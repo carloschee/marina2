@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "Marina",
+    "shortName": "Marina",
+    "description": "Herramienta para el desarrollo del lenguaje.",
+    "themeColor": "#062a35",
+    "backgroundColor": "#062a35",
+    "lang": "es-MX"
+  },
+  "greeting": {
+    "name": "Emi",
+    "subtitle": "¿qué quieres jugar?"
+  },
+  "palette": "warm",
+  "density": "comfy",
+  "tts": {
+    "lang": "es-MX",
+    "rate": 0.85,
+    "volume": 0.9,
+    "muted": false
+  },
+  "modules": []
+}
