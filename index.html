@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Marina 2">
-  <meta name="theme-color" content="#7C3AED">
+  <meta name="theme-color" content="#03111a">
   <title>Marina 2</title>
 
   <link rel="manifest" href="manifest.json">
@@ -19,211 +19,266 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
 
   <style>
-    /* ── Variables ─────────────────────────────────────────────────────────── */
+    /* ── Variables Marina — azul profundo ──────────────────────────────────── */
     :root {
-      color-scheme: dark;
-      --m-bg:         #03111a;
-      --m-bg-mid:     #041e2e;
-      --m-surface:    #062a3e;
-      --m-ink:        #e8f4f8;
-      --m-ink-soft:   rgba(200,230,240,0.55);
-      --m-ink-dark:   #07212e;
-      --m-primary:    #0ea5c9;
-      --m-accent:     #38bdf8;
-      --m-teal:       #14b8a6;
-      --m-coral:      #fb7185;
-      --m-gold:       #fbbf24;
+      --m-bg:          #03111a;
+      --m-bg-mid:      #041e2e;
+      --m-surface:     #062a3e;
+      --m-ink:         #e8f4f8;
+      --m-ink-soft:    rgba(200,230,240,0.55);
+      --m-ink-dark:    #07212e;
+      --m-primary:     #0ea5c9;
+      --m-primary-dk:  #0369a1;
+      --m-accent:      #38bdf8;
+      --m-teal:        #14b8a6;
+      --m-coral:       #fb7185;
+      --m-gold:        #fbbf24;
+      --m-nav-bg:      linear-gradient(135deg, #03111a 0%, #041e2e 50%, #03111a 100%);
+      --d-nav-h:       56px;
+      --d-primary:     #0ea5c9;
       --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-xl: 30px;
       --s-card: 0 4px 20px rgba(14,165,201,0.12);
       --s-deep: 0 8px 32px rgba(3,105,161,0.28);
       --safe-top:    env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
- 
-    /* ── Reset base ─────────────────────────────────────────────────────────── */
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
     html, body {
       height: 100%; width: 100%;
+      overflow: hidden;
+      font-family: 'Nunito', system-ui, sans-serif;
       background: var(--m-bg);
-      font-family: 'Lexend', system-ui, sans-serif;
       color: var(--m-ink);
-      overflow: hidden;
-      -webkit-user-select: none; user-select: none;
-      -webkit-touch-callout: none;
       -webkit-tap-highlight-color: transparent;
-      overscroll-behavior: none;
-      touch-action: manipulation;
+      user-select: none;
     }
- 
-    /* ── Root / stage ───────────────────────────────────────────────────────── */
-    #root {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      overflow: hidden;
+
+    #app {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      background: var(--m-bg);
     }
-    /* Stage 1180×820 — fit() lo escala y centra con translate+scale */
-    .marina-stage {
+
+    /* ── Corrientes submarinas ────────────────────────────────────────────────
+       Reemplaza aurora. Luz azul profundo moviéndose como agua.
+       Sin neón, sin rojo/verde. Solo azules fríos + teal.
+       Movimiento lento y sinuoso — entre 14 y 26 segundos por ciclo.     */
+
+    #app-aurora {                  /* id conservado para no tocar el HTML */
+      position: fixed; inset: 0;
+      z-index: 0; overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* Corriente principal — masa de luz que baja desde la superficie */
+    #app-aurora::before {
+      content: '';
       position: absolute;
-      width: 1180px; height: 820px;
-      top: 0; left: 0;
-      transform-origin: top left;
+      border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+      filter: blur(55px);
+      opacity: 0.48;
+      width: 90vw; height: 70vw;
+      top: -25vw; left: -15vw;
+      background: radial-gradient(ellipse at 45% 35%,
+        #0ea5c9 0%, #0369a1 38%, #041e2e 65%, transparent 80%);
+      animation: corriente-a 20s ease-in-out infinite alternate;
+      will-change: transform;
     }
- 
-    /* ── Corrientes submarinas ───────────────────────────────────────────────── */
-    /* Capas de luz azul profundo que se mueven como corrientes de agua.
-       Colores: azules fríos + teal. Sin neón. Movimiento lento y sinuoso. */
-    .corriente-blob { position: absolute; pointer-events: none; will-change: transform; }
- 
+
+    /* Corriente secundaria — teal que sube desde el fondo */
+    #app-aurora::after {
+      content: '';
+      position: absolute;
+      border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
+      filter: blur(62px);
+      opacity: 0.36;
+      width: 80vw; height: 60vw;
+      bottom: -20vw; right: -10vw;
+      background: radial-gradient(ellipse at 55% 60%,
+        #14b8a6 0%, #0369a1 42%, transparent 72%);
+      animation: corriente-b 26s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    /* Filamentos — corrientes más finas */
+    .aurora-blob {                 /* clase conservada para no tocar el HTML */
+      position: absolute;
+      pointer-events: none;
+      will-change: transform;
+      border-radius: 40% 60% 65% 35% / 55% 40% 60% 45%;
+    }
+
+    /* Filamento 1 — bioluminiscencia izquierda */
+    .aurora-blob:nth-child(1) {
+      width: 62vw; height: 28vw;
+      top: 28%; left: -4%;
+      filter: blur(46px); opacity: 0.26;
+      background: radial-gradient(ellipse at 40% 50%,
+        #38bdf8 0%, #0ea5c9 45%, transparent 70%);
+      animation: corriente-c 15s ease-in-out infinite alternate;
+    }
+
+    /* Filamento 2 — corriente profunda centro-derecha */
+    .aurora-blob:nth-child(2) {
+      width: 52vw; height: 24vw;
+      top: 54%; right: -2%;
+      filter: blur(52px); opacity: 0.22;
+      background: radial-gradient(ellipse at 60% 50%,
+        #14b8a6 0%, #0369a1 50%, transparent 72%);
+      animation: corriente-d 22s ease-in-out infinite alternate;
+    }
+
+    /* Filamento 3 — destello de superficie, muy sutil */
+    .aurora-blob:nth-child(3) {
+      width: 38vw; height: 18vw;
+      top: 6%; right: 8%;
+      filter: blur(40px); opacity: 0.16;
+      background: radial-gradient(ellipse at 50% 40%,
+        #7dd3fc 0%, #0ea5c9 55%, transparent 75%);
+      animation: corriente-e 12s ease-in-out infinite alternate;
+    }
+
+    /* ── Keyframes — sinuosos, sin saltos, con skew para simular refracción */
     @keyframes corriente-a {
       0%   { transform: translate(0,0) skewX(0deg) scale(1);
              border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%; }
-      25%  { transform: translate(5vw,4vh) skewX(1.5deg) scale(1.06);
-             border-radius: 50% 50% 45% 55% / 45% 55% 50% 50%; }
-      60%  { transform: translate(10vw,9vh) skewX(-1deg) scale(1.11);
-             border-radius: 45% 55% 60% 40% / 55% 45% 45% 55%; }
-      100% { transform: translate(16vw,13vh) skewX(-0.5deg) scale(1.16);
+      30%  { transform: translate(6vw,5vh) skewX(1.4deg) scale(1.07);
+             border-radius: 50% 50% 45% 55% / 46% 54% 50% 50%; }
+      65%  { transform: translate(11vw,10vh) skewX(-0.9deg) scale(1.12);
+             border-radius: 46% 54% 60% 40% / 55% 45% 46% 54%; }
+      100% { transform: translate(17vw,14vh) skewX(-0.4deg) scale(1.17);
              border-radius: 42% 58% 52% 48% / 48% 52% 55% 45%; }
     }
+
     @keyframes corriente-b {
       0%   { transform: translate(0,0) skewX(0deg) scale(1.05);
              border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
-      40%  { transform: translate(-7vw,-6vh) skewX(1.5deg) scale(0.97);
-             border-radius: 60% 40% 45% 55% / 50% 50% 55% 45%; }
-      100% { transform: translate(-13vw,-11vh) skewX(-0.8deg) scale(0.90);
+      35%  { transform: translate(-6vw,-5vh) skewX(1.4deg) scale(0.98);
+             border-radius: 60% 40% 46% 54% / 50% 50% 55% 45%; }
+      100% { transform: translate(-14vw,-12vh) skewX(-0.7deg) scale(0.90);
              border-radius: 50% 50% 40% 60% / 42% 58% 48% 52%; }
     }
+
     @keyframes corriente-c {
       0%   { transform: translate(0,0) skewY(0deg) scale(1); }
-      40%  { transform: translate(5vw,-4vh) skewY(1.2deg) scale(1.05); }
-      100% { transform: translate(9vw,-8vh) skewY(-0.8deg) scale(1.10); }
+      45%  { transform: translate(5vw,-4vh) skewY(1.1deg) scale(1.06); }
+      100% { transform: translate(10vw,-8vh) skewY(-0.7deg) scale(1.11); }
     }
+
     @keyframes corriente-d {
       0%   { transform: translate(0,0) skewY(0deg) scale(1); }
-      35%  { transform: translate(-3vw,4vh) skewY(-1.5deg) scale(1.05); }
-      100% { transform: translate(-7vw,8vh) skewY(1deg) scale(0.96); }
+      38%  { transform: translate(-3vw,4vh) skewY(-1.4deg) scale(1.06); }
+      100% { transform: translate(-8vw,9vh) skewY(0.9deg) scale(0.95); }
     }
+
     @keyframes corriente-e {
-      0%   { transform: translate(0,0) scale(1); opacity:.18; }
-      50%  { transform: translate(-5vw,4vh) scale(1.08); opacity:.24; }
-      100% { transform: translate(4vw,7vh) scale(0.94); opacity:.14; }
+      0%   { transform: translate(0,0) scale(1); opacity:.16; }
+      50%  { transform: translate(-5vw,4vh) scale(1.09); opacity:.22; }
+      100% { transform: translate(4vw,7vh) scale(0.93); opacity:.12; }
     }
- 
-    /* ── Boot splash ────────────────────────────────────────────────────────── */
-    .marina-boot {
-      position: fixed; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      background: var(--m-bg); color: var(--m-ink);
-      gap: 24px; z-index: 9999;
-      transition: opacity .4s;
-    }
-    .marina-boot.ready { opacity: 0; pointer-events: none; }
-    .marina-boot img   { width: 128px; height: 128px; border-radius: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.55); }
-    .marina-boot .name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 36px; letter-spacing: -1px; }
-    .marina-boot .dot  { display: inline-block; width: 8px; height: 8px; border-radius: 99px;
-                         background: var(--m-accent); margin: 0 3px;
-                         animation: dot 1.2s infinite ease-in-out; }
-    .marina-boot .dot:nth-child(2) { animation-delay: 0.15s; }
-    .marina-boot .dot:nth-child(3) { animation-delay: 0.30s; }
-    @keyframes dot { 0%,80%,100% { opacity:.2; transform:scale(.8); } 40% { opacity:1; transform:scale(1); } }
- 
-    /* ── Banner SW ──────────────────────────────────────────────────────────── */
-    #marina-update-banner {
-      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-      z-index: 2147483647;
-      background: var(--m-surface); color: var(--m-ink);
-      font-family: 'Lexend', system-ui, sans-serif; font-size: 14px; font-weight: 500;
-      padding: 12px 20px; border-radius: 99px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      display: flex; align-items: center; gap: 14px;
-      border: 1px solid rgba(14,165,201,0.20);
-    }
-    #marina-update-ok {
-      appearance: none; border: none; cursor: pointer;
-      background: var(--m-primary); color: #fff;
-      font-family: inherit; font-weight: 700; font-size: 13px;
-      padding: 6px 16px; border-radius: 99px;
-    }
-    #marina-update-dismiss {
-      appearance: none; border: none; cursor: pointer;
-      background: transparent; color: var(--m-ink-soft);
-      font-size: 18px; padding: 0 4px;
-    }
- 
-    /* ── Header navegación ──────────────────────────────────────────────────── */
+
+    /* ── Header ─────────────────────────────────────────────────────────────── */
     #app-header {
       flex-shrink: 0;
-      height: calc(var(--m-nav-h, 56px) + var(--safe-top));
-      padding: calc(12px + var(--safe-top)) 16px 12px;
-      display: flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, #03111a 0%, #041e2e 50%, #03111a 100%);
-      border-bottom: 1px solid rgba(14,165,201,0.15);
-      box-shadow: 0 4px 24px rgba(3,105,161,0.30);
-      position: relative; z-index: 20;
+      height: calc(var(--d-nav-h) + var(--safe-top));
+      padding-top: var(--safe-top);
+      display: flex;
+      align-items: center;
+      padding: 20px 12px 0;
+      gap: 8px;
+      background: var(--m-nav-bg);
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 20px rgba(3,105,161,0.32);
+      position: relative;
+      z-index: 20;
     }
-    #header-izq   { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-    .menu-logo    { display: flex; align-items: baseline; gap: 6px; }
-    .menu-logo h1 { font-family: 'Outfit', sans-serif; font-size: 1.45rem; font-weight: 900;
-                    letter-spacing: -0.5px; color: #fff; }
-    .menu-logo .version { font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.35);
-                          text-transform: uppercase; letter-spacing: 0.1em; }
- 
-    #btn-volver         { display: none; align-items: center; justify-content: center;
-                          width: 40px; height: 40px; flex-shrink: 0; border: none;
-                          background: transparent; padding: 0; cursor: pointer;
-                          transition: transform 0.12s, filter 0.12s; }
+
+    #header-izq { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+    .menu-logo { display: flex; align-items: baseline; gap: 6px; }
+    .menu-logo h1 {
+      font-size: 1.45rem; font-weight: 900; letter-spacing: -0.5px; color: #fff;
+    }
+    .menu-logo .version {
+      font-size: 0.6rem; font-weight: 700;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase; letter-spacing: .1em;
+    }
+
+    #btn-volver {
+      display: none; align-items: center; justify-content: center;
+      width: 40px; height: 40px; flex-shrink: 0;
+      border: none; background: transparent; padding: 0; cursor: pointer;
+      transition: transform 0.12s ease, filter 0.12s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
     #btn-volver:active  { transform: scale(0.88); filter: brightness(0.8); }
     #btn-volver.visible { display: flex; }
- 
-    /* ── Indicador offline ──────────────────────────────────────────────────── */
+    #btn-volver img {
+      width: 100%; height: 100%; object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+    }
+
+    /* ── Indicador offline ───────────────────────────────────────────────────── */
     #indicador-offline {
       display: flex; align-items: center; gap: 5px;
       padding: 4px 10px; border-radius: 20px;
-      font-size: 0.68rem; font-weight: 700; border: 1.5px solid;
-      transition: all 0.3s;
+      font-size: 0.68rem; font-weight: 700;
+      border: 1.5px solid; transition: all 0.3s ease;
     }
-    #indicador-offline.online   { background: rgba(20,184,166,0.15); border-color: #14b8a6; color: #5eead4; }
+    #indicador-offline.online   { background: rgba(20,184,166,0.15);  border-color: #14b8a6; color: #5eead4; }
     #indicador-offline.offline  { background: rgba(251,113,133,0.15); border-color: #fb7185; color: #fda4af; }
     #indicador-offline.checking { background: rgba(251,191,36,0.15);  border-color: #fbbf24; color: #fcd34d; }
+
     #dot-conexion { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .online  #dot-conexion  { background: #14b8a6; }
     .offline #dot-conexion  { background: #fb7185; }
     .checking #dot-conexion { background: #fbbf24; }
- 
+
     #modulo-acciones { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; }
     #header-derecha  { display: flex; align-items: center; flex-shrink: 0; margin-left: 8px; }
- 
-    /* ── App body / menu ────────────────────────────────────────────────────── */
-    #app-body   { flex: 1; min-height: 0; position: relative; z-index: 1; }
-    #vista-menu { position: absolute; inset: 0; display: flex; flex-direction: column;
-                  overflow: hidden; background: transparent; }
- 
+
+    /* ── Body / menu ─────────────────────────────────────────────────────────── */
+    #app-body { flex: 1; min-height: 0; position: relative; z-index: 1; }
+
+    #vista-menu {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      overflow: hidden; background: transparent;
+    }
+
     #menu-grid {
       flex: 1; overflow: hidden;
-      padding: 12px 20px calc(12px + var(--safe-bottom));
+      padding: 12px 20px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 1fr);
-      gap: 8px; position: relative; z-index: 1;
+      gap: 8px;
+      position: relative; z-index: 1; background: transparent;
     }
+
     @media (max-width: 600px) {
       #menu-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(3,1fr); }
       .tile-label { font-size: 0.82rem; }
     }
- 
+
     .module-tile {
-      background: transparent; border: none; padding: 8px;
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; gap: 10px; cursor: pointer;
-      position: relative; transition: transform 0.15s ease; min-height: 0;
+      background: transparent; border: none; box-shadow: none;
+      padding: 8px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; position: relative;
+      transition: transform 0.15s ease; min-height: 0;
     }
     .module-tile:active { transform: scale(0.90); }
-    .tile-img   { width: 72%; height: auto; object-fit: contain; }
+
+    .tile-img   { width: 72%; height: auto; object-fit: contain; transition: filter 0.15s ease; }
     .tile-label { font-size: 1rem; font-weight: 900; text-align: center; color: white;
-                  text-shadow: 0 2px 10px rgba(0,0,0,0.65); line-height: 1.2; flex-shrink: 0; }
- 
-    /* ── Botones ────────────────────────────────────────────────────────────── */
+                  text-shadow: 0 2px 10px rgba(0,0,0,0.68); line-height: 1.2; flex-shrink: 0; }
+
+    /* ── Botones nav ─────────────────────────────────────────────────────────── */
     .d-nav-btn {
       display: flex; align-items: center; justify-content: center;
       height: 32px; padding: 0 13px; border-radius: var(--r-md); border: none;
@@ -232,48 +287,55 @@
       white-space: nowrap; transition: background 0.15s, transform 0.12s;
     }
     .d-nav-btn:active { background: rgba(255,255,255,0.24); transform: scale(0.93); }
-    .d-nav-btn.activo { background: rgba(14,165,201,0.30); border: 1px solid rgba(56,189,248,0.35); }
- 
+    .d-nav-btn.activo { background: rgba(14,165,201,0.28); border: 1px solid rgba(56,189,248,0.30); }
+
     .d-lang-btn {
       display: flex; align-items: center; justify-content: center;
       width: 32px; height: 32px; border-radius: var(--r-sm);
-      border: 2px solid rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.20);
       background: rgba(255,255,255,0.08); color: white; font-size: 1rem;
       cursor: pointer; transition: all 0.15s;
     }
     .d-lang-btn.activo { border-color: #38bdf8; background: rgba(14,165,201,0.22); }
- 
-    /* ── Modal PIN ──────────────────────────────────────────────────────────── */
-    #modal-pin { position: fixed; inset: 0; background: rgba(3,17,26,0.75);
-                 display: none; align-items: center; justify-content: center;
-                 z-index: 9000; backdrop-filter: blur(12px); }
-    #modal-pin.visible { display: flex; }
- 
-    .pin-box {
-      background: var(--m-surface); border-radius: var(--r-xl);
-      padding: 32px; width: 88%; max-width: 340px; text-align: center;
-      box-shadow: var(--s-deep); border: 1.5px solid rgba(14,165,201,0.25);
+
+    /* ── Modal PIN ───────────────────────────────────────────────────────────── */
+    #modal-pin {
+      position: fixed; inset: 0;
+      background: rgba(3,17,26,0.72);
+      display: none; align-items: center; justify-content: center;
+      z-index: 9000; backdrop-filter: blur(10px);
     }
-    .pin-box h3 { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 900;
-                  margin-bottom: 8px; color: var(--m-ink); }
-    .pin-box p  { font-size: 1rem; font-weight: 700; margin-bottom: 16px; color: var(--m-ink-soft); }
- 
+    #modal-pin.visible { display: flex; }
+
+    .pin-box {
+      background: var(--m-surface);
+      border-radius: var(--r-xl); padding: 32px;
+      width: 88%; max-width: 340px; text-align: center;
+      box-shadow: var(--s-deep);
+      border: 1.5px solid rgba(14,165,201,0.25);
+    }
+    .pin-box h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 8px;  color: var(--m-ink); }
+    .pin-box p  { font-size: 1rem;   font-weight: 800; margin-bottom: 16px; color: var(--m-ink-soft); }
+
     #input-pin {
       width: 100%; padding: 16px; text-align: center;
       font-size: 2.6rem; font-weight: 900;
       border: 2px solid rgba(14,165,201,0.25); border-radius: var(--r-md);
       outline: none; margin-bottom: 14px;
-      background: rgba(3,111,161,0.12); color: var(--m-ink); font-family: inherit;
+      background: rgba(3,111,161,0.10); color: var(--m-ink);
+      font-family: inherit;
     }
-    #input-pin:focus { border-color: var(--m-primary); box-shadow: 0 0 0 3px rgba(14,165,201,0.20); }
- 
+    #input-pin:focus { border-color: var(--m-primary); box-shadow: 0 0 0 3px rgba(14,165,201,0.18); }
+
     .pin-btns { display: flex; gap: 10px; }
-    .pin-btns button { flex: 1; padding: 15px; border-radius: var(--r-md); border: none;
-                       font-weight: 900; font-size: 1.1rem; cursor: pointer; font-family: inherit; }
-    #btn-pin-ok     { background: var(--m-primary); color: #fff; }
+    .pin-btns button {
+      flex: 1; padding: 15px; border-radius: var(--r-md); border: none;
+      font-weight: 900; font-size: 1.1rem; cursor: pointer; font-family: inherit;
+    }
+    #btn-pin-ok     { background: var(--m-primary); color: white; }
     #btn-pin-cancel { background: rgba(255,255,255,0.08); color: var(--m-ink); }
-    #pin-error { color: var(--m-coral); font-size: 0.95rem; font-weight: 800;
-                 margin-top: 8px; min-height: 1em; }
+
+    #pin-error { color: var(--m-coral); font-size: 0.95rem; font-weight: 800; margin-top: 8px; min-height: 1em; }
   </style>
 </head>
 
@@ -357,7 +419,6 @@
     import { toast, animarEntrada } from './core/ui.js';
     import AudioManager, { MediaStop } from './core/audio.js';
     import { Perfiles } from './core/perfiles.js';
-    import AjustesModule from './modules/ajustes/module.js';
 
     const $ = id => document.getElementById(id);
 
