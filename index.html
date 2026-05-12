@@ -40,17 +40,16 @@
       touch-action: manipulation;
     }
     #root {
-      width: 100vw; height: 100vh;
-      padding-top:    env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-      padding-left:   env(safe-area-inset-left);
-      padding-right:  env(safe-area-inset-right);
-      box-sizing: border-box;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
     }
-    /* Stage 1180×820 — scale-to-fit cualquier iPad */
+    /* Stage 1180x820 fijo — el script fit() lo escala y centra
+       con translate+scale para llenar el viewport sin barras negras */
     .marina-stage {
-      position: relative;
+      position: absolute;
       width: 1180px; height: 820px;
+      top: 0; left: 0;
       transform-origin: top left;
     }
     /* Boot splash */
