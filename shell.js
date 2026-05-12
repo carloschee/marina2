@@ -1,10 +1,8 @@
 // shell.js — design tokens y componentes de layout base
 // Sin JSX. Todo React.createElement puro.
-// Exporta al window: tokens, MarinaShell, MarinaTopBar.
+// Exporta al window: T, MarinaShell, MarinaTopBar.
 
-'use strict';
-
-const { createElement: h, useEffect } = React;
+var h = React.createElement;
 
 // ─── Inyectar keyframes una sola vez ─────────────────────────────────────────
 (function injectStyles() {
@@ -23,7 +21,7 @@ const { createElement: h, useEffect } = React;
 // ─── Design tokens ────────────────────────────────────────────────────────────
 // Para cambiar la paleta de la app, editar primary y green aquí,
 // o dejar que app.js los sobreescriba via AppContext.
-const T = {
+var T = {
   bg:           '#062a35',
   bgGrad:       'radial-gradient(ellipse at 30% 0%, #0d4858 0%, #062a35 60%, #03161c 100%)',
   surface:      '#0e3a48',

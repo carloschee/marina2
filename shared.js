@@ -2,8 +2,6 @@
 // Sin JSX. Todo React.createElement puro.
 // Exporta al window para uso cross-script.
 
-'use strict';
-
 // ─── TTS hook ─────────────────────────────────────────────────────────────────
 // Uso:
 //   const tts = useTTS();

@@ -3,16 +3,18 @@
 // tweaks persistidos en localStorage, área de adultos PIN-gated.
 // Sin JSX. Todo React.createElement puro.
 
-'use strict';
-
-const { createElement: h, useState, useEffect, useCallback, useRef, useMemo } = React;
+var h         = React.createElement;
+var useState  = React.useState;
+var useEffect = React.useEffect;
+var useCallback = React.useCallback;
+var useMemo   = React.useMemo;
 
 // ─── Constantes ───────────────────────────────────────────────────────────────
-const TWEAKS_KEY  = 'marina.tweaks.v1';
-const PIN_KEY     = 'marina.pin.v1';
-const PIN_DEFAULT = '1234';
+var TWEAKS_KEY  = 'marina.tweaks.v1';
+var PIN_KEY     = 'marina.pin.v1';
+var PIN_DEFAULT = '1234';
 
-const PALETTES = {
+var PALETTES = {
   warm:    { primary: '#ff6b8b', green: '#38d9a9' },
   pastel:  { primary: '#ffa3b8', green: '#7be0c2' },
   vivid:   { primary: '#ff3d6a', green: '#0fbf8c' },
@@ -359,38 +361,56 @@ function AjustesPanel({ t, setTweak, onClose, pinKey }) {
 }
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
-// Carga marina.config.json y monta MarinaApp cuando React y
-// todos los scripts base están listos.
-async function bootMarina() {
-  // Esperar a que todos los globals estén disponibles
-  await new Promise((resolve) => {
-    const MAX = 8000, STEP = 50;
-    let elapsed = 0;
-    function check() {
-      if (
-        typeof window.useTTS     !== 'undefined' &&
-        typeof window.MarinaShell !== 'undefined' &&
-        typeof window.HomeScreen  !== 'undefined'
-      ) return resolve();
-      elapsed += STEP;
-      if (elapsed >= MAX) { console.error('[marina] globals no cargaron'); return resolve(); }
-      setTimeout(check, STEP);
-    }
-    check();
-  });
+function bootMarina() {
+  var MAX = 6000, STEP = 50, elapsed = 0;
 
-  // Cargar config
-  let config = {};
-  try {
-    const res = await fetch('./marina.config.json');
-    config = await res.json();
-  } catch (e) {
-    console.warn('[marina] No se pudo cargar marina.config.json, usando defaults', e);
+  function waitForGlobals(cb) {
+    if (
+      typeof window.useTTS      !== 'undefined' &&
+      typeof window.MarinaShell !== 'undefined' &&
+      typeof window.HomeScreen  !== 'undefined'
+    ) return cb();
+    elapsed += STEP;
+    if (elapsed >= MAX) {
+      console.error('[marina] globals no cargaron tras', MAX, 'ms');
+      return cb(); // montar de todos modos con config vacío
+    }
+    setTimeout(function () { waitForGlobals(cb); }, STEP);
   }
 
-  ReactDOM.createRoot(document.getElementById('root')).render(
-    h(MarinaApp, { config })
-  );
+  function loadConfig(cb) {
+    var done = false;
+    var timeout = setTimeout(function () {
+      if (done) return;
+      done = true;
+      console.warn('[marina] fetch config timeout, usando defaults');
+      cb({});
+    }, 3000);
+
+    fetch('./marina.config.json')
+      .then(function (r) { return r.json(); })
+      .then(function (cfg) {
+        if (done) return;
+        done = true;
+        clearTimeout(timeout);
+        cb(cfg);
+      })
+      .catch(function (e) {
+        if (done) return;
+        done = true;
+        clearTimeout(timeout);
+        console.warn('[marina] config no disponible, usando defaults:', e.message);
+        cb({});
+      });
+  }
+
+  waitForGlobals(function () {
+    loadConfig(function (config) {
+      ReactDOM.createRoot(document.getElementById('root')).render(
+        h(MarinaApp, { config: config })
+      );
+    });
+  });
 }
 
 bootMarina();

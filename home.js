@@ -1,11 +1,8 @@
 // home.js — pantalla principal de Marina
-// Lee MARINA_MODULES (poblado por app.js desde marina.config.json).
-// Sin módulos registrados muestra una pantalla de bienvenida en blanco.
 // Sin JSX. Todo React.createElement puro.
 
-'use strict';
-
-const { createElement: h, useState } = React;
+var h        = React.createElement;
+var useState = React.useState;
 
 // ─── HomeScreen ───────────────────────────────────────────────────────────────
 // Props:
