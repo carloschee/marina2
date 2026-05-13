@@ -3,11 +3,6 @@
 import { borrarCache, precachear, fetchTimeout } from '../../core/offline.js';
 import { toast, lanzarConfeti } from '../../core/ui.js';
 import { Perfiles } from '../../core/perfiles.js';
-import SaacModule from '../saac/module.js';
-import MemoramaModule from '../memorama/module.js';
-import MediaModule from '../media/module.js';
-import TemporizadorModule from '../temporizador/module.js';
-import LibrosModule from '../libros/module.js';
 import { Telemetry } from '../../core/telemetry.js';
 
 const LS_TAMANO = 'dotir2-saac-tamano';
@@ -1128,11 +1123,7 @@ function _pinchDist(touches) {
 }
 
 const _MODULOS_CONFIGURABLES = [
-  SaacModule,
-  MemoramaModule,
-  MediaModule,
-  TemporizadorModule,
-  LibrosModule,
+
 ];
 
 function _renderModulos() {
