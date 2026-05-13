@@ -476,7 +476,6 @@
         "es": [
             "uva",
             "unicornio",
-            "uniforme",
             "ukelele"
         ],
         "en": [
@@ -494,9 +493,8 @@
             "vela",
             "ventana",
             "vestido",
-            "viaje",
             "vaso",
-            "vuelo"
+            "volar"
         ],
         "en": [
             "van",
@@ -510,7 +508,8 @@
     },
     "W": {
         "es": [
-            "waffle"
+            "waffle",
+            "wonton"
         ],
         "en": [
             "waffle",
@@ -525,7 +524,8 @@
     },
     "X": {
         "es": [
-            "xilófono"
+            "xilófono",
+            "Xochimilco"
         ],
         "en": [
             "xylophone"
@@ -548,8 +548,7 @@
             "zapato",
             "zorro",
             "zanahoria",
-            "zoológico",
-            "zumbido"
+            "zoológico"
         ],
         "en": [
             "zebra",
