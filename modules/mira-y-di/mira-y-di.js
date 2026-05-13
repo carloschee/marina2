@@ -88,30 +88,45 @@ function _render() {
       justify-content:space-between; gap:12px;
     }
 
-    /* Pill ES / EN */
+    /* Pill ES / EN — solo abarca sus dos botones */
     #md-lang-pill {
-      display:flex; gap:3px; padding:3px; align-self:flex-end;
+      display:inline-flex; gap:3px; padding:3px;
       border-radius:99px;
       background:rgba(255,255,255,0.07);
       border:1px solid rgba(255,255,255,0.10);
+      align-self:flex-start;         /* no se estira */
+      width:fit-content;
     }
     .md-lang-btn {
       padding:5px 14px; border-radius:99px; border:none; cursor:pointer;
       font-family:inherit; font-size:.75rem; font-weight:900;
       background:transparent; color:rgba(255,255,255,.45);
-      transition:all .18s;
+      transition:all .18s; white-space:nowrap;
     }
-    .md-lang-btn.activo       { background:#0ea5c9; color:#fff; }
+    .md-lang-btn.activo        { background:#0ea5c9; color:#fff; }
     .md-lang-btn.deshabilitado { opacity:.25; pointer-events:none; }
 
     #md-meta {
       font-size:.72rem; font-weight:900; letter-spacing:.12em;
-      text-transform:uppercase; color:#14b8a6; margin-top:4px;
+      text-transform:uppercase; color:#14b8a6; margin-top:8px;
     }
     #md-palabra {
       font-size:clamp(2.6rem,7vw,4.8rem); font-weight:900;
       letter-spacing:-1px; color:#fff; line-height:1;
-      word-break:break-word; margin:6px 0 12px;
+      word-break:break-word; margin:6px 0 0;
+    }
+
+    /* Cintillo de letras dentro del panel — retícula compacta */
+    #md-letras-panel {
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:16px;
+      padding:8px 10px;
+      display:flex; flex-wrap:wrap; gap:4px;
+    }
+    /* reutiliza .md-letra-btn — misma clase, tamaño reducido aquí */
+    #md-letras-panel .md-letra-btn {
+      width:32px; height:32px; font-size:.78rem;
     }
 
     #md-controles { display:flex; align-items:center; gap:10px; }
@@ -145,13 +160,12 @@ function _render() {
     }
   </style>
 
-  <div id="md-letras-wrap"><div id="md-letras"></div></div>
-
   <div id="md-main">
     <div id="md-card">
       <img id="md-picto" src="" alt="" class="cargando" />
     </div>
     <div id="md-panel">
+      <!-- Fila superior: pill idioma + meta -->
       <div>
         <div id="md-lang-pill">
           <button class="md-lang-btn activo" data-lang="es">ES</button>
@@ -160,6 +174,9 @@ function _render() {
         <div id="md-meta"></div>
         <div id="md-palabra">—</div>
       </div>
+      <!-- Cintillo de letras — retícula en el panel -->
+      <div id="md-letras-panel"></div>
+      <!-- Controles -->
       <div>
         <div id="md-controles">
           <button class="md-nav-btn" id="md-prev">‹</button>
@@ -183,13 +200,13 @@ function _render() {
 
 // ─── Letras ───────────────────────────────────────────────────────────────────
 function _renderLetras() {
-  const wrap = _el.querySelector('#md-letras');
+  const wrap = _el.querySelector('#md-letras-panel');
   wrap.innerHTML = '';
   for (const letra of LETRAS) {
     const vacia = !_vocab[letra]?.es?.length && !_vocab[letra]?.en?.length;
     const btn = document.createElement('button');
-    btn.className    = 'md-letra-btn' + (vacia ? ' vacia' : '');
-    btn.textContent  = letra;
+    btn.className     = 'md-letra-btn' + (vacia ? ' vacia' : '');
+    btn.textContent   = letra;
     btn.dataset.letra = letra;
     btn.addEventListener('click', () => _seleccionarLetra(letra));
     wrap.appendChild(btn);
@@ -220,8 +237,6 @@ function _seleccionarLetra(letra) {
   _el.querySelectorAll('.md-letra-btn').forEach(b =>
     b.classList.toggle('activa', b.dataset.letra === letra)
   );
-  _el.querySelector(`.md-letra-btn[data-letra="${letra}"]`)
-     ?.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
 
   _actualizarPill();
   _actualizarVista();
