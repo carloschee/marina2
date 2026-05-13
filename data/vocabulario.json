@@ -8,9 +8,7 @@
             "arco iris",
             "ardilla",
             "abeja",
-            "ajo",
-            "ala",
-            "auto"
+            "ajo"
         ],
         "en": [
             "apple",
@@ -19,8 +17,6 @@
             "alligator",
             "arm",
             "avocado",
-            "art",
-            "album",
             "ambulance"
         ]
     },
@@ -31,7 +27,6 @@
             "boca",
             "bebé",
             "ballena",
-            "banco",
             "brócoli",
             "botas",
             "botón",
@@ -61,6 +56,7 @@
             "cohete",
             "corona",
             "cactus",
+            "cebra",
             "camión"
         ],
         "en": [
@@ -82,7 +78,6 @@
             "dinosaurio",
             "dientes",
             "dado",
-            "ducha",
             "dragón",
             "dulce",
             "dedos",
@@ -123,8 +118,7 @@
             "eye",
             "ear",
             "eggplant",
-            "elbow",
-            "exit"
+            "elbow"
         ]
     },
     "F": {
@@ -132,10 +126,8 @@
             "flor",
             "fresa",
             "fuego",
-            "foto",
             "foca",
             "flauta",
-            "familia",
             "faro",
             "fruta",
             "fuente"
@@ -145,7 +137,6 @@
             "flower",
             "frog",
             "flag",
-            "family",
             "fox",
             "fork",
             "feather",
@@ -236,7 +227,6 @@
             "jugo",
             "jabón",
             "jarra",
-            "jersey",
             "jinete"
         ],
         "en": [
@@ -358,7 +348,6 @@
             "ola",
             "oruga",
             "oreja",
-            "oficina",
             "olivo",
             "ostión"
         ],
@@ -440,10 +429,9 @@
             "silla",
             "serpiente",
             "sombrero",
-            "semilla",
             "sapo",
             "submarino",
-            "soplo",
+            "soplar",
             "saco"
         ],
         "en": [
@@ -467,7 +455,6 @@
             "taza",
             "tijeras",
             "tomate",
-            "toro",
             "tubo",
             "tambor",
             "tiburón"
@@ -561,7 +548,6 @@
             "zapato",
             "zorro",
             "zanahoria",
-            "cebra",
             "zoológico",
             "zumbido"
         ],
