@@ -385,6 +385,15 @@ function _bindEvents() {
   });
 
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
+
+  _el.querySelector('#md-lang-pill').addEventListener('click', e => {
+    const btn = e.target.closest('.md-lang-btn');
+    if (!btn || btn.classList.contains('deshabilitado')) return;
+    _lang = btn.dataset.lang;
+    _construirLista();
+    _actualizarPill();
+    _actualizarVista();
+  });
 }
 
 // ─── Micrófono + medidor ──────────────────────────────────────────────────────
@@ -524,15 +533,6 @@ function _levenshtein(a, b) {
     }
   }
   return dp[m][n];
-}
-  _el.querySelector('#md-lang-pill').addEventListener('click', e => {
-    const btn = e.target.closest('.md-lang-btn');
-    if (!btn || btn.classList.contains('deshabilitado')) return;
-    _lang = btn.dataset.lang;
-    _construirLista();
-    _actualizarPill();
-    _actualizarVista();
-  });
 }
 
 // ─── TTS ──────────────────────────────────────────────────────────────────────
