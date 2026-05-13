@@ -6,6 +6,8 @@
    Ñ solo tiene español.
 */
 
+import { TTS } from '../../core/tts.js';
+
 const LETRAS = 'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z'.split(' ');
 
 const pictoURL = (palabra, lang) =>
@@ -80,8 +82,19 @@ function _render() {
       width:75%; height:75%; object-fit:contain;
       filter:drop-shadow(0 12px 24px rgba(0,0,0,.22));
       transition:opacity .22s;
+      transform-origin: center bottom;
     }
     #md-picto.cargando { opacity:0; }
+    #md-picto.hablando {
+      animation: picto-wobble 0.5s ease-in-out infinite alternate;
+    }
+    @keyframes picto-wobble {
+      0%   { transform: rotate(-2deg) scale(1.02); }
+      25%  { transform: rotate(1.5deg) scale(1.04) translateY(-3px); }
+      50%  { transform: rotate(-1deg) scale(1.03) translateY(-1px); }
+      75%  { transform: rotate(2deg) scale(1.05) translateY(-4px); }
+      100% { transform: rotate(-1.5deg) scale(1.02) translateY(-2px); }
+    }
 
     #md-panel {
       display:flex; flex-direction:column;
@@ -535,13 +548,18 @@ function _levenshtein(a, b) {
   return dp[m][n];
 }
 
-// ─── TTS ──────────────────────────────────────────────────────────────────────
+// ─── TTS (usa core/tts.js) ───────────────────────────────────────────────────
 function _hablar(texto, lang = 'es-MX') {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(texto);
-  u.lang = lang; u.rate = 0.85; u.pitch = 1.05; u.volume = 1;
-  window.speechSynthesis.speak(u);
+  // Temblor del pictograma — arranca antes de hablar
+  const img = _el?.querySelector('#md-picto');
+  if (img) img.classList.add('hablando');
+
+  // Estimar duración para quitar la animación (TTS no expone onend de forma
+  // confiable en iOS, así que calculamos ~70ms por carácter como fallback)
+  const duracionMs = Math.max(800, texto.length * 70);
+  setTimeout(() => { if (img) img.classList.remove('hablando'); }, duracionMs);
+
+  TTS.speak(texto, { lang, rate: 0.92, pitch: 1.2 });
 }
 
 function _shuffle(arr) {

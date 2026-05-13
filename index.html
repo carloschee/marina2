@@ -1037,6 +1037,16 @@
       }
     }, 4 * 60 * 1000);
 
+    // Solicitar permiso de micrófono al arranque — una sola vez.
+    // Safari recuerda la decisión para este origen permanentemente,
+    // así el diálogo no interrumpe dentro de ningún módulo.
+    (function _solicitarMicrofono() {
+      if (!navigator.mediaDevices?.getUserMedia) return;
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => stream.getTracks().forEach(t => t.stop()))
+        .catch(e => console.warn('[mic] permiso no concedido:', e.message));
+    })();
+
   </script>
 </body>
 
