@@ -40,7 +40,7 @@ export async function init(container) {
 
 export function destroy() { _el = null; _vocab = null; _letra = null; }
 export function onEnter()  {}
-export function onLeave()  { window.speechSynthesis?.cancel(); }
+export function onLeave()  { _detenerMic(); window.speechSynthesis?.cancel(); }
 
 // ─── Shell ────────────────────────────────────────────────────────────────────
 function _render() {
@@ -152,6 +152,56 @@ function _render() {
     }
     #md-btn-escucha:active { transform:scale(.96); box-shadow:0 4px 12px rgba(251,113,133,.30); }
 
+    /* Botón micrófono */
+    #md-btn-mic {
+      width:52px; height:52px; border-radius:50%; border:none; cursor:pointer;
+      background:rgba(255,255,255,.10); color:#fff;
+      font-size:1.3rem;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .15s, transform .12s, box-shadow .15s;
+      flex-shrink:0; position:relative;
+    }
+    #md-btn-mic:active  { transform:scale(.88); }
+    #md-btn-mic.activo  {
+      background:rgba(251,113,133,.25);
+      box-shadow:0 0 0 3px rgba(251,113,133,.50);
+      animation:mic-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes mic-pulse {
+      0%,100% { box-shadow:0 0 0 3px rgba(251,113,133,.50); }
+      50%      { box-shadow:0 0 0 7px rgba(251,113,133,.15); }
+    }
+
+    /* Medidor de pronunciación */
+    #md-medidor-wrap {
+      margin-top:10px;
+      display:none; flex-direction:column; gap:5px;
+    }
+    #md-medidor-wrap.visible { display:flex; }
+    #md-medidor-label {
+      display:flex; justify-content:space-between; align-items:center;
+      font-size:.68rem; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; color:rgba(255,255,255,.45);
+    }
+    #md-medidor-pct {
+      font-size:.8rem; font-weight:900;
+      transition:color .3s;
+    }
+    #md-medidor-track {
+      height:8px; border-radius:99px;
+      background:rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    #md-medidor-bar {
+      height:100%; border-radius:99px; width:0%;
+      transition:width .25s ease, background .35s ease;
+    }
+    #md-medidor-texto {
+      font-size:.72rem; color:rgba(255,255,255,.35);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      min-height:1em;
+    }
+
     #md-dots { display:flex; gap:5px; justify-content:center; margin-top:8px; }
     .md-dot  { height:5px; border-radius:99px; background:rgba(255,255,255,.18); transition:all .3s; }
     .md-dot.activo { background:#0ea5c9; }
@@ -184,7 +234,19 @@ function _render() {
         <div id="md-controles">
           <button class="md-nav-btn" id="md-prev">‹</button>
           <button id="md-btn-escucha"><span style="font-size:1.3rem">🔊</span> escucha</button>
+          <button id="md-btn-mic" title="Pronunciar">🎙️</button>
           <button class="md-nav-btn" id="md-next">›</button>
+        </div>
+        <!-- Medidor de pronunciación -->
+        <div id="md-medidor-wrap">
+          <div id="md-medidor-label">
+            <span>Pronunciación</span>
+            <span id="md-medidor-pct">0%</span>
+          </div>
+          <div id="md-medidor-track">
+            <div id="md-medidor-bar"></div>
+          </div>
+          <div id="md-medidor-texto">…</div>
         </div>
         <div id="md-dots"></div>
       </div>
@@ -264,6 +326,10 @@ function _actualizarVista() {
   const main  = _el.querySelector('#md-main');
   const vacio = _el.querySelector('#md-vacio');
 
+  // Resetear medidor al cambiar de palabra
+  _mejorScore = 0;
+  _actualizarBarra(0, '…');
+
   if (!_lista.length) {
     main.style.display  = 'none';
     vacio.style.display = 'flex';
@@ -317,6 +383,148 @@ function _bindEvents() {
   _el.querySelector('#md-btn-escucha').addEventListener('click', () => {
     if (_lista.length) _hablar(_lista[_idx], _lang === 'es' ? 'es-MX' : 'en-US');
   });
+
+  _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
+}
+
+// ─── Micrófono + medidor ──────────────────────────────────────────────────────
+let _recog      = null;   // SpeechRecognition instance
+let _micActivo  = false;
+let _mejorScore = 0;      // el mejor score de la sesión no baja
+
+function _toggleMic() {
+  if (_micActivo) { _detenerMic(); return; }
+  _iniciarMic();
+}
+
+function _iniciarMic() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    _mostrarMedidor(0, 'Micrófono no disponible en este navegador');
+    return;
+  }
+
+  _recog              = new SR();
+  _recog.lang         = _lang === 'es' ? 'es-MX' : 'en-US';
+  _recog.interimResults = true;   // resultados parciales en tiempo real
+  _recog.continuous   = true;     // no se detiene solo al hacer pausa
+  _recog.maxAlternatives = 3;
+
+  _mejorScore = 0;
+  _micActivo  = true;
+  _el.querySelector('#md-btn-mic').classList.add('activo');
+  _el.querySelector('#md-medidor-wrap').classList.add('visible');
+  _actualizarBarra(0, '…');
+
+  _recog.onresult = (e) => {
+    // Recoger todos los resultados interim y finales disponibles
+    let textoMejor = '';
+    let esFinal    = false;
+
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const res = e.results[i];
+      // Revisar todas las alternativas — quedarse con la más parecida
+      for (let a = 0; a < res.length; a++) {
+        const transcripcion = res[a].transcript.trim().toLowerCase();
+        const score = _similitud(transcripcion, _lista[_idx]?.toLowerCase() || '');
+        if (score > _mejorScore || (!esFinal && res.isFinal)) {
+          _mejorScore = Math.max(_mejorScore, score);
+          textoMejor  = transcripcion;
+        }
+      }
+      if (res.isFinal) esFinal = true;
+    }
+
+    _actualizarBarra(_mejorScore, textoMejor);
+  };
+
+  _recog.onerror = (e) => {
+    // 'no-speech' es normal — no lo tratamos como error grave
+    if (e.error !== 'no-speech') {
+      _actualizarBarra(_mejorScore, `Error: ${e.error}`);
+      _detenerMic();
+    }
+  };
+
+  _recog.onend = () => {
+    // Si sigue activo (no fue detenido manualmente) reiniciar para continuidad
+    if (_micActivo) {
+      try { _recog.start(); } catch {}
+    }
+  };
+
+  try { _recog.start(); } catch (e) { console.warn('[mic]', e); }
+}
+
+function _detenerMic() {
+  _micActivo = false;
+  try { _recog?.stop(); } catch {}
+  _recog = null;
+  _el.querySelector('#md-btn-mic')?.classList.remove('activo');
+}
+
+function _actualizarBarra(score, texto) {
+  const pct  = Math.round(score * 100);
+  // Color: rojo < 40%, amarillo 40-70%, verde > 70%
+  const color = score < 0.40 ? '#f87171'
+              : score < 0.70 ? '#fbbf24'
+              : '#34d399';
+
+  const bar = _el.querySelector('#md-medidor-bar');
+  const pctEl = _el.querySelector('#md-medidor-pct');
+  const textoEl = _el.querySelector('#md-medidor-texto');
+
+  if (bar)    { bar.style.width = pct + '%'; bar.style.background = color; }
+  if (pctEl)  { pctEl.textContent = pct + '%'; pctEl.style.color = color; }
+  if (textoEl) textoEl.textContent = texto || '…';
+}
+
+function _mostrarMedidor(score, texto) {
+  _el.querySelector('#md-medidor-wrap')?.classList.add('visible');
+  _actualizarBarra(score, texto);
+}
+
+// ─── Similitud fonética (Levenshtein normalizado) ─────────────────────────────
+// Compara la transcripción recibida contra la palabra objetivo.
+// Devuelve 0.0 (ninguna similitud) a 1.0 (coincidencia exacta).
+// Normaliza tildes y mayúsculas para no penalizar diferencias de acento.
+function _similitud(a, b) {
+  // Normalizar: minúsculas, sin tildes, sin puntuación
+  const norm = s => s
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, '')
+    .trim();
+
+  const na = norm(a);
+  const nb = norm(b);
+
+  if (!na || !nb) return 0;
+  if (na === nb)  return 1;
+
+  // Si la transcripción contiene la palabra objetivo como token → alto score
+  if (na.split(' ').includes(nb)) return 0.95;
+
+  // Levenshtein
+  const dist = _levenshtein(na, nb);
+  const maxLen = Math.max(na.length, nb.length);
+  return Math.max(0, 1 - dist / maxLen);
+}
+
+function _levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, (_, i) =>
+    Array.from({ length: n + 1 }, (_, j) => i === 0 ? j : j === 0 ? i : 0)
+  );
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      dp[i][j] = a[i-1] === b[j-1]
+        ? dp[i-1][j-1]
+        : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+    }
+  }
+  return dp[m][n];
+}
   _el.querySelector('#md-lang-pill').addEventListener('click', e => {
     const btn = e.target.closest('.md-lang-btn');
     if (!btn || btn.classList.contains('deshabilitado')) return;
