@@ -367,6 +367,11 @@
         </button>
         <div class="menu-logo" id="header-logo">
           <h1>Dótir 2</h1>
+          <span id="saludo-nombre" style="
+            font-size:1.55rem; font-weight:900; letter-spacing:-0.6px;
+            color:rgba(255,255,255,0.38);
+            white-space:nowrap;
+          "></span>
         </div>
         <div id="perfil-chip" style="
           display:flex;align-items:center;gap:6px;
@@ -638,8 +643,16 @@
       } else {
         avatar.textContent = p.avatar || '🧑';
       }
-      apodo.textContent    = p.esInvitado ? 'Invitado' : p.apodo;
-      chip.style.opacity   = p.esInvitado ? '0.45' : '1';
+      apodo.textContent  = p.esInvitado ? 'Invitado' : p.apodo;
+      chip.style.opacity = p.esInvitado ? '0.45' : '1';
+
+      // Saludo en el logo: "Dótir 2 · Emi" o solo "Dótir 2" si es invitado
+      const saludo = $('saludo-nombre');
+      if (saludo) {
+        saludo.textContent = (!p.esInvitado && p.apodo)
+          ? '· ' + p.apodo
+          : '';
+      }
     }
 
     _actualizarChipPerfil();
