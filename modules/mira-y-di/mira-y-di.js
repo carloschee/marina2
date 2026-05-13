@@ -77,7 +77,15 @@ function _render() {
     #md-card {
       border-radius:24px; overflow:hidden;
       display:flex; align-items:center; justify-content:center;
+      position:relative;
     }
+    #md-card-bg {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      pointer-events:none;
+    }
+    /* El pictograma va encima del SVG de fondo */
+    #md-picto { position:relative; z-index:1; }
     #md-picto {
       width:75%; height:75%; object-fit:contain;
       filter:drop-shadow(0 12px 24px rgba(0,0,0,.22));
@@ -228,6 +236,8 @@ function _render() {
 
   <div id="md-main">
     <div id="md-card">
+      <svg id="md-card-bg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"
+           xmlns="http://www.w3.org/2000/svg"></svg>
       <img id="md-picto" src="" alt="" class="cargando" />
     </div>
     <div id="md-panel">
@@ -354,8 +364,10 @@ function _actualizarVista() {
   const palabra = _lista[_idx];
   const color   = COLORES[_letra] || '#0ea5c9';
 
-  _el.querySelector('#md-card').style.background =
-    `linear-gradient(160deg, ${color} 0%, ${color}cc 100%)`;
+  // Fondo con textura SVG — variaciones del color base sin competir
+  // con el pictograma. Se regenera en cada cambio de palabra/letra.
+  _el.querySelector('#md-card').style.background = color;
+  _renderCardBg(color);
 
   const img = _el.querySelector('#md-picto');
   img.classList.add('cargando');
@@ -369,6 +381,110 @@ function _actualizarVista() {
   _el.querySelector('#md-palabra').textContent = palabra;
 
   _renderDots();
+}
+
+// ─── Fondo de la tarjeta ─────────────────────────────────────────────────────
+// Genera un SVG con formas orgánicas en variaciones del color base.
+// Usa una semilla basada en la palabra para que cada palabra tenga
+// un patrón propio pero estable (no cambia con cada render).
+function _renderCardBg(hex) {
+  const svg = _el.querySelector('#md-card-bg');
+  if (!svg) return;
+
+  // Derivar colores: base, más claro, más oscuro, con opacidad
+  const c0 = hex;                          // base
+  const c1 = hex + '99';                   // 60% opacidad
+  const c2 = hex + '44';                   // 27% opacidad
+  const c3 = _mezclarBlanco(hex, 0.25);    // aclarado
+  const c4 = _oscurecer(hex, 0.35);        // oscurecido
+
+  // Semilla pseudo-aleatoria basada en la palabra actual
+  const seed = (_lista[_idx] || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const r = (n, min, max) => min + ((seed * (n * 7919)) % (max - min + 1));
+
+  svg.innerHTML = `
+    <defs>
+      <!-- Filtro de grano suave -->
+      <filter id="md-grain" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4"
+                      stitchTiles="stitch" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
+        <feBlend in="SourceGraphic" in2="gray" mode="overlay" result="blend"/>
+        <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+      </filter>
+      <!-- Gradiente radial central que da profundidad -->
+      <radialGradient id="md-rg1" cx="50%" cy="45%" r="60%">
+        <stop offset="0%"   stop-color="${c3}" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="${c4}" stop-opacity="0"/>
+      </radialGradient>
+      <!-- Gradiente de esquina -->
+      <radialGradient id="md-rg2" cx="${r(1,10,90)}%" cy="${r(2,10,90)}%" r="55%">
+        <stop offset="0%"   stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Base sólida del color de la letra -->
+    <rect width="400" height="500" fill="${c0}"/>
+
+    <!-- Mancha de luz central -->
+    <rect width="400" height="500" fill="url(#md-rg1)"/>
+
+    <!-- Blob orgánico 1 — esquina variable -->
+    <ellipse cx="${r(3,60,340)}" cy="${r(4,60,440)}"
+             rx="${r(5,80,160)}" ry="${r(6,60,130)}"
+             fill="${c3}" opacity="0.22"
+             transform="rotate(${r(7,0,360)} ${r(3,60,340)} ${r(4,60,440)})"/>
+
+    <!-- Blob orgánico 2 — esquina opuesta -->
+    <ellipse cx="${r(8,60,340)}" cy="${r(9,60,440)}"
+             rx="${r(10,60,120)}" ry="${r(11,40,100)}"
+             fill="${c1}" opacity="0.18"
+             transform="rotate(${r(12,0,360)} ${r(8,60,340)} ${r(9,60,440)})"/>
+
+    <!-- Mancha de acento — esquina inferior -->
+    <circle cx="${r(13,0,80)}" cy="${r(14,380,500)}"
+            r="${r(15,60,110)}"
+            fill="${c2}" opacity="0.35"/>
+
+    <!-- Línea orgánica de onda — sutil -->
+    <path d="M0,${r(16,180,320)}
+             Q${r(17,60,160)},${r(18,100,260)}
+               200,${r(19,180,320)}
+             T400,${r(20,180,320)}"
+          stroke="${c3}" stroke-width="${r(21,30,70)}"
+          fill="none" opacity="0.12"/>
+
+    <!-- Mancha de reflejo de luz arriba -->
+    <ellipse cx="${r(22,120,280)}" cy="${r(23,20,80)}"
+             rx="${r(24,50,100)}" ry="${r(25,20,50)}"
+             fill="white" opacity="0.08"/>
+
+    <!-- Capa de grano encima de todo -->
+    <rect width="400" height="500"
+          fill="${c0}" opacity="0.05" filter="url(#md-grain)"/>
+
+    <!-- Gradiente de acento variable -->
+    <rect width="400" height="500" fill="url(#md-rg2)" opacity="0.3"/>
+  `;
+}
+
+// Aclarar un hex mezclándolo con blanco (t: 0-1)
+function _mezclarBlanco(hex, t) {
+  const n = parseInt(hex.replace('#',''), 16);
+  const r = Math.round(((n>>16)&255) + (255 - ((n>>16)&255)) * t);
+  const g = Math.round(((n>>8)&255)  + (255 - ((n>>8)&255))  * t);
+  const b = Math.round((n&255)        + (255 - (n&255))        * t);
+  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+
+// Oscurecer un hex (t: 0-1)
+function _oscurecer(hex, t) {
+  const n = parseInt(hex.replace('#',''), 16);
+  const r = Math.round(((n>>16)&255) * (1-t));
+  const g = Math.round(((n>>8)&255)  * (1-t));
+  const b = Math.round((n&255)        * (1-t));
+  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
 }
 
 function _renderDots() {
