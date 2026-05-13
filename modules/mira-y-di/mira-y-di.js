@@ -85,7 +85,7 @@ function _render() {
 
     #md-panel {
       display:flex; flex-direction:column;
-      justify-content:space-between; gap:12px;
+      justify-content:space-between; gap:0;
     }
 
     /* Pill ES / EN — solo abarca sus dos botones */
@@ -116,19 +116,19 @@ function _render() {
       word-break:break-word; margin:6px 0 0;
     }
 
-    /* Cintillo de letras dentro del panel — retícula táctil */
+    /* Retícula de letras — alto natural, centrada entre palabra y controles */
     #md-letras-panel {
       background:rgba(255,255,255,0.05);
       border:1px solid rgba(255,255,255,0.10);
       border-radius:16px;
-      padding:12px;
-      display:flex; flex-wrap:wrap; gap:6px;
-      flex:1; align-content:flex-start;
-      min-height:0; overflow-y:auto; scrollbar-width:none;
+      padding:14px;
+      display:flex; flex-wrap:wrap; gap:8px;
+      /* No flex:1 — deja que el alto sea el del contenido */
+      align-content:flex-start;
+      width:100%;
     }
-    #md-letras-panel::-webkit-scrollbar { display:none; }
     #md-letras-panel .md-letra-btn {
-      width:52px; height:52px; font-size:1.1rem;
+      width:62px; height:62px; font-size:1.2rem; font-weight:900;
     }
 
     #md-controles { display:flex; align-items:center; gap:10px; }
