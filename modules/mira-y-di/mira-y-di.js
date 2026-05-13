@@ -116,17 +116,19 @@ function _render() {
       word-break:break-word; margin:6px 0 0;
     }
 
-    /* Cintillo de letras dentro del panel — retícula compacta */
+    /* Cintillo de letras dentro del panel — retícula táctil */
     #md-letras-panel {
       background:rgba(255,255,255,0.05);
       border:1px solid rgba(255,255,255,0.10);
       border-radius:16px;
-      padding:8px 10px;
-      display:flex; flex-wrap:wrap; gap:4px;
+      padding:12px;
+      display:flex; flex-wrap:wrap; gap:6px;
+      flex:1; align-content:flex-start;
+      min-height:0; overflow-y:auto; scrollbar-width:none;
     }
-    /* reutiliza .md-letra-btn — misma clase, tamaño reducido aquí */
+    #md-letras-panel::-webkit-scrollbar { display:none; }
     #md-letras-panel .md-letra-btn {
-      width:32px; height:32px; font-size:.78rem;
+      width:52px; height:52px; font-size:1.1rem;
     }
 
     #md-controles { display:flex; align-items:center; gap:10px; }
