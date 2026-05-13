@@ -1,0 +1,110 @@
+{
+  "A": {
+    "es": ["árbol", "avión", "agua", "araña", "arco iris", "ardilla", "abeja", "ajo", "ala", "almeja"],
+    "en": ["apple", "airplane", "ant", "alligator", "arrow", "avocado", "axe", "acorn", "anchor", "ambulance"]
+  },
+  "B": {
+    "es": ["barco", "bicicleta", "boca", "bebé", "ballena", "banco", "bruja", "botas", "botón", "búho"],
+    "en": ["ball", "balloon", "banana", "bear", "bee", "bird", "boat", "book", "bridge", "butterfly"]
+  },
+  "C": {
+    "es": ["casa", "coche", "corazón", "cama", "caballo", "conejo", "cohete", "corona", "cactus", "camión"],
+    "en": ["cake", "candle", "carrot", "castle", "cat", "chair", "cloud", "cow", "crab", "cup"]
+  },
+  "D": {
+    "es": ["delfín", "dinosaurio", "dientes", "dado", "ducha", "dragón", "dulce", "dedos", "desierto", "dinero"],
+    "en": ["dog", "dolphin", "door", "dragon", "drum", "duck", "diamond", "dice", "doll", "donkey"]
+  },
+  "E": {
+    "es": ["elefante", "estrella", "escalera", "espejo", "escoba", "erizo", "esponja", "esquí", "escuela", "espada"],
+    "en": ["eagle", "egg", "elephant", "envelope", "eye", "ear", "earth", "engine", "emerald", "elk"]
+  },
+  "F": {
+    "es": ["flor", "fresa", "fuego", "foto", "foca", "flauta", "fantasma", "faro", "fruta", "fuente"],
+    "en": ["fish", "flower", "frog", "flag", "fire", "fox", "fork", "feather", "fan", "fence"]
+  },
+  "G": {
+    "es": ["gato", "globo", "guitarra", "gallina", "gorila", "girasol", "gusano", "gorra", "granja", "grifo"],
+    "en": ["gate", "ghost", "giraffe", "goat", "gorilla", "grapes", "grass", "guitar", "gift", "glove"]
+  },
+  "H": {
+    "es": ["helado", "hormiga", "huevo", "hoja", "hada", "hamaca", "helicóptero", "hongo", "hacha", "hueso"],
+    "en": ["hammer", "hat", "heart", "hedgehog", "hen", "hippo", "honey", "horse", "house", "hug"]
+  },
+  "I": {
+    "es": ["iglú", "imán", "isla", "iglesia", "insecto", "instrumento", "invierno", "igualdad"],
+    "en": ["ice cream", "igloo", "insect", "iron", "island", "ivy", "iris", "instrument"]
+  },
+  "J": {
+    "es": ["jirafa", "juguete", "jardín", "jaula", "jamón", "jabalí", "jabón", "jarra", "jersey", "jinete"],
+    "en": ["jacket", "jar", "jellyfish", "jet", "jewel", "jungle", "jump rope"]
+  },
+  "K": {
+    "es": ["koala", "kiwi", "kayak"],
+    "en": ["kangaroo", "key", "kite", "kitten", "knight", "knot", "koala", "kiwi"]
+  },
+  "L": {
+    "es": ["libro", "luna", "león", "llave", "lagarto", "lámpara", "loro", "lobo", "limón", "lluvia"],
+    "en": ["lamp", "leaf", "lemon", "lion", "lizard", "lock", "log", "lollipop", "ladder", "lake"]
+  },
+  "M": {
+    "es": ["mariposa", "manzana", "mano", "mono", "montaña", "músico", "mesa", "mochila", "murciélago", "mapa"],
+    "en": ["magnet", "map", "mask", "medal", "milk", "mirror", "monkey", "moon", "mountain", "mushroom"]
+  },
+  "N": {
+    "es": ["nube", "nariz", "naranja", "nieve", "nido", "niña", "niño", "nave", "nuez", "natación"],
+    "en": ["nail", "nest", "net", "newspaper", "night", "notebook", "nurse", "nut"]
+  },
+  "Ñ": {
+    "es": ["ñoño", "ñandú", "ñame"],
+    "en": []
+  },
+  "O": {
+    "es": ["ojo", "oso", "oveja", "ola", "oruga", "oreja", "oficina", "olivo", "ostión"],
+    "en": ["oak", "ocean", "olive", "orange", "ostrich", "owl", "ox"]
+  },
+  "P": {
+    "es": ["pájaro", "perro", "pelota", "pez", "piña", "puerta", "planeta", "pato", "paloma", "pulpo"],
+    "en": ["parrot", "peach", "penguin", "pig", "pillow", "pizza", "planet", "plant", "puppy", "puzzle"]
+  },
+  "Q": {
+    "es": ["queso", "quetzal", "quilate"],
+    "en": ["queen", "quilt", "quail"]
+  },
+  "R": {
+    "es": ["rana", "ratón", "robot", "roca", "rosa", "rayo", "regalo", "red", "río", "rueda"],
+    "en": ["rabbit", "rainbow", "robot", "rocket", "rose", "ruler", "ring", "river"]
+  },
+  "S": {
+    "es": ["sandía", "sol", "silla", "serpiente", "sombrero", "semilla", "sapo", "submarino", "soplo", "saco"],
+    "en": ["sail", "sand", "sandwich", "shark", "sheep", "shell", "ship", "snail", "snake", "sun"]
+  },
+  "T": {
+    "es": ["tigre", "tren", "tortuga", "taza", "tijeras", "tomate", "toro", "tubo", "tambor", "tiburón"],
+    "en": ["table", "tent", "tiger", "tomato", "torch", "tower", "train", "tree", "truck", "turtle"]
+  },
+  "U": {
+    "es": ["uva", "unicornio", "uniforme", "ukelele"],
+    "en": ["umbrella", "unicorn", "uniform", "ukulele"]
+  },
+  "V": {
+    "es": ["vaca", "volcán", "violin", "vela", "ventana", "vestido", "viaje", "víbora", "vuelo"],
+    "en": ["van", "vase", "vest", "vine", "violin", "volcano", "vulture"]
+  },
+  "W": {
+    "es": ["wafle", "wagón"],
+    "en": ["waffle", "wagon", "walrus", "waterfall", "whale", "wheel", "wolf", "worm"]
+  },
+  "X": {
+    "es": ["xilófono"],
+    "en": ["xylophone"]
+  },
+  "Y": {
+    "es": ["yoyo", "yate", "yegua"],
+    "en": ["yacht", "yarn", "yoyo"]
+  },
+  "Z": {
+    "es": ["zapato", "zorro", "zanahoria", "zebra", "zumo", "zumbido"],
+    "en": ["zebra", "zipper", "zoo"]
+  }
+}
