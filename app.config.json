@@ -1,0 +1,33 @@
+{
+  "_comentario": "Edita este archivo para configurar tu app. No toques core/.",
+
+  "app": {
+    "id":          "marina2",
+    "nombre":      "MArina 2",
+    "descripcion": "App de acompañamiento para el desarrollo de lenguaje basada en CAA y pictogramas ARASAAC",
+    "version":     "2.0.0",
+    "idiomas":     ["es", "en"],
+    "idiomaPorDefecto": "es"
+  },
+
+  "ui": {
+    "tema":        "oceano",
+    "saludo":      "Hola ",
+    "mostrarPill": true
+  },
+
+  "pin": {
+    "valorDefecto": "1234"
+  },
+
+  "tts": {
+    "lang":   "es-MX",
+    "rate":   0.92,
+    "pitch":  1.2,
+    "volume": 1
+  },
+
+  "storage": {
+    "prefijo": "marina2"
+  }
+}
