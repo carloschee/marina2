@@ -44,37 +44,32 @@ export function injectStyles() {
     body { background: var(--t-bg); color: var(--t-ink); }
 
     @keyframes corriente-a {
-      0%   { transform: translate(0,0) skewX(0deg) scale(1);
-             border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%; }
-      30%  { transform: translate(6vw,5vh) skewX(1.4deg) scale(1.07);
-             border-radius: 50% 50% 45% 55% / 46% 54% 50% 50%; }
-      65%  { transform: translate(11vw,10vh) skewX(-0.9deg) scale(1.12);
-             border-radius: 46% 54% 60% 40% / 55% 45% 46% 54%; }
-      100% { transform: translate(17vw,14vh) skewX(-0.4deg) scale(1.17);
-             border-radius: 42% 58% 52% 48% / 48% 52% 55% 45%; }
-    }
-    @keyframes corriente-b {
-      0%   { transform: translate(0,0) skewX(0deg) scale(1.05);
-             border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
-      35%  { transform: translate(-6vw,-5vh) skewX(1.4deg) scale(0.98); }
-      100% { transform: translate(-14vw,-12vh) skewX(-0.7deg) scale(0.90);
-             border-radius: 50% 50% 40% 60% / 42% 58% 48% 52%; }
-    }
-    @keyframes corriente-c {
-      0%   { transform: translate(0,0) skewY(0deg) scale(1); }
-      45%  { transform: translate(5vw,-4vh) skewY(1.1deg) scale(1.06); }
-      100% { transform: translate(10vw,-8vh) skewY(-0.7deg) scale(1.11); }
-    }
-    @keyframes corriente-d {
-      0%   { transform: translate(0,0) skewY(0deg) scale(1); }
-      38%  { transform: translate(-3vw,4vh) skewY(-1.4deg) scale(1.06); }
-      100% { transform: translate(-8vw,9vh) skewY(0.9deg) scale(0.95); }
-    }
-    @keyframes corriente-e {
-      0%   { transform: translate(0,0) scale(1); opacity:.16; }
-      50%  { transform: translate(-5vw,4vh) scale(1.09); opacity:.22; }
-      100% { transform: translate(4vw,7vh) scale(0.93); opacity:.12; }
-    }
+  0%   { transform: translateX(0)    scaleY(1)    skewY(0deg); }
+  33%  { transform: translateX(8vw)  scaleY(1.15) skewY(-1deg); }
+  66%  { transform: translateX(14vw) scaleY(0.9)  skewY(1.5deg); }
+  100% { transform: translateX(20vw) scaleY(1.1)  skewY(-0.5deg); }
+}
+@keyframes corriente-b {
+  0%   { transform: translateX(0)     scaleY(1)    skewY(0deg); }
+  33%  { transform: translateX(-10vw) scaleY(1.2)  skewY(1deg); }
+  66%  { transform: translateX(-6vw)  scaleY(0.85) skewY(-1.5deg); }
+  100% { transform: translateX(-18vw) scaleY(1.1)  skewY(0.8deg); }
+}
+@keyframes corriente-c {
+  0%   { transform: translateX(0);    }
+  50%  { transform: translateX(12vw); }
+  100% { transform: translateX(5vw);  }
+}
+@keyframes corriente-d {
+  0%   { transform: translateX(0);     }
+  50%  { transform: translateX(-14vw); }
+  100% { transform: translateX(-8vw);  }
+}
+@keyframes corriente-e {
+  0%   { transform: translateX(0);   opacity:.16; }
+  50%  { transform: translateX(8vw); opacity:.22; }
+  100% { transform: translateX(3vw); opacity:.14; }
+}
   `;
   document.head.appendChild(style);
 }
@@ -92,43 +87,43 @@ export function crearFondo() {
 
   div.innerHTML = `
     <!-- Corriente principal -->
-    <div style="
-      position:absolute; border-radius:40% 60% 55% 45% / 50% 45% 55% 50%;
-      filter:blur(55px); opacity:.48; width:90vw; height:70vw; top:-25vw; left:-15vw;
-      background:radial-gradient(ellipse at 45% 35%,#0ea5c9 0%,#0369a1 38%,#041e2e 65%,transparent 80%);
-      animation:corriente-a 20s ease-in-out infinite alternate; will-change:transform;">
-    </div>
-    <!-- Corriente secundaria -->
-    <div style="
-      position:absolute; border-radius:55% 45% 40% 60% / 45% 55% 50% 50%;
-      filter:blur(62px); opacity:.36; width:80vw; height:60vw; bottom:-20vw; right:-10vw;
-      background:radial-gradient(ellipse at 55% 60%,#14b8a6 0%,#0369a1 42%,transparent 72%);
-      animation:corriente-b 26s ease-in-out infinite alternate; will-change:transform;">
-    </div>
-    <!-- Filamento 1 -->
-    <div style="
-      position:absolute; border-radius:40% 60% 65% 35% / 55% 40% 60% 45%;
-      width:62vw; height:28vw; top:28%; left:-4%;
-      filter:blur(46px); opacity:.26;
-      background:radial-gradient(ellipse at 40% 50%,#38bdf8 0%,#0ea5c9 45%,transparent 70%);
-      animation:corriente-c 15s ease-in-out infinite alternate;">
-    </div>
-    <!-- Filamento 2 -->
-    <div style="
-      position:absolute; border-radius:40% 60% 65% 35% / 55% 40% 60% 45%;
-      width:52vw; height:24vw; top:54%; right:-2%;
-      filter:blur(52px); opacity:.22;
-      background:radial-gradient(ellipse at 60% 50%,#14b8a6 0%,#0369a1 50%,transparent 72%);
-      animation:corriente-d 22s ease-in-out infinite alternate;">
-    </div>
-    <!-- Filamento 3 -->
-    <div style="
-      position:absolute; border-radius:40% 60% 65% 35% / 55% 40% 60% 45%;
-      width:38vw; height:18vw; top:6%; right:8%;
-      filter:blur(40px); opacity:.16;
-      background:radial-gradient(ellipse at 50% 40%,#7dd3fc 0%,#0ea5c9 55%,transparent 75%);
-      animation:corriente-e 12s ease-in-out infinite alternate;">
-    </div>
+<div style="
+  position:absolute; border-radius:50% 50% 50% 50% / 12% 12% 12% 12%;
+  filter:blur(55px); opacity:.48; width:110vw; height:28vw; top:6vw; left:-15vw;
+  background:radial-gradient(ellipse at 45% 50%,#0ea5c9 0%,#0369a1 38%,#041e2e 65%,transparent 80%);
+  animation:corriente-a 20s ease-in-out infinite alternate; will-change:transform;">
+</div>
+<!-- Corriente secundaria -->
+<div style="
+  position:absolute; border-radius:50% 50% 50% 50% / 14% 14% 14% 14%;
+  filter:blur(62px); opacity:.36; width:120vw; height:24vw; bottom:10vw; right:-25vw;
+  background:radial-gradient(ellipse at 55% 50%,#14b8a6 0%,#0369a1 42%,transparent 72%);
+  animation:corriente-b 26s ease-in-out infinite alternate; will-change:transform;">
+</div>
+<!-- Filamento 1 -->
+<div style="
+  position:absolute; border-radius:50% 50% 50% 50% / 18% 18% 18% 18%;
+  width:90vw; height:18vw; top:38%; left:-10%;
+  filter:blur(46px); opacity:.26;
+  background:radial-gradient(ellipse at 40% 50%,#38bdf8 0%,#0ea5c9 45%,transparent 70%);
+  animation:corriente-c 15s ease-in-out infinite alternate;">
+</div>
+<!-- Filamento 2 -->
+<div style="
+  position:absolute; border-radius:50% 50% 50% 50% / 16% 16% 16% 16%;
+  width:80vw; height:15vw; top:62%; right:-15%;
+  filter:blur(52px); opacity:.22;
+  background:radial-gradient(ellipse at 60% 50%,#14b8a6 0%,#0369a1 50%,transparent 72%);
+  animation:corriente-d 22s ease-in-out infinite alternate;">
+</div>
+<!-- Filamento 3 -->
+<div style="
+  position:absolute; border-radius:50% 50% 50% 50% / 14% 14% 14% 14%;
+  width:70vw; height:12vw; top:20%; right:-5%;
+  filter:blur(40px); opacity:.16;
+  background:radial-gradient(ellipse at 50% 50%,#7dd3fc 0%,#0ea5c9 55%,transparent 75%);
+  animation:corriente-e 12s ease-in-out infinite alternate;">
+</div>
     <!-- Caustica SVG -->
     <svg style="position:absolute;bottom:0;left:0;width:100%;height:80px;opacity:.08;pointer-events:none;"
          viewBox="0 0 1180 80" preserveAspectRatio="none">
