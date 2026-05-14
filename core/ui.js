@@ -238,3 +238,13 @@ document.addEventListener('touchmove', e => {
   const dx = _touchStartX - e.touches[0].clientX;
   if (!_puedeScrollear(e.target, dy, dx)) e.preventDefault();
 }, { passive: false });
+
+// Feedback táctil — activa Taptic Engine en iPhone, no-op en iPad/desktop
+export function haptic(patron = 8) {
+  navigator.vibrate?.(patron);
+}
+
+haptic(8)           // tap suave — letras, piezas
+haptic(15)          // tap medio — botón escucha, confirmar
+haptic([10,40,10])  // doble — completar frase, encontrar par en memorama
+haptic([8,30,8,30,15]) // éxito — pantalla de felicitación

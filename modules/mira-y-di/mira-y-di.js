@@ -10,6 +10,7 @@
 */
 
 import { TTS } from '../../core/tts.js';
+import { haptic } from '../../core/ui.js';
 
 const LETRAS = 'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z'.split(' ');
 
@@ -17,12 +18,12 @@ const pictoURL = (palabra, lang) =>
   `assets/pictogramas/${lang}/${palabra}.png`;
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
-let _el    = null;
+let _el = null;
 let _vocab = null;
-let _lang  = 'es';
+let _lang = 'es';
 let _letra = null;
 let _lista = [];
-let _idx   = 0;
+let _idx = 0;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
@@ -54,7 +55,7 @@ export function destroy() {
   _el = null; _vocab = null; _letra = null;
 }
 
-export function onEnter() {}
+export function onEnter() { }
 export function onLeave() { _detenerMic(); TTS.stop(); }
 
 // ─── Shell ────────────────────────────────────────────────────────────────────
@@ -240,8 +241,8 @@ function _renderLetras() {
   for (const letra of LETRAS) {
     const vacia = !_vocab[letra]?.es?.length && !_vocab[letra]?.en?.length;
     const btn = document.createElement('button');
-    btn.className     = 'md-letra-btn' + (vacia ? ' vacia' : '');
-    btn.textContent   = letra;
+    btn.className = 'md-letra-btn' + (vacia ? ' vacia' : '');
+    btn.textContent = letra;
     btn.dataset.letra = letra;
     btn.addEventListener('click', () => _seleccionarLetra(letra));
     wrap.appendChild(btn);
@@ -250,17 +251,17 @@ function _renderLetras() {
 
 // ─── Selección de letra ───────────────────────────────────────────────────────
 const COLORES = {
-  A:'#f87171',B:'#fb923c',C:'#fbbf24',D:'#a3e635',E:'#34d399',
-  F:'#22d3ee',G:'#60a5fa',H:'#a78bfa',I:'#f472b6',J:'#f87171',
-  K:'#fb923c',L:'#fbbf24',M:'#34d399',N:'#22d3ee',Ñ:'#60a5fa',
-  O:'#a78bfa',P:'#f472b6',Q:'#f87171',R:'#fb923c',S:'#fbbf24',
-  T:'#34d399',U:'#22d3ee',V:'#60a5fa',W:'#a78bfa',X:'#f472b6',
-  Y:'#f87171',Z:'#fb923c',
+  A: '#f87171', B: '#fb923c', C: '#fbbf24', D: '#a3e635', E: '#34d399',
+  F: '#22d3ee', G: '#60a5fa', H: '#a78bfa', I: '#f472b6', J: '#f87171',
+  K: '#fb923c', L: '#fbbf24', M: '#34d399', N: '#22d3ee', Ñ: '#60a5fa',
+  O: '#a78bfa', P: '#f472b6', Q: '#f87171', R: '#fb923c', S: '#fbbf24',
+  T: '#34d399', U: '#22d3ee', V: '#60a5fa', W: '#a78bfa', X: '#f472b6',
+  Y: '#f87171', Z: '#fb923c',
 };
 
 function _seleccionarLetra(letra) {
   _letra = letra;
-  _idx   = 0;
+  _idx = 0;
 
   // Si el idioma activo no tiene palabras para esta letra, cambiar al otro
   if (!_vocab[letra]?.[_lang]?.length) {
@@ -280,7 +281,7 @@ function _seleccionarLetra(letra) {
 
 function _construirLista() {
   _lista = _shuffle([...(_vocab[_letra]?.[_lang] || [])]);
-  _idx   = 0;
+  _idx = 0;
 }
 
 // ─── Cambio de idioma desde pill global ───────────────────────────────────────
@@ -299,22 +300,22 @@ function _onLangChange(e) {
 
 // ─── Vista ────────────────────────────────────────────────────────────────────
 function _actualizarVista() {
-  const main  = _el.querySelector('#md-main');
+  const main = _el.querySelector('#md-main');
   const vacio = _el.querySelector('#md-vacio');
 
   _mejorScore = 0;
   _actualizarBarra(0, '…');
 
   if (!_lista.length) {
-    main.style.display  = 'none';
+    main.style.display = 'none';
     vacio.style.display = 'flex';
     return;
   }
-  main.style.display  = 'grid';
+  main.style.display = 'grid';
   vacio.style.display = 'none';
 
   const palabra = _lista[_idx];
-  const color   = COLORES[_letra] || '#0ea5c9';
+  const color = COLORES[_letra] || '#0ea5c9';
 
   _el.querySelector('#md-card').style.background = color;
   _renderCardBg(color);
@@ -323,7 +324,7 @@ function _actualizarVista() {
   img.classList.add('cargando');
   img.alt = palabra;
   img.src = pictoURL(palabra, _lang);
-  img.onload  = () => img.classList.remove('cargando');
+  img.onload = () => img.classList.remove('cargando');
   img.onerror = () => img.classList.remove('cargando');
 
   _el.querySelector('#md-meta').textContent =
@@ -334,12 +335,12 @@ function _actualizarVista() {
 }
 
 function _renderDots() {
-  const wrap  = _el.querySelector('#md-dots');
+  const wrap = _el.querySelector('#md-dots');
   const total = Math.min(_lista.length, 8);
   wrap.innerHTML = '';
   for (let i = 0; i < total; i++) {
     const d = document.createElement('span');
-    d.className  = 'md-dot' + (i === _idx % total ? ' activo' : '');
+    d.className = 'md-dot' + (i === _idx % total ? ' activo' : '');
     d.style.width = i === _idx % total ? '24px' : '8px';
     wrap.appendChild(d);
   }
@@ -359,6 +360,12 @@ function _bindEvents() {
     if (_lista.length) _hablar(_lista[_idx], _lang === 'es' ? 'es-MX' : 'en-US');
   });
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
+  btn.addEventListener('click', () => { haptic(8); _seleccionarLetra(letra); });
+
+  _el.querySelector('#md-btn-escucha').addEventListener('click', () => {
+    haptic(15);
+    if (_lista.length) _hablar(_lista[_idx], _lang === 'es' ? 'es-MX' : 'en-US');
+  });
 }
 
 // ─── TTS ──────────────────────────────────────────────────────────────────────
@@ -371,8 +378,8 @@ function _hablar(texto, lang = 'es-MX') {
 }
 
 // ─── Micrófono + medidor ──────────────────────────────────────────────────────
-let _recog      = null;
-let _micActivo  = false;
+let _recog = null;
+let _micActivo = false;
 let _mejorScore = 0;
 
 function _toggleMic() {
@@ -387,14 +394,14 @@ function _iniciarMic() {
     return;
   }
 
-  _recog                = new SR();
-  _recog.lang           = _lang === 'es' ? 'es-MX' : 'en-US';
+  _recog = new SR();
+  _recog.lang = _lang === 'es' ? 'es-MX' : 'en-US';
   _recog.interimResults = true;
-  _recog.continuous     = true;
+  _recog.continuous = true;
   _recog.maxAlternatives = 3;
 
   _mejorScore = 0;
-  _micActivo  = true;
+  _micActivo = true;
   _el.querySelector('#md-btn-mic').classList.add('activo');
   _el.querySelector('#md-medidor-wrap').classList.add('visible');
   _actualizarBarra(0, '…');
@@ -408,7 +415,7 @@ function _iniciarMic() {
         const score = _similitud(transcripcion, _lista[_idx]?.toLowerCase() || '');
         if (score > _mejorScore) {
           _mejorScore = score;
-          textoMejor  = transcripcion;
+          textoMejor = transcripcion;
         }
       }
     }
@@ -420,7 +427,7 @@ function _iniciarMic() {
   };
 
   _recog.onend = () => {
-    if (_micActivo) { try { _recog.start(); } catch {} }
+    if (_micActivo) { try { _recog.start(); } catch { } }
   };
 
   try { _recog.start(); } catch (e) { console.warn('[mic]', e); }
@@ -428,20 +435,20 @@ function _iniciarMic() {
 
 function _detenerMic() {
   _micActivo = false;
-  try { _recog?.stop(); } catch {}
+  try { _recog?.stop(); } catch { }
   _recog = null;
   _el?.querySelector('#md-btn-mic')?.classList.remove('activo');
 }
 
 function _actualizarBarra(score, texto) {
-  const pct   = Math.round(score * 100);
+  const pct = Math.round(score * 100);
   const color = score < 0.40 ? '#f87171' : score < 0.70 ? '#fbbf24' : '#34d399';
-  const bar   = _el.querySelector('#md-medidor-bar');
+  const bar = _el.querySelector('#md-medidor-bar');
   const pctEl = _el.querySelector('#md-medidor-pct');
   const txtEl = _el.querySelector('#md-medidor-texto');
-  if (bar)   { bar.style.width = pct + '%'; bar.style.background = color; }
+  if (bar) { bar.style.width = pct + '%'; bar.style.background = color; }
   if (pctEl) { pctEl.textContent = pct + '%'; pctEl.style.color = color; }
-  if (txtEl)   txtEl.textContent = texto || '…';
+  if (txtEl) txtEl.textContent = texto || '…';
 }
 
 function _mostrarMedidor(score, texto) {
@@ -472,21 +479,21 @@ function _renderCardBg(hex) {
         <stop offset="0%"   stop-color="${c3}" stop-opacity="0.6"/>
         <stop offset="100%" stop-color="${c4}" stop-opacity="0"/>
       </radialGradient>
-      <radialGradient id="md-rg2" cx="${r(1,10,90)}%" cy="${r(2,10,90)}%" r="55%">
+      <radialGradient id="md-rg2" cx="${r(1, 10, 90)}%" cy="${r(2, 10, 90)}%" r="55%">
         <stop offset="0%"   stop-color="${c1}"/>
         <stop offset="100%" stop-color="${c2}" stop-opacity="0"/>
       </radialGradient>
     </defs>
     <rect width="400" height="500" fill="${c0}"/>
     <rect width="400" height="500" fill="url(#md-rg1)"/>
-    <ellipse cx="${r(3,60,340)}" cy="${r(4,60,440)}" rx="${r(5,80,160)}" ry="${r(6,60,130)}"
-             fill="${c3}" opacity="0.22" transform="rotate(${r(7,0,360)} ${r(3,60,340)} ${r(4,60,440)})"/>
-    <ellipse cx="${r(8,60,340)}" cy="${r(9,60,440)}" rx="${r(10,60,120)}" ry="${r(11,40,100)}"
-             fill="${c1}" opacity="0.18" transform="rotate(${r(12,0,360)} ${r(8,60,340)} ${r(9,60,440)})"/>
-    <circle cx="${r(13,0,80)}" cy="${r(14,380,500)}" r="${r(15,60,110)}" fill="${c2}" opacity="0.35"/>
-    <path d="M0,${r(16,180,320)} Q${r(17,60,160)},${r(18,100,260)} 200,${r(19,180,320)} T400,${r(20,180,320)}"
-          stroke="${c3}" stroke-width="${r(21,30,70)}" fill="none" opacity="0.12"/>
-    <ellipse cx="${r(22,120,280)}" cy="${r(23,20,80)}" rx="${r(24,50,100)}" ry="${r(25,20,50)}"
+    <ellipse cx="${r(3, 60, 340)}" cy="${r(4, 60, 440)}" rx="${r(5, 80, 160)}" ry="${r(6, 60, 130)}"
+             fill="${c3}" opacity="0.22" transform="rotate(${r(7, 0, 360)} ${r(3, 60, 340)} ${r(4, 60, 440)})"/>
+    <ellipse cx="${r(8, 60, 340)}" cy="${r(9, 60, 440)}" rx="${r(10, 60, 120)}" ry="${r(11, 40, 100)}"
+             fill="${c1}" opacity="0.18" transform="rotate(${r(12, 0, 360)} ${r(8, 60, 340)} ${r(9, 60, 440)})"/>
+    <circle cx="${r(13, 0, 80)}" cy="${r(14, 380, 500)}" r="${r(15, 60, 110)}" fill="${c2}" opacity="0.35"/>
+    <path d="M0,${r(16, 180, 320)} Q${r(17, 60, 160)},${r(18, 100, 260)} 200,${r(19, 180, 320)} T400,${r(20, 180, 320)}"
+          stroke="${c3}" stroke-width="${r(21, 30, 70)}" fill="none" opacity="0.12"/>
+    <ellipse cx="${r(22, 120, 280)}" cy="${r(23, 20, 80)}" rx="${r(24, 50, 100)}" ry="${r(25, 20, 50)}"
              fill="white" opacity="0.08"/>
     <rect width="400" height="500" fill="${c0}" opacity="0.05" filter="url(#md-grain)"/>
     <rect width="400" height="500" fill="url(#md-rg2)" opacity="0.3"/>
@@ -494,27 +501,27 @@ function _renderCardBg(hex) {
 }
 
 function _mezclarBlanco(hex, t) {
-  const n = parseInt(hex.replace('#',''), 16);
-  const r = Math.round(((n>>16)&255) + (255-((n>>16)&255))*t);
-  const g = Math.round(((n>>8)&255)  + (255-((n>>8)&255))*t);
-  const b = Math.round((n&255)        + (255-(n&255))*t);
-  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+  const n = parseInt(hex.replace('#', ''), 16);
+  const r = Math.round(((n >> 16) & 255) + (255 - ((n >> 16) & 255)) * t);
+  const g = Math.round(((n >> 8) & 255) + (255 - ((n >> 8) & 255)) * t);
+  const b = Math.round((n & 255) + (255 - (n & 255)) * t);
+  return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
 }
 
 function _oscurecer(hex, t) {
-  const n = parseInt(hex.replace('#',''), 16);
-  const r = Math.round(((n>>16)&255)*(1-t));
-  const g = Math.round(((n>>8)&255)*(1-t));
-  const b = Math.round((n&255)*(1-t));
-  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+  const n = parseInt(hex.replace('#', ''), 16);
+  const r = Math.round(((n >> 16) & 255) * (1 - t));
+  const g = Math.round(((n >> 8) & 255) * (1 - t));
+  const b = Math.round((n & 255) * (1 - t));
+  return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
 }
 
 // ─── Similitud fonética ───────────────────────────────────────────────────────
 function _similitud(a, b) {
-  const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').trim();
+  const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, '').trim();
   const na = norm(a), nb = norm(b);
   if (!na || !nb) return 0;
-  if (na === nb)  return 1;
+  if (na === nb) return 1;
   if (na.split(' ').includes(nb)) return 0.95;
   const dist = _levenshtein(na, nb);
   return Math.max(0, 1 - dist / Math.max(na.length, nb.length));
@@ -522,19 +529,19 @@ function _similitud(a, b) {
 
 function _levenshtein(a, b) {
   const m = a.length, n = b.length;
-  const dp = Array.from({length: m+1}, (_,i) =>
-    Array.from({length: n+1}, (_,j) => i===0 ? j : j===0 ? i : 0)
+  const dp = Array.from({ length: m + 1 }, (_, i) =>
+    Array.from({ length: n + 1 }, (_, j) => i === 0 ? j : j === 0 ? i : 0)
   );
   for (let i = 1; i <= m; i++)
     for (let j = 1; j <= n; j++)
-      dp[i][j] = a[i-1]===b[j-1] ? dp[i-1][j-1] : 1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+      dp[i][j] = a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
   return dp[m][n];
 }
 
 function _shuffle(arr) {
-  for (let i = arr.length-1; i > 0; i--) {
-    const j = Math.floor(Math.random()*(i+1));
-    [arr[i],arr[j]] = [arr[j],arr[i]];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
 }
