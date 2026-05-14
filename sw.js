@@ -1,158 +1,204 @@
-/* ============================================================
-   Dotir 2 — sw.js  (dotir2-v4)
-   Network-first para JS/HTML/CSS -> cambios en repo siempre
-   visibles en la siguiente carga sin borrar cache.
-   Cache-first solo para video. Network-first para JSON.
-   ============================================================ */
+// sw.js — Marina 2 service worker
+// Para actualizar: sube CACHE_VERSION únicamente.
+//
+// Estrategias:
+//   App shell + assets-manifest.json  → Cache-first, precache en install
+//   CDN JS / fuentes                  → Cache-first, lazy, opaque-ok
+//   Audio (.mp3/.ogg/.wav)            → Cache-first, lazy, cuota protegida
+//   Navegación                        → Network-first, timeout 3s, fallback index.html
+//   Todo lo demás                     → Stale-while-revalidate
 
-const CACHE = 'dotir2-v4';
+const CACHE_VERSION   = 'marina2-v1-2026-05-14';
+const AUDIO_QUOTA_MIN = 50 * 1024 * 1024; // 50 MB mínimo libre para audio
+const NAV_TIMEOUT_MS  = 3000;
 
-self.addEventListener('install', e => {
-  e.waitUntil(self.skipWaiting());
-});
+// Shell mínimo garantizado — siempre se precachea aunque el manifiesto falle
+const SHELL_FALLBACK = [
+  './',
+  './index.html',
+  './app.js',
+  './manifest.json',
+  './app.config.json',
+];
 
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys()
-      .then(ks => Promise.all(
-        ks.filter(k => k !== CACHE).map(k => caches.delete(k))
-      ))
-      .then(() => self.clients.claim())
-  );
-});
+const CDN_PRECACHE = [
+  'https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Outfit:wght@700;800;900&display=swap',
+];
 
-// FIX: regex corregidas — parentesis escapados y punto literal
-const isVideo = u => /\.mp4(\?|$)/i.test(u);
-const isAudio = u => /\.mp3(\?|$)/i.test(u);
-const isJson  = u => /\.json(\?|$)/i.test(u);
+// ── Helpers ───────────────────────────────────────────────────
+const openCache   = () => caches.open(CACHE_VERSION);
+const isAudio     = url => /\.(mp3|ogg|wav|m4a|aac)(\?|$)/i.test(url);
+const isFont      = url => /\.(woff2?|ttf|otf)(\?|$)/i.test(url) || url.includes('fonts.gstatic.com');
+const isCdnOpaque = url =>
+  url.startsWith('https://unpkg.com') ||
+  url.startsWith('https://fonts.googleapis.com') ||
+  url.startsWith('https://fonts.gstatic.com');
 
-self.addEventListener('fetch', e => {
-  const { request } = e;
-  const url = request.url;
-  if (request.method !== 'GET') return;
+async function hasQuota(minBytes) {
+  if (!navigator.storage?.estimate) return true;
+  try {
+    const { quota = 0, usage = 0 } = await navigator.storage.estimate();
+    return (quota - usage) > minBytes;
+  } catch { return true; }
+}
 
-  // -- Video: cache-first con soporte Range ---
-  if (isVideo(url)) {
-    e.respondWith(
-      caches.open(CACHE).then(async cache => {
-        const cached = await cache.match(request);
-        if (!cached) {
-          const resp = await fetch(request);
-          if (resp.ok) cache.put(request, resp.clone());
-          return resp;
-        }
-        const range = request.headers.get('Range');
-        if (!range) return cached;
-        const blob  = await cached.blob();
-        const m     = /bytes=(\d*)-(\d*)/.exec(range);
-        const start = m[1] ? +m[1] : 0;
-        const end   = m[2] ? +m[2] : blob.size - 1;
-        return new Response(blob.slice(start, end + 1), {
-          status: 206,
-          statusText: 'Partial Content',
-          headers: {
-            'Content-Type':  cached.headers.get('Content-Type') || 'video/mp4',
-            'Content-Range': `bytes ${start}-${end}/${blob.size}`,
-            'Content-Length': String(end - start + 1),
-            'Accept-Ranges': 'bytes',
-          },
-        });
-      }).catch(() => fetch(request))
+function fetchWithTimeout(req, ms) {
+  return new Promise((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error('timeout')), ms);
+    fetch(req).then(
+      r => { clearTimeout(t); resolve(r); },
+      e => { clearTimeout(t); reject(e); }
     );
-    return;
-  }
+  });
+}
 
-  // -- Audio: cache-first ---
-  if (isAudio(url)) {
-    e.respondWith(
-      caches.open(CACHE).then(async cache => {
-        const cached = await cache.match(request);
-        if (cached) return cached;
-        const resp = await fetch(request);
-        if (resp.ok) cache.put(request, resp.clone());
-        return resp;
-      }).catch(() => caches.match(request).then(c =>
-        c || new Response('Sin conexion', { status: 503 })
-      ))
-    );
-    return;
-  }
+// ── Install ───────────────────────────────────────────────────
+self.addEventListener('install', event => {
+  event.waitUntil((async () => {
+    const cache = await openCache();
 
-  // -- JSON: network-first, fallback a cache ---
-  if (isJson(url)) {
-    e.respondWith(
-      fetch(request)
-        .then(resp => {
-          if (resp.ok) caches.open(CACHE).then(c => c.put(request, resp.clone()));
-          return resp;
-        })
-        .catch(() => caches.match(request).then(c =>
-          c || new Response('[]', { headers: { 'Content-Type': 'application/json' } })
-        ))
-    );
-    return;
-  }
-
-  // -- Todo lo demas: network-first ---
-  // Siempre va a la red -> cambios en el repo se ven de inmediato.
-  // Si no hay red, usa la cache como respaldo.
-  e.respondWith(
-    fetch(request)
-      .then(resp => {
-        if (resp.ok) caches.open(CACHE).then(c => c.put(request, resp.clone()));
-        return resp;
-      })
-      .catch(() => caches.match(request).then(c =>
-        c || new Response('Sin conexion', { status: 503 })
-      ))
-  );
-});
-
-// -- Mensajes desde la app ---
-self.addEventListener('message', async e => {
-
-  // Actualizar SW inmediatamente
-  if (e.data?.tipo === 'skipWaiting') {
-    self.skipWaiting();
-    return;
-  }
-
-  // Precachear lista de URLs
-  if (e.data?.tipo === 'precache') {
-    const cache = await caches.open(CACHE);
-    let ok = 0;
-    const urls = e.data.urls || [];
-    for (const url of urls) {
-      try {
-        const r = await fetch(url);
-        if (r.ok) { await cache.put(url, r); ok++; }
-      } catch (_) {}
-      // Notificar progreso cada 10 archivos
-      if (ok % 10 === 0) {
-        e.source?.postMessage({ tipo: 'precache-progress', ok, total: urls.length });
+    // 1. Intentar cargar assets-manifest.json para precache completo
+    let urlsToPrecache = [...SHELL_FALLBACK];
+    try {
+      const res = await fetch('./assets-manifest.json', { cache: 'no-store' });
+      if (res.ok) {
+        const manifest = await res.json();
+        // El manifiesto ya incluye el shell, usarlo completo
+        urlsToPrecache = manifest.urls || SHELL_FALLBACK;
+        console.log(`[SW] Precacheando ${urlsToPrecache.length} assets desde manifiesto`);
       }
+    } catch (e) {
+      console.warn('[SW] assets-manifest.json no disponible, usando shell fallback:', e.message);
     }
-    e.source?.postMessage({ tipo: 'precache-done', total: urls.length, ok });
-    return;
+
+    // 2. Precachear same-origin (fail-fast para detectar archivos faltantes)
+    const sameOrigin = urlsToPrecache.filter(u => !u.startsWith('http'));
+    await Promise.allSettled(
+      sameOrigin.map(url =>
+        cache.add(new Request(url, { cache: 'reload' }))
+          .catch(e => console.warn('[SW] Precache miss:', url, e.message))
+      )
+    );
+
+    // 3. CDN best-effort
+    await Promise.allSettled(
+      CDN_PRECACHE.map(url =>
+        cache.add(new Request(url, { mode: 'no-cors', cache: 'reload' }))
+          .catch(e => console.warn('[SW] CDN miss:', url, e.message))
+      )
+    );
+
+    self.skipWaiting();
+  })());
+});
+
+// ── Activate ──────────────────────────────────────────────────
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(
+      keys.filter(k => k !== CACHE_VERSION).map(k => caches.delete(k))
+    );
+    await self.clients.claim();
+  })());
+});
+
+// ── Fetch ─────────────────────────────────────────────────────
+self.addEventListener('fetch', event => {
+  const { request: req } = event;
+  const url = req.url;
+  if (req.method !== 'GET' || !url.startsWith('http')) return;
+
+  if (req.mode === 'navigate')         { event.respondWith(handleNav(req));              return; }
+  if (isAudio(url))                    { event.respondWith(handleAudio(req));             return; }
+  if (isCdnOpaque(url) || isFont(url)) { event.respondWith(handleCacheFirst(req, true)); return; }
+  event.respondWith(handleSWR(req));
+});
+
+async function handleNav(req) {
+  const cache = await openCache();
+  try {
+    const res = await fetchWithTimeout(req, NAV_TIMEOUT_MS);
+    if (res.ok) { cache.put(req, res.clone()).catch(() => {}); return res; }
+    throw new Error('non-ok');
+  } catch {
+    const hit = await cache.match(req, { ignoreSearch: true })
+              ?? await cache.match('./index.html');
+    if (hit) return hit;
+    return new Response('<h1>Sin conexión</h1>',
+      { headers: { 'Content-Type': 'text/html;charset=utf-8' }, status: 503 });
+  }
+}
+
+async function handleCacheFirst(req, allowOpaque = false) {
+  const cache = await openCache();
+  const hit   = await cache.match(req);
+  if (hit) {
+    fetch(req).then(r => {
+      if (r && (r.ok || (allowOpaque && r.type === 'opaque')))
+        cache.put(req, r.clone()).catch(() => {});
+    }).catch(() => {});
+    return hit;
+  }
+  const res = await fetch(req);
+  if (res && (res.ok || (allowOpaque && res.type === 'opaque')))
+    cache.put(req, res.clone()).catch(() => {});
+  return res;
+}
+
+async function handleSWR(req) {
+  const cache   = await openCache();
+  const hit     = await cache.match(req, { ignoreSearch: true });
+  const network = fetch(req).then(r => {
+    if (r?.ok) cache.put(req, r.clone()).catch(() => {});
+    return r;
+  }).catch(() => null);
+  return hit ?? await network ?? new Response('', { status: 503 });
+}
+
+async function handleAudio(req) {
+  const cache = await openCache();
+  const hit   = await cache.match(req);
+  if (hit) return hit;
+  const res = await fetch(req);
+  if (res?.ok && await hasQuota(AUDIO_QUOTA_MIN))
+    cache.put(req, res.clone()).catch(() => {});
+  return res;
+}
+
+// ── Mensajes desde la app ─────────────────────────────────────
+self.addEventListener('message', event => {
+  if (event.data?.type === 'SKIP_WAITING')   self.skipWaiting();
+  if (event.data?.tipo === 'heartbeat')      { /* keepalive — no-op */ }
+
+  // Precache bajo demanda (llamado desde offline.js → precachear())
+  if (event.data?.tipo === 'precache') {
+    const urls = event.data.urls || [];
+    caches.open(CACHE_VERSION).then(async cache => {
+      let ok = 0;
+      await Promise.allSettled(
+        urls.map(url =>
+          cache.add(new Request(url, { cache: 'reload' }))
+            .then(() => ok++)
+            .catch(() => {})
+        )
+      );
+      event.source?.postMessage({ tipo: 'precache-done', ok, total: urls.length });
+    });
   }
 
-  // Verificar si una URL esta en cache
-  if (e.data?.tipo === 'check') {
-    const c = await caches.match(e.data.url);
-    e.source?.postMessage({ tipo: 'check-result', url: e.data.url, cached: !!c });
-    return;
+  // Check de cache (llamado desde offline.js → estaEnCache())
+  if (event.data?.tipo === 'check') {
+    caches.open(CACHE_VERSION).then(async cache => {
+      const hit = await cache.match(event.data.url);
+      event.source?.postMessage({ tipo: 'check-result', url: event.data.url, cached: !!hit });
+    });
   }
 
-  // Borrar cache completo
-  if (e.data?.tipo === 'clear') {
-    await caches.delete(CACHE);
-    e.source?.postMessage({ tipo: 'clear-done' });
-    return;
-  }
-
-  // Heartbeat — mantener SW activo
-  if (e.data?.tipo === 'heartbeat') {
-    e.source?.postMessage({ tipo: 'heartbeat-ack' });
-    return;
+  // Limpiar cache (llamado desde offline.js → borrarCache())
+  if (event.data?.tipo === 'clear') {
+    caches.delete(CACHE_VERSION).then(() => {
+      event.source?.postMessage({ tipo: 'clear-done' });
+    });
   }
 });
