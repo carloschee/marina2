@@ -3,7 +3,7 @@
 
   "app": {
     "id":          "marina2",
-    "nombre":      "MArina 2",
+    "nombre":      "Marina 2",
     "descripcion": "App de acompañamiento para el desarrollo de lenguaje basada en CAA y pictogramas ARASAAC",
     "version":     "2.0.0",
     "idiomas":     ["es", "en"],
