@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-MX">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,
@@ -17,49 +18,66 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Outfit:wght@700;800;900&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Outfit:wght@700;800;900&display=swap">
 
   <style>
     /* ── Variables Marina — azul profundo ─────────────────────── */
     :root {
-      --m-bg:         #03111a;
-      --m-bg-mid:     #041e2e;
-      --m-surface:    #062a3e;
-      --m-ink:        #e8f4f8;
-      --m-ink-soft:   rgba(200,230,240,0.55);
-      --m-ink-dark:   #07212e;
-      --m-primary:    #0ea5c9;
+      --m-bg: #03111a;
+      --m-bg-mid: #041e2e;
+      --m-surface: #062a3e;
+      --m-ink: #e8f4f8;
+      --m-ink-soft: rgba(200, 230, 240, 0.55);
+      --m-ink-dark: #07212e;
+      --m-primary: #0ea5c9;
       --m-primary-dk: #0369a1;
-      --m-accent:     #38bdf8;
-      --m-teal:       #14b8a6;
-      --m-coral:      #fb7185;
-      --m-gold:       #fbbf24;
+      --m-accent: #38bdf8;
+      --m-teal: #14b8a6;
+      --m-coral: #fb7185;
+      --m-gold: #fbbf24;
       /* Alias para que el tema oceano.js y el CSS legacy hablen el mismo idioma */
-      --t-primary:    #0ea5c9;
-      --t-secondary:  #14b8a6;
-      --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-xl: 30px;
-      --s-card: 0 4px 20px rgba(14,165,201,0.12);
-      --s-deep: 0 8px 32px rgba(3,105,161,0.28);
-      --safe-top:    env(safe-area-inset-top, 0px);
+      --t-primary: #0ea5c9;
+      --t-secondary: #14b8a6;
+      --r-sm: 10px;
+      --r-md: 16px;
+      --r-lg: 22px;
+      --r-xl: 30px;
+      --s-card: 0 4px 20px rgba(14, 165, 201, 0.12);
+      --s-deep: 0 8px 32px rgba(3, 105, 161, 0.28);
+      --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html, body {
-      height: 100%; width: 100%; overflow: hidden;
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
       font-family: 'Nunito', system-ui, sans-serif;
-      background: var(--m-bg); color: var(--m-ink);
+      background: var(--m-bg);
+      color: var(--m-ink);
       -webkit-tap-highlight-color: transparent;
-      user-select: none; -webkit-user-select: none;
+      user-select: none;
+      -webkit-user-select: none;
       -webkit-touch-callout: none;
-      overscroll-behavior: none; touch-action: manipulation;
+      overscroll-behavior: none;
+      touch-action: manipulation;
     }
 
     /* ── App shell ────────────────────────────────────────────── */
     #app {
-      position: fixed; inset: 0;
-      display: flex; flex-direction: column;
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
       background: var(--m-bg);
     }
 
@@ -68,224 +86,672 @@
       flex-shrink: 0;
       padding-top: calc(16px + var(--safe-top));
       padding-bottom: 14px;
-      padding-left: 20px; padding-right: 16px;
-      display: flex; align-items: center; gap: 10px;
+      padding-left: 20px;
+      padding-right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       background: linear-gradient(to bottom,
-        rgba(3,17,26,0.80) 0%, rgba(3,17,26,0.35) 100%);
+          rgba(3, 17, 26, 0.80) 0%, rgba(3, 17, 26, 0.35) 100%);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(14,165,201,0.10);
-      position: relative; z-index: 20;
+      border-bottom: 1px solid rgba(14, 165, 201, 0.10);
+      position: relative;
+      z-index: 20;
     }
 
-    #header-izq { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    #header-izq {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
 
-    .menu-logo { display: flex; align-items: baseline; gap: 8px; }
+    .menu-logo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
     .menu-logo h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.55rem; font-weight: 900; letter-spacing: -0.6px; color: #fff;
-      text-shadow: 0 2px 12px rgba(14,165,201,0.25);
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -0.6px;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(14, 165, 201, 0.25);
     }
+
     #saludo-nombre {
-      font-size: 1.55rem; font-weight: 900; letter-spacing: -0.6px;
-      color: rgba(255,255,255,0.38); white-space: nowrap;
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -0.6px;
+      color: rgba(255, 255, 255, 0.38);
+      white-space: nowrap;
     }
 
     #perfil-chip {
-      display: flex; align-items: center; gap: 6px;
-      padding: 4px 10px 4px 8px; border-radius: 20px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.10);
-      cursor: default; max-width: 140px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px 4px 8px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      cursor: default;
+      max-width: 140px;
     }
-    #perfil-chip-avatar { font-size: 1.05rem; line-height: 1; flex-shrink: 0; }
-    #perfil-chip-apodo  {
-      color: rgba(255,255,255,0.70); font-size: 0.68rem; font-weight: 800;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+
+    #perfil-chip-avatar {
+      font-size: 1.05rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    #perfil-chip-apodo {
+      color: rgba(255, 255, 255, 0.70);
+      font-size: 0.68rem;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     #btn-volver {
-      display: none; align-items: center; justify-content: center;
-      width: 40px; height: 40px; flex-shrink: 0; border: none;
-      background: rgba(255,255,255,0.09); border-radius: 50%;
-      padding: 0; cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border: none;
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 50%;
+      padding: 0;
+      cursor: pointer;
       transition: transform .12s, background .12s;
     }
-    #btn-volver:active { transform: scale(.88); background: rgba(255,255,255,.16); }
+
+    #btn-volver:active {
+      transform: scale(.88);
+      background: rgba(255, 255, 255, .16);
+    }
 
     #btn-ajustes-header {
-      margin-right: 12px; width: 32px; height: 32px; border: none;
-      background: transparent; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.55); font-size: 1.1rem; flex-shrink: 0;
+      margin-right: 12px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 1.1rem;
+      flex-shrink: 0;
       transition: color .15s;
     }
-    #btn-ajustes-header:active { color: #fff; }
+
+    #btn-ajustes-header:active {
+      color: #fff;
+    }
 
     #modulo-acciones {
-      display: flex; align-items: center; gap: 6px;
-      flex: 1; justify-content: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      justify-content: flex-end;
     }
+
     #header-derecha {
-      display: flex; align-items: center; flex-shrink: 0; margin-left: 6px;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin-left: 6px;
     }
 
     /* Pill ES / EN */
     #lang-pill {
-      display: flex; gap: 3px; padding: 3px; margin-right: 10px;
+      display: flex;
+      gap: 3px;
+      padding: 3px;
+      margin-right: 10px;
       border-radius: 99px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.10);
-      font-size: 0.78rem; font-weight: 900;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      font-size: 0.78rem;
+      font-weight: 900;
     }
+
     .lang-btn {
-      padding: 5px 13px; border-radius: 99px; border: none; cursor: pointer;
-      background: transparent; color: rgba(255,255,255,0.50);
-      font-family: inherit; font-size: inherit; font-weight: inherit;
+      padding: 5px 13px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.50);
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
       transition: all .18s;
     }
-    .lang-btn.activo { background: var(--t-primary,#0ea5c9); color: #fff; }
+
+    .lang-btn.activo {
+      background: var(--t-primary, #0ea5c9);
+      color: #fff;
+    }
 
     /* ── Indicador offline ───────────────────────────────────── */
     #indicador-offline {
-      display: flex; align-items: center; gap: 5px;
-      padding: 4px 10px; border-radius: 20px;
-      font-size: .68rem; font-weight: 700; border: 1.5px solid; transition: all .3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: .68rem;
+      font-weight: 700;
+      border: 1.5px solid;
+      transition: all .3s;
     }
-    #indicador-offline.online   { background: rgba(20,184,166,.15); border-color: #14b8a6; color: #5eead4; }
-    #indicador-offline.offline  { background: rgba(251,113,133,.15); border-color: #fb7185; color: #fda4af; }
-    #indicador-offline.checking { background: rgba(251,191,36,.15);  border-color: #fbbf24; color: #fcd34d; }
-    #dot-conexion { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .online  #dot-conexion  { background: #14b8a6; }
-    .offline #dot-conexion  { background: #fb7185; }
-    .checking #dot-conexion { background: #fbbf24; }
+
+    #indicador-offline.online {
+      background: rgba(20, 184, 166, .15);
+      border-color: #14b8a6;
+      color: #5eead4;
+    }
+
+    #indicador-offline.offline {
+      background: rgba(251, 113, 133, .15);
+      border-color: #fb7185;
+      color: #fda4af;
+    }
+
+    #indicador-offline.checking {
+      background: rgba(251, 191, 36, .15);
+      border-color: #fbbf24;
+      color: #fcd34d;
+    }
+
+    #dot-conexion {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .online #dot-conexion {
+      background: #14b8a6;
+    }
+
+    .offline #dot-conexion {
+      background: #fb7185;
+    }
+
+    .checking #dot-conexion {
+      background: #fbbf24;
+    }
 
     /* ── Body ────────────────────────────────────────────────── */
-    #app-body { flex: 1; min-height: 0; position: relative; z-index: 1; }
+    #app-body {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      z-index: 1;
+    }
 
     #vista-menu {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; overflow: hidden;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     /* ── Grid de módulos ─────────────────────────────────────── */
     #menu-grid {
-      flex: 1; overflow: hidden;
+      flex: 1;
+      overflow: hidden;
       padding: 12px 20px calc(12px + var(--safe-bottom));
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 1fr);
-      gap: 8px; position: relative; z-index: 1;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
     }
+
     @media (max-width: 600px) {
-      #menu-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(3,1fr); }
-      .tile-label { font-size: .82rem; }
+      #menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+      }
+
+      .tile-label {
+        font-size: .82rem;
+      }
     }
 
     .module-tile {
-      background: transparent; border: none; padding: 8px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 10px;
-      cursor: pointer; transition: transform .15s ease; min-height: 0;
+      background: transparent;
+      border: none;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform .15s ease;
+      min-height: 0;
     }
-    .module-tile:active { transform: scale(.90); }
-    .tile-img   { width: 72%; height: auto; object-fit: contain; }
+
+    .module-tile:active {
+      transform: scale(.90);
+    }
+
+    .tile-img {
+      width: 72%;
+      height: auto;
+      object-fit: contain;
+    }
+
     .tile-label {
-      font-size: 1rem; font-weight: 900; text-align: center; color: white;
-      text-shadow: 0 2px 10px rgba(0,0,0,.65); line-height: 1.2; flex-shrink: 0;
+      font-size: 1rem;
+      font-weight: 900;
+      text-align: center;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .65);
+      line-height: 1.2;
+      flex-shrink: 0;
     }
 
     /* ── Botones nav ─────────────────────────────────────────── */
     .d-nav-btn {
-      display: flex; align-items: center; justify-content: center;
-      height: 32px; padding: 0 13px; border-radius: 16px; border: none;
-      background: rgba(255,255,255,.12); color: white;
-      font-size: .8rem; font-weight: 800; cursor: pointer; gap: 5px;
-      white-space: nowrap; transition: background .15s, transform .12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      padding: 0 13px;
+      border-radius: 16px;
+      border: none;
+      background: rgba(255, 255, 255, .12);
+      color: white;
+      font-size: .8rem;
+      font-weight: 800;
+      cursor: pointer;
+      gap: 5px;
+      white-space: nowrap;
+      transition: background .15s, transform .12s;
       font-family: inherit;
     }
-    .d-nav-btn:active { background: rgba(255,255,255,.24); transform: scale(.93); }
+
+    .d-nav-btn:active {
+      background: rgba(255, 255, 255, .24);
+      transform: scale(.93);
+    }
 
     /* ── Modal PIN — pregunta matemática ─────────────────────── */
     #modal-pin {
-      position: fixed; inset: 0; background: rgba(3,17,26,0.75);
-      display: none; align-items: center; justify-content: center;
-      z-index: 9000; backdrop-filter: blur(12px);
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 17, 26, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9000;
+      backdrop-filter: blur(12px);
     }
-    #modal-pin.visible { display: flex; }
+
+    #modal-pin.visible {
+      display: flex;
+    }
 
     .pin-box {
-      background: var(--m-surface); border-radius: var(--r-xl); padding: 32px;
-      width: 88%; max-width: 340px; text-align: center;
-      box-shadow: var(--s-deep); border: 1.5px solid rgba(14,165,201,0.25);
+      background: var(--m-surface);
+      border-radius: var(--r-xl);
+      padding: 32px;
+      width: 88%;
+      max-width: 340px;
+      text-align: center;
+      box-shadow: var(--s-deep);
+      border: 1.5px solid rgba(14, 165, 201, 0.25);
     }
+
     .pin-box h3 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.3rem; font-weight: 900; margin-bottom: 8px; color: var(--m-ink);
+      font-size: 1.3rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: var(--m-ink);
     }
+
     #pin-hint {
-      font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 16px;
       color: var(--m-accent);
     }
+
     #input-pin {
-      width: 100%; padding: 16px; text-align: center;
-      font-size: 2.6rem; font-weight: 900;
-      border: 2px solid rgba(14,165,201,0.25); border-radius: var(--r-md);
-      outline: none; margin-bottom: 14px;
-      background: rgba(3,111,161,0.10); color: var(--m-ink); font-family: inherit;
+      width: 100%;
+      padding: 16px;
+      text-align: center;
+      font-size: 2.6rem;
+      font-weight: 900;
+      border: 2px solid rgba(14, 165, 201, 0.25);
+      border-radius: var(--r-md);
+      outline: none;
+      margin-bottom: 14px;
+      background: rgba(3, 111, 161, 0.10);
+      color: var(--m-ink);
+      font-family: inherit;
     }
-    #input-pin:focus { border-color: var(--m-primary); box-shadow: 0 0 0 3px rgba(14,165,201,0.18); }
-    .pin-btns { display: flex; gap: 10px; }
+
+    #input-pin:focus {
+      border-color: var(--m-primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 201, 0.18);
+    }
+
+    .pin-btns {
+      display: flex;
+      gap: 10px;
+    }
+
     .pin-btns button {
-      flex: 1; padding: 15px; border-radius: var(--r-md); border: none;
-      font-weight: 900; font-size: 1.1rem; cursor: pointer; font-family: inherit;
+      flex: 1;
+      padding: 15px;
+      border-radius: var(--r-md);
+      border: none;
+      font-weight: 900;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-family: inherit;
     }
-    #btn-pin-ok     { background: var(--m-primary); color: #fff; }
-    #btn-pin-cancel { background: rgba(255,255,255,0.08); color: var(--m-ink); }
-    #pin-error { color: var(--m-coral); font-size: .95rem; font-weight: 800; margin-top: 8px; min-height: 1em; }
+
+    #btn-pin-ok {
+      background: var(--m-primary);
+      color: #fff;
+    }
+
+    #btn-pin-cancel {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--m-ink);
+    }
+
+    #pin-error {
+      color: var(--m-coral);
+      font-size: .95rem;
+      font-weight: 800;
+      margin-top: 8px;
+      min-height: 1em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       iPhone SE 2 — portrait  (375 × 667 pt lógicos, max-width: 390px)
+       El iPad no se toca. Estas reglas solo aplican en pantallas pequeñas.
+       ═══════════════════════════════════════════════════════════════════════ */
+    @media (max-width: 390px) {
+
+      /* ── Variables reducidas ─────────────────────────────────────────── */
+      :root {
+        --r-sm: 8px;
+        --r-md: 12px;
+        --r-lg: 16px;
+        --r-xl: 20px;
+      }
+
+      /* ── Header ──────────────────────────────────────────────────────── */
+      #app-header {
+        padding-top: calc(10px + var(--safe-top));
+        padding-bottom: 10px;
+        padding-left: 12px;
+        padding-right: 10px;
+        gap: 6px;
+      }
+
+      .menu-logo h1 {
+        font-size: 1.1rem;
+      }
+
+      #saludo-nombre {
+        font-size: 1.1rem;
+      }
+
+      /* Chip de perfil — oculto, no hay espacio */
+      #perfil-chip {
+        display: none !important;
+      }
+
+      /* Pill ES/EN — un poco más compacto */
+      #lang-pill {
+        margin-right: 6px;
+      }
+
+      .lang-btn {
+        padding: 4px 10px;
+        font-size: 0.72rem;
+      }
+
+      /* Indicador offline — solo el punto, sin texto */
+      #texto-conexion {
+        display: none;
+      }
+
+      #indicador-offline {
+        padding: 4px 6px;
+      }
+
+      /* Botón ajustes header */
+      #btn-ajustes-header {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+        margin-right: 6px;
+      }
+
+      /* MediaStop button */
+      #media-stop-btn {
+        width: 26px !important;
+        height: 26px !important;
+        margin-right: 6px !important;
+      }
+
+      /* ── Menu grid — 2 columnas, scroll vertical ─────────────────────── */
+      #menu-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: auto !important;
+        gap: 10px;
+        padding: 10px 12px calc(10px + var(--safe-bottom));
+        overflow-y: auto;
+        align-content: start;
+      }
+
+      .module-tile {
+        padding: 14px 8px;
+        gap: 8px;
+        min-height: 110px;
+      }
+
+      .tile-img {
+        width: 56px;
+        height: 56px;
+      }
+
+      .tile-label {
+        font-size: 0.85rem;
+      }
+
+      /* ── Botones de navegación en módulos ────────────────────────────── */
+      .d-nav-btn {
+        height: 28px;
+        padding: 0 10px;
+        font-size: 0.72rem;
+      }
+
+      #btn-volver {
+        width: 34px;
+        height: 34px;
+      }
+
+      /* ── Modal PIN ───────────────────────────────────────────────────── */
+      .pin-box {
+        padding: 22px 16px;
+      }
+
+      .pin-box h3 {
+        font-size: 1.05rem;
+      }
+
+      #pin-hint {
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+      }
+
+      #input-pin {
+        font-size: 2rem;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+
+      .pin-btns button {
+        padding: 12px;
+        font-size: 0.95rem;
+      }
+
+    }
+
+    /* ── Módulo Mira y di — iPhone SE portrait ───────────────────────────── */
+    @media (max-width: 390px) {
+
+      /* Layout vertical: imagen arriba, panel abajo */
+      #md-main {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 220px 1fr !important;
+        gap: 10px !important;
+        padding: 8px 10px 10px !important;
+        overflow-y: auto;
+      }
+
+      #md-card {
+        border-radius: 16px !important;
+        min-height: 0 !important;
+        max-height: none !important;
+      }
+
+      #md-picto {
+        width: 65% !important;
+        height: 65% !important;
+      }
+
+      /* Panel — espacio justo, sin huecos grandes */
+      #md-panel {
+        justify-content: flex-start !important;
+        gap: 8px !important;
+      }
+
+      #md-palabra {
+        font-size: 2.2rem !important;
+        margin: 4px 0 0 !important;
+      }
+
+      #md-meta {
+        font-size: 0.62rem !important;
+        margin-top: 2px !important;
+      }
+
+      /* Retícula de letras — 7 por fila */
+      #md-letras-panel {
+        grid-template-columns: repeat(7, 1fr) !important;
+        gap: 4px !important;
+        padding: 8px !important;
+      }
+
+      #md-letras-panel .md-letra-btn {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 !important;
+        font-size: 0.75rem !important;
+      }
+
+      /* Controles */
+      #md-controles {
+        gap: 6px !important;
+      }
+
+      #md-btn-escucha {
+        height: 44px !important;
+        font-size: 0.88rem !important;
+      }
+
+      .md-nav-btn,
+      #md-btn-mic {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.1rem !important;
+      }
+
+      /* Medidor de pronunciación — compacto */
+      #md-medidor-wrap {
+        margin-top: 4px !important;
+        gap: 3px !important;
+      }
+
+      #md-medidor-label,
+      #md-medidor-texto {
+        font-size: 0.60rem !important;
+      }
+
+      #md-medidor-track {
+        height: 6px !important;
+      }
+
+    }
   </style>
 </head>
+
 <body>
 
-<div id="app">
-  <!-- El fondo animado (tema) se inserta aquí por app.js -->
+  <div id="app">
+    <!-- El fondo animado (tema) se inserta aquí por app.js -->
 
-  <header id="app-header">
-    <!-- Montado por app.js -->
-  </header>
+    <header id="app-header">
+      <!-- Montado por app.js -->
+    </header>
 
-  <div id="app-body">
-    <div id="vista-menu">
-      <div id="menu-grid">
-        <!-- Módulos montados por app.js -->
+    <div id="app-body">
+      <div id="vista-menu">
+        <div id="menu-grid">
+          <!-- Módulos montados por app.js -->
+        </div>
       </div>
+      <!-- Los contenedores de módulo se crean dinámicamente por app.js -->
     </div>
-    <!-- Los contenedores de módulo se crean dinámicamente por app.js -->
   </div>
-</div>
 
-<!-- Modal PIN matemático -->
-<div id="modal-pin">
-  <div class="pin-box">
-    <h3>Área de adultos</h3>
-    <div id="pin-hint"></div>
-    <input id="input-pin" type="number" inputmode="numeric"
-           autocomplete="off" min="1" max="18" />
-    <div class="pin-btns">
-      <button id="btn-pin-cancel">Cancelar</button>
-      <button id="btn-pin-ok">Abrir</button>
+  <!-- Modal PIN matemático -->
+  <div id="modal-pin">
+    <div class="pin-box">
+      <h3>Área de adultos</h3>
+      <div id="pin-hint"></div>
+      <input id="input-pin" type="number" inputmode="numeric" autocomplete="off" min="1" max="18" />
+      <div class="pin-btns">
+        <button id="btn-pin-cancel">Cancelar</button>
+        <button id="btn-pin-ok">Abrir</button>
+      </div>
+      <div id="pin-error"></div>
     </div>
-    <div id="pin-error"></div>
   </div>
-</div>
 
-<!-- ══════════════════════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════════════════
      MÓDULOS — agrega un import en app.js y un <script> aquí.
      ══════════════════════════════════════════════════════════ -->
-<!-- <script type="module" src="./modules/ajustes/module.js"></script> -->
-<!-- <script type="module" src="./modules/mira-y-di/module.js"></script> -->
+  <!-- <script type="module" src="./modules/ajustes/module.js"></script> -->
+  <!-- <script type="module" src="./modules/mira-y-di/module.js"></script> -->
 
-<script type="module" src="./app.js"></script>
+  <script type="module" src="./app.js"></script>
 
 </body>
+
 </html>
