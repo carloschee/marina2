@@ -244,7 +244,7 @@ function _renderLetras() {
     btn.className = 'md-letra-btn' + (vacia ? ' vacia' : '');
     btn.textContent = letra;
     btn.dataset.letra = letra;
-    btn.addEventListener('click', () => _seleccionarLetra(letra));
+    btn.addEventListener('click', () => { haptic(8); _seleccionarLetra(letra); });
     wrap.appendChild(btn);
   }
 }
@@ -357,15 +357,10 @@ function _bindEvents() {
     _actualizarVista();
   });
   _el.querySelector('#md-btn-escucha').addEventListener('click', () => {
-    if (_lista.length) _hablar(_lista[_idx], _lang === 'es' ? 'es-MX' : 'en-US');
-  });
-  _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
-  btn.addEventListener('click', () => { haptic(8); _seleccionarLetra(letra); });
-
-  _el.querySelector('#md-btn-escucha').addEventListener('click', () => {
     haptic(15);
     if (_lista.length) _hablar(_lista[_idx], _lang === 'es' ? 'es-MX' : 'en-US');
   });
+  _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
 }
 
 // ─── TTS ──────────────────────────────────────────────────────────────────────
