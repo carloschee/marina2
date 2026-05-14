@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-14T16:11:15.972Z",
-  "totalAssets": 425,
+  "generado": "2026-05-14T16:18:06.936Z",
+  "totalAssets": 423,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -11,8 +11,6 @@
     "./assets/img/icon-96.png",
     "./assets/img/icon-maskable-192.png",
     "./assets/img/icon-maskable-512.png",
-    "./assets/img/icon-memorama.png",
-    "./assets/img/icon-saac.png",
     "./assets/pictogramas/en/Xochimilco.png",
     "./assets/pictogramas/en/airplane.png",
     "./assets/pictogramas/en/alligator.png",
