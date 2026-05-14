@@ -625,278 +625,62 @@
     /* ── Módulo Mira y di — iPhone SE portrait ───────────────────────────── */
     @media (max-width: 390px) {
 
-      /* Layout vertical: imagen arriba, panel abajo */
+      /* Layout: fila superior = [tarjeta | pill vertical], panel debajo
+         #md-main pasa a 2 filas: la primera tiene imagen+pill lado a lado,
+         la segunda es el panel de controles.
+         El pill NO está en #md-card — está en #md-panel, así que
+         lo sacamos del flujo normal y lo posicionamos con grid en la
+         primera fila junto a la tarjeta. */
+
       #md-main {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: 220px 1fr !important;
-        gap: 10px !important;
+        grid-template-columns: 1fr auto !important;
+        /* tarjeta | pill */
+        grid-template-rows: 200px 1fr !important;
+        gap: 10px 6px !important;
         padding: 8px 10px 10px !important;
         overflow-y: auto;
       }
 
+      /* Tarjeta — primera columna, primera fila */
       #md-card {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
         border-radius: 16px !important;
         min-height: 0 !important;
-        max-height: none !important;
       }
 
-      #md-picto {
-        width: 65% !important;
-        height: 65% !important;
-      }
-
-      /* Panel — espacio justo, sin huecos grandes */
+      /* Panel — ocupa las dos columnas en la segunda fila */
       #md-panel {
+        grid-column: 1 / -1 !important;
+        grid-row: 2 !important;
         justify-content: flex-start !important;
         gap: 8px !important;
       }
 
-      #md-palabra {
-        font-size: 2.2rem !important;
-        margin: 4px 0 0 !important;
-      }
-
-      #md-meta {
-        font-size: 0.62rem !important;
-        margin-top: 2px !important;
-      }
-
-      /* Retícula de letras — 7 por fila */
-      #md-letras-panel {
-        grid-template-columns: repeat(7, 1fr) !important;
-        gap: 4px !important;
-        padding: 8px !important;
-      }
-
-      #md-letras-panel .md-letra-btn {
-        width: 100% !important;
-        height: auto !important;
-        aspect-ratio: 1 !important;
-        font-size: 0.75rem !important;
-      }
-
-      /* Controles */
-      #md-controles {
-        gap: 6px !important;
-      }
-
-      #md-btn-escucha {
-        height: 44px !important;
-        font-size: 0.88rem !important;
-      }
-
-      .md-nav-btn,
-      #md-btn-mic {
-        width: 44px !important;
-        height: 44px !important;
-        font-size: 1.1rem !important;
-      }
-
-      /* Medidor de pronunciación — compacto */
-      #md-medidor-wrap {
-        margin-top: 4px !important;
-        gap: 3px !important;
-      }
-
-      #md-medidor-label,
-      #md-medidor-texto {
-        font-size: 0.60rem !important;
-      }
-
-      #md-medidor-track {
-        height: 6px !important;
-      }
-
-    }
-
-    /* ═══════════════════════════════════════════════════════════════════════
-       iPhone SE 2 — portrait  (375 × 667 pt lógicos, max-width: 390px)
-       El iPad no se toca. Estas reglas solo aplican en pantallas pequeñas.
-       ═══════════════════════════════════════════════════════════════════════ */
-    @media (max-width: 390px) {
-
-      /* ── Variables reducidas ─────────────────────────────────────────── */
-      :root {
-        --r-sm: 8px;
-        --r-md: 12px;
-        --r-lg: 16px;
-        --r-xl: 20px;
-      }
-
-      /* ── Header ──────────────────────────────────────────────────────── */
-      #app-header {
-        padding-top: calc(10px + var(--safe-top));
-        padding-bottom: 10px;
-        padding-left: 12px;
-        padding-right: 10px;
-        gap: 6px;
-      }
-
-      .menu-logo h1 {
-        font-size: 1.1rem;
-      }
-
-      #saludo-nombre {
-        font-size: 1.1rem;
-      }
-
-      /* Chip de perfil — oculto, no hay espacio */
-      #perfil-chip {
-        display: none !important;
-      }
-
-      /* Pill ES/EN — un poco más compacto */
-      #lang-pill {
-        margin-right: 6px;
-      }
-
-      .lang-btn {
-        padding: 4px 10px;
-        font-size: 0.72rem;
-      }
-
-      /* Indicador offline — solo el punto, sin texto */
-      #texto-conexion {
-        display: none;
-      }
-
-      #indicador-offline {
-        padding: 4px 6px;
-      }
-
-      /* Botón ajustes header */
-      #btn-ajustes-header {
-        width: 28px;
-        height: 28px;
-        font-size: 1rem;
-        margin-right: 6px;
-      }
-
-      /* MediaStop button */
-      #media-stop-btn {
-        width: 26px !important;
-        height: 26px !important;
-        margin-right: 6px !important;
-      }
-
-      /* ── Menu grid — 2 columnas, scroll vertical ─────────────────────── */
-      #menu-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        grid-template-rows: auto !important;
-        gap: 10px;
-        padding: 10px 12px calc(10px + var(--safe-bottom));
-        overflow-y: auto;
-        align-content: start;
-      }
-
-      .module-tile {
-        padding: 14px 8px;
-        gap: 8px;
-        min-height: 110px;
-      }
-
-      .tile-img {
-        width: 56px;
-        height: 56px;
-      }
-
-      .tile-label {
-        font-size: 0.85rem;
-      }
-
-      /* ── Botones de navegación en módulos ────────────────────────────── */
-      .d-nav-btn {
-        height: 28px;
-        padding: 0 10px;
-        font-size: 0.72rem;
-      }
-
-      #btn-volver {
-        width: 34px;
-        height: 34px;
-      }
-
-      /* ── Modal PIN ───────────────────────────────────────────────────── */
-      .pin-box {
-        padding: 22px 16px;
-      }
-
-      .pin-box h3 {
-        font-size: 1.05rem;
-      }
-
-      #pin-hint {
-        font-size: 0.95rem;
-        margin-bottom: 12px;
-      }
-
-      #input-pin {
-        font-size: 2rem;
-        padding: 12px;
-        margin-bottom: 10px;
-      }
-
-      .pin-btns button {
-        padding: 12px;
-        font-size: 0.95rem;
-      }
-
-    }
-
-    /* ── Módulo Mira y di — iPhone SE portrait ───────────────────────────── */
-    @media (max-width: 390px) {
-
-      /* Layout vertical: [imagen + pill vertical] arriba, panel abajo
-         El pill de idioma se convierte en barra lateral derecha de la imagen */
-      #md-main {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: 200px 1fr !important;
-        gap: 10px !important;
-        padding: 8px 10px 10px !important;
-        overflow-y: auto;
-      }
-
-      /* La tarjeta ocupa todo el ancho menos el pill lateral */
-      #md-card {
-        border-radius: 16px !important;
-        min-height: 0 !important;
-        max-height: none !important;
-        /* Pill se posiciona como overlay lateral derecho */
-        position: relative !important;
-      }
-
-      #md-picto {
-        width: 65% !important;
-        height: 65% !important;
-      }
-
-      /* Pill — barra vertical pegada al lado derecho de la imagen */
+      /* Pill — segunda columna, primera fila: barra vertical junto a la imagen */
       #md-lang-pill {
-        position: absolute !important;
-        right: 8px !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
+        grid-column: 2 !important;
+        grid-row: 1 !important;
         flex-direction: column !important;
-        align-self: unset !important;
+        align-self: stretch !important;
+        /* misma altura que la tarjeta */
         width: auto !important;
         padding: 4px !important;
         gap: 3px !important;
-        background: rgba(3, 17, 26, 0.55) !important;
-        backdrop-filter: blur(8px) !important;
-        -webkit-backdrop-filter: blur(8px) !important;
-        z-index: 2 !important;
+        justify-content: center !important;
+        position: static !important;
+        /* cancela cualquier absolute previo */
+        transform: none !important;
       }
 
       .md-lang-btn {
-        padding: 8px 10px !important;
+        padding: 10px 8px !important;
         font-size: 0.72rem !important;
-        writing-mode: initial !important;
       }
 
-      /* Panel — espacio justo, sin huecos grandes */
-      #md-panel {
-        justify-content: flex-start !important;
-        gap: 8px !important;
+      #md-picto {
+        width: 65% !important;
+        height: 65% !important;
       }
 
       #md-palabra {
