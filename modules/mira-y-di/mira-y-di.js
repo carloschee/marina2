@@ -4,6 +4,9 @@
                   assets/pictogramas/en/{palabra}.png
    El nombre del archivo = texto a pronunciar.
    Ñ solo tiene español.
+
+   El idioma lo gobierna el pill ES/EN del header (evento global 'lang-change').
+   No hay pill local de idioma en este módulo.
 */
 
 import { TTS } from '../../core/tts.js';
@@ -23,8 +26,9 @@ let _idx   = 0;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
-  _el   = container;
-  _lang = 'es';
+  _el = container;
+  // Sincronizar con el idioma activo del pill global si ya fue cambiado
+  _lang = window._langActivo || 'es';
 
   try {
     const res = await fetch('./data/vocabulario.json');
@@ -38,11 +42,20 @@ export async function init(container) {
 
   const disponibles = LETRAS.filter(l => _vocab[l]?.es?.length);
   _seleccionarLetra(disponibles[Math.floor(Math.random() * disponibles.length)]);
+
+  // Escuchar cambios de idioma desde el pill global del header
+  window.addEventListener('lang-change', _onLangChange);
 }
 
-export function destroy() { _el = null; _vocab = null; _letra = null; }
-export function onEnter()  {}
-export function onLeave()  { _detenerMic(); window.speechSynthesis?.cancel(); }
+export function destroy() {
+  window.removeEventListener('lang-change', _onLangChange);
+  _detenerMic();
+  TTS.stop();
+  _el = null; _vocab = null; _letra = null;
+}
+
+export function onEnter() {}
+export function onLeave() { _detenerMic(); TTS.stop(); }
 
 // ─── Shell ────────────────────────────────────────────────────────────────────
 function _render() {
@@ -51,14 +64,6 @@ function _render() {
 
   _el.innerHTML = `
   <style>
-    #md-letras-wrap {
-      flex-shrink:0; overflow-x:auto; overflow-y:hidden;
-      padding:10px 16px 6px; scrollbar-width:none;
-      -webkit-overflow-scrolling:touch;
-    }
-    #md-letras-wrap::-webkit-scrollbar { display:none; }
-    #md-letras { display:flex; gap:6px; width:max-content; }
-
     .md-letra-btn {
       width:38px; height:38px; border-radius:50%; border:none; cursor:pointer;
       font-family:inherit; font-weight:900; font-size:.9rem;
@@ -80,22 +85,17 @@ function _render() {
       position:relative;
     }
     #md-card-bg {
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      pointer-events:none;
+      position:absolute; inset:0; width:100%; height:100%; pointer-events:none;
     }
-    /* El pictograma va encima del SVG de fondo */
-    #md-picto { position:relative; z-index:1; }
     #md-picto {
+      position:relative; z-index:1;
       width:75%; height:75%; object-fit:contain;
       filter:drop-shadow(0 12px 24px rgba(0,0,0,.22));
       transition:opacity .22s;
       transform-origin: center bottom;
     }
     #md-picto.cargando { opacity:0; }
-    #md-picto.hablando {
-      animation: picto-wobble 0.5s ease-in-out infinite alternate;
-    }
+    #md-picto.hablando { animation: picto-wobble 0.5s ease-in-out infinite alternate; }
     @keyframes picto-wobble {
       0%   { transform: rotate(-2deg) scale(1.02); }
       25%  { transform: rotate(1.5deg) scale(1.04) translateY(-3px); }
@@ -109,24 +109,6 @@ function _render() {
       justify-content:space-between; gap:0;
     }
 
-    /* Pill ES / EN — solo abarca sus dos botones */
-    #md-lang-pill {
-      display:inline-flex; gap:3px; padding:3px;
-      border-radius:99px;
-      background:rgba(255,255,255,0.07);
-      border:1px solid rgba(255,255,255,0.10);
-      align-self:flex-start;         /* no se estira */
-      width:fit-content;
-    }
-    .md-lang-btn {
-      padding:5px 14px; border-radius:99px; border:none; cursor:pointer;
-      font-family:inherit; font-size:.75rem; font-weight:900;
-      background:transparent; color:rgba(255,255,255,.45);
-      transition:all .18s; white-space:nowrap;
-    }
-    .md-lang-btn.activo        { background:#0ea5c9; color:#fff; }
-    .md-lang-btn.deshabilitado { opacity:.25; pointer-events:none; }
-
     #md-meta {
       font-size:.72rem; font-weight:900; letter-spacing:.12em;
       text-transform:uppercase; color:#14b8a6; margin-top:8px;
@@ -137,20 +119,16 @@ function _render() {
       word-break:break-word; margin:6px 0 0;
     }
 
-    /* Retícula de letras — grid que reparte el espacio horizontal exacto */
+    /* Retícula de letras */
     #md-letras-panel {
       background:rgba(255,255,255,0.05);
       border:1px solid rgba(255,255,255,0.10);
-      border-radius:16px;
-      padding:12px;
-      display:grid;
-      grid-template-columns:repeat(9, 1fr);
-      gap:6px;
-      width:100%;
+      border-radius:16px; padding:12px;
+      display:grid; grid-template-columns:repeat(9, 1fr);
+      gap:6px; width:100%;
     }
     #md-letras-panel .md-letra-btn {
-      width:100%; aspect-ratio:1;
-      font-size:1.1rem; font-weight:900;
+      width:100%; aspect-ratio:1; font-size:1.1rem; font-weight:900;
     }
 
     #md-controles { display:flex; align-items:center; gap:10px; }
@@ -173,17 +151,14 @@ function _render() {
     }
     #md-btn-escucha:active { transform:scale(.96); box-shadow:0 4px 12px rgba(251,113,133,.30); }
 
-    /* Botón micrófono */
     #md-btn-mic {
       width:52px; height:52px; border-radius:50%; border:none; cursor:pointer;
-      background:rgba(255,255,255,.10); color:#fff;
-      font-size:1.3rem;
+      background:rgba(255,255,255,.10); color:#fff; font-size:1.3rem;
       display:flex; align-items:center; justify-content:center;
-      transition:background .15s, transform .12s, box-shadow .15s;
-      flex-shrink:0; position:relative;
+      transition:background .15s, transform .12s, box-shadow .15s; flex-shrink:0;
     }
-    #md-btn-mic:active  { transform:scale(.88); }
-    #md-btn-mic.activo  {
+    #md-btn-mic:active { transform:scale(.88); }
+    #md-btn-mic.activo {
       background:rgba(251,113,133,.25);
       box-shadow:0 0 0 3px rgba(251,113,133,.50);
       animation:mic-pulse 1.4s ease-in-out infinite;
@@ -193,35 +168,17 @@ function _render() {
       50%      { box-shadow:0 0 0 7px rgba(251,113,133,.15); }
     }
 
-    /* Medidor de pronunciación */
-    #md-medidor-wrap {
-      margin-top:10px;
-      display:none; flex-direction:column; gap:5px;
-    }
+    #md-medidor-wrap { margin-top:10px; display:none; flex-direction:column; gap:5px; }
     #md-medidor-wrap.visible { display:flex; }
     #md-medidor-label {
       display:flex; justify-content:space-between; align-items:center;
       font-size:.68rem; font-weight:700; letter-spacing:.08em;
       text-transform:uppercase; color:rgba(255,255,255,.45);
     }
-    #md-medidor-pct {
-      font-size:.8rem; font-weight:900;
-      transition:color .3s;
-    }
-    #md-medidor-track {
-      height:8px; border-radius:99px;
-      background:rgba(255,255,255,.10);
-      overflow:hidden;
-    }
-    #md-medidor-bar {
-      height:100%; border-radius:99px; width:0%;
-      transition:width .25s ease, background .35s ease;
-    }
-    #md-medidor-texto {
-      font-size:.72rem; color:rgba(255,255,255,.35);
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-      min-height:1em;
-    }
+    #md-medidor-pct   { font-size:.8rem; font-weight:900; transition:color .3s; }
+    #md-medidor-track { height:8px; border-radius:99px; background:rgba(255,255,255,.10); overflow:hidden; }
+    #md-medidor-bar   { height:100%; border-radius:99px; width:0%; transition:width .25s ease, background .35s ease; }
+    #md-medidor-texto { font-size:.72rem; color:rgba(255,255,255,.35); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-height:1em; }
 
     #md-dots { display:flex; gap:5px; justify-content:center; margin-top:8px; }
     .md-dot  { height:5px; border-radius:99px; background:rgba(255,255,255,.18); transition:all .3s; }
@@ -241,18 +198,11 @@ function _render() {
       <img id="md-picto" src="" alt="" class="cargando" />
     </div>
     <div id="md-panel">
-      <!-- Fila superior: pill idioma + meta -->
       <div>
-        <div id="md-lang-pill">
-          <button class="md-lang-btn activo" data-lang="es">ES</button>
-          <button class="md-lang-btn"         data-lang="en">EN</button>
-        </div>
         <div id="md-meta"></div>
         <div id="md-palabra">—</div>
       </div>
-      <!-- Cintillo de letras — retícula en el panel -->
       <div id="md-letras-panel"></div>
-      <!-- Controles -->
       <div>
         <div id="md-controles">
           <button class="md-nav-btn" id="md-prev">‹</button>
@@ -260,15 +210,12 @@ function _render() {
           <button id="md-btn-mic" title="Pronunciar">🎙️</button>
           <button class="md-nav-btn" id="md-next">›</button>
         </div>
-        <!-- Medidor de pronunciación -->
         <div id="md-medidor-wrap">
           <div id="md-medidor-label">
             <span>Pronunciación</span>
             <span id="md-medidor-pct">0%</span>
           </div>
-          <div id="md-medidor-track">
-            <div id="md-medidor-bar"></div>
-          </div>
+          <div id="md-medidor-track"><div id="md-medidor-bar"></div></div>
           <div id="md-medidor-texto">…</div>
         </div>
         <div id="md-dots"></div>
@@ -318,15 +265,16 @@ function _seleccionarLetra(letra) {
   // Si el idioma activo no tiene palabras para esta letra, cambiar al otro
   if (!_vocab[letra]?.[_lang]?.length) {
     _lang = _lang === 'es' ? 'en' : 'es';
+    // Notificar al pill global para que se sincronice visualmente
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('activo', b.dataset.lang === _lang);
+    });
   }
 
   _construirLista();
-
   _el.querySelectorAll('.md-letra-btn').forEach(b =>
     b.classList.toggle('activa', b.dataset.letra === letra)
   );
-
-  _actualizarPill();
   _actualizarVista();
 }
 
@@ -335,13 +283,18 @@ function _construirLista() {
   _idx   = 0;
 }
 
-// ─── Pill ─────────────────────────────────────────────────────────────────────
-function _actualizarPill() {
-  _el.querySelectorAll('.md-lang-btn').forEach(btn => {
-    const l = btn.dataset.lang;
-    btn.classList.toggle('activo', l === _lang);
-    btn.classList.toggle('deshabilitado', !_vocab[_letra]?.[l]?.length);
-  });
+// ─── Cambio de idioma desde pill global ───────────────────────────────────────
+function _onLangChange(e) {
+  const nuevoLang = e.detail?.lang;
+  if (!nuevoLang || nuevoLang === _lang) return;
+
+  // Si la letra activa no tiene palabras en el nuevo idioma (ej. Ñ en EN),
+  // ignorar el cambio — el módulo mantiene su idioma actual.
+  if (_letra && !_vocab[_letra]?.[nuevoLang]?.length) return;
+
+  _lang = nuevoLang;
+  _construirLista();
+  _actualizarVista();
 }
 
 // ─── Vista ────────────────────────────────────────────────────────────────────
@@ -349,7 +302,6 @@ function _actualizarVista() {
   const main  = _el.querySelector('#md-main');
   const vacio = _el.querySelector('#md-vacio');
 
-  // Resetear medidor al cambiar de palabra
   _mejorScore = 0;
   _actualizarBarra(0, '…');
 
@@ -364,8 +316,6 @@ function _actualizarVista() {
   const palabra = _lista[_idx];
   const color   = COLORES[_letra] || '#0ea5c9';
 
-  // Fondo con textura SVG — variaciones del color base sin competir
-  // con el pictograma. Se regenera en cada cambio de palabra/letra.
   _el.querySelector('#md-card').style.background = color;
   _renderCardBg(color);
 
@@ -381,110 +331,6 @@ function _actualizarVista() {
   _el.querySelector('#md-palabra').textContent = palabra;
 
   _renderDots();
-}
-
-// ─── Fondo de la tarjeta ─────────────────────────────────────────────────────
-// Genera un SVG con formas orgánicas en variaciones del color base.
-// Usa una semilla basada en la palabra para que cada palabra tenga
-// un patrón propio pero estable (no cambia con cada render).
-function _renderCardBg(hex) {
-  const svg = _el.querySelector('#md-card-bg');
-  if (!svg) return;
-
-  // Derivar colores: base, más claro, más oscuro, con opacidad
-  const c0 = hex;                          // base
-  const c1 = hex + '99';                   // 60% opacidad
-  const c2 = hex + '44';                   // 27% opacidad
-  const c3 = _mezclarBlanco(hex, 0.25);    // aclarado
-  const c4 = _oscurecer(hex, 0.35);        // oscurecido
-
-  // Semilla pseudo-aleatoria basada en la palabra actual
-  const seed = (_lista[_idx] || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-  const r = (n, min, max) => min + ((seed * (n * 7919)) % (max - min + 1));
-
-  svg.innerHTML = `
-    <defs>
-      <!-- Filtro de grano suave -->
-      <filter id="md-grain" x="-20%" y="-20%" width="140%" height="140%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4"
-                      stitchTiles="stitch" result="noise"/>
-        <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
-        <feBlend in="SourceGraphic" in2="gray" mode="overlay" result="blend"/>
-        <feComposite in="blend" in2="SourceGraphic" operator="in"/>
-      </filter>
-      <!-- Gradiente radial central que da profundidad -->
-      <radialGradient id="md-rg1" cx="50%" cy="45%" r="60%">
-        <stop offset="0%"   stop-color="${c3}" stop-opacity="0.6"/>
-        <stop offset="100%" stop-color="${c4}" stop-opacity="0"/>
-      </radialGradient>
-      <!-- Gradiente de esquina -->
-      <radialGradient id="md-rg2" cx="${r(1,10,90)}%" cy="${r(2,10,90)}%" r="55%">
-        <stop offset="0%"   stop-color="${c1}"/>
-        <stop offset="100%" stop-color="${c2}" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-
-    <!-- Base sólida del color de la letra -->
-    <rect width="400" height="500" fill="${c0}"/>
-
-    <!-- Mancha de luz central -->
-    <rect width="400" height="500" fill="url(#md-rg1)"/>
-
-    <!-- Blob orgánico 1 — esquina variable -->
-    <ellipse cx="${r(3,60,340)}" cy="${r(4,60,440)}"
-             rx="${r(5,80,160)}" ry="${r(6,60,130)}"
-             fill="${c3}" opacity="0.22"
-             transform="rotate(${r(7,0,360)} ${r(3,60,340)} ${r(4,60,440)})"/>
-
-    <!-- Blob orgánico 2 — esquina opuesta -->
-    <ellipse cx="${r(8,60,340)}" cy="${r(9,60,440)}"
-             rx="${r(10,60,120)}" ry="${r(11,40,100)}"
-             fill="${c1}" opacity="0.18"
-             transform="rotate(${r(12,0,360)} ${r(8,60,340)} ${r(9,60,440)})"/>
-
-    <!-- Mancha de acento — esquina inferior -->
-    <circle cx="${r(13,0,80)}" cy="${r(14,380,500)}"
-            r="${r(15,60,110)}"
-            fill="${c2}" opacity="0.35"/>
-
-    <!-- Línea orgánica de onda — sutil -->
-    <path d="M0,${r(16,180,320)}
-             Q${r(17,60,160)},${r(18,100,260)}
-               200,${r(19,180,320)}
-             T400,${r(20,180,320)}"
-          stroke="${c3}" stroke-width="${r(21,30,70)}"
-          fill="none" opacity="0.12"/>
-
-    <!-- Mancha de reflejo de luz arriba -->
-    <ellipse cx="${r(22,120,280)}" cy="${r(23,20,80)}"
-             rx="${r(24,50,100)}" ry="${r(25,20,50)}"
-             fill="white" opacity="0.08"/>
-
-    <!-- Capa de grano encima de todo -->
-    <rect width="400" height="500"
-          fill="${c0}" opacity="0.05" filter="url(#md-grain)"/>
-
-    <!-- Gradiente de acento variable -->
-    <rect width="400" height="500" fill="url(#md-rg2)" opacity="0.3"/>
-  `;
-}
-
-// Aclarar un hex mezclándolo con blanco (t: 0-1)
-function _mezclarBlanco(hex, t) {
-  const n = parseInt(hex.replace('#',''), 16);
-  const r = Math.round(((n>>16)&255) + (255 - ((n>>16)&255)) * t);
-  const g = Math.round(((n>>8)&255)  + (255 - ((n>>8)&255))  * t);
-  const b = Math.round((n&255)        + (255 - (n&255))        * t);
-  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
-}
-
-// Oscurecer un hex (t: 0-1)
-function _oscurecer(hex, t) {
-  const n = parseInt(hex.replace('#',''), 16);
-  const r = Math.round(((n>>16)&255) * (1-t));
-  const g = Math.round(((n>>8)&255)  * (1-t));
-  const b = Math.round((n&255)        * (1-t));
-  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
 }
 
 function _renderDots() {
@@ -512,23 +358,22 @@ function _bindEvents() {
   _el.querySelector('#md-btn-escucha').addEventListener('click', () => {
     if (_lista.length) _hablar(_lista[_idx], _lang === 'es' ? 'es-MX' : 'en-US');
   });
-
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
+}
 
-  _el.querySelector('#md-lang-pill').addEventListener('click', e => {
-    const btn = e.target.closest('.md-lang-btn');
-    if (!btn || btn.classList.contains('deshabilitado')) return;
-    _lang = btn.dataset.lang;
-    _construirLista();
-    _actualizarPill();
-    _actualizarVista();
-  });
+// ─── TTS ──────────────────────────────────────────────────────────────────────
+function _hablar(texto, lang = 'es-MX') {
+  const img = _el?.querySelector('#md-picto');
+  if (img) img.classList.add('hablando');
+  const duracionMs = Math.max(800, texto.length * 70);
+  setTimeout(() => { if (img) img.classList.remove('hablando'); }, duracionMs);
+  TTS.speak(texto, { lang, rate: 0.92, pitch: 1.2 });
 }
 
 // ─── Micrófono + medidor ──────────────────────────────────────────────────────
-let _recog      = null;   // SpeechRecognition instance
+let _recog      = null;
 let _micActivo  = false;
-let _mejorScore = 0;      // el mejor score de la sesión no baja
+let _mejorScore = 0;
 
 function _toggleMic() {
   if (_micActivo) { _detenerMic(); return; }
@@ -542,10 +387,10 @@ function _iniciarMic() {
     return;
   }
 
-  _recog              = new SR();
-  _recog.lang         = _lang === 'es' ? 'es-MX' : 'en-US';
-  _recog.interimResults = true;   // resultados parciales en tiempo real
-  _recog.continuous   = true;     // no se detiene solo al hacer pausa
+  _recog                = new SR();
+  _recog.lang           = _lang === 'es' ? 'es-MX' : 'en-US';
+  _recog.interimResults = true;
+  _recog.continuous     = true;
   _recog.maxAlternatives = 3;
 
   _mejorScore = 0;
@@ -555,40 +400,27 @@ function _iniciarMic() {
   _actualizarBarra(0, '…');
 
   _recog.onresult = (e) => {
-    // Recoger todos los resultados interim y finales disponibles
     let textoMejor = '';
-    let esFinal    = false;
-
     for (let i = e.resultIndex; i < e.results.length; i++) {
       const res = e.results[i];
-      // Revisar todas las alternativas — quedarse con la más parecida
       for (let a = 0; a < res.length; a++) {
         const transcripcion = res[a].transcript.trim().toLowerCase();
         const score = _similitud(transcripcion, _lista[_idx]?.toLowerCase() || '');
-        if (score > _mejorScore || (!esFinal && res.isFinal)) {
-          _mejorScore = Math.max(_mejorScore, score);
+        if (score > _mejorScore) {
+          _mejorScore = score;
           textoMejor  = transcripcion;
         }
       }
-      if (res.isFinal) esFinal = true;
     }
-
     _actualizarBarra(_mejorScore, textoMejor);
   };
 
   _recog.onerror = (e) => {
-    // 'no-speech' es normal — no lo tratamos como error grave
-    if (e.error !== 'no-speech') {
-      _actualizarBarra(_mejorScore, `Error: ${e.error}`);
-      _detenerMic();
-    }
+    if (e.error !== 'no-speech') { _actualizarBarra(_mejorScore, `Error: ${e.error}`); _detenerMic(); }
   };
 
   _recog.onend = () => {
-    // Si sigue activo (no fue detenido manualmente) reiniciar para continuidad
-    if (_micActivo) {
-      try { _recog.start(); } catch {}
-    }
+    if (_micActivo) { try { _recog.start(); } catch {} }
   };
 
   try { _recog.start(); } catch (e) { console.warn('[mic]', e); }
@@ -598,23 +430,18 @@ function _detenerMic() {
   _micActivo = false;
   try { _recog?.stop(); } catch {}
   _recog = null;
-  _el.querySelector('#md-btn-mic')?.classList.remove('activo');
+  _el?.querySelector('#md-btn-mic')?.classList.remove('activo');
 }
 
 function _actualizarBarra(score, texto) {
-  const pct  = Math.round(score * 100);
-  // Color: rojo < 40%, amarillo 40-70%, verde > 70%
-  const color = score < 0.40 ? '#f87171'
-              : score < 0.70 ? '#fbbf24'
-              : '#34d399';
-
-  const bar = _el.querySelector('#md-medidor-bar');
+  const pct   = Math.round(score * 100);
+  const color = score < 0.40 ? '#f87171' : score < 0.70 ? '#fbbf24' : '#34d399';
+  const bar   = _el.querySelector('#md-medidor-bar');
   const pctEl = _el.querySelector('#md-medidor-pct');
-  const textoEl = _el.querySelector('#md-medidor-texto');
-
-  if (bar)    { bar.style.width = pct + '%'; bar.style.background = color; }
-  if (pctEl)  { pctEl.textContent = pct + '%'; pctEl.style.color = color; }
-  if (textoEl) textoEl.textContent = texto || '…';
+  const txtEl = _el.querySelector('#md-medidor-texto');
+  if (bar)   { bar.style.width = pct + '%'; bar.style.background = color; }
+  if (pctEl) { pctEl.textContent = pct + '%'; pctEl.style.color = color; }
+  if (txtEl)   txtEl.textContent = texto || '…';
 }
 
 function _mostrarMedidor(score, texto) {
@@ -622,66 +449,92 @@ function _mostrarMedidor(score, texto) {
   _actualizarBarra(score, texto);
 }
 
-// ─── Similitud fonética (Levenshtein normalizado) ─────────────────────────────
-// Compara la transcripción recibida contra la palabra objetivo.
-// Devuelve 0.0 (ninguna similitud) a 1.0 (coincidencia exacta).
-// Normaliza tildes y mayúsculas para no penalizar diferencias de acento.
+// ─── Fondo SVG de la tarjeta ──────────────────────────────────────────────────
+function _renderCardBg(hex) {
+  const svg = _el.querySelector('#md-card-bg');
+  if (!svg) return;
+  const c0 = hex;
+  const c1 = hex + '99';
+  const c2 = hex + '44';
+  const c3 = _mezclarBlanco(hex, 0.25);
+  const c4 = _oscurecer(hex, 0.35);
+  const seed = (_lista[_idx] || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const r = (n, min, max) => min + ((seed * (n * 7919)) % (max - min + 1));
+  svg.innerHTML = `
+    <defs>
+      <filter id="md-grain" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
+        <feBlend in="SourceGraphic" in2="gray" mode="overlay" result="blend"/>
+        <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+      </filter>
+      <radialGradient id="md-rg1" cx="50%" cy="45%" r="60%">
+        <stop offset="0%"   stop-color="${c3}" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="${c4}" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="md-rg2" cx="${r(1,10,90)}%" cy="${r(2,10,90)}%" r="55%">
+        <stop offset="0%"   stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="400" height="500" fill="${c0}"/>
+    <rect width="400" height="500" fill="url(#md-rg1)"/>
+    <ellipse cx="${r(3,60,340)}" cy="${r(4,60,440)}" rx="${r(5,80,160)}" ry="${r(6,60,130)}"
+             fill="${c3}" opacity="0.22" transform="rotate(${r(7,0,360)} ${r(3,60,340)} ${r(4,60,440)})"/>
+    <ellipse cx="${r(8,60,340)}" cy="${r(9,60,440)}" rx="${r(10,60,120)}" ry="${r(11,40,100)}"
+             fill="${c1}" opacity="0.18" transform="rotate(${r(12,0,360)} ${r(8,60,340)} ${r(9,60,440)})"/>
+    <circle cx="${r(13,0,80)}" cy="${r(14,380,500)}" r="${r(15,60,110)}" fill="${c2}" opacity="0.35"/>
+    <path d="M0,${r(16,180,320)} Q${r(17,60,160)},${r(18,100,260)} 200,${r(19,180,320)} T400,${r(20,180,320)}"
+          stroke="${c3}" stroke-width="${r(21,30,70)}" fill="none" opacity="0.12"/>
+    <ellipse cx="${r(22,120,280)}" cy="${r(23,20,80)}" rx="${r(24,50,100)}" ry="${r(25,20,50)}"
+             fill="white" opacity="0.08"/>
+    <rect width="400" height="500" fill="${c0}" opacity="0.05" filter="url(#md-grain)"/>
+    <rect width="400" height="500" fill="url(#md-rg2)" opacity="0.3"/>
+  `;
+}
+
+function _mezclarBlanco(hex, t) {
+  const n = parseInt(hex.replace('#',''), 16);
+  const r = Math.round(((n>>16)&255) + (255-((n>>16)&255))*t);
+  const g = Math.round(((n>>8)&255)  + (255-((n>>8)&255))*t);
+  const b = Math.round((n&255)        + (255-(n&255))*t);
+  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+
+function _oscurecer(hex, t) {
+  const n = parseInt(hex.replace('#',''), 16);
+  const r = Math.round(((n>>16)&255)*(1-t));
+  const g = Math.round(((n>>8)&255)*(1-t));
+  const b = Math.round((n&255)*(1-t));
+  return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+
+// ─── Similitud fonética ───────────────────────────────────────────────────────
 function _similitud(a, b) {
-  // Normalizar: minúsculas, sin tildes, sin puntuación
-  const norm = s => s
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9\s]/g, '')
-    .trim();
-
-  const na = norm(a);
-  const nb = norm(b);
-
+  const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').trim();
+  const na = norm(a), nb = norm(b);
   if (!na || !nb) return 0;
   if (na === nb)  return 1;
-
-  // Si la transcripción contiene la palabra objetivo como token → alto score
   if (na.split(' ').includes(nb)) return 0.95;
-
-  // Levenshtein
   const dist = _levenshtein(na, nb);
-  const maxLen = Math.max(na.length, nb.length);
-  return Math.max(0, 1 - dist / maxLen);
+  return Math.max(0, 1 - dist / Math.max(na.length, nb.length));
 }
 
 function _levenshtein(a, b) {
   const m = a.length, n = b.length;
-  const dp = Array.from({ length: m + 1 }, (_, i) =>
-    Array.from({ length: n + 1 }, (_, j) => i === 0 ? j : j === 0 ? i : 0)
+  const dp = Array.from({length: m+1}, (_,i) =>
+    Array.from({length: n+1}, (_,j) => i===0 ? j : j===0 ? i : 0)
   );
-  for (let i = 1; i <= m; i++) {
-    for (let j = 1; j <= n; j++) {
-      dp[i][j] = a[i-1] === b[j-1]
-        ? dp[i-1][j-1]
-        : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
-    }
-  }
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1]===b[j-1] ? dp[i-1][j-1] : 1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
   return dp[m][n];
 }
 
-// ─── TTS (usa core/tts.js) ───────────────────────────────────────────────────
-function _hablar(texto, lang = 'es-MX') {
-  // Temblor del pictograma — arranca antes de hablar
-  const img = _el?.querySelector('#md-picto');
-  if (img) img.classList.add('hablando');
-
-  // Estimar duración para quitar la animación (TTS no expone onend de forma
-  // confiable en iOS, así que calculamos ~70ms por carácter como fallback)
-  const duracionMs = Math.max(800, texto.length * 70);
-  setTimeout(() => { if (img) img.classList.remove('hablando'); }, duracionMs);
-
-  TTS.speak(texto, { lang, rate: 0.92, pitch: 1.2 });
-}
-
 function _shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+  for (let i = arr.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
   }
   return arr;
 }
