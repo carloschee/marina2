@@ -208,7 +208,7 @@ function _montarHome() {
     btn.className = 'module-tile';
     btn.innerHTML = `
       <img class="tile-img"
-           src="assets/ui/${mod.id}.png"
+           src="assets/ui/btn-${mod.id}.png"
            onerror="this.style.display='none';this.nextElementSibling.style.fontSize='4rem'"
            alt="${mod.label}">
       <span class="tile-label">${mod.label}</span>`;
