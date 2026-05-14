@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-14T07:23:37.084Z",
-  "totalAssets": 424,
+  "generado": "2026-05-14T07:28:33.236Z",
+  "totalAssets": 425,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -352,6 +352,7 @@
     "./assets/pictogramas/es/pájaro.png",
     "./assets/pictogramas/es/queso.png",
     "./assets/pictogramas/es/quetzal.png",
+    "./assets/pictogramas/es/quinqué.png",
     "./assets/pictogramas/es/rana.png",
     "./assets/pictogramas/es/ratón.png",
     "./assets/pictogramas/es/rayo.png",
