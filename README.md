@@ -1,246 +1,186 @@
-# Marina 2 — PWA Boilerplate
+# Marina 2
 
-App educativa instalable para iPad (y iPhone). Arquitectura modular basada en Dótir 2.
+App educativa progresiva (PWA) para el desarrollo del lenguaje en niñas y niños con necesidades de comunicación aumentativa y alternativa (CAA). Diseñada y optimizada para **iPad Air 4ª generación** en orientación horizontal, también funciona en iPhone.
+
+Marina 2 utiliza pictogramas del sistema **ARASAAC** para asociar imágenes con palabras y frases, apoyando el desarrollo del vocabulario receptivo y expresivo. La app funciona **100% sin conexión** una vez instalada.
+
+> **Usuario principal:** Emi, 3 años.
+> **Adulto responsable:** accede al área de ajustes mediante un gesto oculto o el botón ⚙️ en el header.
+
+---
+
+## Instalación en iPad / iPhone
+
+1. Abre la URL en **Safari** (solo Safari instala PWAs en iOS/iPadOS)
+2. Toca **Compartir → Añadir a pantalla de inicio**
+3. Confirma el nombre "Marina 2" → **Añadir**
+4. Ábrela desde la pantalla de inicio — corre en pantalla completa sin barra del navegador
+
+La primera apertura requiere conexión. Después funciona offline completo.
+
+---
+
+## Módulos
+
+### 🔍 Mira y di
+
+Vocabulario visual por letra del alfabeto. La usuaria explora palabras en español e inglés acompañadas de su pictograma ARASAAC.
+
+**Cómo funciona:**
+- Un cintillo horizontal muestra las letras A–Z + Ñ. Las letras sin palabras aparecen deshabilitadas
+- Al tocar una letra, se muestra una palabra aleatoria de esa letra con su pictograma
+- Los botones ‹ › navegan entre las palabras de la letra seleccionada
+- El botón 🔊 reproduce el audio pregrabado (MP3) con fallback a TTS del dispositivo
+- El botón 🎙️ activa el micrófono para que la usuaria intente pronunciar la palabra — un medidor visual muestra qué tan cercana fue la pronunciación
+- El idioma se controla desde el pill ES/EN del header global
+
+**Contenido:** `data/vocabulario.json` — palabras por letra en ES y EN
+**Pictogramas:** `assets/pictogramas/es/` y `assets/pictogramas/en/`
+**Audio:** `assets/audio/es/` y `assets/audio/en/`
+
+📸 *Captura sugerida: pantalla completa mostrando la tarjeta de imagen a la izquierda y el panel de controles a la derecha, con una letra activa en el cintillo*
+
+---
+
+### 💬 Frases
+
+Construcción de frases mediante piezas tocables. La usuaria arma frases tocando las piezas en orden — piezas con pictograma (fondo blanco) y piezas de texto puro.
+
+**Cómo funciona:**
+- Tres niveles de dificultad seleccionables: ★ Básico, ★★ Intermedio, ★★★ Avanzado
+- Cada nivel tiene un color de tema distintivo (azul / violeta / coral) aplicado a toda la UI del módulo
+- La tira superior muestra las piezas en el orden en que se tocan
+- Al completar la frase:
+  - **Orden correcto** → piezas en verde + confeti + TTS lee la frase completa
+  - **Orden distinto** → sin penalización visual, TTS lee la frase igualmente
+- El botón 🔊 lee lo construido hasta el momento
+- El botón × borra la construcción y permite intentarlo de nuevo
+- Los pills inferiores permiten cambiar entre frases del nivel activo
+
+**Contenido:** `data/frases.json` — frases con piezas y nivel de dificultad
+**Audio piezas:** `assets/audio/es/` (piezas picto) y `assets/audio/frases/es/` (piezas texto y frases completas)
+
+📸 *Captura sugerida 1: selector de nivel con ★★ activo (violeta), tira con piezas construidas*
+📸 *Captura sugerida 2: tira completa con piezas en verde y confeti visible*
+
+---
+
+### ⚙️ Ajustes
+
+Panel de configuración para el adulto responsable. Accesible únicamente mediante PIN matemático.
+
+**Cómo acceder:**
+- **5 toques rápidos** en la esquina inferior derecha
+- **3 toques rápidos** en la esquina superior izquierda
+- Botón ⚙️ en el header
+
+El PIN es una suma matemática aleatoria (`a + b = ?`) — evita que la niña acceda accidentalmente.
+
+**Incluye:** gestión de perfiles, módulos habilitados por perfil, descarga offline, reporte de uso, ajustes de TTS, cambio de PIN.
+
+---
+
+## Área de adultos
+
+| Gesto | Dónde |
+|---|---|
+| 5 toques rápidos | Esquina inferior derecha |
+| 3 toques rápidos | Esquina superior izquierda |
 
 ---
 
 ## Estructura del repo
 
 ```
-├── app.config.json        ← EDITAR ESTO — nombre, tema, PIN, TTS
-├── app.js                 ← Arranque y orquestación (no tocar)
-├── index.html             ← Shell HTML + imports de módulos
-├── manifest.json          ← Metadatos PWA (nombre, íconos, orientación)
+marina2/
+├── app.config.json        ← Configurar nombre, tema, TTS, PIN
+├── app.js                 ← Arranque, navegación, área de adultos
+├── index.html             ← Shell HTML + CSS + imports de módulos
+├── manifest.json          ← Metadatos PWA
 ├── sw.js                  ← Service worker offline-first
-├── assets-manifest.json   ← Lista de assets a precachear (generado)
+├── assets-manifest.json   ← Generado automáticamente por GitHub Action
 │
-├── core/                  ← Infraestructura compartida — NO TOCAR
-│   ├── config.js          Carga app.config.json y expone cfg()
-│   ├── offline.js         Service worker, caché, indicador de conexión
-│   ├── ui.js              toast, confeti, modal, animarEntrada, $()
-│   ├── perfiles.js        Perfiles de usuario, módulos habilitados
-│   ├── telemetry.js       Registro local de eventos de uso
-│   ├── tts.js             Síntesis de voz — TTS.speak(), TTS.stop()
+├── core/                  ← Infraestructura — NO MODIFICAR
+│   ├── config.js          cfg() — lee app.config.json
+│   ├── offline.js         SW, caché, indicador de conexión
+│   ├── ui.js              toast, confeti, animarEntrada
+│   ├── perfiles.js        Perfiles de usuario
+│   ├── telemetry.js       Registro local de eventos
+│   ├── tts.js             TTS.speak(), selección automática de voz
 │   └── audio.js           AudioManager, VideoManager, MediaStop
 │
-├── themes/                ← Temas visuales intercambiables
-│   └── oceano.js          Azul profundo + corrientes submarinas
+├── themes/
+│   └── oceano.js          Tema "Océano Pixar" — rayos de sol, burbujas
 │
-├── modules/               ← Un directorio por módulo
-│   ├── _plantilla/        ← COPIAR ESTO para un módulo nuevo
-│   │   ├── module.js      Metadatos y registro del módulo
-│   │   └── plantilla.js   Lógica, HTML y CSS del módulo
-│   ├── ajustes/           Módulo de ajustes (PIN, perfiles, caché)
-│   └── mira-y-di/         Módulo de vocabulario por letra + pictogramas
+├── modules/
+│   ├── _plantilla/        ← Copiar para crear módulo nuevo
+│   ├── ajustes/           Panel de configuración del adulto
+│   ├── mira-y-di/         Vocabulario por letra con pictogramas
+│   └── frases/            Construcción de frases por nivel
 │
-├── data/                  ← JSONs de contenido
-│   └── vocabulario.json   Palabras por letra en ES y EN
+├── data/
+│   ├── vocabulario.json   Palabras A–Z en ES y EN
+│   └── frases.json        Frases con piezas y niveles 1–3
+│
+├── scripts/
+│   └── generar-audio.py   Genera MP3 con edge-tts
+│
+├── .github/workflows/
+│   └── assets-manifest.yml  Regenera assets-manifest.json en cada push
 │
 └── assets/
-    ├── img/               Íconos de la app (icon-192.png, icon-512.png…)
-    ├── ui/                Imágenes de tiles del home (btn-{id}.png)
-    └── pictogramas/
-        ├── es/            {palabra}.png  — nombre = texto a pronunciar
-        └── en/            {word}.png     — nombre = texto a pronunciar
+    ├── img/               Íconos PWA
+    ├── ui/                Tiles del home (btn-{id}.png)
+    ├── pictogramas/
+    │   ├── es/            {palabra}.png
+    │   └── en/            {word}.png
+    └── audio/
+        ├── es/            {palabra}.mp3
+        ├── en/            {word}.mp3
+        └── frases/
+            └── es/        {id-frase}.mp3 y {pieza-texto}.mp3
 ```
 
 ---
 
-## Levantar una app nueva
+## Generar audios
 
-### 1. Editar `app.config.json`
+```powershell
+pip install edge-tts
 
-```json
-{
-  "app": {
-    "id":          "mi-app",
-    "nombre":      "Mi App",
-    "descripcion": "Descripción breve",
-    "version":     "1.0.0",
-    "idiomas":     ["es", "en"],
-    "idiomaPorDefecto": "es"
-  },
-  "ui": {
-    "tema":        "oceano",
-    "saludo":      "Hola ",
-    "mostrarPill": true
-  },
-  "pin":     { "valorDefecto": "1234" },
-  "tts":     { "lang": "es-MX", "rate": 0.92, "pitch": 1.2, "volume": 1 },
-  "storage": { "prefijo": "mi-app" }
-}
+python .\scripts\generar-audio.py           # todo el vocabulario
+python .\scripts\generar-audio.py --solo-frases   # solo frases
+python .\scripts\generar-audio.py --seco          # dry run
+python .\scripts\generar-audio.py --forzar        # regenerar todo
 ```
 
-> **`storage.prefijo`** aísla el `localStorage` entre apps distintas en el mismo dominio.
-> Usa un valor único por app.
+Voces: `es-MX-DaliaNeural` (ES) · `en-US-AriaNeural` (EN)
 
 ---
 
-### 2. Registrar módulos en `app.js`
+## Agregar un módulo
 
-Edita solo las dos líneas marcadas:
-
-```js
-// ── Importa aquí los módulos de tu app ───────────────────────
-import MiModulo from './modules/mi-modulo/module.js';
-const MODULOS = [AjustesModule, MiModulo];
-```
-
-`AjustesModule` siempre debe estar — da acceso al área de adultos.
-
----
-
-### 3. Crear un módulo nuevo
-
-Copia la carpeta `modules/_plantilla/` y renómbrala:
-
-```
-modules/mi-modulo/
-├── module.js      ← metadatos
-└── mi-modulo.js   ← lógica
-```
-
-**`module.js`** — solo metadatos, no tocar salvo los TODOs:
-
-```js
-import { init, destroy, onEnter, onLeave } from './mi-modulo.js';
-
-export default {
-  id:          'mi-modulo',   // único, minúsculas con guiones
-  label:       'Mi módulo',   // nombre en el tile del home
-  emoji:       '🌟',          // emoji si no hay imagen en assets/ui/
-  orden:       1,             // posición en el home
-  habilitado:  true,
-  requierePin: false,         // true = pide PIN antes de abrir
-  init, destroy, onEnter, onLeave,
-  pause:  undefined,          // opcional — pausar al salir
-  resume: undefined,          // opcional — reanudar al volver
-  cache:  [],                 // URLs a precachear para offline
-};
-```
-
-**`mi-modulo.js`** — lógica del módulo:
-
-```js
-import { TTS }       from '../../core/tts.js';
-import { Telemetry } from '../../core/telemetry.js';
-import { cfg }       from '../../core/config.js';
-
-let _el = null;
-
-export async function init(container) {
-  _el = container;
-  _el.innerHTML = `
-    <style>
-      /* Estilos locales — usa var(--t-primary), var(--t-secondary) del tema */
-      #mi-titulo { color: white; font-size: 2rem; font-weight: 900; }
-    </style>
-    <div id="mi-titulo">Hola desde mi módulo</div>
-  `;
-  // eventos, fetch de datos, etc.
-}
-
-export function destroy() {
-  TTS.stop();
-  _el = null;
-}
-
-export function onEnter() { /* se llama al mostrar el módulo */ }
-export function onLeave() { TTS.stop(); }
-```
-
----
-
-### 4. Imagen del tile en el home
-
-Agrega `assets/ui/btn-{id}.png` con el id del módulo.
-Si no existe, el tile muestra el emoji de respaldo automáticamente.
-
----
-
-### 5. Instalar en iPad / iPhone
-
-1. Sube el repo a un servidor **HTTPS** (GitHub Pages, Netlify, Vercel, Cloudflare Pages)
-2. Abre la URL en **Safari** (solo Safari instala PWAs en iOS)
-3. Toca **Compartir → Añadir a pantalla de inicio**
-4. Confirma el nombre y toca **Añadir**
-
-Después del primer uso con internet, la app funciona **100% offline**.
+1. Copia `modules/_plantilla/` → `modules/mi-modulo/`
+2. Edita `module.js` con los metadatos
+3. Implementa la lógica en `mi-modulo.js`
+4. En `app.js`: agrega el import y el módulo al array `MODULOS`
+5. Agrega `assets/ui/btn-mi-modulo.png` para el tile del home
+6. Push — el GitHub Action actualiza `assets-manifest.json`
 
 ---
 
 ## Core — referencia rápida
 
-### `cfg(ruta, defecto?)`
-Lee cualquier valor de `app.config.json` con notación de punto:
 ```js
-cfg('tts.lang')          // → 'es-MX'
-cfg('app.nombre')        // → 'Marina 2'
-cfg('ui.tema', 'oceano') // con valor por defecto
-```
-
-### `TTS`
-```js
-TTS.speak('hola', { lang: 'es-MX', rate: 0.9, pitch: 1.2 })
+cfg('app.nombre')                    // lee app.config.json
+TTS.speak('hola', { lang: 'es-MX' }) // síntesis de voz
 TTS.stop()
-TTS.setMute(true)
-TTS.getLangs()  // → ['es-MX', 'en-US', ...]
-```
-Selecciona automáticamente la mejor voz disponible en el dispositivo.
-
-### `toast(mensaje, tipo?)`
-Muestra una notificación no intrusiva. `tipo`: `'ok'` | `'error'` | `'info'`.
-```js
-toast('¡Guardado!')
-toast('Sin conexión', 'error')
-```
-
-### `lanzarConfeti({ count?, container? })`
-Lluvia de confeti sobre el contenedor indicado.
-```js
-lanzarConfeti({ container: _el })
-```
-
-### `Perfiles`
-```js
-Perfiles.getActivo()              // → { apodo, avatar, esInvitado, ... }
-Perfiles.getModulosHabilitados()  // → ['mira-y-di', 'memorama'] | null
-Perfiles.onChange(callback)       // suscribirse a cambios
-Perfiles.offChange(callback)      // desuscribirse (hacerlo en destroy())
-```
-
-### `Telemetry`
-```js
-Telemetry.track('evento', { dato: valor })
-```
-Los eventos se guardan en `localStorage` y son visibles desde Ajustes.
-
-### `animarEntrada(elemento)`
-Fade-in suave al mostrar un módulo. Lo llama `app.js` automáticamente,
-pero puedes usarlo en subelementos.
-
-### `AudioManager` / `VideoManager`
-```js
-AudioManager.play('assets/audio/sonido.mp3')
-AudioManager.stop()
-VideoManager.play(url, { loop: true, container: _el })
-```
-
-### `MediaStop`
-Botón flotante que aparece automáticamente al reproducir audio o video,
-permitiendo al adulto detener la reproducción.
-
----
-
-## Temas
-
-Los temas controlan el fondo animado y las variables CSS `--t-primary`, `--t-secondary`.
-El tema activo se define en `app.config.json → ui.tema`.
-
-Para crear un tema nuevo, copia `themes/oceano.js` y exporta:
-```js
-export function injectStyles() { /* inyecta <style> en <head> */ }
-export function crearFondo()   { /* devuelve un HTMLElement para insertar */ }
+toast('¡Muy bien!', 'ok')           // notificación
+lanzarConfeti({ container: _el })   // celebración
+Perfiles.getActivo()                // perfil activo
+Perfiles.onChange(cb)               // suscribirse a cambios
+Perfiles.offChange(cb)              // desuscribirse en destroy()
+Telemetry.track('evento', { _modulo: 'mi-modulo' })
 ```
 
 ---
@@ -249,67 +189,17 @@ export function crearFondo()   { /* devuelve un HTMLElement para insertar */ }
 
 ```
 navegarA(mod)
-  └── mod.init(container)   ← montar HTML, eventos, cargar datos
-        └── mod.onEnter()   ← módulo visible
+  └── mod.init(container)   montar HTML, cargar datos, registrar eventos
+        └── mod.onEnter()   módulo visible
 
-[usuario toca Volver]
-  └── mod.onLeave()         ← detener TTS, audio, etc.
-      └── mod.pause()       ← (si existe) guardar estado
-          o mod.destroy()   ← (si no hay pause) limpiar todo
+[Volver]
+  └── mod.onLeave()         detener TTS y audio
+        └── mod.pause()     mantener estado (si existe)
+              o
+        └── mod.destroy()   limpiar todo
 
-[usuario vuelve al módulo]
-  └── mod.resume()          ← (si existe) restaurar estado
-      o mod.init()          ← arrancar de nuevo
+[Regresa al módulo]
+  └── mod.resume(container) restaurar estado (si existe)
+        o
+  └── mod.init(container)   arrancar de nuevo
 ```
-
-**Reglas importantes:**
-- `init` siempre recibe un `container` limpio — no asumas estado previo
-- `destroy` debe limpiar todos los `addEventListener` y timers para evitar memory leaks
-- Llama a `Perfiles.offChange(cb)` en `destroy` si te suscribiste en `init`
-- No toques el DOM fuera de `container` (salvo TTS y Telemetry)
-- Usa `var(--t-primary)` y `var(--t-secondary)` para colores que respeten el tema
-
----
-
-## Offline
-
-El SW usa 4 estrategias según el tipo de recurso:
-
-| Recurso | Estrategia |
-|---|---|
-| App shell (HTML, JS, CSS) | Cache-first, precache en install |
-| CDN / fuentes | Cache-first, lazy, opaque-ok |
-| Audio (.mp3, .ogg, .wav) | Cache-first, lazy, cuota mínima 50 MB |
-| Navegación | Network-first, timeout 3s, fallback a index.html |
-| Todo lo demás | Stale-while-revalidate |
-
-Para actualizar la caché: incrementa `CACHE_VERSION` en `sw.js`.
-El banner "Nueva versión disponible" aparece automáticamente.
-
-Para agregar URLs al precache de un módulo, llénalas en `cache: []` del `module.js`.
-
----
-
-## Área de adultos (Ajustes)
-
-Dos gestos para abrirla — ninguno es visible para la niña:
-
-| Gesto | Zona |
-|---|---|
-| 5 toques rápidos | Esquina inferior derecha |
-| 3 toques rápidos | Esquina superior izquierda |
-
-PIN por defecto: `1234`. Se cambia desde Ajustes → Seguridad sin tocar código.
-
----
-
-## Convención de pictogramas
-
-```
-assets/pictogramas/
-  es/  árbol.png   →  pronuncia "árbol"   en TTS es-MX
-  en/  tree.png    →  pronuncia "tree"    en TTS en-US
-```
-
-El nombre del archivo **es** el texto a pronunciar y el texto a mostrar.
-No hay IDs ni mapeos externos. Para agregar una palabra: coloca el PNG con el nombre correcto.
