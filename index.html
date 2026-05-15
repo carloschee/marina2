@@ -667,6 +667,21 @@
     </div>
   </div>
 
+  <script>
+setTimeout(() => {
+  const info = document.createElement('div');
+  info.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:rgba(255,0,0,0.8);color:#fff;font-size:11px;padding:4px;z-index:99999;font-family:monospace;';
+  const ids = ['app','app-body','vista-menu','menu-grid'];
+  info.innerHTML = ids.map(id => {
+    const el = document.getElementById(id);
+    if (!el) return `${id}: no encontrado`;
+    const b = el.getBoundingClientRect();
+    return `${id}: top=${Math.round(b.top)} bot=${Math.round(b.bottom)} h=${Math.round(b.height)}`;
+  }).join('<br>') + `<br>win.h=${window.innerHeight}`;
+  document.body.appendChild(info);
+}, 2000);
+</script>
+
   <!-- ══ MÓDULOS — descomentar según se agreguen ══ -->
   <script type="module" src="./app.js"></script>
 </body>
