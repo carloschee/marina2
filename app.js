@@ -221,12 +221,20 @@ function _montarHome() {
   modulos.forEach(mod => {
     const btn = document.createElement('button');
     btn.className = 'module-tile';
-    btn.innerHTML = `
-      <img class="tile-img"
-           src="assets/ui/btn-${mod.id}.png"
-           onerror="this.style.display='none';this.nextElementSibling.style.fontSize='4rem'"
-           alt="${mod.label}">
-      <span class="tile-label">${mod.label}</span>`;
+    btn.innerHTML = `<span class="tile-label">${mod.label}</span>`;
+
+    const imgUrl = `assets/ui/btn-${mod.id}.png`;
+    const testImg = new Image();
+    testImg.onload = () => btn.style.backgroundImage = `url('${imgUrl}')`;
+    testImg.onerror = () => {
+      btn.style.backgroundColor = mod.color || 'rgba(255,255,255,0.10)';
+      const emoji = document.createElement('span');
+      emoji.textContent = mod.emoji || '🌟';
+      emoji.style.cssText = 'font-size:3.5rem;margin-bottom:8px;position:relative;z-index:1;';
+      btn.insertBefore(emoji, btn.firstChild);
+    };
+    testImg.src = imgUrl;
+
     btn.addEventListener('click', () =>
       mod.requierePin ? _abrirPin(mod) : navegarA(mod)
     );
