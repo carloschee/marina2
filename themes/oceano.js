@@ -88,7 +88,7 @@ export function crearFondo() {
   const div = document.createElement('div');
   div.id = 'app-fondo';
   div.style.cssText =
-    'position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;' +
+    'position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;' +
     'background: linear-gradient(180deg, #0d5a8f 0%, #0a3d6b 45%, #063058 75%, #042040 100%);';
 
   div.innerHTML = `
