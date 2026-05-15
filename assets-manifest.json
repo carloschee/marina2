@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-15T19:50:12.660Z",
-  "totalAssets": 883,
+  "generado": "2026-05-15T20:09:16.689Z",
+  "totalAssets": 886,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -670,6 +670,7 @@
     "./assets/pictogramas/es/cielo.png",
     "./assets/pictogramas/es/coche.png",
     "./assets/pictogramas/es/cohete.png",
+    "./assets/pictogramas/es/comer.png",
     "./assets/pictogramas/es/conejo.png",
     "./assets/pictogramas/es/corazón.png",
     "./assets/pictogramas/es/corona.png",
@@ -683,6 +684,7 @@
     "./assets/pictogramas/es/dinosaurio.png",
     "./assets/pictogramas/es/dormir.png",
     "./assets/pictogramas/es/dragón.png",
+    "./assets/pictogramas/es/duerme.png",
     "./assets/pictogramas/es/dulce.png",
     "./assets/pictogramas/es/día.png",
     "./assets/pictogramas/es/elefante.png",
@@ -771,6 +773,7 @@
     "./assets/pictogramas/es/nave.png",
     "./assets/pictogramas/es/negra.png",
     "./assets/pictogramas/es/negras.png",
+    "./assets/pictogramas/es/negro.png",
     "./assets/pictogramas/es/nido.png",
     "./assets/pictogramas/es/nieve.png",
     "./assets/pictogramas/es/niña.png",
