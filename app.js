@@ -19,7 +19,6 @@ const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule];
 // ── Importa aquí los módulos de tu app ───────────────────────
 import AjustesModule  from './modules/ajustes/module.js';
 import MiraYDiModule  from './modules/mira-y-di/module.js';
-const MODULOS = [AjustesModule, MiraYDiModule];
 
 // ─────────────────────────────────────────────────────────────
 // ARRANQUE
