@@ -26,13 +26,13 @@ import { TTS }                   from '../../core/tts.js';
 import { lanzarConfeti, haptic } from '../../core/ui.js';
 import { Telemetry }             from '../../core/telemetry.js';
 
-const PICTO_URL     = (palabra, lang = 'es') => `assets/pictogramas/${lang}/${palabra}.png`;
-const AUDIO_URL     = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
-const AUDIO_FRASE_URL = (nombre, lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
+const PICTO_URL       = (palabra, lang = 'es') => `assets/pictogramas/${lang}/${palabra}.png`;
+const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
+const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
 const NIVELES = [
   {
-    id: 1, label: '⭐', titulo: '',
+    id: 1, label: '★', titulo: 'Básico',
     color:       '#38bdf8',   // azul cielo — fresco, tranquilo
     colorSuave:  'rgba(56,189,248,0.15)',
     colorBorde:  'rgba(56,189,248,0.40)',
@@ -43,7 +43,7 @@ const NIVELES = [
     bordePiezaTxt: 'rgba(56,189,248,0.50)',
   },
   {
-    id: 2, label: '⭐⭐', titulo: '',
+    id: 2, label: '★★', titulo: 'Intermedio',
     color:       '#c084fc',   // violeta suave
     colorSuave:  'rgba(192,132,252,0.15)',
     colorBorde:  'rgba(192,132,252,0.40)',
@@ -54,7 +54,7 @@ const NIVELES = [
     bordePiezaTxt: 'rgba(192,132,252,0.50)',
   },
   {
-    id: 3, label: '⭐⭐⭐', titulo: '',
+    id: 3, label: '★★★', titulo: 'Avanzado',
     color:       '#fb7185',   // coral cálido
     colorSuave:  'rgba(251,113,133,0.15)',
     colorBorde:  'rgba(251,113,133,0.40)',
@@ -67,13 +67,14 @@ const NIVELES = [
 ];
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
-let _el       = null;
+let _el          = null;
 let _todasFrases = [];   // todas las frases cargadas
-let _frases   = [];      // frases del nivel activo
-let _nivel    = 1;
-let _activa   = 0;
-let _built    = [];
-let _audioEl  = null;
+let _frases      = [];   // frases del nivel + idioma activos
+let _nivel       = 1;
+let _lang        = 'es'; // idioma activo — sincronizado con pill global
+let _activa      = 0;
+let _built       = [];
+let _audioEl     = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
@@ -81,6 +82,7 @@ export async function init(container) {
   _built  = [];
   _activa = 0;
   _nivel  = 1;
+  _lang   = window._langActivo || 'es';
 
   try {
     const res = await fetch('./data/frases.json');
@@ -319,7 +321,7 @@ function _cambiarNivel(nivel) {
   _nivel  = nivel;
   _activa = 0;
   _built  = [];
-  _frases = _todasFrases.filter(f => f.nivel === nivel);
+  _frases = _todasFrases.filter(f => f.nivel === nivel && (f.lang || 'es') === _lang);
 
   _renderNiveles();
   _aplicarTema(nivel);
@@ -385,7 +387,7 @@ function _renderSelector() {
     const btn = document.createElement('button');
     btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
     if (i === _activa && nivelCfg) btn.style.background = nivelCfg.color;
-    btn.textContent = f.es;
+    btn.textContent = _lang === 'en' ? (f.en || f.es) : f.es;
     btn.addEventListener('click', () => { haptic(8); _seleccionarFrase(i); });
     wrap.appendChild(btn);
   });
@@ -423,7 +425,7 @@ function _renderPiezas() {
 
     if (pieza.tipo === 'picto') {
       const img   = document.createElement('img');
-      img.src     = PICTO_URL(pieza.texto);
+      img.src     = PICTO_URL(pieza.texto, _lang);
       img.alt     = pieza.texto;
       img.onerror = () => img.remove();
       btn.appendChild(img);
@@ -501,7 +503,7 @@ function _renderTira() {
 
     if (pieza.tipo === 'picto') {
       const img   = document.createElement('img');
-      img.src     = PICTO_URL(pieza.texto);
+      img.src     = PICTO_URL(pieza.texto, _lang);
       img.alt     = pieza.texto;
       img.onerror = () => img.remove();
       div.appendChild(img);
@@ -538,8 +540,8 @@ function _bindEvents() {
 // ─── Audio ────────────────────────────────────────────────────────────────────
 function _reproducirPieza(pieza) {
   const url = pieza.tipo === 'picto'
-    ? AUDIO_URL(pieza.texto)
-    : AUDIO_FRASE_URL(pieza.texto);
+    ? AUDIO_URL(pieza.texto, _lang)
+    : AUDIO_FRASE_URL(pieza.texto, _lang);
 
   if (!_audioEl) {
     _audioEl = document.createElement('audio');
@@ -552,7 +554,13 @@ function _reproducirPieza(pieza) {
 }
 
 function _hablarTTS(texto) {
-  TTS.speak(texto, { lang: 'es-MX', rate: 0.90, pitch: 1.15 });
+  const ttsLang = _lang === 'en' ? 'en-US' : 'es-MX';
+  TTS.speak(texto, { lang: ttsLang, rate: 0.90, pitch: 1.15 });
 }
 
-function _onLangChange() {}
+function _onLangChange(e) {
+  const nuevoLang = e.detail?.lang;
+  if (!nuevoLang || nuevoLang === _lang) return;
+  _lang = nuevoLang;
+  _cambiarNivel(_nivel);
+}
