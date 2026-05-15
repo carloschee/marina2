@@ -463,6 +463,8 @@ function _seleccionarFrase(idx) {
 
   _renderPiezas();
   _renderTira();
+  // Precargar audio del enunciado para respuesta inmediata al tocar play
+  if (_activa >= 0 && _frases[_activa]) _precargarFrase(_frases[_activa].id);
 }
 
 // ─── Piezas disponibles ───────────────────────────────────────────────────────
@@ -589,10 +591,14 @@ function _bindEvents() {
     haptic(10);
     const frase = _activa >= 0 ? _frases[_activa] : null;
     if (!frase || _built.length === 0) return;
-    const texto = _built.length === frase.piezas.length
-      ? frase.es
-      : _built.map(i => frase.piezas[i].texto).join(' ');
-    _hablarTTS(texto);
+    if (_built.length === frase.piezas.length) {
+      // Frase completa — usar MP3 del enunciado completo
+      const texto = _lang === 'en' ? (frase.en || frase.es) : frase.es;
+      _reproducirFrase(texto, frase.id);
+    } else {
+      // Frase parcial — reproducir piezas construidas en cadena
+      _reproducirCadena(_built.map(i => frase.piezas[i]));
+    }
   });
 
   _el.querySelector('#fr-btn-borrar').addEventListener('click', () => {
@@ -606,32 +612,62 @@ function _bindEvents() {
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
 
-// Reproduce el MP3 del enunciado completo (frases/{lang}/{id}.mp3)
-// con fallback a TTS si el archivo no existe.
-function _reproducirFrase(texto, id) {
+// Elemento de audio reutilizable — preload:'auto' para respuesta inmediata
+function _getAudio() {
   if (!_audioEl) {
     _audioEl = document.createElement('audio');
-    _audioEl.preload = 'none';
+    _audioEl.preload = 'auto';
   }
-  _audioEl.pause();
-  _audioEl.src     = AUDIO_FRASE_URL(id, _lang);
-  _audioEl.onerror = () => _hablarTTS(texto);
-  _audioEl.play().catch(() => _hablarTTS(texto));
+  return _audioEl;
 }
 
+// Precarga silenciosa del enunciado completo al seleccionar una frase.
+// Así cuando el usuario toca play, el audio ya está en buffer.
+function _precargarFrase(id) {
+  const url = AUDIO_FRASE_URL(id, _lang);
+  const tmp = new Audio();
+  tmp.preload = 'auto';
+  tmp.src = url;
+  // No lo reproducimos — solo lo descargamos al buffer del navegador
+}
+
+// Reproduce el MP3 del enunciado completo con fallback a TTS.
+function _reproducirFrase(texto, id) {
+  const audio = _getAudio();
+  TTS.stop(); // cancelar TTS si estaba activo
+  audio.pause();
+  audio.src     = AUDIO_FRASE_URL(id, _lang);
+  audio.onerror = () => { TTS.stop(); _hablarTTS(texto); };
+  audio.play().catch(() => { TTS.stop(); _hablarTTS(texto); });
+}
+
+// Reproduce una pieza individual con fallback a TTS.
 function _reproducirPieza(pieza) {
-  const url = pieza.tipo === 'picto'
+  const url   = pieza.tipo === 'picto'
     ? AUDIO_URL(pieza.texto, _lang)
     : AUDIO_FRASE_URL(pieza.texto, _lang);
+  const audio = _getAudio();
+  TTS.stop();
+  audio.pause();
+  audio.src     = url;
+  audio.onerror = () => { TTS.stop(); _hablarTTS(pieza.texto); };
+  audio.play().catch(() => { TTS.stop(); _hablarTTS(pieza.texto); });
+}
 
-  if (!_audioEl) {
-    _audioEl = document.createElement('audio');
-    _audioEl.preload = 'none';
-  }
-  _audioEl.pause();
-  _audioEl.src     = url;
-  _audioEl.onerror = () => _hablarTTS(pieza.texto);
-  _audioEl.play().catch(() => _hablarTTS(pieza.texto));
+// Reproduce una cadena de piezas en secuencia (para frase parcial).
+function _reproducirCadena(piezas) {
+  if (!piezas.length) return;
+  const [primera, ...resto] = piezas;
+  const audio = _getAudio();
+  TTS.stop();
+  audio.pause();
+  const url     = primera.tipo === 'picto'
+    ? AUDIO_URL(primera.texto, _lang)
+    : AUDIO_FRASE_URL(primera.texto, _lang);
+  audio.src     = url;
+  audio.onerror = () => { _hablarTTS(primera.texto); };
+  audio.onended = () => { audio.onended = null; _reproducirCadena(resto); };
+  audio.play().catch(() => _hablarTTS(primera.texto));
 }
 
 function _hablarTTS(texto) {
