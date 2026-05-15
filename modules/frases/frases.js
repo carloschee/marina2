@@ -31,9 +31,39 @@ const AUDIO_URL     = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}
 const AUDIO_FRASE_URL = (nombre, lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
 const NIVELES = [
-  { id: 1, label: '①', titulo: 'Básico',      color: '#38bdf8' },
-  { id: 2, label: '②', titulo: 'Intermedio',  color: '#a78bfa' },
-  { id: 3, label: '③', titulo: 'Avanzado',    color: '#fb7185' },
+  {
+    id: 1, label: '★', titulo: 'Básico',
+    color:       '#38bdf8',   // azul cielo — fresco, tranquilo
+    colorSuave:  'rgba(56,189,248,0.15)',
+    colorBorde:  'rgba(56,189,248,0.40)',
+    colorTexto:  '#0c1a24',   // texto oscuro sobre fondo claro del nivel
+    bgTira:      'rgba(56,189,248,0.08)',
+    bgPanel:     'rgba(56,189,248,0.06)',
+    bgPiezaTxt:  'rgba(56,189,248,0.20)',
+    bordePiezaTxt: 'rgba(56,189,248,0.50)',
+  },
+  {
+    id: 2, label: '★★', titulo: 'Intermedio',
+    color:       '#c084fc',   // violeta suave
+    colorSuave:  'rgba(192,132,252,0.15)',
+    colorBorde:  'rgba(192,132,252,0.40)',
+    colorTexto:  '#1a0a2e',
+    bgTira:      'rgba(192,132,252,0.08)',
+    bgPanel:     'rgba(192,132,252,0.06)',
+    bgPiezaTxt:  'rgba(192,132,252,0.22)',
+    bordePiezaTxt: 'rgba(192,132,252,0.50)',
+  },
+  {
+    id: 3, label: '★★★', titulo: 'Avanzado',
+    color:       '#fb7185',   // coral cálido
+    colorSuave:  'rgba(251,113,133,0.15)',
+    colorBorde:  'rgba(251,113,133,0.40)',
+    colorTexto:  '#2a0a10',
+    bgTira:      'rgba(251,113,133,0.08)',
+    bgPanel:     'rgba(251,113,133,0.06)',
+    bgPiezaTxt:  'rgba(251,113,133,0.22)',
+    bordePiezaTxt: 'rgba(251,113,133,0.50)',
+  },
 ];
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
@@ -97,16 +127,16 @@ function _render() {
       margin-right: 4px;
     }
     .fr-nivel-btn {
-      width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent;
-      cursor: pointer; font-family: inherit; font-weight: 900; font-size: 1.1rem;
-      background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45);
+      height: 40px; padding: 0 14px; border-radius: 99px; border: 2px solid transparent;
+      cursor: pointer; font-family: inherit; font-weight: 900; font-size: .95rem;
+      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.38);
       transition: all .2s; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
+      letter-spacing: 1px; white-space: nowrap;
     }
-    .fr-nivel-btn:active { transform: scale(.88); }
+    .fr-nivel-btn:active { transform: scale(.92); }
     .fr-nivel-btn.activo {
-      color: #fff;
-      background: rgba(255,255,255,0.12);
+      color: #fff; font-weight: 900;
     }
 
     /* ── Tira de construcción ── */
@@ -142,8 +172,10 @@ function _render() {
     }
     .fr-tira-pieza.picto { background: #fff; color: #07212e; border: 2px solid transparent; }
     .fr-tira-pieza.texto {
-      background: rgba(14,165,201,0.18);
-      border: 1.5px solid rgba(14,165,201,0.30); color: #e8f4f8;
+      background: var(--fr-nivel-bg-txt, rgba(14,165,201,0.18));
+      border: 1.5px solid var(--fr-nivel-borde-txt, rgba(14,165,201,0.30));
+      color: #fff; font-weight: 900;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
     .fr-tira-pieza.correcto.picto { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
     .fr-tira-pieza.correcto.texto { background: rgba(34,197,94,0.18); border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.18); }
@@ -184,7 +216,12 @@ function _render() {
     }
     .fr-pieza:active { transform: scale(.93); }
     .fr-pieza.picto  { background: #fff; color: #07212e; }
-    .fr-pieza.texto  { background: rgba(255,255,255,0.10); border: 1.5px solid rgba(255,255,255,0.18); color: #e8f4f8; }
+    .fr-pieza.texto  {
+      background: var(--fr-nivel-bg-txt, rgba(255,255,255,0.10));
+      border: 1.5px solid var(--fr-nivel-borde-txt, rgba(255,255,255,0.18));
+      color: #fff; font-weight: 900;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
     .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
     .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
@@ -258,7 +295,6 @@ function _render() {
 // ─── Selector de nivel ────────────────────────────────────────────────────────
 function _renderNiveles() {
   const wrap = _el.querySelector('#fr-niveles');
-  // Conservar el label
   const label = wrap.querySelector('#fr-niveles-label');
   wrap.innerHTML = '';
   wrap.appendChild(label);
@@ -266,10 +302,14 @@ function _renderNiveles() {
   NIVELES.forEach(n => {
     const btn = document.createElement('button');
     btn.className   = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
-    btn.textContent = n.label;
+    btn.textContent = n.label + ' ' + n.titulo;
     btn.title       = n.titulo;
-    btn.style.borderColor = n.id === _nivel ? n.color : 'transparent';
-    btn.style.color       = n.id === _nivel ? n.color : '';
+    if (n.id === _nivel) {
+      btn.style.borderColor   = n.color;
+      btn.style.color         = n.color;
+      btn.style.background    = n.colorSuave;
+      btn.style.boxShadow     = `0 0 0 1px ${n.colorBorde}`;
+    }
     btn.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
     wrap.appendChild(btn);
   });
@@ -282,18 +322,45 @@ function _cambiarNivel(nivel) {
   _frases = _todasFrases.filter(f => f.nivel === nivel);
 
   _renderNiveles();
-
-  // Color del pill activo según nivel
-  const nivelCfg = NIVELES.find(n => n.id === nivel);
-  document.querySelectorAll('.fr-pill.activa').forEach(p =>
-    p.style.background = nivelCfg?.color || '#14b8a6'
-  );
+  _aplicarTema(nivel);
 
   _el.querySelector('#fr-tira').classList.remove('correcto');
   _renderSelector();
   _renderPiezas();
   _renderTira();
   _actualizarVacio();
+}
+
+// Aplica el tema de color del nivel a todos los elementos de la UI
+function _aplicarTema(nivel) {
+  const n = NIVELES.find(x => x.id === nivel);
+  if (!n) return;
+
+  // Tira
+  const tira = _el.querySelector('#fr-tira');
+  if (tira) {
+    tira.style.background   = n.bgTira;
+    tira.style.borderColor  = n.colorBorde;
+  }
+
+  // Panel de piezas
+  const panel = _el.querySelector('#fr-panel-piezas');
+  if (panel) panel.style.background = n.bgPanel;
+
+  // Label PIEZAS
+  const lbl = _el.querySelector('#fr-panel-label');
+  if (lbl) lbl.style.color = n.color;
+
+  // Label NIVEL
+  const lvlLbl = _el.querySelector('#fr-niveles-label');
+  if (lvlLbl) lvlLbl.style.color = n.color;
+
+  // Guardar en variable CSS para que las piezas de texto la usen
+  _el.style.setProperty('--fr-nivel-color',      n.color);
+  _el.style.setProperty('--fr-nivel-suave',      n.colorSuave);
+  _el.style.setProperty('--fr-nivel-borde',      n.colorBorde);
+  _el.style.setProperty('--fr-nivel-bg-txt',     n.bgPiezaTxt);
+  _el.style.setProperty('--fr-nivel-borde-txt',  n.bordePiezaTxt);
 }
 
 function _actualizarVacio() {
@@ -333,8 +400,9 @@ function _seleccionarFrase(idx) {
   const nivelCfg = NIVELES.find(n => n.id === _nivel);
   _el.querySelectorAll('.fr-pill').forEach((p, i) => {
     p.classList.toggle('activa', i === idx);
-    p.style.background = i === idx ? (nivelCfg?.color || '#14b8a6') : '';
-    p.style.color      = i === idx ? '#07212e' : '';
+    p.style.background  = i === idx ? (nivelCfg?.color || '#14b8a6') : '';
+    p.style.color       = i === idx ? '#07212e' : '';
+    p.style.fontWeight  = i === idx ? '900' : '';
   });
 
   _renderPiezas();
