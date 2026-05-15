@@ -121,20 +121,20 @@ function _render() {
     /* ── Selector de nivel ── */
     #fr-niveles {
       flex-shrink: 0;
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: center; gap: 10px;
     }
     #fr-niveles-label {
-      font-size: .72rem; font-weight: 900; letter-spacing: .1em;
-      text-transform: uppercase; color: rgba(255,255,255,0.40);
+      font-size: .80rem; font-weight: 900; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
       margin-right: 4px;
     }
     .fr-nivel-btn {
-      height: 40px; padding: 0 14px; border-radius: 99px; border: 2px solid transparent;
-      cursor: pointer; font-family: inherit; font-weight: 900; font-size: .95rem;
-      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.38);
+      height: 44px; padding: 0 18px; border-radius: 99px; border: 2px solid transparent;
+      cursor: pointer; font-family: inherit; font-weight: 900; font-size: 1.05rem;
+      background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.60);
       transition: all .2s; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      letter-spacing: 1px; white-space: nowrap;
+      letter-spacing: 0.5px; white-space: nowrap;
     }
     .fr-nivel-btn:active { transform: scale(.92); }
     .fr-nivel-btn.activo {
@@ -160,8 +160,8 @@ function _render() {
       gap: 8px; flex-wrap: wrap; min-height: 60px;
     }
     #fr-tira-placeholder {
-      color: rgba(255,255,255,0.28);
-      font-size: .95rem; font-weight: 600; font-style: italic;
+      color: rgba(255,255,255,0.50);
+      font-size: 1rem; font-weight: 700; font-style: italic;
     }
     /* Pieza en la tira — altura fija para evitar que el renglón crezca */
     .fr-tira-pieza {
@@ -174,10 +174,10 @@ function _render() {
     }
     .fr-tira-pieza.picto { background: #fff; color: #07212e; border: 2px solid transparent; }
     .fr-tira-pieza.texto {
-      background: var(--fr-nivel-bg-txt, rgba(14,165,201,0.18));
-      border: 1.5px solid var(--fr-nivel-borde-txt, rgba(14,165,201,0.30));
-      color: #fff; font-weight: 900;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      background: var(--fr-nivel-bg-txt, rgba(14,165,201,0.25));
+      border: 1.5px solid var(--fr-nivel-borde-txt, rgba(14,165,201,0.55));
+      color: #fff; font-weight: 900; font-size: 1.05rem;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.65);
     }
     .fr-tira-pieza.correcto.picto { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
     .fr-tira-pieza.correcto.texto { background: rgba(34,197,94,0.18); border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.18); }
@@ -203,8 +203,8 @@ function _render() {
       border-radius: 20px; padding: 12px 16px;
     }
     #fr-panel-label {
-      font-size: .68rem; font-weight: 900; letter-spacing: .12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.40); margin-bottom: 10px;
+      font-size: .78rem; font-weight: 900; letter-spacing: .10em;
+      text-transform: uppercase; color: rgba(255,255,255,0.70); margin-bottom: 10px;
     }
     #fr-piezas { display: flex; gap: 10px; flex-wrap: wrap; }
     .fr-pieza {
@@ -219,24 +219,25 @@ function _render() {
     .fr-pieza:active { transform: scale(.93); }
     .fr-pieza.picto  { background: #fff; color: #07212e; }
     .fr-pieza.texto  {
-      background: var(--fr-nivel-bg-txt, rgba(255,255,255,0.10));
-      border: 1.5px solid var(--fr-nivel-borde-txt, rgba(255,255,255,0.18));
-      color: #fff; font-weight: 900;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      background: var(--fr-nivel-bg-txt, rgba(255,255,255,0.14));
+      border: 2px solid var(--fr-nivel-borde-txt, rgba(255,255,255,0.35));
+      color: #fff; font-weight: 900; font-size: 1.1rem;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.65);
     }
     .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
     .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
     /* ── Selector de frases ── */
-    #fr-selector { flex-shrink: 0; display: flex; gap: 8px; flex-wrap: wrap; }
+    #fr-selector { flex-shrink: 0; display: flex; gap: 10px; flex-wrap: wrap; }
     .fr-pill {
-      padding: 8px 16px; border-radius: 99px; border: none; cursor: pointer;
-      font-family: inherit; font-weight: 700; font-size: .85rem;
-      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.60);
-      transition: background .18s, color .18s, transform .12s; white-space: nowrap;
+      padding: 10px 20px; border-radius: 99px; border: 1.5px solid rgba(255,255,255,0.18);
+      cursor: pointer; font-family: inherit; font-weight: 800; font-size: 1rem;
+      background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.80);
+      transition: background .18s, color .18s, transform .12s, border-color .18s;
+      white-space: nowrap; text-shadow: 0 1px 4px rgba(0,0,0,0.40);
     }
     .fr-pill:active { transform: scale(.93); }
-    .fr-pill.activa { color: #07212e; }
+    .fr-pill.activa { color: #07212e; border-color: transparent; font-weight: 900; }
 
     /* ── Estado vacío ── */
     #fr-vacio {
