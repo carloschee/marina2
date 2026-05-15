@@ -7,18 +7,19 @@
    ╚══════════════════════════════════════════════════════════╝
 */
 
-import { cargarConfig, cfg } from './core/config.js';
+import { cargarConfig, cfg }             from './core/config.js';
 import { registrarSW, onConexionChange } from './core/offline.js';
-import { toast, animarEntrada } from './core/ui.js';
-import { Perfiles } from './core/perfiles.js';
-import { TTS } from './core/tts.js';
-import AudioManager from './core/audio.js';
-import FrasesModule from './modules/frases/module.js';
-const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule];
+import { toast, animarEntrada }          from './core/ui.js';
+import { Perfiles }                      from './core/perfiles.js';
+import { TTS }                           from './core/tts.js';
+import AudioManager                      from './core/audio.js';
 
-// ── Importa aquí los módulos de tu app ───────────────────────
-import AjustesModule from './modules/ajustes/module.js';
-import MiraYDiModule from './modules/mira-y-di/module.js';
+// ── Módulos de la app ─────────────────────────────────────────
+import AjustesModule  from './modules/ajustes/module.js';
+import MiraYDiModule  from './modules/mira-y-di/module.js';
+import FrasesModule   from './modules/frases/module.js';
+
+const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule];
 
 // ─────────────────────────────────────────────────────────────
 // ARRANQUE
