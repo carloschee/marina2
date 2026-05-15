@@ -1,145 +1,48 @@
 {
-  "name": "Dótir - Comunicación y Aprendizaje",
-  "short_name": "Dótir",
-  "description": "Herramienta modular de comunicación aumentativa, juego y multimedia para infancias neurodivergentes.",
-
+  "name": "Marina 2",
+  "short_name": "Marina 2",
+  "description": "App de acompañamiento para el desarrollo de lenguaje basada en CAA y pictogramas ARASAAC",
+  "lang": "es-MX",
+  "dir": "ltr",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "any",
-
-  "theme_color": "#4A90E2",
-  "background_color": "#F0F4FA",
-
-  "lang": "es-MX",
-  "dir": "ltr",
-
-  "categories": ["education", "kids", "medical"],
-
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "landscape",
+  "background_color": "#03111a",
+  "theme_color": "#03111a",
+  "categories": ["education", "kids"],
   "icons": [
-    {
-      "src": "assets/img/icon-72.png",
-      "type": "image/png",
-      "sizes": "72x72"
-    },
-    {
-      "src": "assets/img/icon-96.png",
-      "type": "image/png",
-      "sizes": "96x96"
-    },
-    {
-      "src": "assets/img/icon-128.png",
-      "type": "image/png",
-      "sizes": "128x128"
-    },
-    {
-      "src": "assets/img/icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/img/icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/img/icon-maskable-192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "maskable"
-    },
-    {
-      "src": "assets/img/icon-maskable-512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
-    }
+    { "src": "assets/img/icon-72.png",            "sizes": "72x72",   "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-96.png",            "sizes": "96x96",   "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-128.png",           "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-192.png",           "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-512.png",           "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-maskable-192.png",  "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/img/icon-maskable-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
-
-  "screenshots": [
-    {
-    "src": "assets/ui/screenshot-menu.png",
-    "sizes": "1180x820",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "Menu principal de Dotir"
-  },
-  {
-    "src": "assets/ui/screenshot-comunicador.png",
-    "sizes": "1180x820",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "Tablero de comunicacion SAAC"
-  },
-  {
-    "src": "assets/ui/screenshot-memorama.png",
-    "sizes": "1180x820",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "Memorama"
-  },
-  {
-    "src": "assets/ui/screenshot-musica.png",
-    "sizes": "1180x820",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "Reproductor de musica"
-  },
-  {
-    "src": "assets/ui/screenshot-videos.png",
-    "sizes": "1180x820",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "Reproductor de videos"
-  },
-  {
-    "src": "assets/ui/screenshot-libros.png",
-    "sizes": "1180x820",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "Visor de libros"
-  }
-  ],
-
   "shortcuts": [
     {
-    "name": "Comunicador",
-    "short_name": "SAAC",
-    "description": "Abrir el tablero de comunicacion directamente",
-    "url": "./index.html?modulo=saac",
-    "icons": [{ "src": "assets/ui/btn-comunicador.png", "sizes": "192x192" }]
-  },
-  {
-    "name": "Memorama",
-    "short_name": "Memorama",
-    "description": "Ir directamente al juego de memoria",
-    "url": "./index.html?modulo=memorama",
-    "icons": [{ "src": "assets/ui/btn-memorama.png", "sizes": "192x192" }]
-  },
-  {
-    "name": "Musica",
-    "short_name": "Musica",
-    "description": "Abrir el reproductor de musica",
-    "url": "./index.html?modulo=musica",
-    "icons": [{ "src": "assets/ui/btn-musica.png", "sizes": "192x192" }]
-  },
-  {
-    "name": "Libros",
-    "short_name": "Libros",
-    "description": "Abrir el visor de libros",
-    "url": "./index.html?modulo=libros",
-    "icons": [{ "src": "assets/ui/btn-libros.png", "sizes": "192x192" }]
-  },
-  {
-    "name": "Videos",
-    "short_name": "Videos",
-    "description": "Abrir el reproductor de videos",
-    "url": "./index.html?modulo=videos",
-    "icons": [{ "src": "assets/ui/btn-videos.png", "sizes": "192x192" }]
-   }
+      "name": "Mira y di",
+      "short_name": "Mira y di",
+      "description": "Ir directamente a Mira y di",
+      "url": "./index.html?modulo=mira-y-di",
+      "icons": [{ "src": "assets/ui/btn-mira-y-di.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Frases",
+      "short_name": "Frases",
+      "description": "Completa las frases basadas en pictogramas",
+      "url": "./index.html?modulo=frases",
+      "icons": [{ "src": "assets/ui/btn-frases.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Memorama",
+      "short_name": "Memorama",
+      "description": "Ir directamente al juego de memoria",
+      "url": "./index.html?modulo=memorama",
+      "icons": [{ "src": "assets/ui/btn-memorama.png", "sizes": "192x192" }]
+    }
   ],
-
   "prefer_related_applications": false
 }
