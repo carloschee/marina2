@@ -3,49 +3,65 @@
 
    Diseño:
    ┌─────────────────────────────────────────────────┐
+   │ Selector de nivel  ①  ②  ③                     │
+   ├─────────────────────────────────────────────────┤
    │ Tira de construcción + 🔊 + ×                   │
    ├─────────────────────────────────────────────────┤
    │ PIEZAS — chips tocables (picto o texto)          │
    ├─────────────────────────────────────────────────┤
-   │ Selector de frases (pills horizontales)          │
+   │ Selector de frases (pills del nivel activo)      │
    └─────────────────────────────────────────────────┘
 
+   Niveles de dificultad:
+   · 1 — básico:      2 piezas, estructura simple
+   · 2 — intermedio:  3 piezas, verbos o adjetivos
+   · 3 — avanzado:    4+ piezas, frases compuestas
+
    Feedback de orden:
-   · Orden correcto  → piezas en tira con borde verde + confeti verde
-   · Orden distinto  → piezas en tira con estilo neutro, sin penalización
-   · En ambos casos  → TTS lee la frase completa
+   · Correcto  → piezas en tira con borde verde + confeti
+   · Distinto  → sin penalización, TTS lee la frase igual
 */
 
-import { TTS }                    from '../../core/tts.js';
-import { lanzarConfeti, haptic }  from '../../core/ui.js';
-import { Telemetry }              from '../../core/telemetry.js';
+import { TTS }                   from '../../core/tts.js';
+import { lanzarConfeti, haptic } from '../../core/ui.js';
+import { Telemetry }             from '../../core/telemetry.js';
 
-const PICTO_URL = (palabra) => `assets/pictogramas/es/${palabra}.png`;
-const AUDIO_URL = (palabra) => `assets/audio/es/${palabra}.mp3`;
+const PICTO_URL     = (palabra, lang = 'es') => `assets/pictogramas/${lang}/${palabra}.png`;
+const AUDIO_URL     = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
+const AUDIO_FRASE_URL = (nombre, lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
+
+const NIVELES = [
+  { id: 1, label: '①', titulo: 'Básico',      color: '#38bdf8' },
+  { id: 2, label: '②', titulo: 'Intermedio',  color: '#a78bfa' },
+  { id: 3, label: '③', titulo: 'Avanzado',    color: '#fb7185' },
+];
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
-let _el      = null;
-let _frases  = [];
-let _activa  = 0;
-let _built   = [];   // índices de piezas tocadas, en orden de toque
-let _audioEl = null;
+let _el       = null;
+let _todasFrases = [];   // todas las frases cargadas
+let _frases   = [];      // frases del nivel activo
+let _nivel    = 1;
+let _activa   = 0;
+let _built    = [];
+let _audioEl  = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
   _el     = container;
   _built  = [];
   _activa = 0;
+  _nivel  = 1;
 
   try {
     const res = await fetch('./data/frases.json');
-    _frases = await res.json();
+    _todasFrases = await res.json();
   } catch (e) {
     console.error('[frases] No se pudo cargar frases.json', e);
-    _frases = [];
+    _todasFrases = [];
   }
 
   _render();
-  _seleccionarFrase(0);
+  _cambiarNivel(1);
   window.addEventListener('lang-change', _onLangChange);
 }
 
@@ -53,7 +69,7 @@ export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
   if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
   TTS.stop();
-  _el = null; _frases = []; _built = [];
+  _el = null; _todasFrases = []; _frases = []; _built = [];
 }
 
 export function onEnter() {}
@@ -66,88 +82,83 @@ export function onLeave() {
 function _render() {
   _el.style.cssText =
     'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;padding:16px 20px;gap:14px;';
+    'overflow:hidden;background:transparent;padding:14px 20px 12px;gap:12px;';
 
   _el.innerHTML = `
   <style>
+    /* ── Selector de nivel ── */
+    #fr-niveles {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    #fr-niveles-label {
+      font-size: .72rem; font-weight: 900; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.40);
+      margin-right: 4px;
+    }
+    .fr-nivel-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent;
+      cursor: pointer; font-family: inherit; font-weight: 900; font-size: 1.1rem;
+      background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45);
+      transition: all .2s; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fr-nivel-btn:active { transform: scale(.88); }
+    .fr-nivel-btn.activo {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+
     /* ── Tira de construcción ── */
     #fr-tira {
       flex-shrink: 0;
       background: rgba(0,0,0,0.35);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border: 1.5px dashed rgba(255,255,255,0.15);
-      border-radius: 20px;
-      padding: 16px 18px;
-      min-height: 110px;
+      border-radius: 20px; padding: 12px 16px;
+      min-height: 88px;
       display: flex; align-items: center; gap: 10px;
-      transition: border-color .35s;
+      transition: border-color .35s, border-style .35s;
     }
     #fr-tira.correcto {
-      border-color: #22c55e;
-      border-style: solid;
+      border-color: #22c55e; border-style: solid;
     }
     #fr-tira-piezas {
       flex: 1; display: flex; align-items: center;
-      gap: 10px; flex-wrap: wrap; min-height: 64px;
+      gap: 8px; flex-wrap: wrap; min-height: 60px;
     }
     #fr-tira-placeholder {
-      color: rgba(255,255,255,0.30);
-      font-size: 1rem; font-weight: 600; font-style: italic;
+      color: rgba(255,255,255,0.28);
+      font-size: .95rem; font-weight: 600; font-style: italic;
     }
-
-    /* Pieza en la tira — altura fija igual a piezas con pictograma
-       para evitar que el renglón cambie de alto según el contenido */
+    /* Pieza en la tira — altura fija para evitar que el renglón crezca */
     .fr-tira-pieza {
       display: flex; align-items: center; gap: 8px;
-      padding: 8px 14px; border-radius: 14px;
-      font-weight: 900; font-size: 1.05rem;
-      min-height: 60px; /* img(44px) + padding(8px*2) */
+      padding: 6px 12px; border-radius: 12px;
+      font-weight: 900; font-size: 1rem;
+      min-height: 60px;
       animation: fr-pop .22s cubic-bezier(.34,1.56,.64,1) both;
       transition: background .35s, box-shadow .35s, border-color .35s;
     }
-    .fr-tira-pieza.picto {
-      background: #fff; color: #07212e;
-      border: 2px solid transparent;
-    }
+    .fr-tira-pieza.picto { background: #fff; color: #07212e; border: 2px solid transparent; }
     .fr-tira-pieza.texto {
       background: rgba(14,165,201,0.18);
-      border: 1.5px solid rgba(14,165,201,0.30);
-      color: #e8f4f8;
+      border: 1.5px solid rgba(14,165,201,0.30); color: #e8f4f8;
     }
-    /* Orden correcto — realce verde */
-    .fr-tira-pieza.correcto.picto {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
-    }
-    .fr-tira-pieza.correcto.texto {
-      background: rgba(34,197,94,0.18);
-      border-color: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34,197,94,0.18);
-    }
-    .fr-tira-pieza img {
-      width: 44px; height: 44px; object-fit: contain; border-radius: 8px;
-    }
+    .fr-tira-pieza.correcto.picto { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
+    .fr-tira-pieza.correcto.texto { background: rgba(34,197,94,0.18); border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.18); }
+    .fr-tira-pieza img { width: 44px; height: 44px; object-fit: contain; border-radius: 8px; }
 
     /* Botones de acción */
-    #fr-tira-acciones {
-      display: flex; flex-direction: column; gap: 8px; flex-shrink: 0;
-    }
+    #fr-tira-acciones { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
     .fr-accion-btn {
-      width: 48px; height: 48px; border-radius: 50%; border: none;
+      width: 44px; height: 44px; border-radius: 50%; border: none;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer; transition: transform .12s, background .2s;
     }
     .fr-accion-btn:active { transform: scale(.88); }
-    #fr-btn-leer {
-      background: rgba(14,165,201,0.25);
-      border: 1.5px solid rgba(14,165,201,0.40);
-    }
-    #fr-btn-leer.hablando { background: #0ea5c9; }
-    #fr-btn-borrar {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.45);
-      font-size: 1.5rem; font-weight: 300; font-family: inherit;
-    }
+    #fr-btn-leer { background: rgba(14,165,201,0.25); border: 1.5px solid rgba(14,165,201,0.40); }
+    #fr-btn-borrar { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.45); font-size: 1.4rem; font-weight: 300; font-family: inherit; }
 
     /* ── Panel de piezas ── */
     #fr-panel-piezas {
@@ -155,45 +166,45 @@ function _render() {
       background: rgba(0,0,0,0.30);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 20px; padding: 14px 18px;
+      border-radius: 20px; padding: 12px 16px;
     }
     #fr-panel-label {
       font-size: .68rem; font-weight: 900; letter-spacing: .12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.45);
-      margin-bottom: 12px;
+      text-transform: uppercase; color: rgba(255,255,255,0.40); margin-bottom: 10px;
     }
-    #fr-piezas { display: flex; gap: 12px; flex-wrap: wrap; }
-
+    #fr-piezas { display: flex; gap: 10px; flex-wrap: wrap; }
     .fr-pieza {
       display: flex; align-items: center; gap: 10px;
-      padding: 12px 18px; border-radius: 18px;
+      padding: 10px 16px; border-radius: 16px;
       cursor: pointer; border: none;
-      font-family: inherit; font-weight: 900; font-size: 1.1rem;
-      min-height: 92px; /* img(64px) + padding(12px*2) + margen */
+      font-family: inherit; font-weight: 900; font-size: 1.05rem;
+      min-height: 88px;
       transition: transform .14s, opacity .2s, box-shadow .15s;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
     .fr-pieza:active { transform: scale(.93); }
     .fr-pieza.picto  { background: #fff; color: #07212e; }
-    .fr-pieza.texto  {
-      background: rgba(255,255,255,0.10);
-      border: 1.5px solid rgba(255,255,255,0.18);
-      color: #e8f4f8;
-    }
+    .fr-pieza.texto  { background: rgba(255,255,255,0.10); border: 1.5px solid rgba(255,255,255,0.18); color: #e8f4f8; }
     .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
-    .fr-pieza img    { width: 64px; height: 64px; object-fit: contain; border-radius: 10px; }
+    .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
     /* ── Selector de frases ── */
     #fr-selector { flex-shrink: 0; display: flex; gap: 8px; flex-wrap: wrap; }
     .fr-pill {
-      padding: 9px 18px; border-radius: 99px; border: none; cursor: pointer;
-      font-family: inherit; font-weight: 700; font-size: .88rem;
-      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.65);
-      transition: background .18s, color .18s, transform .12s;
-      white-space: nowrap;
+      padding: 8px 16px; border-radius: 99px; border: none; cursor: pointer;
+      font-family: inherit; font-weight: 700; font-size: .85rem;
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.60);
+      transition: background .18s, color .18s, transform .12s; white-space: nowrap;
     }
     .fr-pill:active { transform: scale(.93); }
-    .fr-pill.activa { background: #14b8a6; color: #07212e; }
+    .fr-pill.activa { color: #07212e; }
+
+    /* ── Estado vacío ── */
+    #fr-vacio {
+      display: none; flex: 1; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: rgba(255,255,255,0.30); font-size: .95rem; font-weight: 700;
+    }
 
     /* ── Animaciones ── */
     @keyframes fr-pop {
@@ -202,6 +213,11 @@ function _render() {
     }
   </style>
 
+  <!-- Selector de nivel -->
+  <div id="fr-niveles">
+    <span id="fr-niveles-label">Nivel</span>
+  </div>
+
   <!-- Tira de construcción -->
   <div id="fr-tira">
     <div id="fr-tira-piezas">
@@ -209,7 +225,7 @@ function _render() {
     </div>
     <div id="fr-tira-acciones">
       <button class="fr-accion-btn" id="fr-btn-leer" title="Leer frase">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path d="M11 5L6 9H2v6h4l5 4V5z" fill="white" opacity=".9"/>
           <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"
                 stroke="white" stroke-width="1.8" stroke-linecap="round" opacity=".7"/>
@@ -227,19 +243,81 @@ function _render() {
 
   <!-- Selector de frases -->
   <div id="fr-selector"></div>
+
+  <!-- Estado vacío -->
+  <div id="fr-vacio">
+    <span style="font-size:2.5rem">🔤</span>
+    No hay frases para este nivel todavía.
+  </div>
   `;
 
+  _renderNiveles();
   _bindEvents();
-  _renderSelector();
 }
 
-// ─── Selector ─────────────────────────────────────────────────────────────────
-function _renderSelector() {
-  const wrap = _el.querySelector('#fr-selector');
+// ─── Selector de nivel ────────────────────────────────────────────────────────
+function _renderNiveles() {
+  const wrap = _el.querySelector('#fr-niveles');
+  // Conservar el label
+  const label = wrap.querySelector('#fr-niveles-label');
   wrap.innerHTML = '';
+  wrap.appendChild(label);
+
+  NIVELES.forEach(n => {
+    const btn = document.createElement('button');
+    btn.className   = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
+    btn.textContent = n.label;
+    btn.title       = n.titulo;
+    btn.style.borderColor = n.id === _nivel ? n.color : 'transparent';
+    btn.style.color       = n.id === _nivel ? n.color : '';
+    btn.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
+    wrap.appendChild(btn);
+  });
+}
+
+function _cambiarNivel(nivel) {
+  _nivel  = nivel;
+  _activa = 0;
+  _built  = [];
+  _frases = _todasFrases.filter(f => f.nivel === nivel);
+
+  _renderNiveles();
+
+  // Color del pill activo según nivel
+  const nivelCfg = NIVELES.find(n => n.id === nivel);
+  document.querySelectorAll('.fr-pill.activa').forEach(p =>
+    p.style.background = nivelCfg?.color || '#14b8a6'
+  );
+
+  _el.querySelector('#fr-tira').classList.remove('correcto');
+  _renderSelector();
+  _renderPiezas();
+  _renderTira();
+  _actualizarVacio();
+}
+
+function _actualizarVacio() {
+  const vacio  = _el.querySelector('#fr-vacio');
+  const panel  = _el.querySelector('#fr-panel-piezas');
+  const tira   = _el.querySelector('#fr-tira');
+  const sel    = _el.querySelector('#fr-selector');
+  const sinFrases = _frases.length === 0;
+  vacio.style.display  = sinFrases ? 'flex'  : 'none';
+  panel.style.display  = sinFrases ? 'none'  : '';
+  tira.style.display   = sinFrases ? 'none'  : '';
+  sel.style.display    = sinFrases ? 'none'  : '';
+}
+
+// ─── Selector de frases ───────────────────────────────────────────────────────
+function _renderSelector() {
+  const wrap     = _el.querySelector('#fr-selector');
+  const nivelCfg = NIVELES.find(n => n.id === _nivel);
+  wrap.innerHTML = '';
+
   _frases.forEach((f, i) => {
     const btn = document.createElement('button');
-    btn.className   = 'fr-pill' + (i === _activa ? ' activa' : '');
+    btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
+    if (i === _activa && nivelCfg) btn.style.background = nivelCfg.color;
     btn.textContent = f.es;
     btn.addEventListener('click', () => { haptic(8); _seleccionarFrase(i); });
     wrap.appendChild(btn);
@@ -251,9 +329,14 @@ function _seleccionarFrase(idx) {
   _activa = idx;
   _built  = [];
   _el.querySelector('#fr-tira').classList.remove('correcto');
-  _el.querySelectorAll('.fr-pill').forEach((p, i) =>
-    p.classList.toggle('activa', i === idx)
-  );
+
+  const nivelCfg = NIVELES.find(n => n.id === _nivel);
+  _el.querySelectorAll('.fr-pill').forEach((p, i) => {
+    p.classList.toggle('activa', i === idx);
+    p.style.background = i === idx ? (nivelCfg?.color || '#14b8a6') : '';
+    p.style.color      = i === idx ? '#07212e' : '';
+  });
+
   _renderPiezas();
   _renderTira();
 }
@@ -295,54 +378,42 @@ function _tocarPieza(idx) {
   const pieza = frase.piezas[idx];
 
   _built.push(idx);
-  _reproducir(pieza.texto);
+  _reproducirPieza(pieza);
   _renderTira();
 
   const btnPieza = _el.querySelector(`.fr-pieza[data-idx="${idx}"]`);
   if (btnPieza) btnPieza.classList.add('usada');
 
-  if (_built.length === frase.piezas.length) {
-    _onFraseCompleta(frase);
-  }
+  if (_built.length === frase.piezas.length) _onFraseCompleta(frase);
 
   Telemetry.track('pieza_tocada', {
     _modulo: 'frases', frase: frase.id,
-    pieza: pieza.texto, orden: _built.length,
+    pieza: pieza.texto, orden: _built.length, nivel: _nivel,
   });
 }
 
 // ─── Frase completa ───────────────────────────────────────────────────────────
 function _onFraseCompleta(frase) {
-  // Comparar orden tocado vs. orden esperado (0,1,2,3…)
   const ordenEsperado = frase.piezas.map((_, i) => i);
   const ordenCorrecto = _built.every((idx, pos) => idx === ordenEsperado[pos]);
-
   const tira = _el.querySelector('#fr-tira');
 
   if (ordenCorrecto) {
-    // ── Feedback positivo: piezas en verde + confeti verde ──
     tira.classList.add('correcto');
     tira.querySelectorAll('.fr-tira-pieza').forEach(p => p.classList.add('correcto'));
     lanzarConfeti({ count: 60, container: _el });
-
-    Telemetry.track('frase_completada', {
-      _modulo: 'frases', frase: frase.id,
-      texto: frase.es, orden_correcto: true,
-    });
-  } else {
-    // ── Sin penalización — solo lectura de la frase ──
-    Telemetry.track('frase_completada', {
-      _modulo: 'frases', frase: frase.id,
-      texto: frase.es, orden_correcto: false,
-    });
   }
 
-  // En ambos casos: TTS lee la frase completa
   setTimeout(() => _hablarTTS(frase.es), ordenCorrecto ? 600 : 200);
+
+  Telemetry.track('frase_completada', {
+    _modulo: 'frases', frase: frase.id,
+    texto: frase.es, orden_correcto: ordenCorrecto, nivel: _nivel,
+  });
 }
 
 // ─── Render tira ──────────────────────────────────────────────────────────────
-function _renderTira(marcarCorrectos = false) {
+function _renderTira() {
   const wrap        = _el.querySelector('#fr-tira-piezas');
   const placeholder = _el.querySelector('#fr-tira-placeholder');
   const frase       = _frases[_activa];
@@ -355,10 +426,9 @@ function _renderTira(marcarCorrectos = false) {
   if (placeholder) placeholder.style.display = 'none';
 
   wrap.innerHTML = '';
-  _built.forEach((idx, pos) => {
-    const pieza   = frase.piezas[idx];
-    const div     = document.createElement('div');
-    const esCorrecta = idx === pos; // posición tocada == posición esperada
+  _built.forEach(idx => {
+    const pieza = frase.piezas[idx];
+    const div   = document.createElement('div');
     div.className = `fr-tira-pieza ${pieza.tipo}`;
 
     if (pieza.tipo === 'picto') {
@@ -397,16 +467,20 @@ function _bindEvents() {
   });
 }
 
-// ─── Audio: MP3 → fallback TTS ────────────────────────────────────────────────
-function _reproducir(texto) {
+// ─── Audio ────────────────────────────────────────────────────────────────────
+function _reproducirPieza(pieza) {
+  const url = pieza.tipo === 'picto'
+    ? AUDIO_URL(pieza.texto)
+    : AUDIO_FRASE_URL(pieza.texto);
+
   if (!_audioEl) {
     _audioEl = document.createElement('audio');
     _audioEl.preload = 'none';
   }
   _audioEl.pause();
-  _audioEl.src     = AUDIO_URL(texto);
-  _audioEl.onerror = () => _hablarTTS(texto);
-  _audioEl.play().catch(() => _hablarTTS(texto));
+  _audioEl.src     = url;
+  _audioEl.onerror = () => _hablarTTS(pieza.texto);
+  _audioEl.play().catch(() => _hablarTTS(pieza.texto));
 }
 
 function _hablarTTS(texto) {

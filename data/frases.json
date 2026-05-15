@@ -2,6 +2,7 @@
   {
     "id": "globo-cielo",
     "es": "globo en el cielo",
+    "nivel": 1,
     "piezas": [
       { "tipo": "picto", "texto": "globo" },
       { "tipo": "texto", "texto": "en el cielo" }
@@ -10,31 +11,17 @@
   {
     "id": "sandia-semillas",
     "es": "la sandía tiene semillas",
+    "nivel": 1,
     "piezas": [
+      { "tipo": "texto", "texto": "la" },
       { "tipo": "picto", "texto": "sandía" },
       { "tipo": "texto", "texto": "tiene semillas" }
     ]
   },
   {
-    "id": "mariposa-flor",
-    "es": "mariposa en la flor",
-    "piezas": [
-      { "tipo": "picto", "texto": "mariposa" },
-      { "tipo": "texto", "texto": "en la" },
-      { "tipo": "picto", "texto": "flor" }
-    ]
-  },
-  {
-    "id": "submarino-mar",
-    "es": "submarino en el mar",
-    "piezas": [
-      { "tipo": "picto", "texto": "submarino" },
-      { "tipo": "texto", "texto": "en el mar" }
-    ]
-  },
-  {
     "id": "tren-rapido",
     "es": "tren rápido",
+    "nivel": 1,
     "piezas": [
       { "tipo": "picto", "texto": "tren" },
       { "tipo": "texto", "texto": "rápido" }
@@ -43,32 +30,16 @@
   {
     "id": "manzana-roja",
     "es": "manzana roja",
+    "nivel": 1,
     "piezas": [
       { "tipo": "picto", "texto": "manzana" },
       { "tipo": "texto", "texto": "roja" }
     ]
   },
   {
-    "id": "perro-corre",
-    "es": "el perro corre",
-    "piezas": [
-      { "tipo": "texto", "texto": "el" },
-      { "tipo": "picto", "texto": "perro" },
-      { "tipo": "texto", "texto": "corre" }
-    ]
-  },
-  {
-    "id": "gato-duerme",
-    "es": "el gato duerme",
-    "piezas": [
-      { "tipo": "texto", "texto": "el" },
-      { "tipo": "picto", "texto": "gato" },
-      { "tipo": "texto", "texto": "duerme" }
-    ]
-  },
-  {
     "id": "luna-noche",
     "es": "luna en la noche",
+    "nivel": 1,
     "piezas": [
       { "tipo": "picto", "texto": "luna" },
       { "tipo": "texto", "texto": "en la noche" }
@@ -77,10 +48,103 @@
   {
     "id": "sol-brilla",
     "es": "el sol brilla",
+    "nivel": 1,
     "piezas": [
       { "tipo": "texto", "texto": "el" },
       { "tipo": "picto", "texto": "sol" },
       { "tipo": "texto", "texto": "brilla" }
+    ]
+  },
+  {
+    "id": "gato-duerme",
+    "es": "el gato duerme",
+    "nivel": 1,
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "gato" },
+      { "tipo": "texto", "texto": "duerme" }
+    ]
+  },
+  {
+    "id": "perro-corre",
+    "es": "el perro corre",
+    "nivel": 1,
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "perro" },
+      { "tipo": "texto", "texto": "corre" }
+    ]
+  },
+  {
+    "id": "submarino-mar",
+    "es": "submarino en el mar",
+    "nivel": 1,
+    "piezas": [
+      { "tipo": "picto", "texto": "submarino" },
+      { "tipo": "texto", "texto": "en el mar" }
+    ]
+  },
+  {
+    "id": "mariposa-flor",
+    "es": "mariposa en la flor",
+    "nivel": 2,
+    "piezas": [
+      { "tipo": "picto", "texto": "mariposa" },
+      { "tipo": "texto", "texto": "en la" },
+      { "tipo": "picto", "texto": "flor" }
+    ]
+  },
+  {
+    "id": "submarino-agua",
+    "es": "el submarino en el agua",
+    "nivel": 2,
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "submarino" },
+      { "tipo": "texto", "texto": "en el" },
+      { "tipo": "picto", "texto": "agua" }
+    ]
+  },
+  {
+    "id": "globo-aeroestatico-cielo",
+    "es": "el globo aerostático en el cielo",
+    "nivel": 2,
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "globo" },
+      { "tipo": "texto", "texto": "aerostático en el cielo" }
+    ]
+  },
+  {
+    "id": "submarino-burbujas",
+    "es": "el submarino hace burbujas",
+    "nivel": 2,
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "submarino" },
+      { "tipo": "texto", "texto": "hace burbujas" }
+    ]
+  },
+  {
+    "id": "sandia-semillas-negras",
+    "es": "la sandía tiene semillas y las semillas son negras",
+    "nivel": 3,
+    "piezas": [
+      { "tipo": "texto", "texto": "la" },
+      { "tipo": "picto", "texto": "sandía" },
+      { "tipo": "texto", "texto": "tiene semillas" },
+      { "tipo": "texto", "texto": "y las semillas son negras" }
+    ]
+  },
+  {
+    "id": "submarino-burbujas-agua",
+    "es": "el submarino hace burbujas en el agua",
+    "nivel": 3,
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "submarino" },
+      { "tipo": "texto", "texto": "hace burbujas en el" },
+      { "tipo": "picto", "texto": "agua" }
     ]
   }
 ]
