@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-15T07:23:12.370Z",
-  "totalAssets": 856,
+  "generado": "2026-05-15T07:42:31.731Z",
+  "totalAssets": 857,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -658,6 +658,7 @@
     "./assets/pictogramas/es/camión.png",
     "./assets/pictogramas/es/casa.png",
     "./assets/pictogramas/es/cebra.png",
+    "./assets/pictogramas/es/cielo.png",
     "./assets/pictogramas/es/coche.png",
     "./assets/pictogramas/es/cohete.png",
     "./assets/pictogramas/es/conejo.png",
