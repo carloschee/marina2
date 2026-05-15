@@ -198,27 +198,46 @@
     }
 
     .module-tile {
-      background: rgba(255,255,255,0.10);
-      border: 1.5px solid rgba(255,255,255,0.18);
       border-radius: var(--r-xl);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 8px 24px rgba(0,20,60,0.25),
-                  inset 0 1px 0 rgba(255,255,255,0.20);
-      padding: 12px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 12px;
-      cursor: pointer; transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 8px 24px rgba(0,20,60,0.25);
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
       min-height: 0;
+      /* Imagen como fondo — siempre rellena el botón */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      /* Fallback si no hay imagen */
+      background-color: rgba(255,255,255,0.10);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      /* Label al fondo con gradiente para legibilidad */
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      padding: 0 0 14px 0;
+      overflow: hidden;
+      position: relative;
     }
     .module-tile:active {
       transform: scale(.92);
       box-shadow: 0 4px 12px rgba(0,20,60,0.30);
     }
-    .tile-img   { width: 65%; height: auto; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25)); }
+    /* Gradiente oscuro en la parte inferior para leer el label */
+    .module-tile::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(to top,
+        rgba(2,20,50,0.75) 0%,
+        rgba(2,20,50,0.20) 60%,
+        transparent 100%);
+      border-radius: 0 0 var(--r-xl) var(--r-xl);
+      pointer-events: none;
+    }
     .tile-label {
-      font-size: 1.05rem; font-weight: 900; text-align: center; color: #fff;
-      text-shadow: 0 2px 8px rgba(0,20,60,0.60); line-height: 1.2; flex-shrink: 0;
+      position: relative; z-index: 1;
+      font-size: 1.1rem; font-weight: 900; text-align: center; color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.70); line-height: 1.2;
+      padding: 0 10px;
     }
 
     /* ── Botones nav ─────────────────────────────────────────── */

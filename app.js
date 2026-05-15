@@ -7,18 +7,18 @@
    ╚══════════════════════════════════════════════════════════╝
 */
 
-import { cargarConfig, cfg }             from './core/config.js';
+import { cargarConfig, cfg } from './core/config.js';
 import { registrarSW, onConexionChange } from './core/offline.js';
-import { toast, animarEntrada }          from './core/ui.js';
-import { Perfiles }                      from './core/perfiles.js';
-import { TTS }                           from './core/tts.js';
-import AudioManager                      from './core/audio.js';
-import FrasesModule                      from './modules/frases/module.js';
+import { toast, animarEntrada } from './core/ui.js';
+import { Perfiles } from './core/perfiles.js';
+import { TTS } from './core/tts.js';
+import AudioManager from './core/audio.js';
+import FrasesModule from './modules/frases/module.js';
 const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule];
 
 // ── Importa aquí los módulos de tu app ───────────────────────
-import AjustesModule  from './modules/ajustes/module.js';
-import MiraYDiModule  from './modules/mira-y-di/module.js';
+import AjustesModule from './modules/ajustes/module.js';
+import MiraYDiModule from './modules/mira-y-di/module.js';
 
 // ─────────────────────────────────────────────────────────────
 // ARRANQUE
@@ -32,7 +32,7 @@ import MiraYDiModule  from './modules/mira-y-di/module.js';
   _montarHeader();
 
   onConexionChange(estado => {
-    const el  = document.getElementById('indicador-offline');
+    const el = document.getElementById('indicador-offline');
     const txt = document.getElementById('texto-conexion');
     if (!el) return;
     el.className = estado;
@@ -56,10 +56,10 @@ import MiraYDiModule  from './modules/mira-y-di/module.js';
 // ─────────────────────────────────────────────────────────────
 async function _cargarTema(nombreTema) {
   try {
-    const mod   = await import(`./themes/${nombreTema}.js`);
+    const mod = await import(`./themes/${nombreTema}.js`);
     mod.injectStyles();
     const fondo = mod.crearFondo();
-    const app   = document.getElementById('app');
+    const app = document.getElementById('app');
     if (app) app.insertBefore(fondo, app.firstChild);
     return mod;
   } catch (e) {
@@ -127,8 +127,8 @@ function _montarHeader() {
   const ajustesMod = MODULOS.find(m => m.id === 'ajustes');
   if (ajustesMod) {
     const btn = document.createElement('button');
-    btn.id        = 'btn-ajustes-header';
-    btn.title     = 'Ajustes';
+    btn.id = 'btn-ajustes-header';
+    btn.title = 'Ajustes';
     btn.innerHTML = '⚙️';
     btn.addEventListener('click', () => _abrirPin(ajustesMod));
     document.getElementById('header-derecha')
@@ -137,10 +137,10 @@ function _montarHeader() {
 }
 
 function _actualizarChipPerfil() {
-  const p      = Perfiles.getActivo();
+  const p = Perfiles.getActivo();
   const avatar = document.getElementById('perfil-chip-avatar');
-  const apodo  = document.getElementById('perfil-chip-apodo');
-  const chip   = document.getElementById('perfil-chip');
+  const apodo = document.getElementById('perfil-chip-apodo');
+  const chip = document.getElementById('perfil-chip');
   const saludo = document.getElementById('saludo-nombre');
   if (!avatar || !apodo || !chip) return;
 
@@ -150,7 +150,7 @@ function _actualizarChipPerfil() {
   } else {
     avatar.textContent = p.avatar || '👤';
   }
-  apodo.textContent  = p.esInvitado ? 'Invitado' : p.apodo;
+  apodo.textContent = p.esInvitado ? 'Invitado' : p.apodo;
   chip.style.opacity = p.esInvitado ? '0.45' : '1';
   if (saludo) saludo.textContent = (!p.esInvitado && p.apodo) ? `· ${p.apodo}` : '';
 }
@@ -158,14 +158,14 @@ function _actualizarChipPerfil() {
 // ─────────────────────────────────────────────────────────────
 // HOME — grid de módulos
 // ─────────────────────────────────────────────────────────────
-let _moduloActivo   = null;
+let _moduloActivo = null;
 const _modulosPausados = {};
-const _contenedores    = {};
+const _contenedores = {};
 
 function _getContenedor(id) {
   if (!_contenedores[id]) {
     const div = document.createElement('div');
-    div.id    = `modulo-contenedor-${id}`;
+    div.id = `modulo-contenedor-${id}`;
     div.style.cssText =
       'position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden;';
     document.getElementById('app-body').appendChild(div);
@@ -190,15 +190,30 @@ function _montarHome() {
     .sort((a, b) => a.orden - b.orden);
 
   if (!modulos.length) {
-    grid.innerHTML = `
-      <div style="grid-column:1/-1;display:flex;flex-direction:column;
-                  align-items:center;justify-content:center;gap:12px;
-                  opacity:.35;height:100%;">
-        <span style="font-size:3rem">🌊</span>
-        <span style="font-weight:700;font-size:1rem;color:white;">
-          Agrega módulos en app.js para comenzar.
-        </span>
-      </div>`;
+    grid.innerHTML = '';
+    modulos.forEach(mod => {
+      const btn = document.createElement('button');
+      btn.className = 'module-tile';
+
+      // Imagen como fondo — fallback a emoji si no carga
+      const imgUrl = `assets/ui/btn-${mod.id}.png`;
+      const testImg = new Image();
+      testImg.onload = () => btn.style.backgroundImage = `url('${imgUrl}')`;
+      testImg.onerror = () => {
+        btn.style.background = mod.color || 'rgba(255,255,255,0.10)';
+        const emoji = document.createElement('span');
+        emoji.textContent = mod.emoji || '🌟';
+        emoji.style.cssText = 'font-size:3.5rem;margin-bottom:8px;';
+        btn.insertBefore(emoji, btn.firstChild);
+      };
+      testImg.src = imgUrl;
+
+      btn.innerHTML = `<span class="tile-label">${mod.label}</span>`;
+      btn.addEventListener('click', () =>
+        mod.requierePin ? _abrirPin(mod) : navegarA(mod)
+      );
+      grid.appendChild(btn);
+    });
     return;
   }
 
@@ -223,20 +238,20 @@ function _montarHome() {
 // NAVEGACIÓN
 // ─────────────────────────────────────────────────────────────
 async function navegarA(mod) {
-  const vistaMenu  = document.getElementById('vista-menu');
-  const btnVolver  = document.getElementById('btn-volver');
-  const acciones   = document.getElementById('modulo-acciones');
+  const vistaMenu = document.getElementById('vista-menu');
+  const btnVolver = document.getElementById('btn-volver');
+  const acciones = document.getElementById('modulo-acciones');
 
   // Pausar o destruir módulo activo
   if (_moduloActivo) {
-    try { _moduloActivo.onLeave?.(); } catch {}
+    try { _moduloActivo.onLeave?.(); } catch { }
     const c = _getContenedor(_moduloActivo.id);
     if (_moduloActivo.pause) {
-      try { _moduloActivo.pause(); } catch {}
+      try { _moduloActivo.pause(); } catch { }
       c.style.display = 'none';
       _modulosPausados[_moduloActivo.id] = _moduloActivo;
     } else {
-      try { _moduloActivo.destroy?.(); } catch {}
+      try { _moduloActivo.destroy?.(); } catch { }
       c.innerHTML = ''; c.style.display = 'none';
     }
     _moduloActivo = null;
@@ -260,7 +275,7 @@ async function navegarA(mod) {
 
   // Limpiar si estaba pausado pero no tiene resume
   if (_modulosPausados[mod.id] && !mod.resume) {
-    try { _modulosPausados[mod.id].destroy?.(); } catch {}
+    try { _modulosPausados[mod.id].destroy?.(); } catch { }
     delete _modulosPausados[mod.id];
     contenedor.innerHTML = '';
   }
@@ -282,14 +297,14 @@ async function navegarA(mod) {
 
 function volverAlMenu() {
   if (_moduloActivo) {
-    try { _moduloActivo.onLeave?.(); } catch {}
+    try { _moduloActivo.onLeave?.(); } catch { }
     const c = _getContenedor(_moduloActivo.id);
     if (_moduloActivo.pause) {
-      try { _moduloActivo.pause(); } catch {}
+      try { _moduloActivo.pause(); } catch { }
       c.style.display = 'none';
       _modulosPausados[_moduloActivo.id] = _moduloActivo;
     } else {
-      try { _moduloActivo.destroy?.(); } catch {}
+      try { _moduloActivo.destroy?.(); } catch { }
       c.innerHTML = ''; c.style.display = 'none';
     }
     _moduloActivo = null;
@@ -306,7 +321,7 @@ window._volverAlMenu = volverAlMenu;
 // ─────────────────────────────────────────────────────────────
 // ÁREA DE ADULTOS — PIN matemático
 // ─────────────────────────────────────────────────────────────
-let _pinTarget    = null;
+let _pinTarget = null;
 let _pinRespuesta = 0;
 
 function _abrirPin(mod) {
@@ -315,11 +330,11 @@ function _abrirPin(mod) {
   const b = Math.floor(Math.random() * 9) + 1;
   _pinRespuesta = a + b;
   const hint = document.getElementById('pin-hint');
-  const inp  = document.getElementById('input-pin');
-  const err  = document.getElementById('pin-error');
+  const inp = document.getElementById('input-pin');
+  const err = document.getElementById('pin-error');
   if (hint) hint.textContent = `Resuelve: ${a} + ${b} = ?`;
-  if (inp)  inp.value = '';
-  if (err)  err.textContent = '';
+  if (inp) inp.value = '';
+  if (err) err.textContent = '';
   document.getElementById('modal-pin')?.classList.add('visible');
   setTimeout(() => inp?.focus(), 100);
 }
@@ -425,7 +440,7 @@ function _initWakeLock() {
           if (document.visibilityState === 'visible') _activar();
         });
         return;
-      } catch {}
+      } catch { }
     }
     // Fallback: video silencioso
     if (video.paused) {
