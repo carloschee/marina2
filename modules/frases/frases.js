@@ -10,34 +10,25 @@
    │ Selector de frases (pills horizontales)          │
    └─────────────────────────────────────────────────┘
 
-   - Piezas con pictograma: fondo blanco, imagen ARASAAC + texto
-   - Piezas de texto puro: fondo semitransparente oscuro + texto
-   - Al completar la frase en orden: confeti + TTS de la frase completa
-   - Las piezas NO exigen orden estricto — cualquier orden las va colocando
-   - 🔊 lee la frase construida hasta el momento (o la completa si terminó)
-   - × borra la construcción y reinicia
-   - MP3 pregrabado con fallback a TTS para cada pieza al tocarla
+   Feedback de orden:
+   · Orden correcto  → piezas en tira con borde verde + confeti verde
+   · Orden distinto  → piezas en tira con estilo neutro, sin penalización
+   · En ambos casos  → TTS lee la frase completa
 */
 
-import { TTS }           from '../../core/tts.js';
-import { lanzarConfeti, haptic } from '../../core/ui.js';
-import { Telemetry }     from '../../core/telemetry.js';
+import { TTS }                    from '../../core/tts.js';
+import { lanzarConfeti, haptic }  from '../../core/ui.js';
+import { Telemetry }              from '../../core/telemetry.js';
 
-const PICTO_URL = (palabra, lang = 'es') =>
-  `assets/pictogramas/${lang}/${palabra}.png`;
-
-const AUDIO_URL = (palabra, lang = 'es') =>
-  `assets/audio/${lang}/${palabra}.mp3`;
-
-const AUDIO_FRASE_URL = (nombre, lang = 'es') =>
-  `assets/audio/frases/${lang}/${nombre}.mp3`;
+const PICTO_URL = (palabra) => `assets/pictogramas/es/${palabra}.png`;
+const AUDIO_URL = (palabra) => `assets/audio/es/${palabra}.mp3`;
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
 let _el      = null;
 let _frases  = [];
-let _activa  = 0;    // índice de la frase activa
-let _built   = [];   // índices de piezas ya colocadas
-let _audioEl = null; // elemento <audio> reutilizable
+let _activa  = 0;
+let _built   = [];   // índices de piezas tocadas, en orden de toque
+let _audioEl = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
@@ -84,51 +75,67 @@ function _render() {
       flex-shrink: 0;
       background: rgba(0,0,0,0.35);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px dashed rgba(255,255,255,0.15);
+      border: 1.5px dashed rgba(255,255,255,0.15);
       border-radius: 20px;
       padding: 16px 18px;
       min-height: 110px;
       display: flex; align-items: center; gap: 10px;
+      transition: border-color .35s;
+    }
+    #fr-tira.correcto {
+      border-color: #22c55e;
+      border-style: solid;
     }
     #fr-tira-piezas {
-      flex: 1;
-      display: flex; align-items: center; gap: 10px;
-      flex-wrap: wrap; min-height: 64px;
+      flex: 1; display: flex; align-items: center;
+      gap: 10px; flex-wrap: wrap; min-height: 64px;
     }
     #fr-tira-placeholder {
       color: rgba(255,255,255,0.30);
-      font-size: 1rem; font-weight: 600;
-      font-style: italic;
+      font-size: 1rem; font-weight: 600; font-style: italic;
     }
-    /* Pieza en la tira */
+
+    /* Pieza en la tira — altura fija igual a piezas con pictograma
+       para evitar que el renglón cambie de alto según el contenido */
     .fr-tira-pieza {
       display: flex; align-items: center; gap: 8px;
-      padding: 8px 14px;
-      border-radius: 14px;
+      padding: 8px 14px; border-radius: 14px;
       font-weight: 900; font-size: 1.05rem;
+      min-height: 60px; /* img(44px) + padding(8px*2) */
       animation: fr-pop .22s cubic-bezier(.34,1.56,.64,1) both;
+      transition: background .35s, box-shadow .35s, border-color .35s;
     }
     .fr-tira-pieza.picto {
       background: #fff; color: #07212e;
+      border: 2px solid transparent;
     }
     .fr-tira-pieza.texto {
       background: rgba(14,165,201,0.18);
       border: 1.5px solid rgba(14,165,201,0.30);
       color: #e8f4f8;
     }
+    /* Orden correcto — realce verde */
+    .fr-tira-pieza.correcto.picto {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
+    }
+    .fr-tira-pieza.correcto.texto {
+      background: rgba(34,197,94,0.18);
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.18);
+    }
     .fr-tira-pieza img {
       width: 44px; height: 44px; object-fit: contain; border-radius: 8px;
     }
 
-    /* Botones de acción de la tira */
+    /* Botones de acción */
     #fr-tira-acciones {
       display: flex; flex-direction: column; gap: 8px; flex-shrink: 0;
     }
     .fr-accion-btn {
       width: 48px; height: 48px; border-radius: 50%; border: none;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 1.2rem;
-      transition: transform .12s, opacity .15s;
+      cursor: pointer; transition: transform .12s, background .2s;
     }
     .fr-accion-btn:active { transform: scale(.88); }
     #fr-btn-leer {
@@ -139,7 +146,7 @@ function _render() {
     #fr-btn-borrar {
       background: rgba(255,255,255,0.08);
       color: rgba(255,255,255,0.45);
-      font-size: 1.4rem; font-weight: 300;
+      font-size: 1.5rem; font-weight: 300; font-family: inherit;
     }
 
     /* ── Panel de piezas ── */
@@ -148,47 +155,36 @@ function _render() {
       background: rgba(0,0,0,0.30);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 20px;
-      padding: 14px 18px;
+      border-radius: 20px; padding: 14px 18px;
     }
     #fr-panel-label {
       font-size: .68rem; font-weight: 900; letter-spacing: .12em;
       text-transform: uppercase; color: rgba(255,255,255,0.45);
       margin-bottom: 12px;
     }
-    #fr-piezas {
-      display: flex; gap: 12px; flex-wrap: wrap;
-    }
-    /* Pieza disponible */
+    #fr-piezas { display: flex; gap: 12px; flex-wrap: wrap; }
+
     .fr-pieza {
       display: flex; align-items: center; gap: 10px;
       padding: 12px 18px; border-radius: 18px;
       cursor: pointer; border: none;
       font-family: inherit; font-weight: 900; font-size: 1.1rem;
+      min-height: 92px; /* img(64px) + padding(12px*2) + margen */
       transition: transform .14s, opacity .2s, box-shadow .15s;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
     .fr-pieza:active { transform: scale(.93); }
-    .fr-pieza.picto {
-      background: #fff; color: #07212e;
-    }
-    .fr-pieza.texto {
+    .fr-pieza.picto  { background: #fff; color: #07212e; }
+    .fr-pieza.texto  {
       background: rgba(255,255,255,0.10);
       border: 1.5px solid rgba(255,255,255,0.18);
       color: #e8f4f8;
     }
-    .fr-pieza.usada {
-      opacity: 0.28; pointer-events: none;
-    }
-    .fr-pieza img {
-      width: 64px; height: 64px; object-fit: contain; border-radius: 10px;
-    }
+    .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
+    .fr-pieza img    { width: 64px; height: 64px; object-fit: contain; border-radius: 10px; }
 
     /* ── Selector de frases ── */
-    #fr-selector {
-      flex-shrink: 0;
-      display: flex; gap: 8px; flex-wrap: wrap;
-    }
+    #fr-selector { flex-shrink: 0; display: flex; gap: 8px; flex-wrap: wrap; }
     .fr-pill {
       padding: 9px 18px; border-radius: 99px; border: none; cursor: pointer;
       font-family: inherit; font-weight: 700; font-size: .88rem;
@@ -203,14 +199,6 @@ function _render() {
     @keyframes fr-pop {
       from { transform: scale(0.6); opacity: 0; }
       to   { transform: scale(1);   opacity: 1; }
-    }
-    @keyframes fr-completa {
-      0%,100% { transform: scale(1); }
-      50%      { transform: scale(1.03); }
-    }
-    #fr-tira.completa {
-      border-color: #14b8a6;
-      animation: fr-completa .5s ease;
     }
   </style>
 
@@ -245,13 +233,13 @@ function _render() {
   _renderSelector();
 }
 
-// ─── Selector de frases ───────────────────────────────────────────────────────
+// ─── Selector ─────────────────────────────────────────────────────────────────
 function _renderSelector() {
   const wrap = _el.querySelector('#fr-selector');
   wrap.innerHTML = '';
   _frases.forEach((f, i) => {
     const btn = document.createElement('button');
-    btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
+    btn.className   = 'fr-pill' + (i === _activa ? ' activa' : '');
     btn.textContent = f.es;
     btn.addEventListener('click', () => { haptic(8); _seleccionarFrase(i); });
     wrap.appendChild(btn);
@@ -262,7 +250,7 @@ function _renderSelector() {
 function _seleccionarFrase(idx) {
   _activa = idx;
   _built  = [];
-  _el.querySelector('#fr-tira').classList.remove('completa');
+  _el.querySelector('#fr-tira').classList.remove('correcto');
   _el.querySelectorAll('.fr-pill').forEach((p, i) =>
     p.classList.toggle('activa', i === idx)
   );
@@ -270,7 +258,7 @@ function _seleccionarFrase(idx) {
   _renderTira();
 }
 
-// ─── Render de piezas disponibles ────────────────────────────────────────────
+// ─── Piezas disponibles ───────────────────────────────────────────────────────
 function _renderPiezas() {
   const wrap  = _el.querySelector('#fr-piezas');
   const frase = _frases[_activa];
@@ -279,27 +267,26 @@ function _renderPiezas() {
   wrap.innerHTML = '';
   frase.piezas.forEach((pieza, i) => {
     const btn = document.createElement('button');
-    btn.className = `fr-pieza ${pieza.tipo}` + (_built.includes(i) ? ' usada' : '');
+    btn.className   = `fr-pieza ${pieza.tipo}` + (_built.includes(i) ? ' usada' : '');
     btn.dataset.idx = i;
 
     if (pieza.tipo === 'picto') {
-      const img = document.createElement('img');
-      img.src   = PICTO_URL(pieza.texto);
-      img.alt   = pieza.texto;
+      const img   = document.createElement('img');
+      img.src     = PICTO_URL(pieza.texto);
+      img.alt     = pieza.texto;
       img.onerror = () => img.remove();
       btn.appendChild(img);
     }
 
-    const span = document.createElement('span');
+    const span       = document.createElement('span');
     span.textContent = pieza.texto;
     btn.appendChild(span);
-
     btn.addEventListener('click', () => _tocarPieza(i));
     wrap.appendChild(btn);
   });
 }
 
-// ─── Tocar una pieza ──────────────────────────────────────────────────────────
+// ─── Tocar pieza ──────────────────────────────────────────────────────────────
 function _tocarPieza(idx) {
   if (_built.includes(idx)) return;
   haptic(12);
@@ -311,43 +298,54 @@ function _tocarPieza(idx) {
   _reproducir(pieza.texto);
   _renderTira();
 
-  // Marcar como usada
   const btnPieza = _el.querySelector(`.fr-pieza[data-idx="${idx}"]`);
   if (btnPieza) btnPieza.classList.add('usada');
 
-  // ¿Frase completa? (todos los índices presentes, sin importar orden)
   if (_built.length === frase.piezas.length) {
     _onFraseCompleta(frase);
   }
 
   Telemetry.track('pieza_tocada', {
-    _modulo: 'frases',
-    frase: frase.id,
-    pieza: pieza.texto,
-    orden: _built.length,
+    _modulo: 'frases', frase: frase.id,
+    pieza: pieza.texto, orden: _built.length,
   });
 }
 
 // ─── Frase completa ───────────────────────────────────────────────────────────
 function _onFraseCompleta(frase) {
+  // Comparar orden tocado vs. orden esperado (0,1,2,3…)
+  const ordenEsperado = frase.piezas.map((_, i) => i);
+  const ordenCorrecto = _built.every((idx, pos) => idx === ordenEsperado[pos]);
+
   const tira = _el.querySelector('#fr-tira');
-  tira.classList.add('completa');
-  lanzarConfeti({ count: 50, container: _el });
 
-  setTimeout(() => _reproducir(frase.es, true), 600);
+  if (ordenCorrecto) {
+    // ── Feedback positivo: piezas en verde + confeti verde ──
+    tira.classList.add('correcto');
+    tira.querySelectorAll('.fr-tira-pieza').forEach(p => p.classList.add('correcto'));
+    lanzarConfeti({ count: 60, container: _el });
 
-  Telemetry.track('frase_completada', {
-    _modulo: 'frases',
-    frase: frase.id,
-    texto: frase.es,
-  });
+    Telemetry.track('frase_completada', {
+      _modulo: 'frases', frase: frase.id,
+      texto: frase.es, orden_correcto: true,
+    });
+  } else {
+    // ── Sin penalización — solo lectura de la frase ──
+    Telemetry.track('frase_completada', {
+      _modulo: 'frases', frase: frase.id,
+      texto: frase.es, orden_correcto: false,
+    });
+  }
+
+  // En ambos casos: TTS lee la frase completa
+  setTimeout(() => _hablarTTS(frase.es), ordenCorrecto ? 600 : 200);
 }
 
-// ─── Render de la tira ────────────────────────────────────────────────────────
-function _renderTira() {
-  const wrap       = _el.querySelector('#fr-tira-piezas');
+// ─── Render tira ──────────────────────────────────────────────────────────────
+function _renderTira(marcarCorrectos = false) {
+  const wrap        = _el.querySelector('#fr-tira-piezas');
   const placeholder = _el.querySelector('#fr-tira-placeholder');
-  const frase      = _frases[_activa];
+  const frase       = _frases[_activa];
 
   if (_built.length === 0) {
     wrap.innerHTML = '';
@@ -356,22 +354,22 @@ function _renderTira() {
   }
   if (placeholder) placeholder.style.display = 'none';
 
-  // Reconstruir — mostrar piezas en el orden en que fueron tocadas
   wrap.innerHTML = '';
-  _built.forEach(idx => {
-    const pieza = frase.piezas[idx];
-    const div   = document.createElement('div');
+  _built.forEach((idx, pos) => {
+    const pieza   = frase.piezas[idx];
+    const div     = document.createElement('div');
+    const esCorrecta = idx === pos; // posición tocada == posición esperada
     div.className = `fr-tira-pieza ${pieza.tipo}`;
 
     if (pieza.tipo === 'picto') {
-      const img = document.createElement('img');
-      img.src   = PICTO_URL(pieza.texto);
-      img.alt   = pieza.texto;
+      const img   = document.createElement('img');
+      img.src     = PICTO_URL(pieza.texto);
+      img.alt     = pieza.texto;
       img.onerror = () => img.remove();
       div.appendChild(img);
     }
 
-    const span = document.createElement('span');
+    const span       = document.createElement('span');
     span.textContent = pieza.texto;
     div.appendChild(span);
     wrap.appendChild(div);
@@ -383,39 +381,30 @@ function _bindEvents() {
   _el.querySelector('#fr-btn-leer').addEventListener('click', () => {
     haptic(10);
     const frase = _frases[_activa];
-    if (!frase) return;
-    if (_built.length === 0) return;
-    // Si está completa lee la frase entera, si no, lo construido hasta ahora
+    if (!frase || _built.length === 0) return;
     const texto = _built.length === frase.piezas.length
       ? frase.es
       : _built.map(i => frase.piezas[i].texto).join(' ');
-    _reproducir(texto, true);
+    _hablarTTS(texto);
   });
 
   _el.querySelector('#fr-btn-borrar').addEventListener('click', () => {
     haptic(8);
     _built = [];
-    _el.querySelector('#fr-tira').classList.remove('completa');
+    _el.querySelector('#fr-tira').classList.remove('correcto');
     _renderTira();
     _renderPiezas();
   });
 }
 
-// ─── Reproducción: MP3 → fallback TTS ────────────────────────────────────────
-function _reproducir(texto, esFraseCompleta = false) {
-  if (esFraseCompleta) {
-    // Frases completas siempre por TTS — no hay MP3 para frases
-    _hablarTTS(texto);
-    return;
-  }
-
-  // Piezas individuales: intentar MP3, fallback TTS
+// ─── Audio: MP3 → fallback TTS ────────────────────────────────────────────────
+function _reproducir(texto) {
   if (!_audioEl) {
     _audioEl = document.createElement('audio');
     _audioEl.preload = 'none';
   }
   _audioEl.pause();
-  _audioEl.src = AUDIO_URL(texto);
+  _audioEl.src     = AUDIO_URL(texto);
   _audioEl.onerror = () => _hablarTTS(texto);
   _audioEl.play().catch(() => _hablarTTS(texto));
 }
@@ -424,6 +413,4 @@ function _hablarTTS(texto) {
   TTS.speak(texto, { lang: 'es-MX', rate: 0.90, pitch: 1.15 });
 }
 
-// ─── Cambio de idioma ─────────────────────────────────────────────────────────
-// El módulo de frases es solo español por ahora — ignorar cambios de idioma
 function _onLangChange() {}
