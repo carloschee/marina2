@@ -253,6 +253,11 @@ async def main():
             vocab_es = set(p for p, _ in palabras_es)
             vocab_en = set(p for p, _ in palabras_en)
 
+            # Piezas picto sin MP3 en assets/audio/{lang}/
+            # Se guardan en assets/audio/{lang}/ igual que el vocabulario
+            piezas_picto_es = set()
+            piezas_picto_en = set()
+
             for frase in frases:
                 fid  = frase.get("id", "").strip()
                 lang = frase.get("lang", "es").strip()
@@ -264,16 +269,30 @@ async def main():
                     texto = frase.get("es", "").strip()
                     if fid and texto: frases_es_items.append((fid, texto))
 
-                ref_vocab = vocab_en if lang == "en" else vocab_es
-                ref_set   = piezas_texto_en if lang == "en" else piezas_texto_es
-                for pieza in frase.get("piezas", []):
-                    if pieza.get("tipo") == "texto":
-                        pt = pieza.get("texto", "").strip()
-                        if pt and pt not in ref_vocab:
-                            ref_set.add(pt)
+                ref_vocab      = vocab_en       if lang == "en" else vocab_es
+                ref_set_txt    = piezas_texto_en if lang == "en" else piezas_texto_es
+                ref_set_picto  = piezas_picto_en if lang == "en" else piezas_picto_es
+                ref_dir_audio  = DIR_EN          if lang == "en" else DIR_ES
 
-    piezas_es_items = [(p, p) for p in sorted(piezas_texto_es)]
-    piezas_en_items = [(p, p) for p in sorted(piezas_texto_en)]
+                for pieza in frase.get("piezas", []):
+                    pt = pieza.get("texto", "").strip()
+                    if not pt: continue
+
+                    if pieza.get("tipo") == "texto":
+                        # Piezas texto: siempre en frases/{lang}/
+                        if pt not in ref_vocab:
+                            ref_set_txt.add(pt)
+
+                    elif pieza.get("tipo") == "picto":
+                        # Piezas picto: van en assets/audio/{lang}/ si no existe el MP3
+                        ruta_mp3 = ref_dir_audio / (pt + ".mp3")
+                        if not ruta_mp3.exists() or ruta_mp3.stat().st_size == 0:
+                            ref_set_picto.add(pt)
+
+    piezas_es_items       = [(p, p) for p in sorted(piezas_texto_es)]
+    piezas_en_items       = [(p, p) for p in sorted(piezas_texto_en)]
+    piezas_picto_es_items = [(p, p) for p in sorted(piezas_picto_es)] if 'piezas_picto_es' in dir() else []
+    piezas_picto_en_items = [(p, p) for p in sorted(piezas_picto_en)] if 'piezas_picto_en' in dir() else []
 
     # ── Resumen inicial ───────────────────────────────────────────────────────
     total_archivos = sum([
@@ -325,10 +344,12 @@ async def main():
     if not args.solo_es  and not args.solo_frases:
         await run(palabras_en,     "vocab/en",            VOZ_EN, CONFIG_EN,     DIR_EN)
     if not args.solo_es  and not args.solo_en:
-        await run(frases_es_items, "frases/es enunciados", VOZ_ES, CONFIG_FRASES, DIR_FRASES_ES)
-        await run(piezas_es_items, "frases/es piezas",     VOZ_ES, CONFIG_ES,     DIR_FRASES_ES)
-        await run(frases_en_items, "frases/en enunciados", VOZ_EN, CONFIG_FRASES, DIR_FRASES_EN)
-        await run(piezas_en_items, "frases/en piezas",     VOZ_EN, CONFIG_EN,     DIR_FRASES_EN)
+        await run(frases_es_items,       "frases/es enunciados",    VOZ_ES, CONFIG_FRASES, DIR_FRASES_ES)
+        await run(piezas_es_items,       "frases/es piezas texto",  VOZ_ES, CONFIG_ES,     DIR_FRASES_ES)
+        await run(piezas_picto_es_items, "audio/es picto sin MP3",  VOZ_ES, CONFIG_ES,     DIR_ES)
+        await run(frases_en_items,       "frases/en enunciados",    VOZ_EN, CONFIG_FRASES, DIR_FRASES_EN)
+        await run(piezas_en_items,       "frases/en piezas texto",  VOZ_EN, CONFIG_EN,     DIR_FRASES_EN)
+        await run(piezas_picto_en_items, "audio/en picto sin MP3",  VOZ_EN, CONFIG_EN,     DIR_EN)
 
     # ── Resumen final ─────────────────────────────────────────────────────────
     elapsed = time.monotonic() - t_inicio
