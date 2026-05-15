@@ -301,7 +301,17 @@ function _renderNiveles() {
   wrap.innerHTML = '';
   wrap.appendChild(label);
 
-  NIVELES.forEach(n => {
+  // Solo mostrar niveles que tienen frases en el idioma activo
+  const nivelesConFrases = NIVELES.filter(n =>
+    _todasFrases.some(f => f.nivel === n.id && (f.lang || 'es') === _lang)
+  );
+
+  // Si el nivel activo no tiene frases en este idioma, cambiar al primero disponible
+  if (nivelesConFrases.length && !nivelesConFrases.find(n => n.id === _nivel)) {
+    _nivel = nivelesConFrases[0].id;
+  }
+
+  nivelesConFrases.forEach(n => {
     const btn = document.createElement('button');
     btn.className   = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
     btn.textContent = n.label + ' ' + n.titulo;
@@ -388,7 +398,13 @@ function _renderSelector() {
     btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
     if (i === _activa && nivelCfg) btn.style.background = nivelCfg.color;
     btn.textContent = _lang === 'en' ? (f.en || f.es) : f.es;
-    btn.addEventListener('click', () => { haptic(8); _seleccionarFrase(i); });
+    btn.addEventListener('click', () => {
+      haptic(8);
+      _seleccionarFrase(i);
+      // Reproducir el enunciado completo al seleccionarlo
+      const texto = _lang === 'en' ? (f.en || f.es) : f.es;
+      _reproducirFrase(texto, f.id);
+    });
     wrap.appendChild(btn);
   });
 }
@@ -474,7 +490,20 @@ function _onFraseCompleta(frase) {
     lanzarConfeti({ count: 60, container: _el });
   }
 
-  setTimeout(() => _hablarTTS(frase.es), ordenCorrecto ? 600 : 200);
+  const texto = _lang === 'en' ? (frase.en || frase.es) : frase.es;
+
+  // Esperar a que termine el audio de la última pieza antes de leer la frase completa.
+  // Si _audioEl está reproduciendo, esperamos su evento 'ended'.
+  // Si no hay audio o ya terminó, usamos un delay mínimo.
+  const delay = ordenCorrecto ? 400 : 100;
+  if (_audioEl && !_audioEl.paused) {
+    _audioEl.addEventListener('ended', () => _reproducirFrase(texto, frase.id), { once: true });
+    _audioEl.addEventListener('error', () => {
+      setTimeout(() => _reproducirFrase(texto, frase.id), delay);
+    }, { once: true });
+  } else {
+    setTimeout(() => _reproducirFrase(texto, frase.id), delay);
+  }
 
   Telemetry.track('frase_completada', {
     _modulo: 'frases', frase: frase.id,
@@ -538,6 +567,20 @@ function _bindEvents() {
 }
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
+
+// Reproduce el MP3 del enunciado completo (frases/{lang}/{id}.mp3)
+// con fallback a TTS si el archivo no existe.
+function _reproducirFrase(texto, id) {
+  if (!_audioEl) {
+    _audioEl = document.createElement('audio');
+    _audioEl.preload = 'none';
+  }
+  _audioEl.pause();
+  _audioEl.src     = AUDIO_FRASE_URL(id, _lang);
+  _audioEl.onerror = () => _hablarTTS(texto);
+  _audioEl.play().catch(() => _hablarTTS(texto));
+}
+
 function _reproducirPieza(pieza) {
   const url = pieza.tipo === 'picto'
     ? AUDIO_URL(pieza.texto, _lang)
@@ -562,5 +605,7 @@ function _onLangChange(e) {
   const nuevoLang = e.detail?.lang;
   if (!nuevoLang || nuevoLang === _lang) return;
   _lang = nuevoLang;
+  // _renderNiveles ajusta _nivel si el actual no tiene frases en el nuevo idioma
+  _renderNiveles();
   _cambiarNivel(_nivel);
 }
