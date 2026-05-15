@@ -32,7 +32,7 @@ const AUDIO_FRASE_URL = (nombre, lang = 'es') => `assets/audio/frases/${lang}/${
 
 const NIVELES = [
   {
-    id: 1, label: '★', titulo: 'Básico',
+    id: 1, label: '⭐', titulo: '',
     color:       '#38bdf8',   // azul cielo — fresco, tranquilo
     colorSuave:  'rgba(56,189,248,0.15)',
     colorBorde:  'rgba(56,189,248,0.40)',
@@ -43,7 +43,7 @@ const NIVELES = [
     bordePiezaTxt: 'rgba(56,189,248,0.50)',
   },
   {
-    id: 2, label: '★★', titulo: 'Intermedio',
+    id: 2, label: '⭐⭐', titulo: '',
     color:       '#c084fc',   // violeta suave
     colorSuave:  'rgba(192,132,252,0.15)',
     colorBorde:  'rgba(192,132,252,0.40)',
@@ -54,7 +54,7 @@ const NIVELES = [
     bordePiezaTxt: 'rgba(192,132,252,0.50)',
   },
   {
-    id: 3, label: '★★★', titulo: 'Avanzado',
+    id: 3, label: '⭐⭐⭐', titulo: '',
     color:       '#fb7185',   // coral cálido
     colorSuave:  'rgba(251,113,133,0.15)',
     colorBorde:  'rgba(251,113,133,0.40)',
