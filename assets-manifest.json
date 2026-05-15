@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-15T22:39:29.042Z",
-  "totalAssets": 911,
+  "generado": "2026-05-15T23:09:37.651Z",
+  "totalAssets": 914,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -901,6 +901,7 @@
     "./core/tts.js",
     "./core/ui.js",
     "./data/frases.json",
+    "./data/memorama.json",
     "./data/vocabulario.json",
     "./index.html",
     "./manifest.json",
@@ -910,6 +911,8 @@
     "./modules/ajustes/module.js",
     "./modules/frases/frases.js",
     "./modules/frases/module.js",
+    "./modules/memorama/memorama.js",
+    "./modules/memorama/module.js",
     "./modules/mira-y-di/mira-y-di.js",
     "./modules/mira-y-di/module.js",
     "./themes/oceano.js"
