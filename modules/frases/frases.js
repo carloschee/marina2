@@ -32,7 +32,7 @@ const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/$
 
 const NIVELES = [
   {
-    id: 1, label: '★', titulo: 'Básico',
+    id: 1, label: '⭐', titulo: 'Básico',
     color:       '#38bdf8',   // azul cielo — fresco, tranquilo
     colorSuave:  'rgba(56,189,248,0.15)',
     colorBorde:  'rgba(56,189,248,0.40)',
@@ -43,7 +43,7 @@ const NIVELES = [
     bordePiezaTxt: 'rgba(56,189,248,0.50)',
   },
   {
-    id: 2, label: '★★', titulo: 'Intermedio',
+    id: 2, label: '⭐⭐', titulo: 'Intermedio',
     color:       '#c084fc',   // violeta suave
     colorSuave:  'rgba(192,132,252,0.15)',
     colorBorde:  'rgba(192,132,252,0.40)',
@@ -54,7 +54,7 @@ const NIVELES = [
     bordePiezaTxt: 'rgba(192,132,252,0.50)',
   },
   {
-    id: 3, label: '★★★', titulo: 'Avanzado',
+    id: 3, label: '⭐⭐⭐', titulo: 'Avanzado',
     color:       '#fb7185',   // coral cálido
     colorSuave:  'rgba(251,113,133,0.15)',
     colorBorde:  'rgba(251,113,133,0.40)',
@@ -80,7 +80,7 @@ let _audioEl     = null;
 export async function init(container) {
   _el     = container;
   _built  = [];
-  _activa = 0;
+  _activa = -1;  // sin frase preseleccionada al entrar
   _nivel  = 1;
   _lang   = window._langActivo || 'es';
 
@@ -124,21 +124,23 @@ function _render() {
       display: flex; align-items: center; gap: 10px;
     }
     #fr-niveles-label {
-      font-size: .80rem; font-weight: 900; letter-spacing: .08em;
-      text-transform: uppercase; color: rgba(255,255,255,0.65);
-      margin-right: 4px;
+      font-size: .85rem; font-weight: 900; letter-spacing: .08em;
+      text-transform: uppercase; color: #fff;
+      margin-right: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.40);
     }
     .fr-nivel-btn {
-      height: 44px; padding: 0 18px; border-radius: 99px; border: 2px solid transparent;
+      height: 44px; padding: 0 18px; border-radius: 99px; border: 2px solid rgba(255,255,255,0.25);
       cursor: pointer; font-family: inherit; font-weight: 900; font-size: 1.05rem;
-      background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.60);
+      background: rgba(255,255,255,0.10); color: #fff;
       transition: all .2s; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       letter-spacing: 0.5px; white-space: nowrap;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.40);
     }
     .fr-nivel-btn:active { transform: scale(.92); }
     .fr-nivel-btn.activo {
       color: #fff; font-weight: 900;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.60);
     }
 
     /* ── Tira de construcción ── */
@@ -191,8 +193,16 @@ function _render() {
       cursor: pointer; transition: transform .12s, background .2s;
     }
     .fr-accion-btn:active { transform: scale(.88); }
-    #fr-btn-leer { background: rgba(14,165,201,0.25); border: 1.5px solid rgba(14,165,201,0.40); }
-    #fr-btn-borrar { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.45); font-size: 1.4rem; font-weight: 300; font-family: inherit; }
+    #fr-btn-leer {
+      background: #0ea5c9;
+      border: 2px solid #38bdf8;
+      box-shadow: 0 4px 16px rgba(14,165,201,0.50);
+    }
+    #fr-btn-borrar {
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: #fff; font-size: 1.5rem; font-weight: 400; font-family: inherit;
+    }
 
     /* ── Panel de piezas ── */
     #fr-panel-piezas {
@@ -237,7 +247,8 @@ function _render() {
       white-space: nowrap; text-shadow: 0 1px 4px rgba(0,0,0,0.40);
     }
     .fr-pill:active { transform: scale(.93); }
-    .fr-pill.activa { color: #07212e; border-color: transparent; font-weight: 900; }
+    .fr-pill.activa { color: #fff; border-color: transparent; font-weight: 900;
+                      text-shadow: 0 1px 6px rgba(0,0,0,0.50); }
 
     /* ── Estado vacío ── */
     #fr-vacio {
@@ -330,7 +341,7 @@ function _renderNiveles() {
 
 function _cambiarNivel(nivel) {
   _nivel  = nivel;
-  _activa = 0;
+  _activa = -1;  // sin frase preseleccionada al cambiar nivel
   _built  = [];
   _frases = _todasFrases.filter(f => f.nivel === nivel && (f.lang || 'es') === _lang);
 
@@ -397,7 +408,11 @@ function _renderSelector() {
   _frases.forEach((f, i) => {
     const btn = document.createElement('button');
     btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
-    if (i === _activa && nivelCfg) btn.style.background = nivelCfg.color;
+    if (i === _activa && nivelCfg) {
+      btn.style.background = nivelCfg.color;
+      btn.style.color      = '#fff';
+      btn.style.fontWeight = '900';
+    }
     btn.textContent = _lang === 'en' ? (f.en || f.es) : f.es;
     btn.addEventListener('click', () => {
       haptic(8);
@@ -420,7 +435,7 @@ function _seleccionarFrase(idx) {
   _el.querySelectorAll('.fr-pill').forEach((p, i) => {
     p.classList.toggle('activa', i === idx);
     p.style.background  = i === idx ? (nivelCfg?.color || '#14b8a6') : '';
-    p.style.color       = i === idx ? '#07212e' : '';
+    p.style.color       = i === idx ? '#fff' : '';
     p.style.fontWeight  = i === idx ? '900' : '';
   });
 
@@ -431,7 +446,7 @@ function _seleccionarFrase(idx) {
 // ─── Piezas disponibles ───────────────────────────────────────────────────────
 function _renderPiezas() {
   const wrap  = _el.querySelector('#fr-piezas');
-  const frase = _frases[_activa];
+  const frase = _activa >= 0 ? _frases[_activa] : null;
   if (!frase) { wrap.innerHTML = ''; return; }
 
   wrap.innerHTML = '';
@@ -458,7 +473,7 @@ function _renderPiezas() {
 
 // ─── Tocar pieza ──────────────────────────────────────────────────────────────
 function _tocarPieza(idx) {
-  if (_built.includes(idx)) return;
+  if (_activa < 0 || _built.includes(idx)) return;
   haptic(12);
 
   const frase = _frases[_activa];
@@ -516,7 +531,7 @@ function _onFraseCompleta(frase) {
 function _renderTira() {
   const wrap        = _el.querySelector('#fr-tira-piezas');
   const placeholder = _el.querySelector('#fr-tira-placeholder');
-  const frase       = _frases[_activa];
+  const frase       = _activa >= 0 ? _frases[_activa] : null;
 
   if (_built.length === 0) {
     wrap.innerHTML = '';
@@ -550,7 +565,7 @@ function _renderTira() {
 function _bindEvents() {
   _el.querySelector('#fr-btn-leer').addEventListener('click', () => {
     haptic(10);
-    const frase = _frases[_activa];
+    const frase = _activa >= 0 ? _frases[_activa] : null;
     if (!frase || _built.length === 0) return;
     const texto = _built.length === frase.piezas.length
       ? frase.es
