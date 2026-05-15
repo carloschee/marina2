@@ -1,0 +1,86 @@
+[
+  {
+    "id": "globo-cielo",
+    "es": "globo en el cielo",
+    "piezas": [
+      { "tipo": "picto", "texto": "globo" },
+      { "tipo": "texto", "texto": "en el cielo" }
+    ]
+  },
+  {
+    "id": "sandia-semillas",
+    "es": "la sandía tiene semillas",
+    "piezas": [
+      { "tipo": "picto", "texto": "sandía" },
+      { "tipo": "texto", "texto": "tiene semillas" }
+    ]
+  },
+  {
+    "id": "mariposa-flor",
+    "es": "mariposa en la flor",
+    "piezas": [
+      { "tipo": "picto", "texto": "mariposa" },
+      { "tipo": "texto", "texto": "en la" },
+      { "tipo": "picto", "texto": "flor" }
+    ]
+  },
+  {
+    "id": "submarino-mar",
+    "es": "submarino en el mar",
+    "piezas": [
+      { "tipo": "picto", "texto": "submarino" },
+      { "tipo": "texto", "texto": "en el mar" }
+    ]
+  },
+  {
+    "id": "tren-rapido",
+    "es": "tren rápido",
+    "piezas": [
+      { "tipo": "picto", "texto": "tren" },
+      { "tipo": "texto", "texto": "rápido" }
+    ]
+  },
+  {
+    "id": "manzana-roja",
+    "es": "manzana roja",
+    "piezas": [
+      { "tipo": "picto", "texto": "manzana" },
+      { "tipo": "texto", "texto": "roja" }
+    ]
+  },
+  {
+    "id": "perro-corre",
+    "es": "el perro corre",
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "perro" },
+      { "tipo": "texto", "texto": "corre" }
+    ]
+  },
+  {
+    "id": "gato-duerme",
+    "es": "el gato duerme",
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "gato" },
+      { "tipo": "texto", "texto": "duerme" }
+    ]
+  },
+  {
+    "id": "luna-noche",
+    "es": "luna en la noche",
+    "piezas": [
+      { "tipo": "picto", "texto": "luna" },
+      { "tipo": "texto", "texto": "en la noche" }
+    ]
+  },
+  {
+    "id": "sol-brilla",
+    "es": "el sol brilla",
+    "piezas": [
+      { "tipo": "texto", "texto": "el" },
+      { "tipo": "picto", "texto": "sol" },
+      { "tipo": "texto", "texto": "brilla" }
+    ]
+  }
+]

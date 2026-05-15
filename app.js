@@ -13,6 +13,8 @@ import { toast, animarEntrada }          from './core/ui.js';
 import { Perfiles }                      from './core/perfiles.js';
 import { TTS }                           from './core/tts.js';
 import AudioManager                      from './core/audio.js';
+import FrasesModule                      from './modules/frases/module.js';
+const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule];
 
 // ── Importa aquí los módulos de tu app ───────────────────────
 import AjustesModule  from './modules/ajustes/module.js';
