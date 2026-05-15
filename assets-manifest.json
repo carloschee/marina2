@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-15T01:37:16.008Z",
-  "totalAssets": 844,
+  "generado": "2026-05-15T02:05:16.585Z",
+  "totalAssets": 845,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -824,6 +824,7 @@
     "./assets/pictogramas/es/ñame.png",
     "./assets/pictogramas/es/ñandú.png",
     "./assets/pictogramas/es/ñu.png",
+    "./assets/ui/btn-frases.png",
     "./assets/ui/btn-inicio.png",
     "./assets/ui/btn-mira-y-di.png",
     "./core/audio.js",
