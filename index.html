@@ -92,9 +92,7 @@
       inset: 0;
       display: flex;
       flex-direction: column;
-      background: var(--m-bg);
-      min-height: 100dvh;
-      /* fallback a fixed inset:0 si dvh no disponible */
+      background: transparent;
     }
 
     /* ── Header ──────────────────────────────────────────────── */
@@ -317,6 +315,7 @@
       min-height: 0;
       position: relative;
       z-index: 1;
+      overflow: hidden;
     }
 
     #vista-menu {
@@ -329,7 +328,6 @@
 
     /* ── Grid de módulos ─────────────────────────────────────── */
     #menu-grid {
-      /* height:100% en lugar de flex:1 — el padre es position:absolute */
       width: 100%;
       height: 100%;
       display: grid;
