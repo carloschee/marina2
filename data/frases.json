@@ -58,7 +58,7 @@
         "texto": "suky"
       },
       {
-        "tipo": "texto",
+        "tipo": "picto",
         "texto": "no"
       }
     ]
@@ -70,7 +70,7 @@
     "nivel": 1,
     "piezas": [
       {
-        "tipo": "texto",
+        "tipo": "picto",
         "texto": "tienes"
       },
       {
@@ -102,7 +102,7 @@
     "nivel": 1,
     "piezas": [
       {
-        "tipo": "texto",
+        "tipo": "picto",
         "texto": "tienes"
       },
       {
@@ -298,7 +298,7 @@
     "nivel": 2,
     "piezas": [
       {
-        "tipo": "texto",
+        "tipo": "picto",
         "texto": "tienes"
       },
       {
@@ -354,8 +354,12 @@
         "texto": "daño"
       },
       {
+        "tipo": "picto",
+        "texto": "nosotros"
+      },
+      {
         "tipo": "texto",
-        "texto": "nosotros te"
+        "texto": "te"
       },
       {
         "tipo": "picto",
