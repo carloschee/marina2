@@ -631,43 +631,47 @@ function _precargarFrase(id) {
   // No lo reproducimos — solo lo descargamos al buffer del navegador
 }
 
+// Reproduce un MP3 con fallback a TTS — garantiza que el fallback
+// solo se ejecuta una vez aunque onerror y catch() se disparen juntos.
+function _reproducirURL(url, textoFallback, onEnded = null) {
+  const audio = _getAudio();
+  TTS.stop();
+  audio.pause();
+  audio.onended = onEnded;
+
+  let _fallbackUsado = false;
+  const _fallback = () => {
+    if (_fallbackUsado) return;
+    _fallbackUsado = true;
+    _hablarTTS(textoFallback);
+  };
+
+  audio.onerror = _fallback;
+  audio.src     = url;
+  audio.play().catch(_fallback);
+}
+
 // Reproduce el MP3 del enunciado completo con fallback a TTS.
 function _reproducirFrase(texto, id) {
-  const audio = _getAudio();
-  TTS.stop(); // cancelar TTS si estaba activo
-  audio.pause();
-  audio.src     = AUDIO_FRASE_URL(id, _lang);
-  audio.onerror = () => { TTS.stop(); _hablarTTS(texto); };
-  audio.play().catch(() => { TTS.stop(); _hablarTTS(texto); });
+  _reproducirURL(AUDIO_FRASE_URL(id, _lang), texto);
 }
 
 // Reproduce una pieza individual con fallback a TTS.
 function _reproducirPieza(pieza) {
-  const url   = pieza.tipo === 'picto'
+  const url = pieza.tipo === 'picto'
     ? AUDIO_URL(pieza.texto, _lang)
     : AUDIO_FRASE_URL(pieza.texto, _lang);
-  const audio = _getAudio();
-  TTS.stop();
-  audio.pause();
-  audio.src     = url;
-  audio.onerror = () => { TTS.stop(); _hablarTTS(pieza.texto); };
-  audio.play().catch(() => { TTS.stop(); _hablarTTS(pieza.texto); });
+  _reproducirURL(url, pieza.texto);
 }
 
 // Reproduce una cadena de piezas en secuencia (para frase parcial).
 function _reproducirCadena(piezas) {
   if (!piezas.length) return;
   const [primera, ...resto] = piezas;
-  const audio = _getAudio();
-  TTS.stop();
-  audio.pause();
-  const url     = primera.tipo === 'picto'
+  const url = primera.tipo === 'picto'
     ? AUDIO_URL(primera.texto, _lang)
     : AUDIO_FRASE_URL(primera.texto, _lang);
-  audio.src     = url;
-  audio.onerror = () => { _hablarTTS(primera.texto); };
-  audio.onended = () => { audio.onended = null; _reproducirCadena(resto); };
-  audio.play().catch(() => _hablarTTS(primera.texto));
+  _reproducirURL(url, primera.texto, () => _reproducirCadena(resto));
 }
 
 function _hablarTTS(texto) {
