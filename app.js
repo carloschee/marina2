@@ -13,13 +13,14 @@ import { toast, animarEntrada }          from './core/ui.js';
 import { Perfiles }                      from './core/perfiles.js';
 import { TTS }                           from './core/tts.js';
 import AudioManager                      from './core/audio.js';
+import MemoramaModule                    from './modules/memorama/module.js';
 
 // ── Módulos de la app ─────────────────────────────────────────
 import AjustesModule  from './modules/ajustes/module.js';
 import MiraYDiModule  from './modules/mira-y-di/module.js';
 import FrasesModule   from './modules/frases/module.js';
 
-const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule];
+const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule];
 
 // ─────────────────────────────────────────────────────────────
 // ARRANQUE
