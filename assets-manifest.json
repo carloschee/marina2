@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-15T20:58:33.055Z",
-  "totalAssets": 886,
+  "generado": "2026-05-15T21:08:55.272Z",
+  "totalAssets": 887,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -432,6 +432,7 @@
     "./assets/audio/frases/es/te has hecho.mp3",
     "./assets/audio/frases/es/te-has-hecho-dano-nosotros-te-curamos.mp3",
     "./assets/audio/frases/es/te-has-hecho-dano.mp3",
+    "./assets/audio/frases/es/te.mp3",
     "./assets/audio/frases/es/tiene.mp3",
     "./assets/audio/frases/es/tienes-hambre-pues-vamos-a-comer.mp3",
     "./assets/audio/frases/es/tienes-hambre.mp3",
