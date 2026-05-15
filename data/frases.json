@@ -454,5 +454,49 @@
         "texto": "agua"
       }
     ]
+  },
+  {
+    "id": "hot-air-balloon-in-the-sky",
+    "lang": "en",
+    "es": "hot air balloon in the sky",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "hot air balloon"
+      },
+      {
+        "tipo": "texto",
+        "texto": "in the"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sky"
+      }
+    ]
+  },
+  {
+    "id": "the-sun-is-outside",
+    "lang": "en",
+    "es": "the sun is outside",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "the"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sun"
+      },
+      {
+        "tipo": "texto",
+        "texto": "is"
+      },
+      {
+        "tipo": "picto",
+        "texto": "outside"
+      }
+    ]
   }
 ]
