@@ -53,6 +53,7 @@ export function destroy() {
   _detenerMic();
   TTS.stop();
   _el = null; _vocab = null; _letra = null;
+  if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
 }
 
 export function onEnter() { }
@@ -363,13 +364,43 @@ function _bindEvents() {
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
 }
 
-// ─── TTS ──────────────────────────────────────────────────────────────────────
+// ─── Reproducir palabras con TTS como fallback ──────────────────────────────
+let _audioEl = null;
+
+function _audioURL(palabra, lang) {
+  return `assets/audio/${lang}/${palabra}.mp3`;
+}
+
 function _hablar(texto, lang = 'es-MX') {
+  const langCode = lang.slice(0, 2); // 'es-MX' → 'es'
+  const url = _audioURL(texto, langCode);
+
   const img = _el?.querySelector('#md-picto');
-  if (img) img.classList.add('hablando');
-  const duracionMs = Math.max(800, texto.length * 70);
-  setTimeout(() => { if (img) img.classList.remove('hablando'); }, duracionMs);
-  TTS.speak(texto, { lang, rate: 0.92, pitch: 1.2 });
+  const _animar = () => {
+    if (!img) return;
+    img.classList.add('hablando');
+    setTimeout(() => img.classList.remove('hablando'), Math.max(800, texto.length * 70));
+  };
+
+  if (!_audioEl) {
+    _audioEl = document.createElement('audio');
+    _audioEl.preload = 'none';
+  }
+
+  _audioEl.pause();
+  _audioEl.src = url;
+  _audioEl.onerror = () => {
+    console.debug(`[mira-y-di] Sin MP3 para "${texto}", usando TTS`);
+    TTS.speak(texto, { lang, rate: 0.92, pitch: 1.2 });
+    _animar();
+  };
+
+  _audioEl.play()
+    .then(() => _animar())
+    .catch(() => {
+      TTS.speak(texto, { lang, rate: 0.92, pitch: 1.2 });
+      _animar();
+    });
 }
 
 // ─── Micrófono + medidor ──────────────────────────────────────────────────────
