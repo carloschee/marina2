@@ -1,6 +1,6 @@
 /* modules/frases/module.js */
 
-import { init, destroy, onEnter, onLeave } from './frases.js';
+import { init, destroy, onEnter, onLeave, pause, resume } from './frases.js';
 
 export default {
   id:          'frases',
@@ -17,8 +17,8 @@ export default {
   destroy,
   onEnter,
   onLeave,
-  pause:   undefined,
-  resume:  undefined,
+  pause,
+  resume,
 
   cache: [],
 };

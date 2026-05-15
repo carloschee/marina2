@@ -58,6 +58,27 @@ export function destroy() {
 
 export function onEnter() { }
 export function onLeave() { _detenerMic(); TTS.stop(); }
+export async function pause() {
+  _detenerMic();
+  TTS.stop();
+  if (_audioEl) _audioEl.pause();
+}
+
+export async function resume(container) {
+  _el = container;
+  _render();
+  _renderLetras();
+  if (_letra) {
+    _el.querySelectorAll('.md-letra-btn').forEach(b =>
+      b.classList.toggle('activa', b.dataset.letra === _letra)
+    );
+    _el.querySelector(`.md-letra-btn[data-letra="${_letra}"]`)
+      ?.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' });
+  }
+  _actualizarVista();
+  window.removeEventListener('lang-change', _onLangChange);
+  window.addEventListener('lang-change', _onLangChange);
+}
 
 // ─── Shell ────────────────────────────────────────────────────────────────────
 function _render() {

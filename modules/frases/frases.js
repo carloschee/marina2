@@ -77,6 +77,28 @@ let _built       = [];
 let _audioEl     = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
+export async function pause() {
+  // Detener audio pero mantener todo el estado en memoria
+  if (_audioEl) _audioEl.pause();
+  TTS.stop();
+}
+
+export async function resume(container) {
+  // El contenedor puede haber cambiado — remontar UI con el estado actual
+  _el = container;
+  _render();
+  // Restaurar estado visual
+  _renderNiveles();
+  _aplicarTema(_nivel);
+  _renderSelector();
+  _renderPiezas();
+  _renderTira();
+  _actualizarVacio();
+  // Re-registrar listener de idioma
+  window.removeEventListener('lang-change', _onLangChange);
+  window.addEventListener('lang-change', _onLangChange);
+}
+
 export async function init(container) {
   _el     = container;
   _built  = [];
