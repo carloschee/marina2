@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-16T01:03:12.255Z",
-  "totalAssets": 1134,
+  "generado": "2026-05-16T01:27:49.897Z",
+  "totalAssets": 1135,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -839,6 +839,7 @@
     "./assets/pictogramas/en/shell.png",
     "./assets/pictogramas/en/shirt.png",
     "./assets/pictogramas/en/shoes.png",
+    "./assets/pictogramas/en/sky.png",
     "./assets/pictogramas/en/snail.png",
     "./assets/pictogramas/en/soap.png",
     "./assets/pictogramas/en/socks.png",
