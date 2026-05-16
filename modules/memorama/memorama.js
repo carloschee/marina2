@@ -119,7 +119,7 @@ function _resetEstado() {
 function _render() {
   _el.style.cssText =
     'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;';
+    'overflow:hidden;background:transparent;isolation:isolate;';
 
   _el.innerHTML = `
   <style>
@@ -311,22 +311,27 @@ function _render() {
 
     /* ── Pantalla de victoria ── */
     #mm-victoria {
-      display: none; position: absolute; inset: 0;
+      display: none;
+      position: absolute; inset: 0;   /* cubre todo el contenedor del módulo */
       flex-direction: column; align-items: center; justify-content: center;
-      gap: 16px; z-index: 50;
-      background: rgba(2,20,50,0.70); backdrop-filter: blur(8px);
+      gap: 24px; z-index: 200;        /* por encima de todo */
+      background: rgba(2,20,50,0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     #mm-victoria.visible { display: flex; }
     #mm-victoria h2 {
       font-family: 'Outfit', sans-serif;
       font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #fff;
       text-shadow: 0 4px 20px rgba(0,194,255,0.60);
+      text-align: center; padding: 0 24px;
     }
     #mm-victoria button {
-      padding: 16px 40px; border-radius: 99px; border: none;
+      padding: 20px 48px; border-radius: 99px; border: none;
       background: #00c2ff; color: #032340;
-      font-family: inherit; font-weight: 900; font-size: 1.2rem;
+      font-family: inherit; font-weight: 900; font-size: 1.3rem;
       cursor: pointer; transition: transform .12s;
+      box-shadow: 0 8px 32px rgba(0,194,255,0.45);
     }
     #mm-victoria button:active { transform: scale(.94); }
 
