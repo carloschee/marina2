@@ -55,6 +55,7 @@ BACKOFF_BASE  = 1.0        # segundos base para backoff exponencial
 RAIZ          = Path(__file__).parent.parent
 VOCAB_JSON    = RAIZ / "data" / "vocabulario.json"
 FRASES_JSON   = RAIZ / "data" / "frases.json"
+MEMORAMA_JSON = RAIZ / "data" / "memorama.json"
 DIR_AUDIO     = RAIZ / "assets" / "audio"
 DIR_ES        = DIR_AUDIO / "es"
 DIR_EN        = DIR_AUDIO / "en"
@@ -209,12 +210,14 @@ async def main():
     parser.add_argument("--solo-es",         action="store_true")
     parser.add_argument("--solo-en",         action="store_true")
     parser.add_argument("--solo-frases",     action="store_true")
+    parser.add_argument("--solo-memorama",   action="store_true")
     parser.add_argument("--seco",            action="store_true")
     parser.add_argument("--concurrencia",    type=int, default=5,
                         metavar="N", help="Peticiones simultáneas (default: 5)")
     args = parser.parse_args()
 
-    modo_solo_frases = args.solo_frases and not (args.solo_es or args.solo_en)
+    modo_solo_memorama = getattr(args, "solo_memorama", False)
+    modo_solo_frases = (args.solo_frases or modo_solo_memorama) and not (args.solo_es or args.solo_en)
     conc             = max(1, min(args.concurrencia, 20))  # clamp 1–20
 
     # ── Vocabulario ──────────────────────────────────────────────────────────
@@ -231,6 +234,16 @@ async def main():
                 if p.strip(): es_set.add(p.strip())
             for p in contenido.get("en", []):
                 if p.strip(): en_set.add(p.strip())
+        # Agregar palabras de memorama que no estén ya en el vocabulario
+        if MEMORAMA_JSON.exists():
+            with open(MEMORAMA_JSON, encoding="utf-8") as f:
+                temas_mem = json.load(f)
+            for tema in temas_mem:
+                for p in tema.get("palabras", []):
+                    if p.strip(): es_set.add(p.strip())
+        else:
+            print(f"\u26a0\ufe0f  {MEMORAMA_JSON} no encontrado \u2014 se omiten palabras de memorama")
+
         palabras_es = [(p, p) for p in sorted(es_set)]
         palabras_en = [(p, p) for p in sorted(en_set)]
 
