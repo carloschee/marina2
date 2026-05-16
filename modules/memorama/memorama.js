@@ -84,9 +84,8 @@ export async function resume(container) {
     [..._descubiertas].forEach(i => {
       const el = _el.querySelector(`.mm-carta[data-idx="${i}"]`);
       if (el) {
-        el.style.opacity       = '0';
-        el.style.transform     = 'scale(0.85)';
-        el.style.pointerEvents = 'none';
+        el.classList.add('encontrada');
+        el.style.animationDuration = '0s'; // sin animación al restaurar
       }
     });
     if (_descubiertas.size === _cartas.length && _cartas.length > 0) {
@@ -104,13 +103,18 @@ function _resetEstado() {
 // ─── Shell ────────────────────────────────────────────────────────────────────
 function _render() {
   _el.style.cssText =
-    'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;isolation:isolate;';
+    'position:absolute;inset:0;overflow:hidden;background:transparent;isolation:isolate;';
 
   _el.innerHTML = `
 <style>
+  #mm-wrap {
+    display:flex; flex-direction:column;
+    height:100%; overflow:hidden;
+    background:transparent; position:relative;
+  }
   #mm-header {
-    flex-shrink:0; display:flex; align-items:center; gap:12px; padding:10px 16px 8px;
+    flex-shrink:0;
+    display:flex; align-items:center; gap:12px; padding:10px 16px 8px;
   }
   #mm-btn-tema {
     display:flex; align-items:center; gap:8px; padding:8px 16px;
@@ -131,12 +135,19 @@ function _render() {
   }
   #mm-btn-reiniciar:active { transform:scale(.88) rotate(180deg); }
 
-  #mm-tablero {
+  #mm-tablero-wrap {
     flex:1; min-height:0;
+    padding:5px 10px 0;
+    display:flex;
+    opacity:1; transition:opacity 0.35s ease;
+  }
+  #mm-tablero-wrap.oculto { opacity:0; }
+  #mm-tablero {
+    width:100%;
     display:grid;
     grid-template-columns:repeat(12, 1fr);
     grid-template-rows:repeat(4, 1fr);
-    gap:5px; padding:0 10px 5px;
+    gap:5px;
   }
 
   .mm-carta {
@@ -178,7 +189,8 @@ function _render() {
   }
 
   #mm-tira-wrap {
-    flex-shrink:0; height:76px; padding:4px 12px 8px;
+    flex-shrink:0; height:76px;
+    padding:4px 12px 8px;
     overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
     -webkit-overflow-scrolling:touch;
     display:flex; align-items:center; gap:8px;
@@ -244,23 +256,36 @@ function _render() {
     from { transform:scale(0.7); opacity:0; }
     to   { transform:scale(1);   opacity:1; }
   }
+  @keyframes mm-desaparecer {
+    0%   { opacity:1; transform:rotateY(180deg) scale(1); }
+    40%  { opacity:1; transform:rotateY(180deg) scale(1.08) translateY(-4px); }
+    100% { opacity:0; transform:rotateY(180deg) scale(0); }
+  }
+  .mm-carta.encontrada {
+    animation:mm-desaparecer 0.5s cubic-bezier(.55,.06,.68,.19) forwards;
+    pointer-events:none;
+  }
 </style>
 
-<div id="mm-header">
-  <button id="mm-btn-tema">
-    <span id="mm-tema-emoji">🃏</span>
-    <span id="mm-tema-label">Elegir tema</span>
-  </button>
-  <div id="mm-contador">
-    <strong id="mm-pares-count">0</strong> / ${PARES} pares
+<div id="mm-wrap">
+  <div id="mm-header">
+    <button id="mm-btn-tema">
+      <span id="mm-tema-emoji">🃏</span>
+      <span id="mm-tema-label">Elegir tema</span>
+    </button>
+    <div id="mm-contador">
+      <strong id="mm-pares-count">0</strong> / ${PARES} pares
+    </div>
+    <button id="mm-btn-reiniciar" title="Reiniciar">🔄</button>
   </div>
-  <button id="mm-btn-reiniciar" title="Reiniciar">🔄</button>
-</div>
 
-<div id="mm-tablero"></div>
+  <div id="mm-tablero-wrap">
+    <div id="mm-tablero"></div>
+  </div>
 
-<div id="mm-tira-wrap">
-  <span id="mm-tira-placeholder">Los pares que encuentres aparecerán aquí…</span>
+  <div id="mm-tira-wrap">
+    <span id="mm-tira-placeholder">Los pares que encuentres aparecerán aquí…</span>
+  </div>
 </div>
 
 <div id="mm-modal">
@@ -345,12 +370,7 @@ function _tocarCarta(idx) {
         _descubiertas.add(i1); _descubiertas.add(i2);
         [i1, i2].forEach(i => {
           const el = _el.querySelector(`.mm-carta[data-idx="${i}"]`);
-          if (el) {
-            el.style.transition    = 'opacity .50s ease, transform .50s ease';
-            el.style.opacity       = '0';
-            el.style.transform     = 'scale(0.85)';
-            el.style.pointerEvents = 'none';
-          }
+          if (el) el.classList.add('encontrada');
         });
         _voltadas = [];
         _bloqueado = false;
