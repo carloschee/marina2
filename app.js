@@ -7,18 +7,18 @@
    ╚══════════════════════════════════════════════════════════╝
 */
 
-import { cargarConfig, cfg }             from './core/config.js';
+import { cargarConfig, cfg } from './core/config.js';
 import { registrarSW, onConexionChange } from './core/offline.js';
-import { toast, animarEntrada }          from './core/ui.js';
-import { Perfiles }                      from './core/perfiles.js';
-import { TTS }                           from './core/tts.js';
-import AudioManager                      from './core/audio.js';
-import MemoramaModule                    from './modules/memorama/module.js';
+import { toast, animarEntrada } from './core/ui.js';
+import { Perfiles } from './core/perfiles.js';
+import { TTS } from './core/tts.js';
+import AudioManager from './core/audio.js';
+import MemoramaModule from './modules/memorama/module.js';
 
 // ── Módulos de la app ─────────────────────────────────────────
-import AjustesModule  from './modules/ajustes/module.js';
-import MiraYDiModule  from './modules/mira-y-di/module.js';
-import FrasesModule   from './modules/frases/module.js';
+import AjustesModule from './modules/ajustes/module.js';
+import MiraYDiModule from './modules/mira-y-di/module.js';
+import FrasesModule from './modules/frases/module.js';
 
 const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule];
 
@@ -169,7 +169,7 @@ function _getContenedor(id) {
     const div = document.createElement('div');
     div.id = `modulo-contenedor-${id}`;
     div.style.cssText =
-      'position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden;';
+      'position:absolute;inset:0;display:none;overflow:hidden;';
     document.getElementById('app-body').appendChild(div);
     _contenedores[id] = div;
   }
@@ -276,7 +276,7 @@ async function navegarA(mod) {
   // Reanudar si estaba pausado
   if (_modulosPausados[mod.id] && mod.resume) {
     _moduloActivo = mod;
-    contenedor.style.display = 'flex';
+    contenedor.style.display = 'block';
     try { await mod.resume(contenedor); mod.onEnter?.(); animarEntrada(contenedor); } catch (e) {
       console.error('[App] Error al resumir', mod.id, e);
     }
@@ -292,7 +292,7 @@ async function navegarA(mod) {
 
   _moduloActivo = mod;
   contenedor.innerHTML = '';
-  contenedor.style.display = 'flex';
+  contenedor.style.display = 'block';
 
   try {
     await mod.init(contenedor);
