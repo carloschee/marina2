@@ -24,7 +24,7 @@ import { lanzarConfeti, haptic }  from '../../core/ui.js';
 import { Telemetry }              from '../../core/telemetry.js';
 
 const AUDIO_URL   = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
-const PICTO_URL   = (palabra, lang = 'es') => `assets/pictogramas/${lang}/${palabra}.png`;
+const PICTO_URL   = (palabra) => `assets/pictogramas/es/${palabra}.png`;
 const PARES       = 24;
 const FLIP_DELAY  = 1000;  // ms antes de voltear cartas no pareadas
 
@@ -195,15 +195,12 @@ function _render() {
       align-items: center; justify-content: center;
     }
 
-    /* Dorso — diseño marino */
+    /* Dorso — imagen assets/ui/dorso-memorama.png como patrón */
     .mm-carta-dorso {
-      background: linear-gradient(145deg, #0d5a8f 0%, #0a3d6b 100%);
+      background-image: url('assets/ui/dorso-memorama.png');
+      background-size: cover;
+      background-position: center;
       border: 1.5px solid rgba(14,165,201,0.30);
-    }
-    .mm-carta-dorso::before {
-      content: '🌊';
-      font-size: clamp(.9rem, 2.2vw, 1.4rem);
-      opacity: .55;
     }
 
     /* Frente */
@@ -243,19 +240,16 @@ function _render() {
     }
 
     .mm-par-descubierto {
-      flex-shrink: 0; display: flex; align-items: center; gap: 5px;
-      padding: 4px 10px 4px 6px; border-radius: 99px;
-      background: rgba(34,197,94,0.18); border: 1px solid rgba(34,197,94,0.35);
-      cursor: pointer; transition: background .15s, transform .12s;
+      flex-shrink: 0;
+      width: 52px; height: 52px; border-radius: 12px;
+      background: #fff; border: 2px solid rgba(34,197,94,0.50);
+      cursor: pointer; transition: transform .12s, box-shadow .15s;
+      overflow: hidden; padding: 3px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .mm-par-descubierto:active { transform: scale(.93); background: rgba(34,197,94,0.30); }
+    .mm-par-descubierto:active { transform: scale(.90); }
     .mm-par-descubierto img {
-      width: 36px; height: 36px; object-fit: contain; border-radius: 6px;
-      background: #fff; padding: 2px;
-    }
-    .mm-par-descubierto span {
-      font-size: .78rem; font-weight: 800; color: #fff;
-      white-space: nowrap; text-shadow: 0 1px 4px rgba(0,0,0,.5);
+      width: 100%; height: 100%; object-fit: contain; border-radius: 8px;
     }
 
     /* ── Modal selector de tema ── */
@@ -431,7 +425,7 @@ function _dibujarTablero() {
       <div class="mm-carta-inner">
         <div class="mm-carta-dorso"></div>
         <div class="mm-carta-frente">
-          <img src="${PICTO_URL(carta.palabra, _lang)}"
+          <img src="${PICTO_URL(carta.palabra)}"
                alt="${carta.palabra}"
                onerror="this.style.display='none'">
           <span>${carta.palabra}</span>
@@ -466,11 +460,21 @@ function _tocarCarta(idx) {
     if (c1.id === c2.id) {
       // ── Par encontrado ────────────────────────────────────────
       setTimeout(() => {
-        // Tono de victoria después del nombre de la 2ª carta
         _tonoVictoria();
         c1.descubierta = c2.descubierta = true;
         _descubiertas.add(i1); _descubiertas.add(i2);
-        _actualizarCarta(i1); _actualizarCarta(i2);
+
+        // Desvanecer las cartas del tablero
+        [i1, i2].forEach(i => {
+          const elCarta = _el.querySelector(`.mm-carta[data-idx="${i}"]`);
+          if (elCarta) {
+            elCarta.style.transition = 'opacity .50s ease, transform .50s ease';
+            elCarta.style.opacity    = '0';
+            elCarta.style.transform  = 'scale(0.85)';
+            elCarta.style.pointerEvents = 'none';
+          }
+        });
+
         _voltadas = [];
         _bloqueado = false;
         _actualizarContador();
@@ -500,8 +504,8 @@ function _actualizarCarta(idx) {
   const el    = _el.querySelector(`.mm-carta[data-idx="${idx}"]`);
   const carta = _cartas[idx];
   if (!el) return;
-  el.classList.toggle('volteada',    carta.volteada || carta.descubierta);
-  el.classList.toggle('descubierta', carta.descubierta);
+  if (carta.descubierta) return; // ya manejado con fade en _tocarCarta
+  el.classList.toggle('volteada', carta.volteada);
 }
 
 // ─── Contador ─────────────────────────────────────────────────────────────────
@@ -532,9 +536,8 @@ function _actualizarTira() {
     const chip = document.createElement('div');
     chip.className = 'mm-par-descubierto';
     chip.innerHTML = `
-      <img src="${PICTO_URL(palabra, _lang)}" alt="${palabra}"
-           onerror="this.style.display='none'">
-      <span>${palabra}</span>`;
+      <img src="${PICTO_URL(palabra)}" alt="${palabra}"
+           onerror="this.style.opacity='0'">`;
     chip.addEventListener('click', () => {
       haptic(6);
       _reproducirNombre(palabra);
@@ -648,11 +651,7 @@ function _onLangChange(e) {
   const nuevoLang = e.detail?.lang;
   if (!nuevoLang || nuevoLang === _lang) return;
   _lang = nuevoLang;
-  // Redibujar cartas y tira con el nuevo idioma
-  if (_temaActivo) {
-    _dibujarTablero();
-    _actualizarTira();
-  }
+  // Solo cambia el idioma del audio — pictos siempre en español
 }
 
 // ─── Utilidades ───────────────────────────────────────────────────────────────
