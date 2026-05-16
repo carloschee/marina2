@@ -123,9 +123,9 @@ export async function resume(container) {
       }
     });
 
-    // Si la partida estaba terminada, mostrar victoria
+    // Si la partida estaba terminada, lanzar confeti de nuevo
     if (_descubiertas.size === _cartas.length && _cartas.length > 0) {
-      _el.querySelector('#mm-victoria').classList.add('visible');
+      lanzarConfeti({ count: 120, container: _el });
     }
   }
 
@@ -339,31 +339,7 @@ function _render() {
     }
     .mm-tema-btn-emoji { font-size: 1.8rem; }
 
-    /* ── Pantalla de victoria ── */
-    #mm-victoria {
-      display: none;
-      position: fixed; inset: 0;     /* fixed para cubrir toda la pantalla */
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 24px; z-index: 9000;
-      background: rgba(2,20,50,0.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    #mm-victoria.visible { display: flex; }
-    #mm-victoria h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #fff;
-      text-shadow: 0 4px 20px rgba(0,194,255,0.60);
-      text-align: center; padding: 0 24px;
-    }
-    #mm-victoria button {
-      padding: 20px 48px; border-radius: 99px; border: none;
-      background: #00c2ff; color: #032340;
-      font-family: inherit; font-weight: 900; font-size: 1.3rem;
-      cursor: pointer; transition: transform .12s;
-      box-shadow: 0 8px 32px rgba(0,194,255,0.45);
-    }
-    #mm-victoria button:active { transform: scale(.94); }
+
 
     @keyframes mm-pop {
       from { transform: scale(0.7); opacity: 0; }
@@ -402,12 +378,7 @@ function _render() {
     </div>
   </div>
 
-  <!-- Victoria -->
-  <div id="mm-victoria">
-    <div style="font-size:4rem">🎉</div>
-    <h2>¡Encontraste todos los pares!</h2>
-    <button id="mm-btn-jugar-de-nuevo">Jugar de nuevo</button>
-  </div>
+
   `;
 
   _bindEvents();
@@ -587,8 +558,8 @@ function _actualizarTira() {
 
 // ─── Victoria ─────────────────────────────────────────────────────────────────
 function _mostrarVictoria() {
-  lanzarConfeti({ count: 100, container: _el });
-  _el.querySelector('#mm-victoria').classList.add('visible');
+  lanzarConfeti({ count: 120, container: _el });
+  toast('¡Encontraste todos los pares! 🎉', { duracion: 4000, emoji: '' });
 
   Telemetry.track('memorama_completado', {
     _modulo: 'memorama', tema: _temaActivo?.id
@@ -651,10 +622,6 @@ function _bindEvents() {
     if (e.target === _el.querySelector('#mm-modal')) _cerrarModal();
   });
   _el.querySelector('#mm-btn-reiniciar').addEventListener('click', () => {
-    haptic(10);
-    if (_temaActivo) _iniciarTema(_temaActivo);
-  });
-  _el.querySelector('#mm-btn-jugar-de-nuevo').addEventListener('click', () => {
     haptic(10);
     if (_temaActivo) _iniciarTema(_temaActivo);
   });
