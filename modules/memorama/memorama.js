@@ -280,19 +280,23 @@ function _render() {
 
     /* ── Modal selector de tema ── */
     #mm-modal {
-      position: absolute; inset: 0;
+      position: fixed; inset: 0;     /* fixed para cubrir toda la pantalla */
       background: rgba(2,20,50,0.82);
       display: none; align-items: center; justify-content: center;
-      z-index: 100; backdrop-filter: blur(16px);
+      z-index: 9000; backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
     #mm-modal.visible { display: flex; }
     .mm-modal-box {
-      background: rgba(255,255,255,0.10);
+      background: rgba(13,40,70,0.96);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1.5px solid rgba(255,255,255,0.20);
       border-radius: 28px; padding: 24px;
       width: 88%; max-width: 640px;
-      max-height: 80vh; overflow-y: auto;
+      max-height: 85dvh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .mm-modal-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -338,9 +342,9 @@ function _render() {
     /* ── Pantalla de victoria ── */
     #mm-victoria {
       display: none;
-      position: absolute; inset: 0;   /* cubre todo el contenedor del módulo */
+      position: fixed; inset: 0;     /* fixed para cubrir toda la pantalla */
       flex-direction: column; align-items: center; justify-content: center;
-      gap: 24px; z-index: 200;        /* por encima de todo */
+      gap: 24px; z-index: 9000;
       background: rgba(2,20,50,0.82);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
