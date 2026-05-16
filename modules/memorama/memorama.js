@@ -102,7 +102,33 @@ export async function resume(container) {
   _el = container;
   _lang = window._langActivo || 'es';
   _render();
-  if (_temaActivo) _dibujarTablero();
+
+  // Restaurar estado completo de la partida
+  if (_temaActivo) {
+    // Actualizar header
+    _el.querySelector('#mm-tema-emoji').textContent = _temaActivo.emoji;
+    _el.querySelector('#mm-tema-label').textContent = _temaActivo.label;
+    _actualizarContador();
+    _dibujarTablero();
+    _actualizarTira();
+    _renderModalTemas();
+
+    // Re-aplicar estado visual de cartas descubiertas (fade)
+    [..._descubiertas].forEach(i => {
+      const el = _el.querySelector(`.mm-carta[data-idx="${i}"]`);
+      if (el) {
+        el.style.opacity      = '0';
+        el.style.transform    = 'scale(0.85)';
+        el.style.pointerEvents = 'none';
+      }
+    });
+
+    // Si la partida estaba terminada, mostrar victoria
+    if (_descubiertas.size === _cartas.length && _cartas.length > 0) {
+      _el.querySelector('#mm-victoria').classList.add('visible');
+    }
+  }
+
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }

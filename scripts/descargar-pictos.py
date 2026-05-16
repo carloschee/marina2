@@ -150,26 +150,38 @@ async def descargar_picto(
         return 'descargado'
 
     img_url = f"{IMG_BASE}/{pid}/{pid}_{IMG_SIZE}.png"
+    ultimo_error = "sin respuesta"
     for intento in range(1, REINTENTOS + 1):
         try:
             async with session.get(img_url, timeout=aiohttp.ClientTimeout(total=20)) as r:
                 if r.status == 200:
                     data = await r.read()
-                    ruta.write_bytes(data)
-                    progreso.avanzar()
-                    return 'descargado'
+                    if len(data) < 500:
+                        # Imagen demasiado pequeña — probablemente placeholder de error
+                        ultimo_error = f"imagen inválida ({len(data)} bytes)"
+                    else:
+                        ruta.write_bytes(data)
+                        progreso.avanzar()
+                        return 'descargado'
+                else:
+                    ultimo_error = f"HTTP {r.status}"
+        except asyncio.TimeoutError:
+            ultimo_error = "timeout"
         except Exception as e:
-            if intento == REINTENTOS:
-                errores_log.append({
-                    "origen":  origen,
-                    "palabra": palabra,
-                    "id":      pid,
-                    "error":   str(e),
-                    "ts":      datetime.now().isoformat(timespec="seconds"),
-                })
+            ultimo_error = str(e)
+
         if intento < REINTENTOS:
             await asyncio.sleep(BACKOFF * (2 ** (intento - 1)))
 
+    # Todos los intentos fallaron — registrar en log
+    errores_log.append({
+        "origen":  origen,
+        "palabra": palabra,
+        "id":      pid,
+        "url":     img_url,
+        "error":   ultimo_error,
+        "ts":      datetime.now().isoformat(timespec="seconds"),
+    })
     progreso.avanzar()
     return 'error'
 
@@ -262,15 +274,41 @@ def escribir_log(errores_log: list):
     if not errores_log:
         return
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().isoformat(timespec="seconds")
+
+    # ── Log de texto (legible en consola) ────────────────────────────────────
     with open(LOG_PATH, "a", encoding="utf-8") as f:
-        f.write(f"\n── Ejecución {datetime.now().isoformat(timespec='seconds')} ──\n")
+        f.write(f"\n── Ejecución {ts} ──\n")
         for e in errores_log:
             origen = e.get('origen', '?')
             linea  = f"  {origen} → {e['palabra']}"
-            if "id" in e: linea += f" (id:{e['id']})"
-            linea += f" → {e['error']}\n"
+            if e.get('id'):  linea += f" (id:{e['id']})"
+            linea += f" → {e['error']}"
+            if e.get('url'): linea += f"\n    url: {e['url']}"
+            linea += "\n"
             f.write(linea)
-    print(f"📋  Log de errores: scripts/errores-pictos.log")
+
+    # ── TSV (abrir con Excel / Google Sheets) ────────────────────────────────
+    tsv_path   = LOG_PATH.with_suffix('.tsv')
+    hay_header = tsv_path.exists() and tsv_path.stat().st_size > 0
+
+    with open(tsv_path, "a", encoding="utf-8-sig", newline="") as f:
+        # utf-8-sig = BOM para que Excel lo detecte como UTF-8 automáticamente
+        if not hay_header:
+            f.write("ejecucion\torigen\tpalabra\tid_arasaac\terror\turl\n")
+        for e in errores_log:
+            fila = "\t".join([
+                ts,
+                e.get('origen',  ''),
+                e.get('palabra', ''),
+                str(e.get('id',  '') or ''),
+                e.get('error',   ''),
+                e.get('url',     ''),
+            ])
+            f.write(fila + "\n")
+
+    print(f"📋  Log texto : scripts/errores-pictos.log")
+    print(f"📊  Log TSV   : scripts/errores-pictos.tsv  (abrir con Excel)")
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
