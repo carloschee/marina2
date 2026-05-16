@@ -189,12 +189,14 @@ function _render() {
   }
 
   #mm-tira-wrap {
-    flex-shrink:0; height:76px;
+    flex-shrink:0;
+    height:76px; min-height:76px; max-height:76px;
     padding:4px 12px 8px;
     overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
     -webkit-overflow-scrolling:touch;
     display:flex; align-items:center; gap:8px;
     background:rgba(0,0,0,0.25); border-top:1px solid rgba(255,255,255,0.08);
+    box-sizing:border-box;
   }
   #mm-tira-wrap::-webkit-scrollbar { display:none; }
   #mm-tira-placeholder {
