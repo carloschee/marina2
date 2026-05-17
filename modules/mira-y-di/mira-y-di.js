@@ -24,6 +24,7 @@ let _lang = 'es';
 let _letra = null;
 let _lista = [];
 let _idx = 0;
+let _pictos = {};
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
@@ -34,6 +35,15 @@ export async function init(container) {
   try {
     const res = await fetch('./data/vocabulario.json');
     _vocab = await res.json();
+    // DESPUÉS de cargar vocabulario.json, agregar:
+    let _pictos = {};  // lookup id → entrada del catálogo
+    try {
+      const res2 = await fetch('./data/pictos.json');
+      const catalogo = await res2.json();
+      _pictos = Object.fromEntries(catalogo.map(e => [e.id, e]));
+    } catch (e) {
+      console.warn('[mira-y-di] No se pudo cargar pictos.json, usando modo legacy');
+    }
   } catch (e) {
     console.error('[mira-y-di] No se pudo cargar vocabulario.json', e);
     _vocab = {};
@@ -302,36 +312,52 @@ function _seleccionarLetra(letra) {
 }
 
 function _construirLista() {
-  _lista = _shuffle([...(_vocab[_letra]?.[_lang] || [])]);
+  const ids = _vocab[_letra]?.[_lang] || [];
+  _lista = _shuffle(ids.map(item => {
+    if (typeof item === 'number') {
+      // Nuevo modo — lookup al catálogo
+      const entrada = _pictos[item];
+      if (!entrada) return null;
+      return {
+        picto: _lang === 'en' ? entrada.archivo_en.replace('.png', '') : entrada.archivo_es.replace('.png', ''),
+        texto: _lang === 'en' ? (entrada.tts_en || entrada.tts_es) : entrada.tts_es,
+        lang: _lang,
+      };
+    }
+    // Legacy — string directo
+    return { picto: item, texto: item, lang: _lang };
+  }).filter(Boolean));
   _idx = 0;
 }
 
 // ─── Cambio de idioma desde pill global ───────────────────────────────────────
 function _onLangChange(e) {
-     const cfg = e.detail?.langConfig;
-     if (!cfg) return;
-     // En mira-y-di el idioma de los pictogramas y palabras mostradas
-     // sigue siendo fijo (es o en), solo el AUDIO usa getLang() aleatoriamente.
-     // No hay nada que actualizar en la UI — el audio se resuelve en el momento.
-   }
+  const cfg = e.detail?.langConfig;
+  if (!cfg) return;
+  // En mira-y-di el idioma de los pictogramas y palabras mostradas
+  // sigue siendo fijo (es o en), solo el AUDIO usa getLang() aleatoriamente.
+  // No hay nada que actualizar en la UI — el audio se resuelve en el momento.
+}
 
 // ─── Vista ────────────────────────────────────────────────────────────────────
 function _actualizarVista() {
-  const main = _el.querySelector('#md-main');
+  const main  = _el.querySelector('#md-main');
   const vacio = _el.querySelector('#md-vacio');
 
   _mejorScore = 0;
   _actualizarBarra(0, '…');
 
   if (!_lista.length) {
-    main.style.display = 'none';
+    main.style.display  = 'none';
     vacio.style.display = 'flex';
     return;
   }
-  main.style.display = 'grid';
+  main.style.display  = 'grid';
   vacio.style.display = 'none';
 
-  const palabra = _lista[_idx];
+  const item  = _lista[_idx];
+  const picto = item.picto || item;
+  const texto = item.texto || item;
   const color = COLORES[_letra] || '#0ea5c9';
 
   _el.querySelector('#md-card').style.background = color;
@@ -339,14 +365,14 @@ function _actualizarVista() {
 
   const img = _el.querySelector('#md-picto');
   img.classList.add('cargando');
-  img.alt = palabra;
-  img.src = pictoURL(palabra, _lang);
-  img.onload = () => img.classList.remove('cargando');
+  img.alt = texto;
+  img.src = pictoURL(picto, _lang);
+  img.onload  = () => img.classList.remove('cargando');
   img.onerror = () => img.classList.remove('cargando');
 
   _el.querySelector('#md-meta').textContent =
     `${_idx + 1} · ${_lista.length} · ${_lang === 'es' ? 'ESPAÑOL' : 'INGLÉS'}`;
-  _el.querySelector('#md-palabra').textContent = palabra;
+  _el.querySelector('#md-palabra').textContent = texto;
 
   _renderDots();
 }
@@ -374,9 +400,13 @@ function _bindEvents() {
     _actualizarVista();
   });
   _el.querySelector('#md-btn-escucha').addEventListener('click', () => {
-    haptic(15);
-    if (_lista.length) _hablar(_lista[_idx], window.getLang?.() === 'en' ? 'en-US' : 'es-MX');
-  });
+  haptic(15);
+  if (_lista.length) {
+    const item  = _lista[_idx];
+    const texto = item.texto || item;
+    _hablar(texto, window.getLang?.() === 'en' ? 'en-US' : 'es-MX');
+  }
+});
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
 }
 
