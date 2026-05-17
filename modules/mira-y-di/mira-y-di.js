@@ -313,6 +313,8 @@ function _seleccionarLetra(letra) {
 
 function _construirLista() {
   const ids = _vocab[_letra]?.[_lang] || [];
+  console.log('[mira-y-di] ids:', ids.slice(0,3));
+  console.log('[mira-y-di] _pictos keys:', Object.keys(_pictos).slice(0,3));
   _lista = _shuffle(ids.map(item => {
     if (typeof item === 'number') {
       // Nuevo modo — lookup al catálogo
