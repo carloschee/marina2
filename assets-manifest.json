@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-17T07:46:07.656Z",
-  "totalAssets": 1330,
+  "generado": "2026-05-17T08:07:06.565Z",
+  "totalAssets": 1332,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -949,6 +949,7 @@
     "./assets/pictogramas/es/cascada.png",
     "./assets/pictogramas/es/cebra.png",
     "./assets/pictogramas/es/ceja.png",
+    "./assets/pictogramas/es/celoso.png",
     "./assets/pictogramas/es/cerca.png",
     "./assets/pictogramas/es/cereza.png",
     "./assets/pictogramas/es/cerrado.png",
@@ -1033,6 +1034,7 @@
     "./assets/pictogramas/es/frambuesa.png",
     "./assets/pictogramas/es/fresa.png",
     "./assets/pictogramas/es/frijoles.png",
+    "./assets/pictogramas/es/frustrado.png",
     "./assets/pictogramas/es/fruta.png",
     "./assets/pictogramas/es/frío.png",
     "./assets/pictogramas/es/fuego.png",
