@@ -343,33 +343,13 @@ function _renderNiveles() {
   wrap.appendChild(label);
 
   // Solo mostrar niveles que tienen frases en el idioma activo
-  const ttsLang = (window.getLang?.() === 'en') ? 'en-US' : 'es-MX';
-  _todasFrases.some(f => {
-    if (f.nivel !== n.id) return false;
-    if (_lang === 'ambos') return true;
-    return (f.lang || 'es') === _lang;
-  });
-
-  // Si el nivel activo no tiene frases en este idioma, cambiar al primero disponible
-  if (nivelesConFrases.length && !nivelesConFrases.find(n => n.id === _nivel)) {
-    _nivel = nivelesConFrases[0].id;
-  }
-
-  nivelesConFrases.forEach(n => {
-    const btn = document.createElement('button');
-    btn.className = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
-    btn.textContent = n.label + ' ' + n.titulo;
-    btn.title = n.titulo;
-    if (n.id === _nivel) {
-      btn.style.borderColor = n.color;
-      btn.style.color = n.color;
-      btn.style.background = n.colorSuave;
-      btn.style.boxShadow = `0 0 0 1px ${n.colorBorde}`;
-    }
-    btn.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
-    wrap.appendChild(btn);
-  });
-}
+  const nivelesConFrases = NIVELES.filter(n =>
+    _todasFrases.some(f => {
+      if (f.nivel !== n.id) return false;
+      if (_lang === 'ambos') return true;
+      return (f.lang || 'es') === _lang;
+    })
+  );
 
 function _cambiarNivel(nivel) {
   _nivel = nivel;
@@ -690,7 +670,7 @@ function _reproducirCadena(piezas) {
 }
 
 function _hablarTTS(texto) {
-  const ttsLang = _lang === 'en' ? 'en-US' : 'es-MX';
+  const ttsLang = (window.getLang?.() === 'en') ? 'en-US' : 'es-MX';
   TTS.speak(texto, { lang: ttsLang, rate: 0.90, pitch: 1.15 });
 }
 
