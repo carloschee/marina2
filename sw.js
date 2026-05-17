@@ -8,7 +8,7 @@
 //   Navegación                        → Network-first, timeout 3s, fallback index.html
 //   Todo lo demás                     → Stale-while-revalidate
 
-const CACHE_VERSION   = 'marina2-v1-2026-05-14';
+const CACHE_VERSION = 'marina2-v2-2026-05-17';
 const AUDIO_QUOTA_MIN = 50 * 1024 * 1024; // 50 MB mínimo libre para audio
 const NAV_TIMEOUT_MS  = 3000;
 
