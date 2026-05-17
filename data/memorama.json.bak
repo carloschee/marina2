@@ -1,0 +1,135 @@
+[
+  {
+    "id": "animales",
+    "label": "Animales",
+    "emoji": "🐾",
+    "tipo": "vocabulario",
+    "palabras": [
+      "perro", "gato", "pájaro", "pez", "conejo", "caballo", "vaca", "oveja",
+      "elefante", "león", "tigre", "oso", "mono", "jirafa", "delfín", "mariposa",
+      "rana", "tortuga", "serpiente", "águila", "ballena", "pulpo", "araña", "abeja"
+    ]
+  },
+  {
+    "id": "frutas",
+    "label": "Frutas",
+    "emoji": "🍎",
+    "tipo": "vocabulario",
+    "palabras": [
+      "manzana", "naranja", "sandía", "uva", "fresa", "piña", "mango", "pera",
+      "limón", "plátano", "melón", "cereza", "kiwi", "durazno", "frambuesa", "mora",
+      "coco", "papaya", "guayaba", "maracuyá", "higo", "ciruela", "mandarina", "aguacate"
+    ]
+  },
+  {
+    "id": "transportes",
+    "label": "Transportes",
+    "emoji": "🚗",
+    "tipo": "vocabulario",
+    "palabras": [
+      "coche", "autobús", "tren", "avión", "barco", "bicicleta", "moto", "camión",
+      "helicóptero", "submarino", "cohete", "globo aerostático", "taxi", "ambulancia",
+      "bomberos", "patrulla", "tractor", "excavadora", "patineta", "canoa",
+      "velero", "tranvía", "metro", "teleférico"
+    ]
+  },
+  {
+    "id": "alimentos",
+    "label": "Alimentos",
+    "emoji": "🍕",
+    "tipo": "vocabulario",
+    "palabras": [
+      "pan", "leche", "huevo", "queso", "pizza", "sopa", "arroz", "pasta",
+      "ensalada", "hamburguesa", "sandwich", "yogur", "galleta", "pastel", "helado", "chocolate",
+      "zanahoria", "tomate", "brócoli", "maíz", "frijoles", "pollo", "pescado", "jamón"
+    ]
+  },
+  {
+    "id": "ropa",
+    "label": "Ropa",
+    "emoji": "👕",
+    "tipo": "vocabulario",
+    "palabras": [
+      "camiseta", "pantalón", "vestido", "falda", "zapatos", "botas", "calcetines", "gorra",
+      "abrigo", "bufanda", "guantes", "pijama", "shorts", "chaleco", "sudadera", "sombrero",
+      "cinturón", "mochila", "bolsa", "sandalias", "tenis", "corbata", "delantal", "bañador"
+    ]
+  },
+  {
+    "id": "colores",
+    "label": "Colores",
+    "emoji": "🎨",
+    "tipo": "vocabulario",
+    "palabras": [
+      "rojo", "azul", "amarillo", "verde", "naranja", "morado", "rosa", "marrón",
+      "negro", "blanco", "gris", "turquesa", "dorado", "plateado", "beige", "violeta",
+      "celeste", "magenta", "oliva", "coral", "índigo", "fucsia", "lima", "ocre"
+    ]
+  },
+  {
+    "id": "verbos",
+    "label": "Verbos",
+    "emoji": "🏃",
+    "tipo": "lenguaje",
+    "palabras": [
+      "correr", "saltar", "comer", "beber", "dormir", "jugar", "cantar", "bailar",
+      "leer", "dibujar", "pintar", "escribir", "llorar", "reír", "abrazar", "besar",
+      "caminar", "nadar", "volar", "trepar", "empujar", "jalar", "abrir", "cerrar"
+    ]
+  },
+  {
+    "id": "emociones",
+    "label": "Emociones",
+    "emoji": "😊",
+    "tipo": "lenguaje",
+    "palabras": [
+      "feliz", "triste", "enojado", "asustado", "sorprendido", "aburrido", "emocionado", "tranquilo",
+      "cansado", "contento", "nervioso", "orgulloso", "celoso", "avergonzado", "confundido", "enamorado",
+      "asqueado", "frustrado", "esperanzado", "solitario", "agradecido", "curioso", "valiente", "tímido"
+    ]
+  },
+  {
+    "id": "adjetivos",
+    "label": "Adjetivos",
+    "emoji": "✨",
+    "tipo": "lenguaje",
+    "palabras": [
+      "grande", "pequeño", "rápido", "lento", "caliente", "frío", "suave", "duro",
+      "limpio", "sucio", "nuevo", "viejo", "bonito", "feo", "fuerte", "débil",
+      "alto", "bajo", "gordo", "delgado", "dulce", "amargo", "brillante", "oscuro"
+    ]
+  },
+  {
+    "id": "cuerpo",
+    "label": "Cuerpo",
+    "emoji": "🫁",
+    "tipo": "vocabulario",
+    "palabras": [
+      "cabeza", "pelo", "ojo", "nariz", "boca", "oreja", "cuello", "hombro",
+      "brazo", "mano", "dedo", "pecho", "barriga", "espalda", "pierna", "rodilla",
+      "pie", "talón", "uña", "ceja", "mejilla", "barbilla", "codo", "muñeca"
+    ]
+  },
+  {
+    "id": "naturaleza",
+    "label": "Naturaleza",
+    "emoji": "🌿",
+    "tipo": "vocabulario",
+    "palabras": [
+      "árbol", "flor", "sol", "luna", "estrella", "nube", "lluvia", "nieve",
+      "río", "mar", "montaña", "volcán", "desierto", "bosque", "piedra", "arena",
+      "hoja", "semilla", "raíz", "rama", "hierba", "musgo", "roca", "cascada"
+    ]
+  },
+  {
+    "id": "opuestos",
+    "label": "Opuestos",
+    "emoji": "↔️",
+    "tipo": "lenguaje",
+    "palabras": [
+      "arriba", "abajo", "dentro", "fuera", "antes", "después", "cerca", "lejos",
+      "encima", "debajo", "delante", "detrás", "izquierda", "derecha", "día", "noche",
+      "entrada", "salida", "inicio", "fin", "abierto", "cerrado", "lleno", "vacío"
+    ]
+  }
+]

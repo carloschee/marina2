@@ -56,6 +56,7 @@ RAIZ          = Path(__file__).parent.parent
 VOCAB_JSON    = RAIZ / "data" / "vocabulario.json"
 FRASES_JSON   = RAIZ / "data" / "frases.json"
 MEMORAMA_JSON = RAIZ / "data" / "memorama.json"
+PICTOS_JSON   = RAIZ / "data" / "pictos.json"
 DIR_AUDIO     = RAIZ / "assets" / "audio"
 DIR_ES        = DIR_AUDIO / "es"
 DIR_EN        = DIR_AUDIO / "en"
@@ -224,28 +225,37 @@ async def main():
     palabras_es, palabras_en = [], []
 
     if not modo_solo_frases:
-        if not VOCAB_JSON.exists():
-            print(f"❌  No se encontró {VOCAB_JSON}"); sys.exit(1)
-        with open(VOCAB_JSON, encoding="utf-8") as f:
-            vocab = json.load(f)
-        es_set, en_set = set(), set()
-        for _, contenido in vocab.items():
-            for p in contenido.get("es", []):
-                if p.strip(): es_set.add(p.strip())
-            for p in contenido.get("en", []):
-                if p.strip(): en_set.add(p.strip())
-        # Agregar palabras de memorama que no estén ya en el vocabulario
-        if MEMORAMA_JSON.exists():
-            with open(MEMORAMA_JSON, encoding="utf-8") as f:
-                temas_mem = json.load(f)
-            for tema in temas_mem:
-                for p in tema.get("palabras", []):
-                    if p.strip(): es_set.add(p.strip())
+        if PICTOS_JSON.exists():
+            with open(PICTOS_JSON, encoding="utf-8") as f:
+                catalogo = json.load(f)
+            palabras_es = [
+                (e["archivo_es"].replace(".png",""), e["tts_es"])
+                for e in catalogo if e.get("archivo_es") and e.get("tts_es")
+            ]
+            palabras_en = [
+                (e["archivo_en"].replace(".png",""), e["tts_en"])
+                for e in catalogo if e.get("archivo_en") and e.get("tts_en")
+            ]
         else:
-            print(f"\u26a0\ufe0f  {MEMORAMA_JSON} no encontrado \u2014 se omiten palabras de memorama")
-
-        palabras_es = [(p, p) for p in sorted(es_set)]
-        palabras_en = [(p, p) for p in sorted(en_set)]
+            if not VOCAB_JSON.exists():
+                print(f"❌  No se encontró {VOCAB_JSON}"); sys.exit(1)
+            with open(VOCAB_JSON, encoding="utf-8") as f:
+                vocab = json.load(f)
+            es_set, en_set = set(), set()
+            for _, contenido in vocab.items():
+                for p in contenido.get("es", []):
+                    if isinstance(p, str) and p.strip(): es_set.add(p.strip())
+                for p in contenido.get("en", []):
+                    if isinstance(p, str) and p.strip(): en_set.add(p.strip())
+            if MEMORAMA_JSON.exists():
+                with open(MEMORAMA_JSON, encoding="utf-8") as f:
+                    temas_mem = json.load(f)
+                for tema in temas_mem:
+                    for p in tema.get("palabras", []):
+                        if isinstance(p, str) and p.strip(): es_set.add(p.strip())
+                        elif isinstance(p, dict) and p.get("es"): es_set.add(p["es"].strip())
+            palabras_es = [(p, p) for p in sorted(es_set)]
+            palabras_en = [(p, p) for p in sorted(en_set)]
 
     # ── Frases ───────────────────────────────────────────────────────────────
     frases_es_items = []
@@ -287,25 +297,53 @@ async def main():
                 ref_set_picto  = piezas_picto_en if lang == "en" else piezas_picto_es
                 ref_dir_audio  = DIR_EN          if lang == "en" else DIR_ES
 
-                for pieza in frase.get("piezas", []):
-                    pt = pieza.get("texto", "").strip()
-                    if not pt: continue
+                # Construir lookup de catálogo para resolver picto_id → texto
+                catalogo_lookup = {}
+                if PICTOS_JSON.exists():
+                    with open(PICTOS_JSON, encoding="utf-8") as f:
+                        cat = json.load(f)
+                    catalogo_lookup = {e["id"]: e for e in cat}
 
+                for pieza in frase.get("piezas", []):
                     if pieza.get("tipo") == "texto":
-                        # Piezas texto: siempre en frases/{lang}/
-                        if pt not in ref_vocab:
+                        pt = pieza.get("texto", "").strip()
+                        if pt and pt not in ref_vocab:
                             ref_set_txt.add(pt)
 
                     elif pieza.get("tipo") == "picto":
-                        # Piezas picto: van en assets/audio/{lang}/ si no existe el MP3
-                        ruta_mp3 = ref_dir_audio / (pt + ".mp3")
-                        if not ruta_mp3.exists() or ruta_mp3.stat().st_size == 0:
-                            ref_set_picto.add(pt)
+                        # Con catálogo: resolver picto_id → nombre y tts
+                        pid = pieza.get("picto_id")
+                        if pid and catalogo_lookup:
+                            entrada = catalogo_lookup.get(pid)
+                            if entrada:
+                                nombre = entrada["archivo_es" if lang != "en" else "archivo_en"].replace(".png","")
+                                tts    = entrada["tts_es"    if lang != "en" else "tts_en"]
+                                ruta_mp3 = ref_dir_audio / (nombre + ".mp3")
+                                if not ruta_mp3.exists() or ruta_mp3.stat().st_size == 0:
+                                    ref_set_picto.add((nombre, tts))
+                        else:
+                            # Legacy: usar texto directamente
+                            pt = pieza.get("texto", "").strip()
+                            if pt:
+                                ruta_mp3 = ref_dir_audio / (pt + ".mp3")
+                                if not ruta_mp3.exists() or ruta_mp3.stat().st_size == 0:
+                                    ref_set_picto.add(pt)
 
     piezas_es_items       = [(p, p) for p in sorted(piezas_texto_es)]
     piezas_en_items       = [(p, p) for p in sorted(piezas_texto_en)]
-    piezas_picto_es_items = [(p, p) for p in sorted(piezas_picto_es)] if 'piezas_picto_es' in dir() else []
-    piezas_picto_en_items = [(p, p) for p in sorted(piezas_picto_en)] if 'piezas_picto_en' in dir() else []
+
+    def _normalizar_pictos(s):
+        # Las piezas picto pueden ser strings (legacy) o tuplas (nombre, tts)
+        resultado = []
+        for p in sorted(s, key=lambda x: x[0] if isinstance(x, tuple) else x):
+            if isinstance(p, tuple):
+                resultado.append(p)
+            else:
+                resultado.append((p, p))
+        return resultado
+
+    piezas_picto_es_items = _normalizar_pictos(piezas_picto_es) if 'piezas_picto_es' in dir() else []
+    piezas_picto_en_items = _normalizar_pictos(piezas_picto_en) if 'piezas_picto_en' in dir() else []
 
     # ── Resumen inicial ───────────────────────────────────────────────────────
     total_archivos = sum([

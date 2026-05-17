@@ -42,7 +42,7 @@ except ImportError:
 # ─── Configuración ────────────────────────────────────────────────────────────
 
 API_BASE    = "https://api.arasaac.org/api"
-IMG_BASE    = "https://static.arasaac.org/images/arasaac"
+IMG_BASE    = "https://static.arasaac.org/pictograms"
 LANG_BUSQ   = "es"       # idioma de búsqueda — siempre español para Marina 2
 IMG_SIZE    = 500         # tamaño de imagen (300 o 500)
 
@@ -53,6 +53,7 @@ RAIZ          = Path(__file__).parent.parent
 VOCAB_JSON    = RAIZ / "data" / "vocabulario.json"
 FRASES_JSON   = RAIZ / "data" / "frases.json"
 MEMORAMA_JSON = RAIZ / "data" / "memorama.json"
+PICTOS_JSON   = RAIZ / "data" / "pictos.json"
 DIR_PICTOS    = RAIZ / "assets" / "pictogramas" / "es"
 LOG_PATH      = RAIZ / "scripts" / "errores-pictos.log"
 
@@ -89,12 +90,15 @@ class Progreso:
 
 # ─── API ARASAAC ──────────────────────────────────────────────────────────────
 
-async def buscar_id(session: aiohttp.ClientSession, palabra: str) -> int | None:
+async def buscar_id(session: aiohttp.ClientSession, palabra: str, lang: str = 'es') -> int | None:
     """Busca el _id ARASAAC de una palabra. Retorna el id del primer resultado o None."""
-    if palabra in _cache_ids:
-        return _cache_ids[palabra]
+    cache_key = f"{lang}:{palabra}"
+    if cache_key in _cache_ids:
+        return _cache_ids[cache_key]
 
-    url = f"{API_BASE}/pictograms/{LANG_BUSQ}/search/{quote(palabra)}"
+    # ARASAAC soporta búsqueda en múltiples idiomas
+    lang_api = lang if lang in ('es', 'en', 'fr', 'de', 'it', 'pt') else 'es'
+    url = f"{API_BASE}/pictograms/{lang_api}/search/{quote(palabra)}"
     for intento in range(1, REINTENTOS + 1):
         try:
             async with session.get(url, timeout=aiohttp.ClientTimeout(total=10)) as r:
@@ -102,17 +106,17 @@ async def buscar_id(session: aiohttp.ClientSession, palabra: str) -> int | None:
                     data = await r.json(content_type=None)
                     if data and isinstance(data, list):
                         pid = data[0].get("_id")
-                        _cache_ids[palabra] = pid
+                        _cache_ids[cache_key] = pid
                         return pid
                 elif r.status == 404:
-                    _cache_ids[palabra] = None
+                    _cache_ids[cache_key] = None
                     return None
         except Exception:
             pass
         if intento < REINTENTOS:
             await asyncio.sleep(BACKOFF * (2 ** (intento - 1)))
 
-    _cache_ids[palabra] = None
+    _cache_ids[cache_key] = None
     return None
 
 
@@ -125,6 +129,7 @@ async def descargar_picto(
     seco:        bool,
     errores_log: list,
     progreso:    Progreso,
+    lang:        str = 'es',
 ) -> str:
     """
     Descarga el pictograma de una palabra.
@@ -134,7 +139,7 @@ async def descargar_picto(
         progreso.avanzar()
         return 'omitido'
 
-    pid = await buscar_id(session, palabra)
+    pid = await buscar_id(session, palabra, lang)
     if pid is None:
         errores_log.append({
             "origen":  origen,
@@ -151,9 +156,15 @@ async def descargar_picto(
 
     img_url = f"{IMG_BASE}/{pid}/{pid}_{IMG_SIZE}.png"
     ultimo_error = "sin respuesta"
+    # Headers necesarios — ARASAAC bloquea sin Referer de su dominio
+    headers = {
+        "Referer":    "https://arasaac.org/",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept":     "image/png,image/*,*/*;q=0.8",
+    }
     for intento in range(1, REINTENTOS + 1):
         try:
-            async with session.get(img_url, timeout=aiohttp.ClientTimeout(total=20)) as r:
+            async with session.get(img_url, timeout=aiohttp.ClientTimeout(total=20), headers=headers) as r:
                 if r.status == 200:
                     data = await r.read()
                     if len(data) < 500:
@@ -187,15 +198,20 @@ async def descargar_picto(
 
 
 async def procesar_palabras(
-    palabras:    list[str],
+    palabras:    list,
     prefijo:     str,
     origen:      str,
     forzar:      bool,
     seco:        bool,
     concurrencia: int,
     errores_log: list,
+    lang:        str = 'es',
 ) -> tuple[int, int, int, int]:
-    """Descarga pictogramas para una lista de palabras. Retorna (descargados, omitidos, no_encontrados, errores)."""
+    """
+    Descarga pictogramas para una lista de palabras.
+    palabras puede ser list[str] o list[tuple(nombre_archivo, palabra_busqueda, lang)]
+    Retorna (descargados, omitidos, no_encontrados, errores).
+    """
     if not palabras:
         return 0, 0, 0, 0
 
@@ -207,14 +223,20 @@ async def procesar_palabras(
     connector = aiohttp.TCPConnector(limit=concurrencia + 4)
     async with aiohttp.ClientSession(connector=connector) as session:
 
-        async def _tarea(palabra):
+        async def _tarea(item):
             async with semaforo:
-                ruta = DIR_PICTOS / f"{palabra}.png"
+                # item puede ser str o (nombre_archivo, termino_busqueda, lang)
+                if isinstance(item, tuple) and len(item) == 3:
+                    nombre_archivo, termino, item_lang = item
+                else:
+                    nombre_archivo = termino = item
+                    item_lang = lang
+                ruta = DIR_PICTOS / f"{nombre_archivo}.png"
                 res  = await descargar_picto(
-                    session, palabra, origen, ruta, forzar, seco, errores_log, progreso
+                    session, termino, origen, ruta, forzar, seco, errores_log, progreso, item_lang
                 )
                 resultados.append(res)
-                await asyncio.sleep(0.15)  # cortesía con la API
+                await asyncio.sleep(0.15)
 
         await asyncio.gather(*[_tarea(p) for p in palabras])
 
@@ -228,7 +250,19 @@ async def procesar_palabras(
 
 # ─── Recolección de palabras ──────────────────────────────────────────────────
 
-def palabras_de_vocab() -> set[str]:
+def palabras_de_vocab() -> set:
+    # Con catálogo: generar tuplas (nombre_archivo, termino_busqueda, lang)
+    if PICTOS_JSON.exists():
+        with open(PICTOS_JSON, encoding="utf-8") as f:
+            catalogo = json.load(f)
+        items = set()
+        for e in catalogo:
+            if e.get("archivo_es") and e.get("es"):
+                items.add((e["archivo_es"].replace(".png",""), e["es"], "es"))
+            if e.get("archivo_en") and e.get("en"):
+                items.add((e["archivo_en"].replace(".png",""), e["en"], "en"))
+        return items
+    # Legacy: vocabulario.json con strings
     if not VOCAB_JSON.exists():
         print(f"⚠️  {VOCAB_JSON} no encontrado")
         return set()
@@ -237,11 +271,14 @@ def palabras_de_vocab() -> set[str]:
     palabras = set()
     for contenido in vocab.values():
         for p in contenido.get("es", []):
-            if p.strip(): palabras.add(p.strip())
+            if isinstance(p, str) and p.strip():
+                palabras.add(p.strip())
     return palabras
 
 
 def palabras_de_frases() -> set[str]:
+    if PICTOS_JSON.exists():
+        return set()  # en modo catálogo todo viene de palabras_de_vocab
     if not FRASES_JSON.exists():
         print(f"⚠️  {FRASES_JSON} no encontrado")
         return set()
@@ -251,12 +288,15 @@ def palabras_de_frases() -> set[str]:
     for frase in frases:
         for pieza in frase.get("piezas", []):
             if pieza.get("tipo") == "picto":
-                t = pieza.get("texto", "").strip()
-                if t: palabras.add(t)
+                t = pieza.get("texto", "")
+                if isinstance(t, str) and t.strip():
+                    palabras.add(t.strip())
     return palabras
 
 
 def palabras_de_memorama() -> set[str]:
+    if PICTOS_JSON.exists():
+        return set()  # en modo catálogo todo viene de palabras_de_vocab
     if not MEMORAMA_JSON.exists():
         print(f"⚠️  {MEMORAMA_JSON} no encontrado")
         return set()
@@ -265,7 +305,10 @@ def palabras_de_memorama() -> set[str]:
     palabras = set()
     for tema in temas:
         for p in tema.get("palabras", []):
-            if p.strip(): palabras.add(p.strip())
+            if isinstance(p, str) and p.strip():
+                palabras.add(p.strip())
+            elif isinstance(p, dict) and p.get("es"):
+                palabras.add(p["es"].strip())
     return palabras
 
 # ─── Log de errores ───────────────────────────────────────────────────────────
@@ -362,10 +405,11 @@ async def main():
     total_desc = total_omit = total_no_enc = total_err = 0
     t_inicio = time.monotonic()
 
-    async def run(palabras, prefijo, origen):
+    async def run(palabras, prefijo, origen, lang='es'):
         nonlocal total_desc, total_omit, total_no_enc, total_err
         d, o, n, e = await procesar_palabras(
-            sorted(palabras), prefijo, origen, args.forzar, args.seco, conc, errores_log
+            sorted(palabras) if isinstance(next(iter(palabras), None), str) else palabras,
+            prefijo, origen, args.forzar, args.seco, conc, errores_log, lang
         )
         total_desc  += d; total_omit += o
         total_no_enc += n; total_err  += e

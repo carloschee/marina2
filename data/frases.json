@@ -7,11 +7,13 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "tren"
+        "texto": "tren",
+        "picto_id": 1333
       },
       {
         "tipo": "picto",
-        "texto": "rápido"
+        "texto": "rápido",
+        "picto_id": 1397
       }
     ]
   },
@@ -23,11 +25,13 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "manzana"
+        "texto": "manzana",
+        "picto_id": 1213
       },
       {
         "tipo": "picto",
-        "texto": "roja"
+        "texto": "roja",
+        "picto_id": 1398
       }
     ]
   },
@@ -43,7 +47,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "luna"
+        "texto": "luna",
+        "picto_id": 1193
       }
     ]
   },
@@ -55,11 +60,13 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "suky"
+        "texto": "suky",
+        "picto_id": 1399
       },
       {
         "tipo": "picto",
-        "texto": "no"
+        "texto": "no",
+        "picto_id": 1400
       }
     ]
   },
@@ -71,11 +78,13 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "tienes"
+        "texto": "tienes",
+        "picto_id": 1401
       },
       {
         "tipo": "picto",
-        "texto": "hambre"
+        "texto": "hambre",
+        "picto_id": 1402
       }
     ]
   },
@@ -91,7 +100,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "daño"
+        "texto": "daño",
+        "picto_id": 1403
       }
     ]
   },
@@ -103,11 +113,13 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "tienes"
+        "texto": "tienes",
+        "picto_id": 1401
       },
       {
         "tipo": "picto",
-        "texto": "sueño"
+        "texto": "sueño",
+        "picto_id": 1404
       }
     ]
   },
@@ -119,7 +131,8 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "globo aerostático"
+        "texto": "globo aerostático",
+        "picto_id": 1111
       },
       {
         "tipo": "texto",
@@ -127,7 +140,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "cielo"
+        "texto": "cielo",
+        "picto_id": 1405
       }
     ]
   },
@@ -143,11 +157,13 @@
       },
       {
         "tipo": "picto",
-        "texto": "gato"
+        "texto": "gato",
+        "picto_id": 1110
       },
       {
         "tipo": "picto",
-        "texto": "duerme"
+        "texto": "duerme",
+        "picto_id": 1406
       }
     ]
   },
@@ -159,7 +175,8 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "pío"
+        "texto": "pío",
+        "picto_id": 1407
       },
       {
         "tipo": "texto",
@@ -167,7 +184,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "llorando"
+        "texto": "llorando",
+        "picto_id": 1408
       }
     ]
   },
@@ -183,7 +201,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "sandía"
+        "texto": "sandía",
+        "picto_id": 1312
       },
       {
         "tipo": "texto",
@@ -191,7 +210,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "semillas"
+        "texto": "semillas",
+        "picto_id": 1409
       }
     ]
   },
@@ -207,7 +227,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "sol"
+        "texto": "sol",
+        "picto_id": 1313
       },
       {
         "tipo": "texto",
@@ -215,7 +236,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "afuera"
+        "texto": "afuera",
+        "picto_id": 1410
       }
     ]
   },
@@ -231,7 +253,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "submarino"
+        "texto": "submarino",
+        "picto_id": 1318
       },
       {
         "tipo": "texto",
@@ -239,7 +262,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "agua"
+        "texto": "agua",
+        "picto_id": 1003
       }
     ]
   },
@@ -255,7 +279,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "submarino"
+        "texto": "submarino",
+        "picto_id": 1318
       },
       {
         "tipo": "texto",
@@ -263,7 +288,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "burbujas"
+        "texto": "burbujas",
+        "picto_id": 1411
       }
     ]
   },
@@ -279,7 +305,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "mariposa"
+        "texto": "mariposa",
+        "picto_id": 1212
       },
       {
         "tipo": "texto",
@@ -287,7 +314,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "flor"
+        "texto": "flor",
+        "picto_id": 1093
       }
     ]
   },
@@ -299,11 +327,13 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "tienes"
+        "texto": "tienes",
+        "picto_id": 1401
       },
       {
         "tipo": "picto",
-        "texto": "hambre"
+        "texto": "hambre",
+        "picto_id": 1402
       },
       {
         "tipo": "texto",
@@ -311,7 +341,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "comer"
+        "texto": "comer",
+        "picto_id": 1412
       }
     ]
   },
@@ -327,7 +358,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "sueño"
+        "texto": "sueño",
+        "picto_id": 1404
       },
       {
         "tipo": "texto",
@@ -335,7 +367,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "dormir"
+        "texto": "dormir",
+        "picto_id": 1413
       }
     ]
   },
@@ -351,11 +384,13 @@
       },
       {
         "tipo": "picto",
-        "texto": "daño"
+        "texto": "daño",
+        "picto_id": 1403
       },
       {
         "tipo": "picto",
-        "texto": "nosotros"
+        "texto": "nosotros",
+        "picto_id": 1414
       },
       {
         "tipo": "texto",
@@ -363,7 +398,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "curamos"
+        "texto": "curamos",
+        "picto_id": 1415
       }
     ]
   },
@@ -375,7 +411,8 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "pío"
+        "texto": "pío",
+        "picto_id": 1407
       },
       {
         "tipo": "texto",
@@ -383,7 +420,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "llorando"
+        "texto": "llorando",
+        "picto_id": 1408
       },
       {
         "tipo": "texto",
@@ -403,7 +441,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "sandía"
+        "texto": "sandía",
+        "picto_id": 1312
       },
       {
         "tipo": "texto",
@@ -411,7 +450,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "semillas"
+        "texto": "semillas",
+        "picto_id": 1409
       },
       {
         "tipo": "texto",
@@ -419,7 +459,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "negro"
+        "texto": "negro",
+        "picto_id": 1416
       }
     ]
   },
@@ -435,7 +476,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "submarino"
+        "texto": "submarino",
+        "picto_id": 1318
       },
       {
         "tipo": "texto",
@@ -443,7 +485,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "burbujas"
+        "texto": "burbujas",
+        "picto_id": 1411
       },
       {
         "tipo": "texto",
@@ -451,7 +494,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "agua"
+        "texto": "agua",
+        "picto_id": 1003
       }
     ]
   },
@@ -463,7 +507,8 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "hot air balloon"
+        "texto": "hot air balloon",
+        "picto_id": 1150
       },
       {
         "tipo": "texto",
@@ -471,7 +516,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "sky"
+        "texto": "sky",
+        "picto_id": 1417
       }
     ]
   },
@@ -487,7 +533,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "sun"
+        "texto": "sun",
+        "picto_id": 1330
       },
       {
         "tipo": "texto",
@@ -495,7 +542,8 @@
       },
       {
         "tipo": "picto",
-        "texto": "outside"
+        "texto": "outside",
+        "picto_id": 1418
       }
     ]
   }

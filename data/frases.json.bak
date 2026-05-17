@@ -1,0 +1,502 @@
+[
+  {
+    "id": "tren-rapido",
+    "lang": "es",
+    "es": "tren rápido",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "tren"
+      },
+      {
+        "tipo": "picto",
+        "texto": "rápido"
+      }
+    ]
+  },
+  {
+    "id": "manzana-roja",
+    "lang": "es",
+    "es": "manzana roja",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "manzana"
+      },
+      {
+        "tipo": "picto",
+        "texto": "roja"
+      }
+    ]
+  },
+  {
+    "id": "la-luna",
+    "lang": "es",
+    "es": "la luna",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "la"
+      },
+      {
+        "tipo": "picto",
+        "texto": "luna"
+      }
+    ]
+  },
+  {
+    "id": "suky-no",
+    "lang": "es",
+    "es": "Suky no",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "suky"
+      },
+      {
+        "tipo": "picto",
+        "texto": "no"
+      }
+    ]
+  },
+  {
+    "id": "tienes-hambre",
+    "lang": "es",
+    "es": "¿tienes hambre?",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "tienes"
+      },
+      {
+        "tipo": "picto",
+        "texto": "hambre"
+      }
+    ]
+  },
+  {
+    "id": "te-has-hecho-dano",
+    "lang": "es",
+    "es": "¿te has hecho daño?",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "te has hecho"
+      },
+      {
+        "tipo": "picto",
+        "texto": "daño"
+      }
+    ]
+  },
+  {
+    "id": "tienes-sueno",
+    "lang": "es",
+    "es": "¿tienes sueño?",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "tienes"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sueño"
+      }
+    ]
+  },
+  {
+    "id": "globo-aerostatico-en-el-cielo",
+    "lang": "es",
+    "es": "globo aerostático en el cielo",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "globo aerostático"
+      },
+      {
+        "tipo": "texto",
+        "texto": "en el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "cielo"
+      }
+    ]
+  },
+  {
+    "id": "el-gato-duerme",
+    "lang": "es",
+    "es": "el gato duerme",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "gato"
+      },
+      {
+        "tipo": "picto",
+        "texto": "duerme"
+      }
+    ]
+  },
+  {
+    "id": "pio-esta-llorando",
+    "lang": "es",
+    "es": "pío está llorando...",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "pío"
+      },
+      {
+        "tipo": "texto",
+        "texto": "está"
+      },
+      {
+        "tipo": "picto",
+        "texto": "llorando"
+      }
+    ]
+  },
+  {
+    "id": "la-sandia-tiene-semillas",
+    "lang": "es",
+    "es": "la sandía tiene semillas",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "la"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sandía"
+      },
+      {
+        "tipo": "texto",
+        "texto": "tiene"
+      },
+      {
+        "tipo": "picto",
+        "texto": "semillas"
+      }
+    ]
+  },
+  {
+    "id": "el-sol-esta-afuera",
+    "lang": "es",
+    "es": "el sol está afuera",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sol"
+      },
+      {
+        "tipo": "texto",
+        "texto": "está"
+      },
+      {
+        "tipo": "picto",
+        "texto": "afuera"
+      }
+    ]
+  },
+  {
+    "id": "el-submarino-en-el-agua",
+    "lang": "es",
+    "es": "el submarino en el agua",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "submarino"
+      },
+      {
+        "tipo": "texto",
+        "texto": "en el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "agua"
+      }
+    ]
+  },
+  {
+    "id": "el-submarino-hace-burbujas",
+    "lang": "es",
+    "es": "el submarino hace burbujas",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "submarino"
+      },
+      {
+        "tipo": "texto",
+        "texto": "hace"
+      },
+      {
+        "tipo": "picto",
+        "texto": "burbujas"
+      }
+    ]
+  },
+  {
+    "id": "la-mariposa-en-la-flor",
+    "lang": "es",
+    "es": "la mariposa en la flor",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "la"
+      },
+      {
+        "tipo": "picto",
+        "texto": "mariposa"
+      },
+      {
+        "tipo": "texto",
+        "texto": "en la"
+      },
+      {
+        "tipo": "picto",
+        "texto": "flor"
+      }
+    ]
+  },
+  {
+    "id": "tienes-hambre-pues-vamos-a-comer",
+    "lang": "es",
+    "es": "¿tienes hambre? ¡pues vamos a comer!",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "tienes"
+      },
+      {
+        "tipo": "picto",
+        "texto": "hambre"
+      },
+      {
+        "tipo": "texto",
+        "texto": "pues vamos a"
+      },
+      {
+        "tipo": "picto",
+        "texto": "comer"
+      }
+    ]
+  },
+  {
+    "id": "tienes-sueno-pues-vamos-a-dormir",
+    "lang": "es",
+    "es": "¿tienes sueño? pues vamos a dormir",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "tienes"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sueño"
+      },
+      {
+        "tipo": "texto",
+        "texto": "pues vamos a"
+      },
+      {
+        "tipo": "picto",
+        "texto": "dormir"
+      }
+    ]
+  },
+  {
+    "id": "te-has-hecho-dano-nosotros-te-curamos",
+    "lang": "es",
+    "es": "¿te has hecho daño? ¡nosotros te curamos!",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "te has hecho"
+      },
+      {
+        "tipo": "picto",
+        "texto": "daño"
+      },
+      {
+        "tipo": "picto",
+        "texto": "nosotros"
+      },
+      {
+        "tipo": "texto",
+        "texto": "te"
+      },
+      {
+        "tipo": "picto",
+        "texto": "curamos"
+      }
+    ]
+  },
+  {
+    "id": "pio-esta-llorando-no-sabemos-que-le-pasa",
+    "lang": "es",
+    "es": "pío está llorando, no sabemos qué le pasa",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "pío"
+      },
+      {
+        "tipo": "texto",
+        "texto": "está"
+      },
+      {
+        "tipo": "picto",
+        "texto": "llorando"
+      },
+      {
+        "tipo": "texto",
+        "texto": "no sabemos qué le pasa"
+      }
+    ]
+  },
+  {
+    "id": "la-sandia-tiene-semillas-de-color-negro",
+    "lang": "es",
+    "es": "la sandía tiene semillas de color negro",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "la"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sandía"
+      },
+      {
+        "tipo": "texto",
+        "texto": "tiene"
+      },
+      {
+        "tipo": "picto",
+        "texto": "semillas"
+      },
+      {
+        "tipo": "texto",
+        "texto": "de color"
+      },
+      {
+        "tipo": "picto",
+        "texto": "negro"
+      }
+    ]
+  },
+  {
+    "id": "el-submarino-hace-burbujas-en-el-agua",
+    "lang": "es",
+    "es": "el submarino hace burbujas en el agua",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "submarino"
+      },
+      {
+        "tipo": "texto",
+        "texto": "hace"
+      },
+      {
+        "tipo": "picto",
+        "texto": "burbujas"
+      },
+      {
+        "tipo": "texto",
+        "texto": "en el"
+      },
+      {
+        "tipo": "picto",
+        "texto": "agua"
+      }
+    ]
+  },
+  {
+    "id": "hot-air-balloon-in-the-sky",
+    "lang": "en",
+    "es": "hot air balloon in the sky",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "hot air balloon"
+      },
+      {
+        "tipo": "texto",
+        "texto": "in the"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sky"
+      }
+    ]
+  },
+  {
+    "id": "the-sun-is-outside",
+    "lang": "en",
+    "es": "the sun is outside",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "the"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sun"
+      },
+      {
+        "tipo": "texto",
+        "texto": "is"
+      },
+      {
+        "tipo": "picto",
+        "texto": "outside"
+      }
+    ]
+  }
+]
