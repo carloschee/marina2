@@ -100,11 +100,11 @@ function _montarHeader() {
 
     <div id="header-derecha">
       ${cfg('ui.mostrarPill', true) ? `
-//       <div id="lang-pill">
-//         <button data-lang="es" class="lang-btn activo" title="Español">ES</button>
-//         <button data-lang="en" class="lang-btn" title="Inglés">EN</button>
-//       </div>` : ''}
-      <div id="indicador-offline" class="checking">
+       <div id="lang-pill">
+         <button data-lang="es" class="lang-btn activo" title="Español">ES</button>
+         <button data-lang="en" class="lang-btn" title="Inglés">EN</button>
+       </div>` : ''}
+       <div id="indicador-offline" class="checking">
         <span id="dot-conexion"></span>
         <span id="texto-conexion">Verificando...</span>
       </div>
