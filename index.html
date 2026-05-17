@@ -254,8 +254,34 @@
       transition: all .18s;
     }
 
+    .lang-btn {
+      padding: 5px 14px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.45);
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      transition: all .18s;
+      /* Sin opacity fija — el estado activo/inactivo lo marca el color */
+    }
+
+    /* Activo — fondo sólido del color del idioma */
     .lang-btn.activo {
       background: var(--t-primary);
+      color: #032340;
+    }
+
+    /* ES activo tiene acento azul, EN activo tiene acento verde agua */
+    .lang-btn[data-lang="es"].activo {
+      background: var(--t-primary, #00c2ff);
+      color: #032340;
+    }
+
+    .lang-btn[data-lang="en"].activo {
+      background: var(--m-teal, #00e5b0);
       color: #032340;
     }
 

@@ -100,10 +100,10 @@ function _montarHeader() {
 
     <div id="header-derecha">
       ${cfg('ui.mostrarPill', true) ? `
-      <div id="lang-pill">
-        <button data-lang="es" class="lang-btn activo">ES</button>
-        <button data-lang="en" class="lang-btn">EN</button>
-      </div>` : ''}
+//       <div id="lang-pill">
+//         <button data-lang="es" class="lang-btn activo" title="Español">ES</button>
+//         <button data-lang="en" class="lang-btn" title="Inglés">EN</button>
+//       </div>` : ''}
       <div id="indicador-offline" class="checking">
         <span id="dot-conexion"></span>
         <span id="texto-conexion">Verificando...</span>
@@ -114,15 +114,40 @@ function _montarHeader() {
   // Botón volver — oculto en home
   document.getElementById('btn-volver').style.display = 'none';
 
-  // Pill de idioma
+  // ── Pill de doble toggle ES / EN ──────────────────────────────────────────
+  // Estado global del idioma — objeto con flags independientes
+  window._langConfig = { es: true, en: false };
+
+  // Resuelve qué idioma usar en una reproducción concreta:
+  // · solo ES → 'es'
+  // · solo EN → 'en'
+  // · ambos   → elige aleatoriamente en cada llamada
+  window.getLang = function () {
+    const { es, en } = window._langConfig;
+    if (es && en) return Math.random() < 0.5 ? 'es' : 'en';
+    if (en) return 'en';
+    return 'es';   // default y fallback
+  };
+
   document.getElementById('lang-pill')?.addEventListener('click', e => {
     const btn = e.target.closest('[data-lang]');
     if (!btn) return;
-    window._langActivo = btn.dataset.lang;
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.toggle('activo', b.dataset.lang === window._langActivo);
-    });
-    window.dispatchEvent(new CustomEvent('lang-change', { detail: { lang: window._langActivo } }));
+    const lang = btn.dataset.lang;
+
+    // Toggle del idioma tocado
+    const next = !window._langConfig[lang];
+
+    // Regla: al menos un idioma debe estar activo
+    const otroActivo = lang === 'es' ? window._langConfig.en : window._langConfig.es;
+    if (!next && !otroActivo) return; // no permitir desactivar el último
+
+    window._langConfig[lang] = next;
+    btn.classList.toggle('activo', next);
+
+    // Notificar a los módulos — pasan el langConfig completo
+    window.dispatchEvent(new CustomEvent('lang-change', {
+      detail: { langConfig: { ...window._langConfig } }
+    }));
   });
 
   // Botón ajustes — solo si existe el módulo

@@ -4,31 +4,31 @@
    que el stack-wrap no empuje al tablero.
 */
 
-import { TTS }                          from '../../core/tts.js';
+import { TTS } from '../../core/tts.js';
 import { lanzarConfeti, haptic, toast } from '../../core/ui.js';
-import { Telemetry }                    from '../../core/telemetry.js';
+import { Telemetry } from '../../core/telemetry.js';
 
 const TEMAS_URL = './data/memorama.json';
 const PICTO_BASE = './assets/pictogramas/es/';
 const AUDIO_BASE = './assets/audio/';
-const PARES      = 24;
+const PARES = 24;
 
-let _container  = null;
-let _temas      = [];
+let _container = null;
+let _temas = [];
 let _temaActivo = null;
-let _cartas     = [];
-let _volteadas  = [];
-let _bloqueado  = false;
-let _pares      = 0;
-let _lang       = 'es';
-let _audioEl    = null;
+let _cartas = [];
+let _volteadas = [];
+let _bloqueado = false;
+let _pares = 0;
+let _lang = 'es';
+let _audioEl = null;
 
 const _q = sel => _container?.querySelector(sel);
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
   _container = container;
-  _lang = window._langActivo || 'es';
+  _lang = 'es'; // memorama siempre muestra contenido en español, audio via getLang()
   _cartas = []; _volteadas = []; _pares = 0;
 
   try {
@@ -52,7 +52,7 @@ export function destroy() {
   _cartas = []; _temaActivo = null; _container = null;
 }
 
-export function onEnter() {}
+export function onEnter() { }
 export function onLeave() {
   if (_audioEl) _audioEl.pause();
   TTS.stop();
@@ -65,7 +65,7 @@ export async function pause() {
 
 export async function resume(container) {
   _container = container;
-  _lang = window._langActivo || 'es';
+  _lang = 'es'; // memorama siempre muestra contenido en español, audio via getLang()
   _renderShell();
   _renderListaTemas();
 
@@ -553,7 +553,10 @@ function _reproducirNombre(palabra) {
     TTS.speak(palabra, { lang: _lang === 'en' ? 'en-US' : 'es-MX', rate: 0.90, pitch: 1.15 });
   };
   _audioEl.onerror = _fb;
-  _audioEl.src     = `${AUDIO_BASE}${_lang}/${palabra}.mp3`;
+  // Usar getLang() para elegir el idioma del audio aleatoriamente si ambos activos
+  const audioLang = window.getLang?.() || 'es';
+  _audioEl.src = `${AUDIO_BASE}${audioLang}/${palabra}.mp3`;
+  _audioEl.play().catch(_fb);
   _audioEl.play().catch(_fb);
 }
 
@@ -570,13 +573,12 @@ function _tonoVictoria() {
       gain.gain.linearRampToValueAtTime(0, t + 0.18);
       osc.start(t); osc.stop(t + 0.20);
     });
-  } catch {}
+  } catch { }
 }
 
 function _onLangChange(e) {
-  const l = e.detail?.lang;
-  if (!l || l === _lang) return;
-  _lang = l;
+  // Memorama no filtra contenido por idioma — solo afecta el audio via getLang()
+  // No hay nada que actualizar en la UI
 }
 
 function _shuffle(arr) {

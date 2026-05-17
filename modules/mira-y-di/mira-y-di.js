@@ -29,7 +29,7 @@ let _idx = 0;
 export async function init(container) {
   _el = container;
   // Sincronizar con el idioma activo del pill global si ya fue cambiado
-  _lang = window._langActivo || 'es';
+  _lang = window._langConfig?.es !== false ? 'es' : 'en'; // idioma base al init
 
   try {
     const res = await fetch('./data/vocabulario.json');
@@ -308,17 +308,12 @@ function _construirLista() {
 
 // ─── Cambio de idioma desde pill global ───────────────────────────────────────
 function _onLangChange(e) {
-  const nuevoLang = e.detail?.lang;
-  if (!nuevoLang || nuevoLang === _lang) return;
-
-  // Si la letra activa no tiene palabras en el nuevo idioma (ej. Ñ en EN),
-  // ignorar el cambio — el módulo mantiene su idioma actual.
-  if (_letra && !_vocab[_letra]?.[nuevoLang]?.length) return;
-
-  _lang = nuevoLang;
-  _construirLista();
-  _actualizarVista();
-}
+     const cfg = e.detail?.langConfig;
+     if (!cfg) return;
+     // En mira-y-di el idioma de los pictogramas y palabras mostradas
+     // sigue siendo fijo (es o en), solo el AUDIO usa getLang() aleatoriamente.
+     // No hay nada que actualizar en la UI — el audio se resuelve en el momento.
+   }
 
 // ─── Vista ────────────────────────────────────────────────────────────────────
 function _actualizarVista() {
@@ -380,7 +375,7 @@ function _bindEvents() {
   });
   _el.querySelector('#md-btn-escucha').addEventListener('click', () => {
     haptic(15);
-    if (_lista.length) _hablar(_lista[_idx], _lang === 'es' ? 'es-MX' : 'en-US');
+    if (_lista.length) _hablar(_lista[_idx], window.getLang?.() === 'en' ? 'en-US' : 'es-MX');
   });
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
 }
