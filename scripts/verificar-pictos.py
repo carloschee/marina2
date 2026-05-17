@@ -38,14 +38,21 @@ def main():
         por_palabra[r['palabra']] = r
     errores = list(por_palabra.values())
 
-    # Cruzar con archivos existentes
+    # Directorios de pictogramas
+    DIR_EN = RAIZ / "assets" / "pictogramas" / "en"
+
+    # Cruzar con archivos existentes — buscar en es/ y en en/
     faltantes = []
     resueltos = []
 
     for r in errores:
         palabra = r['palabra']
-        png     = DIR_ES / f"{palabra}.png"
-        existe  = png.exists() and png.stat().st_size > 500
+        # Buscar en es/ primero, luego en en/
+        existe = (
+            (DIR_ES / f"{palabra}.png").exists() and (DIR_ES / f"{palabra}.png").stat().st_size > 500
+            or
+            (DIR_EN / f"{palabra}.png").exists() and (DIR_EN / f"{palabra}.png").stat().st_size > 500
+        )
 
         if existe:
             resueltos.append(r)

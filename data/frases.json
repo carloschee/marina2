@@ -387,11 +387,7 @@
       },
       {
         "tipo": "texto",
-        "texto": "no sabemos"
-      },
-      {
-        "tipo": "picto",
-        "texto": "qué le pasa"
+        "texto": "no sabemos qué le pasa"
       }
     ]
   },
