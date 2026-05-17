@@ -348,8 +348,7 @@ function _renderNiveles() {
     if (f.nivel !== n.id) return false;
     if (_lang === 'ambos') return true;
     return (f.lang || 'es') === _lang;
-  })
-  );
+  });
 
   // Si el nivel activo no tiene frases en este idioma, cambiar al primero disponible
   if (nivelesConFrases.length && !nivelesConFrases.find(n => n.id === _nivel)) {
