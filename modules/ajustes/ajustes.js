@@ -536,20 +536,51 @@ async function _descargarTodo() {
 }
 
 // ─── Reporte ──────────────────────────────────────────────────────────────────
+// ─── Reporte ──────────────────────────────────────────────────────────────────
 function _renderReporte() {
   const el = _q('#aj-reporte-contenido');
   if (!el) return;
-  const p      = Perfiles.getActivo();
+
+  const p       = Perfiles.getActivo();
   const reporte = Telemetry.getReporte?.(p.id) || {};
-  const entradas = Object.entries(reporte);
-  if (!entradas.length) {
-    el.innerHTML = '<p style="color:rgba(255,255,255,0.35);font-size:.8rem;">Sin actividad registrada.</p>';
+
+  if (!reporte.totalEventos) {
+    el.innerHTML = '<p style="color:rgba(255,255,255,0.35);font-size:.8rem;">Sin actividad registrada aún.</p>';
     return;
   }
-  el.innerHTML = entradas.map(([k, v]) =>
-    `<div class="aj-reporte-item">
-      <span class="aj-reporte-nombre">${k}</span>
-      <span class="aj-reporte-valor">${v}</span>
+
+  const MODULO_LABEL = {
+    'mira-y-di': '🔍 Mira y di',
+    'frases':    '💬 Frases',
+    'memorama':  '🃏 Memorama',
+    'ajustes':   '⚙️ Ajustes',
+  };
+
+  const porModulo = reporte.porModulo || {};
+  const filas = [];
+
+  filas.push({ nombre: 'Total de acciones', valor: reporte.totalEventos });
+
+  Object.entries(porModulo)
+    .sort((a, b) => b[1] - a[1])
+    .forEach(([mod, count]) => {
+      const label = MODULO_LABEL[mod] || mod;
+      filas.push({ nombre: label, valor: count + ' acciones' });
+    });
+
+  if (reporte.primerEvento) {
+    const d = new Date(reporte.primerEvento);
+    filas.push({ nombre: 'Primera actividad', valor: d.toLocaleDateString('es-MX') });
+  }
+  if (reporte.ultimoEvento) {
+    const d = new Date(reporte.ultimoEvento);
+    filas.push({ nombre: 'Última actividad', valor: d.toLocaleDateString('es-MX') });
+  }
+
+  el.innerHTML = filas.map(({ nombre, valor }) => `
+    <div class="aj-reporte-item">
+      <span class="aj-reporte-nombre">${nombre}</span>
+      <span class="aj-reporte-valor">${valor}</span>
     </div>`
   ).join('');
 }
