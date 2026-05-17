@@ -18,13 +18,13 @@ const pictoURL = (palabra, lang) =>
   `assets/pictogramas/${lang}/${palabra}.png`;
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
-let _el = null;
+let _el    = null;
 let _vocab = null;
-let _lang = 'es';
+let _pictos = {};    // ← debe estar aquí, fuera de init()
+let _lang  = 'es';
 let _letra = null;
 let _lista = [];
-let _idx = 0;
-let _pictos = {};
+let _idx   = 0;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
