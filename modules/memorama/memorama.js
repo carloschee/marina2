@@ -68,14 +68,49 @@ export async function resume(container) {
   _lang = window._langActivo || 'es';
   _renderShell();
   _renderListaTemas();
+
   if (_temaActivo && _cartas.length) {
+    // Restaurar header
+    const emojiEl = _q('#mem-tema-emoji');
+    const labelEl = _q('#mem-tema-label');
+    const countEl = _q('#mem-pares-count');
+    if (emojiEl) emojiEl.textContent = _temaActivo.emoji;
+    if (labelEl) labelEl.textContent = _temaActivo.label;
+    if (countEl) countEl.textContent = _pares;
+
+    // Reconstruir grid con el estado actual
     _renderGrid();
+
+    // Restaurar estado visual de cada carta
+    _cartas.forEach((carta, idx) => {
+      const el = _q(`[data-idx="${idx}"]`);
+      if (!el) return;
+      if (carta.encontrada) {
+        el.classList.add('volteada');
+        el.classList.add('encontrada');
+        el.style.animationDuration = '0s'; // sin animación al restaurar
+        el.style.opacity = '0';
+        el.style.pointerEvents = 'none';
+      } else if (carta.volteada) {
+        el.classList.add('volteada');
+      }
+    });
+
+    // Restaurar stack de pares encontrados
     _renderStack();
+
+    // Mostrar grid, ocultar modal
     _q('#mem-grid-wrap')?.classList.remove('oculto');
     _q('#mem-modal')?.classList.add('oculto');
+
+    // Si la partida estaba terminada, celebrar de nuevo
+    if (_pares === PARES) {
+      setTimeout(() => lanzarConfeti({ count: 80, container: _q('#mem-wrap') }), 300);
+    }
   } else {
     _mostrarModal();
   }
+
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }
