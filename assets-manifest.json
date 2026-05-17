@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-17T17:09:14.125Z",
-  "totalAssets": 1333,
+  "generado": "2026-05-17T17:12:18.662Z",
+  "totalAssets": 1335,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -169,6 +169,7 @@
     "./assets/audio/en/snail.mp3",
     "./assets/audio/en/soap.mp3",
     "./assets/audio/en/socks.mp3",
+    "./assets/audio/en/submarine.mp3",
     "./assets/audio/en/sun.mp3",
     "./assets/audio/en/table.mp3",
     "./assets/audio/en/tent.mp3",
@@ -654,6 +655,7 @@
     "./assets/audio/frases/es/la-sandia-tiene-semillas.mp3",
     "./assets/audio/frases/es/la.mp3",
     "./assets/audio/frases/es/manzana-roja.mp3",
+    "./assets/audio/frases/es/no sabemos qué le pasa.mp3",
     "./assets/audio/frases/es/no sabemos.mp3",
     "./assets/audio/frases/es/no.mp3",
     "./assets/audio/frases/es/nosotros te.mp3",
