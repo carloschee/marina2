@@ -22,6 +22,7 @@ let _bloqueado = false;
 let _pares = 0;
 let _lang = 'es';
 let _audioEl = null;
+let _pictos = {};
 
 const _q = sel => _container?.querySelector(sel);
 
@@ -39,6 +40,15 @@ export async function init(container) {
     _temas = [];
   }
 
+  try {
+    const res2 = await fetch('./data/pictos.json');
+    const cat = await res2.json();
+    _pictos = Object.fromEntries(cat.map(e => [e.id, e]));
+  } catch {
+    console.warn('[memorama] pictos.json no disponible');
+    _pictos = {};
+  }
+
   _renderShell();
   _renderListaTemas();
   _mostrarModal();
@@ -49,7 +59,7 @@ export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
   if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
   TTS.stop();
-  _cartas = []; _temaActivo = null; _container = null;
+  _cartas = []; _temaActivo = null; _container = null; _pictos = {};
 }
 
 export function onEnter() { }
@@ -422,11 +432,22 @@ function _iniciarJuego() {
 
   // Normalizar — palabras puede ser strings (legacy) u objetos {picto_id, es, en, tts_es, tts_en}
   const _normalizarPalabra = (p) => {
+    // Nueva estructura: p es un ID numérico → resolver contra pictos.json
+    if (typeof p === 'number') {
+      const entrada = _pictos[p];
+      if (!entrada) return null;
+      return {
+        picto: (entrada.ruta_img || '').replace('.png', ''),
+        tts_es: entrada.es || '',
+        tts_en: entrada.en || entrada.es || '',
+      };
+    }
+    // Legacy: string directo
     if (typeof p === 'string') return { picto: p, tts_es: p, tts_en: p };
-    // ruta_img sin extensión = nombre del archivo MP3/PNG
+    // Legacy: objeto inline
     const ruta = (p.ruta_img || '').replace('.png', '');
     return {
-      picto: ruta || p.es || p.picto || String(p.picto_id || ''),
+      picto: ruta || p.es || String(p.picto_id || ''),
       tts_es: p.es || '',
       tts_en: p.en || p.es || '',
     };
@@ -434,7 +455,8 @@ function _iniciarJuego() {
 
   const palabras = _shuffle([..._temaActivo.palabras])
     .slice(0, PARES)
-    .map(_normalizarPalabra);
+    .map(_normalizarPalabra)
+    .filter(Boolean);
 
   _cartas = _shuffle(
     palabras.flatMap((palabra, i) => [
@@ -465,7 +487,7 @@ function _renderGrid() {
     celda.className = 'mem-celda';
     celda.style.animationDelay = (i * 0.018) + 's';
     const picto = carta.palabra.picto || carta.palabra;
-    const label = carta.palabra.tts_es || carta.palabra;
+    const label = (_lang === 'en' ? carta.palabra.tts_en : carta.palabra.tts_es) || carta.palabra;
     celda.innerHTML = `
       <div class="mem-carta" data-idx="${i}">
         <div class="mem-cara mem-dorso"></div>
