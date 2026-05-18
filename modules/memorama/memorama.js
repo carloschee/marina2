@@ -580,7 +580,7 @@ function _reproducirNombre(palabra) {
   _audioEl.onerror = _fb;
   // El archivo MP3 siempre está en es/ con el nombre normalizado
   // (el audio en inglés pronuncia la palabra en inglés pero el archivo se llama igual)
-  _audioEl.src = `${AUDIO_BASE}es/${picto}.mp3`;
+  _audioEl.src = `${AUDIO_BASE}${audioLang}/${picto}.mp3`;
   _audioEl.play().catch(_fb);
 }
 
