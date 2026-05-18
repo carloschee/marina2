@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-18T01:09:43.183Z",
-  "totalAssets": 2351,
+  "generado": "2026-05-18T01:12:18.958Z",
+  "totalAssets": 2352,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -2121,6 +2121,7 @@
     "./assets/pictogramas/pastel.png",
     "./assets/pictogramas/patineta.png",
     "./assets/pictogramas/pato.png",
+    "./assets/pictogramas/patrulla.png",
     "./assets/pictogramas/peach.png",
     "./assets/pictogramas/pecho.png",
     "./assets/pictogramas/pelo.png",
