@@ -2618,10 +2618,10 @@
   {
     "id": 1328,
     "es": "triste",
-    "en": "dreary",
+    "en": "sad",
     "ruta_img": "triste.png",
     "tts_es": "triste",
-    "tts_en": "dreary"
+    "tts_en": "sad"
   },
   {
     "id": 1329,
@@ -2634,10 +2634,10 @@
   {
     "id": 1330,
     "es": "asustado",
-    "en": "afraid",
+    "en": "scared",
     "ruta_img": "asustado.png",
     "tts_es": "asustado",
-    "tts_en": "afraid"
+    "tts_en": "scared"
   },
   {
     "id": 1331,
@@ -2658,10 +2658,10 @@
   {
     "id": 1333,
     "es": "emocionado",
-    "en": "thrilled",
+    "en": "excited",
     "ruta_img": "emocionado.png",
     "tts_es": "emocionado",
-    "tts_en": "thrilled"
+    "tts_en": "excited"
   },
   {
     "id": 1334,
@@ -2714,10 +2714,10 @@
   {
     "id": 1340,
     "es": "avergonzado",
-    "en": "sheepish",
+    "en": "ashamed",
     "ruta_img": "avergonzado.png",
     "tts_es": "avergonzado",
-    "tts_en": "sheepish"
+    "tts_en": "ashamed"
   },
   {
     "id": 1341,
@@ -2730,18 +2730,18 @@
   {
     "id": 1342,
     "es": "enamorado",
-    "en": "lovesick",
+    "en": "in love",
     "ruta_img": "enamorado.png",
     "tts_es": "enamorado",
-    "tts_en": "lovesick"
+    "tts_en": "in love"
   },
   {
     "id": 1343,
     "es": "asqueado",
-    "en": "<g id=\"1\"> </g><g id=\"2\">disgusted</g>",
+    "en": "disgusted",
     "ruta_img": "asqueado.png",
     "tts_es": "asqueado",
-    "tts_en": "<g id=\"1\"> </g><g id=\"2\">disgusted</g>"
+    "tts_en": "disgusted"
   },
   {
     "id": 1344,
@@ -2802,18 +2802,18 @@
   {
     "id": 1351,
     "es": "grande",
-    "en": "wide",
+    "en": "big",
     "ruta_img": "grande.png",
     "tts_es": "grande",
-    "tts_en": "wide"
+    "tts_en": "big"
   },
   {
     "id": 1352,
     "es": "pequeño",
-    "en": "for me",
+    "en": "little",
     "ruta_img": "pequeno.png",
     "tts_es": "pequeño",
-    "tts_en": "for me"
+    "tts_en": "little"
   },
   {
     "id": 1353,
@@ -2842,10 +2842,10 @@
   {
     "id": 1356,
     "es": "suave",
-    "en": "body wash",
+    "en": "soft",
     "ruta_img": "suave.png",
     "tts_es": "suave",
-    "tts_en": "body wash"
+    "tts_en": "soft"
   },
   {
     "id": 1357,
@@ -2858,18 +2858,18 @@
   {
     "id": 1358,
     "es": "limpio",
-    "en": "clr, clear",
+    "en": "clean",
     "ruta_img": "limpio.png",
     "tts_es": "limpio",
-    "tts_en": "clr, clear"
+    "tts_en": "clean"
   },
   {
     "id": 1359,
     "es": "sucio",
-    "en": "average",
+    "en": "dirty",
     "ruta_img": "sucio.png",
     "tts_es": "sucio",
-    "tts_en": "average"
+    "tts_en": "dirty"
   },
   {
     "id": 1360,
@@ -2882,10 +2882,10 @@
   {
     "id": 1361,
     "es": "viejo",
-    "en": "old!",
+    "en": "old",
     "ruta_img": "viejo.png",
     "tts_es": "viejo",
-    "tts_en": "old!"
+    "tts_en": "old"
   },
   {
     "id": 1362,
@@ -2930,10 +2930,10 @@
   {
     "id": 1367,
     "es": "bajo",
-    "en": "value",
+    "en": "short",
     "ruta_img": "bajo.png",
     "tts_es": "bajo",
-    "tts_en": "value"
+    "tts_en": "short"
   },
   {
     "id": 1368,
@@ -2946,10 +2946,10 @@
   {
     "id": 1369,
     "es": "delgado",
-    "en": "skinny",
+    "en": "thin",
     "ruta_img": "delgado.png",
     "tts_es": "delgado",
-    "tts_en": "skinny"
+    "tts_en": "thin"
   },
   {
     "id": 1370,
@@ -2962,10 +2962,10 @@
   {
     "id": 1371,
     "es": "brillante",
-    "en": "when held up to the light",
+    "en": "bright",
     "ruta_img": "brillante.png",
     "tts_es": "brillante",
-    "tts_en": "when held up to the light"
+    "tts_en": "bright"
   },
   {
     "id": 1372,
@@ -2978,26 +2978,26 @@
   {
     "id": 1373,
     "es": "cabeza",
-    "en": "height",
+    "en": "head",
     "ruta_img": "cabeza.png",
     "tts_es": "cabeza",
-    "tts_en": "height"
+    "tts_en": "head"
   },
   {
     "id": 1374,
     "es": "pelo",
-    "en": "animal hair",
+    "en": "hair",
     "ruta_img": "pelo.png",
     "tts_es": "pelo",
-    "tts_en": "animal hair"
+    "tts_en": "hair"
   },
   {
     "id": 1375,
     "es": "cuello",
-    "en": "neck = stem + flare",
+    "en": "neck",
     "ruta_img": "cuello.png",
     "tts_es": "cuello",
-    "tts_en": "neck = stem + flare"
+    "tts_en": "neck"
   },
   {
     "id": 1376,
@@ -3018,18 +3018,18 @@
   {
     "id": 1378,
     "es": "dedo",
-    "en": "individual air blast nozzle",
+    "en": "finger",
     "ruta_img": "dedo.png",
     "tts_es": "dedo",
-    "tts_en": "individual air blast nozzle"
+    "tts_en": "finger"
   },
   {
     "id": 1379,
     "es": "pecho",
-    "en": "breast",
+    "en": "chest",
     "ruta_img": "pecho.png",
     "tts_es": "pecho",
-    "tts_en": "breast"
+    "tts_en": "chest"
   },
   {
     "id": 1380,
@@ -3050,10 +3050,10 @@
   {
     "id": 1382,
     "es": "pierna",
-    "en": "height",
+    "en": "leg",
     "ruta_img": "pierna.png",
     "tts_es": "pierna",
-    "tts_en": "height"
+    "tts_en": "leg"
   },
   {
     "id": 1383,
@@ -3066,18 +3066,18 @@
   {
     "id": 1384,
     "es": "pie",
-    "en": "pie (foot)",
+    "en": "foot",
     "ruta_img": "pie.png",
     "tts_es": "pie",
-    "tts_en": "pie (foot)"
+    "tts_en": "foot"
   },
   {
     "id": 1385,
     "es": "talón",
-    "en": "back, pole, poll",
+    "en": "heel",
     "ruta_img": "talon.png",
     "tts_es": "talón",
-    "tts_en": "back, pole, poll"
+    "tts_en": "heel"
   },
   {
     "id": 1386,
@@ -3098,10 +3098,10 @@
   {
     "id": 1388,
     "es": "mejilla",
-    "en": "bucca, cheek, mala",
+    "en": "cheek",
     "ruta_img": "mejilla.png",
     "tts_es": "mejilla",
-    "tts_en": "bucca, cheek, mala"
+    "tts_en": "cheek"
   },
   {
     "id": 1389,
@@ -3130,18 +3130,18 @@
   {
     "id": 1392,
     "es": "lluvia",
-    "en": "shower",
+    "en": "rain",
     "ruta_img": "lluvia.png",
     "tts_es": "lluvia",
-    "tts_en": "shower"
+    "tts_en": "rain"
   },
   {
     "id": 1393,
     "es": "mar",
-    "en": "the sea.",
+    "en": "sea.",
     "ruta_img": "mar.png",
     "tts_es": "mar",
-    "tts_en": "the sea."
+    "tts_en": "sea."
   },
   {
     "id": 1394,
@@ -3154,10 +3154,10 @@
   {
     "id": 1395,
     "es": "bosque",
-    "en": "forrest",
+    "en": "forest",
     "ruta_img": "bosque.png",
     "tts_es": "bosque",
-    "tts_en": "forrest"
+    "tts_en": "forest"
   },
   {
     "id": 1396,
@@ -3202,18 +3202,18 @@
   {
     "id": 1401,
     "es": "hierba",
-    "en": "grass",
+    "en": "weed",
     "ruta_img": "hierba.png",
     "tts_es": "hierba",
-    "tts_en": "grass"
+    "tts_en": "weed"
   },
   {
     "id": 1402,
     "es": "musgo",
-    "en": "grass",
+    "en": "moss",
     "ruta_img": "musgo.png",
     "tts_es": "musgo",
-    "tts_en": "grass"
+    "tts_en": "moss"
   },
   {
     "id": 1403,
@@ -3242,18 +3242,18 @@
   {
     "id": 1406,
     "es": "dentro",
-    "en": "within",
+    "en": "inside",
     "ruta_img": "dentro.png",
     "tts_es": "dentro",
-    "tts_en": "within"
+    "tts_en": "inside"
   },
   {
     "id": 1407,
     "es": "fuera",
-    "en": "it is",
+    "en": "outside",
     "ruta_img": "fuera.png",
     "tts_es": "fuera",
-    "tts_en": "it is"
+    "tts_en": "outside"
   },
   {
     "id": 1408,
@@ -3274,18 +3274,18 @@
   {
     "id": 1410,
     "es": "cerca",
-    "en": "beside",
+    "en": "near",
     "ruta_img": "cerca.png",
     "tts_es": "cerca",
-    "tts_en": "beside"
+    "tts_en": "near"
   },
   {
     "id": 1411,
     "es": "lejos",
-    "en": "away",
+    "en": "far",
     "ruta_img": "lejos.png",
     "tts_es": "lejos",
-    "tts_en": "away"
+    "tts_en": "far"
   },
   {
     "id": 1412,
@@ -3330,10 +3330,10 @@
   {
     "id": 1417,
     "es": "derecha",
-    "en": "right wing",
+    "en": "right",
     "ruta_img": "derecha.png",
     "tts_es": "derecha",
-    "tts_en": "right wing"
+    "tts_en": "right"
   },
   {
     "id": 1418,
@@ -3346,18 +3346,18 @@
   {
     "id": 1419,
     "es": "entrada",
-    "en": "forecourt",
+    "en": "entrance",
     "ruta_img": "entrada.png",
     "tts_es": "entrada",
-    "tts_en": "forecourt"
+    "tts_en": "entrance"
   },
   {
     "id": 1420,
     "es": "salida",
-    "en": "departure",
+    "en": "exit",
     "ruta_img": "salida.png",
     "tts_es": "salida",
-    "tts_en": "departure"
+    "tts_en": "exit"
   },
   {
     "id": 1421,
@@ -3394,10 +3394,10 @@
   {
     "id": 1425,
     "es": "lleno",
-    "en": "plein",
+    "en": "full",
     "ruta_img": "lleno.png",
     "tts_es": "lleno",
-    "tts_en": "plein"
+    "tts_en": "full"
   },
   {
     "id": 1426,
