@@ -56,13 +56,13 @@
   {
     "id": 1010,
     "es": "bicicleta",
-    "en": "bicycle",
+    "en": "bike",
     "ruta_img": "bicicleta.png"
   },
   {
     "id": 1011,
     "es": "boca",
-    "en": "mouth",
+    "en": "nozzle",
     "ruta_img": "boca.png"
   },
   {
@@ -104,7 +104,7 @@
   {
     "id": 1018,
     "es": "casa",
-    "en": "home",
+    "en": "house",
     "ruta_img": "casa.png"
   },
   {
@@ -116,7 +116,7 @@
   {
     "id": 1020,
     "es": "corazón",
-    "en": "heart",
+    "en": "core",
     "ruta_img": "corazon.png"
   },
   {
@@ -146,13 +146,13 @@
   {
     "id": 1025,
     "es": "corona",
-    "en": "crown",
+    "en": "bottle mouth",
     "ruta_img": "corona.png"
   },
   {
     "id": 1026,
     "es": "cactus",
-    "en": "cactus",
+    "en": "cactaceae",
     "ruta_img": "cactus.png"
   },
   {
@@ -182,31 +182,31 @@
   {
     "id": 1031,
     "es": "dientes",
-    "en": "teeth",
+    "en": "cloves",
     "ruta_img": "dientes.png"
   },
   {
     "id": 1032,
     "es": "dado",
-    "en": "given",
+    "en": "dice",
     "ruta_img": "dado.png"
   },
   {
     "id": 1033,
     "es": "dragón",
-    "en": "dragon",
+    "en": "dracone",
     "ruta_img": "dragon.png"
   },
   {
     "id": 1034,
     "es": "dulce",
-    "en": "sweet",
+    "en": "doux, sweet",
     "ruta_img": "dulce.png"
   },
   {
     "id": 1035,
     "es": "dedos",
-    "en": "fingers",
+    "en": "finger",
     "ruta_img": "dedos.png"
   },
   {
@@ -236,13 +236,13 @@
   {
     "id": 1040,
     "es": "escalera",
-    "en": "ladder",
+    "en": "stairway",
     "ruta_img": "escalera.png"
   },
   {
     "id": 1041,
     "es": "espejo",
-    "en": "mirror",
+    "en": "mirrored",
     "ruta_img": "espejo.png"
   },
   {
@@ -254,7 +254,7 @@
   {
     "id": 1043,
     "es": "erizo",
-    "en": "sea ??urchin",
+    "en": "european edible sea urchin",
     "ruta_img": "erizo.png"
   },
   {
@@ -266,7 +266,7 @@
   {
     "id": 1045,
     "es": "elote",
-    "en": "corn",
+    "en": "sweetcorn on-the-cob",
     "ruta_img": "elote.png"
   },
   {
@@ -278,7 +278,7 @@
   {
     "id": 1047,
     "es": "espada",
-    "en": "sword",
+    "en": "spee",
     "ruta_img": "espada.png"
   },
   {
@@ -296,7 +296,7 @@
   {
     "id": 1050,
     "es": "fuego",
-    "en": "fire",
+    "en": "ﬁre",
     "ruta_img": "fuego.png"
   },
   {
@@ -308,13 +308,13 @@
   {
     "id": 1052,
     "es": "flauta",
-    "en": "flute",
+    "en": "fluted champagne glass",
     "ruta_img": "flauta.png"
   },
   {
     "id": 1053,
     "es": "faro",
-    "en": "lighthouse",
+    "en": "headlight",
     "ruta_img": "faro.png"
   },
   {
@@ -326,7 +326,7 @@
   {
     "id": 1055,
     "es": "fuente",
-    "en": "fountain",
+    "en": "font",
     "ruta_img": "fuente.png"
   },
   {
@@ -344,13 +344,13 @@
   {
     "id": 1058,
     "es": "guitarra",
-    "en": "guitar",
+    "en": "peruvian guitarfish",
     "ruta_img": "guitarra.png"
   },
   {
     "id": 1059,
     "es": "gallina",
-    "en": "hen",
+    "en": "chicken, fowl, hen",
     "ruta_img": "gallina.png"
   },
   {
@@ -368,31 +368,31 @@
   {
     "id": 1062,
     "es": "gusano",
-    "en": "worm",
+    "en": "internet worm",
     "ruta_img": "gusano.png"
   },
   {
     "id": 1063,
     "es": "gorra",
-    "en": "cap",
+    "en": "cap hat",
     "ruta_img": "gorra.png"
   },
   {
     "id": 1064,
     "es": "granja",
-    "en": "farm",
+    "en": "farm building",
     "ruta_img": "granja.png"
   },
   {
     "id": 1065,
     "es": "grifo",
-    "en": "tap",
+    "en": "faucet",
     "ruta_img": "grifo.png"
   },
   {
     "id": 1066,
     "es": "helado",
-    "en": "frozen",
+    "en": "ice cream",
     "ruta_img": "helado.png"
   },
   {
@@ -404,13 +404,13 @@
   {
     "id": 1068,
     "es": "huevo",
-    "en": "egg",
+    "en": "products",
     "ruta_img": "huevo.png"
   },
   {
     "id": 1069,
     "es": "hoja",
-    "en": "sheet",
+    "en": "blade",
     "ruta_img": "hoja.png"
   },
   {
@@ -434,7 +434,7 @@
   {
     "id": 1073,
     "es": "hongo",
-    "en": "fungus",
+    "en": "bowler",
     "ruta_img": "hongo.png"
   },
   {
@@ -458,7 +458,7 @@
   {
     "id": 1077,
     "es": "imán",
-    "en": "magnet",
+    "en": "imam",
     "ruta_img": "iman.png"
   },
   {
@@ -494,7 +494,7 @@
   {
     "id": 1083,
     "es": "jirafa",
-    "en": "giraffe",
+    "en": "boom microphone",
     "ruta_img": "jirafa.png"
   },
   {
@@ -506,7 +506,7 @@
   {
     "id": 1085,
     "es": "jardín",
-    "en": "garden",
+    "en": "front yard",
     "ruta_img": "jardin.png"
   },
   {
@@ -536,13 +536,13 @@
   {
     "id": 1090,
     "es": "jarra",
-    "en": "jug",
+    "en": "jar",
     "ruta_img": "jarra.png"
   },
   {
     "id": 1091,
     "es": "jinete",
-    "en": "rider",
+    "en": "horseman, rider",
     "ruta_img": "jinete.png"
   },
   {
@@ -566,7 +566,7 @@
   {
     "id": 1095,
     "es": "libro",
-    "en": "book",
+    "en": "civil code",
     "ruta_img": "libro.png"
   },
   {
@@ -590,7 +590,7 @@
   {
     "id": 1099,
     "es": "lagarto",
-    "en": "lizard",
+    "en": "dragonet",
     "ruta_img": "lagarto.png"
   },
   {
@@ -608,7 +608,7 @@
   {
     "id": 1102,
     "es": "lobo",
-    "en": "wolf",
+    "en": "shadow of the wolf",
     "ruta_img": "lobo.png"
   },
   {
@@ -632,7 +632,7 @@
   {
     "id": 1106,
     "es": "manzana",
-    "en": "apple",
+    "en": "acid",
     "ruta_img": "manzana.png"
   },
   {
@@ -644,13 +644,13 @@
   {
     "id": 1108,
     "es": "mono",
-    "en": "bun",
+    "en": "monkey",
     "ruta_img": "mono.png"
   },
   {
     "id": 1109,
     "es": "montaña",
-    "en": "mountain",
+    "en": "rice",
     "ruta_img": "montana.png"
   },
   {
@@ -716,25 +716,25 @@
   {
     "id": 1120,
     "es": "niña",
-    "en": "little girl",
+    "en": "girl",
     "ruta_img": "nina.png"
   },
   {
     "id": 1121,
     "es": "niño",
-    "en": "child",
+    "en": "boy",
     "ruta_img": "nino.png"
   },
   {
     "id": 1122,
     "es": "nave",
-    "en": "nave",
+    "en": "warehouse",
     "ruta_img": "nave.png"
   },
   {
     "id": 1123,
     "es": "nuez",
-    "en": "nut",
+    "en": "english walnut, walnut",
     "ruta_img": "nuez.png"
   },
   {
@@ -746,19 +746,19 @@
   {
     "id": 1125,
     "es": "ñu",
-    "en": "wildebeest",
+    "en": "gnu",
     "ruta_img": "nu.png"
   },
   {
     "id": 1126,
     "es": "ñandú",
-    "en": "Rhea",
+    "en": "greater rhea",
     "ruta_img": "nandu.png"
   },
   {
     "id": 1127,
     "es": "ñame",
-    "en": "yam",
+    "en": "kilari, kins, kirta",
     "ruta_img": "name.png"
   },
   {
@@ -830,7 +830,7 @@
   {
     "id": 1139,
     "es": "pez",
-    "en": "fish",
+    "en": "lower side of the neck",
     "ruta_img": "pez.png"
   },
   {
@@ -860,13 +860,13 @@
   {
     "id": 1144,
     "es": "paloma",
-    "en": "pigeon",
+    "en": "hen pigeon",
     "ruta_img": "paloma.png"
   },
   {
     "id": 1145,
     "es": "pulpo",
-    "en": "octopus",
+    "en": "octopuses",
     "ruta_img": "pulpo.png"
   },
   {
@@ -884,7 +884,7 @@
   {
     "id": 1148,
     "es": "quinqué",
-    "en": "oil lamp",
+    "en": "argand lamp",
     "ruta_img": "quinque.png"
   },
   {
@@ -896,7 +896,7 @@
   {
     "id": 1150,
     "es": "ratón",
-    "en": "mouse",
+    "en": "acute tox",
     "ruta_img": "raton.png"
   },
   {
@@ -914,13 +914,13 @@
   {
     "id": 1153,
     "es": "rosa",
-    "en": "pink",
+    "en": "rose",
     "ruta_img": "rosa.png"
   },
   {
     "id": 1154,
     "es": "rayo",
-    "en": "ray",
+    "en": "lightning",
     "ruta_img": "rayo.png"
   },
   {
@@ -932,7 +932,7 @@
   {
     "id": 1156,
     "es": "red",
-    "en": "grid",
+    "en": "network",
     "ruta_img": "red.png"
   },
   {
@@ -944,7 +944,7 @@
   {
     "id": 1158,
     "es": "rueda",
-    "en": "wheel",
+    "en": "caster, castor",
     "ruta_img": "rueda.png"
   },
   {
@@ -980,7 +980,7 @@
   {
     "id": 1164,
     "es": "sapo",
-    "en": "toad",
+    "en": "toad car part",
     "ruta_img": "sapo.png"
   },
   {
@@ -992,13 +992,13 @@
   {
     "id": 1166,
     "es": "soplar",
-    "en": "blow",
+    "en": "to blow",
     "ruta_img": "soplar.png"
   },
   {
     "id": 1167,
     "es": "saco",
-    "en": "sack",
+    "en": "bag",
     "ruta_img": "saco.png"
   },
   {
@@ -1016,13 +1016,13 @@
   {
     "id": 1170,
     "es": "tortuga",
-    "en": "tortoise",
+    "en": "turtle",
     "ruta_img": "tortuga.png"
   },
   {
     "id": 1171,
     "es": "taza",
-    "en": "cup",
+    "en": "stacked cup",
     "ruta_img": "taza.png"
   },
   {
@@ -1040,13 +1040,13 @@
   {
     "id": 1174,
     "es": "tubo",
-    "en": "tube",
+    "en": "side",
     "ruta_img": "tubo.png"
   },
   {
     "id": 1175,
     "es": "tambor",
-    "en": "drum",
+    "en": "bull wheel, winding drum",
     "ruta_img": "tambor.png"
   },
   {
@@ -1094,7 +1094,7 @@
   {
     "id": 1183,
     "es": "vela",
-    "en": "candle",
+    "en": "sail",
     "ruta_img": "vela.png"
   },
   {
@@ -1106,7 +1106,7 @@
   {
     "id": 1185,
     "es": "vestido",
-    "en": "dress",
+    "en": "bee dress, bee suit, clothing",
     "ruta_img": "vestido.png"
   },
   {
@@ -1118,7 +1118,7 @@
   {
     "id": 1187,
     "es": "volar",
-    "en": "fly",
+    "en": "flying",
     "ruta_img": "volar.png"
   },
   {
@@ -1148,7 +1148,7 @@
   {
     "id": 1192,
     "es": "yoyo",
-    "en": "yo-yo",
+    "en": "weedage",
     "ruta_img": "yoyo.png"
   },
   {
@@ -1190,7 +1190,7 @@
   {
     "id": 1199,
     "es": "rápido",
-    "en": "fast",
+    "en": "grade reducer",
     "ruta_img": "rapido.png"
   },
   {
@@ -1208,7 +1208,7 @@
   {
     "id": 1202,
     "es": "no",
-    "en": "No",
+    "en": "no",
     "ruta_img": "no.png"
   },
   {
@@ -1220,13 +1220,13 @@
   {
     "id": 1204,
     "es": "hambre",
-    "en": "hunger",
+    "en": "famine",
     "ruta_img": "hambre.png"
   },
   {
     "id": 1205,
     "es": "daño",
-    "en": "damage",
+    "en": "harm",
     "ruta_img": "dano.png"
   },
   {
@@ -1238,31 +1238,31 @@
   {
     "id": 1207,
     "es": "cielo",
-    "en": "darling",
+    "en": "state of the sky",
     "ruta_img": "cielo.png"
   },
   {
     "id": 1208,
     "es": "duerme",
-    "en": "sleep",
+    "en": "sleeping",
     "ruta_img": "duerme.png"
   },
   {
     "id": 1209,
     "es": "pío",
-    "en": "pious",
+    "en": "skewbald",
     "ruta_img": "pio.png"
   },
   {
     "id": 1210,
     "es": "llorando",
-    "en": "crying",
+    "en": "in tears",
     "ruta_img": "llorando.png"
   },
   {
     "id": 1211,
     "es": "semillas",
-    "en": "seeds",
+    "en": "seed germ for botanical purposes",
     "ruta_img": "semillas.png"
   },
   {
@@ -1286,7 +1286,7 @@
   {
     "id": 1215,
     "es": "dormir",
-    "en": "sleep",
+    "en": "sleeping",
     "ruta_img": "dormir.png"
   },
   {
@@ -1316,7 +1316,7 @@
   {
     "id": 1220,
     "es": "mango",
-    "en": "mango",
+    "en": "handle",
     "ruta_img": "mango.png"
   },
   {
@@ -1346,19 +1346,19 @@
   {
     "id": 1225,
     "es": "durazno",
-    "en": "peach",
+    "en": "amygdalus persica",
     "ruta_img": "durazno.png"
   },
   {
     "id": 1226,
     "es": "frambuesa",
-    "en": "raspberry",
+    "en": "european red raspberry, raspberry",
     "ruta_img": "frambuesa.png"
   },
   {
     "id": 1227,
     "es": "mora",
-    "en": "blackberry",
+    "en": "mulberry",
     "ruta_img": "mora.png"
   },
   {
@@ -1382,7 +1382,7 @@
   {
     "id": 1231,
     "es": "maracuyá",
-    "en": "passion fruit",
+    "en": "yellow passion flower",
     "ruta_img": "maracuya.png"
   },
   {
@@ -1418,13 +1418,13 @@
   {
     "id": 1237,
     "es": "moto",
-    "en": "motorbike",
+    "en": "motorcycle",
     "ruta_img": "moto.png"
   },
   {
     "id": 1238,
     "es": "taxi",
-    "en": "Taxi",
+    "en": "taxi",
     "ruta_img": "taxi.png"
   },
   {
@@ -1436,13 +1436,13 @@
   {
     "id": 1240,
     "es": "bomberos",
-    "en": "firefighters",
+    "en": "firemen",
     "ruta_img": "bomberos.png"
   },
   {
     "id": 1241,
     "es": "patrulla",
-    "en": "patrol",
+    "en": "police car",
     "ruta_img": "patrulla.png"
   },
   {
@@ -1460,7 +1460,7 @@
   {
     "id": 1244,
     "es": "patineta",
-    "en": "skateboard",
+    "en": "scooter",
     "ruta_img": "patineta.png"
   },
   {
@@ -1472,25 +1472,25 @@
   {
     "id": 1246,
     "es": "velero",
-    "en": "sailboat",
+    "en": "sailplane",
     "ruta_img": "velero.png"
   },
   {
     "id": 1247,
     "es": "tranvía",
-    "en": "tram",
+    "en": "tramway",
     "ruta_img": "tranvia.png"
   },
   {
     "id": 1248,
     "es": "metro",
-    "en": "metro",
+    "en": "meter",
     "ruta_img": "metro.png"
   },
   {
     "id": 1249,
     "es": "teleférico",
-    "en": "cable car",
+    "en": "cablecar",
     "ruta_img": "teleferico.png"
   },
   {
@@ -1520,7 +1520,7 @@
   {
     "id": 1254,
     "es": "pasta",
-    "en": "paste",
+    "en": "pasta",
     "ruta_img": "pasta.png"
   },
   {
@@ -1550,7 +1550,7 @@
   {
     "id": 1259,
     "es": "galleta",
-    "en": "cookie",
+    "en": "biscuit",
     "ruta_img": "galleta.png"
   },
   {
@@ -1568,13 +1568,13 @@
   {
     "id": 1262,
     "es": "maíz",
-    "en": "corn",
+    "en": "corn, maize",
     "ruta_img": "maiz.png"
   },
   {
     "id": 1263,
     "es": "frijoles",
-    "en": "beans",
+    "en": "kidney beans",
     "ruta_img": "frijoles.png"
   },
   {
@@ -1586,7 +1586,7 @@
   {
     "id": 1265,
     "es": "pescado",
-    "en": "fish",
+    "en": "products",
     "ruta_img": "pescado.png"
   },
   {
@@ -1598,7 +1598,7 @@
   {
     "id": 1267,
     "es": "pantalón",
-    "en": "pants",
+    "en": "trousers",
     "ruta_img": "pantalon.png"
   },
   {
@@ -1628,19 +1628,19 @@
   {
     "id": 1272,
     "es": "bufanda",
-    "en": "scarf",
+    "en": "muffler",
     "ruta_img": "bufanda.png"
   },
   {
     "id": 1273,
     "es": "guantes",
-    "en": "gloves",
+    "en": "protective",
     "ruta_img": "guantes.png"
   },
   {
     "id": 1274,
     "es": "pijama",
-    "en": "pajamas",
+    "en": "pyjamas",
     "ruta_img": "pijama.png"
   },
   {
@@ -1658,19 +1658,19 @@
   {
     "id": 1277,
     "es": "sudadera",
-    "en": "hoodie",
+    "en": "sweatshirt",
     "ruta_img": "sudadera.png"
   },
   {
     "id": 1278,
     "es": "cinturón",
-    "en": "belt",
+    "en": "loop belt",
     "ruta_img": "cinturon.png"
   },
   {
     "id": 1279,
     "es": "bolsa",
-    "en": "bag",
+    "en": "pouch",
     "ruta_img": "bolsa.png"
   },
   {
@@ -1688,7 +1688,7 @@
   {
     "id": 1282,
     "es": "corbata",
-    "en": "tie",
+    "en": "necktie",
     "ruta_img": "corbata.png"
   },
   {
@@ -1700,7 +1700,7 @@
   {
     "id": 1284,
     "es": "bañador",
-    "en": "swimsuit",
+    "en": "swimwear",
     "ruta_img": "banador.png"
   },
   {
@@ -1754,13 +1754,13 @@
   {
     "id": 1293,
     "es": "turquesa",
-    "en": "turquoise",
+    "en": "teal\"",
     "ruta_img": "turquesa.png"
   },
   {
     "id": 1294,
     "es": "dorado",
-    "en": "golden",
+    "en": "gold  golden",
     "ruta_img": "dorado.png"
   },
   {
@@ -1784,7 +1784,7 @@
   {
     "id": 1298,
     "es": "celeste",
-    "en": "sky blue",
+    "en": "light blue",
     "ruta_img": "celeste.png"
   },
   {
@@ -1802,7 +1802,7 @@
   {
     "id": 1301,
     "es": "coral",
-    "en": "coral",
+    "en": "choral",
     "ruta_img": "coral.png"
   },
   {
@@ -1814,19 +1814,19 @@
   {
     "id": 1303,
     "es": "fucsia",
-    "en": "fuchsia",
+    "en": "fushia",
     "ruta_img": "fucsia.png"
   },
   {
     "id": 1304,
     "es": "lima",
-    "en": "lime",
+    "en": "shaper",
     "ruta_img": "lima.png"
   },
   {
     "id": 1305,
     "es": "ocre",
-    "en": "ocher",
+    "en": "ochre",
     "ruta_img": "ocre.png"
   },
   {
@@ -1838,13 +1838,13 @@
   {
     "id": 1307,
     "es": "saltar",
-    "en": "hop",
+    "en": "jump",
     "ruta_img": "saltar.png"
   },
   {
     "id": 1308,
     "es": "beber",
-    "en": "drink",
+    "en": "drinking",
     "ruta_img": "beber.png"
   },
   {
@@ -1856,7 +1856,7 @@
   {
     "id": 1310,
     "es": "cantar",
-    "en": "sing",
+    "en": "singing,",
     "ruta_img": "cantar.png"
   },
   {
@@ -1868,19 +1868,19 @@
   {
     "id": 1312,
     "es": "leer",
-    "en": "read",
+    "en": "reading",
     "ruta_img": "leer.png"
   },
   {
     "id": 1313,
     "es": "dibujar",
-    "en": "draw",
+    "en": "draw a picture",
     "ruta_img": "dibujar.png"
   },
   {
     "id": 1314,
     "es": "pintar",
-    "en": "paint",
+    "en": "painting",
     "ruta_img": "pintar.png"
   },
   {
@@ -1892,31 +1892,31 @@
   {
     "id": 1316,
     "es": "llorar",
-    "en": "cry",
+    "en": "crying",
     "ruta_img": "llorar.png"
   },
   {
     "id": 1317,
     "es": "reír",
-    "en": "laugh",
+    "en": "laughing",
     "ruta_img": "reir.png"
   },
   {
     "id": 1318,
     "es": "abrazar",
-    "en": "embrace",
+    "en": "hug",
     "ruta_img": "abrazar.png"
   },
   {
     "id": 1319,
     "es": "besar",
-    "en": "kiss",
+    "en": "kiss you",
     "ruta_img": "besar.png"
   },
   {
     "id": 1320,
     "es": "caminar",
-    "en": "walk",
+    "en": "walking",
     "ruta_img": "caminar.png"
   },
   {
@@ -1946,7 +1946,7 @@
   {
     "id": 1325,
     "es": "abrir",
-    "en": "open",
+    "en": "opening",
     "ruta_img": "abrir.png"
   },
   {
@@ -2000,7 +2000,7 @@
   {
     "id": 1334,
     "es": "tranquilo",
-    "en": "don't worry",
+    "en": "tranquil",
     "ruta_img": "tranquilo.png"
   },
   {
@@ -2018,7 +2018,7 @@
   {
     "id": 1337,
     "es": "nervioso",
-    "en": "highly strung",
+    "en": "nervous",
     "ruta_img": "nervioso.png"
   },
   {
@@ -2132,7 +2132,7 @@
   {
     "id": 1356,
     "es": "suave",
-    "en": "gentle",
+    "en": "soft",
     "ruta_img": "suave.png"
   },
   {
@@ -2168,7 +2168,7 @@
   {
     "id": 1362,
     "es": "bonito",
-    "en": "pretty",
+    "en": "nice",
     "ruta_img": "bonito.png"
   },
   {
@@ -2192,13 +2192,13 @@
   {
     "id": 1366,
     "es": "alto",
-    "en": "high",
+    "en": "tall",
     "ruta_img": "alto.png"
   },
   {
     "id": 1367,
     "es": "bajo",
-    "en": "low",
+    "en": "short",
     "ruta_img": "bajo.png"
   },
   {
@@ -2210,7 +2210,7 @@
   {
     "id": 1369,
     "es": "delgado",
-    "en": "slim",
+    "en": "thin",
     "ruta_img": "delgado.png"
   },
   {
@@ -2306,13 +2306,13 @@
   {
     "id": 1385,
     "es": "talón",
-    "en": "bead",
+    "en": "heel",
     "ruta_img": "talon.png"
   },
   {
     "id": 1386,
     "es": "uña",
-    "en": "a",
+    "en": "nail",
     "ruta_img": "una.png"
   },
   {
@@ -2402,7 +2402,7 @@
   {
     "id": 1401,
     "es": "hierba",
-    "en": "grass",
+    "en": "weed",
     "ruta_img": "hierba.png"
   },
   {
@@ -2414,7 +2414,7 @@
   {
     "id": 1403,
     "es": "cascada",
-    "en": "waterfall",
+    "en": "cascade",
     "ruta_img": "cascada.png"
   },
   {
@@ -2438,7 +2438,7 @@
   {
     "id": 1407,
     "es": "fuera",
-    "en": "out",
+    "en": "outside",
     "ruta_img": "fuera.png"
   },
   {
@@ -2468,7 +2468,7 @@
   {
     "id": 1412,
     "es": "encima",
-    "en": "on",
+    "en": "over",
     "ruta_img": "encima.png"
   },
   {
@@ -2480,7 +2480,7 @@
   {
     "id": 1414,
     "es": "delante",
-    "en": "in front of",
+    "en": "front",
     "ruta_img": "delante.png"
   },
   {
@@ -2504,7 +2504,7 @@
   {
     "id": 1418,
     "es": "noche",
-    "en": "evening",
+    "en": "night",
     "ruta_img": "noche.png"
   },
   {
@@ -2528,7 +2528,7 @@
   {
     "id": 1422,
     "es": "fin",
-    "en": "end",
+    "en": "the end",
     "ruta_img": "fin.png"
   },
   {
