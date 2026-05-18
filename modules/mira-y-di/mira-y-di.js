@@ -20,11 +20,13 @@ let _letra = null;
 let _lista = [];
 let _idx = 0;
 let _audioEl = null;
+let _langConfig = { es: true, en: false };
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
   _el = container;
-  _lang = window._langActivo || 'es';
+  _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
+  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
 
   try {
     const res = await fetch('./data/vocabulario.json');
@@ -272,13 +274,6 @@ function _seleccionarLetra(letra) {
   _letra = letra;
   _idx = 0;
 
-  if (!_vocab[letra]?.[_lang]?.length) {
-    _lang = _lang === 'es' ? 'en' : 'es';
-    document.querySelectorAll('.lang-btn').forEach(b =>
-      b.classList.toggle('activo', b.dataset.lang === _lang)
-    );
-  }
-
   _construirLista();
   _el.querySelectorAll('.md-letra-btn').forEach(b =>
     b.classList.toggle('activa', b.dataset.letra === letra)
@@ -287,7 +282,7 @@ function _seleccionarLetra(letra) {
 }
 
 function _construirLista() {
-  const ids = _vocab[_letra]?.[_lang] || [];
+  const ids = _vocab[_letra]?.es || [];  // siempre el set ES
   _lista = _shuffle(ids.map(item => {
     if (typeof item === 'number') {
       const entrada = _pictos[item];
@@ -307,14 +302,13 @@ function _construirLista() {
 
 // ─── Cambio de idioma desde pill global ───────────────────────────────────────
 function _onLangChange(e) {
-  // app.js emite { langConfig: { es, en } } — resolver a string 'es' | 'en'
   const cfg = e.detail?.langConfig;
-  const nuevoLang = cfg
-    ? (cfg.en && !cfg.es ? 'en' : 'es')
-    : e.detail?.lang;
-  if (!nuevoLang || nuevoLang === _lang) return;
-  // Ñ solo tiene español — ignorar cambio a EN
-  if (_letra && !_vocab[_letra]?.[nuevoLang]?.length) return;
+  if (!cfg) return;
+  // Guardar el langConfig para usarlo en reproducción
+  _langConfig = { ...cfg };
+  // Para mostrar texto: si solo EN → 'en', si no → 'es'
+  const nuevoLang = (cfg.en && !cfg.es) ? 'en' : 'es';
+  if (nuevoLang === _lang) return;
   _lang = nuevoLang;
   _construirLista();
   _actualizarVista();
@@ -382,9 +376,11 @@ function _bindEvents() {
     haptic(15);
     if (!_lista.length) return;
     const item = _lista[_idx];
-    const lang = _lang === 'en' ? 'en-US' : 'es-MX';
-    const texto = _lang === 'en' ? (item.tts_en || item.texto) : (item.tts_es || item.texto);
-    const archivo = item.picto;  // ruta_img sin .png — mismo nombre en es/ y en/
+    const { es, en } = _langConfig;
+    const reproducirEn = (es && en) ? Math.random() < 0.5 : !!en;
+    const lang = reproducirEn ? 'en-US' : 'es-MX';
+    const texto = reproducirEn ? (item.tts_en || item.tts_es) : item.tts_es;
+    const archivo = item.picto;  // mismo nombre en es/ y en/
     _hablar(texto, lang, archivo);
   });
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
