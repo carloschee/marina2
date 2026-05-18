@@ -9,7 +9,7 @@ import { lanzarConfeti, haptic, toast } from '../../core/ui.js';
 import { Telemetry }                    from '../../core/telemetry.js';
 
 const TEMAS_URL = './data/memorama.json';
-const PICTO_BASE = './assets/pictogramas/es/';
+const PICTO_BASE = './assets/pictogramas/';
 const AUDIO_BASE = './assets/audio/';
 const PARES      = 24;
 
@@ -423,10 +423,12 @@ function _iniciarJuego() {
   // Normalizar — palabras puede ser strings (legacy) u objetos {picto_id, es, en, tts_es, tts_en}
   const _normalizarPalabra = (p) => {
     if (typeof p === 'string') return { picto: p, tts_es: p, tts_en: p };
+    // ruta_img sin extensión = nombre del archivo MP3/PNG
+    const ruta = (p.ruta_img || '').replace('.png', '');
     return {
-      picto:  p.es || p.picto || String(p.picto_id || ''),
-      tts_es: p.tts_es || p.es || '',
-      tts_en: p.tts_en || p.en || p.tts_es || p.es || '',
+      picto:   ruta || p.es || p.picto || String(p.picto_id || ''),
+      tts_es:  p.tts_es || p.es || '',
+      tts_en:  p.tts_en || p.en || p.tts_es || p.es || '',
     };
   };
 
@@ -576,7 +578,9 @@ function _reproducirNombre(palabra) {
     TTS.speak(ttsTexto, { lang: audioLang === 'en' ? 'en-US' : 'es-MX', rate: 0.90, pitch: 1.15 });
   };
   _audioEl.onerror = _fb;
-  _audioEl.src = `${AUDIO_BASE}${audioLang}/${picto}.mp3`;
+  // El archivo MP3 siempre está en es/ con el nombre normalizado
+  // (el audio en inglés pronuncia la palabra en inglés pero el archivo se llama igual)
+  _audioEl.src = `${AUDIO_BASE}es/${picto}.mp3`;
   _audioEl.play().catch(_fb);
 }
 
