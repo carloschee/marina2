@@ -4,24 +4,24 @@
    que el stack-wrap no empuje al tablero.
 */
 
-import { TTS }                          from '../../core/tts.js';
+import { TTS } from '../../core/tts.js';
 import { lanzarConfeti, haptic, toast } from '../../core/ui.js';
-import { Telemetry }                    from '../../core/telemetry.js';
+import { Telemetry } from '../../core/telemetry.js';
 
 const TEMAS_URL = './data/memorama.json';
 const PICTO_BASE = './assets/pictogramas/';
 const AUDIO_BASE = './assets/audio/';
-const PARES      = 24;
+const PARES = 24;
 
-let _container  = null;
-let _temas      = [];
+let _container = null;
+let _temas = [];
 let _temaActivo = null;
-let _cartas     = [];
-let _volteadas  = [];
-let _bloqueado  = false;
-let _pares      = 0;
-let _lang       = 'es';
-let _audioEl    = null;
+let _cartas = [];
+let _volteadas = [];
+let _bloqueado = false;
+let _pares = 0;
+let _lang = 'es';
+let _audioEl = null;
 
 const _q = sel => _container?.querySelector(sel);
 
@@ -52,7 +52,7 @@ export function destroy() {
   _cartas = []; _temaActivo = null; _container = null;
 }
 
-export function onEnter() {}
+export function onEnter() { }
 export function onLeave() {
   if (_audioEl) _audioEl.pause();
   TTS.stop();
@@ -426,9 +426,9 @@ function _iniciarJuego() {
     // ruta_img sin extensión = nombre del archivo MP3/PNG
     const ruta = (p.ruta_img || '').replace('.png', '');
     return {
-      picto:   ruta || p.es || p.picto || String(p.picto_id || ''),
-      tts_es:  p.tts_es || p.es || '',
-      tts_en:  p.tts_en || p.en || p.tts_es || p.es || '',
+      picto: ruta || p.es || p.picto || String(p.picto_id || ''),
+      tts_es: p.es || '',
+      tts_en: p.en || p.es || '',
     };
   };
 
@@ -464,8 +464,8 @@ function _renderGrid() {
     const celda = document.createElement('div');
     celda.className = 'mem-celda';
     celda.style.animationDelay = (i * 0.018) + 's';
-    const picto  = carta.palabra.picto  || carta.palabra;
-    const label  = carta.palabra.tts_es || carta.palabra;
+    const picto = carta.palabra.picto || carta.palabra;
+    const label = carta.palabra.tts_es || carta.palabra;
     celda.innerHTML = `
       <div class="mem-carta" data-idx="${i}">
         <div class="mem-cara mem-dorso"></div>
@@ -567,9 +567,9 @@ function _reproducirNombre(palabra) {
   _audioEl.pause();
 
   const audioLang = window.getLang?.() || 'es';
-  const picto    = (typeof palabra === 'object') ? (palabra.picto  || palabra.es || '') : palabra;
+  const picto = (typeof palabra === 'object') ? (palabra.picto || palabra.es || '') : palabra;
   const ttsTexto = (typeof palabra === 'object')
-    ? (audioLang === 'en' ? (palabra.tts_en || palabra.tts_es || picto) : (palabra.tts_es || picto))
+    ? (audioLang === 'en' ? (palabra.tts_en || picto) : (palabra.tts_es || picto))
     : palabra;
 
   let _used = false;
@@ -597,7 +597,7 @@ function _tonoVictoria() {
       gain.gain.linearRampToValueAtTime(0, t + 0.18);
       osc.start(t); osc.stop(t + 0.20);
     });
-  } catch {}
+  } catch { }
 }
 
 function _onLangChange(e) {
