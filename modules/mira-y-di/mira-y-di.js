@@ -378,7 +378,7 @@ let _audioEl = null;
 
 function _hablar(texto, lang = 'es-MX') {
   const langCode = lang.slice(0, 2);
-  const url = `assets/audio/${langCode}/${texto}.mp3`;
+  const url = `assets/audio/${langCode}/${archivo}.mp3`;
 
   const img = _el?.querySelector('#md-picto');
   const _animar = () => {
