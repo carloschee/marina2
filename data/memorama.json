@@ -6,172 +6,172 @@
     "tipo": "vocabulario",
     "palabras": [
       {
-        "picto_id": 1269,
+        "picto_id": 1137,
         "es": "perro",
-        "en": "",
+        "en": "dog",
         "tts_es": "perro",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1110,
-        "es": "gato",
-        "en": "",
-        "tts_es": "gato",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1268,
-        "es": "pájaro",
-        "en": "",
-        "tts_es": "pájaro",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1271,
-        "es": "pez",
-        "en": "",
-        "tts_es": "pez",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1040,
-        "es": "conejo",
-        "en": "",
-        "tts_es": "conejo",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1039,
-        "es": "caballo",
-        "en": "",
-        "tts_es": "caballo",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1358,
-        "es": "vaca",
-        "en": "",
-        "tts_es": "vaca",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1255,
-        "es": "oveja",
-        "en": "",
-        "tts_es": "oveja",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1075,
-        "es": "elefante",
-        "en": "",
-        "tts_es": "elefante",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1194,
-        "es": "león",
-        "en": "",
-        "tts_es": "león",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1332,
-        "es": "tigre",
-        "en": "",
-        "tts_es": "tigre",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1254,
-        "es": "oso",
-        "en": "",
-        "tts_es": "oso",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1215,
-        "es": "mono",
-        "en": "",
-        "tts_es": "mono",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1165,
-        "es": "jirafa",
-        "en": "",
-        "tts_es": "jirafa",
-        "tts_en": ""
+        "tts_en": "dog"
       },
       {
         "picto_id": 1056,
+        "es": "gato",
+        "en": "gato (cat)",
+        "tts_es": "gato",
+        "tts_en": "gato (cat)"
+      },
+      {
+        "picto_id": 1136,
+        "es": "pájaro",
+        "en": "pájaro (bird)",
+        "tts_es": "pájaro",
+        "tts_en": "pájaro (bird)"
+      },
+      {
+        "picto_id": 1139,
+        "es": "pez",
+        "en": "lower side of the neck",
+        "tts_es": "pez",
+        "tts_en": "lower side of the neck"
+      },
+      {
+        "picto_id": 1023,
+        "es": "conejo",
+        "en": "conejo (rabbit)",
+        "tts_es": "conejo",
+        "tts_en": "conejo (rabbit)"
+      },
+      {
+        "picto_id": 1022,
+        "es": "caballo",
+        "en": "caballo (horse)",
+        "tts_es": "caballo",
+        "tts_en": "caballo (horse)"
+      },
+      {
+        "picto_id": 1180,
+        "es": "vaca",
+        "en": "vaca (cow)",
+        "tts_es": "vaca",
+        "tts_en": "vaca (cow)"
+      },
+      {
+        "picto_id": 1130,
+        "es": "oveja",
+        "en": "oveja (sheep)",
+        "tts_es": "oveja",
+        "tts_en": "oveja (sheep)"
+      },
+      {
+        "picto_id": 1038,
+        "es": "elefante",
+        "en": "elefante (elephant)",
+        "tts_es": "elefante",
+        "tts_en": "elefante (elephant)"
+      },
+      {
+        "picto_id": 1097,
+        "es": "león",
+        "en": "león (lion)",
+        "tts_es": "león",
+        "tts_en": "león (lion)"
+      },
+      {
+        "picto_id": 1168,
+        "es": "tigre",
+        "en": "tigre (tiger)",
+        "tts_es": "tigre",
+        "tts_en": "tigre (tiger)"
+      },
+      {
+        "picto_id": 1129,
+        "es": "oso",
+        "en": "bear",
+        "tts_es": "oso",
+        "tts_en": "bear"
+      },
+      {
+        "picto_id": 1108,
+        "es": "mono",
+        "en": "monkey",
+        "tts_es": "mono",
+        "tts_en": "monkey"
+      },
+      {
+        "picto_id": 1083,
+        "es": "jirafa",
+        "en": "boom microphone",
+        "tts_es": "jirafa",
+        "tts_en": "boom microphone"
+      },
+      {
+        "picto_id": 1029,
         "es": "delfín",
-        "en": "",
+        "en": "dolphin",
         "tts_es": "delfín",
-        "tts_en": ""
+        "tts_en": "dolphin"
       },
       {
-        "picto_id": 1212,
+        "picto_id": 1105,
         "es": "mariposa",
-        "en": "",
+        "en": "butterfly",
         "tts_es": "mariposa",
-        "tts_en": ""
+        "tts_en": "butterfly"
       },
       {
-        "picto_id": 1294,
+        "picto_id": 1149,
         "es": "rana",
-        "en": "",
+        "en": "frog",
         "tts_es": "rana",
-        "tts_en": ""
+        "tts_en": "frog"
       },
       {
-        "picto_id": 1334,
+        "picto_id": 1170,
         "es": "tortuga",
-        "en": "",
+        "en": "turtle",
         "tts_es": "tortuga",
-        "tts_en": ""
+        "tts_en": "turtle"
       },
       {
-        "picto_id": 1315,
+        "picto_id": 1162,
         "es": "serpiente",
-        "en": "",
+        "en": "mechanism for managing currency fluctuations",
         "tts_es": "serpiente",
-        "tts_en": ""
+        "tts_en": "mechanism for managing currency fluctuations"
       },
       {
-        "picto_id": 1419,
+        "picto_id": 1219,
         "es": "águila",
-        "en": "",
+        "en": "eagle",
         "tts_es": "águila",
-        "tts_en": ""
+        "tts_en": "eagle"
       },
       {
-        "picto_id": 1020,
+        "picto_id": 1013,
         "es": "ballena",
-        "en": "",
+        "en": "whale",
         "tts_es": "ballena",
-        "tts_en": ""
+        "tts_en": "whale"
       },
       {
-        "picto_id": 1277,
+        "picto_id": 1145,
         "es": "pulpo",
-        "en": "",
+        "en": "octopuses",
         "tts_es": "pulpo",
-        "tts_en": ""
+        "tts_en": "octopuses"
       },
       {
         "picto_id": 1004,
         "es": "araña",
-        "en": "",
+        "en": "spider assembly",
         "tts_es": "araña",
-        "tts_en": ""
+        "tts_en": "spider assembly"
       },
       {
         "picto_id": 1007,
         "es": "abeja",
-        "en": "",
+        "en": "bee",
         "tts_es": "abeja",
-        "tts_en": ""
+        "tts_en": "bee"
       }
     ]
   },
@@ -182,172 +182,172 @@
     "tipo": "vocabulario",
     "palabras": [
       {
-        "picto_id": 1213,
+        "picto_id": 1106,
         "es": "manzana",
-        "en": "",
+        "en": "acid",
         "tts_es": "manzana",
-        "tts_en": ""
+        "tts_en": "acid"
+      },
+      {
+        "picto_id": 1117,
+        "es": "naranja",
+        "en": "orange",
+        "tts_es": "naranja",
+        "tts_en": "orange"
+      },
+      {
+        "picto_id": 1159,
+        "es": "sandía",
+        "en": "watermelon",
+        "tts_es": "sandía",
+        "tts_en": "watermelon"
+      },
+      {
+        "picto_id": 1177,
+        "es": "uva",
+        "en": "grape",
+        "tts_es": "uva",
+        "tts_en": "grape"
+      },
+      {
+        "picto_id": 1049,
+        "es": "fresa",
+        "en": "strawberry",
+        "tts_es": "fresa",
+        "tts_en": "strawberry"
+      },
+      {
+        "picto_id": 1140,
+        "es": "piña",
+        "en": "pineapple",
+        "tts_es": "piña",
+        "tts_en": "pineapple"
+      },
+      {
+        "picto_id": 1220,
+        "es": "mango",
+        "en": "handle",
+        "tts_es": "mango",
+        "tts_en": "handle"
+      },
+      {
+        "picto_id": 1221,
+        "es": "pera",
+        "en": "pear",
+        "tts_es": "pera",
+        "tts_en": "pear"
+      },
+      {
+        "picto_id": 1103,
+        "es": "limón",
+        "en": "lemon",
+        "tts_es": "limón",
+        "tts_en": "lemon"
+      },
+      {
+        "picto_id": 1222,
+        "es": "plátano",
+        "en": "banana",
+        "tts_es": "plátano",
+        "tts_en": "banana"
+      },
+      {
+        "picto_id": 1223,
+        "es": "melón",
+        "en": "melon",
+        "tts_es": "melón",
+        "tts_en": "melon"
+      },
+      {
+        "picto_id": 1224,
+        "es": "cereza",
+        "en": "cherry",
+        "tts_es": "cereza",
+        "tts_en": "cherry"
+      },
+      {
+        "picto_id": 1093,
+        "es": "kiwi",
+        "en": "kiwi",
+        "tts_es": "kiwi",
+        "tts_en": "kiwi"
+      },
+      {
+        "picto_id": 1225,
+        "es": "durazno",
+        "en": "amygdalus persica",
+        "tts_es": "durazno",
+        "tts_en": "amygdalus persica"
+      },
+      {
+        "picto_id": 1226,
+        "es": "frambuesa",
+        "en": "european red raspberry, raspberry",
+        "tts_es": "frambuesa",
+        "tts_en": "european red raspberry, raspberry"
+      },
+      {
+        "picto_id": 1227,
+        "es": "mora",
+        "en": "mulberry",
+        "tts_es": "mora",
+        "tts_en": "mulberry"
+      },
+      {
+        "picto_id": 1228,
+        "es": "coco",
+        "en": "grape flea beetle ( haltica ampelophaga",
+        "tts_es": "coco",
+        "tts_en": "grape flea beetle ( haltica ampelophaga"
+      },
+      {
+        "picto_id": 1229,
+        "es": "papaya",
+        "en": "papaya",
+        "tts_es": "papaya",
+        "tts_en": "papaya"
+      },
+      {
+        "picto_id": 1230,
+        "es": "guayaba",
+        "en": "guava",
+        "tts_es": "guayaba",
+        "tts_en": "guava"
+      },
+      {
+        "picto_id": 1231,
+        "es": "maracuyá",
+        "en": "yellow passion flower",
+        "tts_es": "maracuyá",
+        "tts_en": "yellow passion flower"
+      },
+      {
+        "picto_id": 1232,
+        "es": "higo",
+        "en": "fig",
+        "tts_es": "higo",
+        "tts_en": "fig"
+      },
+      {
+        "picto_id": 1233,
+        "es": "ciruela",
+        "en": "plum",
+        "tts_es": "ciruela",
+        "tts_en": "plum"
       },
       {
         "picto_id": 1234,
-        "es": "naranja",
-        "en": "",
-        "tts_es": "naranja",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1312,
-        "es": "sandía",
-        "en": "",
-        "tts_es": "sandía",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1351,
-        "es": "uva",
-        "en": "",
-        "tts_es": "uva",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1094,
-        "es": "fresa",
-        "en": "",
-        "tts_es": "fresa",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1272,
-        "es": "piña",
-        "en": "",
-        "tts_es": "piña",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1420,
-        "es": "mango",
-        "en": "",
-        "tts_es": "mango",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1421,
-        "es": "pera",
-        "en": "",
-        "tts_es": "pera",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1200,
-        "es": "limón",
-        "en": "",
-        "tts_es": "limón",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1422,
-        "es": "plátano",
-        "en": "",
-        "tts_es": "plátano",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1423,
-        "es": "melón",
-        "en": "",
-        "tts_es": "melón",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1424,
-        "es": "cereza",
-        "en": "",
-        "tts_es": "cereza",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1182,
-        "es": "kiwi",
-        "en": "",
-        "tts_es": "kiwi",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1425,
-        "es": "durazno",
-        "en": "",
-        "tts_es": "durazno",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1426,
-        "es": "frambuesa",
-        "en": "",
-        "tts_es": "frambuesa",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1427,
-        "es": "mora",
-        "en": "",
-        "tts_es": "mora",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1428,
-        "es": "coco",
-        "en": "",
-        "tts_es": "coco",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1429,
-        "es": "papaya",
-        "en": "",
-        "tts_es": "papaya",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1430,
-        "es": "guayaba",
-        "en": "",
-        "tts_es": "guayaba",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1431,
-        "es": "maracuyá",
-        "en": "",
-        "tts_es": "maracuyá",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1432,
-        "es": "higo",
-        "en": "",
-        "tts_es": "higo",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1433,
-        "es": "ciruela",
-        "en": "",
-        "tts_es": "ciruela",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1434,
         "es": "mandarina",
-        "en": "",
+        "en": "tangerine",
         "tts_es": "mandarina",
-        "tts_en": ""
+        "tts_en": "tangerine"
       },
       {
-        "picto_id": 1435,
+        "picto_id": 1235,
         "es": "aguacate",
-        "en": "",
+        "en": "avocado",
         "tts_es": "aguacate",
-        "tts_en": ""
+        "tts_en": "avocado"
       }
     ]
   },
@@ -358,172 +358,172 @@
     "tipo": "vocabulario",
     "palabras": [
       {
-        "picto_id": 1036,
+        "picto_id": 1019,
         "es": "coche",
-        "en": "",
+        "en": "(tyre type)",
         "tts_es": "coche",
-        "tts_en": ""
+        "tts_en": "(tyre type)"
       },
       {
-        "picto_id": 1436,
+        "picto_id": 1236,
         "es": "autobús",
-        "en": "",
+        "en": "bus",
         "tts_es": "autobús",
-        "tts_en": ""
+        "tts_en": "bus"
       },
       {
-        "picto_id": 1333,
+        "picto_id": 1169,
         "es": "tren",
-        "en": "",
+        "en": "train",
         "tts_es": "tren",
-        "tts_en": ""
+        "tts_en": "train"
       },
       {
         "picto_id": 1002,
         "es": "avión",
-        "en": "",
+        "en": "plane",
         "tts_es": "avión",
-        "tts_en": ""
+        "tts_en": "plane"
       },
       {
-        "picto_id": 1016,
+        "picto_id": 1009,
         "es": "barco",
-        "en": "",
+        "en": "ship",
         "tts_es": "barco",
-        "tts_en": ""
+        "tts_en": "ship"
       },
       {
-        "picto_id": 1017,
+        "picto_id": 1010,
         "es": "bicicleta",
-        "en": "",
+        "en": "bike",
         "tts_es": "bicicleta",
-        "tts_en": ""
+        "tts_en": "bike"
       },
       {
-        "picto_id": 1437,
+        "picto_id": 1237,
         "es": "moto",
-        "en": "",
+        "en": "motorcycle",
         "tts_es": "moto",
-        "tts_en": ""
+        "tts_en": "motorcycle"
       },
       {
-        "picto_id": 1045,
+        "picto_id": 1028,
         "es": "camión",
-        "en": "",
+        "en": "camión (lorry)",
         "tts_es": "camión",
-        "tts_en": ""
+        "tts_en": "camión (lorry)"
       },
       {
-        "picto_id": 1136,
+        "picto_id": 1072,
         "es": "helicóptero",
-        "en": "",
+        "en": "helicopter",
         "tts_es": "helicóptero",
-        "tts_en": ""
+        "tts_en": "helicopter"
       },
       {
-        "picto_id": 1318,
+        "picto_id": 1165,
         "es": "submarino",
-        "en": "",
+        "en": "submarine",
         "tts_es": "submarino",
-        "tts_en": ""
+        "tts_en": "submarine"
       },
       {
-        "picto_id": 1041,
+        "picto_id": 1024,
         "es": "cohete",
-        "en": "",
+        "en": "rocket",
         "tts_es": "cohete",
-        "tts_en": ""
+        "tts_en": "rocket"
       },
       {
-        "picto_id": 1111,
+        "picto_id": 1057,
         "es": "globo aerostático",
-        "en": "",
+        "en": "balloon",
         "tts_es": "globo aerostático",
-        "tts_en": ""
+        "tts_en": "balloon"
       },
       {
-        "picto_id": 1438,
+        "picto_id": 1238,
         "es": "taxi",
-        "en": "",
+        "en": "taxi (taxi)",
         "tts_es": "taxi",
-        "tts_en": ""
+        "tts_en": "taxi (taxi)"
       },
       {
-        "picto_id": 1439,
+        "picto_id": 1239,
         "es": "ambulancia",
-        "en": "",
+        "en": "ambulance",
         "tts_es": "ambulancia",
-        "tts_en": ""
+        "tts_en": "ambulance"
       },
       {
-        "picto_id": 1440,
+        "picto_id": 1240,
         "es": "bomberos",
-        "en": "",
+        "en": "firemen",
         "tts_es": "bomberos",
-        "tts_en": ""
+        "tts_en": "firemen"
       },
       {
-        "picto_id": 1441,
+        "picto_id": 1241,
         "es": "patrulla",
-        "en": "",
+        "en": "patrol",
         "tts_es": "patrulla",
-        "tts_en": ""
+        "tts_en": "patrol"
       },
       {
-        "picto_id": 1442,
+        "picto_id": 1242,
         "es": "tractor",
-        "en": "",
+        "en": "tractor (tractor)",
         "tts_es": "tractor",
-        "tts_en": ""
+        "tts_en": "tractor (tractor)"
       },
       {
-        "picto_id": 1443,
+        "picto_id": 1243,
         "es": "excavadora",
-        "en": "",
+        "en": "excavator",
         "tts_es": "excavadora",
-        "tts_en": ""
+        "tts_en": "excavator"
       },
       {
-        "picto_id": 1444,
+        "picto_id": 1244,
         "es": "patineta",
-        "en": "",
+        "en": "scooter",
         "tts_es": "patineta",
-        "tts_en": ""
+        "tts_en": "scooter"
       },
       {
-        "picto_id": 1445,
+        "picto_id": 1245,
         "es": "canoa",
-        "en": "",
+        "en": "canoe",
         "tts_es": "canoa",
-        "tts_en": ""
+        "tts_en": "canoe"
       },
       {
-        "picto_id": 1446,
+        "picto_id": 1246,
         "es": "velero",
-        "en": "",
+        "en": "sailplane",
         "tts_es": "velero",
-        "tts_en": ""
+        "tts_en": "sailplane"
       },
       {
-        "picto_id": 1447,
+        "picto_id": 1247,
         "es": "tranvía",
-        "en": "",
+        "en": "tramway",
         "tts_es": "tranvía",
-        "tts_en": ""
+        "tts_en": "tramway"
       },
       {
-        "picto_id": 1448,
+        "picto_id": 1248,
         "es": "metro",
-        "en": "",
+        "en": "meter",
         "tts_es": "metro",
-        "tts_en": ""
+        "tts_en": "meter"
       },
       {
-        "picto_id": 1449,
+        "picto_id": 1249,
         "es": "teleférico",
-        "en": "",
+        "en": "aerial cableway, aerial ropeway, cable railway, cableway, teleferic, telpher railway",
         "tts_es": "teleférico",
-        "tts_en": ""
+        "tts_en": "aerial cableway, aerial ropeway, cable railway, cableway, teleferic, telpher railway"
       }
     ]
   },
@@ -534,172 +534,172 @@
     "tipo": "vocabulario",
     "palabras": [
       {
-        "picto_id": 1450,
+        "picto_id": 1250,
         "es": "pan",
-        "en": "",
+        "en": "bread",
         "tts_es": "pan",
-        "tts_en": ""
+        "tts_en": "bread"
       },
       {
-        "picto_id": 1201,
+        "picto_id": 1104,
         "es": "leche",
-        "en": "",
+        "en": "milk",
         "tts_es": "leche",
-        "tts_en": ""
+        "tts_en": "milk"
       },
       {
-        "picto_id": 1132,
+        "picto_id": 1068,
         "es": "huevo",
-        "en": "",
+        "en": "products",
         "tts_es": "huevo",
-        "tts_en": ""
+        "tts_en": "products"
       },
       {
-        "picto_id": 1288,
+        "picto_id": 1146,
         "es": "queso",
-        "en": "",
+        "en": "cheese",
         "tts_es": "queso",
-        "tts_en": ""
+        "tts_en": "cheese"
       },
       {
-        "picto_id": 1451,
+        "picto_id": 1251,
         "es": "pizza",
-        "en": "",
+        "en": "pizza",
         "tts_es": "pizza",
-        "tts_en": ""
+        "tts_en": "pizza"
       },
       {
-        "picto_id": 1452,
+        "picto_id": 1252,
         "es": "sopa",
-        "en": "",
+        "en": "soup",
         "tts_es": "sopa",
-        "tts_en": ""
+        "tts_en": "soup"
       },
       {
-        "picto_id": 1453,
+        "picto_id": 1253,
         "es": "arroz",
-        "en": "",
+        "en": "rice",
         "tts_es": "arroz",
-        "tts_en": ""
+        "tts_en": "rice"
       },
       {
-        "picto_id": 1454,
+        "picto_id": 1254,
         "es": "pasta",
-        "en": "",
+        "en": "pasta",
         "tts_es": "pasta",
-        "tts_en": ""
+        "tts_en": "pasta"
       },
       {
-        "picto_id": 1455,
+        "picto_id": 1255,
         "es": "ensalada",
-        "en": "",
+        "en": "salad",
         "tts_es": "ensalada",
-        "tts_en": ""
+        "tts_en": "salad"
       },
       {
-        "picto_id": 1456,
+        "picto_id": 1256,
         "es": "hamburguesa",
-        "en": "",
+        "en": "hamburger",
         "tts_es": "hamburguesa",
-        "tts_en": ""
+        "tts_en": "hamburger"
       },
       {
-        "picto_id": 1457,
+        "picto_id": 1257,
         "es": "sandwich",
-        "en": "",
+        "en": "sandwich",
         "tts_es": "sandwich",
-        "tts_en": ""
+        "tts_en": "sandwich"
       },
       {
-        "picto_id": 1458,
+        "picto_id": 1258,
         "es": "yogur",
-        "en": "",
+        "en": "yogurt",
         "tts_es": "yogur",
-        "tts_en": ""
+        "tts_en": "yogurt"
       },
       {
-        "picto_id": 1459,
+        "picto_id": 1259,
         "es": "galleta",
-        "en": "",
+        "en": "biscuit",
         "tts_es": "galleta",
-        "tts_en": ""
+        "tts_en": "biscuit"
       },
       {
-        "picto_id": 1460,
+        "picto_id": 1260,
         "es": "pastel",
-        "en": "",
+        "en": "cake",
         "tts_es": "pastel",
-        "tts_en": ""
+        "tts_en": "cake"
       },
       {
-        "picto_id": 1130,
+        "picto_id": 1066,
         "es": "helado",
-        "en": "",
+        "en": "ice cream",
         "tts_es": "helado",
-        "tts_en": ""
+        "tts_en": "ice cream"
       },
       {
-        "picto_id": 1461,
+        "picto_id": 1261,
         "es": "chocolate",
-        "en": "",
+        "en": "chocolate",
         "tts_es": "chocolate",
-        "tts_en": ""
+        "tts_en": "chocolate"
       },
       {
-        "picto_id": 1392,
+        "picto_id": 1197,
         "es": "zanahoria",
-        "en": "",
+        "en": "carrot",
         "tts_es": "zanahoria",
-        "tts_en": ""
+        "tts_en": "carrot"
       },
       {
-        "picto_id": 1337,
+        "picto_id": 1173,
         "es": "tomate",
-        "en": "",
+        "en": "tomato",
         "tts_es": "tomate",
-        "tts_en": ""
+        "tts_en": "tomato"
       },
       {
-        "picto_id": 1021,
+        "picto_id": 1014,
         "es": "brócoli",
-        "en": "",
+        "en": "broccoli",
         "tts_es": "brócoli",
-        "tts_en": ""
+        "tts_en": "broccoli"
       },
       {
-        "picto_id": 1462,
+        "picto_id": 1262,
         "es": "maíz",
-        "en": "",
+        "en": "corn, maize",
         "tts_es": "maíz",
-        "tts_en": ""
+        "tts_en": "corn, maize"
       },
       {
-        "picto_id": 1463,
+        "picto_id": 1263,
         "es": "frijoles",
-        "en": "",
+        "en": "kidney beans",
         "tts_es": "frijoles",
-        "tts_en": ""
+        "tts_en": "kidney beans"
       },
       {
-        "picto_id": 1464,
+        "picto_id": 1264,
         "es": "pollo",
-        "en": "",
+        "en": "chicken",
         "tts_es": "pollo",
-        "tts_en": ""
+        "tts_en": "chicken"
       },
       {
-        "picto_id": 1465,
+        "picto_id": 1265,
         "es": "pescado",
-        "en": "",
+        "en": "products",
         "tts_es": "pescado",
-        "tts_en": ""
+        "tts_en": "products"
       },
       {
-        "picto_id": 1169,
+        "picto_id": 1087,
         "es": "jamón",
-        "en": "",
+        "en": "ham",
         "tts_es": "jamón",
-        "tts_en": ""
+        "tts_en": "ham"
       }
     ]
   },
@@ -710,172 +710,172 @@
     "tipo": "vocabulario",
     "palabras": [
       {
-        "picto_id": 1466,
+        "picto_id": 1266,
         "es": "camiseta",
-        "en": "",
+        "en": "t-shirt",
         "tts_es": "camiseta",
-        "tts_en": ""
+        "tts_en": "t-shirt"
       },
       {
-        "picto_id": 1467,
+        "picto_id": 1267,
         "es": "pantalón",
-        "en": "",
+        "en": "trousers",
         "tts_es": "pantalón",
-        "tts_en": ""
+        "tts_en": "trousers"
       },
       {
-        "picto_id": 1363,
+        "picto_id": 1185,
         "es": "vestido",
-        "en": "",
+        "en": "bee dress, bee suit, clothing",
         "tts_es": "vestido",
-        "tts_en": ""
+        "tts_en": "bee dress, bee suit, clothing"
       },
       {
-        "picto_id": 1468,
+        "picto_id": 1268,
         "es": "falda",
-        "en": "",
+        "en": "falda (skirt)",
         "tts_es": "falda",
-        "tts_en": ""
+        "tts_en": "falda (skirt)"
       },
       {
-        "picto_id": 1469,
+        "picto_id": 1269,
         "es": "zapatos",
-        "en": "",
+        "en": "shoes",
         "tts_es": "zapatos",
-        "tts_en": ""
+        "tts_en": "shoes"
       },
       {
-        "picto_id": 1022,
+        "picto_id": 1015,
         "es": "botas",
-        "en": "",
+        "en": "boots",
         "tts_es": "botas",
-        "tts_en": ""
+        "tts_en": "boots"
       },
       {
-        "picto_id": 1470,
+        "picto_id": 1270,
         "es": "calcetines",
-        "en": "",
+        "en": "socks",
         "tts_es": "calcetines",
-        "tts_en": ""
+        "tts_en": "socks"
       },
       {
-        "picto_id": 1117,
+        "picto_id": 1063,
         "es": "gorra",
-        "en": "",
+        "en": "cap hat",
         "tts_es": "gorra",
-        "tts_en": ""
+        "tts_en": "cap hat"
       },
       {
-        "picto_id": 1471,
+        "picto_id": 1271,
         "es": "abrigo",
-        "en": "",
+        "en": "abrigo (coat)",
         "tts_es": "abrigo",
-        "tts_en": ""
+        "tts_en": "abrigo (coat)"
       },
       {
-        "picto_id": 1472,
+        "picto_id": 1272,
         "es": "bufanda",
-        "en": "",
+        "en": "muffler",
         "tts_es": "bufanda",
-        "tts_en": ""
+        "tts_en": "muffler"
       },
       {
-        "picto_id": 1473,
+        "picto_id": 1273,
         "es": "guantes",
-        "en": "",
+        "en": "protective",
         "tts_es": "guantes",
-        "tts_en": ""
+        "tts_en": "protective"
       },
       {
-        "picto_id": 1474,
+        "picto_id": 1274,
         "es": "pijama",
-        "en": "",
+        "en": "pyjamas",
         "tts_es": "pijama",
-        "tts_en": ""
+        "tts_en": "pyjamas"
       },
       {
-        "picto_id": 1475,
+        "picto_id": 1275,
         "es": "shorts",
-        "en": "",
+        "en": "shorts",
         "tts_es": "shorts",
-        "tts_en": ""
+        "tts_en": "shorts"
       },
       {
-        "picto_id": 1476,
+        "picto_id": 1276,
         "es": "chaleco",
-        "en": "",
+        "en": "vest",
         "tts_es": "chaleco",
-        "tts_en": ""
+        "tts_en": "vest"
       },
       {
-        "picto_id": 1477,
+        "picto_id": 1277,
         "es": "sudadera",
-        "en": "",
+        "en": "sweatshirt",
         "tts_es": "sudadera",
-        "tts_en": ""
+        "tts_en": "sweatshirt"
       },
       {
-        "picto_id": 1316,
+        "picto_id": 1163,
         "es": "sombrero",
-        "en": "",
+        "en": "hat",
         "tts_es": "sombrero",
-        "tts_en": ""
+        "tts_en": "hat"
       },
       {
-        "picto_id": 1478,
+        "picto_id": 1278,
         "es": "cinturón",
-        "en": "",
+        "en": "loop belt",
         "tts_es": "cinturón",
-        "tts_en": ""
+        "tts_en": "loop belt"
       },
       {
-        "picto_id": 1219,
+        "picto_id": 1112,
         "es": "mochila",
-        "en": "",
+        "en": "backpack",
         "tts_es": "mochila",
-        "tts_en": ""
+        "tts_en": "backpack"
       },
       {
-        "picto_id": 1479,
+        "picto_id": 1279,
         "es": "bolsa",
-        "en": "",
+        "en": "pouch",
         "tts_es": "bolsa",
-        "tts_en": ""
+        "tts_en": "pouch"
       },
       {
-        "picto_id": 1480,
+        "picto_id": 1280,
         "es": "sandalias",
-        "en": "",
+        "en": "sandals",
         "tts_es": "sandalias",
-        "tts_en": ""
+        "tts_en": "sandals"
       },
       {
-        "picto_id": 1481,
+        "picto_id": 1281,
         "es": "tenis",
-        "en": "",
+        "en": "tennis",
         "tts_es": "tenis",
-        "tts_en": ""
+        "tts_en": "tennis"
       },
       {
-        "picto_id": 1482,
+        "picto_id": 1282,
         "es": "corbata",
-        "en": "",
+        "en": "necktie",
         "tts_es": "corbata",
-        "tts_en": ""
+        "tts_en": "necktie"
       },
       {
-        "picto_id": 1483,
+        "picto_id": 1283,
         "es": "delantal",
-        "en": "",
+        "en": "apron",
         "tts_es": "delantal",
-        "tts_en": ""
+        "tts_en": "apron"
       },
       {
-        "picto_id": 1484,
+        "picto_id": 1284,
         "es": "bañador",
-        "en": "",
+        "en": "swimwear",
         "tts_es": "bañador",
-        "tts_en": ""
+        "tts_en": "swimwear"
       }
     ]
   },
@@ -886,172 +886,172 @@
     "tipo": "vocabulario",
     "palabras": [
       {
-        "picto_id": 1485,
+        "picto_id": 1285,
         "es": "rojo",
-        "en": "",
+        "en": "red",
         "tts_es": "rojo",
-        "tts_en": ""
+        "tts_en": "red"
       },
       {
-        "picto_id": 1486,
+        "picto_id": 1286,
         "es": "azul",
-        "en": "",
+        "en": "blue",
         "tts_es": "azul",
-        "tts_en": ""
+        "tts_en": "blue"
       },
       {
-        "picto_id": 1487,
+        "picto_id": 1287,
         "es": "amarillo",
-        "en": "",
+        "en": "yellow",
         "tts_es": "amarillo",
-        "tts_en": ""
+        "tts_en": "yellow"
       },
       {
-        "picto_id": 1488,
+        "picto_id": 1288,
         "es": "verde",
-        "en": "",
+        "en": "green",
         "tts_es": "verde",
-        "tts_en": ""
+        "tts_en": "green"
       },
       {
-        "picto_id": 1234,
+        "picto_id": 1117,
         "es": "naranja",
-        "en": "",
+        "en": "orange",
         "tts_es": "naranja",
-        "tts_en": ""
+        "tts_en": "orange"
       },
       {
-        "picto_id": 1489,
+        "picto_id": 1289,
         "es": "morado",
-        "en": "",
+        "en": "purple",
         "tts_es": "morado",
-        "tts_en": ""
+        "tts_en": "purple"
+      },
+      {
+        "picto_id": 1153,
+        "es": "rosa",
+        "en": "rose",
+        "tts_es": "rosa",
+        "tts_en": "rose"
+      },
+      {
+        "picto_id": 1290,
+        "es": "marrón",
+        "en": "brown",
+        "tts_es": "marrón",
+        "tts_en": "brown"
+      },
+      {
+        "picto_id": 1218,
+        "es": "negro",
+        "en": "black",
+        "tts_es": "negro",
+        "tts_en": "black"
+      },
+      {
+        "picto_id": 1291,
+        "es": "blanco",
+        "en": "white",
+        "tts_es": "blanco",
+        "tts_en": "white"
+      },
+      {
+        "picto_id": 1292,
+        "es": "gris",
+        "en": "grey",
+        "tts_es": "gris",
+        "tts_en": "grey"
+      },
+      {
+        "picto_id": 1293,
+        "es": "turquesa",
+        "en": "teal\"",
+        "tts_es": "turquesa",
+        "tts_en": "teal\""
+      },
+      {
+        "picto_id": 1294,
+        "es": "dorado",
+        "en": "gold  golden",
+        "tts_es": "dorado",
+        "tts_en": "gold  golden"
+      },
+      {
+        "picto_id": 1295,
+        "es": "plateado",
+        "en": "silver",
+        "tts_es": "plateado",
+        "tts_en": "silver"
+      },
+      {
+        "picto_id": 1296,
+        "es": "beige",
+        "en": "beige",
+        "tts_es": "beige",
+        "tts_en": "beige"
+      },
+      {
+        "picto_id": 1297,
+        "es": "violeta",
+        "en": "violet",
+        "tts_es": "violeta",
+        "tts_en": "violet"
       },
       {
         "picto_id": 1298,
-        "es": "rosa",
-        "en": "",
-        "tts_es": "rosa",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1490,
-        "es": "marrón",
-        "en": "",
-        "tts_es": "marrón",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1416,
-        "es": "negro",
-        "en": "",
-        "tts_es": "negro",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1491,
-        "es": "blanco",
-        "en": "",
-        "tts_es": "blanco",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1492,
-        "es": "gris",
-        "en": "",
-        "tts_es": "gris",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1493,
-        "es": "turquesa",
-        "en": "",
-        "tts_es": "turquesa",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1494,
-        "es": "dorado",
-        "en": "",
-        "tts_es": "dorado",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1495,
-        "es": "plateado",
-        "en": "",
-        "tts_es": "plateado",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1496,
-        "es": "beige",
-        "en": "",
-        "tts_es": "beige",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1497,
-        "es": "violeta",
-        "en": "",
-        "tts_es": "violeta",
-        "tts_en": ""
-      },
-      {
-        "picto_id": 1498,
         "es": "celeste",
-        "en": "",
+        "en": "light blue",
         "tts_es": "celeste",
-        "tts_en": ""
+        "tts_en": "light blue"
       },
       {
-        "picto_id": 1499,
+        "picto_id": 1299,
         "es": "magenta",
-        "en": "",
+        "en": "magenta",
         "tts_es": "magenta",
-        "tts_en": ""
+        "tts_en": "magenta"
       },
       {
-        "picto_id": 1500,
+        "picto_id": 1300,
         "es": "oliva",
-        "en": "",
+        "en": "olive",
         "tts_es": "oliva",
-        "tts_en": ""
+        "tts_en": "olive"
       },
       {
-        "picto_id": 1501,
+        "picto_id": 1301,
         "es": "coral",
-        "en": "",
+        "en": "choral",
         "tts_es": "coral",
-        "tts_en": ""
+        "tts_en": "choral"
       },
       {
-        "picto_id": 1502,
+        "picto_id": 1302,
         "es": "índigo",
-        "en": "",
+        "en": "indigo",
         "tts_es": "índigo",
-        "tts_en": ""
+        "tts_en": "indigo"
       },
       {
-        "picto_id": 1503,
+        "picto_id": 1303,
         "es": "fucsia",
-        "en": "",
+        "en": "fushia",
         "tts_es": "fucsia",
-        "tts_en": ""
+        "tts_en": "fushia"
       },
       {
-        "picto_id": 1504,
+        "picto_id": 1304,
         "es": "lima",
-        "en": "",
+        "en": "shaper",
         "tts_es": "lima",
-        "tts_en": ""
+        "tts_en": "shaper"
       },
       {
-        "picto_id": 1505,
+        "picto_id": 1305,
         "es": "ocre",
-        "en": "",
+        "en": "ochre",
         "tts_es": "ocre",
-        "tts_en": ""
+        "tts_en": "ochre"
       }
     ]
   },
@@ -1062,172 +1062,172 @@
     "tipo": "lenguaje",
     "palabras": [
       {
-        "picto_id": 1506,
+        "picto_id": 1306,
         "es": "correr",
-        "en": "",
+        "en": "run",
         "tts_es": "correr",
-        "tts_en": ""
+        "tts_en": "run"
       },
       {
-        "picto_id": 1507,
+        "picto_id": 1307,
         "es": "saltar",
-        "en": "",
+        "en": "jump.",
         "tts_es": "saltar",
-        "tts_en": ""
+        "tts_en": "jump."
       },
       {
-        "picto_id": 1412,
+        "picto_id": 1214,
         "es": "comer",
-        "en": "",
+        "en": "eat",
         "tts_es": "comer",
-        "tts_en": ""
+        "tts_en": "eat"
       },
       {
-        "picto_id": 1508,
+        "picto_id": 1308,
         "es": "beber",
-        "en": "",
+        "en": "drinking",
         "tts_es": "beber",
-        "tts_en": ""
+        "tts_en": "drinking"
       },
       {
-        "picto_id": 1413,
+        "picto_id": 1215,
         "es": "dormir",
-        "en": "",
+        "en": "sleeping",
         "tts_es": "dormir",
-        "tts_en": ""
+        "tts_en": "sleeping"
       },
       {
-        "picto_id": 1509,
+        "picto_id": 1309,
         "es": "jugar",
-        "en": "",
+        "en": "play",
         "tts_es": "jugar",
-        "tts_en": ""
+        "tts_en": "play"
       },
       {
-        "picto_id": 1510,
+        "picto_id": 1310,
         "es": "cantar",
-        "en": "",
+        "en": "singing,",
         "tts_es": "cantar",
-        "tts_en": ""
+        "tts_en": "singing,"
       },
       {
-        "picto_id": 1511,
+        "picto_id": 1311,
         "es": "bailar",
-        "en": "",
+        "en": "bailar (dancing)",
         "tts_es": "bailar",
-        "tts_en": ""
+        "tts_en": "bailar (dancing)"
       },
       {
-        "picto_id": 1512,
+        "picto_id": 1312,
         "es": "leer",
-        "en": "",
+        "en": "reading",
         "tts_es": "leer",
-        "tts_en": ""
+        "tts_en": "reading"
       },
       {
-        "picto_id": 1513,
+        "picto_id": 1313,
         "es": "dibujar",
-        "en": "",
+        "en": "draw a picture",
         "tts_es": "dibujar",
-        "tts_en": ""
+        "tts_en": "draw a picture"
       },
       {
-        "picto_id": 1514,
+        "picto_id": 1314,
         "es": "pintar",
-        "en": "",
+        "en": "painting",
         "tts_es": "pintar",
-        "tts_en": ""
+        "tts_en": "painting"
       },
       {
-        "picto_id": 1515,
+        "picto_id": 1315,
         "es": "escribir",
-        "en": "",
+        "en": "write",
         "tts_es": "escribir",
-        "tts_en": ""
+        "tts_en": "write"
       },
       {
-        "picto_id": 1516,
+        "picto_id": 1316,
         "es": "llorar",
-        "en": "",
+        "en": "crying",
         "tts_es": "llorar",
-        "tts_en": ""
+        "tts_en": "crying"
       },
       {
-        "picto_id": 1517,
+        "picto_id": 1317,
         "es": "reír",
-        "en": "",
+        "en": "laughing",
         "tts_es": "reír",
-        "tts_en": ""
+        "tts_en": "laughing"
       },
       {
-        "picto_id": 1518,
+        "picto_id": 1318,
         "es": "abrazar",
-        "en": "",
+        "en": "hug",
         "tts_es": "abrazar",
-        "tts_en": ""
+        "tts_en": "hug"
       },
       {
-        "picto_id": 1519,
+        "picto_id": 1319,
         "es": "besar",
-        "en": "",
+        "en": "kiss you",
         "tts_es": "besar",
-        "tts_en": ""
+        "tts_en": "kiss you"
       },
       {
-        "picto_id": 1520,
+        "picto_id": 1320,
         "es": "caminar",
-        "en": "",
+        "en": "walking",
         "tts_es": "caminar",
-        "tts_en": ""
+        "tts_en": "walking"
       },
       {
-        "picto_id": 1521,
+        "picto_id": 1321,
         "es": "nadar",
-        "en": "",
+        "en": "swim",
         "tts_es": "nadar",
-        "tts_en": ""
+        "tts_en": "swim"
       },
       {
-        "picto_id": 1365,
+        "picto_id": 1187,
         "es": "volar",
-        "en": "",
+        "en": "flying",
         "tts_es": "volar",
-        "tts_en": ""
+        "tts_en": "flying"
       },
       {
-        "picto_id": 1522,
+        "picto_id": 1322,
         "es": "trepar",
-        "en": "",
+        "en": "climb",
         "tts_es": "trepar",
-        "tts_en": ""
+        "tts_en": "climb"
       },
       {
-        "picto_id": 1523,
+        "picto_id": 1323,
         "es": "empujar",
-        "en": "",
+        "en": "push",
         "tts_es": "empujar",
-        "tts_en": ""
+        "tts_en": "push"
       },
       {
-        "picto_id": 1524,
+        "picto_id": 1324,
         "es": "jalar",
-        "en": "",
+        "en": "pull",
         "tts_es": "jalar",
-        "tts_en": ""
+        "tts_en": "pull"
       },
       {
-        "picto_id": 1525,
+        "picto_id": 1325,
         "es": "abrir",
-        "en": "",
+        "en": "opening",
         "tts_es": "abrir",
-        "tts_en": ""
+        "tts_en": "opening"
       },
       {
-        "picto_id": 1526,
+        "picto_id": 1326,
         "es": "cerrar",
-        "en": "",
+        "en": "close",
         "tts_es": "cerrar",
-        "tts_en": ""
+        "tts_en": "close"
       }
     ]
   },
@@ -1238,172 +1238,172 @@
     "tipo": "lenguaje",
     "palabras": [
       {
-        "picto_id": 1527,
+        "picto_id": 1327,
         "es": "feliz",
-        "en": "",
+        "en": "happy",
         "tts_es": "feliz",
-        "tts_en": ""
+        "tts_en": "happy"
       },
       {
-        "picto_id": 1528,
+        "picto_id": 1328,
         "es": "triste",
-        "en": "",
+        "en": "dreary",
         "tts_es": "triste",
-        "tts_en": ""
+        "tts_en": "dreary"
       },
       {
-        "picto_id": 1529,
+        "picto_id": 1329,
         "es": "enojado",
-        "en": "",
+        "en": "angry",
         "tts_es": "enojado",
-        "tts_en": ""
+        "tts_en": "angry"
       },
       {
-        "picto_id": 1530,
+        "picto_id": 1330,
         "es": "asustado",
-        "en": "",
+        "en": "afraid",
         "tts_es": "asustado",
-        "tts_en": ""
+        "tts_en": "afraid"
       },
       {
-        "picto_id": 1531,
+        "picto_id": 1331,
         "es": "sorprendido",
-        "en": "",
+        "en": "surprised",
         "tts_es": "sorprendido",
-        "tts_en": ""
+        "tts_en": "surprised"
       },
       {
-        "picto_id": 1532,
+        "picto_id": 1332,
         "es": "aburrido",
-        "en": "",
+        "en": "bored",
         "tts_es": "aburrido",
-        "tts_en": ""
+        "tts_en": "bored"
       },
       {
-        "picto_id": 1533,
+        "picto_id": 1333,
         "es": "emocionado",
-        "en": "",
+        "en": "thrilled",
         "tts_es": "emocionado",
-        "tts_en": ""
+        "tts_en": "thrilled"
       },
       {
-        "picto_id": 1534,
+        "picto_id": 1334,
         "es": "tranquilo",
-        "en": "",
+        "en": "tranquil",
         "tts_es": "tranquilo",
-        "tts_en": ""
+        "tts_en": "tranquil"
       },
       {
-        "picto_id": 1535,
+        "picto_id": 1335,
         "es": "cansado",
-        "en": "",
+        "en": "tired",
         "tts_es": "cansado",
-        "tts_en": ""
+        "tts_en": "tired"
       },
       {
-        "picto_id": 1536,
+        "picto_id": 1336,
         "es": "contento",
-        "en": "",
+        "en": "glad",
         "tts_es": "contento",
-        "tts_en": ""
+        "tts_en": "glad"
       },
       {
-        "picto_id": 1537,
+        "picto_id": 1337,
         "es": "nervioso",
-        "en": "",
+        "en": "nervous",
         "tts_es": "nervioso",
-        "tts_en": ""
+        "tts_en": "nervous"
       },
       {
-        "picto_id": 1538,
+        "picto_id": 1338,
         "es": "orgulloso",
-        "en": "",
+        "en": "proud",
         "tts_es": "orgulloso",
-        "tts_en": ""
+        "tts_en": "proud"
       },
       {
-        "picto_id": 1539,
+        "picto_id": 1339,
         "es": "celoso",
-        "en": "",
+        "en": "jealous",
         "tts_es": "celoso",
-        "tts_en": ""
+        "tts_en": "jealous"
       },
       {
-        "picto_id": 1540,
+        "picto_id": 1340,
         "es": "avergonzado",
-        "en": "",
+        "en": "sheepish",
         "tts_es": "avergonzado",
-        "tts_en": ""
+        "tts_en": "sheepish"
       },
       {
-        "picto_id": 1541,
+        "picto_id": 1341,
         "es": "confundido",
-        "en": "",
+        "en": "confused",
         "tts_es": "confundido",
-        "tts_en": ""
+        "tts_en": "confused"
       },
       {
-        "picto_id": 1542,
+        "picto_id": 1342,
         "es": "enamorado",
-        "en": "",
+        "en": "lovesick",
         "tts_es": "enamorado",
-        "tts_en": ""
+        "tts_en": "lovesick"
       },
       {
-        "picto_id": 1543,
+        "picto_id": 1343,
         "es": "asqueado",
-        "en": "",
+        "en": "<g id=\"1\"> </g><g id=\"2\">disgusted</g>",
         "tts_es": "asqueado",
-        "tts_en": ""
+        "tts_en": "<g id=\"1\"> </g><g id=\"2\">disgusted</g>"
       },
       {
-        "picto_id": 1544,
+        "picto_id": 1344,
         "es": "frustrado",
-        "en": "",
+        "en": "frustrated",
         "tts_es": "frustrado",
-        "tts_en": ""
+        "tts_en": "frustrated"
       },
       {
-        "picto_id": 1545,
+        "picto_id": 1345,
         "es": "esperanzado",
-        "en": "",
+        "en": "hopeful",
         "tts_es": "esperanzado",
-        "tts_en": ""
+        "tts_en": "hopeful"
       },
       {
-        "picto_id": 1546,
+        "picto_id": 1346,
         "es": "solitario",
-        "en": "",
+        "en": "lonely",
         "tts_es": "solitario",
-        "tts_en": ""
+        "tts_en": "lonely"
       },
       {
-        "picto_id": 1547,
+        "picto_id": 1347,
         "es": "agradecido",
-        "en": "",
+        "en": "grateful",
         "tts_es": "agradecido",
-        "tts_en": ""
+        "tts_en": "grateful"
       },
       {
-        "picto_id": 1548,
+        "picto_id": 1348,
         "es": "curioso",
-        "en": "",
+        "en": "curious",
         "tts_es": "curioso",
-        "tts_en": ""
+        "tts_en": "curious"
       },
       {
-        "picto_id": 1549,
+        "picto_id": 1349,
         "es": "valiente",
-        "en": "",
+        "en": "brave",
         "tts_es": "valiente",
-        "tts_en": ""
+        "tts_en": "brave"
       },
       {
-        "picto_id": 1550,
+        "picto_id": 1350,
         "es": "tímido",
-        "en": "",
+        "en": "shy",
         "tts_es": "tímido",
-        "tts_en": ""
+        "tts_en": "shy"
       }
     ]
   },
@@ -1414,172 +1414,172 @@
     "tipo": "lenguaje",
     "palabras": [
       {
-        "picto_id": 1551,
+        "picto_id": 1351,
         "es": "grande",
-        "en": "",
+        "en": "wide",
         "tts_es": "grande",
-        "tts_en": ""
+        "tts_en": "wide"
       },
       {
-        "picto_id": 1552,
+        "picto_id": 1352,
         "es": "pequeño",
-        "en": "",
+        "en": "for me",
         "tts_es": "pequeño",
-        "tts_en": ""
+        "tts_en": "for me"
       },
       {
-        "picto_id": 1397,
+        "picto_id": 1199,
         "es": "rápido",
-        "en": "",
+        "en": "grade reducer",
         "tts_es": "rápido",
-        "tts_en": ""
+        "tts_en": "grade reducer"
       },
       {
-        "picto_id": 1553,
+        "picto_id": 1353,
         "es": "lento",
-        "en": "",
+        "en": "slow",
         "tts_es": "lento",
-        "tts_en": ""
+        "tts_en": "slow"
       },
       {
-        "picto_id": 1554,
+        "picto_id": 1354,
         "es": "caliente",
-        "en": "",
+        "en": "hot",
         "tts_es": "caliente",
-        "tts_en": ""
+        "tts_en": "hot"
       },
       {
-        "picto_id": 1555,
+        "picto_id": 1355,
         "es": "frío",
-        "en": "",
+        "en": "cold",
         "tts_es": "frío",
-        "tts_en": ""
+        "tts_en": "cold"
       },
       {
-        "picto_id": 1556,
+        "picto_id": 1356,
         "es": "suave",
-        "en": "",
+        "en": "body wash",
         "tts_es": "suave",
-        "tts_en": ""
+        "tts_en": "body wash"
       },
       {
-        "picto_id": 1557,
+        "picto_id": 1357,
         "es": "duro",
-        "en": "",
+        "en": "hard",
         "tts_es": "duro",
-        "tts_en": ""
+        "tts_en": "hard"
       },
       {
-        "picto_id": 1558,
+        "picto_id": 1358,
         "es": "limpio",
-        "en": "",
+        "en": "clr, clear",
         "tts_es": "limpio",
-        "tts_en": ""
+        "tts_en": "clr, clear"
       },
       {
-        "picto_id": 1559,
+        "picto_id": 1359,
         "es": "sucio",
-        "en": "",
+        "en": "average",
         "tts_es": "sucio",
-        "tts_en": ""
+        "tts_en": "average"
       },
       {
-        "picto_id": 1560,
+        "picto_id": 1360,
         "es": "nuevo",
-        "en": "",
+        "en": "new",
         "tts_es": "nuevo",
-        "tts_en": ""
+        "tts_en": "new"
       },
       {
-        "picto_id": 1561,
+        "picto_id": 1361,
         "es": "viejo",
-        "en": "",
+        "en": "old!",
         "tts_es": "viejo",
-        "tts_en": ""
+        "tts_en": "old!"
       },
       {
-        "picto_id": 1562,
+        "picto_id": 1362,
         "es": "bonito",
-        "en": "",
+        "en": "nice",
         "tts_es": "bonito",
-        "tts_en": ""
+        "tts_en": "nice"
       },
       {
-        "picto_id": 1563,
+        "picto_id": 1363,
         "es": "feo",
-        "en": "",
+        "en": "ugly",
         "tts_es": "feo",
-        "tts_en": ""
+        "tts_en": "ugly"
       },
       {
-        "picto_id": 1564,
+        "picto_id": 1364,
         "es": "fuerte",
-        "en": "",
+        "en": "strong",
         "tts_es": "fuerte",
-        "tts_en": ""
+        "tts_en": "strong"
       },
       {
-        "picto_id": 1565,
+        "picto_id": 1365,
         "es": "débil",
-        "en": "",
+        "en": "weak",
         "tts_es": "débil",
-        "tts_en": ""
+        "tts_en": "weak"
       },
       {
-        "picto_id": 1566,
+        "picto_id": 1366,
         "es": "alto",
-        "en": "",
+        "en": "tall",
         "tts_es": "alto",
-        "tts_en": ""
+        "tts_en": "tall"
       },
       {
-        "picto_id": 1567,
+        "picto_id": 1367,
         "es": "bajo",
-        "en": "",
+        "en": "value",
         "tts_es": "bajo",
-        "tts_en": ""
+        "tts_en": "value"
       },
       {
-        "picto_id": 1568,
+        "picto_id": 1368,
         "es": "gordo",
-        "en": "",
+        "en": "fat",
         "tts_es": "gordo",
-        "tts_en": ""
+        "tts_en": "fat"
       },
       {
-        "picto_id": 1569,
+        "picto_id": 1369,
         "es": "delgado",
-        "en": "",
+        "en": "skinny",
         "tts_es": "delgado",
-        "tts_en": ""
+        "tts_en": "skinny"
       },
       {
-        "picto_id": 1061,
+        "picto_id": 1034,
         "es": "dulce",
-        "en": "",
+        "en": "doux, sweet",
         "tts_es": "dulce",
-        "tts_en": ""
+        "tts_en": "doux, sweet"
       },
       {
-        "picto_id": 1570,
+        "picto_id": 1370,
         "es": "amargo",
-        "en": "",
+        "en": "bitter",
         "tts_es": "amargo",
-        "tts_en": ""
+        "tts_en": "bitter"
       },
       {
-        "picto_id": 1571,
+        "picto_id": 1371,
         "es": "brillante",
-        "en": "",
+        "en": "when held up to the light",
         "tts_es": "brillante",
-        "tts_en": ""
+        "tts_en": "when held up to the light"
       },
       {
-        "picto_id": 1572,
+        "picto_id": 1372,
         "es": "oscuro",
-        "en": "",
+        "en": "dark",
         "tts_es": "oscuro",
-        "tts_en": ""
+        "tts_en": "dark"
       }
     ]
   },
@@ -1590,172 +1590,172 @@
     "tipo": "vocabulario",
     "palabras": [
       {
-        "picto_id": 1573,
+        "picto_id": 1373,
         "es": "cabeza",
-        "en": "",
+        "en": "height",
         "tts_es": "cabeza",
-        "tts_en": ""
+        "tts_en": "height"
       },
       {
-        "picto_id": 1574,
+        "picto_id": 1374,
         "es": "pelo",
-        "en": "",
+        "en": "animal hair",
         "tts_es": "pelo",
-        "tts_en": ""
+        "tts_en": "animal hair"
       },
       {
-        "picto_id": 1253,
+        "picto_id": 1128,
         "es": "ojo",
-        "en": "",
+        "en": "ojo (eye)",
         "tts_es": "ojo",
-        "tts_en": ""
+        "tts_en": "ojo (eye)"
       },
       {
-        "picto_id": 1233,
+        "picto_id": 1116,
         "es": "nariz",
-        "en": "",
+        "en": "nariz (nose)",
         "tts_es": "nariz",
-        "tts_en": ""
+        "tts_en": "nariz (nose)"
       },
       {
-        "picto_id": 1018,
+        "picto_id": 1011,
         "es": "boca",
-        "en": "",
+        "en": "nozzle",
         "tts_es": "boca",
-        "tts_en": ""
+        "tts_en": "nozzle"
       },
       {
-        "picto_id": 1258,
+        "picto_id": 1133,
         "es": "oreja",
-        "en": "",
+        "en": "oreja (ear)",
         "tts_es": "oreja",
-        "tts_en": ""
+        "tts_en": "oreja (ear)"
       },
       {
-        "picto_id": 1575,
+        "picto_id": 1375,
         "es": "cuello",
-        "en": "",
+        "en": "neck = stem + flare",
         "tts_es": "cuello",
-        "tts_en": ""
+        "tts_en": "neck = stem + flare"
       },
       {
-        "picto_id": 1576,
+        "picto_id": 1376,
         "es": "hombro",
-        "en": "",
+        "en": "shoulder",
         "tts_es": "hombro",
-        "tts_en": ""
+        "tts_en": "shoulder"
       },
       {
-        "picto_id": 1577,
+        "picto_id": 1377,
         "es": "brazo",
-        "en": "",
+        "en": "arm",
         "tts_es": "brazo",
-        "tts_en": ""
+        "tts_en": "arm"
       },
       {
-        "picto_id": 1214,
+        "picto_id": 1107,
         "es": "mano",
-        "en": "",
+        "en": "mano (hand)",
         "tts_es": "mano",
-        "tts_en": ""
+        "tts_en": "mano (hand)"
       },
       {
-        "picto_id": 1578,
+        "picto_id": 1378,
         "es": "dedo",
-        "en": "",
+        "en": "individual air blast nozzle",
         "tts_es": "dedo",
-        "tts_en": ""
+        "tts_en": "individual air blast nozzle"
       },
       {
-        "picto_id": 1579,
+        "picto_id": 1379,
         "es": "pecho",
-        "en": "",
+        "en": "breast",
         "tts_es": "pecho",
-        "tts_en": ""
+        "tts_en": "breast"
       },
       {
-        "picto_id": 1580,
+        "picto_id": 1380,
         "es": "barriga",
-        "en": "",
+        "en": "belly",
         "tts_es": "barriga",
-        "tts_en": ""
+        "tts_en": "belly"
       },
       {
-        "picto_id": 1581,
+        "picto_id": 1381,
         "es": "espalda",
-        "en": "",
+        "en": "back",
         "tts_es": "espalda",
-        "tts_en": ""
+        "tts_en": "back"
       },
       {
-        "picto_id": 1582,
+        "picto_id": 1382,
         "es": "pierna",
-        "en": "",
+        "en": "height",
         "tts_es": "pierna",
-        "tts_en": ""
+        "tts_en": "height"
       },
       {
-        "picto_id": 1583,
+        "picto_id": 1383,
         "es": "rodilla",
-        "en": "",
+        "en": "knee",
         "tts_es": "rodilla",
-        "tts_en": ""
+        "tts_en": "knee"
       },
       {
-        "picto_id": 1584,
+        "picto_id": 1384,
         "es": "pie",
-        "en": "",
+        "en": "pie (foot)",
         "tts_es": "pie",
-        "tts_en": ""
+        "tts_en": "pie (foot)"
       },
       {
-        "picto_id": 1585,
+        "picto_id": 1385,
         "es": "talón",
-        "en": "",
+        "en": "back, pole, poll",
         "tts_es": "talón",
-        "tts_en": ""
+        "tts_en": "back, pole, poll"
       },
       {
-        "picto_id": 1586,
+        "picto_id": 1386,
         "es": "uña",
-        "en": "",
+        "en": "nail",
         "tts_es": "uña",
-        "tts_en": ""
+        "tts_en": "nail"
       },
       {
-        "picto_id": 1587,
+        "picto_id": 1387,
         "es": "ceja",
-        "en": "",
+        "en": "eyebrow",
         "tts_es": "ceja",
-        "tts_en": ""
+        "tts_en": "eyebrow"
       },
       {
-        "picto_id": 1588,
+        "picto_id": 1388,
         "es": "mejilla",
-        "en": "",
+        "en": "bucca, cheek, mala",
         "tts_es": "mejilla",
-        "tts_en": ""
+        "tts_en": "bucca, cheek, mala"
       },
       {
-        "picto_id": 1589,
+        "picto_id": 1389,
         "es": "barbilla",
-        "en": "",
+        "en": "chin",
         "tts_es": "barbilla",
-        "tts_en": ""
+        "tts_en": "chin"
       },
       {
-        "picto_id": 1590,
+        "picto_id": 1390,
         "es": "codo",
-        "en": "",
+        "en": "elbow",
         "tts_es": "codo",
-        "tts_en": ""
+        "tts_en": "elbow"
       },
       {
-        "picto_id": 1591,
+        "picto_id": 1391,
         "es": "muñeca",
-        "en": "",
+        "en": "doll",
         "tts_es": "muñeca",
-        "tts_en": ""
+        "tts_en": "doll"
       }
     ]
   },
@@ -1768,170 +1768,170 @@
       {
         "picto_id": 1001,
         "es": "árbol",
-        "en": "",
+        "en": "tree",
         "tts_es": "árbol",
-        "tts_en": ""
+        "tts_en": "tree"
       },
       {
-        "picto_id": 1093,
+        "picto_id": 1048,
         "es": "flor",
-        "en": "",
+        "en": "flor (flower)",
         "tts_es": "flor",
-        "tts_en": ""
+        "tts_en": "flor (flower)"
       },
       {
-        "picto_id": 1313,
+        "picto_id": 1160,
         "es": "sol",
-        "en": "",
+        "en": "sun",
         "tts_es": "sol",
-        "tts_en": ""
+        "tts_en": "sun"
       },
       {
-        "picto_id": 1193,
+        "picto_id": 1096,
         "es": "luna",
-        "en": "",
+        "en": "moon",
         "tts_es": "luna",
-        "tts_en": ""
+        "tts_en": "moon"
       },
       {
-        "picto_id": 1076,
+        "picto_id": 1039,
         "es": "estrella",
-        "en": "",
+        "en": "star",
         "tts_es": "estrella",
-        "tts_en": ""
+        "tts_en": "star"
       },
       {
-        "picto_id": 1232,
+        "picto_id": 1115,
         "es": "nube",
-        "en": "",
+        "en": "cloud",
         "tts_es": "nube",
-        "tts_en": ""
+        "tts_en": "cloud"
       },
       {
-        "picto_id": 1592,
+        "picto_id": 1392,
         "es": "lluvia",
-        "en": "",
+        "en": "shower",
         "tts_es": "lluvia",
-        "tts_en": ""
+        "tts_en": "shower"
       },
       {
-        "picto_id": 1235,
+        "picto_id": 1118,
         "es": "nieve",
-        "en": "",
+        "en": "snow",
         "tts_es": "nieve",
-        "tts_en": ""
+        "tts_en": "snow"
       },
       {
-        "picto_id": 1302,
+        "picto_id": 1157,
         "es": "río",
-        "en": "",
+        "en": "río (river)",
         "tts_es": "río",
-        "tts_en": ""
+        "tts_en": "río (river)"
       },
       {
-        "picto_id": 1593,
+        "picto_id": 1393,
         "es": "mar",
-        "en": "",
+        "en": "the sea.",
         "tts_es": "mar",
-        "tts_en": ""
+        "tts_en": "the sea."
       },
       {
-        "picto_id": 1216,
+        "picto_id": 1109,
         "es": "montaña",
-        "en": "",
+        "en": "rice",
         "tts_es": "montaña",
-        "tts_en": ""
+        "tts_en": "rice"
       },
       {
-        "picto_id": 1359,
+        "picto_id": 1181,
         "es": "volcán",
-        "en": "",
+        "en": "volcano",
         "tts_es": "volcán",
-        "tts_en": ""
+        "tts_en": "volcano"
       },
       {
-        "picto_id": 1594,
+        "picto_id": 1394,
         "es": "desierto",
-        "en": "",
+        "en": "desert",
         "tts_es": "desierto",
-        "tts_en": ""
+        "tts_en": "desert"
       },
       {
-        "picto_id": 1595,
+        "picto_id": 1395,
         "es": "bosque",
-        "en": "",
+        "en": "forrest",
         "tts_es": "bosque",
-        "tts_en": ""
+        "tts_en": "forrest"
       },
       {
-        "picto_id": 1596,
+        "picto_id": 1396,
         "es": "piedra",
-        "en": "",
+        "en": "stone",
         "tts_es": "piedra",
-        "tts_en": ""
+        "tts_en": "stone"
       },
       {
-        "picto_id": 1597,
+        "picto_id": 1397,
         "es": "arena",
-        "en": "",
+        "en": "sand",
         "tts_es": "arena",
-        "tts_en": ""
+        "tts_en": "sand"
       },
       {
-        "picto_id": 1133,
+        "picto_id": 1069,
         "es": "hoja",
-        "en": "",
+        "en": "blade",
         "tts_es": "hoja",
-        "tts_en": ""
+        "tts_en": "blade"
       },
       {
-        "picto_id": 1598,
+        "picto_id": 1398,
         "es": "semilla",
-        "en": "",
+        "en": "seed",
         "tts_es": "semilla",
-        "tts_en": ""
+        "tts_en": "seed"
       },
       {
-        "picto_id": 1599,
+        "picto_id": 1399,
         "es": "raíz",
-        "en": "",
+        "en": "root",
         "tts_es": "raíz",
-        "tts_en": ""
+        "tts_en": "root"
       },
       {
-        "picto_id": 1600,
+        "picto_id": 1400,
         "es": "rama",
-        "en": "",
+        "en": "branch",
         "tts_es": "rama",
-        "tts_en": ""
+        "tts_en": "branch"
       },
       {
-        "picto_id": 1601,
+        "picto_id": 1401,
         "es": "hierba",
-        "en": "",
+        "en": "grass",
         "tts_es": "hierba",
-        "tts_en": ""
+        "tts_en": "grass"
       },
       {
-        "picto_id": 1602,
+        "picto_id": 1402,
         "es": "musgo",
-        "en": "",
+        "en": "grass",
         "tts_es": "musgo",
-        "tts_en": ""
+        "tts_en": "grass"
       },
       {
-        "picto_id": 1297,
+        "picto_id": 1152,
         "es": "roca",
-        "en": "",
+        "en": "rock",
         "tts_es": "roca",
-        "tts_en": ""
+        "tts_en": "rock"
       },
       {
-        "picto_id": 1603,
+        "picto_id": 1403,
         "es": "cascada",
-        "en": "",
+        "en": "cascade",
         "tts_es": "cascada",
-        "tts_en": ""
+        "tts_en": "cascade"
       }
     ]
   },
@@ -1942,172 +1942,172 @@
     "tipo": "lenguaje",
     "palabras": [
       {
-        "picto_id": 1604,
+        "picto_id": 1404,
         "es": "arriba",
-        "en": "",
+        "en": "above",
         "tts_es": "arriba",
-        "tts_en": ""
+        "tts_en": "above"
       },
       {
-        "picto_id": 1605,
+        "picto_id": 1405,
         "es": "abajo",
-        "en": "",
+        "en": "below",
         "tts_es": "abajo",
-        "tts_en": ""
+        "tts_en": "below"
       },
       {
-        "picto_id": 1606,
+        "picto_id": 1406,
         "es": "dentro",
-        "en": "",
+        "en": "within",
         "tts_es": "dentro",
-        "tts_en": ""
+        "tts_en": "within"
       },
       {
-        "picto_id": 1607,
+        "picto_id": 1407,
         "es": "fuera",
-        "en": "",
+        "en": "it is",
         "tts_es": "fuera",
-        "tts_en": ""
+        "tts_en": "it is"
       },
       {
-        "picto_id": 1608,
+        "picto_id": 1408,
         "es": "antes",
-        "en": "",
+        "en": "before",
         "tts_es": "antes",
-        "tts_en": ""
+        "tts_en": "before"
       },
       {
-        "picto_id": 1609,
+        "picto_id": 1409,
         "es": "después",
-        "en": "",
+        "en": "after",
         "tts_es": "después",
-        "tts_en": ""
+        "tts_en": "after"
       },
       {
-        "picto_id": 1610,
+        "picto_id": 1410,
         "es": "cerca",
-        "en": "",
+        "en": "beside",
         "tts_es": "cerca",
-        "tts_en": ""
+        "tts_en": "beside"
       },
       {
-        "picto_id": 1611,
+        "picto_id": 1411,
         "es": "lejos",
-        "en": "",
+        "en": "away",
         "tts_es": "lejos",
-        "tts_en": ""
+        "tts_en": "away"
       },
       {
-        "picto_id": 1612,
+        "picto_id": 1412,
         "es": "encima",
-        "en": "",
+        "en": "over",
         "tts_es": "encima",
-        "tts_en": ""
+        "tts_en": "over"
       },
       {
-        "picto_id": 1613,
+        "picto_id": 1413,
         "es": "debajo",
-        "en": "",
+        "en": "below",
         "tts_es": "debajo",
-        "tts_en": ""
+        "tts_en": "below"
       },
       {
-        "picto_id": 1614,
+        "picto_id": 1414,
         "es": "delante",
-        "en": "",
+        "en": "front",
         "tts_es": "delante",
-        "tts_en": ""
+        "tts_en": "front"
       },
       {
-        "picto_id": 1615,
+        "picto_id": 1415,
         "es": "detrás",
-        "en": "",
+        "en": "behind",
         "tts_es": "detrás",
-        "tts_en": ""
+        "tts_en": "behind"
       },
       {
-        "picto_id": 1616,
+        "picto_id": 1416,
         "es": "izquierda",
-        "en": "",
+        "en": "left",
         "tts_es": "izquierda",
-        "tts_en": ""
+        "tts_en": "left"
       },
       {
-        "picto_id": 1617,
+        "picto_id": 1417,
         "es": "derecha",
-        "en": "",
+        "en": "right wing",
         "tts_es": "derecha",
-        "tts_en": ""
+        "tts_en": "right wing"
       },
       {
-        "picto_id": 1063,
+        "picto_id": 1036,
         "es": "día",
-        "en": "",
+        "en": "day",
         "tts_es": "día",
-        "tts_en": ""
+        "tts_en": "day"
       },
       {
-        "picto_id": 1618,
+        "picto_id": 1418,
         "es": "noche",
-        "en": "",
+        "en": "night",
         "tts_es": "noche",
-        "tts_en": ""
+        "tts_en": "night"
       },
       {
-        "picto_id": 1619,
+        "picto_id": 1419,
         "es": "entrada",
-        "en": "",
+        "en": "forecourt",
         "tts_es": "entrada",
-        "tts_en": ""
+        "tts_en": "forecourt"
       },
       {
-        "picto_id": 1620,
+        "picto_id": 1420,
         "es": "salida",
-        "en": "",
+        "en": "departure",
         "tts_es": "salida",
-        "tts_en": ""
+        "tts_en": "departure"
       },
       {
-        "picto_id": 1621,
+        "picto_id": 1421,
         "es": "inicio",
-        "en": "",
+        "en": "start",
         "tts_es": "inicio",
-        "tts_en": ""
+        "tts_en": "start"
       },
       {
-        "picto_id": 1622,
+        "picto_id": 1422,
         "es": "fin",
-        "en": "",
+        "en": "the end",
         "tts_es": "fin",
-        "tts_en": ""
+        "tts_en": "the end"
       },
       {
-        "picto_id": 1623,
+        "picto_id": 1423,
         "es": "abierto",
-        "en": "",
+        "en": "open",
         "tts_es": "abierto",
-        "tts_en": ""
+        "tts_en": "open"
       },
       {
-        "picto_id": 1624,
+        "picto_id": 1424,
         "es": "cerrado",
-        "en": "",
+        "en": "closed",
         "tts_es": "cerrado",
-        "tts_en": ""
+        "tts_en": "closed"
       },
       {
-        "picto_id": 1625,
+        "picto_id": 1425,
         "es": "lleno",
-        "en": "",
+        "en": "plein",
         "tts_es": "lleno",
-        "tts_en": ""
+        "tts_en": "plein"
       },
       {
-        "picto_id": 1626,
+        "picto_id": 1426,
         "es": "vacío",
-        "en": "",
+        "en": "empty",
         "tts_es": "vacío",
-        "tts_en": ""
+        "tts_en": "empty"
       }
     ]
   }

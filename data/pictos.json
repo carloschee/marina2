@@ -1,6262 +1,3410 @@
 [
   {
     "id": 1001,
-    "arasaac_id": null,
     "es": "árbol",
-    "en": "",
-    "archivo_es": "arbol.png",
-    "archivo_en": "arbol.png",
-    "tts_es": "árbol",
-    "tts_en": ""
-  },
-  {
-    "id": 1002,
-    "arasaac_id": null,
-    "es": "avión",
-    "en": "",
-    "archivo_es": "avion.png",
-    "archivo_en": "avion.png",
-    "tts_es": "avión",
-    "tts_en": ""
-  },
-  {
-    "id": 1003,
-    "arasaac_id": null,
-    "es": "agua",
-    "en": "",
-    "archivo_es": "agua.png",
-    "archivo_en": "agua.png",
-    "tts_es": "agua",
-    "tts_en": ""
-  },
-  {
-    "id": 1004,
-    "arasaac_id": null,
-    "es": "araña",
-    "en": "",
-    "archivo_es": "arana.png",
-    "archivo_en": "arana.png",
-    "tts_es": "araña",
-    "tts_en": ""
-  },
-  {
-    "id": 1005,
-    "arasaac_id": null,
-    "es": "arco iris",
-    "en": "",
-    "archivo_es": "arco-iris.png",
-    "archivo_en": "arco-iris.png",
-    "tts_es": "arco iris",
-    "tts_en": ""
-  },
-  {
-    "id": 1006,
-    "arasaac_id": null,
-    "es": "ardilla",
-    "en": "",
-    "archivo_es": "ardilla.png",
-    "archivo_en": "ardilla.png",
-    "tts_es": "ardilla",
-    "tts_en": ""
-  },
-  {
-    "id": 1007,
-    "arasaac_id": null,
-    "es": "abeja",
-    "en": "",
-    "archivo_es": "abeja.png",
-    "archivo_en": "abeja.png",
-    "tts_es": "abeja",
-    "tts_en": ""
-  },
-  {
-    "id": 1008,
-    "arasaac_id": null,
-    "es": "ajo",
-    "en": "",
-    "archivo_es": "ajo.png",
-    "archivo_en": "ajo.png",
-    "tts_es": "ajo",
-    "tts_en": ""
-  },
-  {
-    "id": 1009,
-    "arasaac_id": null,
-    "es": "",
-    "en": "apple",
-    "archivo_es": "apple.png",
-    "archivo_en": "apple.png",
-    "tts_es": "",
-    "tts_en": "apple"
-  },
-  {
-    "id": 1010,
-    "arasaac_id": null,
-    "es": "",
-    "en": "airplane",
-    "archivo_es": "airplane.png",
-    "archivo_en": "airplane.png",
-    "tts_es": "",
-    "tts_en": "airplane"
-  },
-  {
-    "id": 1011,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ant",
-    "archivo_es": "ant.png",
-    "archivo_en": "ant.png",
-    "tts_es": "",
-    "tts_en": "ant"
-  },
-  {
-    "id": 1012,
-    "arasaac_id": null,
-    "es": "",
-    "en": "alligator",
-    "archivo_es": "alligator.png",
-    "archivo_en": "alligator.png",
-    "tts_es": "",
-    "tts_en": "alligator"
-  },
-  {
-    "id": 1013,
-    "arasaac_id": null,
-    "es": "",
-    "en": "arm",
-    "archivo_es": "arm.png",
-    "archivo_en": "arm.png",
-    "tts_es": "",
-    "tts_en": "arm"
-  },
-  {
-    "id": 1014,
-    "arasaac_id": null,
-    "es": "",
-    "en": "avocado",
-    "archivo_es": "avocado.png",
-    "archivo_en": "avocado.png",
-    "tts_es": "",
-    "tts_en": "avocado"
-  },
-  {
-    "id": 1015,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ambulance",
-    "archivo_es": "ambulance.png",
-    "archivo_en": "ambulance.png",
-    "tts_es": "",
-    "tts_en": "ambulance"
-  },
-  {
-    "id": 1016,
-    "arasaac_id": null,
-    "es": "barco",
-    "en": "",
-    "archivo_es": "barco.png",
-    "archivo_en": "barco.png",
-    "tts_es": "barco",
-    "tts_en": ""
-  },
-  {
-    "id": 1017,
-    "arasaac_id": null,
-    "es": "bicicleta",
-    "en": "",
-    "archivo_es": "bicicleta.png",
-    "archivo_en": "bicicleta.png",
-    "tts_es": "bicicleta",
-    "tts_en": ""
-  },
-  {
-    "id": 1018,
-    "arasaac_id": null,
-    "es": "boca",
-    "en": "",
-    "archivo_es": "boca.png",
-    "archivo_en": "boca.png",
-    "tts_es": "boca",
-    "tts_en": ""
-  },
-  {
-    "id": 1019,
-    "arasaac_id": null,
-    "es": "bebé",
-    "en": "",
-    "archivo_es": "bebe.png",
-    "archivo_en": "bebe.png",
-    "tts_es": "bebé",
-    "tts_en": ""
-  },
-  {
-    "id": 1020,
-    "arasaac_id": null,
-    "es": "ballena",
-    "en": "",
-    "archivo_es": "ballena.png",
-    "archivo_en": "ballena.png",
-    "tts_es": "ballena",
-    "tts_en": ""
-  },
-  {
-    "id": 1021,
-    "arasaac_id": null,
-    "es": "brócoli",
-    "en": "",
-    "archivo_es": "brocoli.png",
-    "archivo_en": "brocoli.png",
-    "tts_es": "brócoli",
-    "tts_en": ""
-  },
-  {
-    "id": 1022,
-    "arasaac_id": null,
-    "es": "botas",
-    "en": "",
-    "archivo_es": "botas.png",
-    "archivo_en": "botas.png",
-    "tts_es": "botas",
-    "tts_en": ""
-  },
-  {
-    "id": 1023,
-    "arasaac_id": null,
-    "es": "botón",
-    "en": "",
-    "archivo_es": "boton.png",
-    "archivo_en": "boton.png",
-    "tts_es": "botón",
-    "tts_en": ""
-  },
-  {
-    "id": 1024,
-    "arasaac_id": null,
-    "es": "búho",
-    "en": "",
-    "archivo_es": "buho.png",
-    "archivo_en": "buho.png",
-    "tts_es": "búho",
-    "tts_en": ""
-  },
-  {
-    "id": 1025,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ball",
-    "archivo_es": "ball.png",
-    "archivo_en": "ball.png",
-    "tts_es": "",
-    "tts_en": "ball"
-  },
-  {
-    "id": 1026,
-    "arasaac_id": null,
-    "es": "",
-    "en": "balloon",
-    "archivo_es": "balloon.png",
-    "archivo_en": "balloon.png",
-    "tts_es": "",
-    "tts_en": "balloon"
-  },
-  {
-    "id": 1027,
-    "arasaac_id": null,
-    "es": "",
-    "en": "banana",
-    "archivo_es": "banana.png",
-    "archivo_en": "banana.png",
-    "tts_es": "",
-    "tts_en": "banana"
-  },
-  {
-    "id": 1028,
-    "arasaac_id": null,
-    "es": "",
-    "en": "bear",
-    "archivo_es": "bear.png",
-    "archivo_en": "bear.png",
-    "tts_es": "",
-    "tts_en": "bear"
-  },
-  {
-    "id": 1029,
-    "arasaac_id": null,
-    "es": "",
-    "en": "bee",
-    "archivo_es": "bee.png",
-    "archivo_en": "bee.png",
-    "tts_es": "",
-    "tts_en": "bee"
-  },
-  {
-    "id": 1030,
-    "arasaac_id": null,
-    "es": "",
-    "en": "bird",
-    "archivo_es": "bird.png",
-    "archivo_en": "bird.png",
-    "tts_es": "",
-    "tts_en": "bird"
-  },
-  {
-    "id": 1031,
-    "arasaac_id": null,
-    "es": "",
-    "en": "boat",
-    "archivo_es": "boat.png",
-    "archivo_en": "boat.png",
-    "tts_es": "",
-    "tts_en": "boat"
-  },
-  {
-    "id": 1032,
-    "arasaac_id": null,
-    "es": "",
-    "en": "bed",
-    "archivo_es": "bed.png",
-    "archivo_en": "bed.png",
-    "tts_es": "",
-    "tts_en": "bed"
-  },
-  {
-    "id": 1033,
-    "arasaac_id": null,
-    "es": "",
-    "en": "book",
-    "archivo_es": "book.png",
-    "archivo_en": "book.png",
-    "tts_es": "",
-    "tts_en": "book"
-  },
-  {
-    "id": 1034,
-    "arasaac_id": null,
-    "es": "",
-    "en": "butterfly",
-    "archivo_es": "butterfly.png",
-    "archivo_en": "butterfly.png",
-    "tts_es": "",
-    "tts_en": "butterfly"
-  },
-  {
-    "id": 1035,
-    "arasaac_id": null,
-    "es": "casa",
-    "en": "",
-    "archivo_es": "casa.png",
-    "archivo_en": "casa.png",
-    "tts_es": "casa",
-    "tts_en": ""
-  },
-  {
-    "id": 1036,
-    "arasaac_id": null,
-    "es": "coche",
-    "en": "",
-    "archivo_es": "coche.png",
-    "archivo_en": "coche.png",
-    "tts_es": "coche",
-    "tts_en": ""
-  },
-  {
-    "id": 1037,
-    "arasaac_id": null,
-    "es": "corazón",
-    "en": "",
-    "archivo_es": "corazon.png",
-    "archivo_en": "corazon.png",
-    "tts_es": "corazón",
-    "tts_en": ""
-  },
-  {
-    "id": 1038,
-    "arasaac_id": null,
-    "es": "cama",
-    "en": "",
-    "archivo_es": "cama.png",
-    "archivo_en": "cama.png",
-    "tts_es": "cama",
-    "tts_en": ""
-  },
-  {
-    "id": 1039,
-    "arasaac_id": null,
-    "es": "caballo",
-    "en": "",
-    "archivo_es": "caballo.png",
-    "archivo_en": "caballo.png",
-    "tts_es": "caballo",
-    "tts_en": ""
-  },
-  {
-    "id": 1040,
-    "arasaac_id": null,
-    "es": "conejo",
-    "en": "",
-    "archivo_es": "conejo.png",
-    "archivo_en": "conejo.png",
-    "tts_es": "conejo",
-    "tts_en": ""
-  },
-  {
-    "id": 1041,
-    "arasaac_id": null,
-    "es": "cohete",
-    "en": "",
-    "archivo_es": "cohete.png",
-    "archivo_en": "cohete.png",
-    "tts_es": "cohete",
-    "tts_en": ""
-  },
-  {
-    "id": 1042,
-    "arasaac_id": null,
-    "es": "corona",
-    "en": "",
-    "archivo_es": "corona.png",
-    "archivo_en": "corona.png",
-    "tts_es": "corona",
-    "tts_en": ""
-  },
-  {
-    "id": 1043,
-    "arasaac_id": null,
-    "es": "cactus",
-    "en": "",
-    "archivo_es": "cactus.png",
-    "archivo_en": "cactus.png",
-    "tts_es": "cactus",
-    "tts_en": ""
-  },
-  {
-    "id": 1044,
-    "arasaac_id": null,
-    "es": "cebra",
-    "en": "",
-    "archivo_es": "cebra.png",
-    "archivo_en": "cebra.png",
-    "tts_es": "cebra",
-    "tts_en": ""
-  },
-  {
-    "id": 1045,
-    "arasaac_id": null,
-    "es": "camión",
-    "en": "",
-    "archivo_es": "camion.png",
-    "archivo_en": "camion.png",
-    "tts_es": "camión",
-    "tts_en": ""
-  },
-  {
-    "id": 1046,
-    "arasaac_id": null,
-    "es": "",
-    "en": "cake",
-    "archivo_es": "cake.png",
-    "archivo_en": "cake.png",
-    "tts_es": "",
-    "tts_en": "cake"
-  },
-  {
-    "id": 1047,
-    "arasaac_id": null,
-    "es": "",
-    "en": "candle",
-    "archivo_es": "candle.png",
-    "archivo_en": "candle.png",
-    "tts_es": "",
-    "tts_en": "candle"
-  },
-  {
-    "id": 1048,
-    "arasaac_id": null,
-    "es": "",
-    "en": "carrot",
-    "archivo_es": "carrot.png",
-    "archivo_en": "carrot.png",
-    "tts_es": "",
-    "tts_en": "carrot"
-  },
-  {
-    "id": 1049,
-    "arasaac_id": null,
-    "es": "",
-    "en": "car",
-    "archivo_es": "car.png",
-    "archivo_en": "car.png",
-    "tts_es": "",
-    "tts_en": "car"
-  },
-  {
-    "id": 1050,
-    "arasaac_id": null,
-    "es": "",
-    "en": "cat",
-    "archivo_es": "cat.png",
-    "archivo_en": "cat.png",
-    "tts_es": "",
-    "tts_en": "cat"
-  },
-  {
-    "id": 1051,
-    "arasaac_id": null,
-    "es": "",
-    "en": "chair",
-    "archivo_es": "chair.png",
-    "archivo_en": "chair.png",
-    "tts_es": "",
-    "tts_en": "chair"
-  },
-  {
-    "id": 1052,
-    "arasaac_id": null,
-    "es": "",
-    "en": "cloud",
-    "archivo_es": "cloud.png",
-    "archivo_en": "cloud.png",
-    "tts_es": "",
-    "tts_en": "cloud"
-  },
-  {
-    "id": 1053,
-    "arasaac_id": null,
-    "es": "",
-    "en": "cow",
-    "archivo_es": "cow.png",
-    "archivo_en": "cow.png",
-    "tts_es": "",
-    "tts_en": "cow"
-  },
-  {
-    "id": 1054,
-    "arasaac_id": null,
-    "es": "",
-    "en": "crab",
-    "archivo_es": "crab.png",
-    "archivo_en": "crab.png",
-    "tts_es": "",
-    "tts_en": "crab"
-  },
-  {
-    "id": 1055,
-    "arasaac_id": null,
-    "es": "",
-    "en": "cup",
-    "archivo_es": "cup.png",
-    "archivo_en": "cup.png",
-    "tts_es": "",
-    "tts_en": "cup"
-  },
-  {
-    "id": 1056,
-    "arasaac_id": null,
-    "es": "delfín",
-    "en": "",
-    "archivo_es": "delfin.png",
-    "archivo_en": "delfin.png",
-    "tts_es": "delfín",
-    "tts_en": ""
-  },
-  {
-    "id": 1057,
-    "arasaac_id": null,
-    "es": "dinosaurio",
-    "en": "",
-    "archivo_es": "dinosaurio.png",
-    "archivo_en": "dinosaurio.png",
-    "tts_es": "dinosaurio",
-    "tts_en": ""
-  },
-  {
-    "id": 1058,
-    "arasaac_id": null,
-    "es": "dientes",
-    "en": "",
-    "archivo_es": "dientes.png",
-    "archivo_en": "dientes.png",
-    "tts_es": "dientes",
-    "tts_en": ""
-  },
-  {
-    "id": 1059,
-    "arasaac_id": null,
-    "es": "dado",
-    "en": "",
-    "archivo_es": "dado.png",
-    "archivo_en": "dado.png",
-    "tts_es": "dado",
-    "tts_en": ""
-  },
-  {
-    "id": 1060,
-    "arasaac_id": null,
-    "es": "dragón",
-    "en": "",
-    "archivo_es": "dragon.png",
-    "archivo_en": "dragon.png",
-    "tts_es": "dragón",
-    "tts_en": ""
-  },
-  {
-    "id": 1061,
-    "arasaac_id": null,
-    "es": "dulce",
-    "en": "",
-    "archivo_es": "dulce.png",
-    "archivo_en": "dulce.png",
-    "tts_es": "dulce",
-    "tts_en": ""
-  },
-  {
-    "id": 1062,
-    "arasaac_id": null,
-    "es": "dedos",
-    "en": "",
-    "archivo_es": "dedos.png",
-    "archivo_en": "dedos.png",
-    "tts_es": "dedos",
-    "tts_en": ""
-  },
-  {
-    "id": 1063,
-    "arasaac_id": null,
-    "es": "día",
-    "en": "",
-    "archivo_es": "dia.png",
-    "archivo_en": "dia.png",
-    "tts_es": "día",
-    "tts_en": ""
-  },
-  {
-    "id": 1064,
-    "arasaac_id": null,
-    "es": "dinero",
-    "en": "",
-    "archivo_es": "dinero.png",
-    "archivo_en": "dinero.png",
-    "tts_es": "dinero",
-    "tts_en": ""
-  },
-  {
-    "id": 1065,
-    "arasaac_id": null,
-    "es": "",
-    "en": "dog",
-    "archivo_es": "dog.png",
-    "archivo_en": "dog.png",
-    "tts_es": "",
-    "tts_en": "dog"
-  },
-  {
-    "id": 1066,
-    "arasaac_id": null,
-    "es": "",
-    "en": "dolphin",
-    "archivo_es": "dolphin.png",
-    "archivo_en": "dolphin.png",
-    "tts_es": "",
-    "tts_en": "dolphin"
-  },
-  {
-    "id": 1067,
-    "arasaac_id": null,
-    "es": "",
-    "en": "door",
-    "archivo_es": "door.png",
-    "archivo_en": "door.png",
-    "tts_es": "",
-    "tts_en": "door"
-  },
-  {
-    "id": 1068,
-    "arasaac_id": null,
-    "es": "",
-    "en": "dad",
-    "archivo_es": "dad.png",
-    "archivo_en": "dad.png",
-    "tts_es": "",
-    "tts_en": "dad"
-  },
-  {
-    "id": 1069,
-    "arasaac_id": null,
-    "es": "",
-    "en": "drum",
-    "archivo_es": "drum.png",
-    "archivo_en": "drum.png",
-    "tts_es": "",
-    "tts_en": "drum"
-  },
-  {
-    "id": 1070,
-    "arasaac_id": null,
-    "es": "",
-    "en": "duck",
-    "archivo_es": "duck.png",
-    "archivo_en": "duck.png",
-    "tts_es": "",
-    "tts_en": "duck"
-  },
-  {
-    "id": 1071,
-    "arasaac_id": null,
-    "es": "",
-    "en": "drink",
-    "archivo_es": "drink.png",
-    "archivo_en": "drink.png",
-    "tts_es": "",
-    "tts_en": "drink"
-  },
-  {
-    "id": 1072,
-    "arasaac_id": null,
-    "es": "",
-    "en": "desk",
-    "archivo_es": "desk.png",
-    "archivo_en": "desk.png",
-    "tts_es": "",
-    "tts_en": "desk"
-  },
-  {
-    "id": 1073,
-    "arasaac_id": null,
-    "es": "",
-    "en": "doll",
-    "archivo_es": "doll.png",
-    "archivo_en": "doll.png",
-    "tts_es": "",
-    "tts_en": "doll"
-  },
-  {
-    "id": 1074,
-    "arasaac_id": null,
-    "es": "",
-    "en": "donkey",
-    "archivo_es": "donkey.png",
-    "archivo_en": "donkey.png",
-    "tts_es": "",
-    "tts_en": "donkey"
-  },
-  {
-    "id": 1075,
-    "arasaac_id": null,
-    "es": "elefante",
-    "en": "",
-    "archivo_es": "elefante.png",
-    "archivo_en": "elefante.png",
-    "tts_es": "elefante",
-    "tts_en": ""
-  },
-  {
-    "id": 1076,
-    "arasaac_id": null,
-    "es": "estrella",
-    "en": "",
-    "archivo_es": "estrella.png",
-    "archivo_en": "estrella.png",
-    "tts_es": "estrella",
-    "tts_en": ""
-  },
-  {
-    "id": 1077,
-    "arasaac_id": null,
-    "es": "escalera",
-    "en": "",
-    "archivo_es": "escalera.png",
-    "archivo_en": "escalera.png",
-    "tts_es": "escalera",
-    "tts_en": ""
-  },
-  {
-    "id": 1078,
-    "arasaac_id": null,
-    "es": "espejo",
-    "en": "",
-    "archivo_es": "espejo.png",
-    "archivo_en": "espejo.png",
-    "tts_es": "espejo",
-    "tts_en": ""
-  },
-  {
-    "id": 1079,
-    "arasaac_id": null,
-    "es": "escoba",
-    "en": "",
-    "archivo_es": "escoba.png",
-    "archivo_en": "escoba.png",
-    "tts_es": "escoba",
-    "tts_en": ""
-  },
-  {
-    "id": 1080,
-    "arasaac_id": null,
-    "es": "erizo",
-    "en": "",
-    "archivo_es": "erizo.png",
-    "archivo_en": "erizo.png",
-    "tts_es": "erizo",
-    "tts_en": ""
-  },
-  {
-    "id": 1081,
-    "arasaac_id": null,
-    "es": "esponja",
-    "en": "",
-    "archivo_es": "esponja.png",
-    "archivo_en": "esponja.png",
-    "tts_es": "esponja",
-    "tts_en": ""
-  },
-  {
-    "id": 1082,
-    "arasaac_id": null,
-    "es": "elote",
-    "en": "",
-    "archivo_es": "elote.png",
-    "archivo_en": "elote.png",
-    "tts_es": "elote",
-    "tts_en": ""
-  },
-  {
-    "id": 1083,
-    "arasaac_id": null,
-    "es": "escuela",
-    "en": "",
-    "archivo_es": "escuela.png",
-    "archivo_en": "escuela.png",
-    "tts_es": "escuela",
-    "tts_en": ""
-  },
-  {
-    "id": 1084,
-    "arasaac_id": null,
-    "es": "espada",
-    "en": "",
-    "archivo_es": "espada.png",
-    "archivo_en": "espada.png",
-    "tts_es": "espada",
-    "tts_en": ""
-  },
-  {
-    "id": 1085,
-    "arasaac_id": null,
-    "es": "",
-    "en": "eagle",
-    "archivo_es": "eagle.png",
-    "archivo_en": "eagle.png",
-    "tts_es": "",
-    "tts_en": "eagle"
-  },
-  {
-    "id": 1086,
-    "arasaac_id": null,
-    "es": "",
-    "en": "egg",
-    "archivo_es": "egg.png",
-    "archivo_en": "egg.png",
-    "tts_es": "",
-    "tts_en": "egg"
-  },
-  {
-    "id": 1087,
-    "arasaac_id": null,
-    "es": "",
-    "en": "elephant",
-    "archivo_es": "elephant.png",
-    "archivo_en": "elephant.png",
-    "tts_es": "",
-    "tts_en": "elephant"
-  },
-  {
-    "id": 1088,
-    "arasaac_id": null,
-    "es": "",
-    "en": "eat",
-    "archivo_es": "eat.png",
-    "archivo_en": "eat.png",
-    "tts_es": "",
-    "tts_en": "eat"
-  },
-  {
-    "id": 1089,
-    "arasaac_id": null,
-    "es": "",
-    "en": "eye",
-    "archivo_es": "eye.png",
-    "archivo_en": "eye.png",
-    "tts_es": "",
-    "tts_en": "eye"
-  },
-  {
-    "id": 1090,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ear",
-    "archivo_es": "ear.png",
-    "archivo_en": "ear.png",
-    "tts_es": "",
-    "tts_en": "ear"
-  },
-  {
-    "id": 1091,
-    "arasaac_id": null,
-    "es": "",
-    "en": "eggplant",
-    "archivo_es": "eggplant.png",
-    "archivo_en": "eggplant.png",
-    "tts_es": "",
-    "tts_en": "eggplant"
-  },
-  {
-    "id": 1092,
-    "arasaac_id": null,
-    "es": "",
-    "en": "elbow",
-    "archivo_es": "elbow.png",
-    "archivo_en": "elbow.png",
-    "tts_es": "",
-    "tts_en": "elbow"
-  },
-  {
-    "id": 1093,
-    "arasaac_id": null,
-    "es": "flor",
-    "en": "",
-    "archivo_es": "flor.png",
-    "archivo_en": "flor.png",
-    "tts_es": "flor",
-    "tts_en": ""
-  },
-  {
-    "id": 1094,
-    "arasaac_id": null,
-    "es": "fresa",
-    "en": "",
-    "archivo_es": "fresa.png",
-    "archivo_en": "fresa.png",
-    "tts_es": "fresa",
-    "tts_en": ""
-  },
-  {
-    "id": 1095,
-    "arasaac_id": null,
-    "es": "fuego",
-    "en": "",
-    "archivo_es": "fuego.png",
-    "archivo_en": "fuego.png",
-    "tts_es": "fuego",
-    "tts_en": ""
-  },
-  {
-    "id": 1096,
-    "arasaac_id": null,
-    "es": "foca",
-    "en": "",
-    "archivo_es": "foca.png",
-    "archivo_en": "foca.png",
-    "tts_es": "foca",
-    "tts_en": ""
-  },
-  {
-    "id": 1097,
-    "arasaac_id": null,
-    "es": "flauta",
-    "en": "",
-    "archivo_es": "flauta.png",
-    "archivo_en": "flauta.png",
-    "tts_es": "flauta",
-    "tts_en": ""
-  },
-  {
-    "id": 1098,
-    "arasaac_id": null,
-    "es": "faro",
-    "en": "",
-    "archivo_es": "faro.png",
-    "archivo_en": "faro.png",
-    "tts_es": "faro",
-    "tts_en": ""
-  },
-  {
-    "id": 1099,
-    "arasaac_id": null,
-    "es": "fruta",
-    "en": "",
-    "archivo_es": "fruta.png",
-    "archivo_en": "fruta.png",
-    "tts_es": "fruta",
-    "tts_en": ""
-  },
-  {
-    "id": 1100,
-    "arasaac_id": null,
-    "es": "fuente",
-    "en": "",
-    "archivo_es": "fuente.png",
-    "archivo_en": "fuente.png",
-    "tts_es": "fuente",
-    "tts_en": ""
-  },
-  {
-    "id": 1101,
-    "arasaac_id": null,
-    "es": "",
-    "en": "fish",
-    "archivo_es": "fish.png",
-    "archivo_en": "fish.png",
-    "tts_es": "",
-    "tts_en": "fish"
-  },
-  {
-    "id": 1102,
-    "arasaac_id": null,
-    "es": "",
-    "en": "flower",
-    "archivo_es": "flower.png",
-    "archivo_en": "flower.png",
-    "tts_es": "",
-    "tts_en": "flower"
-  },
-  {
-    "id": 1103,
-    "arasaac_id": null,
-    "es": "",
-    "en": "frog",
-    "archivo_es": "frog.png",
-    "archivo_en": "frog.png",
-    "tts_es": "",
-    "tts_en": "frog"
-  },
-  {
-    "id": 1104,
-    "arasaac_id": null,
-    "es": "",
-    "en": "flag",
-    "archivo_es": "flag.png",
-    "archivo_en": "flag.png",
-    "tts_es": "",
-    "tts_en": "flag"
-  },
-  {
-    "id": 1105,
-    "arasaac_id": null,
-    "es": "",
-    "en": "fox",
-    "archivo_es": "fox.png",
-    "archivo_en": "fox.png",
-    "tts_es": "",
-    "tts_en": "fox"
-  },
-  {
-    "id": 1106,
-    "arasaac_id": null,
-    "es": "",
-    "en": "fork",
-    "archivo_es": "fork.png",
-    "archivo_en": "fork.png",
-    "tts_es": "",
-    "tts_en": "fork"
-  },
-  {
-    "id": 1107,
-    "arasaac_id": null,
-    "es": "",
-    "en": "feather",
-    "archivo_es": "feather.png",
-    "archivo_en": "feather.png",
-    "tts_es": "",
-    "tts_en": "feather"
-  },
-  {
-    "id": 1108,
-    "arasaac_id": null,
-    "es": "",
-    "en": "fan",
-    "archivo_es": "fan.png",
-    "archivo_en": "fan.png",
-    "tts_es": "",
-    "tts_en": "fan"
-  },
-  {
-    "id": 1109,
-    "arasaac_id": null,
-    "es": "",
-    "en": "feet",
-    "archivo_es": "feet.png",
-    "archivo_en": "feet.png",
-    "tts_es": "",
-    "tts_en": "feet"
-  },
-  {
-    "id": 1110,
-    "arasaac_id": null,
-    "es": "gato",
-    "en": "",
-    "archivo_es": "gato.png",
-    "archivo_en": "gato.png",
-    "tts_es": "gato",
-    "tts_en": ""
-  },
-  {
-    "id": 1111,
-    "arasaac_id": null,
-    "es": "globo aerostático",
-    "en": "",
-    "archivo_es": "globo-aerostatico.png",
-    "archivo_en": "globo-aerostatico.png",
-    "tts_es": "globo aerostático",
-    "tts_en": ""
-  },
-  {
-    "id": 1112,
-    "arasaac_id": null,
-    "es": "guitarra",
-    "en": "",
-    "archivo_es": "guitarra.png",
-    "archivo_en": "guitarra.png",
-    "tts_es": "guitarra",
-    "tts_en": ""
-  },
-  {
-    "id": 1113,
-    "arasaac_id": null,
-    "es": "gallina",
-    "en": "",
-    "archivo_es": "gallina.png",
-    "archivo_en": "gallina.png",
-    "tts_es": "gallina",
-    "tts_en": ""
-  },
-  {
-    "id": 1114,
-    "arasaac_id": null,
-    "es": "gorila",
-    "en": "",
-    "archivo_es": "gorila.png",
-    "archivo_en": "gorila.png",
-    "tts_es": "gorila",
-    "tts_en": ""
-  },
-  {
-    "id": 1115,
-    "arasaac_id": null,
-    "es": "girasol",
-    "en": "",
-    "archivo_es": "girasol.png",
-    "archivo_en": "girasol.png",
-    "tts_es": "girasol",
-    "tts_en": ""
-  },
-  {
-    "id": 1116,
-    "arasaac_id": null,
-    "es": "gusano",
-    "en": "",
-    "archivo_es": "gusano.png",
-    "archivo_en": "gusano.png",
-    "tts_es": "gusano",
-    "tts_en": ""
-  },
-  {
-    "id": 1117,
-    "arasaac_id": null,
-    "es": "gorra",
-    "en": "",
-    "archivo_es": "gorra.png",
-    "archivo_en": "gorra.png",
-    "tts_es": "gorra",
-    "tts_en": ""
-  },
-  {
-    "id": 1118,
-    "arasaac_id": null,
-    "es": "granja",
-    "en": "",
-    "archivo_es": "granja.png",
-    "archivo_en": "granja.png",
-    "tts_es": "granja",
-    "tts_en": ""
-  },
-  {
-    "id": 1119,
-    "arasaac_id": null,
-    "es": "grifo",
-    "en": "",
-    "archivo_es": "grifo.png",
-    "archivo_en": "grifo.png",
-    "tts_es": "grifo",
-    "tts_en": ""
-  },
-  {
-    "id": 1120,
-    "arasaac_id": null,
-    "es": "",
-    "en": "gate",
-    "archivo_es": "gate.png",
-    "archivo_en": "gate.png",
-    "tts_es": "",
-    "tts_en": "gate"
-  },
-  {
-    "id": 1121,
-    "arasaac_id": null,
-    "es": "",
-    "en": "girl",
-    "archivo_es": "girl.png",
-    "archivo_en": "girl.png",
-    "tts_es": "",
-    "tts_en": "girl"
-  },
-  {
-    "id": 1122,
-    "arasaac_id": null,
-    "es": "",
-    "en": "giraffe",
-    "archivo_es": "giraffe.png",
-    "archivo_en": "giraffe.png",
-    "tts_es": "",
-    "tts_en": "giraffe"
-  },
-  {
-    "id": 1123,
-    "arasaac_id": null,
-    "es": "",
-    "en": "goat",
-    "archivo_es": "goat.png",
-    "archivo_en": "goat.png",
-    "tts_es": "",
-    "tts_en": "goat"
-  },
-  {
-    "id": 1124,
-    "arasaac_id": null,
-    "es": "",
-    "en": "gorilla",
-    "archivo_es": "gorilla.png",
-    "archivo_en": "gorilla.png",
-    "tts_es": "",
-    "tts_en": "gorilla"
-  },
-  {
-    "id": 1125,
-    "arasaac_id": null,
-    "es": "",
-    "en": "grapes",
-    "archivo_es": "grapes.png",
-    "archivo_en": "grapes.png",
-    "tts_es": "",
-    "tts_en": "grapes"
-  },
-  {
-    "id": 1126,
-    "arasaac_id": null,
-    "es": "",
-    "en": "grass",
-    "archivo_es": "grass.png",
-    "archivo_en": "grass.png",
-    "tts_es": "",
-    "tts_en": "grass"
-  },
-  {
-    "id": 1127,
-    "arasaac_id": null,
-    "es": "",
-    "en": "guitar",
-    "archivo_es": "guitar.png",
-    "archivo_en": "guitar.png",
-    "tts_es": "",
-    "tts_en": "guitar"
-  },
-  {
-    "id": 1128,
-    "arasaac_id": null,
-    "es": "",
-    "en": "gift",
-    "archivo_es": "gift.png",
-    "archivo_en": "gift.png",
-    "tts_es": "",
-    "tts_en": "gift"
-  },
-  {
-    "id": 1129,
-    "arasaac_id": null,
-    "es": "",
-    "en": "glove",
-    "archivo_es": "glove.png",
-    "archivo_en": "glove.png",
-    "tts_es": "",
-    "tts_en": "glove"
-  },
-  {
-    "id": 1130,
-    "arasaac_id": null,
-    "es": "helado",
-    "en": "",
-    "archivo_es": "helado.png",
-    "archivo_en": "helado.png",
-    "tts_es": "helado",
-    "tts_en": ""
-  },
-  {
-    "id": 1131,
-    "arasaac_id": null,
-    "es": "hormiga",
-    "en": "",
-    "archivo_es": "hormiga.png",
-    "archivo_en": "hormiga.png",
-    "tts_es": "hormiga",
-    "tts_en": ""
-  },
-  {
-    "id": 1132,
-    "arasaac_id": null,
-    "es": "huevo",
-    "en": "",
-    "archivo_es": "huevo.png",
-    "archivo_en": "huevo.png",
-    "tts_es": "huevo",
-    "tts_en": ""
-  },
-  {
-    "id": 1133,
-    "arasaac_id": null,
-    "es": "hoja",
-    "en": "",
-    "archivo_es": "hoja.png",
-    "archivo_en": "hoja.png",
-    "tts_es": "hoja",
-    "tts_en": ""
-  },
-  {
-    "id": 1134,
-    "arasaac_id": null,
-    "es": "hada",
-    "en": "",
-    "archivo_es": "hada.png",
-    "archivo_en": "hada.png",
-    "tts_es": "hada",
-    "tts_en": ""
-  },
-  {
-    "id": 1135,
-    "arasaac_id": null,
-    "es": "hamaca",
-    "en": "",
-    "archivo_es": "hamaca.png",
-    "archivo_en": "hamaca.png",
-    "tts_es": "hamaca",
-    "tts_en": ""
-  },
-  {
-    "id": 1136,
-    "arasaac_id": null,
-    "es": "helicóptero",
-    "en": "",
-    "archivo_es": "helicoptero.png",
-    "archivo_en": "helicoptero.png",
-    "tts_es": "helicóptero",
-    "tts_en": ""
-  },
-  {
-    "id": 1137,
-    "arasaac_id": null,
-    "es": "hongo",
-    "en": "",
-    "archivo_es": "hongo.png",
-    "archivo_en": "hongo.png",
-    "tts_es": "hongo",
-    "tts_en": ""
-  },
-  {
-    "id": 1138,
-    "arasaac_id": null,
-    "es": "hacha",
-    "en": "",
-    "archivo_es": "hacha.png",
-    "archivo_en": "hacha.png",
-    "tts_es": "hacha",
-    "tts_en": ""
-  },
-  {
-    "id": 1139,
-    "arasaac_id": null,
-    "es": "hueso",
-    "en": "",
-    "archivo_es": "hueso.png",
-    "archivo_en": "hueso.png",
-    "tts_es": "hueso",
-    "tts_en": ""
-  },
-  {
-    "id": 1140,
-    "arasaac_id": null,
-    "es": "",
-    "en": "hammer",
-    "archivo_es": "hammer.png",
-    "archivo_en": "hammer.png",
-    "tts_es": "",
-    "tts_en": "hammer"
-  },
-  {
-    "id": 1141,
-    "arasaac_id": null,
-    "es": "",
-    "en": "hat",
-    "archivo_es": "hat.png",
-    "archivo_en": "hat.png",
-    "tts_es": "",
-    "tts_en": "hat"
-  },
-  {
-    "id": 1142,
-    "arasaac_id": null,
-    "es": "",
-    "en": "heart",
-    "archivo_es": "heart.png",
-    "archivo_en": "heart.png",
-    "tts_es": "",
-    "tts_en": "heart"
-  },
-  {
-    "id": 1143,
-    "arasaac_id": null,
-    "es": "",
-    "en": "hedgehog",
-    "archivo_es": "hedgehog.png",
-    "archivo_en": "hedgehog.png",
-    "tts_es": "",
-    "tts_en": "hedgehog"
-  },
-  {
-    "id": 1144,
-    "arasaac_id": null,
-    "es": "",
-    "en": "hen",
-    "archivo_es": "hen.png",
-    "archivo_en": "hen.png",
-    "tts_es": "",
-    "tts_en": "hen"
-  },
-  {
-    "id": 1145,
-    "arasaac_id": null,
-    "es": "",
-    "en": "hippo",
-    "archivo_es": "hippo.png",
-    "archivo_en": "hippo.png",
-    "tts_es": "",
-    "tts_en": "hippo"
-  },
-  {
-    "id": 1146,
-    "arasaac_id": null,
-    "es": "",
-    "en": "honey",
-    "archivo_es": "honey.png",
-    "archivo_en": "honey.png",
-    "tts_es": "",
-    "tts_en": "honey"
-  },
-  {
-    "id": 1147,
-    "arasaac_id": null,
-    "es": "",
-    "en": "horse",
-    "archivo_es": "horse.png",
-    "archivo_en": "horse.png",
-    "tts_es": "",
-    "tts_en": "horse"
-  },
-  {
-    "id": 1148,
-    "arasaac_id": null,
-    "es": "",
-    "en": "house",
-    "archivo_es": "house.png",
-    "archivo_en": "house.png",
-    "tts_es": "",
-    "tts_en": "house"
-  },
-  {
-    "id": 1149,
-    "arasaac_id": null,
-    "es": "",
-    "en": "hug",
-    "archivo_es": "hug.png",
-    "archivo_en": "hug.png",
-    "tts_es": "",
-    "tts_en": "hug"
-  },
-  {
-    "id": 1150,
-    "arasaac_id": null,
-    "es": "",
-    "en": "hot air balloon",
-    "archivo_es": "hot-air-balloon.png",
-    "archivo_en": "hot-air-balloon.png",
-    "tts_es": "",
-    "tts_en": "hot air balloon"
-  },
-  {
-    "id": 1151,
-    "arasaac_id": null,
-    "es": "iglú",
-    "en": "",
-    "archivo_es": "iglu.png",
-    "archivo_en": "iglu.png",
-    "tts_es": "iglú",
-    "tts_en": ""
-  },
-  {
-    "id": 1152,
-    "arasaac_id": null,
-    "es": "imán",
-    "en": "",
-    "archivo_es": "iman.png",
-    "archivo_en": "iman.png",
-    "tts_es": "imán",
-    "tts_en": ""
-  },
-  {
-    "id": 1153,
-    "arasaac_id": null,
-    "es": "isla",
-    "en": "",
-    "archivo_es": "isla.png",
-    "archivo_en": "isla.png",
-    "tts_es": "isla",
-    "tts_en": ""
-  },
-  {
-    "id": 1154,
-    "arasaac_id": null,
-    "es": "iglesia",
-    "en": "",
-    "archivo_es": "iglesia.png",
-    "archivo_en": "iglesia.png",
-    "tts_es": "iglesia",
-    "tts_en": ""
-  },
-  {
-    "id": 1155,
-    "arasaac_id": null,
-    "es": "insecto",
-    "en": "",
-    "archivo_es": "insecto.png",
-    "archivo_en": "insecto.png",
-    "tts_es": "insecto",
-    "tts_en": ""
-  },
-  {
-    "id": 1156,
-    "arasaac_id": null,
-    "es": "instrumento",
-    "en": "",
-    "archivo_es": "instrumento.png",
-    "archivo_en": "instrumento.png",
-    "tts_es": "instrumento",
-    "tts_en": ""
-  },
-  {
-    "id": 1157,
-    "arasaac_id": null,
-    "es": "invierno",
-    "en": "",
-    "archivo_es": "invierno.png",
-    "archivo_en": "invierno.png",
-    "tts_es": "invierno",
-    "tts_en": ""
-  },
-  {
-    "id": 1158,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ice cream",
-    "archivo_es": "ice-cream.png",
-    "archivo_en": "ice-cream.png",
-    "tts_es": "",
-    "tts_en": "ice cream"
-  },
-  {
-    "id": 1159,
-    "arasaac_id": null,
-    "es": "",
-    "en": "igloo",
-    "archivo_es": "igloo.png",
-    "archivo_en": "igloo.png",
-    "tts_es": "",
-    "tts_en": "igloo"
-  },
-  {
-    "id": 1160,
-    "arasaac_id": null,
-    "es": "",
-    "en": "insect",
-    "archivo_es": "insect.png",
-    "archivo_en": "insect.png",
-    "tts_es": "",
-    "tts_en": "insect"
-  },
-  {
-    "id": 1161,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ink",
-    "archivo_es": "ink.png",
-    "archivo_en": "ink.png",
-    "tts_es": "",
-    "tts_en": "ink"
-  },
-  {
-    "id": 1162,
-    "arasaac_id": null,
-    "es": "",
-    "en": "island",
-    "archivo_es": "island.png",
-    "archivo_en": "island.png",
-    "tts_es": "",
-    "tts_en": "island"
-  },
-  {
-    "id": 1163,
-    "arasaac_id": null,
-    "es": "",
-    "en": "inside",
-    "archivo_es": "inside.png",
-    "archivo_en": "inside.png",
-    "tts_es": "",
-    "tts_en": "inside"
-  },
-  {
-    "id": 1164,
-    "arasaac_id": null,
-    "es": "",
-    "en": "instrument",
-    "archivo_es": "instrument.png",
-    "archivo_en": "instrument.png",
-    "tts_es": "",
-    "tts_en": "instrument"
-  },
-  {
-    "id": 1165,
-    "arasaac_id": null,
-    "es": "jirafa",
-    "en": "",
-    "archivo_es": "jirafa.png",
-    "archivo_en": "jirafa.png",
-    "tts_es": "jirafa",
-    "tts_en": ""
-  },
-  {
-    "id": 1166,
-    "arasaac_id": null,
-    "es": "juguete",
-    "en": "",
-    "archivo_es": "juguete.png",
-    "archivo_en": "juguete.png",
-    "tts_es": "juguete",
-    "tts_en": ""
-  },
-  {
-    "id": 1167,
-    "arasaac_id": null,
-    "es": "jardín",
-    "en": "",
-    "archivo_es": "jardin.png",
-    "archivo_en": "jardin.png",
-    "tts_es": "jardín",
-    "tts_en": ""
-  },
-  {
-    "id": 1168,
-    "arasaac_id": null,
-    "es": "jaula",
-    "en": "",
-    "archivo_es": "jaula.png",
-    "archivo_en": "jaula.png",
-    "tts_es": "jaula",
-    "tts_en": ""
-  },
-  {
-    "id": 1169,
-    "arasaac_id": null,
-    "es": "jamón",
-    "en": "",
-    "archivo_es": "jamon.png",
-    "archivo_en": "jamon.png",
-    "tts_es": "jamón",
-    "tts_en": ""
-  },
-  {
-    "id": 1170,
-    "arasaac_id": null,
-    "es": "jugo",
-    "en": "",
-    "archivo_es": "jugo.png",
-    "archivo_en": "jugo.png",
-    "tts_es": "jugo",
-    "tts_en": ""
-  },
-  {
-    "id": 1171,
-    "arasaac_id": null,
-    "es": "jabón",
-    "en": "",
-    "archivo_es": "jabon.png",
-    "archivo_en": "jabon.png",
-    "tts_es": "jabón",
-    "tts_en": ""
-  },
-  {
-    "id": 1172,
-    "arasaac_id": null,
-    "es": "jarra",
-    "en": "",
-    "archivo_es": "jarra.png",
-    "archivo_en": "jarra.png",
-    "tts_es": "jarra",
-    "tts_en": ""
-  },
-  {
-    "id": 1173,
-    "arasaac_id": null,
-    "es": "jinete",
-    "en": "",
-    "archivo_es": "jinete.png",
-    "archivo_en": "jinete.png",
-    "tts_es": "jinete",
-    "tts_en": ""
-  },
-  {
-    "id": 1174,
-    "arasaac_id": null,
-    "es": "",
-    "en": "jacket",
-    "archivo_es": "jacket.png",
-    "archivo_en": "jacket.png",
-    "tts_es": "",
-    "tts_en": "jacket"
-  },
-  {
-    "id": 1175,
-    "arasaac_id": null,
-    "es": "",
-    "en": "jar",
-    "archivo_es": "jar.png",
-    "archivo_en": "jar.png",
-    "tts_es": "",
-    "tts_en": "jar"
-  },
-  {
-    "id": 1176,
-    "arasaac_id": null,
-    "es": "",
-    "en": "jellyfish",
-    "archivo_es": "jellyfish.png",
-    "archivo_en": "jellyfish.png",
-    "tts_es": "",
-    "tts_en": "jellyfish"
-  },
-  {
-    "id": 1177,
-    "arasaac_id": null,
-    "es": "",
-    "en": "jet",
-    "archivo_es": "jet.png",
-    "archivo_en": "jet.png",
-    "tts_es": "",
-    "tts_en": "jet"
-  },
-  {
-    "id": 1178,
-    "arasaac_id": null,
-    "es": "",
-    "en": "jam",
-    "archivo_es": "jam.png",
-    "archivo_en": "jam.png",
-    "tts_es": "",
-    "tts_en": "jam"
-  },
-  {
-    "id": 1179,
-    "arasaac_id": null,
-    "es": "",
-    "en": "juice",
-    "archivo_es": "juice.png",
-    "archivo_en": "juice.png",
-    "tts_es": "",
-    "tts_en": "juice"
-  },
-  {
-    "id": 1180,
-    "arasaac_id": null,
-    "es": "",
-    "en": "jump",
-    "archivo_es": "jump.png",
-    "archivo_en": "jump.png",
-    "tts_es": "",
-    "tts_en": "jump"
-  },
-  {
-    "id": 1181,
-    "arasaac_id": null,
-    "es": "koala",
-    "en": "",
-    "archivo_es": "koala.png",
-    "archivo_en": "koala.png",
-    "tts_es": "koala",
-    "tts_en": ""
-  },
-  {
-    "id": 1182,
-    "arasaac_id": null,
-    "es": "kiwi",
-    "en": "",
-    "archivo_es": "kiwi.png",
-    "archivo_en": "kiwi.png",
-    "tts_es": "kiwi",
-    "tts_en": ""
-  },
-  {
-    "id": 1183,
-    "arasaac_id": null,
-    "es": "kayak",
-    "en": "",
-    "archivo_es": "kayak.png",
-    "archivo_en": "kayak.png",
-    "tts_es": "kayak",
-    "tts_en": ""
-  },
-  {
-    "id": 1184,
-    "arasaac_id": null,
-    "es": "",
-    "en": "kangaroo",
-    "archivo_es": "kangaroo.png",
-    "archivo_en": "kangaroo.png",
-    "tts_es": "",
-    "tts_en": "kangaroo"
-  },
-  {
-    "id": 1185,
-    "arasaac_id": null,
-    "es": "",
-    "en": "key",
-    "archivo_es": "key.png",
-    "archivo_en": "key.png",
-    "tts_es": "",
-    "tts_en": "key"
-  },
-  {
-    "id": 1186,
-    "arasaac_id": null,
-    "es": "",
-    "en": "kite",
-    "archivo_es": "kite.png",
-    "archivo_en": "kite.png",
-    "tts_es": "",
-    "tts_en": "kite"
-  },
-  {
-    "id": 1187,
-    "arasaac_id": null,
-    "es": "",
-    "en": "kitten",
-    "archivo_es": "kitten.png",
-    "archivo_en": "kitten.png",
-    "tts_es": "",
-    "tts_en": "kitten"
-  },
-  {
-    "id": 1188,
-    "arasaac_id": null,
-    "es": "",
-    "en": "kiss",
-    "archivo_es": "kiss.png",
-    "archivo_en": "kiss.png",
-    "tts_es": "",
-    "tts_en": "kiss"
-  },
-  {
-    "id": 1189,
-    "arasaac_id": null,
-    "es": "",
-    "en": "knot",
-    "archivo_es": "knot.png",
-    "archivo_en": "knot.png",
-    "tts_es": "",
-    "tts_en": "knot"
-  },
-  {
-    "id": 1190,
-    "arasaac_id": null,
-    "es": "",
-    "en": "koala",
-    "archivo_es": "koala.png",
-    "archivo_en": "koala.png",
-    "tts_es": "",
-    "tts_en": "koala"
-  },
-  {
-    "id": 1191,
-    "arasaac_id": null,
-    "es": "",
-    "en": "kiwi",
-    "archivo_es": "kiwi.png",
-    "archivo_en": "kiwi.png",
-    "tts_es": "",
-    "tts_en": "kiwi"
-  },
-  {
-    "id": 1192,
-    "arasaac_id": null,
-    "es": "libro",
-    "en": "",
-    "archivo_es": "libro.png",
-    "archivo_en": "libro.png",
-    "tts_es": "libro",
-    "tts_en": ""
-  },
-  {
-    "id": 1193,
-    "arasaac_id": null,
-    "es": "luna",
-    "en": "",
-    "archivo_es": "luna.png",
-    "archivo_en": "luna.png",
-    "tts_es": "luna",
-    "tts_en": ""
-  },
-  {
-    "id": 1194,
-    "arasaac_id": null,
-    "es": "león",
-    "en": "",
-    "archivo_es": "leon.png",
-    "archivo_en": "leon.png",
-    "tts_es": "león",
-    "tts_en": ""
-  },
-  {
-    "id": 1195,
-    "arasaac_id": null,
-    "es": "llave",
-    "en": "",
-    "archivo_es": "llave.png",
-    "archivo_en": "llave.png",
-    "tts_es": "llave",
-    "tts_en": ""
-  },
-  {
-    "id": 1196,
-    "arasaac_id": null,
-    "es": "lagarto",
-    "en": "",
-    "archivo_es": "lagarto.png",
-    "archivo_en": "lagarto.png",
-    "tts_es": "lagarto",
-    "tts_en": ""
-  },
-  {
-    "id": 1197,
-    "arasaac_id": null,
-    "es": "lámpara",
-    "en": "",
-    "archivo_es": "lampara.png",
-    "archivo_en": "lampara.png",
-    "tts_es": "lámpara",
-    "tts_en": ""
-  },
-  {
-    "id": 1198,
-    "arasaac_id": null,
-    "es": "loro",
-    "en": "",
-    "archivo_es": "loro.png",
-    "archivo_en": "loro.png",
-    "tts_es": "loro",
-    "tts_en": ""
-  },
-  {
-    "id": 1199,
-    "arasaac_id": null,
-    "es": "lobo",
-    "en": "",
-    "archivo_es": "lobo.png",
-    "archivo_en": "lobo.png",
-    "tts_es": "lobo",
-    "tts_en": ""
-  },
-  {
-    "id": 1200,
-    "arasaac_id": null,
-    "es": "limón",
-    "en": "",
-    "archivo_es": "limon.png",
-    "archivo_en": "limon.png",
-    "tts_es": "limón",
-    "tts_en": ""
-  },
-  {
-    "id": 1201,
-    "arasaac_id": null,
-    "es": "leche",
-    "en": "",
-    "archivo_es": "leche.png",
-    "archivo_en": "leche.png",
-    "tts_es": "leche",
-    "tts_en": ""
-  },
-  {
-    "id": 1202,
-    "arasaac_id": null,
-    "es": "",
-    "en": "lamp",
-    "archivo_es": "lamp.png",
-    "archivo_en": "lamp.png",
-    "tts_es": "",
-    "tts_en": "lamp"
-  },
-  {
-    "id": 1203,
-    "arasaac_id": null,
-    "es": "",
-    "en": "leaf",
-    "archivo_es": "leaf.png",
-    "archivo_en": "leaf.png",
-    "tts_es": "",
-    "tts_en": "leaf"
-  },
-  {
-    "id": 1204,
-    "arasaac_id": null,
-    "es": "",
-    "en": "lemon",
-    "archivo_es": "lemon.png",
-    "archivo_en": "lemon.png",
-    "tts_es": "",
-    "tts_en": "lemon"
-  },
-  {
-    "id": 1205,
-    "arasaac_id": null,
-    "es": "",
-    "en": "lion",
-    "archivo_es": "lion.png",
-    "archivo_en": "lion.png",
-    "tts_es": "",
-    "tts_en": "lion"
-  },
-  {
-    "id": 1206,
-    "arasaac_id": null,
-    "es": "",
-    "en": "lizard",
-    "archivo_es": "lizard.png",
-    "archivo_en": "lizard.png",
-    "tts_es": "",
-    "tts_en": "lizard"
-  },
-  {
-    "id": 1207,
-    "arasaac_id": null,
-    "es": "",
-    "en": "lock",
-    "archivo_es": "lock.png",
-    "archivo_en": "lock.png",
-    "tts_es": "",
-    "tts_en": "lock"
-  },
-  {
-    "id": 1208,
-    "arasaac_id": null,
-    "es": "",
-    "en": "log",
-    "archivo_es": "log.png",
-    "archivo_en": "log.png",
-    "tts_es": "",
-    "tts_en": "log"
-  },
-  {
-    "id": 1209,
-    "arasaac_id": null,
-    "es": "",
-    "en": "lollipop",
-    "archivo_es": "lollipop.png",
-    "archivo_en": "lollipop.png",
-    "tts_es": "",
-    "tts_en": "lollipop"
-  },
-  {
-    "id": 1210,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ladder",
-    "archivo_es": "ladder.png",
-    "archivo_en": "ladder.png",
-    "tts_es": "",
-    "tts_en": "ladder"
-  },
-  {
-    "id": 1211,
-    "arasaac_id": null,
-    "es": "",
-    "en": "lake",
-    "archivo_es": "lake.png",
-    "archivo_en": "lake.png",
-    "tts_es": "",
-    "tts_en": "lake"
-  },
-  {
-    "id": 1212,
-    "arasaac_id": null,
-    "es": "mariposa",
-    "en": "",
-    "archivo_es": "mariposa.png",
-    "archivo_en": "mariposa.png",
-    "tts_es": "mariposa",
-    "tts_en": ""
-  },
-  {
-    "id": 1213,
-    "arasaac_id": null,
-    "es": "manzana",
-    "en": "",
-    "archivo_es": "manzana.png",
-    "archivo_en": "manzana.png",
-    "tts_es": "manzana",
-    "tts_en": ""
-  },
-  {
-    "id": 1214,
-    "arasaac_id": null,
-    "es": "mano",
-    "en": "",
-    "archivo_es": "mano.png",
-    "archivo_en": "mano.png",
-    "tts_es": "mano",
-    "tts_en": ""
-  },
-  {
-    "id": 1215,
-    "arasaac_id": null,
-    "es": "mono",
-    "en": "",
-    "archivo_es": "mono.png",
-    "archivo_en": "mono.png",
-    "tts_es": "mono",
-    "tts_en": ""
-  },
-  {
-    "id": 1216,
-    "arasaac_id": null,
-    "es": "montaña",
-    "en": "",
-    "archivo_es": "montana.png",
-    "archivo_en": "montana.png",
-    "tts_es": "montaña",
-    "tts_en": ""
-  },
-  {
-    "id": 1217,
-    "arasaac_id": null,
-    "es": "músico",
-    "en": "",
-    "archivo_es": "musico.png",
-    "archivo_en": "musico.png",
-    "tts_es": "músico",
-    "tts_en": ""
-  },
-  {
-    "id": 1218,
-    "arasaac_id": null,
-    "es": "mesa",
-    "en": "",
-    "archivo_es": "mesa.png",
-    "archivo_en": "mesa.png",
-    "tts_es": "mesa",
-    "tts_en": ""
-  },
-  {
-    "id": 1219,
-    "arasaac_id": null,
-    "es": "mochila",
-    "en": "",
-    "archivo_es": "mochila.png",
-    "archivo_en": "mochila.png",
-    "tts_es": "mochila",
-    "tts_en": ""
-  },
-  {
-    "id": 1220,
-    "arasaac_id": null,
-    "es": "murciélago",
-    "en": "",
-    "archivo_es": "murcielago.png",
-    "archivo_en": "murcielago.png",
-    "tts_es": "murciélago",
-    "tts_en": ""
-  },
-  {
-    "id": 1221,
-    "arasaac_id": null,
-    "es": "mapa",
-    "en": "",
-    "archivo_es": "mapa.png",
-    "archivo_en": "mapa.png",
-    "tts_es": "mapa",
-    "tts_en": ""
-  },
-  {
-    "id": 1222,
-    "arasaac_id": null,
-    "es": "",
-    "en": "magnet",
-    "archivo_es": "magnet.png",
-    "archivo_en": "magnet.png",
-    "tts_es": "",
-    "tts_en": "magnet"
-  },
-  {
-    "id": 1223,
-    "arasaac_id": null,
-    "es": "",
-    "en": "map",
-    "archivo_es": "map.png",
-    "archivo_en": "map.png",
-    "tts_es": "",
-    "tts_en": "map"
-  },
-  {
-    "id": 1224,
-    "arasaac_id": null,
-    "es": "",
-    "en": "mask",
-    "archivo_es": "mask.png",
-    "archivo_en": "mask.png",
-    "tts_es": "",
-    "tts_en": "mask"
-  },
-  {
-    "id": 1225,
-    "arasaac_id": null,
-    "es": "",
-    "en": "medal",
-    "archivo_es": "medal.png",
-    "archivo_en": "medal.png",
-    "tts_es": "",
-    "tts_en": "medal"
-  },
-  {
-    "id": 1226,
-    "arasaac_id": null,
-    "es": "",
-    "en": "milk",
-    "archivo_es": "milk.png",
-    "archivo_en": "milk.png",
-    "tts_es": "",
-    "tts_en": "milk"
-  },
-  {
-    "id": 1227,
-    "arasaac_id": null,
-    "es": "",
-    "en": "mirror",
-    "archivo_es": "mirror.png",
-    "archivo_en": "mirror.png",
-    "tts_es": "",
-    "tts_en": "mirror"
-  },
-  {
-    "id": 1228,
-    "arasaac_id": null,
-    "es": "",
-    "en": "monkey",
-    "archivo_es": "monkey.png",
-    "archivo_en": "monkey.png",
-    "tts_es": "",
-    "tts_en": "monkey"
-  },
-  {
-    "id": 1229,
-    "arasaac_id": null,
-    "es": "",
-    "en": "moon",
-    "archivo_es": "moon.png",
-    "archivo_en": "moon.png",
-    "tts_es": "",
-    "tts_en": "moon"
-  },
-  {
-    "id": 1230,
-    "arasaac_id": null,
-    "es": "",
-    "en": "mountain",
-    "archivo_es": "mountain.png",
-    "archivo_en": "mountain.png",
-    "tts_es": "",
-    "tts_en": "mountain"
-  },
-  {
-    "id": 1231,
-    "arasaac_id": null,
-    "es": "",
-    "en": "mushroom",
-    "archivo_es": "mushroom.png",
-    "archivo_en": "mushroom.png",
-    "tts_es": "",
-    "tts_en": "mushroom"
-  },
-  {
-    "id": 1232,
-    "arasaac_id": null,
-    "es": "nube",
-    "en": "",
-    "archivo_es": "nube.png",
-    "archivo_en": "nube.png",
-    "tts_es": "nube",
-    "tts_en": ""
-  },
-  {
-    "id": 1233,
-    "arasaac_id": null,
-    "es": "nariz",
-    "en": "",
-    "archivo_es": "nariz.png",
-    "archivo_en": "nariz.png",
-    "tts_es": "nariz",
-    "tts_en": ""
-  },
-  {
-    "id": 1234,
-    "arasaac_id": null,
-    "es": "naranja",
-    "en": "",
-    "archivo_es": "naranja.png",
-    "archivo_en": "naranja.png",
-    "tts_es": "naranja",
-    "tts_en": ""
-  },
-  {
-    "id": 1235,
-    "arasaac_id": null,
-    "es": "nieve",
-    "en": "",
-    "archivo_es": "nieve.png",
-    "archivo_en": "nieve.png",
-    "tts_es": "nieve",
-    "tts_en": ""
-  },
-  {
-    "id": 1236,
-    "arasaac_id": null,
-    "es": "nido",
-    "en": "",
-    "archivo_es": "nido.png",
-    "archivo_en": "nido.png",
-    "tts_es": "nido",
-    "tts_en": ""
-  },
-  {
-    "id": 1237,
-    "arasaac_id": null,
-    "es": "niña",
-    "en": "",
-    "archivo_es": "nina.png",
-    "archivo_en": "nina.png",
-    "tts_es": "niña",
-    "tts_en": ""
-  },
-  {
-    "id": 1238,
-    "arasaac_id": null,
-    "es": "niño",
-    "en": "",
-    "archivo_es": "nino.png",
-    "archivo_en": "nino.png",
-    "tts_es": "niño",
-    "tts_en": ""
-  },
-  {
-    "id": 1239,
-    "arasaac_id": null,
-    "es": "nave",
-    "en": "",
-    "archivo_es": "nave.png",
-    "archivo_en": "nave.png",
-    "tts_es": "nave",
-    "tts_en": ""
-  },
-  {
-    "id": 1240,
-    "arasaac_id": null,
-    "es": "nuez",
-    "en": "",
-    "archivo_es": "nuez.png",
-    "archivo_en": "nuez.png",
-    "tts_es": "nuez",
-    "tts_en": ""
-  },
-  {
-    "id": 1241,
-    "arasaac_id": null,
-    "es": "natación",
-    "en": "",
-    "archivo_es": "natacion.png",
-    "archivo_en": "natacion.png",
-    "tts_es": "natación",
-    "tts_en": ""
-  },
-  {
-    "id": 1242,
-    "arasaac_id": null,
-    "es": "",
-    "en": "nose",
-    "archivo_es": "nose.png",
-    "archivo_en": "nose.png",
-    "tts_es": "",
-    "tts_en": "nose"
-  },
-  {
-    "id": 1243,
-    "arasaac_id": null,
-    "es": "",
-    "en": "nest",
-    "archivo_es": "nest.png",
-    "archivo_en": "nest.png",
-    "tts_es": "",
-    "tts_en": "nest"
-  },
-  {
-    "id": 1244,
-    "arasaac_id": null,
-    "es": "",
-    "en": "net",
-    "archivo_es": "net.png",
-    "archivo_en": "net.png",
-    "tts_es": "",
-    "tts_en": "net"
-  },
-  {
-    "id": 1245,
-    "arasaac_id": null,
-    "es": "",
-    "en": "newspaper",
-    "archivo_es": "newspaper.png",
-    "archivo_en": "newspaper.png",
-    "tts_es": "",
-    "tts_en": "newspaper"
-  },
-  {
-    "id": 1246,
-    "arasaac_id": null,
-    "es": "",
-    "en": "night",
-    "archivo_es": "night.png",
-    "archivo_en": "night.png",
-    "tts_es": "",
-    "tts_en": "night"
-  },
-  {
-    "id": 1247,
-    "arasaac_id": null,
-    "es": "",
-    "en": "notebook",
-    "archivo_es": "notebook.png",
-    "archivo_en": "notebook.png",
-    "tts_es": "",
-    "tts_en": "notebook"
-  },
-  {
-    "id": 1248,
-    "arasaac_id": null,
-    "es": "",
-    "en": "nurse",
-    "archivo_es": "nurse.png",
-    "archivo_en": "nurse.png",
-    "tts_es": "",
-    "tts_en": "nurse"
-  },
-  {
-    "id": 1249,
-    "arasaac_id": null,
-    "es": "",
-    "en": "nut",
-    "archivo_es": "nut.png",
-    "archivo_en": "nut.png",
-    "tts_es": "",
-    "tts_en": "nut"
-  },
-  {
-    "id": 1250,
-    "arasaac_id": null,
-    "es": "ñu",
-    "en": "",
-    "archivo_es": "nu.png",
-    "archivo_en": "nu.png",
-    "tts_es": "ñu",
-    "tts_en": ""
-  },
-  {
-    "id": 1251,
-    "arasaac_id": null,
-    "es": "ñandú",
-    "en": "",
-    "archivo_es": "nandu.png",
-    "archivo_en": "nandu.png",
-    "tts_es": "ñandú",
-    "tts_en": ""
-  },
-  {
-    "id": 1252,
-    "arasaac_id": null,
-    "es": "ñame",
-    "en": "",
-    "archivo_es": "name.png",
-    "archivo_en": "name.png",
-    "tts_es": "ñame",
-    "tts_en": ""
-  },
-  {
-    "id": 1253,
-    "arasaac_id": null,
-    "es": "ojo",
-    "en": "",
-    "archivo_es": "ojo.png",
-    "archivo_en": "ojo.png",
-    "tts_es": "ojo",
-    "tts_en": ""
-  },
-  {
-    "id": 1254,
-    "arasaac_id": null,
-    "es": "oso",
-    "en": "",
-    "archivo_es": "oso.png",
-    "archivo_en": "oso.png",
-    "tts_es": "oso",
-    "tts_en": ""
-  },
-  {
-    "id": 1255,
-    "arasaac_id": null,
-    "es": "oveja",
-    "en": "",
-    "archivo_es": "oveja.png",
-    "archivo_en": "oveja.png",
-    "tts_es": "oveja",
-    "tts_en": ""
-  },
-  {
-    "id": 1256,
-    "arasaac_id": null,
-    "es": "ola",
-    "en": "",
-    "archivo_es": "ola.png",
-    "archivo_en": "ola.png",
-    "tts_es": "ola",
-    "tts_en": ""
-  },
-  {
-    "id": 1257,
-    "arasaac_id": null,
-    "es": "oruga",
-    "en": "",
-    "archivo_es": "oruga.png",
-    "archivo_en": "oruga.png",
-    "tts_es": "oruga",
-    "tts_en": ""
-  },
-  {
-    "id": 1258,
-    "arasaac_id": null,
-    "es": "oreja",
-    "en": "",
-    "archivo_es": "oreja.png",
-    "archivo_en": "oreja.png",
-    "tts_es": "oreja",
-    "tts_en": ""
-  },
-  {
-    "id": 1259,
-    "arasaac_id": null,
-    "es": "ornitorrinco",
-    "en": "",
-    "archivo_es": "ornitorrinco.png",
-    "archivo_en": "ornitorrinco.png",
-    "tts_es": "ornitorrinco",
-    "tts_en": ""
-  },
-  {
-    "id": 1260,
-    "arasaac_id": null,
-    "es": "ocelote",
-    "en": "",
-    "archivo_es": "ocelote.png",
-    "archivo_en": "ocelote.png",
-    "tts_es": "ocelote",
-    "tts_en": ""
-  },
-  {
-    "id": 1261,
-    "arasaac_id": null,
-    "es": "",
-    "en": "open",
-    "archivo_es": "open.png",
-    "archivo_en": "open.png",
-    "tts_es": "",
-    "tts_en": "open"
-  },
-  {
-    "id": 1262,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ocean",
-    "archivo_es": "ocean.png",
-    "archivo_en": "ocean.png",
-    "tts_es": "",
-    "tts_en": "ocean"
-  },
-  {
-    "id": 1263,
-    "arasaac_id": null,
-    "es": "",
-    "en": "olive",
-    "archivo_es": "olive.png",
-    "archivo_en": "olive.png",
-    "tts_es": "",
-    "tts_en": "olive"
-  },
-  {
-    "id": 1264,
-    "arasaac_id": null,
-    "es": "",
-    "en": "orange",
-    "archivo_es": "orange.png",
-    "archivo_en": "orange.png",
-    "tts_es": "",
-    "tts_en": "orange"
-  },
-  {
-    "id": 1265,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ostrich",
-    "archivo_es": "ostrich.png",
-    "archivo_en": "ostrich.png",
-    "tts_es": "",
-    "tts_en": "ostrich"
-  },
-  {
-    "id": 1266,
-    "arasaac_id": null,
-    "es": "",
-    "en": "owl",
-    "archivo_es": "owl.png",
-    "archivo_en": "owl.png",
-    "tts_es": "",
-    "tts_en": "owl"
-  },
-  {
-    "id": 1267,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ox",
-    "archivo_es": "ox.png",
-    "archivo_en": "ox.png",
-    "tts_es": "",
-    "tts_en": "ox"
-  },
-  {
-    "id": 1268,
-    "arasaac_id": null,
-    "es": "pájaro",
-    "en": "",
-    "archivo_es": "pajaro.png",
-    "archivo_en": "pajaro.png",
-    "tts_es": "pájaro",
-    "tts_en": ""
-  },
-  {
-    "id": 1269,
-    "arasaac_id": null,
-    "es": "perro",
-    "en": "",
-    "archivo_es": "perro.png",
-    "archivo_en": "perro.png",
-    "tts_es": "perro",
-    "tts_en": ""
-  },
-  {
-    "id": 1270,
-    "arasaac_id": null,
-    "es": "pelota",
-    "en": "",
-    "archivo_es": "pelota.png",
-    "archivo_en": "pelota.png",
-    "tts_es": "pelota",
-    "tts_en": ""
-  },
-  {
-    "id": 1271,
-    "arasaac_id": null,
-    "es": "pez",
-    "en": "",
-    "archivo_es": "pez.png",
-    "archivo_en": "pez.png",
-    "tts_es": "pez",
-    "tts_en": ""
-  },
-  {
-    "id": 1272,
-    "arasaac_id": null,
-    "es": "piña",
-    "en": "",
-    "archivo_es": "pina.png",
-    "archivo_en": "pina.png",
-    "tts_es": "piña",
-    "tts_en": ""
-  },
-  {
-    "id": 1273,
-    "arasaac_id": null,
-    "es": "puerta",
-    "en": "",
-    "archivo_es": "puerta.png",
-    "archivo_en": "puerta.png",
-    "tts_es": "puerta",
-    "tts_en": ""
-  },
-  {
-    "id": 1274,
-    "arasaac_id": null,
-    "es": "planeta",
-    "en": "",
-    "archivo_es": "planeta.png",
-    "archivo_en": "planeta.png",
-    "tts_es": "planeta",
-    "tts_en": ""
-  },
-  {
-    "id": 1275,
-    "arasaac_id": null,
-    "es": "pato",
-    "en": "",
-    "archivo_es": "pato.png",
-    "archivo_en": "pato.png",
-    "tts_es": "pato",
-    "tts_en": ""
-  },
-  {
-    "id": 1276,
-    "arasaac_id": null,
-    "es": "paloma",
-    "en": "",
-    "archivo_es": "paloma.png",
-    "archivo_en": "paloma.png",
-    "tts_es": "paloma",
-    "tts_en": ""
-  },
-  {
-    "id": 1277,
-    "arasaac_id": null,
-    "es": "pulpo",
-    "en": "",
-    "archivo_es": "pulpo.png",
-    "archivo_en": "pulpo.png",
-    "tts_es": "pulpo",
-    "tts_en": ""
-  },
-  {
-    "id": 1278,
-    "arasaac_id": null,
-    "es": "",
-    "en": "parrot",
-    "archivo_es": "parrot.png",
-    "archivo_en": "parrot.png",
-    "tts_es": "",
-    "tts_en": "parrot"
-  },
-  {
-    "id": 1279,
-    "arasaac_id": null,
-    "es": "",
-    "en": "peach",
-    "archivo_es": "peach.png",
-    "archivo_en": "peach.png",
-    "tts_es": "",
-    "tts_en": "peach"
-  },
-  {
-    "id": 1280,
-    "arasaac_id": null,
-    "es": "",
-    "en": "penguin",
-    "archivo_es": "penguin.png",
-    "archivo_en": "penguin.png",
-    "tts_es": "",
-    "tts_en": "penguin"
-  },
-  {
-    "id": 1281,
-    "arasaac_id": null,
-    "es": "",
-    "en": "pig",
-    "archivo_es": "pig.png",
-    "archivo_en": "pig.png",
-    "tts_es": "",
-    "tts_en": "pig"
-  },
-  {
-    "id": 1282,
-    "arasaac_id": null,
-    "es": "",
-    "en": "pillow",
-    "archivo_es": "pillow.png",
-    "archivo_en": "pillow.png",
-    "tts_es": "",
-    "tts_en": "pillow"
-  },
-  {
-    "id": 1283,
-    "arasaac_id": null,
-    "es": "",
-    "en": "pizza",
-    "archivo_es": "pizza.png",
-    "archivo_en": "pizza.png",
-    "tts_es": "",
-    "tts_en": "pizza"
-  },
-  {
-    "id": 1284,
-    "arasaac_id": null,
-    "es": "",
-    "en": "play",
-    "archivo_es": "play.png",
-    "archivo_en": "play.png",
-    "tts_es": "",
-    "tts_en": "play"
-  },
-  {
-    "id": 1285,
-    "arasaac_id": null,
-    "es": "",
-    "en": "plant",
-    "archivo_es": "plant.png",
-    "archivo_en": "plant.png",
-    "tts_es": "",
-    "tts_en": "plant"
-  },
-  {
-    "id": 1286,
-    "arasaac_id": null,
-    "es": "",
-    "en": "puppy",
-    "archivo_es": "puppy.png",
-    "archivo_en": "puppy.png",
-    "tts_es": "",
-    "tts_en": "puppy"
-  },
-  {
-    "id": 1287,
-    "arasaac_id": null,
-    "es": "",
-    "en": "puzzle",
-    "archivo_es": "puzzle.png",
-    "archivo_en": "puzzle.png",
-    "tts_es": "",
-    "tts_en": "puzzle"
-  },
-  {
-    "id": 1288,
-    "arasaac_id": null,
-    "es": "queso",
-    "en": "",
-    "archivo_es": "queso.png",
-    "archivo_en": "queso.png",
-    "tts_es": "queso",
-    "tts_en": ""
-  },
-  {
-    "id": 1289,
-    "arasaac_id": null,
-    "es": "quetzal",
-    "en": "",
-    "archivo_es": "quetzal.png",
-    "archivo_en": "quetzal.png",
-    "tts_es": "quetzal",
-    "tts_en": ""
-  },
-  {
-    "id": 1290,
-    "arasaac_id": null,
-    "es": "quinqué",
-    "en": "",
-    "archivo_es": "quinque.png",
-    "archivo_en": "quinque.png",
-    "tts_es": "quinqué",
-    "tts_en": ""
-  },
-  {
-    "id": 1291,
-    "arasaac_id": null,
-    "es": "",
-    "en": "queen",
-    "archivo_es": "queen.png",
-    "archivo_en": "queen.png",
-    "tts_es": "",
-    "tts_en": "queen"
-  },
-  {
-    "id": 1292,
-    "arasaac_id": null,
-    "es": "",
-    "en": "quilt",
-    "archivo_es": "quilt.png",
-    "archivo_en": "quilt.png",
-    "tts_es": "",
-    "tts_en": "quilt"
-  },
-  {
-    "id": 1293,
-    "arasaac_id": null,
-    "es": "",
-    "en": "quail",
-    "archivo_es": "quail.png",
-    "archivo_en": "quail.png",
-    "tts_es": "",
-    "tts_en": "quail"
-  },
-  {
-    "id": 1294,
-    "arasaac_id": null,
-    "es": "rana",
-    "en": "",
-    "archivo_es": "rana.png",
-    "archivo_en": "rana.png",
-    "tts_es": "rana",
-    "tts_en": ""
-  },
-  {
-    "id": 1295,
-    "arasaac_id": null,
-    "es": "ratón",
-    "en": "",
-    "archivo_es": "raton.png",
-    "archivo_en": "raton.png",
-    "tts_es": "ratón",
-    "tts_en": ""
-  },
-  {
-    "id": 1296,
-    "arasaac_id": null,
-    "es": "robot",
-    "en": "",
-    "archivo_es": "robot.png",
-    "archivo_en": "robot.png",
-    "tts_es": "robot",
-    "tts_en": ""
-  },
-  {
-    "id": 1297,
-    "arasaac_id": null,
-    "es": "roca",
-    "en": "",
-    "archivo_es": "roca.png",
-    "archivo_en": "roca.png",
-    "tts_es": "roca",
-    "tts_en": ""
-  },
-  {
-    "id": 1298,
-    "arasaac_id": null,
-    "es": "rosa",
-    "en": "",
-    "archivo_es": "rosa.png",
-    "archivo_en": "rosa.png",
-    "tts_es": "rosa",
-    "tts_en": ""
-  },
-  {
-    "id": 1299,
-    "arasaac_id": null,
-    "es": "rayo",
-    "en": "",
-    "archivo_es": "rayo.png",
-    "archivo_en": "rayo.png",
-    "tts_es": "rayo",
-    "tts_en": ""
-  },
-  {
-    "id": 1300,
-    "arasaac_id": null,
-    "es": "regalo",
-    "en": "",
-    "archivo_es": "regalo.png",
-    "archivo_en": "regalo.png",
-    "tts_es": "regalo",
-    "tts_en": ""
-  },
-  {
-    "id": 1301,
-    "arasaac_id": null,
-    "es": "red",
-    "en": "",
-    "archivo_es": "red.png",
-    "archivo_en": "red.png",
-    "tts_es": "red",
-    "tts_en": ""
-  },
-  {
-    "id": 1302,
-    "arasaac_id": null,
-    "es": "río",
-    "en": "",
-    "archivo_es": "rio.png",
-    "archivo_en": "rio.png",
-    "tts_es": "río",
-    "tts_en": ""
-  },
-  {
-    "id": 1303,
-    "arasaac_id": null,
-    "es": "rueda",
-    "en": "",
-    "archivo_es": "rueda.png",
-    "archivo_en": "rueda.png",
-    "tts_es": "rueda",
-    "tts_en": ""
-  },
-  {
-    "id": 1304,
-    "arasaac_id": null,
-    "es": "",
-    "en": "rabbit",
-    "archivo_es": "rabbit.png",
-    "archivo_en": "rabbit.png",
-    "tts_es": "",
-    "tts_en": "rabbit"
-  },
-  {
-    "id": 1305,
-    "arasaac_id": null,
-    "es": "",
-    "en": "rainbow",
-    "archivo_es": "rainbow.png",
-    "archivo_en": "rainbow.png",
-    "tts_es": "",
-    "tts_en": "rainbow"
-  },
-  {
-    "id": 1306,
-    "arasaac_id": null,
-    "es": "",
-    "en": "robot",
-    "archivo_es": "robot.png",
-    "archivo_en": "robot.png",
-    "tts_es": "",
-    "tts_en": "robot"
-  },
-  {
-    "id": 1307,
-    "arasaac_id": null,
-    "es": "",
-    "en": "rocket",
-    "archivo_es": "rocket.png",
-    "archivo_en": "rocket.png",
-    "tts_es": "",
-    "tts_en": "rocket"
-  },
-  {
-    "id": 1308,
-    "arasaac_id": null,
-    "es": "",
-    "en": "rose",
-    "archivo_es": "rose.png",
-    "archivo_en": "rose.png",
-    "tts_es": "",
-    "tts_en": "rose"
-  },
-  {
-    "id": 1309,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ruler",
-    "archivo_es": "ruler.png",
-    "archivo_en": "ruler.png",
-    "tts_es": "",
-    "tts_en": "ruler"
-  },
-  {
-    "id": 1310,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ring",
-    "archivo_es": "ring.png",
-    "archivo_en": "ring.png",
-    "tts_es": "",
-    "tts_en": "ring"
-  },
-  {
-    "id": 1311,
-    "arasaac_id": null,
-    "es": "",
-    "en": "river",
-    "archivo_es": "river.png",
-    "archivo_en": "river.png",
-    "tts_es": "",
-    "tts_en": "river"
-  },
-  {
-    "id": 1312,
-    "arasaac_id": null,
-    "es": "sandía",
-    "en": "",
-    "archivo_es": "sandia.png",
-    "archivo_en": "sandia.png",
-    "tts_es": "sandía",
-    "tts_en": ""
-  },
-  {
-    "id": 1313,
-    "arasaac_id": null,
-    "es": "sol",
-    "en": "",
-    "archivo_es": "sol.png",
-    "archivo_en": "sol.png",
-    "tts_es": "sol",
-    "tts_en": ""
-  },
-  {
-    "id": 1314,
-    "arasaac_id": null,
-    "es": "silla",
-    "en": "",
-    "archivo_es": "silla.png",
-    "archivo_en": "silla.png",
-    "tts_es": "silla",
-    "tts_en": ""
-  },
-  {
-    "id": 1315,
-    "arasaac_id": null,
-    "es": "serpiente",
-    "en": "",
-    "archivo_es": "serpiente.png",
-    "archivo_en": "serpiente.png",
-    "tts_es": "serpiente",
-    "tts_en": ""
-  },
-  {
-    "id": 1316,
-    "arasaac_id": null,
-    "es": "sombrero",
-    "en": "",
-    "archivo_es": "sombrero.png",
-    "archivo_en": "sombrero.png",
-    "tts_es": "sombrero",
-    "tts_en": ""
-  },
-  {
-    "id": 1317,
-    "arasaac_id": null,
-    "es": "sapo",
-    "en": "",
-    "archivo_es": "sapo.png",
-    "archivo_en": "sapo.png",
-    "tts_es": "sapo",
-    "tts_en": ""
-  },
-  {
-    "id": 1318,
-    "arasaac_id": null,
-    "es": "submarino",
-    "en": "",
-    "archivo_es": "submarino.png",
-    "archivo_en": "submarino.png",
-    "tts_es": "submarino",
-    "tts_en": ""
-  },
-  {
-    "id": 1319,
-    "arasaac_id": null,
-    "es": "soplar",
-    "en": "",
-    "archivo_es": "soplar.png",
-    "archivo_en": "soplar.png",
-    "tts_es": "soplar",
-    "tts_en": ""
-  },
-  {
-    "id": 1320,
-    "arasaac_id": null,
-    "es": "saco",
-    "en": "",
-    "archivo_es": "saco.png",
-    "archivo_en": "saco.png",
-    "tts_es": "saco",
-    "tts_en": ""
-  },
-  {
-    "id": 1321,
-    "arasaac_id": null,
-    "es": "",
-    "en": "soap",
-    "archivo_es": "soap.png",
-    "archivo_en": "soap.png",
-    "tts_es": "",
-    "tts_en": "soap"
-  },
-  {
-    "id": 1322,
-    "arasaac_id": null,
-    "es": "",
-    "en": "sand",
-    "archivo_es": "sand.png",
-    "archivo_en": "sand.png",
-    "tts_es": "",
-    "tts_en": "sand"
-  },
-  {
-    "id": 1323,
-    "arasaac_id": null,
-    "es": "",
-    "en": "sandwich",
-    "archivo_es": "sandwich.png",
-    "archivo_en": "sandwich.png",
-    "tts_es": "",
-    "tts_en": "sandwich"
-  },
-  {
-    "id": 1324,
-    "arasaac_id": null,
-    "es": "",
-    "en": "socks",
-    "archivo_es": "socks.png",
-    "archivo_en": "socks.png",
-    "tts_es": "",
-    "tts_en": "socks"
-  },
-  {
-    "id": 1325,
-    "arasaac_id": null,
-    "es": "",
-    "en": "sheep",
-    "archivo_es": "sheep.png",
-    "archivo_en": "sheep.png",
-    "tts_es": "",
-    "tts_en": "sheep"
-  },
-  {
-    "id": 1326,
-    "arasaac_id": null,
-    "es": "",
-    "en": "shell",
-    "archivo_es": "shell.png",
-    "archivo_en": "shell.png",
-    "tts_es": "",
-    "tts_en": "shell"
-  },
-  {
-    "id": 1327,
-    "arasaac_id": null,
-    "es": "",
-    "en": "shirt",
-    "archivo_es": "shirt.png",
-    "archivo_en": "shirt.png",
-    "tts_es": "",
-    "tts_en": "shirt"
-  },
-  {
-    "id": 1328,
-    "arasaac_id": null,
-    "es": "",
-    "en": "snail",
-    "archivo_es": "snail.png",
-    "archivo_en": "snail.png",
-    "tts_es": "",
-    "tts_en": "snail"
-  },
-  {
-    "id": 1329,
-    "arasaac_id": null,
-    "es": "",
-    "en": "shoes",
-    "archivo_es": "shoes.png",
-    "archivo_en": "shoes.png",
-    "tts_es": "",
-    "tts_en": "shoes"
-  },
-  {
-    "id": 1330,
-    "arasaac_id": null,
-    "es": "",
-    "en": "sun",
-    "archivo_es": "sun.png",
-    "archivo_en": "sun.png",
-    "tts_es": "",
-    "tts_en": "sun"
-  },
-  {
-    "id": 1331,
-    "arasaac_id": null,
-    "es": "",
-    "en": "submarine",
-    "archivo_es": "submarine.png",
-    "archivo_en": "submarine.png",
-    "tts_es": "",
-    "tts_en": "submarine"
-  },
-  {
-    "id": 1332,
-    "arasaac_id": null,
-    "es": "tigre",
-    "en": "",
-    "archivo_es": "tigre.png",
-    "archivo_en": "tigre.png",
-    "tts_es": "tigre",
-    "tts_en": ""
-  },
-  {
-    "id": 1333,
-    "arasaac_id": null,
-    "es": "tren",
-    "en": "",
-    "archivo_es": "tren.png",
-    "archivo_en": "tren.png",
-    "tts_es": "tren",
-    "tts_en": ""
-  },
-  {
-    "id": 1334,
-    "arasaac_id": null,
-    "es": "tortuga",
-    "en": "",
-    "archivo_es": "tortuga.png",
-    "archivo_en": "tortuga.png",
-    "tts_es": "tortuga",
-    "tts_en": ""
-  },
-  {
-    "id": 1335,
-    "arasaac_id": null,
-    "es": "taza",
-    "en": "",
-    "archivo_es": "taza.png",
-    "archivo_en": "taza.png",
-    "tts_es": "taza",
-    "tts_en": ""
-  },
-  {
-    "id": 1336,
-    "arasaac_id": null,
-    "es": "tijeras",
-    "en": "",
-    "archivo_es": "tijeras.png",
-    "archivo_en": "tijeras.png",
-    "tts_es": "tijeras",
-    "tts_en": ""
-  },
-  {
-    "id": 1337,
-    "arasaac_id": null,
-    "es": "tomate",
-    "en": "",
-    "archivo_es": "tomate.png",
-    "archivo_en": "tomate.png",
-    "tts_es": "tomate",
-    "tts_en": ""
-  },
-  {
-    "id": 1338,
-    "arasaac_id": null,
-    "es": "tubo",
-    "en": "",
-    "archivo_es": "tubo.png",
-    "archivo_en": "tubo.png",
-    "tts_es": "tubo",
-    "tts_en": ""
-  },
-  {
-    "id": 1339,
-    "arasaac_id": null,
-    "es": "tambor",
-    "en": "",
-    "archivo_es": "tambor.png",
-    "archivo_en": "tambor.png",
-    "tts_es": "tambor",
-    "tts_en": ""
-  },
-  {
-    "id": 1340,
-    "arasaac_id": null,
-    "es": "tiburón",
-    "en": "",
-    "archivo_es": "tiburon.png",
-    "archivo_en": "tiburon.png",
-    "tts_es": "tiburón",
-    "tts_en": ""
-  },
-  {
-    "id": 1341,
-    "arasaac_id": null,
-    "es": "",
-    "en": "table",
-    "archivo_es": "table.png",
-    "archivo_en": "table.png",
-    "tts_es": "",
-    "tts_en": "table"
-  },
-  {
-    "id": 1342,
-    "arasaac_id": null,
-    "es": "",
-    "en": "tent",
-    "archivo_es": "tent.png",
-    "archivo_en": "tent.png",
-    "tts_es": "",
-    "tts_en": "tent"
-  },
-  {
-    "id": 1343,
-    "arasaac_id": null,
-    "es": "",
-    "en": "toes",
-    "archivo_es": "toes.png",
-    "archivo_en": "toes.png",
-    "tts_es": "",
-    "tts_en": "toes"
-  },
-  {
-    "id": 1344,
-    "arasaac_id": null,
-    "es": "",
-    "en": "tomato",
-    "archivo_es": "tomato.png",
-    "archivo_en": "tomato.png",
-    "tts_es": "",
-    "tts_en": "tomato"
-  },
-  {
-    "id": 1345,
-    "arasaac_id": null,
-    "es": "",
-    "en": "toys",
-    "archivo_es": "toys.png",
-    "archivo_en": "toys.png",
-    "tts_es": "",
-    "tts_en": "toys"
-  },
-  {
-    "id": 1346,
-    "arasaac_id": null,
-    "es": "",
-    "en": "tower",
-    "archivo_es": "tower.png",
-    "archivo_en": "tower.png",
-    "tts_es": "",
-    "tts_en": "tower"
-  },
-  {
-    "id": 1347,
-    "arasaac_id": null,
-    "es": "",
-    "en": "train",
-    "archivo_es": "train.png",
-    "archivo_en": "train.png",
-    "tts_es": "",
-    "tts_en": "train"
-  },
-  {
-    "id": 1348,
-    "arasaac_id": null,
-    "es": "",
     "en": "tree",
-    "archivo_es": "tree.png",
-    "archivo_en": "tree.png",
-    "tts_es": "",
+    "ruta_img": "arbol.png",
+    "tts_es": "árbol",
     "tts_en": "tree"
   },
   {
-    "id": 1349,
-    "arasaac_id": null,
-    "es": "",
-    "en": "truck",
-    "archivo_es": "truck.png",
-    "archivo_en": "truck.png",
-    "tts_es": "",
-    "tts_en": "truck"
+    "id": 1002,
+    "es": "avión",
+    "en": "plane",
+    "ruta_img": "avion.png",
+    "tts_es": "avión",
+    "tts_en": "plane"
   },
   {
-    "id": 1350,
-    "arasaac_id": null,
-    "es": "",
-    "en": "turtle",
-    "archivo_es": "turtle.png",
-    "archivo_en": "turtle.png",
-    "tts_es": "",
-    "tts_en": "turtle"
-  },
-  {
-    "id": 1351,
-    "arasaac_id": null,
-    "es": "uva",
-    "en": "",
-    "archivo_es": "uva.png",
-    "archivo_en": "uva.png",
-    "tts_es": "uva",
-    "tts_en": ""
-  },
-  {
-    "id": 1352,
-    "arasaac_id": null,
-    "es": "unicornio",
-    "en": "",
-    "archivo_es": "unicornio.png",
-    "archivo_en": "unicornio.png",
-    "tts_es": "unicornio",
-    "tts_en": ""
-  },
-  {
-    "id": 1353,
-    "arasaac_id": null,
-    "es": "ukelele",
-    "en": "",
-    "archivo_es": "ukelele.png",
-    "archivo_en": "ukelele.png",
-    "tts_es": "ukelele",
-    "tts_en": ""
-  },
-  {
-    "id": 1354,
-    "arasaac_id": null,
-    "es": "",
-    "en": "umbrella",
-    "archivo_es": "umbrella.png",
-    "archivo_en": "umbrella.png",
-    "tts_es": "",
-    "tts_en": "umbrella"
-  },
-  {
-    "id": 1355,
-    "arasaac_id": null,
-    "es": "",
-    "en": "unicorn",
-    "archivo_es": "unicorn.png",
-    "archivo_en": "unicorn.png",
-    "tts_es": "",
-    "tts_en": "unicorn"
-  },
-  {
-    "id": 1356,
-    "arasaac_id": null,
-    "es": "",
-    "en": "urchin",
-    "archivo_es": "urchin.png",
-    "archivo_en": "urchin.png",
-    "tts_es": "",
-    "tts_en": "urchin"
-  },
-  {
-    "id": 1357,
-    "arasaac_id": null,
-    "es": "",
-    "en": "ukulele",
-    "archivo_es": "ukulele.png",
-    "archivo_en": "ukulele.png",
-    "tts_es": "",
-    "tts_en": "ukulele"
-  },
-  {
-    "id": 1358,
-    "arasaac_id": null,
-    "es": "vaca",
-    "en": "",
-    "archivo_es": "vaca.png",
-    "archivo_en": "vaca.png",
-    "tts_es": "vaca",
-    "tts_en": ""
-  },
-  {
-    "id": 1359,
-    "arasaac_id": null,
-    "es": "volcán",
-    "en": "",
-    "archivo_es": "volcan.png",
-    "archivo_en": "volcan.png",
-    "tts_es": "volcán",
-    "tts_en": ""
-  },
-  {
-    "id": 1360,
-    "arasaac_id": null,
-    "es": "violín",
-    "en": "",
-    "archivo_es": "violin.png",
-    "archivo_en": "violin.png",
-    "tts_es": "violín",
-    "tts_en": ""
-  },
-  {
-    "id": 1361,
-    "arasaac_id": null,
-    "es": "vela",
-    "en": "",
-    "archivo_es": "vela.png",
-    "archivo_en": "vela.png",
-    "tts_es": "vela",
-    "tts_en": ""
-  },
-  {
-    "id": 1362,
-    "arasaac_id": null,
-    "es": "ventana",
-    "en": "",
-    "archivo_es": "ventana.png",
-    "archivo_en": "ventana.png",
-    "tts_es": "ventana",
-    "tts_en": ""
-  },
-  {
-    "id": 1363,
-    "arasaac_id": null,
-    "es": "vestido",
-    "en": "",
-    "archivo_es": "vestido.png",
-    "archivo_en": "vestido.png",
-    "tts_es": "vestido",
-    "tts_en": ""
-  },
-  {
-    "id": 1364,
-    "arasaac_id": null,
-    "es": "vaso",
-    "en": "",
-    "archivo_es": "vaso.png",
-    "archivo_en": "vaso.png",
-    "tts_es": "vaso",
-    "tts_en": ""
-  },
-  {
-    "id": 1365,
-    "arasaac_id": null,
-    "es": "volar",
-    "en": "",
-    "archivo_es": "volar.png",
-    "archivo_en": "volar.png",
-    "tts_es": "volar",
-    "tts_en": ""
-  },
-  {
-    "id": 1366,
-    "arasaac_id": null,
-    "es": "",
-    "en": "van",
-    "archivo_es": "van.png",
-    "archivo_en": "van.png",
-    "tts_es": "",
-    "tts_en": "van"
-  },
-  {
-    "id": 1367,
-    "arasaac_id": null,
-    "es": "",
-    "en": "vase",
-    "archivo_es": "vase.png",
-    "archivo_en": "vase.png",
-    "tts_es": "",
-    "tts_en": "vase"
-  },
-  {
-    "id": 1368,
-    "arasaac_id": null,
-    "es": "",
-    "en": "vest",
-    "archivo_es": "vest.png",
-    "archivo_en": "vest.png",
-    "tts_es": "",
-    "tts_en": "vest"
-  },
-  {
-    "id": 1369,
-    "arasaac_id": null,
-    "es": "",
-    "en": "violin",
-    "archivo_es": "violin.png",
-    "archivo_en": "violin.png",
-    "tts_es": "",
-    "tts_en": "violin"
-  },
-  {
-    "id": 1370,
-    "arasaac_id": null,
-    "es": "",
-    "en": "vegetables",
-    "archivo_es": "vegetables.png",
-    "archivo_en": "vegetables.png",
-    "tts_es": "",
-    "tts_en": "vegetables"
-  },
-  {
-    "id": 1371,
-    "arasaac_id": null,
-    "es": "waffle",
-    "en": "",
-    "archivo_es": "waffle.png",
-    "archivo_en": "waffle.png",
-    "tts_es": "waffle",
-    "tts_en": ""
-  },
-  {
-    "id": 1372,
-    "arasaac_id": null,
-    "es": "wonton",
-    "en": "",
-    "archivo_es": "wonton.png",
-    "archivo_en": "wonton.png",
-    "tts_es": "wonton",
-    "tts_en": ""
-  },
-  {
-    "id": 1373,
-    "arasaac_id": null,
-    "es": "",
-    "en": "waffle",
-    "archivo_es": "waffle.png",
-    "archivo_en": "waffle.png",
-    "tts_es": "",
-    "tts_en": "waffle"
-  },
-  {
-    "id": 1374,
-    "arasaac_id": null,
-    "es": "",
-    "en": "wagon",
-    "archivo_es": "wagon.png",
-    "archivo_en": "wagon.png",
-    "tts_es": "",
-    "tts_en": "wagon"
-  },
-  {
-    "id": 1375,
-    "arasaac_id": null,
-    "es": "",
-    "en": "walrus",
-    "archivo_es": "walrus.png",
-    "archivo_en": "walrus.png",
-    "tts_es": "",
-    "tts_en": "walrus"
-  },
-  {
-    "id": 1376,
-    "arasaac_id": null,
-    "es": "",
-    "en": "waterfall",
-    "archivo_es": "waterfall.png",
-    "archivo_en": "waterfall.png",
-    "tts_es": "",
-    "tts_en": "waterfall"
-  },
-  {
-    "id": 1377,
-    "arasaac_id": null,
-    "es": "",
-    "en": "whale",
-    "archivo_es": "whale.png",
-    "archivo_en": "whale.png",
-    "tts_es": "",
-    "tts_en": "whale"
-  },
-  {
-    "id": 1378,
-    "arasaac_id": null,
-    "es": "",
-    "en": "wheel",
-    "archivo_es": "wheel.png",
-    "archivo_en": "wheel.png",
-    "tts_es": "",
-    "tts_en": "wheel"
-  },
-  {
-    "id": 1379,
-    "arasaac_id": null,
-    "es": "",
+    "id": 1003,
+    "es": "agua",
     "en": "water",
-    "archivo_es": "water.png",
-    "archivo_en": "water.png",
-    "tts_es": "",
+    "ruta_img": "agua.png",
+    "tts_es": "agua",
     "tts_en": "water"
   },
   {
-    "id": 1380,
-    "arasaac_id": null,
-    "es": "xilófono",
-    "en": "",
-    "archivo_es": "xilofono.png",
-    "archivo_en": "xilofono.png",
-    "tts_es": "xilófono",
-    "tts_en": ""
+    "id": 1004,
+    "es": "araña",
+    "en": "spider assembly",
+    "ruta_img": "arana.png",
+    "tts_es": "araña",
+    "tts_en": "spider assembly"
   },
   {
-    "id": 1381,
-    "arasaac_id": null,
-    "es": "Xochimilco",
-    "en": "",
-    "archivo_es": "xochimilco.png",
-    "archivo_en": "xochimilco.png",
-    "tts_es": "Xochimilco",
-    "tts_en": ""
+    "id": 1005,
+    "es": "arco iris",
+    "en": "rainbow",
+    "ruta_img": "arco-iris.png",
+    "tts_es": "arco iris",
+    "tts_en": "rainbow"
   },
   {
-    "id": 1382,
-    "arasaac_id": null,
-    "es": "",
-    "en": "xylophone",
-    "archivo_es": "xylophone.png",
-    "archivo_en": "xylophone.png",
-    "tts_es": "",
-    "tts_en": "xylophone"
+    "id": 1006,
+    "es": "ardilla",
+    "en": "squirrel",
+    "ruta_img": "ardilla.png",
+    "tts_es": "ardilla",
+    "tts_en": "squirrel"
   },
   {
-    "id": 1383,
-    "arasaac_id": null,
-    "es": "",
-    "en": "Xochimilco",
-    "archivo_es": "xochimilco.png",
-    "archivo_en": "xochimilco.png",
-    "tts_es": "",
-    "tts_en": "Xochimilco"
+    "id": 1007,
+    "es": "abeja",
+    "en": "bee",
+    "ruta_img": "abeja.png",
+    "tts_es": "abeja",
+    "tts_en": "bee"
   },
   {
-    "id": 1384,
-    "arasaac_id": null,
-    "es": "yoyo",
-    "en": "",
-    "archivo_es": "yoyo.png",
-    "archivo_en": "yoyo.png",
-    "tts_es": "yoyo",
-    "tts_en": ""
+    "id": 1008,
+    "es": "ajo",
+    "en": "garlic",
+    "ruta_img": "ajo.png",
+    "tts_es": "ajo",
+    "tts_en": "garlic"
   },
   {
-    "id": 1385,
-    "arasaac_id": null,
-    "es": "yate",
-    "en": "",
-    "archivo_es": "yate.png",
-    "archivo_en": "yate.png",
-    "tts_es": "yate",
-    "tts_en": ""
+    "id": 1009,
+    "es": "barco",
+    "en": "ship",
+    "ruta_img": "barco.png",
+    "tts_es": "barco",
+    "tts_en": "ship"
   },
   {
-    "id": 1386,
-    "arasaac_id": null,
-    "es": "yegua",
-    "en": "",
-    "archivo_es": "yegua.png",
-    "archivo_en": "yegua.png",
-    "tts_es": "yegua",
-    "tts_en": ""
+    "id": 1010,
+    "es": "bicicleta",
+    "en": "bike",
+    "ruta_img": "bicicleta.png",
+    "tts_es": "bicicleta",
+    "tts_en": "bike"
   },
   {
-    "id": 1387,
-    "arasaac_id": null,
-    "es": "",
-    "en": "yacht",
-    "archivo_es": "yacht.png",
-    "archivo_en": "yacht.png",
-    "tts_es": "",
-    "tts_en": "yacht"
+    "id": 1011,
+    "es": "boca",
+    "en": "nozzle",
+    "ruta_img": "boca.png",
+    "tts_es": "boca",
+    "tts_en": "nozzle"
   },
   {
-    "id": 1388,
-    "arasaac_id": null,
-    "es": "",
-    "en": "yarn",
-    "archivo_es": "yarn.png",
-    "archivo_en": "yarn.png",
-    "tts_es": "",
-    "tts_en": "yarn"
+    "id": 1012,
+    "es": "bebé",
+    "en": "baby",
+    "ruta_img": "bebe.png",
+    "tts_es": "bebé",
+    "tts_en": "baby"
   },
   {
-    "id": 1389,
-    "arasaac_id": null,
-    "es": "",
-    "en": "yoyo",
-    "archivo_es": "yoyo.png",
-    "archivo_en": "yoyo.png",
-    "tts_es": "",
-    "tts_en": "yoyo"
+    "id": 1013,
+    "es": "ballena",
+    "en": "whale",
+    "ruta_img": "ballena.png",
+    "tts_es": "ballena",
+    "tts_en": "whale"
   },
   {
-    "id": 1390,
-    "arasaac_id": null,
-    "es": "zapato",
-    "en": "",
-    "archivo_es": "zapato.png",
-    "archivo_en": "zapato.png",
-    "tts_es": "zapato",
-    "tts_en": ""
+    "id": 1014,
+    "es": "brócoli",
+    "en": "broccoli",
+    "ruta_img": "brocoli.png",
+    "tts_es": "brócoli",
+    "tts_en": "broccoli"
   },
   {
-    "id": 1391,
-    "arasaac_id": null,
-    "es": "zorro",
-    "en": "",
-    "archivo_es": "zorro.png",
-    "archivo_en": "zorro.png",
-    "tts_es": "zorro",
-    "tts_en": ""
+    "id": 1015,
+    "es": "botas",
+    "en": "boots",
+    "ruta_img": "botas.png",
+    "tts_es": "botas",
+    "tts_en": "boots"
   },
   {
-    "id": 1392,
-    "arasaac_id": null,
-    "es": "zanahoria",
-    "en": "",
-    "archivo_es": "zanahoria.png",
-    "archivo_en": "zanahoria.png",
-    "tts_es": "zanahoria",
-    "tts_en": ""
+    "id": 1016,
+    "es": "botón",
+    "en": "button",
+    "ruta_img": "boton.png",
+    "tts_es": "botón",
+    "tts_en": "button"
   },
   {
-    "id": 1393,
-    "arasaac_id": null,
-    "es": "zoológico",
-    "en": "",
-    "archivo_es": "zoologico.png",
-    "archivo_en": "zoologico.png",
-    "tts_es": "zoológico",
-    "tts_en": ""
+    "id": 1017,
+    "es": "búho",
+    "en": "96b family strigidae",
+    "ruta_img": "buho.png",
+    "tts_es": "búho",
+    "tts_en": "96b family strigidae"
   },
   {
-    "id": 1394,
-    "arasaac_id": null,
-    "es": "",
+    "id": 1018,
+    "es": "casa",
+    "en": "house",
+    "ruta_img": "casa.png",
+    "tts_es": "casa",
+    "tts_en": "house"
+  },
+  {
+    "id": 1019,
+    "es": "coche",
+    "en": "(tyre type)",
+    "ruta_img": "coche.png",
+    "tts_es": "coche",
+    "tts_en": "(tyre type)"
+  },
+  {
+    "id": 1020,
+    "es": "corazón",
+    "en": "core",
+    "ruta_img": "corazon.png",
+    "tts_es": "corazón",
+    "tts_en": "core"
+  },
+  {
+    "id": 1021,
+    "es": "cama",
+    "en": "bed",
+    "ruta_img": "cama.png",
+    "tts_es": "cama",
+    "tts_en": "bed"
+  },
+  {
+    "id": 1022,
+    "es": "caballo",
+    "en": "caballo (horse)",
+    "ruta_img": "caballo.png",
+    "tts_es": "caballo",
+    "tts_en": "caballo (horse)"
+  },
+  {
+    "id": 1023,
+    "es": "conejo",
+    "en": "conejo (rabbit)",
+    "ruta_img": "conejo.png",
+    "tts_es": "conejo",
+    "tts_en": "conejo (rabbit)"
+  },
+  {
+    "id": 1024,
+    "es": "cohete",
+    "en": "rocket",
+    "ruta_img": "cohete.png",
+    "tts_es": "cohete",
+    "tts_en": "rocket"
+  },
+  {
+    "id": 1025,
+    "es": "corona",
+    "en": "bottle mouth",
+    "ruta_img": "corona.png",
+    "tts_es": "corona",
+    "tts_en": "bottle mouth"
+  },
+  {
+    "id": 1026,
+    "es": "cactus",
+    "en": "cactaceae",
+    "ruta_img": "cactus.png",
+    "tts_es": "cactus",
+    "tts_en": "cactaceae"
+  },
+  {
+    "id": 1027,
+    "es": "cebra",
     "en": "zebra",
-    "archivo_es": "zebra.png",
-    "archivo_en": "zebra.png",
-    "tts_es": "",
+    "ruta_img": "cebra.png",
+    "tts_es": "cebra",
     "tts_en": "zebra"
   },
   {
-    "id": 1395,
-    "arasaac_id": null,
-    "es": "",
-    "en": "zipper",
-    "archivo_es": "zipper.png",
-    "archivo_en": "zipper.png",
-    "tts_es": "",
-    "tts_en": "zipper"
+    "id": 1028,
+    "es": "camión",
+    "en": "camión (lorry)",
+    "ruta_img": "camion.png",
+    "tts_es": "camión",
+    "tts_en": "camión (lorry)"
   },
   {
-    "id": 1396,
-    "arasaac_id": null,
-    "es": "",
-    "en": "zoo",
-    "archivo_es": "zoo.png",
-    "archivo_en": "zoo.png",
-    "tts_es": "",
-    "tts_en": "zoo"
+    "id": 1029,
+    "es": "delfín",
+    "en": "dolphin",
+    "ruta_img": "delfin.png",
+    "tts_es": "delfín",
+    "tts_en": "dolphin"
   },
   {
-    "id": 1397,
-    "arasaac_id": null,
+    "id": 1030,
+    "es": "dinosaurio",
+    "en": "dinosaur",
+    "ruta_img": "dinosaurio.png",
+    "tts_es": "dinosaurio",
+    "tts_en": "dinosaur"
+  },
+  {
+    "id": 1031,
+    "es": "dientes",
+    "en": "cloves",
+    "ruta_img": "dientes.png",
+    "tts_es": "dientes",
+    "tts_en": "cloves"
+  },
+  {
+    "id": 1032,
+    "es": "dado",
+    "en": "cement ( or stone ) footing",
+    "ruta_img": "dado.png",
+    "tts_es": "dado",
+    "tts_en": "cement ( or stone ) footing"
+  },
+  {
+    "id": 1033,
+    "es": "dragón",
+    "en": "dracone",
+    "ruta_img": "dragon.png",
+    "tts_es": "dragón",
+    "tts_en": "dracone"
+  },
+  {
+    "id": 1034,
+    "es": "dulce",
+    "en": "doux, sweet",
+    "ruta_img": "dulce.png",
+    "tts_es": "dulce",
+    "tts_en": "doux, sweet"
+  },
+  {
+    "id": 1035,
+    "es": "dedos",
+    "en": "finger",
+    "ruta_img": "dedos.png",
+    "tts_es": "dedos",
+    "tts_en": "finger"
+  },
+  {
+    "id": 1036,
+    "es": "día",
+    "en": "day",
+    "ruta_img": "dia.png",
+    "tts_es": "día",
+    "tts_en": "day"
+  },
+  {
+    "id": 1037,
+    "es": "dinero",
+    "en": "money",
+    "ruta_img": "dinero.png",
+    "tts_es": "dinero",
+    "tts_en": "money"
+  },
+  {
+    "id": 1038,
+    "es": "elefante",
+    "en": "elefante (elephant)",
+    "ruta_img": "elefante.png",
+    "tts_es": "elefante",
+    "tts_en": "elefante (elephant)"
+  },
+  {
+    "id": 1039,
+    "es": "estrella",
+    "en": "star",
+    "ruta_img": "estrella.png",
+    "tts_es": "estrella",
+    "tts_en": "star"
+  },
+  {
+    "id": 1040,
+    "es": "escalera",
+    "en": "stairway",
+    "ruta_img": "escalera.png",
+    "tts_es": "escalera",
+    "tts_en": "stairway"
+  },
+  {
+    "id": 1041,
+    "es": "espejo",
+    "en": "mirrored",
+    "ruta_img": "espejo.png",
+    "tts_es": "espejo",
+    "tts_en": "mirrored"
+  },
+  {
+    "id": 1042,
+    "es": "escoba",
+    "en": "broom",
+    "ruta_img": "escoba.png",
+    "tts_es": "escoba",
+    "tts_en": "broom"
+  },
+  {
+    "id": 1043,
+    "es": "erizo",
+    "en": "european edible sea urchin",
+    "ruta_img": "erizo.png",
+    "tts_es": "erizo",
+    "tts_en": "european edible sea urchin"
+  },
+  {
+    "id": 1044,
+    "es": "esponja",
+    "en": "sponge",
+    "ruta_img": "esponja.png",
+    "tts_es": "esponja",
+    "tts_en": "sponge"
+  },
+  {
+    "id": 1045,
+    "es": "elote",
+    "en": "sweetcorn on-the-cob",
+    "ruta_img": "elote.png",
+    "tts_es": "elote",
+    "tts_en": "sweetcorn on-the-cob"
+  },
+  {
+    "id": 1046,
+    "es": "escuela",
+    "en": "school",
+    "ruta_img": "escuela.png",
+    "tts_es": "escuela",
+    "tts_en": "school"
+  },
+  {
+    "id": 1047,
+    "es": "espada",
+    "en": "spee",
+    "ruta_img": "espada.png",
+    "tts_es": "espada",
+    "tts_en": "spee"
+  },
+  {
+    "id": 1048,
+    "es": "flor",
+    "en": "flor (flower)",
+    "ruta_img": "flor.png",
+    "tts_es": "flor",
+    "tts_en": "flor (flower)"
+  },
+  {
+    "id": 1049,
+    "es": "fresa",
+    "en": "strawberry",
+    "ruta_img": "fresa.png",
+    "tts_es": "fresa",
+    "tts_en": "strawberry"
+  },
+  {
+    "id": 1050,
+    "es": "fuego",
+    "en": "ﬁre",
+    "ruta_img": "fuego.png",
+    "tts_es": "fuego",
+    "tts_en": "ﬁre"
+  },
+  {
+    "id": 1051,
+    "es": "foca",
+    "en": "seal",
+    "ruta_img": "foca.png",
+    "tts_es": "foca",
+    "tts_en": "seal"
+  },
+  {
+    "id": 1052,
+    "es": "flauta",
+    "en": "fluted champagne glass",
+    "ruta_img": "flauta.png",
+    "tts_es": "flauta",
+    "tts_en": "fluted champagne glass"
+  },
+  {
+    "id": 1053,
+    "es": "faro",
+    "en": "headlight",
+    "ruta_img": "faro.png",
+    "tts_es": "faro",
+    "tts_en": "headlight"
+  },
+  {
+    "id": 1054,
+    "es": "fruta",
+    "en": "fruit",
+    "ruta_img": "fruta.png",
+    "tts_es": "fruta",
+    "tts_en": "fruit"
+  },
+  {
+    "id": 1055,
+    "es": "fuente",
+    "en": "font",
+    "ruta_img": "fuente.png",
+    "tts_es": "fuente",
+    "tts_en": "font"
+  },
+  {
+    "id": 1056,
+    "es": "gato",
+    "en": "gato (cat)",
+    "ruta_img": "gato.png",
+    "tts_es": "gato",
+    "tts_en": "gato (cat)"
+  },
+  {
+    "id": 1057,
+    "es": "globo aerostático",
+    "en": "balloon",
+    "ruta_img": "globo-aerostatico.png",
+    "tts_es": "globo aerostático",
+    "tts_en": "balloon"
+  },
+  {
+    "id": 1058,
+    "es": "guitarra",
+    "en": "peruvian guitarfish",
+    "ruta_img": "guitarra.png",
+    "tts_es": "guitarra",
+    "tts_en": "peruvian guitarfish"
+  },
+  {
+    "id": 1059,
+    "es": "gallina",
+    "en": "chicken, fowl, hen",
+    "ruta_img": "gallina.png",
+    "tts_es": "gallina",
+    "tts_en": "chicken, fowl, hen"
+  },
+  {
+    "id": 1060,
+    "es": "gorila",
+    "en": "gorilla",
+    "ruta_img": "gorila.png",
+    "tts_es": "gorila",
+    "tts_en": "gorilla"
+  },
+  {
+    "id": 1061,
+    "es": "girasol",
+    "en": "sunflower",
+    "ruta_img": "girasol.png",
+    "tts_es": "girasol",
+    "tts_en": "sunflower"
+  },
+  {
+    "id": 1062,
+    "es": "gusano",
+    "en": "internet worm",
+    "ruta_img": "gusano.png",
+    "tts_es": "gusano",
+    "tts_en": "internet worm"
+  },
+  {
+    "id": 1063,
+    "es": "gorra",
+    "en": "cap hat",
+    "ruta_img": "gorra.png",
+    "tts_es": "gorra",
+    "tts_en": "cap hat"
+  },
+  {
+    "id": 1064,
+    "es": "granja",
+    "en": "farm building",
+    "ruta_img": "granja.png",
+    "tts_es": "granja",
+    "tts_en": "farm building"
+  },
+  {
+    "id": 1065,
+    "es": "grifo",
+    "en": "faucet",
+    "ruta_img": "grifo.png",
+    "tts_es": "grifo",
+    "tts_en": "faucet"
+  },
+  {
+    "id": 1066,
+    "es": "helado",
+    "en": "ice cream",
+    "ruta_img": "helado.png",
+    "tts_es": "helado",
+    "tts_en": "ice cream"
+  },
+  {
+    "id": 1067,
+    "es": "hormiga",
+    "en": "ant (living organism)",
+    "ruta_img": "hormiga.png",
+    "tts_es": "hormiga",
+    "tts_en": "ant (living organism)"
+  },
+  {
+    "id": 1068,
+    "es": "huevo",
+    "en": "products",
+    "ruta_img": "huevo.png",
+    "tts_es": "huevo",
+    "tts_en": "products"
+  },
+  {
+    "id": 1069,
+    "es": "hoja",
+    "en": "blade",
+    "ruta_img": "hoja.png",
+    "tts_es": "hoja",
+    "tts_en": "blade"
+  },
+  {
+    "id": 1070,
+    "es": "hada",
+    "en": "fairy",
+    "ruta_img": "hada.png",
+    "tts_es": "hada",
+    "tts_en": "fairy"
+  },
+  {
+    "id": 1071,
+    "es": "hamaca",
+    "en": "hammock",
+    "ruta_img": "hamaca.png",
+    "tts_es": "hamaca",
+    "tts_en": "hammock"
+  },
+  {
+    "id": 1072,
+    "es": "helicóptero",
+    "en": "helicopter",
+    "ruta_img": "helicoptero.png",
+    "tts_es": "helicóptero",
+    "tts_en": "helicopter"
+  },
+  {
+    "id": 1073,
+    "es": "hongo",
+    "en": "bowler",
+    "ruta_img": "hongo.png",
+    "tts_es": "hongo",
+    "tts_en": "bowler"
+  },
+  {
+    "id": 1074,
+    "es": "hacha",
+    "en": "axe",
+    "ruta_img": "hacha.png",
+    "tts_es": "hacha",
+    "tts_en": "axe"
+  },
+  {
+    "id": 1075,
+    "es": "hueso",
+    "en": "bone",
+    "ruta_img": "hueso.png",
+    "tts_es": "hueso",
+    "tts_en": "bone"
+  },
+  {
+    "id": 1076,
+    "es": "iglú",
+    "en": "igloo",
+    "ruta_img": "iglu.png",
+    "tts_es": "iglú",
+    "tts_en": "igloo"
+  },
+  {
+    "id": 1077,
+    "es": "imán",
+    "en": "imam",
+    "ruta_img": "iman.png",
+    "tts_es": "imán",
+    "tts_en": "imam"
+  },
+  {
+    "id": 1078,
+    "es": "isla",
+    "en": "island",
+    "ruta_img": "isla.png",
+    "tts_es": "isla",
+    "tts_en": "island"
+  },
+  {
+    "id": 1079,
+    "es": "iglesia",
+    "en": "church",
+    "ruta_img": "iglesia.png",
+    "tts_es": "iglesia",
+    "tts_en": "church"
+  },
+  {
+    "id": 1080,
+    "es": "insecto",
+    "en": "insect",
+    "ruta_img": "insecto.png",
+    "tts_es": "insecto",
+    "tts_en": "insect"
+  },
+  {
+    "id": 1081,
+    "es": "instrumento",
+    "en": "instrument",
+    "ruta_img": "instrumento.png",
+    "tts_es": "instrumento",
+    "tts_en": "instrument"
+  },
+  {
+    "id": 1082,
+    "es": "invierno",
+    "en": "winter",
+    "ruta_img": "invierno.png",
+    "tts_es": "invierno",
+    "tts_en": "winter"
+  },
+  {
+    "id": 1083,
+    "es": "jirafa",
+    "en": "boom microphone",
+    "ruta_img": "jirafa.png",
+    "tts_es": "jirafa",
+    "tts_en": "boom microphone"
+  },
+  {
+    "id": 1084,
+    "es": "juguete",
+    "en": "toy",
+    "ruta_img": "juguete.png",
+    "tts_es": "juguete",
+    "tts_en": "toy"
+  },
+  {
+    "id": 1085,
+    "es": "jardín",
+    "en": "front yard",
+    "ruta_img": "jardin.png",
+    "tts_es": "jardín",
+    "tts_en": "front yard"
+  },
+  {
+    "id": 1086,
+    "es": "jaula",
+    "en": "cage",
+    "ruta_img": "jaula.png",
+    "tts_es": "jaula",
+    "tts_en": "cage"
+  },
+  {
+    "id": 1087,
+    "es": "jamón",
+    "en": "ham",
+    "ruta_img": "jamon.png",
+    "tts_es": "jamón",
+    "tts_en": "ham"
+  },
+  {
+    "id": 1088,
+    "es": "jugo",
+    "en": "juice",
+    "ruta_img": "jugo.png",
+    "tts_es": "jugo",
+    "tts_en": "juice"
+  },
+  {
+    "id": 1089,
+    "es": "jabón",
+    "en": "soap",
+    "ruta_img": "jabon.png",
+    "tts_es": "jabón",
+    "tts_en": "soap"
+  },
+  {
+    "id": 1090,
+    "es": "jarra",
+    "en": "jar",
+    "ruta_img": "jarra.png",
+    "tts_es": "jarra",
+    "tts_en": "jar"
+  },
+  {
+    "id": 1091,
+    "es": "jinete",
+    "en": "horseman, rider",
+    "ruta_img": "jinete.png",
+    "tts_es": "jinete",
+    "tts_en": "horseman, rider"
+  },
+  {
+    "id": 1092,
+    "es": "koala",
+    "en": "koala",
+    "ruta_img": "koala.png",
+    "tts_es": "koala",
+    "tts_en": "koala"
+  },
+  {
+    "id": 1093,
+    "es": "kiwi",
+    "en": "kiwi",
+    "ruta_img": "kiwi.png",
+    "tts_es": "kiwi",
+    "tts_en": "kiwi"
+  },
+  {
+    "id": 1094,
+    "es": "kayak",
+    "en": "kayak",
+    "ruta_img": "kayak.png",
+    "tts_es": "kayak",
+    "tts_en": "kayak"
+  },
+  {
+    "id": 1095,
+    "es": "libro",
+    "en": "civil code",
+    "ruta_img": "libro.png",
+    "tts_es": "libro",
+    "tts_en": "civil code"
+  },
+  {
+    "id": 1096,
+    "es": "luna",
+    "en": "moon",
+    "ruta_img": "luna.png",
+    "tts_es": "luna",
+    "tts_en": "moon"
+  },
+  {
+    "id": 1097,
+    "es": "león",
+    "en": "león (lion)",
+    "ruta_img": "leon.png",
+    "tts_es": "león",
+    "tts_en": "león (lion)"
+  },
+  {
+    "id": 1098,
+    "es": "llave",
+    "en": "key",
+    "ruta_img": "llave.png",
+    "tts_es": "llave",
+    "tts_en": "key"
+  },
+  {
+    "id": 1099,
+    "es": "lagarto",
+    "en": "dragonet",
+    "ruta_img": "lagarto.png",
+    "tts_es": "lagarto",
+    "tts_en": "dragonet"
+  },
+  {
+    "id": 1100,
+    "es": "lámpara",
+    "en": "lámpara (lamp)",
+    "ruta_img": "lampara.png",
+    "tts_es": "lámpara",
+    "tts_en": "lámpara (lamp)"
+  },
+  {
+    "id": 1101,
+    "es": "loro",
+    "en": "parrot",
+    "ruta_img": "loro.png",
+    "tts_es": "loro",
+    "tts_en": "parrot"
+  },
+  {
+    "id": 1102,
+    "es": "lobo",
+    "en": "shadow of the wolf",
+    "ruta_img": "lobo.png",
+    "tts_es": "lobo",
+    "tts_en": "shadow of the wolf"
+  },
+  {
+    "id": 1103,
+    "es": "limón",
+    "en": "lemon",
+    "ruta_img": "limon.png",
+    "tts_es": "limón",
+    "tts_en": "lemon"
+  },
+  {
+    "id": 1104,
+    "es": "leche",
+    "en": "milk",
+    "ruta_img": "leche.png",
+    "tts_es": "leche",
+    "tts_en": "milk"
+  },
+  {
+    "id": 1105,
+    "es": "mariposa",
+    "en": "butterfly",
+    "ruta_img": "mariposa.png",
+    "tts_es": "mariposa",
+    "tts_en": "butterfly"
+  },
+  {
+    "id": 1106,
+    "es": "manzana",
+    "en": "acid",
+    "ruta_img": "manzana.png",
+    "tts_es": "manzana",
+    "tts_en": "acid"
+  },
+  {
+    "id": 1107,
+    "es": "mano",
+    "en": "mano (hand)",
+    "ruta_img": "mano.png",
+    "tts_es": "mano",
+    "tts_en": "mano (hand)"
+  },
+  {
+    "id": 1108,
+    "es": "mono",
+    "en": "monkey",
+    "ruta_img": "mono.png",
+    "tts_es": "mono",
+    "tts_en": "monkey"
+  },
+  {
+    "id": 1109,
+    "es": "montaña",
+    "en": "rice",
+    "ruta_img": "montana.png",
+    "tts_es": "montaña",
+    "tts_en": "rice"
+  },
+  {
+    "id": 1110,
+    "es": "músico",
+    "en": "musician",
+    "ruta_img": "musico.png",
+    "tts_es": "músico",
+    "tts_en": "musician"
+  },
+  {
+    "id": 1111,
+    "es": "mesa",
+    "en": "table",
+    "ruta_img": "mesa.png",
+    "tts_es": "mesa",
+    "tts_en": "table"
+  },
+  {
+    "id": 1112,
+    "es": "mochila",
+    "en": "backpack",
+    "ruta_img": "mochila.png",
+    "tts_es": "mochila",
+    "tts_en": "backpack"
+  },
+  {
+    "id": 1113,
+    "es": "murciélago",
+    "en": "bat",
+    "ruta_img": "murcielago.png",
+    "tts_es": "murciélago",
+    "tts_en": "bat"
+  },
+  {
+    "id": 1114,
+    "es": "mapa",
+    "en": "map",
+    "ruta_img": "mapa.png",
+    "tts_es": "mapa",
+    "tts_en": "map"
+  },
+  {
+    "id": 1115,
+    "es": "nube",
+    "en": "cloud",
+    "ruta_img": "nube.png",
+    "tts_es": "nube",
+    "tts_en": "cloud"
+  },
+  {
+    "id": 1116,
+    "es": "nariz",
+    "en": "nariz (nose)",
+    "ruta_img": "nariz.png",
+    "tts_es": "nariz",
+    "tts_en": "nariz (nose)"
+  },
+  {
+    "id": 1117,
+    "es": "naranja",
+    "en": "orange",
+    "ruta_img": "naranja.png",
+    "tts_es": "naranja",
+    "tts_en": "orange"
+  },
+  {
+    "id": 1118,
+    "es": "nieve",
+    "en": "snow",
+    "ruta_img": "nieve.png",
+    "tts_es": "nieve",
+    "tts_en": "snow"
+  },
+  {
+    "id": 1119,
+    "es": "nido",
+    "en": "nest",
+    "ruta_img": "nido.png",
+    "tts_es": "nido",
+    "tts_en": "nest"
+  },
+  {
+    "id": 1120,
+    "es": "niña",
+    "en": "child (girl)",
+    "ruta_img": "nina.png",
+    "tts_es": "niña",
+    "tts_en": "child (girl)"
+  },
+  {
+    "id": 1121,
+    "es": "niño",
+    "en": "child (boy)",
+    "ruta_img": "nino.png",
+    "tts_es": "niño",
+    "tts_en": "child (boy)"
+  },
+  {
+    "id": 1122,
+    "es": "nave",
+    "en": "warehouse",
+    "ruta_img": "nave.png",
+    "tts_es": "nave",
+    "tts_en": "warehouse"
+  },
+  {
+    "id": 1123,
+    "es": "nuez",
+    "en": "english walnut, walnut",
+    "ruta_img": "nuez.png",
+    "tts_es": "nuez",
+    "tts_en": "english walnut, walnut"
+  },
+  {
+    "id": 1124,
+    "es": "natación",
+    "en": "swimming",
+    "ruta_img": "natacion.png",
+    "tts_es": "natación",
+    "tts_en": "swimming"
+  },
+  {
+    "id": 1125,
+    "es": "ñu",
+    "en": "gnu",
+    "ruta_img": "nu.png",
+    "tts_es": "ñu",
+    "tts_en": "gnu"
+  },
+  {
+    "id": 1126,
+    "es": "ñandú",
+    "en": "greater rhea",
+    "ruta_img": "nandu.png",
+    "tts_es": "ñandú",
+    "tts_en": "greater rhea"
+  },
+  {
+    "id": 1127,
+    "es": "ñame",
+    "en": "kilari, kins, kirta",
+    "ruta_img": "name.png",
+    "tts_es": "ñame",
+    "tts_en": "kilari, kins, kirta"
+  },
+  {
+    "id": 1128,
+    "es": "ojo",
+    "en": "ojo (eye)",
+    "ruta_img": "ojo.png",
+    "tts_es": "ojo",
+    "tts_en": "ojo (eye)"
+  },
+  {
+    "id": 1129,
+    "es": "oso",
+    "en": "bear",
+    "ruta_img": "oso.png",
+    "tts_es": "oso",
+    "tts_en": "bear"
+  },
+  {
+    "id": 1130,
+    "es": "oveja",
+    "en": "oveja (sheep)",
+    "ruta_img": "oveja.png",
+    "tts_es": "oveja",
+    "tts_en": "oveja (sheep)"
+  },
+  {
+    "id": 1131,
+    "es": "ola",
+    "en": "wave",
+    "ruta_img": "ola.png",
+    "tts_es": "ola",
+    "tts_en": "wave"
+  },
+  {
+    "id": 1132,
+    "es": "oruga",
+    "en": "caterpillar",
+    "ruta_img": "oruga.png",
+    "tts_es": "oruga",
+    "tts_en": "caterpillar"
+  },
+  {
+    "id": 1133,
+    "es": "oreja",
+    "en": "oreja (ear)",
+    "ruta_img": "oreja.png",
+    "tts_es": "oreja",
+    "tts_en": "oreja (ear)"
+  },
+  {
+    "id": 1134,
+    "es": "ornitorrinco",
+    "en": "platypus",
+    "ruta_img": "ornitorrinco.png",
+    "tts_es": "ornitorrinco",
+    "tts_en": "platypus"
+  },
+  {
+    "id": 1135,
+    "es": "ocelote",
+    "en": "ocelot",
+    "ruta_img": "ocelote.png",
+    "tts_es": "ocelote",
+    "tts_en": "ocelot"
+  },
+  {
+    "id": 1136,
+    "es": "pájaro",
+    "en": "pájaro (bird)",
+    "ruta_img": "pajaro.png",
+    "tts_es": "pájaro",
+    "tts_en": "pájaro (bird)"
+  },
+  {
+    "id": 1137,
+    "es": "perro",
+    "en": "dog",
+    "ruta_img": "perro.png",
+    "tts_es": "perro",
+    "tts_en": "dog"
+  },
+  {
+    "id": 1138,
+    "es": "pelota",
+    "en": "ball",
+    "ruta_img": "pelota.png",
+    "tts_es": "pelota",
+    "tts_en": "ball"
+  },
+  {
+    "id": 1139,
+    "es": "pez",
+    "en": "lower side of the neck",
+    "ruta_img": "pez.png",
+    "tts_es": "pez",
+    "tts_en": "lower side of the neck"
+  },
+  {
+    "id": 1140,
+    "es": "piña",
+    "en": "pineapple",
+    "ruta_img": "pina.png",
+    "tts_es": "piña",
+    "tts_en": "pineapple"
+  },
+  {
+    "id": 1141,
+    "es": "puerta",
+    "en": "door",
+    "ruta_img": "puerta.png",
+    "tts_es": "puerta",
+    "tts_en": "door"
+  },
+  {
+    "id": 1142,
+    "es": "planeta",
+    "en": "planet",
+    "ruta_img": "planeta.png",
+    "tts_es": "planeta",
+    "tts_en": "planet"
+  },
+  {
+    "id": 1143,
+    "es": "pato",
+    "en": "duck",
+    "ruta_img": "pato.png",
+    "tts_es": "pato",
+    "tts_en": "duck"
+  },
+  {
+    "id": 1144,
+    "es": "paloma",
+    "en": "hen pigeon",
+    "ruta_img": "paloma.png",
+    "tts_es": "paloma",
+    "tts_en": "hen pigeon"
+  },
+  {
+    "id": 1145,
+    "es": "pulpo",
+    "en": "octopuses",
+    "ruta_img": "pulpo.png",
+    "tts_es": "pulpo",
+    "tts_en": "octopuses"
+  },
+  {
+    "id": 1146,
+    "es": "queso",
+    "en": "cheese",
+    "ruta_img": "queso.png",
+    "tts_es": "queso",
+    "tts_en": "cheese"
+  },
+  {
+    "id": 1147,
+    "es": "quetzal",
+    "en": "quetzal",
+    "ruta_img": "quetzal.png",
+    "tts_es": "quetzal",
+    "tts_en": "quetzal"
+  },
+  {
+    "id": 1148,
+    "es": "quinqué",
+    "en": "argand lamp",
+    "ruta_img": "quinque.png",
+    "tts_es": "quinqué",
+    "tts_en": "argand lamp"
+  },
+  {
+    "id": 1149,
+    "es": "rana",
+    "en": "frog",
+    "ruta_img": "rana.png",
+    "tts_es": "rana",
+    "tts_en": "frog"
+  },
+  {
+    "id": 1150,
+    "es": "ratón",
+    "en": "acute tox",
+    "ruta_img": "raton.png",
+    "tts_es": "ratón",
+    "tts_en": "acute tox"
+  },
+  {
+    "id": 1151,
+    "es": "robot",
+    "en": "robot",
+    "ruta_img": "robot.png",
+    "tts_es": "robot",
+    "tts_en": "robot"
+  },
+  {
+    "id": 1152,
+    "es": "roca",
+    "en": "rock",
+    "ruta_img": "roca.png",
+    "tts_es": "roca",
+    "tts_en": "rock"
+  },
+  {
+    "id": 1153,
+    "es": "rosa",
+    "en": "rose",
+    "ruta_img": "rosa.png",
+    "tts_es": "rosa",
+    "tts_en": "rose"
+  },
+  {
+    "id": 1154,
+    "es": "rayo",
+    "en": "lightning",
+    "ruta_img": "rayo.png",
+    "tts_es": "rayo",
+    "tts_en": "lightning"
+  },
+  {
+    "id": 1155,
+    "es": "regalo",
+    "en": "gift",
+    "ruta_img": "regalo.png",
+    "tts_es": "regalo",
+    "tts_en": "gift"
+  },
+  {
+    "id": 1156,
+    "es": "red",
+    "en": "network",
+    "ruta_img": "red.png",
+    "tts_es": "red",
+    "tts_en": "network"
+  },
+  {
+    "id": 1157,
+    "es": "río",
+    "en": "río (river)",
+    "ruta_img": "rio.png",
+    "tts_es": "río",
+    "tts_en": "río (river)"
+  },
+  {
+    "id": 1158,
+    "es": "rueda",
+    "en": "caster, castor",
+    "ruta_img": "rueda.png",
+    "tts_es": "rueda",
+    "tts_en": "caster, castor"
+  },
+  {
+    "id": 1159,
+    "es": "sandía",
+    "en": "watermelon",
+    "ruta_img": "sandia.png",
+    "tts_es": "sandía",
+    "tts_en": "watermelon"
+  },
+  {
+    "id": 1160,
+    "es": "sol",
+    "en": "sun",
+    "ruta_img": "sol.png",
+    "tts_es": "sol",
+    "tts_en": "sun"
+  },
+  {
+    "id": 1161,
+    "es": "silla",
+    "en": "chair",
+    "ruta_img": "silla.png",
+    "tts_es": "silla",
+    "tts_en": "chair"
+  },
+  {
+    "id": 1162,
+    "es": "serpiente",
+    "en": "mechanism for managing currency fluctuations",
+    "ruta_img": "serpiente.png",
+    "tts_es": "serpiente",
+    "tts_en": "mechanism for managing currency fluctuations"
+  },
+  {
+    "id": 1163,
+    "es": "sombrero",
+    "en": "hat",
+    "ruta_img": "sombrero.png",
+    "tts_es": "sombrero",
+    "tts_en": "hat"
+  },
+  {
+    "id": 1164,
+    "es": "sapo",
+    "en": "toad car part",
+    "ruta_img": "sapo.png",
+    "tts_es": "sapo",
+    "tts_en": "toad car part"
+  },
+  {
+    "id": 1165,
+    "es": "submarino",
+    "en": "submarine",
+    "ruta_img": "submarino.png",
+    "tts_es": "submarino",
+    "tts_en": "submarine"
+  },
+  {
+    "id": 1166,
+    "es": "soplar",
+    "en": "to blow",
+    "ruta_img": "soplar.png",
+    "tts_es": "soplar",
+    "tts_en": "to blow"
+  },
+  {
+    "id": 1167,
+    "es": "saco",
+    "en": "bag",
+    "ruta_img": "saco.png",
+    "tts_es": "saco",
+    "tts_en": "bag"
+  },
+  {
+    "id": 1168,
+    "es": "tigre",
+    "en": "tigre (tiger)",
+    "ruta_img": "tigre.png",
+    "tts_es": "tigre",
+    "tts_en": "tigre (tiger)"
+  },
+  {
+    "id": 1169,
+    "es": "tren",
+    "en": "train",
+    "ruta_img": "tren.png",
+    "tts_es": "tren",
+    "tts_en": "train"
+  },
+  {
+    "id": 1170,
+    "es": "tortuga",
+    "en": "turtle",
+    "ruta_img": "tortuga.png",
+    "tts_es": "tortuga",
+    "tts_en": "turtle"
+  },
+  {
+    "id": 1171,
+    "es": "taza",
+    "en": "stacked cup",
+    "ruta_img": "taza.png",
+    "tts_es": "taza",
+    "tts_en": "stacked cup"
+  },
+  {
+    "id": 1172,
+    "es": "tijeras",
+    "en": "scissors",
+    "ruta_img": "tijeras.png",
+    "tts_es": "tijeras",
+    "tts_en": "scissors"
+  },
+  {
+    "id": 1173,
+    "es": "tomate",
+    "en": "tomato",
+    "ruta_img": "tomate.png",
+    "tts_es": "tomate",
+    "tts_en": "tomato"
+  },
+  {
+    "id": 1174,
+    "es": "tubo",
+    "en": "side",
+    "ruta_img": "tubo.png",
+    "tts_es": "tubo",
+    "tts_en": "side"
+  },
+  {
+    "id": 1175,
+    "es": "tambor",
+    "en": "bull wheel, winding drum",
+    "ruta_img": "tambor.png",
+    "tts_es": "tambor",
+    "tts_en": "bull wheel, winding drum"
+  },
+  {
+    "id": 1176,
+    "es": "tiburón",
+    "en": "shark",
+    "ruta_img": "tiburon.png",
+    "tts_es": "tiburón",
+    "tts_en": "shark"
+  },
+  {
+    "id": 1177,
+    "es": "uva",
+    "en": "grape",
+    "ruta_img": "uva.png",
+    "tts_es": "uva",
+    "tts_en": "grape"
+  },
+  {
+    "id": 1178,
+    "es": "unicornio",
+    "en": "unicorn",
+    "ruta_img": "unicornio.png",
+    "tts_es": "unicornio",
+    "tts_en": "unicorn"
+  },
+  {
+    "id": 1179,
+    "es": "ukelele",
+    "en": "ukulele",
+    "ruta_img": "ukelele.png",
+    "tts_es": "ukelele",
+    "tts_en": "ukulele"
+  },
+  {
+    "id": 1180,
+    "es": "vaca",
+    "en": "vaca (cow)",
+    "ruta_img": "vaca.png",
+    "tts_es": "vaca",
+    "tts_en": "vaca (cow)"
+  },
+  {
+    "id": 1181,
+    "es": "volcán",
+    "en": "volcano",
+    "ruta_img": "volcan.png",
+    "tts_es": "volcán",
+    "tts_en": "volcano"
+  },
+  {
+    "id": 1182,
+    "es": "violín",
+    "en": "violin",
+    "ruta_img": "violin.png",
+    "tts_es": "violín",
+    "tts_en": "violin"
+  },
+  {
+    "id": 1183,
+    "es": "vela",
+    "en": "sail",
+    "ruta_img": "vela.png",
+    "tts_es": "vela",
+    "tts_en": "sail"
+  },
+  {
+    "id": 1184,
+    "es": "ventana",
+    "en": "window",
+    "ruta_img": "ventana.png",
+    "tts_es": "ventana",
+    "tts_en": "window"
+  },
+  {
+    "id": 1185,
+    "es": "vestido",
+    "en": "bee dress, bee suit, clothing",
+    "ruta_img": "vestido.png",
+    "tts_es": "vestido",
+    "tts_en": "bee dress, bee suit, clothing"
+  },
+  {
+    "id": 1186,
+    "es": "vaso",
+    "en": "glass",
+    "ruta_img": "vaso.png",
+    "tts_es": "vaso",
+    "tts_en": "glass"
+  },
+  {
+    "id": 1187,
+    "es": "volar",
+    "en": "flying",
+    "ruta_img": "volar.png",
+    "tts_es": "volar",
+    "tts_en": "flying"
+  },
+  {
+    "id": 1188,
+    "es": "waffle",
+    "en": "waffle",
+    "ruta_img": "waffle.png",
+    "tts_es": "waffle",
+    "tts_en": "waffle"
+  },
+  {
+    "id": 1189,
+    "es": "wonton",
+    "en": "wonton",
+    "ruta_img": "wonton.png",
+    "tts_es": "wonton",
+    "tts_en": "wonton"
+  },
+  {
+    "id": 1190,
+    "es": "xilófono",
+    "en": "xylophone",
+    "ruta_img": "xilofono.png",
+    "tts_es": "xilófono",
+    "tts_en": "xylophone"
+  },
+  {
+    "id": 1191,
+    "es": "Xochimilco",
+    "en": "Xochimilco",
+    "ruta_img": "xochimilco.png",
+    "tts_es": "Xochimilco",
+    "tts_en": "Xochimilco"
+  },
+  {
+    "id": 1192,
+    "es": "yoyo",
+    "en": "weedage",
+    "ruta_img": "yoyo.png",
+    "tts_es": "yoyo",
+    "tts_en": "weedage"
+  },
+  {
+    "id": 1193,
+    "es": "yate",
+    "en": "yacht",
+    "ruta_img": "yate.png",
+    "tts_es": "yate",
+    "tts_en": "yacht"
+  },
+  {
+    "id": 1194,
+    "es": "yegua",
+    "en": "mare",
+    "ruta_img": "yegua.png",
+    "tts_es": "yegua",
+    "tts_en": "mare"
+  },
+  {
+    "id": 1195,
+    "es": "zapato",
+    "en": "shoe",
+    "ruta_img": "zapato.png",
+    "tts_es": "zapato",
+    "tts_en": "shoe"
+  },
+  {
+    "id": 1196,
+    "es": "zorro",
+    "en": "fox",
+    "ruta_img": "zorro.png",
+    "tts_es": "zorro",
+    "tts_en": "fox"
+  },
+  {
+    "id": 1197,
+    "es": "zanahoria",
+    "en": "carrot",
+    "ruta_img": "zanahoria.png",
+    "tts_es": "zanahoria",
+    "tts_en": "carrot"
+  },
+  {
+    "id": 1198,
+    "es": "zoológico",
+    "en": "zoological",
+    "ruta_img": "zoologico.png",
+    "tts_es": "zoológico",
+    "tts_en": "zoological"
+  },
+  {
+    "id": 1199,
     "es": "rápido",
-    "en": "",
-    "archivo_es": "rapido.png",
-    "archivo_en": "rapido.png",
+    "en": "grade reducer",
+    "ruta_img": "rapido.png",
     "tts_es": "rápido",
-    "tts_en": ""
+    "tts_en": "grade reducer"
   },
   {
-    "id": 1398,
-    "arasaac_id": null,
+    "id": 1200,
     "es": "roja",
-    "en": "",
-    "archivo_es": "roja.png",
-    "archivo_en": "roja.png",
+    "en": "red",
+    "ruta_img": "roja.png",
     "tts_es": "roja",
-    "tts_en": ""
+    "tts_en": "red"
   },
   {
-    "id": 1399,
-    "arasaac_id": null,
+    "id": 1201,
     "es": "suky",
-    "en": "",
-    "archivo_es": "suky.png",
-    "archivo_en": "suky.png",
+    "en": "suky",
+    "ruta_img": "suky.png",
     "tts_es": "suky",
-    "tts_en": ""
+    "tts_en": "suky"
   },
   {
-    "id": 1400,
-    "arasaac_id": null,
+    "id": 1202,
     "es": "no",
-    "en": "",
-    "archivo_es": "no.png",
-    "archivo_en": "no.png",
+    "en": "no",
+    "ruta_img": "no.png",
     "tts_es": "no",
-    "tts_en": ""
+    "tts_en": "no"
   },
   {
-    "id": 1401,
-    "arasaac_id": null,
+    "id": 1203,
     "es": "tienes",
-    "en": "",
-    "archivo_es": "tienes.png",
-    "archivo_en": "tienes.png",
+    "en": "have",
+    "ruta_img": "tienes.png",
     "tts_es": "tienes",
-    "tts_en": ""
+    "tts_en": "have"
   },
   {
-    "id": 1402,
-    "arasaac_id": null,
+    "id": 1204,
     "es": "hambre",
-    "en": "",
-    "archivo_es": "hambre.png",
-    "archivo_en": "hambre.png",
+    "en": "famine",
+    "ruta_img": "hambre.png",
     "tts_es": "hambre",
-    "tts_en": ""
+    "tts_en": "famine"
   },
   {
-    "id": 1403,
-    "arasaac_id": null,
+    "id": 1205,
     "es": "daño",
-    "en": "",
-    "archivo_es": "dano.png",
-    "archivo_en": "dano.png",
+    "en": "harm",
+    "ruta_img": "dano.png",
     "tts_es": "daño",
-    "tts_en": ""
+    "tts_en": "harm"
   },
   {
-    "id": 1404,
-    "arasaac_id": null,
+    "id": 1206,
     "es": "sueño",
-    "en": "",
-    "archivo_es": "sueno.png",
-    "archivo_en": "sueno.png",
+    "en": "dream",
+    "ruta_img": "sueno.png",
     "tts_es": "sueño",
-    "tts_en": ""
+    "tts_en": "dream"
   },
   {
-    "id": 1405,
-    "arasaac_id": null,
+    "id": 1207,
     "es": "cielo",
-    "en": "",
-    "archivo_es": "cielo.png",
-    "archivo_en": "cielo.png",
+    "en": "state of the sky",
+    "ruta_img": "cielo.png",
     "tts_es": "cielo",
-    "tts_en": ""
+    "tts_en": "state of the sky"
   },
   {
-    "id": 1406,
-    "arasaac_id": null,
+    "id": 1208,
     "es": "duerme",
-    "en": "",
-    "archivo_es": "duerme.png",
-    "archivo_en": "duerme.png",
+    "en": "sleeping",
+    "ruta_img": "duerme.png",
     "tts_es": "duerme",
-    "tts_en": ""
+    "tts_en": "sleeping"
   },
   {
-    "id": 1407,
-    "arasaac_id": null,
+    "id": 1209,
     "es": "pío",
-    "en": "",
-    "archivo_es": "pio.png",
-    "archivo_en": "pio.png",
+    "en": "skewbald",
+    "ruta_img": "pio.png",
     "tts_es": "pío",
-    "tts_en": ""
+    "tts_en": "skewbald"
   },
   {
-    "id": 1408,
-    "arasaac_id": null,
+    "id": 1210,
     "es": "llorando",
-    "en": "",
-    "archivo_es": "llorando.png",
-    "archivo_en": "llorando.png",
+    "en": "in tears",
+    "ruta_img": "llorando.png",
     "tts_es": "llorando",
-    "tts_en": ""
+    "tts_en": "in tears"
   },
   {
-    "id": 1409,
-    "arasaac_id": null,
+    "id": 1211,
     "es": "semillas",
-    "en": "",
-    "archivo_es": "semillas.png",
-    "archivo_en": "semillas.png",
+    "en": "seed germ for botanical purposes",
+    "ruta_img": "semillas.png",
     "tts_es": "semillas",
-    "tts_en": ""
+    "tts_en": "seed germ for botanical purposes"
   },
   {
-    "id": 1410,
-    "arasaac_id": null,
+    "id": 1212,
     "es": "afuera",
-    "en": "",
-    "archivo_es": "afuera.png",
-    "archivo_en": "afuera.png",
-    "tts_es": "afuera",
-    "tts_en": ""
-  },
-  {
-    "id": 1411,
-    "arasaac_id": null,
-    "es": "burbujas",
-    "en": "",
-    "archivo_es": "burbujas.png",
-    "archivo_en": "burbujas.png",
-    "tts_es": "burbujas",
-    "tts_en": ""
-  },
-  {
-    "id": 1412,
-    "arasaac_id": null,
-    "es": "comer",
-    "en": "",
-    "archivo_es": "comer.png",
-    "archivo_en": "comer.png",
-    "tts_es": "comer",
-    "tts_en": ""
-  },
-  {
-    "id": 1413,
-    "arasaac_id": null,
-    "es": "dormir",
-    "en": "",
-    "archivo_es": "dormir.png",
-    "archivo_en": "dormir.png",
-    "tts_es": "dormir",
-    "tts_en": ""
-  },
-  {
-    "id": 1414,
-    "arasaac_id": null,
-    "es": "nosotros",
-    "en": "",
-    "archivo_es": "nosotros.png",
-    "archivo_en": "nosotros.png",
-    "tts_es": "nosotros",
-    "tts_en": ""
-  },
-  {
-    "id": 1415,
-    "arasaac_id": null,
-    "es": "curamos",
-    "en": "",
-    "archivo_es": "curamos.png",
-    "archivo_en": "curamos.png",
-    "tts_es": "curamos",
-    "tts_en": ""
-  },
-  {
-    "id": 1416,
-    "arasaac_id": null,
-    "es": "negro",
-    "en": "",
-    "archivo_es": "negro.png",
-    "archivo_en": "negro.png",
-    "tts_es": "negro",
-    "tts_en": ""
-  },
-  {
-    "id": 1417,
-    "arasaac_id": null,
-    "es": "",
-    "en": "sky",
-    "archivo_es": "sky.png",
-    "archivo_en": "sky.png",
-    "tts_es": "",
-    "tts_en": "sky"
-  },
-  {
-    "id": 1418,
-    "arasaac_id": null,
-    "es": "",
     "en": "outside",
-    "archivo_es": "outside.png",
-    "archivo_en": "outside.png",
-    "tts_es": "",
+    "ruta_img": "afuera.png",
+    "tts_es": "afuera",
     "tts_en": "outside"
   },
   {
-    "id": 1419,
-    "arasaac_id": null,
+    "id": 1213,
+    "es": "burbujas",
+    "en": "bubbles",
+    "ruta_img": "burbujas.png",
+    "tts_es": "burbujas",
+    "tts_en": "bubbles"
+  },
+  {
+    "id": 1214,
+    "es": "comer",
+    "en": "eat",
+    "ruta_img": "comer.png",
+    "tts_es": "comer",
+    "tts_en": "eat"
+  },
+  {
+    "id": 1215,
+    "es": "dormir",
+    "en": "sleeping",
+    "ruta_img": "dormir.png",
+    "tts_es": "dormir",
+    "tts_en": "sleeping"
+  },
+  {
+    "id": 1216,
+    "es": "nosotros",
+    "en": "us",
+    "ruta_img": "nosotros.png",
+    "tts_es": "nosotros",
+    "tts_en": "us"
+  },
+  {
+    "id": 1217,
+    "es": "curamos",
+    "en": "we cure",
+    "ruta_img": "curamos.png",
+    "tts_es": "curamos",
+    "tts_en": "we cure"
+  },
+  {
+    "id": 1218,
+    "es": "negro",
+    "en": "black",
+    "ruta_img": "negro.png",
+    "tts_es": "negro",
+    "tts_en": "black"
+  },
+  {
+    "id": 1219,
     "es": "águila",
-    "en": "",
-    "archivo_es": "aguila.png",
-    "archivo_en": "aguila.png",
+    "en": "eagle",
+    "ruta_img": "aguila.png",
     "tts_es": "águila",
-    "tts_en": ""
+    "tts_en": "eagle"
+  },
+  {
+    "id": 1220,
+    "es": "mango",
+    "en": "handle",
+    "ruta_img": "mango.png",
+    "tts_es": "mango",
+    "tts_en": "handle"
+  },
+  {
+    "id": 1221,
+    "es": "pera",
+    "en": "pear",
+    "ruta_img": "pera.png",
+    "tts_es": "pera",
+    "tts_en": "pear"
+  },
+  {
+    "id": 1222,
+    "es": "plátano",
+    "en": "banana",
+    "ruta_img": "platano.png",
+    "tts_es": "plátano",
+    "tts_en": "banana"
+  },
+  {
+    "id": 1223,
+    "es": "melón",
+    "en": "melon",
+    "ruta_img": "melon.png",
+    "tts_es": "melón",
+    "tts_en": "melon"
+  },
+  {
+    "id": 1224,
+    "es": "cereza",
+    "en": "cherry",
+    "ruta_img": "cereza.png",
+    "tts_es": "cereza",
+    "tts_en": "cherry"
+  },
+  {
+    "id": 1225,
+    "es": "durazno",
+    "en": "amygdalus persica",
+    "ruta_img": "durazno.png",
+    "tts_es": "durazno",
+    "tts_en": "amygdalus persica"
+  },
+  {
+    "id": 1226,
+    "es": "frambuesa",
+    "en": "european red raspberry, raspberry",
+    "ruta_img": "frambuesa.png",
+    "tts_es": "frambuesa",
+    "tts_en": "european red raspberry, raspberry"
+  },
+  {
+    "id": 1227,
+    "es": "mora",
+    "en": "mulberry",
+    "ruta_img": "mora.png",
+    "tts_es": "mora",
+    "tts_en": "mulberry"
+  },
+  {
+    "id": 1228,
+    "es": "coco",
+    "en": "grape flea beetle ( haltica ampelophaga",
+    "ruta_img": "coco.png",
+    "tts_es": "coco",
+    "tts_en": "grape flea beetle ( haltica ampelophaga"
+  },
+  {
+    "id": 1229,
+    "es": "papaya",
+    "en": "papaya",
+    "ruta_img": "papaya.png",
+    "tts_es": "papaya",
+    "tts_en": "papaya"
+  },
+  {
+    "id": 1230,
+    "es": "guayaba",
+    "en": "guava",
+    "ruta_img": "guayaba.png",
+    "tts_es": "guayaba",
+    "tts_en": "guava"
+  },
+  {
+    "id": 1231,
+    "es": "maracuyá",
+    "en": "yellow passion flower",
+    "ruta_img": "maracuya.png",
+    "tts_es": "maracuyá",
+    "tts_en": "yellow passion flower"
+  },
+  {
+    "id": 1232,
+    "es": "higo",
+    "en": "fig",
+    "ruta_img": "higo.png",
+    "tts_es": "higo",
+    "tts_en": "fig"
+  },
+  {
+    "id": 1233,
+    "es": "ciruela",
+    "en": "plum",
+    "ruta_img": "ciruela.png",
+    "tts_es": "ciruela",
+    "tts_en": "plum"
+  },
+  {
+    "id": 1234,
+    "es": "mandarina",
+    "en": "tangerine",
+    "ruta_img": "mandarina.png",
+    "tts_es": "mandarina",
+    "tts_en": "tangerine"
+  },
+  {
+    "id": 1235,
+    "es": "aguacate",
+    "en": "avocado",
+    "ruta_img": "aguacate.png",
+    "tts_es": "aguacate",
+    "tts_en": "avocado"
+  },
+  {
+    "id": 1236,
+    "es": "autobús",
+    "en": "bus",
+    "ruta_img": "autobus.png",
+    "tts_es": "autobús",
+    "tts_en": "bus"
+  },
+  {
+    "id": 1237,
+    "es": "moto",
+    "en": "motorcycle",
+    "ruta_img": "moto.png",
+    "tts_es": "moto",
+    "tts_en": "motorcycle"
+  },
+  {
+    "id": 1238,
+    "es": "taxi",
+    "en": "taxi (taxi)",
+    "ruta_img": "taxi.png",
+    "tts_es": "taxi",
+    "tts_en": "taxi (taxi)"
+  },
+  {
+    "id": 1239,
+    "es": "ambulancia",
+    "en": "ambulance",
+    "ruta_img": "ambulancia.png",
+    "tts_es": "ambulancia",
+    "tts_en": "ambulance"
+  },
+  {
+    "id": 1240,
+    "es": "bomberos",
+    "en": "firemen",
+    "ruta_img": "bomberos.png",
+    "tts_es": "bomberos",
+    "tts_en": "firemen"
+  },
+  {
+    "id": 1241,
+    "es": "patrulla",
+    "en": "patrol",
+    "ruta_img": "patrulla.png",
+    "tts_es": "patrulla",
+    "tts_en": "patrol"
+  },
+  {
+    "id": 1242,
+    "es": "tractor",
+    "en": "tractor (tractor)",
+    "ruta_img": "tractor.png",
+    "tts_es": "tractor",
+    "tts_en": "tractor (tractor)"
+  },
+  {
+    "id": 1243,
+    "es": "excavadora",
+    "en": "excavator",
+    "ruta_img": "excavadora.png",
+    "tts_es": "excavadora",
+    "tts_en": "excavator"
+  },
+  {
+    "id": 1244,
+    "es": "patineta",
+    "en": "scooter",
+    "ruta_img": "patineta.png",
+    "tts_es": "patineta",
+    "tts_en": "scooter"
+  },
+  {
+    "id": 1245,
+    "es": "canoa",
+    "en": "canoe",
+    "ruta_img": "canoa.png",
+    "tts_es": "canoa",
+    "tts_en": "canoe"
+  },
+  {
+    "id": 1246,
+    "es": "velero",
+    "en": "sailplane",
+    "ruta_img": "velero.png",
+    "tts_es": "velero",
+    "tts_en": "sailplane"
+  },
+  {
+    "id": 1247,
+    "es": "tranvía",
+    "en": "tramway",
+    "ruta_img": "tranvia.png",
+    "tts_es": "tranvía",
+    "tts_en": "tramway"
+  },
+  {
+    "id": 1248,
+    "es": "metro",
+    "en": "meter",
+    "ruta_img": "metro.png",
+    "tts_es": "metro",
+    "tts_en": "meter"
+  },
+  {
+    "id": 1249,
+    "es": "teleférico",
+    "en": "aerial cableway, aerial ropeway, cable railway, cableway, teleferic, telpher railway",
+    "ruta_img": "teleferico.png",
+    "tts_es": "teleférico",
+    "tts_en": "aerial cableway, aerial ropeway, cable railway, cableway, teleferic, telpher railway"
+  },
+  {
+    "id": 1250,
+    "es": "pan",
+    "en": "bread",
+    "ruta_img": "pan.png",
+    "tts_es": "pan",
+    "tts_en": "bread"
+  },
+  {
+    "id": 1251,
+    "es": "pizza",
+    "en": "pizza",
+    "ruta_img": "pizza.png",
+    "tts_es": "pizza",
+    "tts_en": "pizza"
+  },
+  {
+    "id": 1252,
+    "es": "sopa",
+    "en": "soup",
+    "ruta_img": "sopa.png",
+    "tts_es": "sopa",
+    "tts_en": "soup"
+  },
+  {
+    "id": 1253,
+    "es": "arroz",
+    "en": "rice",
+    "ruta_img": "arroz.png",
+    "tts_es": "arroz",
+    "tts_en": "rice"
+  },
+  {
+    "id": 1254,
+    "es": "pasta",
+    "en": "pasta",
+    "ruta_img": "pasta.png",
+    "tts_es": "pasta",
+    "tts_en": "pasta"
+  },
+  {
+    "id": 1255,
+    "es": "ensalada",
+    "en": "salad",
+    "ruta_img": "ensalada.png",
+    "tts_es": "ensalada",
+    "tts_en": "salad"
+  },
+  {
+    "id": 1256,
+    "es": "hamburguesa",
+    "en": "hamburger",
+    "ruta_img": "hamburguesa.png",
+    "tts_es": "hamburguesa",
+    "tts_en": "hamburger"
+  },
+  {
+    "id": 1257,
+    "es": "sandwich",
+    "en": "sandwich",
+    "ruta_img": "sandwich.png",
+    "tts_es": "sandwich",
+    "tts_en": "sandwich"
+  },
+  {
+    "id": 1258,
+    "es": "yogur",
+    "en": "yogurt",
+    "ruta_img": "yogur.png",
+    "tts_es": "yogur",
+    "tts_en": "yogurt"
+  },
+  {
+    "id": 1259,
+    "es": "galleta",
+    "en": "biscuit",
+    "ruta_img": "galleta.png",
+    "tts_es": "galleta",
+    "tts_en": "biscuit"
+  },
+  {
+    "id": 1260,
+    "es": "pastel",
+    "en": "cake",
+    "ruta_img": "pastel.png",
+    "tts_es": "pastel",
+    "tts_en": "cake"
+  },
+  {
+    "id": 1261,
+    "es": "chocolate",
+    "en": "chocolate",
+    "ruta_img": "chocolate.png",
+    "tts_es": "chocolate",
+    "tts_en": "chocolate"
+  },
+  {
+    "id": 1262,
+    "es": "maíz",
+    "en": "corn, maize",
+    "ruta_img": "maiz.png",
+    "tts_es": "maíz",
+    "tts_en": "corn, maize"
+  },
+  {
+    "id": 1263,
+    "es": "frijoles",
+    "en": "kidney beans",
+    "ruta_img": "frijoles.png",
+    "tts_es": "frijoles",
+    "tts_en": "kidney beans"
+  },
+  {
+    "id": 1264,
+    "es": "pollo",
+    "en": "chicken",
+    "ruta_img": "pollo.png",
+    "tts_es": "pollo",
+    "tts_en": "chicken"
+  },
+  {
+    "id": 1265,
+    "es": "pescado",
+    "en": "products",
+    "ruta_img": "pescado.png",
+    "tts_es": "pescado",
+    "tts_en": "products"
+  },
+  {
+    "id": 1266,
+    "es": "camiseta",
+    "en": "t-shirt",
+    "ruta_img": "camiseta.png",
+    "tts_es": "camiseta",
+    "tts_en": "t-shirt"
+  },
+  {
+    "id": 1267,
+    "es": "pantalón",
+    "en": "trousers",
+    "ruta_img": "pantalon.png",
+    "tts_es": "pantalón",
+    "tts_en": "trousers"
+  },
+  {
+    "id": 1268,
+    "es": "falda",
+    "en": "falda (skirt)",
+    "ruta_img": "falda.png",
+    "tts_es": "falda",
+    "tts_en": "falda (skirt)"
+  },
+  {
+    "id": 1269,
+    "es": "zapatos",
+    "en": "shoes",
+    "ruta_img": "zapatos.png",
+    "tts_es": "zapatos",
+    "tts_en": "shoes"
+  },
+  {
+    "id": 1270,
+    "es": "calcetines",
+    "en": "socks",
+    "ruta_img": "calcetines.png",
+    "tts_es": "calcetines",
+    "tts_en": "socks"
+  },
+  {
+    "id": 1271,
+    "es": "abrigo",
+    "en": "abrigo (coat)",
+    "ruta_img": "abrigo.png",
+    "tts_es": "abrigo",
+    "tts_en": "abrigo (coat)"
+  },
+  {
+    "id": 1272,
+    "es": "bufanda",
+    "en": "muffler",
+    "ruta_img": "bufanda.png",
+    "tts_es": "bufanda",
+    "tts_en": "muffler"
+  },
+  {
+    "id": 1273,
+    "es": "guantes",
+    "en": "protective",
+    "ruta_img": "guantes.png",
+    "tts_es": "guantes",
+    "tts_en": "protective"
+  },
+  {
+    "id": 1274,
+    "es": "pijama",
+    "en": "pyjamas",
+    "ruta_img": "pijama.png",
+    "tts_es": "pijama",
+    "tts_en": "pyjamas"
+  },
+  {
+    "id": 1275,
+    "es": "shorts",
+    "en": "shorts",
+    "ruta_img": "shorts.png",
+    "tts_es": "shorts",
+    "tts_en": "shorts"
+  },
+  {
+    "id": 1276,
+    "es": "chaleco",
+    "en": "vest",
+    "ruta_img": "chaleco.png",
+    "tts_es": "chaleco",
+    "tts_en": "vest"
+  },
+  {
+    "id": 1277,
+    "es": "sudadera",
+    "en": "sweatshirt",
+    "ruta_img": "sudadera.png",
+    "tts_es": "sudadera",
+    "tts_en": "sweatshirt"
+  },
+  {
+    "id": 1278,
+    "es": "cinturón",
+    "en": "loop belt",
+    "ruta_img": "cinturon.png",
+    "tts_es": "cinturón",
+    "tts_en": "loop belt"
+  },
+  {
+    "id": 1279,
+    "es": "bolsa",
+    "en": "pouch",
+    "ruta_img": "bolsa.png",
+    "tts_es": "bolsa",
+    "tts_en": "pouch"
+  },
+  {
+    "id": 1280,
+    "es": "sandalias",
+    "en": "sandals",
+    "ruta_img": "sandalias.png",
+    "tts_es": "sandalias",
+    "tts_en": "sandals"
+  },
+  {
+    "id": 1281,
+    "es": "tenis",
+    "en": "tennis",
+    "ruta_img": "tenis.png",
+    "tts_es": "tenis",
+    "tts_en": "tennis"
+  },
+  {
+    "id": 1282,
+    "es": "corbata",
+    "en": "necktie",
+    "ruta_img": "corbata.png",
+    "tts_es": "corbata",
+    "tts_en": "necktie"
+  },
+  {
+    "id": 1283,
+    "es": "delantal",
+    "en": "apron",
+    "ruta_img": "delantal.png",
+    "tts_es": "delantal",
+    "tts_en": "apron"
+  },
+  {
+    "id": 1284,
+    "es": "bañador",
+    "en": "swimwear",
+    "ruta_img": "banador.png",
+    "tts_es": "bañador",
+    "tts_en": "swimwear"
+  },
+  {
+    "id": 1285,
+    "es": "rojo",
+    "en": "red",
+    "ruta_img": "rojo.png",
+    "tts_es": "rojo",
+    "tts_en": "red"
+  },
+  {
+    "id": 1286,
+    "es": "azul",
+    "en": "blue",
+    "ruta_img": "azul.png",
+    "tts_es": "azul",
+    "tts_en": "blue"
+  },
+  {
+    "id": 1287,
+    "es": "amarillo",
+    "en": "yellow",
+    "ruta_img": "amarillo.png",
+    "tts_es": "amarillo",
+    "tts_en": "yellow"
+  },
+  {
+    "id": 1288,
+    "es": "verde",
+    "en": "green",
+    "ruta_img": "verde.png",
+    "tts_es": "verde",
+    "tts_en": "green"
+  },
+  {
+    "id": 1289,
+    "es": "morado",
+    "en": "purple",
+    "ruta_img": "morado.png",
+    "tts_es": "morado",
+    "tts_en": "purple"
+  },
+  {
+    "id": 1290,
+    "es": "marrón",
+    "en": "brown",
+    "ruta_img": "marron.png",
+    "tts_es": "marrón",
+    "tts_en": "brown"
+  },
+  {
+    "id": 1291,
+    "es": "blanco",
+    "en": "white",
+    "ruta_img": "blanco.png",
+    "tts_es": "blanco",
+    "tts_en": "white"
+  },
+  {
+    "id": 1292,
+    "es": "gris",
+    "en": "grey",
+    "ruta_img": "gris.png",
+    "tts_es": "gris",
+    "tts_en": "grey"
+  },
+  {
+    "id": 1293,
+    "es": "turquesa",
+    "en": "teal\"",
+    "ruta_img": "turquesa.png",
+    "tts_es": "turquesa",
+    "tts_en": "teal\""
+  },
+  {
+    "id": 1294,
+    "es": "dorado",
+    "en": "gold  golden",
+    "ruta_img": "dorado.png",
+    "tts_es": "dorado",
+    "tts_en": "gold  golden"
+  },
+  {
+    "id": 1295,
+    "es": "plateado",
+    "en": "silver",
+    "ruta_img": "plateado.png",
+    "tts_es": "plateado",
+    "tts_en": "silver"
+  },
+  {
+    "id": 1296,
+    "es": "beige",
+    "en": "beige",
+    "ruta_img": "beige.png",
+    "tts_es": "beige",
+    "tts_en": "beige"
+  },
+  {
+    "id": 1297,
+    "es": "violeta",
+    "en": "violet",
+    "ruta_img": "violeta.png",
+    "tts_es": "violeta",
+    "tts_en": "violet"
+  },
+  {
+    "id": 1298,
+    "es": "celeste",
+    "en": "light blue",
+    "ruta_img": "celeste.png",
+    "tts_es": "celeste",
+    "tts_en": "light blue"
+  },
+  {
+    "id": 1299,
+    "es": "magenta",
+    "en": "magenta",
+    "ruta_img": "magenta.png",
+    "tts_es": "magenta",
+    "tts_en": "magenta"
+  },
+  {
+    "id": 1300,
+    "es": "oliva",
+    "en": "olive",
+    "ruta_img": "oliva.png",
+    "tts_es": "oliva",
+    "tts_en": "olive"
+  },
+  {
+    "id": 1301,
+    "es": "coral",
+    "en": "choral",
+    "ruta_img": "coral.png",
+    "tts_es": "coral",
+    "tts_en": "choral"
+  },
+  {
+    "id": 1302,
+    "es": "índigo",
+    "en": "indigo",
+    "ruta_img": "indigo.png",
+    "tts_es": "índigo",
+    "tts_en": "indigo"
+  },
+  {
+    "id": 1303,
+    "es": "fucsia",
+    "en": "fushia",
+    "ruta_img": "fucsia.png",
+    "tts_es": "fucsia",
+    "tts_en": "fushia"
+  },
+  {
+    "id": 1304,
+    "es": "lima",
+    "en": "shaper",
+    "ruta_img": "lima.png",
+    "tts_es": "lima",
+    "tts_en": "shaper"
+  },
+  {
+    "id": 1305,
+    "es": "ocre",
+    "en": "ochre",
+    "ruta_img": "ocre.png",
+    "tts_es": "ocre",
+    "tts_en": "ochre"
+  },
+  {
+    "id": 1306,
+    "es": "correr",
+    "en": "run",
+    "ruta_img": "correr.png",
+    "tts_es": "correr",
+    "tts_en": "run"
+  },
+  {
+    "id": 1307,
+    "es": "saltar",
+    "en": "jump.",
+    "ruta_img": "saltar.png",
+    "tts_es": "saltar",
+    "tts_en": "jump."
+  },
+  {
+    "id": 1308,
+    "es": "beber",
+    "en": "drinking",
+    "ruta_img": "beber.png",
+    "tts_es": "beber",
+    "tts_en": "drinking"
+  },
+  {
+    "id": 1309,
+    "es": "jugar",
+    "en": "play",
+    "ruta_img": "jugar.png",
+    "tts_es": "jugar",
+    "tts_en": "play"
+  },
+  {
+    "id": 1310,
+    "es": "cantar",
+    "en": "singing,",
+    "ruta_img": "cantar.png",
+    "tts_es": "cantar",
+    "tts_en": "singing,"
+  },
+  {
+    "id": 1311,
+    "es": "bailar",
+    "en": "bailar (dancing)",
+    "ruta_img": "bailar.png",
+    "tts_es": "bailar",
+    "tts_en": "bailar (dancing)"
+  },
+  {
+    "id": 1312,
+    "es": "leer",
+    "en": "reading",
+    "ruta_img": "leer.png",
+    "tts_es": "leer",
+    "tts_en": "reading"
+  },
+  {
+    "id": 1313,
+    "es": "dibujar",
+    "en": "draw a picture",
+    "ruta_img": "dibujar.png",
+    "tts_es": "dibujar",
+    "tts_en": "draw a picture"
+  },
+  {
+    "id": 1314,
+    "es": "pintar",
+    "en": "painting",
+    "ruta_img": "pintar.png",
+    "tts_es": "pintar",
+    "tts_en": "painting"
+  },
+  {
+    "id": 1315,
+    "es": "escribir",
+    "en": "write",
+    "ruta_img": "escribir.png",
+    "tts_es": "escribir",
+    "tts_en": "write"
+  },
+  {
+    "id": 1316,
+    "es": "llorar",
+    "en": "crying",
+    "ruta_img": "llorar.png",
+    "tts_es": "llorar",
+    "tts_en": "crying"
+  },
+  {
+    "id": 1317,
+    "es": "reír",
+    "en": "laughing",
+    "ruta_img": "reir.png",
+    "tts_es": "reír",
+    "tts_en": "laughing"
+  },
+  {
+    "id": 1318,
+    "es": "abrazar",
+    "en": "hug",
+    "ruta_img": "abrazar.png",
+    "tts_es": "abrazar",
+    "tts_en": "hug"
+  },
+  {
+    "id": 1319,
+    "es": "besar",
+    "en": "kiss you",
+    "ruta_img": "besar.png",
+    "tts_es": "besar",
+    "tts_en": "kiss you"
+  },
+  {
+    "id": 1320,
+    "es": "caminar",
+    "en": "walking",
+    "ruta_img": "caminar.png",
+    "tts_es": "caminar",
+    "tts_en": "walking"
+  },
+  {
+    "id": 1321,
+    "es": "nadar",
+    "en": "swim",
+    "ruta_img": "nadar.png",
+    "tts_es": "nadar",
+    "tts_en": "swim"
+  },
+  {
+    "id": 1322,
+    "es": "trepar",
+    "en": "climb",
+    "ruta_img": "trepar.png",
+    "tts_es": "trepar",
+    "tts_en": "climb"
+  },
+  {
+    "id": 1323,
+    "es": "empujar",
+    "en": "push",
+    "ruta_img": "empujar.png",
+    "tts_es": "empujar",
+    "tts_en": "push"
+  },
+  {
+    "id": 1324,
+    "es": "jalar",
+    "en": "pull",
+    "ruta_img": "jalar.png",
+    "tts_es": "jalar",
+    "tts_en": "pull"
+  },
+  {
+    "id": 1325,
+    "es": "abrir",
+    "en": "opening",
+    "ruta_img": "abrir.png",
+    "tts_es": "abrir",
+    "tts_en": "opening"
+  },
+  {
+    "id": 1326,
+    "es": "cerrar",
+    "en": "close",
+    "ruta_img": "cerrar.png",
+    "tts_es": "cerrar",
+    "tts_en": "close"
+  },
+  {
+    "id": 1327,
+    "es": "feliz",
+    "en": "happy",
+    "ruta_img": "feliz.png",
+    "tts_es": "feliz",
+    "tts_en": "happy"
+  },
+  {
+    "id": 1328,
+    "es": "triste",
+    "en": "dreary",
+    "ruta_img": "triste.png",
+    "tts_es": "triste",
+    "tts_en": "dreary"
+  },
+  {
+    "id": 1329,
+    "es": "enojado",
+    "en": "angry",
+    "ruta_img": "enojado.png",
+    "tts_es": "enojado",
+    "tts_en": "angry"
+  },
+  {
+    "id": 1330,
+    "es": "asustado",
+    "en": "afraid",
+    "ruta_img": "asustado.png",
+    "tts_es": "asustado",
+    "tts_en": "afraid"
+  },
+  {
+    "id": 1331,
+    "es": "sorprendido",
+    "en": "surprised",
+    "ruta_img": "sorprendido.png",
+    "tts_es": "sorprendido",
+    "tts_en": "surprised"
+  },
+  {
+    "id": 1332,
+    "es": "aburrido",
+    "en": "bored",
+    "ruta_img": "aburrido.png",
+    "tts_es": "aburrido",
+    "tts_en": "bored"
+  },
+  {
+    "id": 1333,
+    "es": "emocionado",
+    "en": "thrilled",
+    "ruta_img": "emocionado.png",
+    "tts_es": "emocionado",
+    "tts_en": "thrilled"
+  },
+  {
+    "id": 1334,
+    "es": "tranquilo",
+    "en": "tranquil",
+    "ruta_img": "tranquilo.png",
+    "tts_es": "tranquilo",
+    "tts_en": "tranquil"
+  },
+  {
+    "id": 1335,
+    "es": "cansado",
+    "en": "tired",
+    "ruta_img": "cansado.png",
+    "tts_es": "cansado",
+    "tts_en": "tired"
+  },
+  {
+    "id": 1336,
+    "es": "contento",
+    "en": "glad",
+    "ruta_img": "contento.png",
+    "tts_es": "contento",
+    "tts_en": "glad"
+  },
+  {
+    "id": 1337,
+    "es": "nervioso",
+    "en": "nervous",
+    "ruta_img": "nervioso.png",
+    "tts_es": "nervioso",
+    "tts_en": "nervous"
+  },
+  {
+    "id": 1338,
+    "es": "orgulloso",
+    "en": "proud",
+    "ruta_img": "orgulloso.png",
+    "tts_es": "orgulloso",
+    "tts_en": "proud"
+  },
+  {
+    "id": 1339,
+    "es": "celoso",
+    "en": "jealous",
+    "ruta_img": "celoso.png",
+    "tts_es": "celoso",
+    "tts_en": "jealous"
+  },
+  {
+    "id": 1340,
+    "es": "avergonzado",
+    "en": "sheepish",
+    "ruta_img": "avergonzado.png",
+    "tts_es": "avergonzado",
+    "tts_en": "sheepish"
+  },
+  {
+    "id": 1341,
+    "es": "confundido",
+    "en": "confused",
+    "ruta_img": "confundido.png",
+    "tts_es": "confundido",
+    "tts_en": "confused"
+  },
+  {
+    "id": 1342,
+    "es": "enamorado",
+    "en": "lovesick",
+    "ruta_img": "enamorado.png",
+    "tts_es": "enamorado",
+    "tts_en": "lovesick"
+  },
+  {
+    "id": 1343,
+    "es": "asqueado",
+    "en": "<g id=\"1\"> </g><g id=\"2\">disgusted</g>",
+    "ruta_img": "asqueado.png",
+    "tts_es": "asqueado",
+    "tts_en": "<g id=\"1\"> </g><g id=\"2\">disgusted</g>"
+  },
+  {
+    "id": 1344,
+    "es": "frustrado",
+    "en": "frustrated",
+    "ruta_img": "frustrado.png",
+    "tts_es": "frustrado",
+    "tts_en": "frustrated"
+  },
+  {
+    "id": 1345,
+    "es": "esperanzado",
+    "en": "hopeful",
+    "ruta_img": "esperanzado.png",
+    "tts_es": "esperanzado",
+    "tts_en": "hopeful"
+  },
+  {
+    "id": 1346,
+    "es": "solitario",
+    "en": "lonely",
+    "ruta_img": "solitario.png",
+    "tts_es": "solitario",
+    "tts_en": "lonely"
+  },
+  {
+    "id": 1347,
+    "es": "agradecido",
+    "en": "grateful",
+    "ruta_img": "agradecido.png",
+    "tts_es": "agradecido",
+    "tts_en": "grateful"
+  },
+  {
+    "id": 1348,
+    "es": "curioso",
+    "en": "curious",
+    "ruta_img": "curioso.png",
+    "tts_es": "curioso",
+    "tts_en": "curious"
+  },
+  {
+    "id": 1349,
+    "es": "valiente",
+    "en": "brave",
+    "ruta_img": "valiente.png",
+    "tts_es": "valiente",
+    "tts_en": "brave"
+  },
+  {
+    "id": 1350,
+    "es": "tímido",
+    "en": "shy",
+    "ruta_img": "timido.png",
+    "tts_es": "tímido",
+    "tts_en": "shy"
+  },
+  {
+    "id": 1351,
+    "es": "grande",
+    "en": "wide",
+    "ruta_img": "grande.png",
+    "tts_es": "grande",
+    "tts_en": "wide"
+  },
+  {
+    "id": 1352,
+    "es": "pequeño",
+    "en": "for me",
+    "ruta_img": "pequeno.png",
+    "tts_es": "pequeño",
+    "tts_en": "for me"
+  },
+  {
+    "id": 1353,
+    "es": "lento",
+    "en": "slow",
+    "ruta_img": "lento.png",
+    "tts_es": "lento",
+    "tts_en": "slow"
+  },
+  {
+    "id": 1354,
+    "es": "caliente",
+    "en": "hot",
+    "ruta_img": "caliente.png",
+    "tts_es": "caliente",
+    "tts_en": "hot"
+  },
+  {
+    "id": 1355,
+    "es": "frío",
+    "en": "cold",
+    "ruta_img": "frio.png",
+    "tts_es": "frío",
+    "tts_en": "cold"
+  },
+  {
+    "id": 1356,
+    "es": "suave",
+    "en": "body wash",
+    "ruta_img": "suave.png",
+    "tts_es": "suave",
+    "tts_en": "body wash"
+  },
+  {
+    "id": 1357,
+    "es": "duro",
+    "en": "hard",
+    "ruta_img": "duro.png",
+    "tts_es": "duro",
+    "tts_en": "hard"
+  },
+  {
+    "id": 1358,
+    "es": "limpio",
+    "en": "clr, clear",
+    "ruta_img": "limpio.png",
+    "tts_es": "limpio",
+    "tts_en": "clr, clear"
+  },
+  {
+    "id": 1359,
+    "es": "sucio",
+    "en": "average",
+    "ruta_img": "sucio.png",
+    "tts_es": "sucio",
+    "tts_en": "average"
+  },
+  {
+    "id": 1360,
+    "es": "nuevo",
+    "en": "new",
+    "ruta_img": "nuevo.png",
+    "tts_es": "nuevo",
+    "tts_en": "new"
+  },
+  {
+    "id": 1361,
+    "es": "viejo",
+    "en": "old!",
+    "ruta_img": "viejo.png",
+    "tts_es": "viejo",
+    "tts_en": "old!"
+  },
+  {
+    "id": 1362,
+    "es": "bonito",
+    "en": "nice",
+    "ruta_img": "bonito.png",
+    "tts_es": "bonito",
+    "tts_en": "nice"
+  },
+  {
+    "id": 1363,
+    "es": "feo",
+    "en": "ugly",
+    "ruta_img": "feo.png",
+    "tts_es": "feo",
+    "tts_en": "ugly"
+  },
+  {
+    "id": 1364,
+    "es": "fuerte",
+    "en": "strong",
+    "ruta_img": "fuerte.png",
+    "tts_es": "fuerte",
+    "tts_en": "strong"
+  },
+  {
+    "id": 1365,
+    "es": "débil",
+    "en": "weak",
+    "ruta_img": "debil.png",
+    "tts_es": "débil",
+    "tts_en": "weak"
+  },
+  {
+    "id": 1366,
+    "es": "alto",
+    "en": "tall",
+    "ruta_img": "alto.png",
+    "tts_es": "alto",
+    "tts_en": "tall"
+  },
+  {
+    "id": 1367,
+    "es": "bajo",
+    "en": "value",
+    "ruta_img": "bajo.png",
+    "tts_es": "bajo",
+    "tts_en": "value"
+  },
+  {
+    "id": 1368,
+    "es": "gordo",
+    "en": "fat",
+    "ruta_img": "gordo.png",
+    "tts_es": "gordo",
+    "tts_en": "fat"
+  },
+  {
+    "id": 1369,
+    "es": "delgado",
+    "en": "skinny",
+    "ruta_img": "delgado.png",
+    "tts_es": "delgado",
+    "tts_en": "skinny"
+  },
+  {
+    "id": 1370,
+    "es": "amargo",
+    "en": "bitter",
+    "ruta_img": "amargo.png",
+    "tts_es": "amargo",
+    "tts_en": "bitter"
+  },
+  {
+    "id": 1371,
+    "es": "brillante",
+    "en": "when held up to the light",
+    "ruta_img": "brillante.png",
+    "tts_es": "brillante",
+    "tts_en": "when held up to the light"
+  },
+  {
+    "id": 1372,
+    "es": "oscuro",
+    "en": "dark",
+    "ruta_img": "oscuro.png",
+    "tts_es": "oscuro",
+    "tts_en": "dark"
+  },
+  {
+    "id": 1373,
+    "es": "cabeza",
+    "en": "height",
+    "ruta_img": "cabeza.png",
+    "tts_es": "cabeza",
+    "tts_en": "height"
+  },
+  {
+    "id": 1374,
+    "es": "pelo",
+    "en": "animal hair",
+    "ruta_img": "pelo.png",
+    "tts_es": "pelo",
+    "tts_en": "animal hair"
+  },
+  {
+    "id": 1375,
+    "es": "cuello",
+    "en": "neck = stem + flare",
+    "ruta_img": "cuello.png",
+    "tts_es": "cuello",
+    "tts_en": "neck = stem + flare"
+  },
+  {
+    "id": 1376,
+    "es": "hombro",
+    "en": "shoulder",
+    "ruta_img": "hombro.png",
+    "tts_es": "hombro",
+    "tts_en": "shoulder"
+  },
+  {
+    "id": 1377,
+    "es": "brazo",
+    "en": "arm",
+    "ruta_img": "brazo.png",
+    "tts_es": "brazo",
+    "tts_en": "arm"
+  },
+  {
+    "id": 1378,
+    "es": "dedo",
+    "en": "individual air blast nozzle",
+    "ruta_img": "dedo.png",
+    "tts_es": "dedo",
+    "tts_en": "individual air blast nozzle"
+  },
+  {
+    "id": 1379,
+    "es": "pecho",
+    "en": "breast",
+    "ruta_img": "pecho.png",
+    "tts_es": "pecho",
+    "tts_en": "breast"
+  },
+  {
+    "id": 1380,
+    "es": "barriga",
+    "en": "belly",
+    "ruta_img": "barriga.png",
+    "tts_es": "barriga",
+    "tts_en": "belly"
+  },
+  {
+    "id": 1381,
+    "es": "espalda",
+    "en": "back",
+    "ruta_img": "espalda.png",
+    "tts_es": "espalda",
+    "tts_en": "back"
+  },
+  {
+    "id": 1382,
+    "es": "pierna",
+    "en": "height",
+    "ruta_img": "pierna.png",
+    "tts_es": "pierna",
+    "tts_en": "height"
+  },
+  {
+    "id": 1383,
+    "es": "rodilla",
+    "en": "knee",
+    "ruta_img": "rodilla.png",
+    "tts_es": "rodilla",
+    "tts_en": "knee"
+  },
+  {
+    "id": 1384,
+    "es": "pie",
+    "en": "pie (foot)",
+    "ruta_img": "pie.png",
+    "tts_es": "pie",
+    "tts_en": "pie (foot)"
+  },
+  {
+    "id": 1385,
+    "es": "talón",
+    "en": "back, pole, poll",
+    "ruta_img": "talon.png",
+    "tts_es": "talón",
+    "tts_en": "back, pole, poll"
+  },
+  {
+    "id": 1386,
+    "es": "uña",
+    "en": "nail",
+    "ruta_img": "una.png",
+    "tts_es": "uña",
+    "tts_en": "nail"
+  },
+  {
+    "id": 1387,
+    "es": "ceja",
+    "en": "eyebrow",
+    "ruta_img": "ceja.png",
+    "tts_es": "ceja",
+    "tts_en": "eyebrow"
+  },
+  {
+    "id": 1388,
+    "es": "mejilla",
+    "en": "bucca, cheek, mala",
+    "ruta_img": "mejilla.png",
+    "tts_es": "mejilla",
+    "tts_en": "bucca, cheek, mala"
+  },
+  {
+    "id": 1389,
+    "es": "barbilla",
+    "en": "chin",
+    "ruta_img": "barbilla.png",
+    "tts_es": "barbilla",
+    "tts_en": "chin"
+  },
+  {
+    "id": 1390,
+    "es": "codo",
+    "en": "elbow",
+    "ruta_img": "codo.png",
+    "tts_es": "codo",
+    "tts_en": "elbow"
+  },
+  {
+    "id": 1391,
+    "es": "muñeca",
+    "en": "doll",
+    "ruta_img": "muneca.png",
+    "tts_es": "muñeca",
+    "tts_en": "doll"
+  },
+  {
+    "id": 1392,
+    "es": "lluvia",
+    "en": "shower",
+    "ruta_img": "lluvia.png",
+    "tts_es": "lluvia",
+    "tts_en": "shower"
+  },
+  {
+    "id": 1393,
+    "es": "mar",
+    "en": "the sea.",
+    "ruta_img": "mar.png",
+    "tts_es": "mar",
+    "tts_en": "the sea."
+  },
+  {
+    "id": 1394,
+    "es": "desierto",
+    "en": "desert",
+    "ruta_img": "desierto.png",
+    "tts_es": "desierto",
+    "tts_en": "desert"
+  },
+  {
+    "id": 1395,
+    "es": "bosque",
+    "en": "forrest",
+    "ruta_img": "bosque.png",
+    "tts_es": "bosque",
+    "tts_en": "forrest"
+  },
+  {
+    "id": 1396,
+    "es": "piedra",
+    "en": "stone",
+    "ruta_img": "piedra.png",
+    "tts_es": "piedra",
+    "tts_en": "stone"
+  },
+  {
+    "id": 1397,
+    "es": "arena",
+    "en": "sand",
+    "ruta_img": "arena.png",
+    "tts_es": "arena",
+    "tts_en": "sand"
+  },
+  {
+    "id": 1398,
+    "es": "semilla",
+    "en": "seed",
+    "ruta_img": "semilla.png",
+    "tts_es": "semilla",
+    "tts_en": "seed"
+  },
+  {
+    "id": 1399,
+    "es": "raíz",
+    "en": "root",
+    "ruta_img": "raiz.png",
+    "tts_es": "raíz",
+    "tts_en": "root"
+  },
+  {
+    "id": 1400,
+    "es": "rama",
+    "en": "branch",
+    "ruta_img": "rama.png",
+    "tts_es": "rama",
+    "tts_en": "branch"
+  },
+  {
+    "id": 1401,
+    "es": "hierba",
+    "en": "grass",
+    "ruta_img": "hierba.png",
+    "tts_es": "hierba",
+    "tts_en": "grass"
+  },
+  {
+    "id": 1402,
+    "es": "musgo",
+    "en": "grass",
+    "ruta_img": "musgo.png",
+    "tts_es": "musgo",
+    "tts_en": "grass"
+  },
+  {
+    "id": 1403,
+    "es": "cascada",
+    "en": "cascade",
+    "ruta_img": "cascada.png",
+    "tts_es": "cascada",
+    "tts_en": "cascade"
+  },
+  {
+    "id": 1404,
+    "es": "arriba",
+    "en": "above",
+    "ruta_img": "arriba.png",
+    "tts_es": "arriba",
+    "tts_en": "above"
+  },
+  {
+    "id": 1405,
+    "es": "abajo",
+    "en": "below",
+    "ruta_img": "abajo.png",
+    "tts_es": "abajo",
+    "tts_en": "below"
+  },
+  {
+    "id": 1406,
+    "es": "dentro",
+    "en": "within",
+    "ruta_img": "dentro.png",
+    "tts_es": "dentro",
+    "tts_en": "within"
+  },
+  {
+    "id": 1407,
+    "es": "fuera",
+    "en": "it is",
+    "ruta_img": "fuera.png",
+    "tts_es": "fuera",
+    "tts_en": "it is"
+  },
+  {
+    "id": 1408,
+    "es": "antes",
+    "en": "before",
+    "ruta_img": "antes.png",
+    "tts_es": "antes",
+    "tts_en": "before"
+  },
+  {
+    "id": 1409,
+    "es": "después",
+    "en": "after",
+    "ruta_img": "despues.png",
+    "tts_es": "después",
+    "tts_en": "after"
+  },
+  {
+    "id": 1410,
+    "es": "cerca",
+    "en": "beside",
+    "ruta_img": "cerca.png",
+    "tts_es": "cerca",
+    "tts_en": "beside"
+  },
+  {
+    "id": 1411,
+    "es": "lejos",
+    "en": "away",
+    "ruta_img": "lejos.png",
+    "tts_es": "lejos",
+    "tts_en": "away"
+  },
+  {
+    "id": 1412,
+    "es": "encima",
+    "en": "over",
+    "ruta_img": "encima.png",
+    "tts_es": "encima",
+    "tts_en": "over"
+  },
+  {
+    "id": 1413,
+    "es": "debajo",
+    "en": "below",
+    "ruta_img": "debajo.png",
+    "tts_es": "debajo",
+    "tts_en": "below"
+  },
+  {
+    "id": 1414,
+    "es": "delante",
+    "en": "front",
+    "ruta_img": "delante.png",
+    "tts_es": "delante",
+    "tts_en": "front"
+  },
+  {
+    "id": 1415,
+    "es": "detrás",
+    "en": "behind",
+    "ruta_img": "detras.png",
+    "tts_es": "detrás",
+    "tts_en": "behind"
+  },
+  {
+    "id": 1416,
+    "es": "izquierda",
+    "en": "left",
+    "ruta_img": "izquierda.png",
+    "tts_es": "izquierda",
+    "tts_en": "left"
+  },
+  {
+    "id": 1417,
+    "es": "derecha",
+    "en": "right wing",
+    "ruta_img": "derecha.png",
+    "tts_es": "derecha",
+    "tts_en": "right wing"
+  },
+  {
+    "id": 1418,
+    "es": "noche",
+    "en": "night",
+    "ruta_img": "noche.png",
+    "tts_es": "noche",
+    "tts_en": "night"
+  },
+  {
+    "id": 1419,
+    "es": "entrada",
+    "en": "forecourt",
+    "ruta_img": "entrada.png",
+    "tts_es": "entrada",
+    "tts_en": "forecourt"
   },
   {
     "id": 1420,
-    "arasaac_id": null,
-    "es": "mango",
-    "en": "",
-    "archivo_es": "mango.png",
-    "archivo_en": "mango.png",
-    "tts_es": "mango",
-    "tts_en": ""
+    "es": "salida",
+    "en": "departure",
+    "ruta_img": "salida.png",
+    "tts_es": "salida",
+    "tts_en": "departure"
   },
   {
     "id": 1421,
-    "arasaac_id": null,
-    "es": "pera",
-    "en": "",
-    "archivo_es": "pera.png",
-    "archivo_en": "pera.png",
-    "tts_es": "pera",
-    "tts_en": ""
+    "es": "inicio",
+    "en": "start",
+    "ruta_img": "inicio.png",
+    "tts_es": "inicio",
+    "tts_en": "start"
   },
   {
     "id": 1422,
-    "arasaac_id": null,
-    "es": "plátano",
-    "en": "",
-    "archivo_es": "platano.png",
-    "archivo_en": "platano.png",
-    "tts_es": "plátano",
-    "tts_en": ""
+    "es": "fin",
+    "en": "the end",
+    "ruta_img": "fin.png",
+    "tts_es": "fin",
+    "tts_en": "the end"
   },
   {
     "id": 1423,
-    "arasaac_id": null,
-    "es": "melón",
-    "en": "",
-    "archivo_es": "melon.png",
-    "archivo_en": "melon.png",
-    "tts_es": "melón",
-    "tts_en": ""
+    "es": "abierto",
+    "en": "open",
+    "ruta_img": "abierto.png",
+    "tts_es": "abierto",
+    "tts_en": "open"
   },
   {
     "id": 1424,
-    "arasaac_id": null,
-    "es": "cereza",
-    "en": "",
-    "archivo_es": "cereza.png",
-    "archivo_en": "cereza.png",
-    "tts_es": "cereza",
-    "tts_en": ""
+    "es": "cerrado",
+    "en": "closed",
+    "ruta_img": "cerrado.png",
+    "tts_es": "cerrado",
+    "tts_en": "closed"
   },
   {
     "id": 1425,
-    "arasaac_id": null,
-    "es": "durazno",
-    "en": "",
-    "archivo_es": "durazno.png",
-    "archivo_en": "durazno.png",
-    "tts_es": "durazno",
-    "tts_en": ""
+    "es": "lleno",
+    "en": "plein",
+    "ruta_img": "lleno.png",
+    "tts_es": "lleno",
+    "tts_en": "plein"
   },
   {
     "id": 1426,
-    "arasaac_id": null,
-    "es": "frambuesa",
-    "en": "",
-    "archivo_es": "frambuesa.png",
-    "archivo_en": "frambuesa.png",
-    "tts_es": "frambuesa",
-    "tts_en": ""
-  },
-  {
-    "id": 1427,
-    "arasaac_id": null,
-    "es": "mora",
-    "en": "",
-    "archivo_es": "mora.png",
-    "archivo_en": "mora.png",
-    "tts_es": "mora",
-    "tts_en": ""
-  },
-  {
-    "id": 1428,
-    "arasaac_id": null,
-    "es": "coco",
-    "en": "",
-    "archivo_es": "coco.png",
-    "archivo_en": "coco.png",
-    "tts_es": "coco",
-    "tts_en": ""
-  },
-  {
-    "id": 1429,
-    "arasaac_id": null,
-    "es": "papaya",
-    "en": "",
-    "archivo_es": "papaya.png",
-    "archivo_en": "papaya.png",
-    "tts_es": "papaya",
-    "tts_en": ""
-  },
-  {
-    "id": 1430,
-    "arasaac_id": null,
-    "es": "guayaba",
-    "en": "",
-    "archivo_es": "guayaba.png",
-    "archivo_en": "guayaba.png",
-    "tts_es": "guayaba",
-    "tts_en": ""
-  },
-  {
-    "id": 1431,
-    "arasaac_id": null,
-    "es": "maracuyá",
-    "en": "",
-    "archivo_es": "maracuya.png",
-    "archivo_en": "maracuya.png",
-    "tts_es": "maracuyá",
-    "tts_en": ""
-  },
-  {
-    "id": 1432,
-    "arasaac_id": null,
-    "es": "higo",
-    "en": "",
-    "archivo_es": "higo.png",
-    "archivo_en": "higo.png",
-    "tts_es": "higo",
-    "tts_en": ""
-  },
-  {
-    "id": 1433,
-    "arasaac_id": null,
-    "es": "ciruela",
-    "en": "",
-    "archivo_es": "ciruela.png",
-    "archivo_en": "ciruela.png",
-    "tts_es": "ciruela",
-    "tts_en": ""
-  },
-  {
-    "id": 1434,
-    "arasaac_id": null,
-    "es": "mandarina",
-    "en": "",
-    "archivo_es": "mandarina.png",
-    "archivo_en": "mandarina.png",
-    "tts_es": "mandarina",
-    "tts_en": ""
-  },
-  {
-    "id": 1435,
-    "arasaac_id": null,
-    "es": "aguacate",
-    "en": "",
-    "archivo_es": "aguacate.png",
-    "archivo_en": "aguacate.png",
-    "tts_es": "aguacate",
-    "tts_en": ""
-  },
-  {
-    "id": 1436,
-    "arasaac_id": null,
-    "es": "autobús",
-    "en": "",
-    "archivo_es": "autobus.png",
-    "archivo_en": "autobus.png",
-    "tts_es": "autobús",
-    "tts_en": ""
-  },
-  {
-    "id": 1437,
-    "arasaac_id": null,
-    "es": "moto",
-    "en": "",
-    "archivo_es": "moto.png",
-    "archivo_en": "moto.png",
-    "tts_es": "moto",
-    "tts_en": ""
-  },
-  {
-    "id": 1438,
-    "arasaac_id": null,
-    "es": "taxi",
-    "en": "",
-    "archivo_es": "taxi.png",
-    "archivo_en": "taxi.png",
-    "tts_es": "taxi",
-    "tts_en": ""
-  },
-  {
-    "id": 1439,
-    "arasaac_id": null,
-    "es": "ambulancia",
-    "en": "",
-    "archivo_es": "ambulancia.png",
-    "archivo_en": "ambulancia.png",
-    "tts_es": "ambulancia",
-    "tts_en": ""
-  },
-  {
-    "id": 1440,
-    "arasaac_id": null,
-    "es": "bomberos",
-    "en": "",
-    "archivo_es": "bomberos.png",
-    "archivo_en": "bomberos.png",
-    "tts_es": "bomberos",
-    "tts_en": ""
-  },
-  {
-    "id": 1441,
-    "arasaac_id": null,
-    "es": "patrulla",
-    "en": "",
-    "archivo_es": "patrulla.png",
-    "archivo_en": "patrulla.png",
-    "tts_es": "patrulla",
-    "tts_en": ""
-  },
-  {
-    "id": 1442,
-    "arasaac_id": null,
-    "es": "tractor",
-    "en": "",
-    "archivo_es": "tractor.png",
-    "archivo_en": "tractor.png",
-    "tts_es": "tractor",
-    "tts_en": ""
-  },
-  {
-    "id": 1443,
-    "arasaac_id": null,
-    "es": "excavadora",
-    "en": "",
-    "archivo_es": "excavadora.png",
-    "archivo_en": "excavadora.png",
-    "tts_es": "excavadora",
-    "tts_en": ""
-  },
-  {
-    "id": 1444,
-    "arasaac_id": null,
-    "es": "patineta",
-    "en": "",
-    "archivo_es": "patineta.png",
-    "archivo_en": "patineta.png",
-    "tts_es": "patineta",
-    "tts_en": ""
-  },
-  {
-    "id": 1445,
-    "arasaac_id": null,
-    "es": "canoa",
-    "en": "",
-    "archivo_es": "canoa.png",
-    "archivo_en": "canoa.png",
-    "tts_es": "canoa",
-    "tts_en": ""
-  },
-  {
-    "id": 1446,
-    "arasaac_id": null,
-    "es": "velero",
-    "en": "",
-    "archivo_es": "velero.png",
-    "archivo_en": "velero.png",
-    "tts_es": "velero",
-    "tts_en": ""
-  },
-  {
-    "id": 1447,
-    "arasaac_id": null,
-    "es": "tranvía",
-    "en": "",
-    "archivo_es": "tranvia.png",
-    "archivo_en": "tranvia.png",
-    "tts_es": "tranvía",
-    "tts_en": ""
-  },
-  {
-    "id": 1448,
-    "arasaac_id": null,
-    "es": "metro",
-    "en": "",
-    "archivo_es": "metro.png",
-    "archivo_en": "metro.png",
-    "tts_es": "metro",
-    "tts_en": ""
-  },
-  {
-    "id": 1449,
-    "arasaac_id": null,
-    "es": "teleférico",
-    "en": "",
-    "archivo_es": "teleferico.png",
-    "archivo_en": "teleferico.png",
-    "tts_es": "teleférico",
-    "tts_en": ""
-  },
-  {
-    "id": 1450,
-    "arasaac_id": null,
-    "es": "pan",
-    "en": "",
-    "archivo_es": "pan.png",
-    "archivo_en": "pan.png",
-    "tts_es": "pan",
-    "tts_en": ""
-  },
-  {
-    "id": 1451,
-    "arasaac_id": null,
-    "es": "pizza",
-    "en": "",
-    "archivo_es": "pizza.png",
-    "archivo_en": "pizza.png",
-    "tts_es": "pizza",
-    "tts_en": ""
-  },
-  {
-    "id": 1452,
-    "arasaac_id": null,
-    "es": "sopa",
-    "en": "",
-    "archivo_es": "sopa.png",
-    "archivo_en": "sopa.png",
-    "tts_es": "sopa",
-    "tts_en": ""
-  },
-  {
-    "id": 1453,
-    "arasaac_id": null,
-    "es": "arroz",
-    "en": "",
-    "archivo_es": "arroz.png",
-    "archivo_en": "arroz.png",
-    "tts_es": "arroz",
-    "tts_en": ""
-  },
-  {
-    "id": 1454,
-    "arasaac_id": null,
-    "es": "pasta",
-    "en": "",
-    "archivo_es": "pasta.png",
-    "archivo_en": "pasta.png",
-    "tts_es": "pasta",
-    "tts_en": ""
-  },
-  {
-    "id": 1455,
-    "arasaac_id": null,
-    "es": "ensalada",
-    "en": "",
-    "archivo_es": "ensalada.png",
-    "archivo_en": "ensalada.png",
-    "tts_es": "ensalada",
-    "tts_en": ""
-  },
-  {
-    "id": 1456,
-    "arasaac_id": null,
-    "es": "hamburguesa",
-    "en": "",
-    "archivo_es": "hamburguesa.png",
-    "archivo_en": "hamburguesa.png",
-    "tts_es": "hamburguesa",
-    "tts_en": ""
-  },
-  {
-    "id": 1457,
-    "arasaac_id": null,
-    "es": "sandwich",
-    "en": "",
-    "archivo_es": "sandwich.png",
-    "archivo_en": "sandwich.png",
-    "tts_es": "sandwich",
-    "tts_en": ""
-  },
-  {
-    "id": 1458,
-    "arasaac_id": null,
-    "es": "yogur",
-    "en": "",
-    "archivo_es": "yogur.png",
-    "archivo_en": "yogur.png",
-    "tts_es": "yogur",
-    "tts_en": ""
-  },
-  {
-    "id": 1459,
-    "arasaac_id": null,
-    "es": "galleta",
-    "en": "",
-    "archivo_es": "galleta.png",
-    "archivo_en": "galleta.png",
-    "tts_es": "galleta",
-    "tts_en": ""
-  },
-  {
-    "id": 1460,
-    "arasaac_id": null,
-    "es": "pastel",
-    "en": "",
-    "archivo_es": "pastel.png",
-    "archivo_en": "pastel.png",
-    "tts_es": "pastel",
-    "tts_en": ""
-  },
-  {
-    "id": 1461,
-    "arasaac_id": null,
-    "es": "chocolate",
-    "en": "",
-    "archivo_es": "chocolate.png",
-    "archivo_en": "chocolate.png",
-    "tts_es": "chocolate",
-    "tts_en": ""
-  },
-  {
-    "id": 1462,
-    "arasaac_id": null,
-    "es": "maíz",
-    "en": "",
-    "archivo_es": "maiz.png",
-    "archivo_en": "maiz.png",
-    "tts_es": "maíz",
-    "tts_en": ""
-  },
-  {
-    "id": 1463,
-    "arasaac_id": null,
-    "es": "frijoles",
-    "en": "",
-    "archivo_es": "frijoles.png",
-    "archivo_en": "frijoles.png",
-    "tts_es": "frijoles",
-    "tts_en": ""
-  },
-  {
-    "id": 1464,
-    "arasaac_id": null,
-    "es": "pollo",
-    "en": "",
-    "archivo_es": "pollo.png",
-    "archivo_en": "pollo.png",
-    "tts_es": "pollo",
-    "tts_en": ""
-  },
-  {
-    "id": 1465,
-    "arasaac_id": null,
-    "es": "pescado",
-    "en": "",
-    "archivo_es": "pescado.png",
-    "archivo_en": "pescado.png",
-    "tts_es": "pescado",
-    "tts_en": ""
-  },
-  {
-    "id": 1466,
-    "arasaac_id": null,
-    "es": "camiseta",
-    "en": "",
-    "archivo_es": "camiseta.png",
-    "archivo_en": "camiseta.png",
-    "tts_es": "camiseta",
-    "tts_en": ""
-  },
-  {
-    "id": 1467,
-    "arasaac_id": null,
-    "es": "pantalón",
-    "en": "",
-    "archivo_es": "pantalon.png",
-    "archivo_en": "pantalon.png",
-    "tts_es": "pantalón",
-    "tts_en": ""
-  },
-  {
-    "id": 1468,
-    "arasaac_id": null,
-    "es": "falda",
-    "en": "",
-    "archivo_es": "falda.png",
-    "archivo_en": "falda.png",
-    "tts_es": "falda",
-    "tts_en": ""
-  },
-  {
-    "id": 1469,
-    "arasaac_id": null,
-    "es": "zapatos",
-    "en": "",
-    "archivo_es": "zapatos.png",
-    "archivo_en": "zapatos.png",
-    "tts_es": "zapatos",
-    "tts_en": ""
-  },
-  {
-    "id": 1470,
-    "arasaac_id": null,
-    "es": "calcetines",
-    "en": "",
-    "archivo_es": "calcetines.png",
-    "archivo_en": "calcetines.png",
-    "tts_es": "calcetines",
-    "tts_en": ""
-  },
-  {
-    "id": 1471,
-    "arasaac_id": null,
-    "es": "abrigo",
-    "en": "",
-    "archivo_es": "abrigo.png",
-    "archivo_en": "abrigo.png",
-    "tts_es": "abrigo",
-    "tts_en": ""
-  },
-  {
-    "id": 1472,
-    "arasaac_id": null,
-    "es": "bufanda",
-    "en": "",
-    "archivo_es": "bufanda.png",
-    "archivo_en": "bufanda.png",
-    "tts_es": "bufanda",
-    "tts_en": ""
-  },
-  {
-    "id": 1473,
-    "arasaac_id": null,
-    "es": "guantes",
-    "en": "",
-    "archivo_es": "guantes.png",
-    "archivo_en": "guantes.png",
-    "tts_es": "guantes",
-    "tts_en": ""
-  },
-  {
-    "id": 1474,
-    "arasaac_id": null,
-    "es": "pijama",
-    "en": "",
-    "archivo_es": "pijama.png",
-    "archivo_en": "pijama.png",
-    "tts_es": "pijama",
-    "tts_en": ""
-  },
-  {
-    "id": 1475,
-    "arasaac_id": null,
-    "es": "shorts",
-    "en": "",
-    "archivo_es": "shorts.png",
-    "archivo_en": "shorts.png",
-    "tts_es": "shorts",
-    "tts_en": ""
-  },
-  {
-    "id": 1476,
-    "arasaac_id": null,
-    "es": "chaleco",
-    "en": "",
-    "archivo_es": "chaleco.png",
-    "archivo_en": "chaleco.png",
-    "tts_es": "chaleco",
-    "tts_en": ""
-  },
-  {
-    "id": 1477,
-    "arasaac_id": null,
-    "es": "sudadera",
-    "en": "",
-    "archivo_es": "sudadera.png",
-    "archivo_en": "sudadera.png",
-    "tts_es": "sudadera",
-    "tts_en": ""
-  },
-  {
-    "id": 1478,
-    "arasaac_id": null,
-    "es": "cinturón",
-    "en": "",
-    "archivo_es": "cinturon.png",
-    "archivo_en": "cinturon.png",
-    "tts_es": "cinturón",
-    "tts_en": ""
-  },
-  {
-    "id": 1479,
-    "arasaac_id": null,
-    "es": "bolsa",
-    "en": "",
-    "archivo_es": "bolsa.png",
-    "archivo_en": "bolsa.png",
-    "tts_es": "bolsa",
-    "tts_en": ""
-  },
-  {
-    "id": 1480,
-    "arasaac_id": null,
-    "es": "sandalias",
-    "en": "",
-    "archivo_es": "sandalias.png",
-    "archivo_en": "sandalias.png",
-    "tts_es": "sandalias",
-    "tts_en": ""
-  },
-  {
-    "id": 1481,
-    "arasaac_id": null,
-    "es": "tenis",
-    "en": "",
-    "archivo_es": "tenis.png",
-    "archivo_en": "tenis.png",
-    "tts_es": "tenis",
-    "tts_en": ""
-  },
-  {
-    "id": 1482,
-    "arasaac_id": null,
-    "es": "corbata",
-    "en": "",
-    "archivo_es": "corbata.png",
-    "archivo_en": "corbata.png",
-    "tts_es": "corbata",
-    "tts_en": ""
-  },
-  {
-    "id": 1483,
-    "arasaac_id": null,
-    "es": "delantal",
-    "en": "",
-    "archivo_es": "delantal.png",
-    "archivo_en": "delantal.png",
-    "tts_es": "delantal",
-    "tts_en": ""
-  },
-  {
-    "id": 1484,
-    "arasaac_id": null,
-    "es": "bañador",
-    "en": "",
-    "archivo_es": "banador.png",
-    "archivo_en": "banador.png",
-    "tts_es": "bañador",
-    "tts_en": ""
-  },
-  {
-    "id": 1485,
-    "arasaac_id": null,
-    "es": "rojo",
-    "en": "",
-    "archivo_es": "rojo.png",
-    "archivo_en": "rojo.png",
-    "tts_es": "rojo",
-    "tts_en": ""
-  },
-  {
-    "id": 1486,
-    "arasaac_id": null,
-    "es": "azul",
-    "en": "",
-    "archivo_es": "azul.png",
-    "archivo_en": "azul.png",
-    "tts_es": "azul",
-    "tts_en": ""
-  },
-  {
-    "id": 1487,
-    "arasaac_id": null,
-    "es": "amarillo",
-    "en": "",
-    "archivo_es": "amarillo.png",
-    "archivo_en": "amarillo.png",
-    "tts_es": "amarillo",
-    "tts_en": ""
-  },
-  {
-    "id": 1488,
-    "arasaac_id": null,
-    "es": "verde",
-    "en": "",
-    "archivo_es": "verde.png",
-    "archivo_en": "verde.png",
-    "tts_es": "verde",
-    "tts_en": ""
-  },
-  {
-    "id": 1489,
-    "arasaac_id": null,
-    "es": "morado",
-    "en": "",
-    "archivo_es": "morado.png",
-    "archivo_en": "morado.png",
-    "tts_es": "morado",
-    "tts_en": ""
-  },
-  {
-    "id": 1490,
-    "arasaac_id": null,
-    "es": "marrón",
-    "en": "",
-    "archivo_es": "marron.png",
-    "archivo_en": "marron.png",
-    "tts_es": "marrón",
-    "tts_en": ""
-  },
-  {
-    "id": 1491,
-    "arasaac_id": null,
-    "es": "blanco",
-    "en": "",
-    "archivo_es": "blanco.png",
-    "archivo_en": "blanco.png",
-    "tts_es": "blanco",
-    "tts_en": ""
-  },
-  {
-    "id": 1492,
-    "arasaac_id": null,
-    "es": "gris",
-    "en": "",
-    "archivo_es": "gris.png",
-    "archivo_en": "gris.png",
-    "tts_es": "gris",
-    "tts_en": ""
-  },
-  {
-    "id": 1493,
-    "arasaac_id": null,
-    "es": "turquesa",
-    "en": "",
-    "archivo_es": "turquesa.png",
-    "archivo_en": "turquesa.png",
-    "tts_es": "turquesa",
-    "tts_en": ""
-  },
-  {
-    "id": 1494,
-    "arasaac_id": null,
-    "es": "dorado",
-    "en": "",
-    "archivo_es": "dorado.png",
-    "archivo_en": "dorado.png",
-    "tts_es": "dorado",
-    "tts_en": ""
-  },
-  {
-    "id": 1495,
-    "arasaac_id": null,
-    "es": "plateado",
-    "en": "",
-    "archivo_es": "plateado.png",
-    "archivo_en": "plateado.png",
-    "tts_es": "plateado",
-    "tts_en": ""
-  },
-  {
-    "id": 1496,
-    "arasaac_id": null,
-    "es": "beige",
-    "en": "",
-    "archivo_es": "beige.png",
-    "archivo_en": "beige.png",
-    "tts_es": "beige",
-    "tts_en": ""
-  },
-  {
-    "id": 1497,
-    "arasaac_id": null,
-    "es": "violeta",
-    "en": "",
-    "archivo_es": "violeta.png",
-    "archivo_en": "violeta.png",
-    "tts_es": "violeta",
-    "tts_en": ""
-  },
-  {
-    "id": 1498,
-    "arasaac_id": null,
-    "es": "celeste",
-    "en": "",
-    "archivo_es": "celeste.png",
-    "archivo_en": "celeste.png",
-    "tts_es": "celeste",
-    "tts_en": ""
-  },
-  {
-    "id": 1499,
-    "arasaac_id": null,
-    "es": "magenta",
-    "en": "",
-    "archivo_es": "magenta.png",
-    "archivo_en": "magenta.png",
-    "tts_es": "magenta",
-    "tts_en": ""
-  },
-  {
-    "id": 1500,
-    "arasaac_id": null,
-    "es": "oliva",
-    "en": "",
-    "archivo_es": "oliva.png",
-    "archivo_en": "oliva.png",
-    "tts_es": "oliva",
-    "tts_en": ""
-  },
-  {
-    "id": 1501,
-    "arasaac_id": null,
-    "es": "coral",
-    "en": "",
-    "archivo_es": "coral.png",
-    "archivo_en": "coral.png",
-    "tts_es": "coral",
-    "tts_en": ""
-  },
-  {
-    "id": 1502,
-    "arasaac_id": null,
-    "es": "índigo",
-    "en": "",
-    "archivo_es": "indigo.png",
-    "archivo_en": "indigo.png",
-    "tts_es": "índigo",
-    "tts_en": ""
-  },
-  {
-    "id": 1503,
-    "arasaac_id": null,
-    "es": "fucsia",
-    "en": "",
-    "archivo_es": "fucsia.png",
-    "archivo_en": "fucsia.png",
-    "tts_es": "fucsia",
-    "tts_en": ""
-  },
-  {
-    "id": 1504,
-    "arasaac_id": null,
-    "es": "lima",
-    "en": "",
-    "archivo_es": "lima.png",
-    "archivo_en": "lima.png",
-    "tts_es": "lima",
-    "tts_en": ""
-  },
-  {
-    "id": 1505,
-    "arasaac_id": null,
-    "es": "ocre",
-    "en": "",
-    "archivo_es": "ocre.png",
-    "archivo_en": "ocre.png",
-    "tts_es": "ocre",
-    "tts_en": ""
-  },
-  {
-    "id": 1506,
-    "arasaac_id": null,
-    "es": "correr",
-    "en": "",
-    "archivo_es": "correr.png",
-    "archivo_en": "correr.png",
-    "tts_es": "correr",
-    "tts_en": ""
-  },
-  {
-    "id": 1507,
-    "arasaac_id": null,
-    "es": "saltar",
-    "en": "",
-    "archivo_es": "saltar.png",
-    "archivo_en": "saltar.png",
-    "tts_es": "saltar",
-    "tts_en": ""
-  },
-  {
-    "id": 1508,
-    "arasaac_id": null,
-    "es": "beber",
-    "en": "",
-    "archivo_es": "beber.png",
-    "archivo_en": "beber.png",
-    "tts_es": "beber",
-    "tts_en": ""
-  },
-  {
-    "id": 1509,
-    "arasaac_id": null,
-    "es": "jugar",
-    "en": "",
-    "archivo_es": "jugar.png",
-    "archivo_en": "jugar.png",
-    "tts_es": "jugar",
-    "tts_en": ""
-  },
-  {
-    "id": 1510,
-    "arasaac_id": null,
-    "es": "cantar",
-    "en": "",
-    "archivo_es": "cantar.png",
-    "archivo_en": "cantar.png",
-    "tts_es": "cantar",
-    "tts_en": ""
-  },
-  {
-    "id": 1511,
-    "arasaac_id": null,
-    "es": "bailar",
-    "en": "",
-    "archivo_es": "bailar.png",
-    "archivo_en": "bailar.png",
-    "tts_es": "bailar",
-    "tts_en": ""
-  },
-  {
-    "id": 1512,
-    "arasaac_id": null,
-    "es": "leer",
-    "en": "",
-    "archivo_es": "leer.png",
-    "archivo_en": "leer.png",
-    "tts_es": "leer",
-    "tts_en": ""
-  },
-  {
-    "id": 1513,
-    "arasaac_id": null,
-    "es": "dibujar",
-    "en": "",
-    "archivo_es": "dibujar.png",
-    "archivo_en": "dibujar.png",
-    "tts_es": "dibujar",
-    "tts_en": ""
-  },
-  {
-    "id": 1514,
-    "arasaac_id": null,
-    "es": "pintar",
-    "en": "",
-    "archivo_es": "pintar.png",
-    "archivo_en": "pintar.png",
-    "tts_es": "pintar",
-    "tts_en": ""
-  },
-  {
-    "id": 1515,
-    "arasaac_id": null,
-    "es": "escribir",
-    "en": "",
-    "archivo_es": "escribir.png",
-    "archivo_en": "escribir.png",
-    "tts_es": "escribir",
-    "tts_en": ""
-  },
-  {
-    "id": 1516,
-    "arasaac_id": null,
-    "es": "llorar",
-    "en": "",
-    "archivo_es": "llorar.png",
-    "archivo_en": "llorar.png",
-    "tts_es": "llorar",
-    "tts_en": ""
-  },
-  {
-    "id": 1517,
-    "arasaac_id": null,
-    "es": "reír",
-    "en": "",
-    "archivo_es": "reir.png",
-    "archivo_en": "reir.png",
-    "tts_es": "reír",
-    "tts_en": ""
-  },
-  {
-    "id": 1518,
-    "arasaac_id": null,
-    "es": "abrazar",
-    "en": "",
-    "archivo_es": "abrazar.png",
-    "archivo_en": "abrazar.png",
-    "tts_es": "abrazar",
-    "tts_en": ""
-  },
-  {
-    "id": 1519,
-    "arasaac_id": null,
-    "es": "besar",
-    "en": "",
-    "archivo_es": "besar.png",
-    "archivo_en": "besar.png",
-    "tts_es": "besar",
-    "tts_en": ""
-  },
-  {
-    "id": 1520,
-    "arasaac_id": null,
-    "es": "caminar",
-    "en": "",
-    "archivo_es": "caminar.png",
-    "archivo_en": "caminar.png",
-    "tts_es": "caminar",
-    "tts_en": ""
-  },
-  {
-    "id": 1521,
-    "arasaac_id": null,
-    "es": "nadar",
-    "en": "",
-    "archivo_es": "nadar.png",
-    "archivo_en": "nadar.png",
-    "tts_es": "nadar",
-    "tts_en": ""
-  },
-  {
-    "id": 1522,
-    "arasaac_id": null,
-    "es": "trepar",
-    "en": "",
-    "archivo_es": "trepar.png",
-    "archivo_en": "trepar.png",
-    "tts_es": "trepar",
-    "tts_en": ""
-  },
-  {
-    "id": 1523,
-    "arasaac_id": null,
-    "es": "empujar",
-    "en": "",
-    "archivo_es": "empujar.png",
-    "archivo_en": "empujar.png",
-    "tts_es": "empujar",
-    "tts_en": ""
-  },
-  {
-    "id": 1524,
-    "arasaac_id": null,
-    "es": "jalar",
-    "en": "",
-    "archivo_es": "jalar.png",
-    "archivo_en": "jalar.png",
-    "tts_es": "jalar",
-    "tts_en": ""
-  },
-  {
-    "id": 1525,
-    "arasaac_id": null,
-    "es": "abrir",
-    "en": "",
-    "archivo_es": "abrir.png",
-    "archivo_en": "abrir.png",
-    "tts_es": "abrir",
-    "tts_en": ""
-  },
-  {
-    "id": 1526,
-    "arasaac_id": null,
-    "es": "cerrar",
-    "en": "",
-    "archivo_es": "cerrar.png",
-    "archivo_en": "cerrar.png",
-    "tts_es": "cerrar",
-    "tts_en": ""
-  },
-  {
-    "id": 1527,
-    "arasaac_id": null,
-    "es": "feliz",
-    "en": "",
-    "archivo_es": "feliz.png",
-    "archivo_en": "feliz.png",
-    "tts_es": "feliz",
-    "tts_en": ""
-  },
-  {
-    "id": 1528,
-    "arasaac_id": null,
-    "es": "triste",
-    "en": "",
-    "archivo_es": "triste.png",
-    "archivo_en": "triste.png",
-    "tts_es": "triste",
-    "tts_en": ""
-  },
-  {
-    "id": 1529,
-    "arasaac_id": null,
-    "es": "enojado",
-    "en": "",
-    "archivo_es": "enojado.png",
-    "archivo_en": "enojado.png",
-    "tts_es": "enojado",
-    "tts_en": ""
-  },
-  {
-    "id": 1530,
-    "arasaac_id": null,
-    "es": "asustado",
-    "en": "",
-    "archivo_es": "asustado.png",
-    "archivo_en": "asustado.png",
-    "tts_es": "asustado",
-    "tts_en": ""
-  },
-  {
-    "id": 1531,
-    "arasaac_id": null,
-    "es": "sorprendido",
-    "en": "",
-    "archivo_es": "sorprendido.png",
-    "archivo_en": "sorprendido.png",
-    "tts_es": "sorprendido",
-    "tts_en": ""
-  },
-  {
-    "id": 1532,
-    "arasaac_id": null,
-    "es": "aburrido",
-    "en": "",
-    "archivo_es": "aburrido.png",
-    "archivo_en": "aburrido.png",
-    "tts_es": "aburrido",
-    "tts_en": ""
-  },
-  {
-    "id": 1533,
-    "arasaac_id": null,
-    "es": "emocionado",
-    "en": "",
-    "archivo_es": "emocionado.png",
-    "archivo_en": "emocionado.png",
-    "tts_es": "emocionado",
-    "tts_en": ""
-  },
-  {
-    "id": 1534,
-    "arasaac_id": null,
-    "es": "tranquilo",
-    "en": "",
-    "archivo_es": "tranquilo.png",
-    "archivo_en": "tranquilo.png",
-    "tts_es": "tranquilo",
-    "tts_en": ""
-  },
-  {
-    "id": 1535,
-    "arasaac_id": null,
-    "es": "cansado",
-    "en": "",
-    "archivo_es": "cansado.png",
-    "archivo_en": "cansado.png",
-    "tts_es": "cansado",
-    "tts_en": ""
-  },
-  {
-    "id": 1536,
-    "arasaac_id": null,
-    "es": "contento",
-    "en": "",
-    "archivo_es": "contento.png",
-    "archivo_en": "contento.png",
-    "tts_es": "contento",
-    "tts_en": ""
-  },
-  {
-    "id": 1537,
-    "arasaac_id": null,
-    "es": "nervioso",
-    "en": "",
-    "archivo_es": "nervioso.png",
-    "archivo_en": "nervioso.png",
-    "tts_es": "nervioso",
-    "tts_en": ""
-  },
-  {
-    "id": 1538,
-    "arasaac_id": null,
-    "es": "orgulloso",
-    "en": "",
-    "archivo_es": "orgulloso.png",
-    "archivo_en": "orgulloso.png",
-    "tts_es": "orgulloso",
-    "tts_en": ""
-  },
-  {
-    "id": 1539,
-    "arasaac_id": null,
-    "es": "celoso",
-    "en": "",
-    "archivo_es": "celoso.png",
-    "archivo_en": "celoso.png",
-    "tts_es": "celoso",
-    "tts_en": ""
-  },
-  {
-    "id": 1540,
-    "arasaac_id": null,
-    "es": "avergonzado",
-    "en": "",
-    "archivo_es": "avergonzado.png",
-    "archivo_en": "avergonzado.png",
-    "tts_es": "avergonzado",
-    "tts_en": ""
-  },
-  {
-    "id": 1541,
-    "arasaac_id": null,
-    "es": "confundido",
-    "en": "",
-    "archivo_es": "confundido.png",
-    "archivo_en": "confundido.png",
-    "tts_es": "confundido",
-    "tts_en": ""
-  },
-  {
-    "id": 1542,
-    "arasaac_id": null,
-    "es": "enamorado",
-    "en": "",
-    "archivo_es": "enamorado.png",
-    "archivo_en": "enamorado.png",
-    "tts_es": "enamorado",
-    "tts_en": ""
-  },
-  {
-    "id": 1543,
-    "arasaac_id": null,
-    "es": "asqueado",
-    "en": "",
-    "archivo_es": "asqueado.png",
-    "archivo_en": "asqueado.png",
-    "tts_es": "asqueado",
-    "tts_en": ""
-  },
-  {
-    "id": 1544,
-    "arasaac_id": null,
-    "es": "frustrado",
-    "en": "",
-    "archivo_es": "frustrado.png",
-    "archivo_en": "frustrado.png",
-    "tts_es": "frustrado",
-    "tts_en": ""
-  },
-  {
-    "id": 1545,
-    "arasaac_id": null,
-    "es": "esperanzado",
-    "en": "",
-    "archivo_es": "esperanzado.png",
-    "archivo_en": "esperanzado.png",
-    "tts_es": "esperanzado",
-    "tts_en": ""
-  },
-  {
-    "id": 1546,
-    "arasaac_id": null,
-    "es": "solitario",
-    "en": "",
-    "archivo_es": "solitario.png",
-    "archivo_en": "solitario.png",
-    "tts_es": "solitario",
-    "tts_en": ""
-  },
-  {
-    "id": 1547,
-    "arasaac_id": null,
-    "es": "agradecido",
-    "en": "",
-    "archivo_es": "agradecido.png",
-    "archivo_en": "agradecido.png",
-    "tts_es": "agradecido",
-    "tts_en": ""
-  },
-  {
-    "id": 1548,
-    "arasaac_id": null,
-    "es": "curioso",
-    "en": "",
-    "archivo_es": "curioso.png",
-    "archivo_en": "curioso.png",
-    "tts_es": "curioso",
-    "tts_en": ""
-  },
-  {
-    "id": 1549,
-    "arasaac_id": null,
-    "es": "valiente",
-    "en": "",
-    "archivo_es": "valiente.png",
-    "archivo_en": "valiente.png",
-    "tts_es": "valiente",
-    "tts_en": ""
-  },
-  {
-    "id": 1550,
-    "arasaac_id": null,
-    "es": "tímido",
-    "en": "",
-    "archivo_es": "timido.png",
-    "archivo_en": "timido.png",
-    "tts_es": "tímido",
-    "tts_en": ""
-  },
-  {
-    "id": 1551,
-    "arasaac_id": null,
-    "es": "grande",
-    "en": "",
-    "archivo_es": "grande.png",
-    "archivo_en": "grande.png",
-    "tts_es": "grande",
-    "tts_en": ""
-  },
-  {
-    "id": 1552,
-    "arasaac_id": null,
-    "es": "pequeño",
-    "en": "",
-    "archivo_es": "pequeno.png",
-    "archivo_en": "pequeno.png",
-    "tts_es": "pequeño",
-    "tts_en": ""
-  },
-  {
-    "id": 1553,
-    "arasaac_id": null,
-    "es": "lento",
-    "en": "",
-    "archivo_es": "lento.png",
-    "archivo_en": "lento.png",
-    "tts_es": "lento",
-    "tts_en": ""
-  },
-  {
-    "id": 1554,
-    "arasaac_id": null,
-    "es": "caliente",
-    "en": "",
-    "archivo_es": "caliente.png",
-    "archivo_en": "caliente.png",
-    "tts_es": "caliente",
-    "tts_en": ""
-  },
-  {
-    "id": 1555,
-    "arasaac_id": null,
-    "es": "frío",
-    "en": "",
-    "archivo_es": "frio.png",
-    "archivo_en": "frio.png",
-    "tts_es": "frío",
-    "tts_en": ""
-  },
-  {
-    "id": 1556,
-    "arasaac_id": null,
-    "es": "suave",
-    "en": "",
-    "archivo_es": "suave.png",
-    "archivo_en": "suave.png",
-    "tts_es": "suave",
-    "tts_en": ""
-  },
-  {
-    "id": 1557,
-    "arasaac_id": null,
-    "es": "duro",
-    "en": "",
-    "archivo_es": "duro.png",
-    "archivo_en": "duro.png",
-    "tts_es": "duro",
-    "tts_en": ""
-  },
-  {
-    "id": 1558,
-    "arasaac_id": null,
-    "es": "limpio",
-    "en": "",
-    "archivo_es": "limpio.png",
-    "archivo_en": "limpio.png",
-    "tts_es": "limpio",
-    "tts_en": ""
-  },
-  {
-    "id": 1559,
-    "arasaac_id": null,
-    "es": "sucio",
-    "en": "",
-    "archivo_es": "sucio.png",
-    "archivo_en": "sucio.png",
-    "tts_es": "sucio",
-    "tts_en": ""
-  },
-  {
-    "id": 1560,
-    "arasaac_id": null,
-    "es": "nuevo",
-    "en": "",
-    "archivo_es": "nuevo.png",
-    "archivo_en": "nuevo.png",
-    "tts_es": "nuevo",
-    "tts_en": ""
-  },
-  {
-    "id": 1561,
-    "arasaac_id": null,
-    "es": "viejo",
-    "en": "",
-    "archivo_es": "viejo.png",
-    "archivo_en": "viejo.png",
-    "tts_es": "viejo",
-    "tts_en": ""
-  },
-  {
-    "id": 1562,
-    "arasaac_id": null,
-    "es": "bonito",
-    "en": "",
-    "archivo_es": "bonito.png",
-    "archivo_en": "bonito.png",
-    "tts_es": "bonito",
-    "tts_en": ""
-  },
-  {
-    "id": 1563,
-    "arasaac_id": null,
-    "es": "feo",
-    "en": "",
-    "archivo_es": "feo.png",
-    "archivo_en": "feo.png",
-    "tts_es": "feo",
-    "tts_en": ""
-  },
-  {
-    "id": 1564,
-    "arasaac_id": null,
-    "es": "fuerte",
-    "en": "",
-    "archivo_es": "fuerte.png",
-    "archivo_en": "fuerte.png",
-    "tts_es": "fuerte",
-    "tts_en": ""
-  },
-  {
-    "id": 1565,
-    "arasaac_id": null,
-    "es": "débil",
-    "en": "",
-    "archivo_es": "debil.png",
-    "archivo_en": "debil.png",
-    "tts_es": "débil",
-    "tts_en": ""
-  },
-  {
-    "id": 1566,
-    "arasaac_id": null,
-    "es": "alto",
-    "en": "",
-    "archivo_es": "alto.png",
-    "archivo_en": "alto.png",
-    "tts_es": "alto",
-    "tts_en": ""
-  },
-  {
-    "id": 1567,
-    "arasaac_id": null,
-    "es": "bajo",
-    "en": "",
-    "archivo_es": "bajo.png",
-    "archivo_en": "bajo.png",
-    "tts_es": "bajo",
-    "tts_en": ""
-  },
-  {
-    "id": 1568,
-    "arasaac_id": null,
-    "es": "gordo",
-    "en": "",
-    "archivo_es": "gordo.png",
-    "archivo_en": "gordo.png",
-    "tts_es": "gordo",
-    "tts_en": ""
-  },
-  {
-    "id": 1569,
-    "arasaac_id": null,
-    "es": "delgado",
-    "en": "",
-    "archivo_es": "delgado.png",
-    "archivo_en": "delgado.png",
-    "tts_es": "delgado",
-    "tts_en": ""
-  },
-  {
-    "id": 1570,
-    "arasaac_id": null,
-    "es": "amargo",
-    "en": "",
-    "archivo_es": "amargo.png",
-    "archivo_en": "amargo.png",
-    "tts_es": "amargo",
-    "tts_en": ""
-  },
-  {
-    "id": 1571,
-    "arasaac_id": null,
-    "es": "brillante",
-    "en": "",
-    "archivo_es": "brillante.png",
-    "archivo_en": "brillante.png",
-    "tts_es": "brillante",
-    "tts_en": ""
-  },
-  {
-    "id": 1572,
-    "arasaac_id": null,
-    "es": "oscuro",
-    "en": "",
-    "archivo_es": "oscuro.png",
-    "archivo_en": "oscuro.png",
-    "tts_es": "oscuro",
-    "tts_en": ""
-  },
-  {
-    "id": 1573,
-    "arasaac_id": null,
-    "es": "cabeza",
-    "en": "",
-    "archivo_es": "cabeza.png",
-    "archivo_en": "cabeza.png",
-    "tts_es": "cabeza",
-    "tts_en": ""
-  },
-  {
-    "id": 1574,
-    "arasaac_id": null,
-    "es": "pelo",
-    "en": "",
-    "archivo_es": "pelo.png",
-    "archivo_en": "pelo.png",
-    "tts_es": "pelo",
-    "tts_en": ""
-  },
-  {
-    "id": 1575,
-    "arasaac_id": null,
-    "es": "cuello",
-    "en": "",
-    "archivo_es": "cuello.png",
-    "archivo_en": "cuello.png",
-    "tts_es": "cuello",
-    "tts_en": ""
-  },
-  {
-    "id": 1576,
-    "arasaac_id": null,
-    "es": "hombro",
-    "en": "",
-    "archivo_es": "hombro.png",
-    "archivo_en": "hombro.png",
-    "tts_es": "hombro",
-    "tts_en": ""
-  },
-  {
-    "id": 1577,
-    "arasaac_id": null,
-    "es": "brazo",
-    "en": "",
-    "archivo_es": "brazo.png",
-    "archivo_en": "brazo.png",
-    "tts_es": "brazo",
-    "tts_en": ""
-  },
-  {
-    "id": 1578,
-    "arasaac_id": null,
-    "es": "dedo",
-    "en": "",
-    "archivo_es": "dedo.png",
-    "archivo_en": "dedo.png",
-    "tts_es": "dedo",
-    "tts_en": ""
-  },
-  {
-    "id": 1579,
-    "arasaac_id": null,
-    "es": "pecho",
-    "en": "",
-    "archivo_es": "pecho.png",
-    "archivo_en": "pecho.png",
-    "tts_es": "pecho",
-    "tts_en": ""
-  },
-  {
-    "id": 1580,
-    "arasaac_id": null,
-    "es": "barriga",
-    "en": "",
-    "archivo_es": "barriga.png",
-    "archivo_en": "barriga.png",
-    "tts_es": "barriga",
-    "tts_en": ""
-  },
-  {
-    "id": 1581,
-    "arasaac_id": null,
-    "es": "espalda",
-    "en": "",
-    "archivo_es": "espalda.png",
-    "archivo_en": "espalda.png",
-    "tts_es": "espalda",
-    "tts_en": ""
-  },
-  {
-    "id": 1582,
-    "arasaac_id": null,
-    "es": "pierna",
-    "en": "",
-    "archivo_es": "pierna.png",
-    "archivo_en": "pierna.png",
-    "tts_es": "pierna",
-    "tts_en": ""
-  },
-  {
-    "id": 1583,
-    "arasaac_id": null,
-    "es": "rodilla",
-    "en": "",
-    "archivo_es": "rodilla.png",
-    "archivo_en": "rodilla.png",
-    "tts_es": "rodilla",
-    "tts_en": ""
-  },
-  {
-    "id": 1584,
-    "arasaac_id": null,
-    "es": "pie",
-    "en": "",
-    "archivo_es": "pie.png",
-    "archivo_en": "pie.png",
-    "tts_es": "pie",
-    "tts_en": ""
-  },
-  {
-    "id": 1585,
-    "arasaac_id": null,
-    "es": "talón",
-    "en": "",
-    "archivo_es": "talon.png",
-    "archivo_en": "talon.png",
-    "tts_es": "talón",
-    "tts_en": ""
-  },
-  {
-    "id": 1586,
-    "arasaac_id": null,
-    "es": "uña",
-    "en": "",
-    "archivo_es": "una.png",
-    "archivo_en": "una.png",
-    "tts_es": "uña",
-    "tts_en": ""
-  },
-  {
-    "id": 1587,
-    "arasaac_id": null,
-    "es": "ceja",
-    "en": "",
-    "archivo_es": "ceja.png",
-    "archivo_en": "ceja.png",
-    "tts_es": "ceja",
-    "tts_en": ""
-  },
-  {
-    "id": 1588,
-    "arasaac_id": null,
-    "es": "mejilla",
-    "en": "",
-    "archivo_es": "mejilla.png",
-    "archivo_en": "mejilla.png",
-    "tts_es": "mejilla",
-    "tts_en": ""
-  },
-  {
-    "id": 1589,
-    "arasaac_id": null,
-    "es": "barbilla",
-    "en": "",
-    "archivo_es": "barbilla.png",
-    "archivo_en": "barbilla.png",
-    "tts_es": "barbilla",
-    "tts_en": ""
-  },
-  {
-    "id": 1590,
-    "arasaac_id": null,
-    "es": "codo",
-    "en": "",
-    "archivo_es": "codo.png",
-    "archivo_en": "codo.png",
-    "tts_es": "codo",
-    "tts_en": ""
-  },
-  {
-    "id": 1591,
-    "arasaac_id": null,
-    "es": "muñeca",
-    "en": "",
-    "archivo_es": "muneca.png",
-    "archivo_en": "muneca.png",
-    "tts_es": "muñeca",
-    "tts_en": ""
-  },
-  {
-    "id": 1592,
-    "arasaac_id": null,
-    "es": "lluvia",
-    "en": "",
-    "archivo_es": "lluvia.png",
-    "archivo_en": "lluvia.png",
-    "tts_es": "lluvia",
-    "tts_en": ""
-  },
-  {
-    "id": 1593,
-    "arasaac_id": null,
-    "es": "mar",
-    "en": "",
-    "archivo_es": "mar.png",
-    "archivo_en": "mar.png",
-    "tts_es": "mar",
-    "tts_en": ""
-  },
-  {
-    "id": 1594,
-    "arasaac_id": null,
-    "es": "desierto",
-    "en": "",
-    "archivo_es": "desierto.png",
-    "archivo_en": "desierto.png",
-    "tts_es": "desierto",
-    "tts_en": ""
-  },
-  {
-    "id": 1595,
-    "arasaac_id": null,
-    "es": "bosque",
-    "en": "",
-    "archivo_es": "bosque.png",
-    "archivo_en": "bosque.png",
-    "tts_es": "bosque",
-    "tts_en": ""
-  },
-  {
-    "id": 1596,
-    "arasaac_id": null,
-    "es": "piedra",
-    "en": "",
-    "archivo_es": "piedra.png",
-    "archivo_en": "piedra.png",
-    "tts_es": "piedra",
-    "tts_en": ""
-  },
-  {
-    "id": 1597,
-    "arasaac_id": null,
-    "es": "arena",
-    "en": "",
-    "archivo_es": "arena.png",
-    "archivo_en": "arena.png",
-    "tts_es": "arena",
-    "tts_en": ""
-  },
-  {
-    "id": 1598,
-    "arasaac_id": null,
-    "es": "semilla",
-    "en": "",
-    "archivo_es": "semilla.png",
-    "archivo_en": "semilla.png",
-    "tts_es": "semilla",
-    "tts_en": ""
-  },
-  {
-    "id": 1599,
-    "arasaac_id": null,
-    "es": "raíz",
-    "en": "",
-    "archivo_es": "raiz.png",
-    "archivo_en": "raiz.png",
-    "tts_es": "raíz",
-    "tts_en": ""
-  },
-  {
-    "id": 1600,
-    "arasaac_id": null,
-    "es": "rama",
-    "en": "",
-    "archivo_es": "rama.png",
-    "archivo_en": "rama.png",
-    "tts_es": "rama",
-    "tts_en": ""
-  },
-  {
-    "id": 1601,
-    "arasaac_id": null,
-    "es": "hierba",
-    "en": "",
-    "archivo_es": "hierba.png",
-    "archivo_en": "hierba.png",
-    "tts_es": "hierba",
-    "tts_en": ""
-  },
-  {
-    "id": 1602,
-    "arasaac_id": null,
-    "es": "musgo",
-    "en": "",
-    "archivo_es": "musgo.png",
-    "archivo_en": "musgo.png",
-    "tts_es": "musgo",
-    "tts_en": ""
-  },
-  {
-    "id": 1603,
-    "arasaac_id": null,
-    "es": "cascada",
-    "en": "",
-    "archivo_es": "cascada.png",
-    "archivo_en": "cascada.png",
-    "tts_es": "cascada",
-    "tts_en": ""
-  },
-  {
-    "id": 1604,
-    "arasaac_id": null,
-    "es": "arriba",
-    "en": "",
-    "archivo_es": "arriba.png",
-    "archivo_en": "arriba.png",
-    "tts_es": "arriba",
-    "tts_en": ""
-  },
-  {
-    "id": 1605,
-    "arasaac_id": null,
-    "es": "abajo",
-    "en": "",
-    "archivo_es": "abajo.png",
-    "archivo_en": "abajo.png",
-    "tts_es": "abajo",
-    "tts_en": ""
-  },
-  {
-    "id": 1606,
-    "arasaac_id": null,
-    "es": "dentro",
-    "en": "",
-    "archivo_es": "dentro.png",
-    "archivo_en": "dentro.png",
-    "tts_es": "dentro",
-    "tts_en": ""
-  },
-  {
-    "id": 1607,
-    "arasaac_id": null,
-    "es": "fuera",
-    "en": "",
-    "archivo_es": "fuera.png",
-    "archivo_en": "fuera.png",
-    "tts_es": "fuera",
-    "tts_en": ""
-  },
-  {
-    "id": 1608,
-    "arasaac_id": null,
-    "es": "antes",
-    "en": "",
-    "archivo_es": "antes.png",
-    "archivo_en": "antes.png",
-    "tts_es": "antes",
-    "tts_en": ""
-  },
-  {
-    "id": 1609,
-    "arasaac_id": null,
-    "es": "después",
-    "en": "",
-    "archivo_es": "despues.png",
-    "archivo_en": "despues.png",
-    "tts_es": "después",
-    "tts_en": ""
-  },
-  {
-    "id": 1610,
-    "arasaac_id": null,
-    "es": "cerca",
-    "en": "",
-    "archivo_es": "cerca.png",
-    "archivo_en": "cerca.png",
-    "tts_es": "cerca",
-    "tts_en": ""
-  },
-  {
-    "id": 1611,
-    "arasaac_id": null,
-    "es": "lejos",
-    "en": "",
-    "archivo_es": "lejos.png",
-    "archivo_en": "lejos.png",
-    "tts_es": "lejos",
-    "tts_en": ""
-  },
-  {
-    "id": 1612,
-    "arasaac_id": null,
-    "es": "encima",
-    "en": "",
-    "archivo_es": "encima.png",
-    "archivo_en": "encima.png",
-    "tts_es": "encima",
-    "tts_en": ""
-  },
-  {
-    "id": 1613,
-    "arasaac_id": null,
-    "es": "debajo",
-    "en": "",
-    "archivo_es": "debajo.png",
-    "archivo_en": "debajo.png",
-    "tts_es": "debajo",
-    "tts_en": ""
-  },
-  {
-    "id": 1614,
-    "arasaac_id": null,
-    "es": "delante",
-    "en": "",
-    "archivo_es": "delante.png",
-    "archivo_en": "delante.png",
-    "tts_es": "delante",
-    "tts_en": ""
-  },
-  {
-    "id": 1615,
-    "arasaac_id": null,
-    "es": "detrás",
-    "en": "",
-    "archivo_es": "detras.png",
-    "archivo_en": "detras.png",
-    "tts_es": "detrás",
-    "tts_en": ""
-  },
-  {
-    "id": 1616,
-    "arasaac_id": null,
-    "es": "izquierda",
-    "en": "",
-    "archivo_es": "izquierda.png",
-    "archivo_en": "izquierda.png",
-    "tts_es": "izquierda",
-    "tts_en": ""
-  },
-  {
-    "id": 1617,
-    "arasaac_id": null,
-    "es": "derecha",
-    "en": "",
-    "archivo_es": "derecha.png",
-    "archivo_en": "derecha.png",
-    "tts_es": "derecha",
-    "tts_en": ""
-  },
-  {
-    "id": 1618,
-    "arasaac_id": null,
-    "es": "noche",
-    "en": "",
-    "archivo_es": "noche.png",
-    "archivo_en": "noche.png",
-    "tts_es": "noche",
-    "tts_en": ""
-  },
-  {
-    "id": 1619,
-    "arasaac_id": null,
-    "es": "entrada",
-    "en": "",
-    "archivo_es": "entrada.png",
-    "archivo_en": "entrada.png",
-    "tts_es": "entrada",
-    "tts_en": ""
-  },
-  {
-    "id": 1620,
-    "arasaac_id": null,
-    "es": "salida",
-    "en": "",
-    "archivo_es": "salida.png",
-    "archivo_en": "salida.png",
-    "tts_es": "salida",
-    "tts_en": ""
-  },
-  {
-    "id": 1621,
-    "arasaac_id": null,
-    "es": "inicio",
-    "en": "",
-    "archivo_es": "inicio.png",
-    "archivo_en": "inicio.png",
-    "tts_es": "inicio",
-    "tts_en": ""
-  },
-  {
-    "id": 1622,
-    "arasaac_id": null,
-    "es": "fin",
-    "en": "",
-    "archivo_es": "fin.png",
-    "archivo_en": "fin.png",
-    "tts_es": "fin",
-    "tts_en": ""
-  },
-  {
-    "id": 1623,
-    "arasaac_id": null,
-    "es": "abierto",
-    "en": "",
-    "archivo_es": "abierto.png",
-    "archivo_en": "abierto.png",
-    "tts_es": "abierto",
-    "tts_en": ""
-  },
-  {
-    "id": 1624,
-    "arasaac_id": null,
-    "es": "cerrado",
-    "en": "",
-    "archivo_es": "cerrado.png",
-    "archivo_en": "cerrado.png",
-    "tts_es": "cerrado",
-    "tts_en": ""
-  },
-  {
-    "id": 1625,
-    "arasaac_id": null,
-    "es": "lleno",
-    "en": "",
-    "archivo_es": "lleno.png",
-    "archivo_en": "lleno.png",
-    "tts_es": "lleno",
-    "tts_en": ""
-  },
-  {
-    "id": 1626,
-    "arasaac_id": null,
     "es": "vacío",
-    "en": "",
-    "archivo_es": "vacio.png",
-    "archivo_en": "vacio.png",
+    "en": "empty",
+    "ruta_img": "vacio.png",
     "tts_es": "vacío",
-    "tts_en": ""
+    "tts_en": "empty"
   }
 ]
