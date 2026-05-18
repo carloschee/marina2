@@ -450,10 +450,10 @@
   {
     "id": 1057,
     "es": "globo aerostático",
-    "en": "balloon",
-    "ruta_img": "globo-aerostatico.png",
+    "en": "hot air balloon",
+    "ruta_img": "globo aerostático.png",
     "tts_es": "globo aerostático",
-    "tts_en": "balloon"
+    "tts_en": "hot air 2balloon"
   },
   {
     "id": 1058,
