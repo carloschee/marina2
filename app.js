@@ -311,7 +311,7 @@ async function navegarA(mod) {
   if (_modulosPausados[mod.id] && mod.resume) {
     _moduloActivo = mod;
     contenedor.style.display = 'block';
-    try { await mod.resume(contenedor); mod.onEnter?.(); animarEntrada(contenedor); } catch (e) {
+    try { await mod.resume(contenedor); mod.onEnter?.(); } catch (e) {
       console.error('[App] Error al resumir', mod.id, e);
     }
     return;
@@ -331,7 +331,6 @@ async function navegarA(mod) {
   try {
     await mod.init(contenedor);
     mod.onEnter?.();
-    animarEntrada(contenedor);
   } catch (e) {
     console.error('[App] Error en módulo', mod.id, e);
     contenedor.innerHTML =
