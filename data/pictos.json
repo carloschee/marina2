@@ -1397,7 +1397,7 @@
     "es": "roja",
     "en": "red",
     "ruta_img": "rojo-color.png",
-    "art": "la"
+    "art": ""
   },
   {
     "id": 1201,
@@ -1523,7 +1523,7 @@
     "es": "negro",
     "en": "black",
     "ruta_img": "negro-color.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1219,
@@ -1992,7 +1992,7 @@
     "es": "rojo",
     "en": "red",
     "ruta_img": "rojo-color.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1286,
@@ -2020,7 +2020,7 @@
     "es": "morado",
     "en": "purple",
     "ruta_img": "morado-color.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1290,
@@ -2034,14 +2034,14 @@
     "es": "blanco",
     "en": "white",
     "ruta_img": "blanco-color.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1292,
     "es": "gris",
     "en": "grey",
     "ruta_img": "gris-color.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1293,
@@ -2055,14 +2055,14 @@
     "es": "dorado",
     "en": "golden",
     "ruta_img": "dorado-color.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1295,
     "es": "plateado",
     "en": "silver",
     "ruta_img": "plateado-color.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1296,
@@ -2531,7 +2531,7 @@
     "es": "bonito",
     "en": "pretty",
     "ruta_img": "bonito.png",
-    "art": "el"
+    "art": ""
   },
   {
     "id": 1363,
