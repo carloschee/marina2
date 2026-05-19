@@ -196,8 +196,9 @@ function _render() {
     #tc-grid {
       flex:1; min-height:0;
       display:flex; flex-wrap:wrap;
-      align-content:center; justify-content:center;
-      gap:12px; padding:0 20px 16px;
+      align-content:flex-start; justify-content:center;
+      gap:12px; padding:20px 20px 16px;
+      align-items:flex-start;
     }
 
     /* ── Mosaico — tamaño fijo igual en todos los niveles ── */
