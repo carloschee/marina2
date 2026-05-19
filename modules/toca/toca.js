@@ -8,6 +8,14 @@
    · 3 aciertos consecutivos → sube de nivel
    · 5 niveles: 3 → 4 → 5 → 6 → 8 opciones
 
+   Layout de mosaicos:
+   · Tamaño fijo calculado para nivel máximo (8 mosaicos, 4+4)
+   · Nivel 1 (3): fila central de 3
+   · Nivel 2 (4): 2×2
+   · Nivel 3 (5): fila de 3 + fila de 2 centrada
+   · Nivel 4 (6): 2×3
+   · Nivel 5 (8): fila de 4 + fila de 4
+
    Idioma gobernado por el pill global (lang-change).
    Fuente: data/pictos.json (modo aleatorio) o data/toca-temas.json (temas).
 */
@@ -17,33 +25,42 @@ import { haptic, lanzarConfeti } from '../../core/ui.js';
 import { Telemetry } from '../../core/telemetry.js';
 
 const PICTO_URL = (ruta) => `assets/pictogramas/${ruta}`;
-const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta.replace('.png', '')}.mp3`;
+const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta.replace('.png', '').toLowerCase()}.mp3`;
 
-const NIVELES = [3, 4, 5, 6, 8];
+const NIVELES     = [3, 4, 5, 6, 8];
 const ACIERTOS_UP = 3;
 
-let _el = null;
-let _catalogo = [];
-let _temas = [];
-let _tema = null;
-let _pool = [];
+// Tamaño fijo de mosaico calculado para el nivel máximo (8 mosaicos, layout 4+4):
+// iPad Air 4 landscape: área grid ≈ 604px alto × 1140px ancho
+// 4 cols, gap 12px: (1140 - 36) / 4 ≈ 276px ancho
+// 2 filas, gap 12px: (604 - 12) / 2 ≈ 296px alto
+// → cuadrado limitado por el menor: 272px
+const MOSAIC_SIZE = 272; // px — igual en todos los niveles
+
+let _el         = null;
+let _catalogo   = [];
+let _temas      = [];
+let _tema       = null;
+let _pool       = [];
 let _langConfig = { es: true, en: false };
-let _lang = 'es';
-let _nivel = 0;
-let _aciertos = 0;
-let _objetivo = null;
-let _opciones = [];
-let _esperando = false;
-let _audioEl = null;
+let _lang       = 'es';
+let _nivel      = 0;
+let _aciertos   = 0;
+let _objetivo   = null;
+let _opciones   = [];
+let _esperando  = false;
+let _audioEl    = null;
+
+// ─── API pública ──────────────────────────────────────────────────────────────
 
 export async function init(container) {
-  _el = container;
+  _el         = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
-  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
-  _nivel = 0;
-  _aciertos = 0;
-  _esperando = false;
-  _tema = null;
+  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _nivel      = 0;
+  _aciertos   = 0;
+  _esperando  = false;
+  _tema       = null;
 
   try {
     const res = await fetch('./data/pictos.json');
@@ -74,15 +91,15 @@ export function destroy() {
   _el = null; _catalogo = []; _pool = []; _temas = [];
 }
 
-export function onEnter() { }
+export function onEnter() {}
 export function onLeave() {
   TTS.stop();
   if (_audioEl) _audioEl.pause();
   Telemetry.track('toca_sesion', {
     _modulo: 'toca',
     nivel_alcanzado: _nivel + 1,
-    opciones_nivel: NIVELES[_nivel],
-    tema: _tema?.id || 'todos',
+    opciones_nivel:  NIVELES[_nivel],
+    tema:            _tema?.id || 'todos',
   });
 }
 
@@ -93,9 +110,9 @@ export async function pause() {
 }
 
 export async function resume(container) {
-  _el = container;
+  _el         = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
-  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
   if (_objetivo && _opciones.length) {
     _renderRonda();
@@ -107,14 +124,16 @@ export async function resume(container) {
   window.addEventListener('lang-change', _onLangChange);
 }
 
+// ─── Shell ────────────────────────────────────────────────────────────────────
+
 function _render() {
-  // SIN contain:strict — rompe position:absolute de los hijos
   _el.style.cssText =
     'position:absolute;inset:0;display:flex;flex-direction:column;' +
     'overflow:hidden;background:transparent;';
 
   _el.innerHTML = `
   <style>
+    /* ── Header ── */
     #tc-header {
       flex-shrink:0;
       display:flex; align-items:center; justify-content:space-between;
@@ -128,11 +147,11 @@ function _render() {
     #tc-nivel-valor { font-size:.72rem; font-weight:900; color:#00e5b0; margin-left:4px; }
     #tc-btn-tema {
       display:flex; align-items:center; gap:6px;
-      padding:6px 14px; border-radius:99px; border:none; cursor:pointer;
+      padding:6px 14px; border-radius:99px;
       background:rgba(255,255,255,0.10);
       border:1.5px solid rgba(255,255,255,0.18);
       color:#fff; font-family:inherit; font-size:.8rem; font-weight:800;
-      transition:background .15s, transform .12s; flex-shrink:0;
+      cursor:pointer; transition:background .15s, transform .12s; flex-shrink:0;
     }
     #tc-btn-tema:active { transform:scale(.93); background:rgba(255,255,255,.18); }
     #tc-tema-label { max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -143,6 +162,8 @@ function _render() {
       transition:background .3s, transform .3s;
     }
     .tc-dot.lleno { background:#00e5b0; transform:scale(1.2); }
+
+    /* ── Instrucción ── */
     #tc-instruccion {
       flex-shrink:0; margin:0 20px 14px;
       background:rgba(0,0,0,0.35);
@@ -169,23 +190,20 @@ function _render() {
       transition:transform .12s, box-shadow .15s;
     }
     #tc-btn-repetir:active { transform:scale(.88); }
+
+    /* ── Grid — contenedor flex centrado ── */
     #tc-grid {
-      flex:1; min-height:0; display:grid; gap:12px; padding:0 20px 16px;
+      flex:1; min-height:0;
+      display:flex; flex-wrap:wrap;
+      align-content:center; justify-content:center;
+      gap:12px; padding:0 20px 16px;
     }
-    #tc-grid.cols-3 { grid-template-columns:repeat(3,1fr); grid-template-rows:1fr; }
-    #tc-grid.cols-4 { grid-template-columns:repeat(4,1fr); grid-template-rows:1fr; }
-    #tc-grid.cols-5 {
-      grid-template-columns:repeat(6,1fr);
-      grid-template-rows:repeat(2,1fr);
-    }
-    #tc-grid.cols-5 .tc-opcion:nth-child(1) { grid-column:1/3; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(2) { grid-column:3/5; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(3) { grid-column:5/7; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(4) { grid-column:2/4; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(5) { grid-column:4/6; }
-    #tc-grid.cols-6 { grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); }
-    #tc-grid.cols-8 { grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,1fr); }
+
+    /* ── Mosaico — tamaño fijo igual en todos los niveles ── */
     .tc-opcion {
+      width:${MOSAIC_SIZE}px;
+      height:${MOSAIC_SIZE}px;
+      flex-shrink:0;
       background:#fff; border-radius:20px;
       display:flex; flex-direction:column;
       align-items:center; justify-content:center;
@@ -195,16 +213,15 @@ function _render() {
       transition:transform .14s, box-shadow .14s, border-color .2s;
       position:relative; overflow:hidden;
       -webkit-tap-highlight-color:transparent; user-select:none;
-      min-height:0;
     }
     .tc-opcion:active { transform:scale(.93); }
     .tc-opcion img {
-      width:60%; height:60%; object-fit:contain;
+      width:62%; height:62%; object-fit:contain;
       flex-shrink:0; pointer-events:none;
     }
     .tc-opcion-label {
-      font-size:clamp(.7rem,1.6vw,.95rem); font-weight:900;
-      color:#07212e; text-align:center; margin-top:6px;
+      font-size:clamp(.75rem,1.8vw,1rem); font-weight:900;
+      color:#07212e; text-align:center; margin-top:8px;
       line-height:1.1; word-break:break-word; flex-shrink:0;
     }
     .tc-opcion.correcto {
@@ -221,6 +238,8 @@ function _render() {
       60%     { transform:translateX(-5px) rotate(-1deg); }
       80%     { transform:translateX(5px) rotate(1deg); }
     }
+
+    /* ── Overlay nivel ── */
     #tc-nivel-up {
       display:none; position:absolute; inset:0; z-index:10;
       align-items:center; justify-content:center; flex-direction:column; gap:12px;
@@ -234,6 +253,8 @@ function _render() {
     @keyframes tc-flotar { from { transform:translateY(0); } to { transform:translateY(-12px); } }
     #tc-nivel-up-texto { font-size:2rem; font-weight:900; color:#fff; text-shadow:0 4px 20px rgba(0,229,176,.60); }
     #tc-nivel-up-sub   { font-size:1rem; font-weight:700; color:rgba(255,255,255,0.60); }
+
+    /* ── Modal temas ── */
     #tc-modal-temas {
       display:none; position:fixed; inset:0; z-index:20;
       align-items:center; justify-content:center;
@@ -256,7 +277,7 @@ function _render() {
     }
     .tc-tema-opcion {
       display:flex; align-items:center; gap:14px;
-      padding:14px 16px; border-radius:16px; border:none; cursor:pointer;
+      padding:14px 16px; border-radius:16px; cursor:pointer;
       background:rgba(255,255,255,0.06);
       border:1px solid rgba(255,255,255,0.10);
       font-family:inherit; color:#fff; text-align:left;
@@ -268,6 +289,8 @@ function _render() {
     .tc-tema-info   { display:flex; flex-direction:column; gap:2px; }
     .tc-tema-nombre { font-size:1rem; font-weight:900; }
     .tc-tema-desc   { font-size:.72rem; color:rgba(255,255,255,.45); font-weight:700; }
+
+    /* ── Vacío ── */
     #tc-vacio {
       display:none; flex:1; flex-direction:column;
       align-items:center; justify-content:center; gap:12px;
@@ -327,103 +350,138 @@ function _render() {
   });
 }
 
+// ─── Ronda ────────────────────────────────────────────────────────────────────
+
 function _nuevaRonda() {
-  if (!_el) return;  // proteger si el módulo fue destruido
+  if (!_el) return;                          // proteger si módulo fue destruido
   const n = NIVELES[_nivel];
+
   if (_catalogo.length < n) {
-    _el.querySelector('#tc-grid').style.display = 'none';
+    _el.querySelector('#tc-grid').style.display        = 'none';
     _el.querySelector('#tc-instruccion').style.display = 'none';
-    _el.querySelector('#tc-vacio').style.display = 'flex';
+    _el.querySelector('#tc-vacio').style.display       = 'flex';
     return;
   }
+
   _esperando = false;
+
+  // Rellenar pool si hace falta
   if (_pool.length < n) {
     const base = _tema?.palabras?.length
       ? _catalogo.filter(e => _tema.palabras.includes(e.id))
       : _catalogo;
     _pool = _shuffle([...base]);
   }
+
   _objetivo = _pool.shift();
+
   const base = _tema?.palabras?.length
     ? _catalogo.filter(e => _tema.palabras.includes(e.id))
     : _catalogo;
-  const tmpPool = _shuffle(base.filter(e => e.id !== _objetivo.id));
+
+  const tmpPool    = _shuffle(base.filter(e => e.id !== _objetivo.id));
   const distractores = [];
   while (distractores.length < n - 1 && tmpPool.length) {
     distractores.push(tmpPool.shift());
   }
+
   _opciones = _shuffle([_objetivo, ...distractores]);
   _renderRonda();
 
-  // DIAGNÓSTICO TEMPORAL — remover después
-  const el = _el;
-  const grid = _el.querySelector('#tc-grid');
-  console.log('[toca] contenedor:', el.offsetWidth, 'x', el.offsetHeight);
-  console.log('[toca] grid:', grid.offsetWidth, 'x', grid.offsetHeight);
-  console.log('[toca] el parent:', el.parentElement?.offsetWidth, 'x', el.parentElement?.offsetHeight);
-  console.log('[toca] el style:', el.style.cssText);
-  const header = _el.querySelector('#tc-header');
-  const instruccion = _el.querySelector('#tc-instruccion');
-  console.log('[toca] header h:', header.offsetHeight);
-  console.log('[toca] instruccion h:', instruccion.offsetHeight);
-  console.log('[toca] suma:', header.offsetHeight + instruccion.offsetHeight);
-  console.log('[toca] diferencia:', el.offsetHeight - grid.offsetHeight - header.offsetHeight - instruccion.offsetHeight);
-
+  // Reproducir instrucción solo si no hay audio activo reproduciéndose
   setTimeout(() => {
-    if (_el && !(_audioEl && !_audioEl.paused)) _reproducirInstruccion();
+    if (_el && (!_audioEl || _audioEl.paused)) _reproducirInstruccion();
   }, 400);
 }
 
+// ─── Render ronda ─────────────────────────────────────────────────────────────
+
 function _renderRonda() {
-  const n = NIVELES[_nivel];
+  const n    = NIVELES[_nivel];
+  const grid = _el.querySelector('#tc-grid');
+
   _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
   _renderDots();
   _actualizarPrompt();
-  const grid = _el.querySelector('#tc-grid');
-  grid.className = `cols-${n}`;
+
+  // Quitar clase previa de nivel
+  grid.className = '';
   grid.innerHTML = '';
-  _opciones.forEach(picto => {
+
+  _opciones.forEach((picto, i) => {
     const btn = document.createElement('button');
-    btn.className = 'tc-opcion';
+    btn.className  = 'tc-opcion';
     btn.dataset.id = picto.id;
+
     const img = document.createElement('img');
-    img.src = PICTO_URL(picto.ruta_img);
-    img.alt = picto.es;
+    img.src     = PICTO_URL(picto.ruta_img);
+    img.alt     = picto.es;
     img.onerror = () => { img.style.opacity = '0.3'; };
+
     const label = document.createElement('span');
-    label.className = 'tc-opcion-label';
+    label.className   = 'tc-opcion-label';
     label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
+
     btn.appendChild(img);
     btn.appendChild(label);
     btn.addEventListener('click', () => _tocar(picto, btn));
     grid.appendChild(btn);
   });
+
+  // Aplicar layout según nivel — ajusta flex-basis para centrar filas
+  _aplicarLayout(n);
 }
 
-function _actualizarPrompt() {
-  if (!_objetivo) return;
-  const prompt = _el.querySelector('#tc-prompt');
-  if (_lang === 'en') {
-    prompt.innerHTML = `Touch the <strong>${_objetivo.en || _objetivo.es}</strong>`;
-    _el.querySelector('#tc-label-sup').textContent = 'LISTEN AND TOUCH';
-  } else {
-    const art = _objetivo.art || '';
-    prompt.innerHTML = art
-      ? `Toca ${art} <strong>${_objetivo.es}</strong>`
-      : `Toca <strong>${_objetivo.es}</strong>`;
-    _el.querySelector('#tc-label-sup').textContent = 'ESCUCHA Y TOCA';
+// ─── Layouts por nivel ────────────────────────────────────────────────────────
+// Todos los mosaicos tienen MOSAIC_SIZE × MOSAIC_SIZE px fijos.
+// flex-wrap:wrap + justify-content:center acomoda automáticamente.
+// Solo necesitamos controlar cuántos caben por fila mediante flex-basis.
+//
+// Nivel 1 (3):  1 fila de 3           → basis = MOSAIC_SIZE (3 por fila máx)
+// Nivel 2 (4):  2×2                   → basis = 45% (2 por fila)
+// Nivel 3 (5):  fila 3 + fila 2 cen. → primeros 3 full, últimos 2 centrados
+// Nivel 4 (6):  2×3                   → basis = MOSAIC_SIZE (3 por fila)
+// Nivel 5 (8):  2×4                   → basis = MOSAIC_SIZE (4 por fila)
+
+function _aplicarLayout(n) {
+  const grid    = _el.querySelector('#tc-grid');
+  const opciones = grid.querySelectorAll('.tc-opcion');
+  const S        = MOSAIC_SIZE;
+
+  // Reset
+  opciones.forEach(o => {
+    o.style.width     = S + 'px';
+    o.style.height    = S + 'px';
+    o.style.flexBasis = S + 'px';
+    o.style.flexGrow  = '0';
+    o.style.flexShrink = '0';
+  });
+
+  if (n === 3) {
+    // Fila central de 3 — ya queda centrado con justify-content:center
+    // Sin cambios adicionales
+  } else if (n === 4) {
+    // 2×2: forzar 2 por fila usando basis > 45% del contenedor
+    // El contenedor tiene ~1140px, 2 mosaicos + 1 gap = 2*272+12 = 556 → caben bien
+    // No hace falta cambiar nada — con width fijo y wrap, 4 mosaicos = 2+2
+  } else if (n === 5) {
+    // Fila de 3 + fila de 2 centrada
+    // Los 3 primeros ocupan ancho normal, los 2 últimos también
+    // Con justify-content:center y ancho fijo se centra automáticamente
+    // Los 3 primeros llenan la fila (3×272 + 2×12 = 840 < 1140 → fila completa)
+    // Los 2 últimos (2×272 + 12 = 556) quedan centrados en segunda fila
+    // Sin cambios adicionales
+  } else if (n === 6) {
+    // 2×3: con MOSAIC_SIZE y 3 por fila caben bien
+    // 3×272 + 2×12 = 840 < 1140 → fila completa
+    // Sin cambios adicionales
+  } else if (n === 8) {
+    // 2×4: 4×272 + 3×12 = 1124 < 1140 → fila completa de 4
+    // Sin cambios adicionales
   }
 }
 
-function _renderDots() {
-  const wrap = _el.querySelector('#tc-dots');
-  wrap.innerHTML = '';
-  for (let i = 0; i < ACIERTOS_UP; i++) {
-    const d = document.createElement('div');
-    d.className = 'tc-dot' + (i < _aciertos ? ' lleno' : '');
-    wrap.appendChild(d);
-  }
-}
+// ─── Interacción ──────────────────────────────────────────────────────────────
 
 function _tocar(picto, btn) {
   if (_esperando) return;
@@ -436,15 +494,19 @@ function _acierto(btn) {
   _aciertos++;
   btn.classList.add('correcto');
   lanzarConfeti({ count: 30, container: _el });
-  const texto = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
+
+  const texto   = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
   const archivo = _objetivo.ruta_img;
   _reproducirAudio(archivo, _lang, texto);
+
   Telemetry.track('toca_acierto', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1 });
+
   if (_aciertos >= ACIERTOS_UP) {
     _aciertos = 0;
     if (_nivel < NIVELES.length - 1) {
       setTimeout(() => _mostrarSubidaNivel(), 700);
     } else {
+      // Último nivel — celebrar modo infinito
       setTimeout(() => _mostrarModoInfinito(), 700);
     }
   } else {
@@ -461,6 +523,8 @@ function _error(btn) {
   Telemetry.track('toca_error', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1 });
 }
 
+// ─── Overlays de nivel ────────────────────────────────────────────────────────
+
 function _mostrarSubidaNivel() {
   _nivel++;
   const emojis = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '🏆'];
@@ -476,6 +540,7 @@ function _mostrarSubidaNivel() {
     { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
   );
   setTimeout(() => {
+    if (!_el) return;
     _el.querySelector('#tc-nivel-up').classList.remove('visible');
     _nuevaRonda();
   }, 2200);
@@ -486,18 +551,21 @@ function _mostrarModoInfinito() {
   _el.querySelector('#tc-nivel-up-texto').textContent =
     _lang === 'en' ? '¡Champion!' : '¡Campeona!';
   _el.querySelector('#tc-nivel-up-sub').textContent =
-    _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
+    _lang === 'en' ? '∞ Infinite challenge!' : '∞ ¡Reto infinito!';
   _el.querySelector('#tc-nivel-up').classList.add('visible');
-  lanzarConfeti({ count: 100, container: _el });
+  lanzarConfeti({ count: 120, container: _el });
   TTS.speak(
     _lang === 'en' ? 'Champion! Infinite challenge!' : '¡Campeona! ¡Reto infinito!',
     { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
   );
   setTimeout(() => {
+    if (!_el) return;
     _el.querySelector('#tc-nivel-up').classList.remove('visible');
-    if (_el) _nuevaRonda();
+    _nuevaRonda();
   }, 2800);
 }
+
+// ─── Modal temas ──────────────────────────────────────────────────────────────
 
 function _abrirModalTemas() {
   const lista = _el.querySelector('#tc-modal-lista');
@@ -544,14 +612,16 @@ function _seleccionarTema(id) {
   } else {
     _pool = _shuffle([..._catalogo]);
   }
-  _nivel = 0;
+  _nivel    = 0;
   _aciertos = 0;
   _nuevaRonda();
 }
 
+// ─── Audio e instrucción ──────────────────────────────────────────────────────
+
 function _reproducirInstruccion() {
   if (!_objetivo) return;
-  const lang = _lang === 'en' ? 'en-US' : 'es-MX';
+  const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
   const texto = _lang === 'en'
     ? `Touch the ${_objetivo.en || _objetivo.es}`
     : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
@@ -566,21 +636,53 @@ function _reproducirAudio(ruta, lang, textoFallback) {
   TTS.stop();
   _audioEl.pause();
   _audioEl.onerror = null;
+
   let _usado = false;
   const _fallback = () => {
-    if (_usado) return; _usado = true;
+    if (_usado) return;
+    _usado = true;
     TTS.speak(textoFallback, { lang: lang === 'en' ? 'en-US' : 'es-MX', rate: 0.9, pitch: 1.2 });
   };
+
   _audioEl.onerror = _fallback;
-  _audioEl.src = AUDIO_URL(ruta, lang);
+  _audioEl.src     = AUDIO_URL(ruta, lang);
   _audioEl.play().catch(_fallback);
 }
+
+// ─── UI helpers ───────────────────────────────────────────────────────────────
+
+function _actualizarPrompt() {
+  if (!_objetivo) return;
+  const prompt = _el.querySelector('#tc-prompt');
+  if (_lang === 'en') {
+    prompt.innerHTML = `Touch the <strong>${_objetivo.en || _objetivo.es}</strong>`;
+    _el.querySelector('#tc-label-sup').textContent = 'LISTEN AND TOUCH';
+  } else {
+    const art = _objetivo.art || '';
+    prompt.innerHTML = art
+      ? `Toca ${art} <strong>${_objetivo.es}</strong>`
+      : `Toca <strong>${_objetivo.es}</strong>`;
+    _el.querySelector('#tc-label-sup').textContent = 'ESCUCHA Y TOCA';
+  }
+}
+
+function _renderDots() {
+  const wrap = _el.querySelector('#tc-dots');
+  wrap.innerHTML = '';
+  for (let i = 0; i < ACIERTOS_UP; i++) {
+    const d = document.createElement('div');
+    d.className = 'tc-dot' + (i < _aciertos ? ' lleno' : '');
+    wrap.appendChild(d);
+  }
+}
+
+// ─── Cambio de idioma ─────────────────────────────────────────────────────────
 
 function _onLangChange(e) {
   const cfg = e.detail?.langConfig;
   if (!cfg) return;
   _langConfig = { ...cfg };
-  _lang = (cfg.en && !cfg.es) ? 'en' : 'es';
+  _lang       = (cfg.en && !cfg.es) ? 'en' : 'es';
   if (_objetivo) {
     _actualizarPrompt();
     _el.querySelectorAll('.tc-opcion-label').forEach((lbl, i) => {
@@ -589,6 +691,8 @@ function _onLangChange(e) {
     });
   }
 }
+
+// ─── Util ─────────────────────────────────────────────────────────────────────
 
 function _shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
