@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-19T03:18:28.539Z",
-  "totalAssets": 2240,
+  "generado": "2026-05-19T03:20:10.078Z",
+  "totalAssets": 2241,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -2226,6 +2226,7 @@
     "./data/frases.json",
     "./data/memorama.json",
     "./data/pictos.json",
+    "./data/toca-temas.json",
     "./data/vocabulario.json",
     "./index.html",
     "./manifest.json",
