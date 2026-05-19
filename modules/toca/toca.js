@@ -13,96 +13,96 @@
    Preparado para leer data/toca-temas.json cuando exista.
 */
 
-import { TTS }                   from '../../core/tts.js';
+import { TTS } from '../../core/tts.js';
 import { haptic, lanzarConfeti } from '../../core/ui.js';
-import { Telemetry }             from '../../core/telemetry.js';
+import { Telemetry } from '../../core/telemetry.js';
 
-const PICTO_URL  = (ruta)        => `assets/pictogramas/${ruta}.png`;
-const AUDIO_URL  = (ruta, lang)  => `assets/audio/${lang}/${ruta}.mp3`;
+const PICTO_URL = (ruta) => `assets/pictogramas/${ruta}`;
+const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta}.mp3`;
 
 // Niveles: cantidad de opciones por nivel
-const NIVELES     = [3, 4, 5, 6, 8];
+const NIVELES = [3, 4, 5, 6, 8];
 const ACIERTOS_UP = 3;   // aciertos consecutivos para subir
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
-let _el          = null;
-let _catalogo    = [];   // pictos.json completo (solo los que tienen art o son sustantivos)
-let _pool        = [];   // palabras disponibles para esta sesión
-let _langConfig  = { es: true, en: false };
-let _lang        = 'es';
+let _el = null;
+let _catalogo = [];   // pictos.json completo (solo los que tienen art o son sustantivos)
+let _pool = [];   // palabras disponibles para esta sesión
+let _langConfig = { es: true, en: false };
+let _lang = 'es';
 
-let _nivel       = 0;   // índice en NIVELES (0 = 3 opciones)
-let _aciertos    = 0;   // aciertos consecutivos
-let _objetivo    = null; // picto objetivo actual
-let _opciones    = [];  // pictos mostrados (incluye objetivo)
-let _esperando   = false; // bloqueo durante animación
-let _audioEl     = null;
+let _nivel = 0;   // índice en NIVELES (0 = 3 opciones)
+let _aciertos = 0;   // aciertos consecutivos
+let _objetivo = null; // picto objetivo actual
+let _opciones = [];  // pictos mostrados (incluye objetivo)
+let _esperando = false; // bloqueo durante animación
+let _audioEl = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
-  _el         = container;
-  _langConfig = window._langConfig ? { ..._langConfig, ...window._langConfig } : { es: true, en: false };
-  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
-  _nivel      = 0;
-  _aciertos   = 0;
-  _esperando  = false;
+    _el = container;
+    _langConfig = window._langConfig ? { ..._langConfig, ...window._langConfig } : { es: true, en: false };
+    _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+    _nivel = 0;
+    _aciertos = 0;
+    _esperando = false;
 
-  try {
-    const res  = await fetch('./data/pictos.json');
-    const cat  = await res.json();
-    // Solo palabras con pictograma y que no son verbos/adjetivos puros (art !== undefined)
-    _catalogo = cat.filter(e => e.ruta_img && e.es && e.art !== undefined);
-  } catch (e) {
-    console.error('[toca] No se pudo cargar pictos.json', e);
-    _catalogo = [];
-  }
+    try {
+        const res = await fetch('./data/pictos.json');
+        const cat = await res.json();
+        // Solo palabras con pictograma y que no son verbos/adjetivos puros (art !== undefined)
+        _catalogo = cat.filter(e => e.ruta_img && e.es && e.art !== undefined);
+    } catch (e) {
+        console.error('[toca] No se pudo cargar pictos.json', e);
+        _catalogo = [];
+    }
 
-  _pool = _shuffle([..._catalogo]);
-  _render();
-  _nuevaRonda();
+    _pool = _shuffle([..._catalogo]);
+    _render();
+    _nuevaRonda();
 
-  window.addEventListener('lang-change', _onLangChange);
+    window.addEventListener('lang-change', _onLangChange);
 }
 
 export function destroy() {
-  window.removeEventListener('lang-change', _onLangChange);
-  TTS.stop();
-  if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
-  _el = null; _catalogo = []; _pool = [];
+    window.removeEventListener('lang-change', _onLangChange);
+    TTS.stop();
+    if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
+    _el = null; _catalogo = []; _pool = [];
 }
 
-export function onEnter() {}
+export function onEnter() { }
 export function onLeave() {
-  TTS.stop();
-  if (_audioEl) _audioEl.pause();
-  Telemetry.track('toca_sesion', {
-    _modulo: 'toca',
-    nivel_alcanzado: _nivel + 1,
-    opciones_nivel:  NIVELES[_nivel],
-  });
+    TTS.stop();
+    if (_audioEl) _audioEl.pause();
+    Telemetry.track('toca_sesion', {
+        _modulo: 'toca',
+        nivel_alcanzado: _nivel + 1,
+        opciones_nivel: NIVELES[_nivel],
+    });
 }
 
 export async function pause() {
-  TTS.stop(); if (_audioEl) _audioEl.pause();
+    TTS.stop(); if (_audioEl) _audioEl.pause();
 }
 
 export async function resume(container) {
-  _el = container;
-  _langConfig = window._langConfig ? { ..._langConfig, ...window._langConfig } : _langConfig;
-  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
-  _render();
-  _renderRonda();
-  window.removeEventListener('lang-change', _onLangChange);
-  window.addEventListener('lang-change', _onLangChange);
+    _el = container;
+    _langConfig = window._langConfig ? { ..._langConfig, ...window._langConfig } : _langConfig;
+    _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+    _render();
+    _renderRonda();
+    window.removeEventListener('lang-change', _onLangChange);
+    window.addEventListener('lang-change', _onLangChange);
 }
 
 // ─── Shell ────────────────────────────────────────────────────────────────────
 function _render() {
-  _el.style.cssText =
-    'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;';
+    _el.style.cssText =
+        'position:absolute;inset:0;display:flex;flex-direction:column;' +
+        'overflow:hidden;background:transparent;';
 
-  _el.innerHTML = `
+    _el.innerHTML = `
   <style>
     /* ── Header de nivel ── */
     #tc-header {
@@ -296,254 +296,254 @@ function _render() {
   </div>
   `;
 
-  _el.querySelector('#tc-btn-repetir').addEventListener('click', () => {
-    haptic(10);
-    _reproducirInstruccion();
-  });
+    _el.querySelector('#tc-btn-repetir').addEventListener('click', () => {
+        haptic(10);
+        _reproducirInstruccion();
+    });
 }
 
 // ─── Ronda ────────────────────────────────────────────────────────────────────
 function _nuevaRonda() {
-  if (_catalogo.length < NIVELES[_nivel]) {
-    _el.querySelector('#tc-grid').style.display     = 'none';
-    _el.querySelector('#tc-instruccion').style.display = 'none';
-    _el.querySelector('#tc-vacio').style.display    = 'flex';
-    return;
-  }
+    if (_catalogo.length < NIVELES[_nivel]) {
+        _el.querySelector('#tc-grid').style.display = 'none';
+        _el.querySelector('#tc-instruccion').style.display = 'none';
+        _el.querySelector('#tc-vacio').style.display = 'flex';
+        return;
+    }
 
-  _esperando = false;
+    _esperando = false;
 
-  // Elegir objetivo y distractores del pool
-  const n = NIVELES[_nivel];
+    // Elegir objetivo y distractores del pool
+    const n = NIVELES[_nivel];
 
-  // Rellenar pool si se agota
-  if (_pool.length < n) _pool = _shuffle([..._catalogo]);
+    // Rellenar pool si se agota
+    if (_pool.length < n) _pool = _shuffle([..._catalogo]);
 
-  // Objetivo: primero del pool
-  _objetivo = _pool.shift();
+    // Objetivo: primero del pool
+    _objetivo = _pool.shift();
 
-  // Distractores: siguientes n-1 del pool
-  const distractores = [];
-  while (distractores.length < n - 1) {
-    if (!_pool.length) _pool = _shuffle([..._catalogo]);
-    const candidato = _pool.shift();
-    if (candidato.id !== _objetivo.id) distractores.push(candidato);
-  }
+    // Distractores: siguientes n-1 del pool
+    const distractores = [];
+    while (distractores.length < n - 1) {
+        if (!_pool.length) _pool = _shuffle([..._catalogo]);
+        const candidato = _pool.shift();
+        if (candidato.id !== _objetivo.id) distractores.push(candidato);
+    }
 
-  _opciones = _shuffle([_objetivo, ...distractores]);
+    _opciones = _shuffle([_objetivo, ...distractores]);
 
-  _renderRonda();
+    _renderRonda();
 
-  // Reproducir instrucción con delay breve
-  setTimeout(() => _reproducirInstruccion(), 400);
+    // Reproducir instrucción con delay breve
+    setTimeout(() => _reproducirInstruccion(), 400);
 }
 
 function _renderRonda() {
-  const n = NIVELES[_nivel];
+    const n = NIVELES[_nivel];
 
-  // Header
-  _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
-  _renderDots();
+    // Header
+    _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
+    _renderDots();
 
-  // Prompt
-  _actualizarPrompt();
+    // Prompt
+    _actualizarPrompt();
 
-  // Grid
-  const grid = _el.querySelector('#tc-grid');
-  grid.className = `cols-${n}`;
-  grid.innerHTML = '';
+    // Grid
+    const grid = _el.querySelector('#tc-grid');
+    grid.className = `cols-${n}`;
+    grid.innerHTML = '';
 
-  _opciones.forEach(picto => {
-    const btn = document.createElement('button');
-    btn.className    = 'tc-opcion';
-    btn.dataset.id   = picto.id;
+    _opciones.forEach(picto => {
+        const btn = document.createElement('button');
+        btn.className = 'tc-opcion';
+        btn.dataset.id = picto.id;
 
-    const img        = document.createElement('img');
-    img.src          = PICTO_URL(picto.ruta_img);
-    img.alt          = picto.es;
-    img.onerror      = () => img.style.opacity = '0.3';
+        const img = document.createElement('img');
+        img.src = PICTO_URL(picto.ruta_img);
+        img.alt = picto.es;
+        img.onerror = () => img.style.opacity = '0.3';
 
-    const label      = document.createElement('span');
-    label.className  = 'tc-opcion-label';
-    label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
+        const label = document.createElement('span');
+        label.className = 'tc-opcion-label';
+        label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
 
-    btn.appendChild(img);
-    btn.appendChild(label);
-    btn.addEventListener('click', () => _tocar(picto, btn));
-    grid.appendChild(btn);
-  });
+        btn.appendChild(img);
+        btn.appendChild(label);
+        btn.addEventListener('click', () => _tocar(picto, btn));
+        grid.appendChild(btn);
+    });
 }
 
 function _actualizarPrompt() {
-  if (!_objetivo) return;
-  const prompt = _el.querySelector('#tc-prompt');
-  if (_lang === 'en') {
-    const word = _objetivo.en || _objetivo.es;
-    prompt.innerHTML = `Touch the <strong>${word}</strong>`;
-    _el.querySelector('#tc-label-sup').textContent = 'LISTEN AND TOUCH';
-  } else {
-    const art  = _objetivo.art || '';
-    const word = _objetivo.es;
-    const ins  = art ? `Toca ${art} <strong>${word}</strong>` : `Toca <strong>${word}</strong>`;
-    prompt.innerHTML = ins;
-    _el.querySelector('#tc-label-sup').textContent = 'ESCUCHA Y TOCA';
-  }
+    if (!_objetivo) return;
+    const prompt = _el.querySelector('#tc-prompt');
+    if (_lang === 'en') {
+        const word = _objetivo.en || _objetivo.es;
+        prompt.innerHTML = `Touch the <strong>${word}</strong>`;
+        _el.querySelector('#tc-label-sup').textContent = 'LISTEN AND TOUCH';
+    } else {
+        const art = _objetivo.art || '';
+        const word = _objetivo.es;
+        const ins = art ? `Toca ${art} <strong>${word}</strong>` : `Toca <strong>${word}</strong>`;
+        prompt.innerHTML = ins;
+        _el.querySelector('#tc-label-sup').textContent = 'ESCUCHA Y TOCA';
+    }
 }
 
 function _renderDots() {
-  const wrap = _el.querySelector('#tc-dots');
-  wrap.innerHTML = '';
-  for (let i = 0; i < ACIERTOS_UP; i++) {
-    const d = document.createElement('div');
-    d.className = 'tc-dot' + (i < _aciertos ? ' lleno' : '');
-    wrap.appendChild(d);
-  }
+    const wrap = _el.querySelector('#tc-dots');
+    wrap.innerHTML = '';
+    for (let i = 0; i < ACIERTOS_UP; i++) {
+        const d = document.createElement('div');
+        d.className = 'tc-dot' + (i < _aciertos ? ' lleno' : '');
+        wrap.appendChild(d);
+    }
 }
 
 // ─── Interacción ──────────────────────────────────────────────────────────────
 function _tocar(picto, btn) {
-  if (_esperando) return;
-  haptic(12);
+    if (_esperando) return;
+    haptic(12);
 
-  if (picto.id === _objetivo.id) {
-    _acierto(btn);
-  } else {
-    _error(btn);
-  }
+    if (picto.id === _objetivo.id) {
+        _acierto(btn);
+    } else {
+        _error(btn);
+    }
 }
 
 function _acierto(btn) {
-  _esperando = true;
-  _aciertos++;
+    _esperando = true;
+    _aciertos++;
 
-  btn.classList.add('correcto');
-  lanzarConfeti({ count: 30, container: _el });
+    btn.classList.add('correcto');
+    lanzarConfeti({ count: 30, container: _el });
 
-  // Eco de la palabra
-  const texto  = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
-  const archivo = _objetivo.ruta_img.replace('.png', '');
-  _reproducirAudio(archivo, _lang, texto);
+    // Eco de la palabra
+    const texto = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
+    const archivo = _objetivo.ruta_img.replace('.png', '');
+    _reproducirAudio(archivo, _lang, texto);
 
-  Telemetry.track('toca_acierto', {
-    _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1,
-  });
+    Telemetry.track('toca_acierto', {
+        _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1,
+    });
 
-  // ¿Subir de nivel?
-  if (_aciertos >= ACIERTOS_UP) {
-    _aciertos = 0;
-    if (_nivel < NIVELES.length - 1) {
-      setTimeout(() => _mostrarSubidaNivel(), 700);
+    // ¿Subir de nivel?
+    if (_aciertos >= ACIERTOS_UP) {
+        _aciertos = 0;
+        if (_nivel < NIVELES.length - 1) {
+            setTimeout(() => _mostrarSubidaNivel(), 700);
+        } else {
+            // Nivel máximo — reiniciar conteo y seguir
+            setTimeout(() => _nuevaRonda(), 900);
+        }
     } else {
-      // Nivel máximo — reiniciar conteo y seguir
-      setTimeout(() => _nuevaRonda(), 900);
+        _renderDots();
+        setTimeout(() => _nuevaRonda(), 900);
     }
-  } else {
-    _renderDots();
-    setTimeout(() => _nuevaRonda(), 900);
-  }
 }
 
 function _error(btn) {
-  btn.classList.add('incorrecto');
-  haptic([10, 50, 10]);
+    btn.classList.add('incorrecto');
+    haptic([10, 50, 10]);
 
-  setTimeout(() => btn.classList.remove('incorrecto'), 450);
+    setTimeout(() => btn.classList.remove('incorrecto'), 450);
 
-  // Repetir instrucción con delay
-  setTimeout(() => _reproducirInstruccion(), 600);
+    // Repetir instrucción con delay
+    setTimeout(() => _reproducirInstruccion(), 600);
 
-  Telemetry.track('toca_error', {
-    _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1,
-  });
+    Telemetry.track('toca_error', {
+        _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1,
+    });
 }
 
 function _mostrarSubidaNivel() {
-  _nivel++;
-  const overlay = _el.querySelector('#tc-nivel-up');
-  const emojis  = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '🏆'];
-  _el.querySelector('#tc-nivel-up-emoji').textContent = emojis[Math.min(_nivel, emojis.length - 1)];
-  _el.querySelector('#tc-nivel-up-texto').textContent =
-    _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
-  _el.querySelector('#tc-nivel-up-sub').textContent =
-    _lang === 'en'
-      ? `Now ${NIVELES[_nivel]} pictures`
-      : `Ahora ${NIVELES[_nivel]} opciones`;
+    _nivel++;
+    const overlay = _el.querySelector('#tc-nivel-up');
+    const emojis = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '🏆'];
+    _el.querySelector('#tc-nivel-up-emoji').textContent = emojis[Math.min(_nivel, emojis.length - 1)];
+    _el.querySelector('#tc-nivel-up-texto').textContent =
+        _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
+    _el.querySelector('#tc-nivel-up-sub').textContent =
+        _lang === 'en'
+            ? `Now ${NIVELES[_nivel]} pictures`
+            : `Ahora ${NIVELES[_nivel]} opciones`;
 
-  overlay.classList.add('visible');
-  lanzarConfeti({ count: 60, container: _el });
+    overlay.classList.add('visible');
+    lanzarConfeti({ count: 60, container: _el });
 
-  // TTS
-  const msg = _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
-  TTS.speak(msg, { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 });
+    // TTS
+    const msg = _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
+    TTS.speak(msg, { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 });
 
-  setTimeout(() => {
-    overlay.classList.remove('visible');
-    _nuevaRonda();
-  }, 2200);
+    setTimeout(() => {
+        overlay.classList.remove('visible');
+        _nuevaRonda();
+    }, 2200);
 }
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
 function _reproducirInstruccion() {
-  if (!_objetivo) return;
+    if (!_objetivo) return;
 
-  const lang   = _lang === 'en' ? 'en-US' : 'es-MX';
-  const texto  = _lang === 'en'
-    ? `Touch the ${_objetivo.en || _objetivo.es}`
-    : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
+    const lang = _lang === 'en' ? 'en-US' : 'es-MX';
+    const texto = _lang === 'en'
+        ? `Touch the ${_objetivo.en || _objetivo.es}`
+        : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
 
-  // Intentar MP3 primero, TTS como fallback
-  const archivo = _objetivo.ruta_img.replace('.png', '');
-  const urlAudio = AUDIO_URL(archivo, _lang);
+    // Intentar MP3 primero, TTS como fallback
+    const archivo = _objetivo.ruta_img.replace('.png', '');
+    const urlAudio = AUDIO_URL(archivo, _lang);
 
-  // Para la instrucción completa usamos TTS directamente
-  // (no tenemos MP3 de instrucciones compuestas)
-  TTS.speak(texto, { lang, rate: 0.88, pitch: 1.1 });
+    // Para la instrucción completa usamos TTS directamente
+    // (no tenemos MP3 de instrucciones compuestas)
+    TTS.speak(texto, { lang, rate: 0.88, pitch: 1.1 });
 }
 
 function _reproducirAudio(archivo, lang, textoFallback) {
-  if (!_audioEl) {
-    _audioEl = document.createElement('audio');
-    _audioEl.preload = 'none';
-  }
-  TTS.stop();
-  _audioEl.pause();
+    if (!_audioEl) {
+        _audioEl = document.createElement('audio');
+        _audioEl.preload = 'none';
+    }
+    TTS.stop();
+    _audioEl.pause();
 
-  const url = AUDIO_URL(archivo, lang);
-  let _usado = false;
-  const _fallback = () => {
-    if (_usado) return; _usado = true;
-    TTS.speak(textoFallback, {
-      lang: lang === 'en' ? 'en-US' : 'es-MX',
-      rate: 0.9, pitch: 1.2,
-    });
-  };
+    const url = AUDIO_URL(archivo, lang);
+    let _usado = false;
+    const _fallback = () => {
+        if (_usado) return; _usado = true;
+        TTS.speak(textoFallback, {
+            lang: lang === 'en' ? 'en-US' : 'es-MX',
+            rate: 0.9, pitch: 1.2,
+        });
+    };
 
-  _audioEl.onerror = _fallback;
-  _audioEl.src     = url;
-  _audioEl.play().catch(_fallback);
+    _audioEl.onerror = _fallback;
+    _audioEl.src = url;
+    _audioEl.play().catch(_fallback);
 }
 
 // ─── Idioma ───────────────────────────────────────────────────────────────────
 function _onLangChange(e) {
-  const cfg = e.detail?.langConfig;
-  if (!cfg) return;
-  _langConfig = { ...cfg };
-  _lang = (cfg.en && !cfg.es) ? 'en' : 'es';
-  // Actualizar labels sin reiniciar la ronda
-  if (_objetivo) {
-    _actualizarPrompt();
-    _el.querySelectorAll('.tc-opcion-label').forEach((lbl, i) => {
-      const p = _opciones[i];
-      if (p) lbl.textContent = _lang === 'en' ? (p.en || p.es) : p.es;
-    });
-  }
+    const cfg = e.detail?.langConfig;
+    if (!cfg) return;
+    _langConfig = { ...cfg };
+    _lang = (cfg.en && !cfg.es) ? 'en' : 'es';
+    // Actualizar labels sin reiniciar la ronda
+    if (_objetivo) {
+        _actualizarPrompt();
+        _el.querySelectorAll('.tc-opcion-label').forEach((lbl, i) => {
+            const p = _opciones[i];
+            if (p) lbl.textContent = _lang === 'en' ? (p.en || p.es) : p.es;
+        });
+    }
 }
 
 // ─── Utils ────────────────────────────────────────────────────────────────────
 function _shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
 }
