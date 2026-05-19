@@ -8,12 +8,12 @@
 */
 
 import { borrarCache, precachear, fetchTimeout } from '../../core/offline.js';
-import { toast, lanzarConfeti }                  from '../../core/ui.js';
-import { Perfiles }                              from '../../core/perfiles.js';
-import { Telemetry }                             from '../../core/telemetry.js';
-import { cfg }                                   from '../../core/config.js';
+import { toast, lanzarConfeti } from '../../core/ui.js';
+import { Perfiles } from '../../core/perfiles.js';
+import { Telemetry } from '../../core/telemetry.js';
+import { cfg } from '../../core/config.js';
 
-let _container      = null;
+let _container = null;
 let _onPerfilChange = null;
 const _q = sel => _container?.querySelector(sel);
 
@@ -38,11 +38,11 @@ export function destroy() {
 }
 
 export function onEnter() { _actualizarEstadoConexion(); }
-export function onLeave() {}
+export function onLeave() { }
 
 // ─── Shell ────────────────────────────────────────────────────────────────────
 function _renderShell() {
-  const appNombre  = cfg('app.nombre',  'Marina 2');
+  const appNombre = cfg('app.nombre', 'Marina 2');
   const appVersion = cfg('app.version', '1.0.0');
 
   _container.innerHTML = `
@@ -79,7 +79,7 @@ function _renderShell() {
         font-weight: 800; font-size: .82rem; cursor: pointer;
         transition: transform .12s; white-space: nowrap; font-family: inherit;
       }
-      .aj-btn:active  { transform: scale(.93); }
+      .aj-btn:active  { transform:scale(.93); filter:brightness(1.2); }
       .aj-primary { background: var(--t-primary, #0ea5c9); color: white; }
       .aj-danger  { background: #EF4444; color: white; }
       .aj-neutral { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
@@ -380,12 +380,17 @@ function _renderShell() {
   _q('#btn-aj-borrar').addEventListener('click', async () => {
     const btn = _q('#btn-aj-borrar');
     btn.disabled = true;
+    btn.textContent = '⏳ Borrando…';
     await borrarCache();
     toast('Caché borrada', { emoji: '🗑️' });
+    btn.textContent = 'Borrar';
     btn.disabled = false;
   });
 
   _q('#btn-aj-refresh').addEventListener('click', async () => {
+    const btn = _q('#btn-aj-refresh');
+    btn.disabled = true;
+    btn.textContent = '⏳ Actualizando…';
     const reg = await navigator.serviceWorker?.getRegistration();
     if (reg?.waiting) {
       reg.waiting.postMessage({ tipo: 'skipWaiting' });
@@ -396,8 +401,11 @@ function _renderShell() {
   });
 
   _q('#btn-aj-reset').addEventListener('click', async () => {
-    _q('#btn-aj-reset').disabled = true;
+    const btn = _q('#btn-aj-reset');
+    btn.disabled = true;
+    btn.textContent = '⏳ Borrando…';
     await borrarCache();
+    btn.textContent = '⏳ Recargando…';
     location.reload(true);
   });
 
@@ -446,7 +454,7 @@ function _renderShell() {
 
 // ─── Conexión ─────────────────────────────────────────────────────────────────
 async function _actualizarEstadoConexion() {
-  const dot   = _q('#aj-dot');
+  const dot = _q('#aj-dot');
   const texto = _q('#aj-texto-conexion');
   if (!dot || !texto) return;
   dot.style.background = '#eab308';
@@ -472,13 +480,14 @@ async function _actualizarEstadoConexion() {
 // Usa assets-manifest.json generado por scripts/generate-manifest.js
 // No hay URLs hardcodeadas de módulos específicos.
 async function _descargarTodo() {
-  const btn  = _q('#btn-aj-descargar');
+  const btn = _q('#btn-aj-descargar');
   const wrap = _q('#aj-progreso-wrap');
-  const bar  = _q('#aj-progreso-bar');
-  const txt  = _q('#aj-progreso-txt');
+  const bar = _q('#aj-progreso-bar');
+  const txt = _q('#aj-progreso-txt');
   if (!btn || !wrap || !bar || !txt) return;
 
   btn.disabled = true;
+  btn.textContent = '⏳ Descargando…';
   wrap.classList.add('visible');
   bar.style.width = '0%';
   txt.textContent = 'Leyendo manifiesto...';
@@ -502,7 +511,7 @@ async function _descargarTodo() {
       const extra = mod.buildCache ? await mod.buildCache() : (mod.cache || []);
       if (!_container) return;
       extra.forEach(u => urls.add(u));
-    } catch (_) {}
+    } catch (_) { }
   }
 
   if (!urls.size) {
@@ -526,9 +535,9 @@ async function _descargarTodo() {
 
   if (!_container) return;
 
-  bar.style.width   = '100%';
+  bar.style.width = '100%';
   bar.style.background = ok === total ? '#22c55e' : '#f59e0b';
-  txt.textContent   = ok === total ? `${ok} archivos listos` : `${ok} de ${total} descargados`;
+  txt.textContent = ok === total ? `${ok} archivos listos` : `${ok} de ${total} descargados`;
 
   lanzarConfeti({ count: 40, container: _container });
   toast('Descarga completada', { emoji: '📥' });
@@ -541,7 +550,7 @@ function _renderReporte() {
   const el = _q('#aj-reporte-contenido');
   if (!el) return;
 
-  const p       = Perfiles.getActivo();
+  const p = Perfiles.getActivo();
   const reporte = Telemetry.getReporte?.(p.id) || {};
 
   if (!reporte.totalEventos) {
@@ -551,9 +560,9 @@ function _renderReporte() {
 
   const MODULO_LABEL = {
     'mira-y-di': '🔍 Mira y di',
-    'frases':    '💬 Frases',
-    'memorama':  '🃏 Memorama',
-    'ajustes':   '⚙️ Ajustes',
+    'frases': '💬 Frases',
+    'memorama': '🃏 Memorama',
+    'ajustes': '⚙️ Ajustes',
   };
 
   const porModulo = reporte.porModulo || {};
@@ -613,19 +622,19 @@ function _renderModulos() {
 
   _MODULOS_CONFIGURABLES.forEach(mod => {
     const activo = habilitados === null || habilitados.includes(mod.id);
-    const fila   = document.createElement('div');
+    const fila = document.createElement('div');
     fila.className = 'aj-toggle-fila';
 
-    const info  = document.createElement('div');
+    const info = document.createElement('div');
     info.className = 'aj-toggle-info';
     info.innerHTML = `<span class="aj-toggle-emoji">${mod.emoji}</span><span class="aj-toggle-label">${mod.label}</span>`;
 
-    const label  = document.createElement('label');
+    const label = document.createElement('label');
     label.className = 'aj-toggle';
-    const input  = document.createElement('input');
-    input.type    = 'checkbox';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
     input.checked = activo;
-    const slider  = document.createElement('span');
+    const slider = document.createElement('span');
     slider.className = 'aj-toggle-slider';
     label.append(input, slider);
 
@@ -651,8 +660,8 @@ function _renderPerfiles() {
 
   Perfiles.listar().forEach(p => {
     const esActivo = p.id === Perfiles.activoId;
-    const edad     = Perfiles.calcularEdad(p.fechaNacimiento);
-    const item     = document.createElement('div');
+    const edad = Perfiles.calcularEdad(p.fechaNacimiento);
+    const item = document.createElement('div');
     item.className = 'aj-perfil-item';
 
     const avatarEl = document.createElement('div');
@@ -674,13 +683,13 @@ function _renderPerfiles() {
 
     if (esActivo) {
       const badge = document.createElement('span');
-      badge.className   = 'aj-perfil-activo-badge';
+      badge.className = 'aj-perfil-activo-badge';
       badge.textContent = 'activo';
       btns.appendChild(badge);
     } else {
       const btnAct = document.createElement('button');
       btnAct.className = 'aj-perfil-btn aj-perfil-btn-activar';
-      btnAct.title     = 'Activar';
+      btnAct.title = 'Activar';
       btnAct.textContent = '▶';
       btnAct.addEventListener('click', () => {
         Perfiles.activar(p.id);
@@ -691,16 +700,16 @@ function _renderPerfiles() {
     }
 
     const btnEdit = document.createElement('button');
-    btnEdit.className   = 'aj-perfil-btn aj-perfil-btn-editar';
-    btnEdit.title       = 'Editar';
+    btnEdit.className = 'aj-perfil-btn aj-perfil-btn-editar';
+    btnEdit.title = 'Editar';
     btnEdit.textContent = '✏️';
     btnEdit.addEventListener('click', () => _abrirModal(p.id));
     btns.appendChild(btnEdit);
 
     if (!esActivo) {
       const btnDel = document.createElement('button');
-      btnDel.className   = 'aj-perfil-btn aj-perfil-btn-eliminar';
-      btnDel.title       = 'Eliminar';
+      btnDel.className = 'aj-perfil-btn aj-perfil-btn-eliminar';
+      btnDel.title = 'Eliminar';
       btnDel.textContent = '🗑';
       btnDel.addEventListener('click', () => {
         if (!confirm(`¿Eliminar el perfil de ${p.apodo}? Esta acción no se puede deshacer.`)) return;
@@ -717,11 +726,11 @@ function _renderPerfiles() {
 }
 
 // ─── Modal de perfil ──────────────────────────────────────────────────────────
-let _editandoId    = null;
+let _editandoId = null;
 let _avatarFotoData = null;
 
 function _abrirModal(id) {
-  _editandoId    = id || null;
+  _editandoId = id || null;
   _avatarFotoData = null;
 
   const titulo = _q('#aj-modal-titulo');
@@ -729,29 +738,29 @@ function _abrirModal(id) {
   const inputEmoji = _q('#input-avatar-emoji');
   const inputFecha = _q('#input-fecha');
   const inputNotas = _q('#input-notas');
-  const preview    = _q('#aj-avatar-preview');
+  const preview = _q('#aj-avatar-preview');
 
   if (id) {
     const p = Perfiles.listar().find(x => x.id === id);
     if (!p) return;
     titulo.textContent = 'Editar perfil';
-    inputApodo.value   = p.apodo;
-    inputFecha.value   = p.fechaNacimiento || '';
-    inputNotas.value   = p.notas || '';
+    inputApodo.value = p.apodo;
+    inputFecha.value = p.fechaNacimiento || '';
+    inputNotas.value = p.notas || '';
     if (p.avatarFoto) {
       _avatarFotoData = p.avatarFoto;
       preview.innerHTML = `<img src="${p.avatarFoto}">`;
-      inputEmoji.value  = '';
+      inputEmoji.value = '';
     } else {
       preview.textContent = p.avatar || '🧑';
-      inputEmoji.value    = p.avatar || '';
+      inputEmoji.value = p.avatar || '';
     }
   } else {
-    titulo.textContent  = 'Nuevo perfil';
-    inputApodo.value    = '';
-    inputEmoji.value    = '';
-    inputFecha.value    = '';
-    inputNotas.value    = '';
+    titulo.textContent = 'Nuevo perfil';
+    inputApodo.value = '';
+    inputEmoji.value = '';
+    inputFecha.value = '';
+    inputNotas.value = '';
     preview.textContent = '🧑';
   }
 
@@ -761,7 +770,7 @@ function _abrirModal(id) {
 
 function _cerrarModal() {
   _q('#aj-modal-perfil')?.classList.remove('visible');
-  _editandoId    = null;
+  _editandoId = null;
   _avatarFotoData = null;
   const fi = _q('#input-avatar-file');
   if (fi) fi.value = '';
@@ -773,10 +782,10 @@ function _guardarPerfil() {
 
   const datos = {
     apodo,
-    avatar:          _q('#input-avatar-emoji').value.trim() || '🧑',
-    avatarFoto:      _avatarFotoData || null,
+    avatar: _q('#input-avatar-emoji').value.trim() || '🧑',
+    avatarFoto: _avatarFotoData || null,
     fechaNacimiento: _q('#input-fecha').value || null,
-    notas:           _q('#input-notas').value.trim(),
+    notas: _q('#input-notas').value.trim(),
   };
 
   if (_editandoId) {
@@ -792,26 +801,26 @@ function _guardarPerfil() {
 }
 
 // ─── Crop de avatar ───────────────────────────────────────────────────────────
-let _cropImg      = null;
-let _cropZoom     = 1;
-let _cropOffX     = 0;
-let _cropOffY     = 0;
+let _cropImg = null;
+let _cropZoom = 1;
+let _cropOffX = 0;
+let _cropOffY = 0;
 let _cropDragging = false;
-let _cropLastX    = 0;
-let _cropLastY    = 0;
+let _cropLastX = 0;
+let _cropLastY = 0;
 let _cropPinchDist = 0;
 
 function _abrirCrop(src) {
   const img = new Image();
   img.onload = () => {
-    _cropImg  = img;
+    _cropImg = img;
     _cropZoom = Math.max(320 / img.width, 320 / img.height);
     _cropOffX = 0; _cropOffY = 0;
-    const sl  = _q('#aj-crop-zoom-slider');
-    sl.min    = String(_cropZoom * 0.8);
-    sl.max    = String(_cropZoom * 4);
-    sl.step   = String(_cropZoom * 0.01);
-    sl.value  = String(_cropZoom);
+    const sl = _q('#aj-crop-zoom-slider');
+    sl.min = String(_cropZoom * 0.8);
+    sl.max = String(_cropZoom * 4);
+    sl.step = String(_cropZoom * 0.01);
+    sl.value = String(_cropZoom);
     _dibujarCrop();
     _q('#aj-crop-wrap').classList.add('visible');
     _iniciarEventosCrop();
@@ -840,7 +849,7 @@ function _confirmarCrop() {
   const ih = _cropImg.height * _cropZoom;
   const ix = cx + _cropOffX - iw / 2;
   const iy = cy + _cropOffY - ih / 2;
-  const e  = 256 / 320;
+  const e = 256 / 320;
   ctx.drawImage(_cropImg, ix * e, iy * e, iw * e, ih * e);
   _avatarFotoData = out.toDataURL('image/jpeg', 0.88);
   const prev = _q('#aj-avatar-preview');
@@ -871,14 +880,14 @@ function _dibujarCrop() {
   ctx.beginPath();
   ctx.arc(cx, cy, W * 0.46, 0, Math.PI * 2);
   ctx.strokeStyle = 'rgba(14,165,201,0.9)';
-  ctx.lineWidth   = 2.5;
+  ctx.lineWidth = 2.5;
   ctx.stroke();
 }
 
 function _clampOffset() {
   if (!_cropImg) return;
   const canvas = _q('#aj-crop-canvas');
-  const radio  = canvas.width * 0.46;
+  const radio = canvas.width * 0.46;
   const iw = _cropImg.width * _cropZoom;
   const ih = _cropImg.height * _cropZoom;
   const maxX = Math.max(0, iw / 2 - radio);
@@ -890,31 +899,31 @@ function _clampOffset() {
 function _iniciarEventosCrop() {
   const c = _q('#aj-crop-canvas');
   if (!c) return;
-  c.addEventListener('mousedown',  _onCropMouseDown);
-  c.addEventListener('mousemove',  _onCropMouseMove);
-  c.addEventListener('mouseup',    _onCropMouseUp);
+  c.addEventListener('mousedown', _onCropMouseDown);
+  c.addEventListener('mousemove', _onCropMouseMove);
+  c.addEventListener('mouseup', _onCropMouseUp);
   c.addEventListener('mouseleave', _onCropMouseUp);
-  c.addEventListener('wheel',      _onCropWheel,      { passive: false });
+  c.addEventListener('wheel', _onCropWheel, { passive: false });
   c.addEventListener('touchstart', _onCropTouchStart, { passive: false });
-  c.addEventListener('touchmove',  _onCropTouchMove,  { passive: false });
-  c.addEventListener('touchend',   _onCropTouchEnd);
+  c.addEventListener('touchmove', _onCropTouchMove, { passive: false });
+  c.addEventListener('touchend', _onCropTouchEnd);
 }
 
 function _limpiarEventosCrop() {
   const c = _q('#aj-crop-canvas');
   if (!c) return;
-  c.removeEventListener('mousedown',  _onCropMouseDown);
-  c.removeEventListener('mousemove',  _onCropMouseMove);
-  c.removeEventListener('mouseup',    _onCropMouseUp);
+  c.removeEventListener('mousedown', _onCropMouseDown);
+  c.removeEventListener('mousemove', _onCropMouseMove);
+  c.removeEventListener('mouseup', _onCropMouseUp);
   c.removeEventListener('mouseleave', _onCropMouseUp);
-  c.removeEventListener('wheel',      _onCropWheel);
+  c.removeEventListener('wheel', _onCropWheel);
   c.removeEventListener('touchstart', _onCropTouchStart);
-  c.removeEventListener('touchmove',  _onCropTouchMove);
-  c.removeEventListener('touchend',   _onCropTouchEnd);
+  c.removeEventListener('touchmove', _onCropTouchMove);
+  c.removeEventListener('touchend', _onCropTouchEnd);
 }
 
-function _onCropMouseDown(e) { _cropDragging = true;  _cropLastX = e.clientX; _cropLastY = e.clientY; }
-function _onCropMouseUp()    { _cropDragging = false; }
+function _onCropMouseDown(e) { _cropDragging = true; _cropLastX = e.clientX; _cropLastY = e.clientY; }
+function _onCropMouseUp() { _cropDragging = false; }
 function _onCropMouseMove(e) {
   if (!_cropDragging) return;
   _cropOffX += e.clientX - _cropLastX;
@@ -924,20 +933,20 @@ function _onCropMouseMove(e) {
 }
 function _onCropWheel(e) {
   e.preventDefault();
-  const sl    = _q('#aj-crop-zoom-slider');
+  const sl = _q('#aj-crop-zoom-slider');
   const delta = e.deltaY > 0 ? -0.08 : 0.08;
-  _cropZoom   = Math.max(parseFloat(sl.min), Math.min(parseFloat(sl.max), _cropZoom + delta * _cropZoom));
-  sl.value    = String(_cropZoom);
+  _cropZoom = Math.max(parseFloat(sl.min), Math.min(parseFloat(sl.max), _cropZoom + delta * _cropZoom));
+  sl.value = String(_cropZoom);
   _clampOffset(); _dibujarCrop();
 }
 function _onCropTouchStart(e) {
   e.preventDefault();
   if (e.touches.length === 1) {
     _cropDragging = true;
-    _cropLastX    = e.touches[0].clientX;
-    _cropLastY    = e.touches[0].clientY;
+    _cropLastX = e.touches[0].clientX;
+    _cropLastY = e.touches[0].clientY;
   } else if (e.touches.length === 2) {
-    _cropDragging  = false;
+    _cropDragging = false;
     _cropPinchDist = _pinchDist(e.touches);
   }
 }
@@ -950,10 +959,10 @@ function _onCropTouchMove(e) {
     _cropLastY = e.touches[0].clientY;
     _clampOffset(); _dibujarCrop();
   } else if (e.touches.length === 2) {
-    const sl    = _q('#aj-crop-zoom-slider');
-    const dist  = _pinchDist(e.touches);
-    _cropZoom   = Math.max(parseFloat(sl.min), Math.min(parseFloat(sl.max), _cropZoom * (dist / _cropPinchDist)));
-    sl.value    = String(_cropZoom);
+    const sl = _q('#aj-crop-zoom-slider');
+    const dist = _pinchDist(e.touches);
+    _cropZoom = Math.max(parseFloat(sl.min), Math.min(parseFloat(sl.max), _cropZoom * (dist / _cropPinchDist)));
+    sl.value = String(_cropZoom);
     _cropPinchDist = dist;
     _clampOffset(); _dibujarCrop();
   }

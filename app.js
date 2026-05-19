@@ -130,6 +130,11 @@ function _montarHeader() {
     return 'es';   // default y fallback
   };
 
+  // Guardar altura del header como variable CSS para los contenedores fixed
+  requestAnimationFrame(() => {
+    const h = document.getElementById('app-header')?.offsetHeight || 0;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  });
   document.getElementById('lang-pill')?.addEventListener('click', e => {
     const btn = e.target.closest('[data-lang]');
     if (!btn) return;
@@ -194,9 +199,12 @@ function _getContenedor(id) {
   if (!_contenedores[id]) {
     const div = document.createElement('div');
     div.id = `modulo-contenedor-${id}`;
+    // position:fixed relativo al viewport — inmune al padding del padre
+    // top = altura del header para no quedar debajo de él
     div.style.cssText =
-      'position:absolute;inset:0;display:none;overflow:hidden;';
-    document.getElementById('app-body').appendChild(div);
+      'position:fixed;left:0;right:0;bottom:0;display:none;overflow:hidden;' +
+      'top:var(--header-h, 0px);';
+    document.body.appendChild(div);
     _contenedores[id] = div;
   }
   return _contenedores[id];
