@@ -354,6 +354,7 @@
       box-sizing: border-box;
       justify-content: center;
       align-content: center;
+      transition: grid-template-columns .35s ease, gap .3s ease, padding .3s ease;
     }
 
     /* ── Portrait en iPhone — filas libres, sin altura fija ───── */
@@ -474,7 +475,10 @@
       border-radius: var(--r-xl);
       box-shadow: 0 8px 24px rgba(0, 20, 60, 0.25);
       cursor: pointer;
-      transition: transform .15s ease, box-shadow .15s ease;
+      transition: transform .15s ease, box-shadow .15s ease,
+        width .3s ease, height .3s ease,
+        min-height .3s ease, max-height .3s ease,
+        font-size .3s ease, opacity .3s ease;
       min-height: 0;
       /* Imagen como fondo — siempre rellena el botón */
       background-size: cover;
@@ -514,11 +518,12 @@
       pointer-events: none;
     }
 
-    .tile-label {
+    tile-label {
       position: relative;
       z-index: 1;
       font-size: 1.1rem;
       font-weight: 900;
+      transition: font-size .3s ease, opacity .3s ease;
       text-align: center;
       color: #fff;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.70);
