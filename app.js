@@ -123,10 +123,6 @@ function _montarHeader() {
     return 'es';
   };
 
-  requestAnimationFrame(() => {
-    const h = document.getElementById('app-header')?.offsetHeight || 0;
-    document.documentElement.style.setProperty('--header-h', h + 'px');
-  });
   document.getElementById('lang-pill')?.addEventListener('click', e => {
     const btn = e.target.closest('[data-lang]');
     if (!btn) return;
@@ -145,7 +141,6 @@ function _montarHeader() {
     }));
   });
 
-  // Botón ajustes — solo si existe el módulo
   const ajustesMod = MODULOS.find(m => m.id === 'ajustes');
   if (ajustesMod) {
     const btn = document.createElement('button');
@@ -188,12 +183,10 @@ function _getContenedor(id) {
   if (!_contenedores[id]) {
     const div = document.createElement('div');
     div.id = `modulo-contenedor-${id}`;
-    // position:fixed relativo al viewport — inmune al padding del padre
-    // top = altura del header para no quedar debajo de él
-    div.style.cssText =
-      'position:fixed;left:0;right:0;bottom:0;display:none;overflow:hidden;z-index:10;' +
-      'top:var(--header-h, 56px);';
-    document.body.appendChild(div);
+    // Dentro de #app-body — position:absolute llena exactamente el área
+    // debajo del header sin necesidad de calcular alturas ni z-index manuales
+    div.style.cssText = 'position:absolute;inset:0;display:none;overflow:hidden;';
+    document.getElementById('app-body').appendChild(div);
     _contenedores[id] = div;
   }
   return _contenedores[id];
@@ -213,34 +206,6 @@ function _montarHome() {
     .filter(m => m.habilitado && m.id !== 'ajustes')
     .filter(m => !habilitados || habilitados.includes(m.id))
     .sort((a, b) => a.orden - b.orden);
-
-  if (!modulos.length) {
-    grid.innerHTML = '';
-    modulos.forEach(mod => {
-      const btn = document.createElement('button');
-      btn.className = 'module-tile';
-
-      // Imagen como fondo — fallback a emoji si no carga
-      const imgUrl = `assets/ui/btn-${mod.id}.png`;
-      const testImg = new Image();
-      testImg.onload = () => btn.style.backgroundImage = `url('${imgUrl}')`;
-      testImg.onerror = () => {
-        btn.style.background = mod.color || 'rgba(255,255,255,0.10)';
-        const emoji = document.createElement('span');
-        emoji.textContent = mod.emoji || '🌟';
-        emoji.style.cssText = 'font-size:3.5rem;margin-bottom:8px;';
-        btn.insertBefore(emoji, btn.firstChild);
-      };
-      testImg.src = imgUrl;
-
-      btn.innerHTML = `<span class="tile-label">${mod.label}</span>`;
-      btn.addEventListener('click', () =>
-        mod.requierePin ? _abrirPin(mod) : navegarA(mod)
-      );
-      grid.appendChild(btn);
-    });
-    return;
-  }
 
   grid.innerHTML = '';
   modulos.forEach(mod => {
@@ -275,7 +240,6 @@ async function navegarA(mod) {
   const btnVolver = document.getElementById('btn-volver');
   const acciones = document.getElementById('modulo-acciones');
 
-  // Pausar o destruir módulo activo
   if (_moduloActivo) {
     try { _moduloActivo.onLeave?.(); } catch { }
     const c = _getContenedor(_moduloActivo.id);
@@ -296,14 +260,8 @@ async function navegarA(mod) {
 
   const contenedor = _getContenedor(mod.id);
 
-  // Reanudar si estaba pausado
   if (_modulosPausados[mod.id] && mod.resume) {
     _moduloActivo = mod;
-    const hh = document.getElementById('app-header')?.offsetHeight || 56;
-    document.documentElement.style.setProperty('--header-h', hh + 'px');
-    const _hh = document.getElementById('app-header')?.offsetHeight || 56;
-    document.documentElement.style.setProperty('--header-h', _hh + 'px');
-    contenedor.style.setProperty?.('top', _hh + 'px');
     contenedor.style.display = 'block';
     try { await mod.resume(contenedor); mod.onEnter?.(); } catch (e) {
       console.error('[App] Error al resumir', mod.id, e);
@@ -311,7 +269,6 @@ async function navegarA(mod) {
     return;
   }
 
-  // Limpiar si estaba pausado pero no tiene resume
   if (_modulosPausados[mod.id] && !mod.resume) {
     try { _modulosPausados[mod.id].destroy?.(); } catch { }
     delete _modulosPausados[mod.id];
@@ -320,9 +277,6 @@ async function navegarA(mod) {
 
   _moduloActivo = mod;
   contenedor.innerHTML = '';
-  const _hh2 = document.getElementById('app-header')?.offsetHeight || 56;
-  document.documentElement.style.setProperty('--header-h', _hh2 + 'px');
-  contenedor.style.top = _hh2 + 'px';
   contenedor.style.display = 'block';
 
   try {
@@ -354,7 +308,6 @@ function volverAlMenu() {
   animarEntrada(document.getElementById('vista-menu'), 'fadeIn');
 }
 
-// Exponer globalmente para uso desde módulos
 window.DotirApp = { volverAlMenu, navegarA, toast, MODULE_REGISTRY: MODULOS };
 window._volverAlMenu = volverAlMenu;
 
@@ -405,16 +358,18 @@ function _initAreaAdultos() {
     ?.addEventListener('click', _cerrarPin);
 
   document.getElementById('input-pin')
-    ?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btn-pin-ok')?.click(); });
+    ?.addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('btn-pin-ok')?.click();
+    });
 
   document.getElementById('modal-pin')
-    ?.addEventListener('click', e => { if (e.target.id === 'modal-pin') _cerrarPin(); });
+    ?.addEventListener('click', e => {
+      if (e.target.id === 'modal-pin') _cerrarPin();
+    });
 
-  // Gestos ocultos para abrir área de adultos
   const ajustesMod = MODULOS.find(m => m.id === 'ajustes');
   if (!ajustesMod) return;
 
-  // Deep link por URL: ?modulo=mira-y-di
   const moduloUrl = new URLSearchParams(location.search).get('modulo');
   if (moduloUrl) {
     const mod = MODULOS.find(m => m.id === moduloUrl);
@@ -423,10 +378,9 @@ function _initAreaAdultos() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// WAKE LOCK — evita que el iPad apague la pantalla
+// WAKE LOCK
 // ─────────────────────────────────────────────────────────────
 function _initWakeLock() {
-  // Video silencioso de 1px como fallback para Safari que no soporta WakeLock API
   const video = document.createElement('video');
   video.loop = true; video.muted = true;
   video.playsInline = true;
@@ -467,13 +421,11 @@ function _initWakeLock() {
         return;
       } catch { }
     }
-    // Fallback: video silencioso
     if (video.paused) {
       try { await video.play(); } catch (e) { console.warn('[WakeLock] fallback falló:', e); }
     }
   }
 
-  // Activar tras primer gesto (iOS requiere interacción)
   ['touchstart', 'touchend', 'click', 'pointerdown'].forEach(ev => {
     document.addEventListener(ev, function _u() {
       _activar();
@@ -486,7 +438,6 @@ function _initWakeLock() {
     else if (!video.paused) video.pause();
   });
 
-  // Heartbeat al SW cada 4 min
   setInterval(() => {
     if (document.visibilityState === 'visible') {
       navigator.serviceWorker?.controller?.postMessage({ tipo: 'heartbeat' });
@@ -495,8 +446,7 @@ function _initWakeLock() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// MICRÓFONO — solicitar permiso al arranque (una sola vez)
-// Safari recuerda la decisión para el origen permanentemente.
+// MICRÓFONO
 // ─────────────────────────────────────────────────────────────
 function _solicitarMicrofono() {
   if (!navigator.mediaDevices?.getUserMedia) return;
