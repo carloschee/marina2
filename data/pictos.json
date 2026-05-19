@@ -1396,8 +1396,8 @@
     "id": 1200,
     "es": "roja",
     "en": "red",
-    "ruta_img": "roja.png",
-    "art": ""
+    "ruta_img": "rojo-color.png",
+    "art": "la"
   },
   {
     "id": 1201,
@@ -1522,8 +1522,8 @@
     "id": 1218,
     "es": "negro",
     "en": "black",
-    "ruta_img": "negro.png",
-    "art": ""
+    "ruta_img": "negro-color.png",
+    "art": "el"
   },
   {
     "id": 1219,
@@ -1674,9 +1674,9 @@
   },
   {
     "id": 1240,
-    "es": "bomberos",
-    "en": "firefighters",
-    "ruta_img": "bomberos.png",
+    "es": "camión de bomberos",
+    "en": "firetruck",
+    "ruta_img": "camion-bomberos.png",
     "art": "el"
   },
   {
@@ -1991,8 +1991,8 @@
     "id": 1285,
     "es": "rojo",
     "en": "red",
-    "ruta_img": "rojo.png",
-    "art": ""
+    "ruta_img": "rojo-color.png",
+    "art": "el"
   },
   {
     "id": 1286,
@@ -2005,43 +2005,43 @@
     "id": 1287,
     "es": "amarillo",
     "en": "yellow",
-    "ruta_img": "amarillo.png",
+    "ruta_img": "amarillo-color.png",
     "art": ""
   },
   {
     "id": 1288,
     "es": "verde",
     "en": "green",
-    "ruta_img": "verde.png",
+    "ruta_img": "verde-color.png",
     "art": ""
   },
   {
     "id": 1289,
     "es": "morado",
     "en": "purple",
-    "ruta_img": "morado.png",
-    "art": ""
+    "ruta_img": "morado-color.png",
+    "art": "el"
   },
   {
     "id": 1290,
     "es": "marrón",
     "en": "brown",
-    "ruta_img": "marron.png",
+    "ruta_img": "marron-color.png",
     "art": ""
   },
   {
     "id": 1291,
     "es": "blanco",
     "en": "white",
-    "ruta_img": "blanco.png",
-    "art": ""
+    "ruta_img": "blanco-color.png",
+    "art": "el"
   },
   {
     "id": 1292,
     "es": "gris",
     "en": "grey",
-    "ruta_img": "gris.png",
-    "art": ""
+    "ruta_img": "gris-color.png",
+    "art": "el"
   },
   {
     "id": 1293,
@@ -2054,29 +2054,29 @@
     "id": 1294,
     "es": "dorado",
     "en": "golden",
-    "ruta_img": "dorado.png",
-    "art": ""
+    "ruta_img": "dorado-color.png",
+    "art": "el"
   },
   {
     "id": 1295,
     "es": "plateado",
     "en": "silver",
-    "ruta_img": "plateado.png",
-    "art": ""
+    "ruta_img": "plateado-color.png",
+    "art": "el"
   },
   {
     "id": 1296,
     "es": "beige",
     "en": "beige",
-    "ruta_img": "beige.png",
+    "ruta_img": "beige-color.png",
     "art": ""
   },
   {
     "id": 1297,
     "es": "violeta",
     "en": "violet",
-    "ruta_img": "violeta.png",
-    "art": ""
+    "ruta_img": "violeta-flor.png",
+    "art": "la"
   },
   {
     "id": 1298,
@@ -2131,7 +2131,7 @@
     "id": 1305,
     "es": "ocre",
     "en": "ocher",
-    "ruta_img": "ocre.png",
+    "ruta_img": "ocre-color.png",
     "art": ""
   },
   {
@@ -2468,7 +2468,7 @@
     "es": "lento",
     "en": "slow",
     "ruta_img": "lento.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1354,
@@ -2482,7 +2482,7 @@
     "es": "frío",
     "en": "cold",
     "ruta_img": "frio.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1356,
@@ -2496,49 +2496,49 @@
     "es": "duro",
     "en": "hard",
     "ruta_img": "duro.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1358,
     "es": "limpio",
     "en": "clean",
     "ruta_img": "limpio.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1359,
     "es": "sucio",
     "en": "dirty",
     "ruta_img": "sucio.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1360,
     "es": "nuevo",
     "en": "new",
     "ruta_img": "nuevo.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1361,
     "es": "viejo",
     "en": "old",
     "ruta_img": "viejo.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1362,
     "es": "bonito",
     "en": "pretty",
     "ruta_img": "bonito.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1363,
     "es": "feo",
     "en": "ugly",
     "ruta_img": "feo.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1364,
@@ -2980,5 +2980,33 @@
     "en": "empty",
     "ruta_img": "vacio.png",
     "art": ""
+  },
+  {
+    "id": 1427,
+    "es": "pastelito",
+    "en": "cupcake",
+    "ruta_img": "pastelito.png",
+    "art": "el"
+  },
+  {
+    "id": 1428,
+    "es": "mono de nieve",
+    "en": "snowman",
+    "ruta_img": "mono-nieve.png",
+    "art": "el"
+  },
+  {
+    "id": 1429,
+    "es": "calor",
+    "en": "heat",
+    "ruta_img": "calor.png",
+    "art": "el"
+  },
+  {
+    "id": 1430,
+    "es": "bombero",
+    "en": "firefighter",
+    "ruta_img": "bombero.png",
+    "art": "el"
   }
 ]
