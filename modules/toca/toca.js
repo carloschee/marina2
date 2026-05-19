@@ -203,8 +203,6 @@ function _render() {
 
     /* ── Mosaico — tamaño fijo igual en todos los niveles ── */
     .tc-opcion {
-      width:${MOSAIC_SIZE}px;
-      height:${MOSAIC_SIZE}px;
       flex-shrink:0;
       background:#fff; border-radius:20px;
       display:flex; flex-direction:column;
@@ -439,7 +437,7 @@ function _renderRonda() {
   });
 
   // Aplicar layout según nivel — ajusta flex-basis para centrar filas
-  _aplicarLayout(n);
+  requestAnimationFrame(() => { if (_el) _aplicarLayout(n); });
 }
 
 // ─── Layouts por nivel ────────────────────────────────────────────────────────
@@ -455,40 +453,27 @@ function _renderRonda() {
 
 function _aplicarLayout(n) {
   const grid = _el.querySelector('#tc-grid');
-  const opciones = grid.querySelectorAll('.tc-opcion');
-  const S = MOSAIC_SIZE;
+  const GAP  = 12;
+  const PAD  = 40;
 
-  // Reset
-  opciones.forEach(o => {
-    o.style.width = S + 'px';
-    o.style.height = S + 'px';
-    o.style.flexBasis = S + 'px';
-    o.style.flexGrow = '0';
+  const filas = { 3:1, 4:2, 5:2, 6:2, 8:2 }[n] || 2;
+  const cols  = { 3:3, 4:2, 5:3, 6:3, 8:4 }[n] || 3;
+
+  const W = grid.offsetWidth  || (window.innerWidth  - PAD);
+  const H = grid.offsetHeight || (window.innerHeight - PAD);
+
+  // Tamaño limitado por ancho Y por alto
+  const porAncho = Math.floor((W - GAP * (cols  - 1)) / cols);
+  const porAlto  = Math.floor((H - GAP * (filas - 1) - 36) / filas); // 36 = padding-top+bottom
+  const size     = Math.min(porAncho, porAlto);
+
+  grid.querySelectorAll('.tc-opcion').forEach(o => {
+    o.style.width      = size + 'px';
+    o.style.height     = size + 'px';
+    o.style.flexBasis  = size + 'px';
+    o.style.flexGrow   = '0';
     o.style.flexShrink = '0';
   });
-
-  if (n === 3) {
-    // Fila central de 3 — ya queda centrado con justify-content:center
-    // Sin cambios adicionales
-  } else if (n === 4) {
-    // 2×2: forzar 2 por fila usando basis > 45% del contenedor
-    // El contenedor tiene ~1140px, 2 mosaicos + 1 gap = 2*272+12 = 556 → caben bien
-    // No hace falta cambiar nada — con width fijo y wrap, 4 mosaicos = 2+2
-  } else if (n === 5) {
-    // Fila de 3 + fila de 2 centrada
-    // Los 3 primeros ocupan ancho normal, los 2 últimos también
-    // Con justify-content:center y ancho fijo se centra automáticamente
-    // Los 3 primeros llenan la fila (3×272 + 2×12 = 840 < 1140 → fila completa)
-    // Los 2 últimos (2×272 + 12 = 556) quedan centrados en segunda fila
-    // Sin cambios adicionales
-  } else if (n === 6) {
-    // 2×3: con MOSAIC_SIZE y 3 por fila caben bien
-    // 3×272 + 2×12 = 840 < 1140 → fila completa
-    // Sin cambios adicionales
-  } else if (n === 8) {
-    // 2×4: 4×272 + 3×12 = 1124 < 1140 → fila completa de 4
-    // Sin cambios adicionales
-  }
 }
 
 // ─── Interacción ──────────────────────────────────────────────────────────────
