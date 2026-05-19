@@ -328,6 +328,7 @@ function _render() {
 }
 
 function _nuevaRonda() {
+  if (!_el) return;  // proteger si el módulo fue destruido
   const n = NIVELES[_nivel];
   if (_catalogo.length < n) {
     _el.querySelector('#tc-grid').style.display = 'none';
@@ -368,7 +369,9 @@ function _nuevaRonda() {
   console.log('[toca] suma:', header.offsetHeight + instruccion.offsetHeight);
   console.log('[toca] diferencia:', el.offsetHeight - grid.offsetHeight - header.offsetHeight - instruccion.offsetHeight);
 
-  setTimeout(() => _reproducirInstruccion(), 400);
+  setTimeout(() => {
+    if (_el && !(_audioEl && !_audioEl.paused)) _reproducirInstruccion();
+  }, 400);
 }
 
 function _renderRonda() {
@@ -442,12 +445,13 @@ function _acierto(btn) {
     if (_nivel < NIVELES.length - 1) {
       setTimeout(() => _mostrarSubidaNivel(), 700);
     } else {
-      setTimeout(() => _nuevaRonda(), 900);
+      setTimeout(() => _mostrarModoInfinito(), 700);
     }
   } else {
     _renderDots();
-    setTimeout(() => _nuevaRonda(), 900);
+    setTimeout(() => { if (_el) _nuevaRonda(); }, 900);
   }
+}
 }
 
 function _error(btn) {
@@ -476,6 +480,24 @@ function _mostrarSubidaNivel() {
     _el.querySelector('#tc-nivel-up').classList.remove('visible');
     _nuevaRonda();
   }, 2200);
+}
+
+function _mostrarModoInfinito() {
+  _el.querySelector('#tc-nivel-up-emoji').textContent = '🏆';
+  _el.querySelector('#tc-nivel-up-texto').textContent =
+    _lang === 'en' ? '¡Champion!' : '¡Campeona!';
+  _el.querySelector('#tc-nivel-up-sub').textContent =
+    _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
+  _el.querySelector('#tc-nivel-up').classList.add('visible');
+  lanzarConfeti({ count: 100, container: _el });
+  TTS.speak(
+    _lang === 'en' ? 'Champion! Infinite challenge!' : '¡Campeona! ¡Reto infinito!',
+    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
+  );
+  setTimeout(() => {
+    _el.querySelector('#tc-nivel-up').classList.remove('visible');
+    if (_el) _nuevaRonda();
+  }, 2800);
 }
 
 function _abrirModalTemas() {
