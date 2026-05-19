@@ -1,5 +1,5 @@
 {
-  "generado": "2026-05-19T17:52:46.684Z",
+  "generado": "2026-05-19T17:54:31.598Z",
   "totalAssets": 1401,
   "urls": [
     "./app.config.json",
@@ -945,7 +945,6 @@
     "./assets/img/icon-96.png",
     "./assets/img/icon-maskable-192.png",
     "./assets/img/icon-maskable-512.png",
-    "./assets/pictogramas/Xochimilco.png",
     "./assets/pictogramas/abajo.png",
     "./assets/pictogramas/abeja.png",
     "./assets/pictogramas/abierto.png",
@@ -1361,6 +1360,7 @@
     "./assets/pictogramas/waffle.png",
     "./assets/pictogramas/wonton.png",
     "./assets/pictogramas/xilofono.png",
+    "./assets/pictogramas/xochimilco.png",
     "./assets/pictogramas/yate.png",
     "./assets/pictogramas/yegua.png",
     "./assets/pictogramas/yogur.png",
