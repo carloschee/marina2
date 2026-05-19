@@ -26,7 +26,7 @@ import { TTS }                   from '../../core/tts.js';
 import { lanzarConfeti, haptic } from '../../core/ui.js';
 import { Telemetry }             from '../../core/telemetry.js';
 
-const PICTO_URL       = (palabra, lang = 'es') => `assets/pictogramas/${lang}/${palabra}.png`;
+const PICTO_URL = (ruta_img) => `assets/pictogramas/${ruta_img}`;
 const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
 const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
@@ -74,7 +74,8 @@ let _nivel       = 1;
 let _lang        = 'es'; // idioma activo — sincronizado con pill global
 let _activa      = 0;
 let _built       = [];
-let _audioEl     = null;
+let _audioEl    = null;
+let _pictos     = {};
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function pause() {
@@ -115,6 +116,14 @@ export async function init(container) {
   _lang   = _langDesdeConfig();
 
   try {
+    const res = await fetch('./data/pictos.json');
+    const cat = await res.json();
+    _pictos = Object.fromEntries(cat.map(e => [e.id, e]));
+  } catch {
+    _pictos = {};
+  }
+
+  try {
     const res = await fetch('./data/frases.json');
     _todasFrases = await res.json();
   } catch (e) {
@@ -131,7 +140,7 @@ export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
   if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
   TTS.stop();
-  _el = null; _todasFrases = []; _frases = []; _built = [];
+  _el = null; _todasFrases = []; _frases = []; _built = []; _pictos = {};
 }
 
 export function onEnter() {}
@@ -502,7 +511,8 @@ function _renderPiezas() {
 
     if (pieza.tipo === 'picto') {
       const img   = document.createElement('img');
-      img.src     = PICTO_URL(pieza.texto, _lang);
+      const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
+      img.src = entrada ? PICTO_URL(entrada.ruta_img) : `assets/pictogramas/${pieza.texto}.png`;
       img.alt     = pieza.texto;
       img.onerror = () => img.remove();
       btn.appendChild(img);
@@ -593,7 +603,8 @@ function _renderTira() {
 
     if (pieza.tipo === 'picto') {
       const img   = document.createElement('img');
-      img.src     = PICTO_URL(pieza.texto, _lang);
+      const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
+      img.src = entrada ? PICTO_URL(entrada.ruta_img) : `assets/pictogramas/${pieza.texto}.png`;
       img.alt     = pieza.texto;
       img.onerror = () => img.remove();
       div.appendChild(img);
