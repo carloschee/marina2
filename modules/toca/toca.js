@@ -116,7 +116,7 @@ export async function resume(container) {
 function _render() {
   _el.style.cssText =
     'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;';
+    'overflow:hidden;background:transparent;contain:strict;';
 
   _el.innerHTML = `
   <style>
@@ -274,7 +274,7 @@ function _render() {
 
     /* ── Modal de temas ── */
     #tc-modal-temas {
-      display:none; position:absolute; inset:0; z-index:20;
+      display:none; position:fixed; inset:0; z-index:20;
       align-items:center; justify-content:center;
       background:rgba(3,17,26,0.80);
       backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
