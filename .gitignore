@@ -6,3 +6,4 @@ script/generar-catalogo-pictos.py
 script/pictos.csv
 script/procesar-pictos.py
 script/verificar-pictos.py
+scripts/limpiar-pictos.py
