@@ -361,6 +361,12 @@ function _nuevaRonda() {
   console.log('[toca] grid:', grid.offsetWidth, 'x', grid.offsetHeight);
   console.log('[toca] el parent:', el.parentElement?.offsetWidth, 'x', el.parentElement?.offsetHeight);
   console.log('[toca] el style:', el.style.cssText);
+  const header = _el.querySelector('#tc-header');
+  const instruccion = _el.querySelector('#tc-instruccion');
+  console.log('[toca] header h:', header.offsetHeight);
+  console.log('[toca] instruccion h:', instruccion.offsetHeight);
+  console.log('[toca] suma:', header.offsetHeight + instruccion.offsetHeight);
+  console.log('[toca] diferencia:', el.offsetHeight - grid.offsetHeight - header.offsetHeight - instruccion.offsetHeight);
 
   setTimeout(() => _reproducirInstruccion(), 400);
 }
