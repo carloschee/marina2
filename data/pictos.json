@@ -1066,7 +1066,7 @@
   {
     "id": 1153,
     "es": "rosa",
-    "en": "pink",
+    "en": "rose",
     "ruta_img": "rosa.png",
     "art": "la"
   },
@@ -1087,7 +1087,7 @@
   {
     "id": 1156,
     "es": "red",
-    "en": "grid",
+    "en": "net",
     "ruta_img": "red.png",
     "art": "la"
   },
