@@ -12,38 +12,38 @@
    Fuente: data/pictos.json (modo aleatorio) o data/toca-temas.json (temas).
 */
 
-import { TTS }                   from '../../core/tts.js';
+import { TTS } from '../../core/tts.js';
 import { haptic, lanzarConfeti } from '../../core/ui.js';
-import { Telemetry }             from '../../core/telemetry.js';
+import { Telemetry } from '../../core/telemetry.js';
 
-const PICTO_URL = (ruta)       => `assets/pictogramas/${ruta}`;
+const PICTO_URL = (ruta) => `assets/pictogramas/${ruta}`;
 const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta.replace('.png', '')}.mp3`;
 
-const NIVELES     = [3, 4, 5, 6, 8];
+const NIVELES = [3, 4, 5, 6, 8];
 const ACIERTOS_UP = 3;
 
-let _el         = null;
-let _catalogo   = [];
-let _temas      = [];
-let _tema       = null;
-let _pool       = [];
+let _el = null;
+let _catalogo = [];
+let _temas = [];
+let _tema = null;
+let _pool = [];
 let _langConfig = { es: true, en: false };
-let _lang       = 'es';
-let _nivel      = 0;
-let _aciertos   = 0;
-let _objetivo   = null;
-let _opciones   = [];
-let _esperando  = false;
-let _audioEl    = null;
+let _lang = 'es';
+let _nivel = 0;
+let _aciertos = 0;
+let _objetivo = null;
+let _opciones = [];
+let _esperando = false;
+let _audioEl = null;
 
 export async function init(container) {
-  _el         = container;
+  _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
-  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
-  _nivel      = 0;
-  _aciertos   = 0;
-  _esperando  = false;
-  _tema       = null;
+  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _nivel = 0;
+  _aciertos = 0;
+  _esperando = false;
+  _tema = null;
 
   try {
     const res = await fetch('./data/pictos.json');
@@ -74,14 +74,14 @@ export function destroy() {
   _el = null; _catalogo = []; _pool = []; _temas = [];
 }
 
-export function onEnter() {}
+export function onEnter() { }
 export function onLeave() {
   TTS.stop();
   if (_audioEl) _audioEl.pause();
   Telemetry.track('toca_sesion', {
     _modulo: 'toca',
     nivel_alcanzado: _nivel + 1,
-    opciones_nivel:  NIVELES[_nivel],
+    opciones_nivel: NIVELES[_nivel],
     tema: _tema?.id || 'todos',
   });
 }
@@ -330,9 +330,9 @@ function _render() {
 function _nuevaRonda() {
   const n = NIVELES[_nivel];
   if (_catalogo.length < n) {
-    _el.querySelector('#tc-grid').style.display        = 'none';
+    _el.querySelector('#tc-grid').style.display = 'none';
     _el.querySelector('#tc-instruccion').style.display = 'none';
-    _el.querySelector('#tc-vacio').style.display       = 'flex';
+    _el.querySelector('#tc-vacio').style.display = 'flex';
     return;
   }
   _esperando = false;
@@ -353,6 +353,15 @@ function _nuevaRonda() {
   }
   _opciones = _shuffle([_objetivo, ...distractores]);
   _renderRonda();
+
+  // DIAGNÓSTICO TEMPORAL — remover después
+  const el = _el;
+  const grid = _el.querySelector('#tc-grid');
+  console.log('[toca] contenedor:', el.offsetWidth, 'x', el.offsetHeight);
+  console.log('[toca] grid:', grid.offsetWidth, 'x', grid.offsetHeight);
+  console.log('[toca] el parent:', el.parentElement?.offsetWidth, 'x', el.parentElement?.offsetHeight);
+  console.log('[toca] el style:', el.style.cssText);
+
   setTimeout(() => _reproducirInstruccion(), 400);
 }
 
@@ -366,14 +375,14 @@ function _renderRonda() {
   grid.innerHTML = '';
   _opciones.forEach(picto => {
     const btn = document.createElement('button');
-    btn.className  = 'tc-opcion';
+    btn.className = 'tc-opcion';
     btn.dataset.id = picto.id;
     const img = document.createElement('img');
-    img.src     = PICTO_URL(picto.ruta_img);
-    img.alt     = picto.es;
+    img.src = PICTO_URL(picto.ruta_img);
+    img.alt = picto.es;
     img.onerror = () => { img.style.opacity = '0.3'; };
     const label = document.createElement('span');
-    label.className   = 'tc-opcion-label';
+    label.className = 'tc-opcion-label';
     label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
     btn.appendChild(img);
     btn.appendChild(label);
@@ -418,10 +427,10 @@ function _acierto(btn) {
   _aciertos++;
   btn.classList.add('correcto');
   lanzarConfeti({ count: 30, container: _el });
-  const texto   = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
+  const texto = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
   const archivo = _objetivo.ruta_img;
   _reproducirAudio(archivo, _lang, texto);
-  Telemetry.track('toca_acierto', { _modulo:'toca', picto:_objetivo.es, nivel:_nivel+1 });
+  Telemetry.track('toca_acierto', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1 });
   if (_aciertos >= ACIERTOS_UP) {
     _aciertos = 0;
     if (_nivel < NIVELES.length - 1) {
@@ -440,22 +449,22 @@ function _error(btn) {
   haptic([10, 50, 10]);
   setTimeout(() => btn.classList.remove('incorrecto'), 450);
   setTimeout(() => _reproducirInstruccion(), 600);
-  Telemetry.track('toca_error', { _modulo:'toca', picto:_objetivo.es, nivel:_nivel+1 });
+  Telemetry.track('toca_error', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1 });
 }
 
 function _mostrarSubidaNivel() {
   _nivel++;
   const emojis = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '🏆'];
-  _el.querySelector('#tc-nivel-up-emoji').textContent = emojis[Math.min(_nivel, emojis.length-1)];
+  _el.querySelector('#tc-nivel-up-emoji').textContent = emojis[Math.min(_nivel, emojis.length - 1)];
   _el.querySelector('#tc-nivel-up-texto').textContent =
-    _lang === 'en' ? `Level ${_nivel+1}!` : `¡Nivel ${_nivel+1}!`;
+    _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
   _el.querySelector('#tc-nivel-up-sub').textContent =
     _lang === 'en' ? `Now ${NIVELES[_nivel]} pictures` : `Ahora ${NIVELES[_nivel]} opciones`;
   _el.querySelector('#tc-nivel-up').classList.add('visible');
   lanzarConfeti({ count: 60, container: _el });
   TTS.speak(
-    _lang === 'en' ? `Level ${_nivel+1}!` : `¡Nivel ${_nivel+1}!`,
-    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch:1.3, rate:0.9 }
+    _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`,
+    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
   );
   setTimeout(() => {
     _el.querySelector('#tc-nivel-up').classList.remove('visible');
@@ -508,14 +517,14 @@ function _seleccionarTema(id) {
   } else {
     _pool = _shuffle([..._catalogo]);
   }
-  _nivel    = 0;
+  _nivel = 0;
   _aciertos = 0;
   _nuevaRonda();
 }
 
 function _reproducirInstruccion() {
   if (!_objetivo) return;
-  const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
+  const lang = _lang === 'en' ? 'en-US' : 'es-MX';
   const texto = _lang === 'en'
     ? `Touch the ${_objetivo.en || _objetivo.es}`
     : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
@@ -533,10 +542,10 @@ function _reproducirAudio(ruta, lang, textoFallback) {
   let _usado = false;
   const _fallback = () => {
     if (_usado) return; _usado = true;
-    TTS.speak(textoFallback, { lang: lang === 'en' ? 'en-US' : 'es-MX', rate:0.9, pitch:1.2 });
+    TTS.speak(textoFallback, { lang: lang === 'en' ? 'en-US' : 'es-MX', rate: 0.9, pitch: 1.2 });
   };
   _audioEl.onerror = _fallback;
-  _audioEl.src     = AUDIO_URL(ruta, lang);
+  _audioEl.src = AUDIO_URL(ruta, lang);
   _audioEl.play().catch(_fallback);
 }
 
