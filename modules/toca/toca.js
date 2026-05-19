@@ -17,16 +17,15 @@ import { haptic, lanzarConfeti } from '../../core/ui.js';
 import { Telemetry }             from '../../core/telemetry.js';
 
 const PICTO_URL = (ruta)       => `assets/pictogramas/${ruta}`;
-const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta.replace('.png',''  )}.mp3`;
+const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta.replace('.png', '')}.mp3`;
 
 const NIVELES     = [3, 4, 5, 6, 8];
 const ACIERTOS_UP = 3;
 
-// ─── Estado ───────────────────────────────────────────────────────────────────
 let _el         = null;
 let _catalogo   = [];
 let _temas      = [];
-let _tema       = null;   // null = todos
+let _tema       = null;
 let _pool       = [];
 let _langConfig = { es: true, en: false };
 let _lang       = 'es';
@@ -37,7 +36,6 @@ let _opciones   = [];
 let _esperando  = false;
 let _audioEl    = null;
 
-// ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
   _el         = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
@@ -66,7 +64,6 @@ export async function init(container) {
   _pool = _shuffle([..._catalogo]);
   _render();
   _nuevaRonda();
-
   window.addEventListener('lang-change', _onLangChange);
 }
 
@@ -100,27 +97,24 @@ export async function resume(container) {
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
   _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
-
   if (_objetivo && _opciones.length) {
     _renderRonda();
     setTimeout(() => _reproducirInstruccion(), 500);
   } else {
     _nuevaRonda();
   }
-
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }
 
-// ─── Shell ────────────────────────────────────────────────────────────────────
 function _render() {
+  // SIN contain:strict — rompe position:absolute de los hijos
   _el.style.cssText =
     'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;contain:strict;';
+    'overflow:hidden;background:transparent;';
 
   _el.innerHTML = `
   <style>
-    /* ── Header ── */
     #tc-header {
       flex-shrink:0;
       display:flex; align-items:center; justify-content:space-between;
@@ -132,7 +126,6 @@ function _render() {
       text-transform:uppercase; color:rgba(255,255,255,0.50);
     }
     #tc-nivel-valor { font-size:.72rem; font-weight:900; color:#00e5b0; margin-left:4px; }
-
     #tc-btn-tema {
       display:flex; align-items:center; gap:6px;
       padding:6px 14px; border-radius:99px; border:none; cursor:pointer;
@@ -143,7 +136,6 @@ function _render() {
     }
     #tc-btn-tema:active { transform:scale(.93); background:rgba(255,255,255,.18); }
     #tc-tema-label { max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-
     #tc-dots { display:flex; gap:6px; align-items:center; flex-shrink:0; }
     .tc-dot {
       width:10px; height:10px; border-radius:50%;
@@ -151,8 +143,6 @@ function _render() {
       transition:background .3s, transform .3s;
     }
     .tc-dot.lleno { background:#00e5b0; transform:scale(1.2); }
-
-    /* ── Instrucción ── */
     #tc-instruccion {
       flex-shrink:0; margin:0 20px 14px;
       background:rgba(0,0,0,0.35);
@@ -178,84 +168,59 @@ function _render() {
       box-shadow:0 6px 20px rgba(251,113,133,0.45);
       transition:transform .12s, box-shadow .15s;
     }
-    #tc-btn-repetir:active { transform:scale(.88); box-shadow:0 3px 10px rgba(251,113,133,.3); }
-
-    /* ── Grid ── */
+    #tc-btn-repetir:active { transform:scale(.88); }
     #tc-grid {
       flex:1; min-height:0; display:grid; gap:12px; padding:0 20px 16px;
     }
-    /* 3 opciones — 1 fila × 3 cols */
-    #tc-grid.cols-3 {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 1fr;
-    }
-    /* 4 opciones — 1 fila × 4 cols */
-    #tc-grid.cols-4 {
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 1fr;
-    }
-    /* 5 opciones — 2 filas: 3 arriba + 2 abajo centradas */
+    #tc-grid.cols-3 { grid-template-columns:repeat(3,1fr); grid-template-rows:1fr; }
+    #tc-grid.cols-4 { grid-template-columns:repeat(4,1fr); grid-template-rows:1fr; }
     #tc-grid.cols-5 {
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns:repeat(6,1fr);
+      grid-template-rows:repeat(2,1fr);
     }
-    #tc-grid.cols-5 .tc-opcion:nth-child(1) { grid-column: 1 / 3; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(2) { grid-column: 3 / 5; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(3) { grid-column: 5 / 7; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(4) { grid-column: 2 / 4; }
-    #tc-grid.cols-5 .tc-opcion:nth-child(5) { grid-column: 4 / 6; }
-    /* 6 opciones — 2 filas × 3 cols */
-    #tc-grid.cols-6 {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-    }
-    /* 8 opciones — 2 filas × 4 cols */
-    #tc-grid.cols-8 {
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-    }
-
+    #tc-grid.cols-5 .tc-opcion:nth-child(1) { grid-column:1/3; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(2) { grid-column:3/5; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(3) { grid-column:5/7; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(4) { grid-column:2/4; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(5) { grid-column:4/6; }
+    #tc-grid.cols-6 { grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); }
+    #tc-grid.cols-8 { grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,1fr); }
     .tc-opcion {
-      background: #fff; border-radius: 20px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 10px 8px 12px; cursor: pointer;
-      border: 3px solid transparent;
-      box-shadow: 0 4px 16px rgba(0,20,60,0.18);
-      transition: transform .14s, box-shadow .14s, border-color .2s;
-      position: relative; overflow: hidden;
-      -webkit-tap-highlight-color: transparent; user-select: none;
-      min-height: 0; /* importante — deja que el grid controle la altura */
+      background:#fff; border-radius:20px;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:10px 8px 12px; cursor:pointer;
+      border:3px solid transparent;
+      box-shadow:0 4px 16px rgba(0,20,60,0.18);
+      transition:transform .14s, box-shadow .14s, border-color .2s;
+      position:relative; overflow:hidden;
+      -webkit-tap-highlight-color:transparent; user-select:none;
+      min-height:0;
     }
-    .tc-opcion:active { transform: scale(.93); }
+    .tc-opcion:active { transform:scale(.93); }
     .tc-opcion img {
-      width: 60%; height: 60%; object-fit: contain;
-      flex-shrink: 0; pointer-events: none;
+      width:60%; height:60%; object-fit:contain;
+      flex-shrink:0; pointer-events:none;
     }
     .tc-opcion-label {
-      font-size: clamp(.7rem, 1.6vw, .95rem); font-weight: 900;
-      color: #07212e; text-align: center; margin-top: 6px;
-      line-height: 1.1; word-break: break-word;
-      flex-shrink: 0;
+      font-size:clamp(.7rem,1.6vw,.95rem); font-weight:900;
+      color:#07212e; text-align:center; margin-top:6px;
+      line-height:1.1; word-break:break-word; flex-shrink:0;
     }
     .tc-opcion.correcto {
       border-color:#22c55e;
       box-shadow:0 0 0 4px rgba(34,197,94,0.35), 0 6px 20px rgba(0,20,60,0.20);
       animation:tc-pop .35s cubic-bezier(.34,1.56,.64,1) both;
     }
-    @keyframes tc-pop {
-      from { transform:scale(.9); } to { transform:scale(1); }
-    }
+    @keyframes tc-pop { from { transform:scale(.9); } to { transform:scale(1); } }
     .tc-opcion.incorrecto { animation:tc-wiggle .4s ease both; }
     @keyframes tc-wiggle {
       0%,100% { transform:translateX(0) rotate(0deg); }
-      20%      { transform:translateX(-8px) rotate(-2deg); }
-      40%      { transform:translateX(8px) rotate(2deg); }
-      60%      { transform:translateX(-5px) rotate(-1deg); }
-      80%      { transform:translateX(5px) rotate(1deg); }
+      20%     { transform:translateX(-8px) rotate(-2deg); }
+      40%     { transform:translateX(8px) rotate(2deg); }
+      60%     { transform:translateX(-5px) rotate(-1deg); }
+      80%     { transform:translateX(5px) rotate(1deg); }
     }
-
-    /* ── Overlay subida de nivel ── */
     #tc-nivel-up {
       display:none; position:absolute; inset:0; z-index:10;
       align-items:center; justify-content:center; flex-direction:column; gap:12px;
@@ -266,13 +231,9 @@ function _render() {
     #tc-nivel-up.visible { display:flex; }
     @keyframes tc-fadein { from { opacity:0; } to { opacity:1; } }
     #tc-nivel-up-emoji { font-size:4rem; animation:tc-flotar 1.2s ease-in-out infinite alternate; }
-    @keyframes tc-flotar {
-      from { transform:translateY(0); } to { transform:translateY(-12px); }
-    }
+    @keyframes tc-flotar { from { transform:translateY(0); } to { transform:translateY(-12px); } }
     #tc-nivel-up-texto { font-size:2rem; font-weight:900; color:#fff; text-shadow:0 4px 20px rgba(0,229,176,.60); }
     #tc-nivel-up-sub   { font-size:1rem; font-weight:700; color:rgba(255,255,255,0.60); }
-
-    /* ── Modal de temas ── */
     #tc-modal-temas {
       display:none; position:fixed; inset:0; z-index:20;
       align-items:center; justify-content:center;
@@ -302,16 +263,11 @@ function _render() {
       transition:background .15s, transform .12s; width:100%;
     }
     .tc-tema-opcion:active { transform:scale(.97); }
-    .tc-tema-opcion.activo {
-      background:rgba(0,229,176,0.15);
-      border-color:rgba(0,229,176,0.40);
-    }
-    .tc-tema-emoji { font-size:1.5rem; flex-shrink:0; }
-    .tc-tema-info  { display:flex; flex-direction:column; gap:2px; }
+    .tc-tema-opcion.activo { background:rgba(0,229,176,0.15); border-color:rgba(0,229,176,0.40); }
+    .tc-tema-emoji  { font-size:1.5rem; flex-shrink:0; }
+    .tc-tema-info   { display:flex; flex-direction:column; gap:2px; }
     .tc-tema-nombre { font-size:1rem; font-weight:900; }
     .tc-tema-desc   { font-size:.72rem; color:rgba(255,255,255,.45); font-weight:700; }
-
-    /* ── Sin pictos ── */
     #tc-vacio {
       display:none; flex:1; flex-direction:column;
       align-items:center; justify-content:center; gap:12px;
@@ -319,7 +275,6 @@ function _render() {
     }
   </style>
 
-  <!-- Header -->
   <div id="tc-header">
     <div id="tc-nivel-wrap">
       <span id="tc-nivel-label">NIVEL</span>
@@ -332,7 +287,6 @@ function _render() {
     <div id="tc-dots"></div>
   </div>
 
-  <!-- Instrucción -->
   <div id="tc-instruccion">
     <div id="tc-instruccion-texto">
       <span id="tc-label-sup">ESCUCHA Y TOCA</span>
@@ -341,17 +295,14 @@ function _render() {
     <button id="tc-btn-repetir" title="Repetir">🔊</button>
   </div>
 
-  <!-- Grid de opciones -->
   <div id="tc-grid"></div>
 
-  <!-- Overlay subida de nivel -->
   <div id="tc-nivel-up">
     <div id="tc-nivel-up-emoji">⭐</div>
     <div id="tc-nivel-up-texto"></div>
     <div id="tc-nivel-up-sub"></div>
   </div>
 
-  <!-- Modal de temas -->
   <div id="tc-modal-temas">
     <div id="tc-modal-box">
       <p id="tc-modal-titulo">Elige un tema</p>
@@ -359,7 +310,6 @@ function _render() {
     </div>
   </div>
 
-  <!-- Sin pictos -->
   <div id="tc-vacio">
     <span style="font-size:3rem">🔤</span>
     No hay pictogramas disponibles.
@@ -367,51 +317,40 @@ function _render() {
   `;
 
   _el.querySelector('#tc-btn-repetir').addEventListener('click', () => {
-    haptic(10);
-    _reproducirInstruccion();
+    haptic(10); _reproducirInstruccion();
   });
   _el.querySelector('#tc-btn-tema').addEventListener('click', () => {
-    haptic(8);
-    _abrirModalTemas();
+    haptic(8); _abrirModalTemas();
   });
   _el.querySelector('#tc-modal-temas').addEventListener('click', e => {
     if (e.target === _el.querySelector('#tc-modal-temas')) _cerrarModalTemas();
   });
 }
 
-// ─── Ronda ────────────────────────────────────────────────────────────────────
 function _nuevaRonda() {
   const n = NIVELES[_nivel];
-
   if (_catalogo.length < n) {
     _el.querySelector('#tc-grid').style.display        = 'none';
     _el.querySelector('#tc-instruccion').style.display = 'none';
     _el.querySelector('#tc-vacio').style.display       = 'flex';
     return;
   }
-
   _esperando = false;
-
-  // Rellenar pool si se agota
   if (_pool.length < n) {
     const base = _tema?.palabras?.length
       ? _catalogo.filter(e => _tema.palabras.includes(e.id))
       : _catalogo;
     _pool = _shuffle([...base]);
   }
-
   _objetivo = _pool.shift();
-
-  const distractores = [];
   const base = _tema?.palabras?.length
     ? _catalogo.filter(e => _tema.palabras.includes(e.id))
     : _catalogo;
-
   const tmpPool = _shuffle(base.filter(e => e.id !== _objetivo.id));
+  const distractores = [];
   while (distractores.length < n - 1 && tmpPool.length) {
     distractores.push(tmpPool.shift());
   }
-
   _opciones = _shuffle([_objetivo, ...distractores]);
   _renderRonda();
   setTimeout(() => _reproducirInstruccion(), 400);
@@ -419,29 +358,23 @@ function _nuevaRonda() {
 
 function _renderRonda() {
   const n = NIVELES[_nivel];
-
   _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
   _renderDots();
   _actualizarPrompt();
-
   const grid = _el.querySelector('#tc-grid');
   grid.className = `cols-${n}`;
   grid.innerHTML = '';
-
   _opciones.forEach(picto => {
     const btn = document.createElement('button');
     btn.className  = 'tc-opcion';
     btn.dataset.id = picto.id;
-
-    const img   = document.createElement('img');
-    img.src      = PICTO_URL(picto.ruta_img);
-    img.alt      = picto.es;
-    img.onerror  = () => { img.style.opacity = '0.3'; };
-
+    const img = document.createElement('img');
+    img.src     = PICTO_URL(picto.ruta_img);
+    img.alt     = picto.es;
+    img.onerror = () => { img.style.opacity = '0.3'; };
     const label = document.createElement('span');
-    label.className  = 'tc-opcion-label';
+    label.className   = 'tc-opcion-label';
     label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
-
     btn.appendChild(img);
     btn.appendChild(label);
     btn.addEventListener('click', () => _tocar(picto, btn));
@@ -453,15 +386,13 @@ function _actualizarPrompt() {
   if (!_objetivo) return;
   const prompt = _el.querySelector('#tc-prompt');
   if (_lang === 'en') {
-    const word = _objetivo.en || _objetivo.es;
-    prompt.innerHTML = `Touch the <strong>${word}</strong>`;
+    prompt.innerHTML = `Touch the <strong>${_objetivo.en || _objetivo.es}</strong>`;
     _el.querySelector('#tc-label-sup').textContent = 'LISTEN AND TOUCH';
   } else {
     const art = _objetivo.art || '';
-    const word = _objetivo.es;
     prompt.innerHTML = art
-      ? `Toca ${art} <strong>${word}</strong>`
-      : `Toca <strong>${word}</strong>`;
+      ? `Toca ${art} <strong>${_objetivo.es}</strong>`
+      : `Toca <strong>${_objetivo.es}</strong>`;
     _el.querySelector('#tc-label-sup').textContent = 'ESCUCHA Y TOCA';
   }
 }
@@ -476,7 +407,6 @@ function _renderDots() {
   }
 }
 
-// ─── Interacción ──────────────────────────────────────────────────────────────
 function _tocar(picto, btn) {
   if (_esperando) return;
   haptic(12);
@@ -486,16 +416,12 @@ function _tocar(picto, btn) {
 function _acierto(btn) {
   _esperando = true;
   _aciertos++;
-
   btn.classList.add('correcto');
   lanzarConfeti({ count: 30, container: _el });
-
   const texto   = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
   const archivo = _objetivo.ruta_img;
   _reproducirAudio(archivo, _lang, texto);
-
   Telemetry.track('toca_acierto', { _modulo:'toca', picto:_objetivo.es, nivel:_nivel+1 });
-
   if (_aciertos >= ACIERTOS_UP) {
     _aciertos = 0;
     if (_nivel < NIVELES.length - 1) {
@@ -524,42 +450,32 @@ function _mostrarSubidaNivel() {
   _el.querySelector('#tc-nivel-up-texto').textContent =
     _lang === 'en' ? `Level ${_nivel+1}!` : `¡Nivel ${_nivel+1}!`;
   _el.querySelector('#tc-nivel-up-sub').textContent =
-    _lang === 'en'
-      ? `Now ${NIVELES[_nivel]} pictures`
-      : `Ahora ${NIVELES[_nivel]} opciones`;
-
+    _lang === 'en' ? `Now ${NIVELES[_nivel]} pictures` : `Ahora ${NIVELES[_nivel]} opciones`;
   _el.querySelector('#tc-nivel-up').classList.add('visible');
   lanzarConfeti({ count: 60, container: _el });
   TTS.speak(
     _lang === 'en' ? `Level ${_nivel+1}!` : `¡Nivel ${_nivel+1}!`,
     { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch:1.3, rate:0.9 }
   );
-
   setTimeout(() => {
     _el.querySelector('#tc-nivel-up').classList.remove('visible');
     _nuevaRonda();
   }, 2200);
 }
 
-// ─── Modal de temas ───────────────────────────────────────────────────────────
 function _abrirModalTemas() {
   const lista = _el.querySelector('#tc-modal-lista');
   lista.innerHTML = '';
-
-  // Opción "Todos juegan"
   lista.appendChild(_crearOpcionTema(
     { id: null, emoji: '🌊', label: 'Todos juegan', desc: `${_catalogo.length} pictogramas` },
     _tema === null
   ));
-
-  // Temas adicionales
   _temas.forEach(t => {
     lista.appendChild(_crearOpcionTema(
       { id: t.id, emoji: t.emoji || '📚', label: t.label, desc: `${t.palabras?.length || 0} pictogramas` },
       _tema?.id === t.id
     ));
   });
-
   _el.querySelector('#tc-modal-temas').classList.add('visible');
 }
 
@@ -584,24 +500,19 @@ function _cerrarModalTemas() {
 function _seleccionarTema(id) {
   _tema = id === null ? null : (_temas.find(t => t.id === id) || null);
   _cerrarModalTemas();
-
   const label = _el.querySelector('#tc-tema-label');
   if (label) label.textContent = _tema ? _tema.label : 'Todos juegan';
-
-  // Reconstruir pool
   if (_tema?.palabras?.length) {
     const ids = new Set(_tema.palabras);
     _pool = _shuffle(_catalogo.filter(e => ids.has(e.id)));
   } else {
     _pool = _shuffle([..._catalogo]);
   }
-
   _nivel    = 0;
   _aciertos = 0;
   _nuevaRonda();
 }
 
-// ─── Audio ────────────────────────────────────────────────────────────────────
 function _reproducirInstruccion() {
   if (!_objetivo) return;
   const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
@@ -619,19 +530,16 @@ function _reproducirAudio(ruta, lang, textoFallback) {
   TTS.stop();
   _audioEl.pause();
   _audioEl.onerror = null;
-
   let _usado = false;
   const _fallback = () => {
     if (_usado) return; _usado = true;
     TTS.speak(textoFallback, { lang: lang === 'en' ? 'en-US' : 'es-MX', rate:0.9, pitch:1.2 });
   };
-
   _audioEl.onerror = _fallback;
   _audioEl.src     = AUDIO_URL(ruta, lang);
   _audioEl.play().catch(_fallback);
 }
 
-// ─── Idioma ───────────────────────────────────────────────────────────────────
 function _onLangChange(e) {
   const cfg = e.detail?.langConfig;
   if (!cfg) return;
@@ -646,7 +554,6 @@ function _onLangChange(e) {
   }
 }
 
-// ─── Utils ────────────────────────────────────────────────────────────────────
 function _shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
