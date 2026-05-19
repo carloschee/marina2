@@ -1131,7 +1131,7 @@
     "es": "serpiente",
     "en": "snake",
     "ruta_img": "serpiente.png",
-    "art": "el"
+    "art": "la"
   },
   {
     "id": 1163,
@@ -2082,7 +2082,7 @@
     "id": 1298,
     "es": "celeste",
     "en": "sky blue",
-    "ruta_img": "celeste.png",
+    "ruta_img": "celeste-color.png",
     "art": ""
   },
   {
@@ -2993,7 +2993,7 @@
     "es": "mono de nieve",
     "en": "snowman",
     "ruta_img": "mono-nieve.png",
-    "art": "el"
+    "art": "la"
   },
   {
     "id": 1429,
