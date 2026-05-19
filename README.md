@@ -14,7 +14,7 @@ Esta sección es para ti, mamá, papá o terapeuta que acompañas a Emi durante 
 
 La primera vez que abras la app, te recomendamos agregarla a la pantalla de inicio del iPad para que funcione como una aplicación nativa: toca el botón de compartir en Safari y elige **"Agregar a pantalla de inicio"**. Así la app funciona en pantalla completa, sin la barra del navegador, y también funciona sin internet una vez descargada.
 
-📸 *Captura sugerida: Safari abierto en la URL de la app, con el menú "Compartir" visible y la opción "Agregar a pantalla de inicio" resaltada*
+!(assets/readme/menu-agregar-inicio.pngl "Agregar a pantalla de inicio")
 
 ---
 
