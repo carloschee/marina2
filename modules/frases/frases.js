@@ -341,10 +341,11 @@ function _render() {
 
 // ─── Selector de nivel ────────────────────────────────────────────────────────
 function _renderNiveles() {
-  const wrap = _el.querySelector('#fr-niveles');
-  const label = wrap.querySelector('#fr-niveles-label');
+  const wrap    = _el.querySelector('#fr-niveles');
+  const label   = wrap.querySelector('#fr-niveles-label');
+  const acciones = wrap.querySelector('#fr-tira-acciones');
   wrap.innerHTML = '';
-  wrap.appendChild(label);
+  wrap.appendChild(label);  
 
   // Solo mostrar niveles que tienen frases en el idioma activo
   const nivelesConFrases = NIVELES.filter(n =>
@@ -374,6 +375,7 @@ function _renderNiveles() {
     btn.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
     wrap.appendChild(btn);
   });
+  if (acciones) wrap.appendChild(acciones);
 }
 
 function _cambiarNivel(nivel) {
