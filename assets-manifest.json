@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-19T05:12:05.675Z",
-  "totalAssets": 2241,
+  "generado": "2026-05-19T05:57:07.026Z",
+  "totalAssets": 2242,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -2031,6 +2031,7 @@
     "./assets/pictogramas/luna.png",
     "./assets/pictogramas/maiz.png",
     "./assets/pictogramas/mandarina.png",
+    "./assets/pictogramas/mango-fruta.png",
     "./assets/pictogramas/mango.png",
     "./assets/pictogramas/mano.png",
     "./assets/pictogramas/manzana.png",
