@@ -120,6 +120,21 @@ function _render() {
     }
     #md-picto.cargando { opacity:0; }
     #md-picto.hablando { animation:picto-wobble .5s ease-in-out infinite alternate; }
+    /* Spring drag — el picto sigue el dedo con resistencia */
+    #md-picto.dragging { transition: none !important; cursor: grab; }
+
+    /* Partículas flotantes en la tarjeta */
+    .md-particula {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; opacity: 0;
+      animation: md-flotar linear infinite;
+    }
+    @keyframes md-flotar {
+      0%   { transform: translateY(0)   scale(1);    opacity: 0; }
+      15%  { opacity: 0.35; }
+      85%  { opacity: 0.20; }
+      100% { transform: translateY(-120%) scale(0.6); opacity: 0; }
+    }
     @keyframes picto-wobble {
       0%   { transform:rotate(-2deg) scale(1.02); }
       25%  { transform:rotate(1.5deg) scale(1.04) translateY(-3px); }
@@ -378,6 +393,9 @@ function _bindEvents() {
     _hablar(texto, lang, archivo);
   });
   _el.querySelector('#md-btn-mic').addEventListener('click', _toggleMic);
+  // Spring drag en el pictograma
+  const picto = _el.querySelector('#md-picto');
+  if (picto) _initSpringDrag(picto);
 }
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
@@ -530,6 +548,24 @@ function _renderCardBg(hex) {
              fill="white" opacity="0.08"/>
     <rect width="400" height="500" fill="${c0}" opacity="0.05" filter="url(#md-grain)"/>
     <rect width="400" height="500" fill="url(#md-rg2)" opacity="0.3"/>
+
+    <!-- Luz rotatoria sutil -->
+    <ellipse cx="${200 + r(26, -60, 60)}" cy="${r(27, 80, 200)}"
+             rx="${r(28, 60, 120)}" ry="${r(29, 30, 70)}"
+             fill="white" opacity="0.06"
+             transform="rotate(${r(30, 0, 360)} 200 250)"/>
+
+    <!-- Destellos puntales -->
+    ${[1, 2, 3, 4, 5].map(i => `
+    <circle cx="${r(30 + i, 30, 370)}" cy="${r(35 + i, 40, 460)}"
+            r="${r(40 + i, 2, 5)}"
+            fill="white" opacity="${(r(45 + i, 1, 4) / 10).toFixed(1)}">
+      <animate attributeName="opacity"
+               values="0;${(r(45 + i, 2, 5) / 10).toFixed(1)};0"
+               dur="${(r(50 + i, 25, 45) / 10).toFixed(1)}s"
+               begin="${(r(55 + i, 0, 30) / 10).toFixed(1)}s"
+               repeatCount="indefinite"/>
+    </circle>`).join('')}
   `;
 }
 
@@ -569,6 +605,47 @@ function _levenshtein(a, b) {
     for (let j = 1; j <= n; j++)
       dp[i][j] = a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
   return dp[m][n];
+}
+
+// ─── Spring drag del pictograma ────────────────────────────────────────────────
+function _initSpringDrag(img) {
+  let startX = 0, startY = 0, isDragging = false;
+  const MAX = 28;   // máximo desplazamiento en px
+  const K = 0.35; // resistencia (0=sin resistencia, 1=1:1)
+
+  const _clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+  img.addEventListener('touchstart', e => {
+    if (img.classList.contains('hablando')) return;
+    const t = e.touches[0];
+    startX = t.clientX; startY = t.clientY;
+    isDragging = true;
+    img.classList.add('dragging');
+  }, { passive: true });
+
+  img.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const t = e.touches[0];
+    const dx = _clamp((t.clientX - startX) * K, -MAX, MAX);
+    const dy = _clamp((t.clientY - startY) * K, -MAX, MAX);
+    // Leve rotación proporcional al desplazamiento horizontal
+    const rot = dx * 0.15;
+    img.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(1.04)`;
+  }, { passive: false });
+
+  const _release = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    img.classList.remove('dragging');
+    // Rebote elástico de vuelta al centro
+    img.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    img.style.transform = 'translate(0,0) rotate(0deg) scale(1)';
+    setTimeout(() => { img.style.transition = ''; img.style.transform = ''; }, 520);
+  };
+
+  img.addEventListener('touchend', _release, { passive: true });
+  img.addEventListener('touchcancel', _release, { passive: true });
 }
 
 function _shuffle(arr) {
