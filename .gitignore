@@ -7,3 +7,4 @@ script/pictos.csv
 script/procesar-pictos.py
 script/verificar-pictos.py
 scripts/limpiar-pictos.py
+scripts/pictos-art-csv.py
