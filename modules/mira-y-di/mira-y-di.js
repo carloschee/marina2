@@ -304,14 +304,10 @@ function _construirLista() {
 function _onLangChange(e) {
   const cfg = e.detail?.langConfig;
   if (!cfg) return;
-  // Guardar el langConfig para usarlo en reproducción
   _langConfig = { ...cfg };
-  // Para mostrar texto: si solo EN → 'en', si no → 'es'
-  const nuevoLang = (cfg.en && !cfg.es) ? 'en' : 'es';
-  if (nuevoLang === _lang) return;
-  _lang = nuevoLang;
-  _construirLista();
-  _actualizarVista();
+  _lang = (cfg.en && !cfg.es) ? 'en' : 'es';
+  // Solo actualizar texto y meta — sin shuffle ni reset de índice
+  if (_lista.length) _actualizarTexto();
 }
 
 // ─── Vista ────────────────────────────────────────────────────────────────────
@@ -343,9 +339,7 @@ function _actualizarVista() {
   img.onload = () => img.classList.remove('cargando');
   img.onerror = () => img.classList.remove('cargando');
 
-  _el.querySelector('#md-meta').textContent =
-    `${_idx + 1} · ${_lista.length} · ${_lang === 'es' ? 'ESPAÑOL' : 'INGLÉS'}`;
-  _el.querySelector('#md-palabra').textContent = item.texto;
+  _actualizarTexto();
 
   _renderDots();
 }
@@ -583,4 +577,21 @@ function _shuffle(arr) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+function _actualizarTexto() {
+  const item = _lista[_idx];
+  if (!item) return;
+  const { es, en } = _langConfig;
+  let display;
+  if (es && en) {
+    display = `${item.tts_es} / ${item.tts_en}`;
+  } else if (en) {
+    display = item.tts_en || item.tts_es;
+  } else {
+    display = item.tts_es;
+  }
+  _el.querySelector('#md-palabra').textContent = display;
+  _el.querySelector('#md-meta').textContent =
+    `${_idx + 1} · ${_lista.length} · ${es && en ? 'ES / EN' : en ? 'INGLÉS' : 'ESPAÑOL'}`;
 }
