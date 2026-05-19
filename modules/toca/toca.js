@@ -452,26 +452,26 @@ function _renderRonda() {
 // Nivel 5 (8):  2×4                   → basis = MOSAIC_SIZE (4 por fila)
 
 function _aplicarLayout(n) {
-  const grid = _el.querySelector('#tc-grid');
-  const GAP  = 12;
+  const grid  = _el.querySelector('#tc-grid');
+  const GAP   = 12;
+  const MAX   = 280; // tamaño máximo por mosaico en px
 
   const cols  = { 3:3, 4:2, 5:3, 6:3, 8:4 }[n] || 3;
   const filas = { 3:1, 4:2, 5:2, 6:2, 8:2 }[n] || 2;
 
-  // Ancho real del grid (confiable siempre)
+  // Ancho disponible real
   const W = grid.offsetWidth;
 
-  // Alto disponible = alto del contenedor - elementos fijos encima del grid
-  const totalH  = _el.offsetHeight;
-  const headerH = _el.querySelector('#tc-header').offsetHeight;
-  const instrH  = _el.querySelector('#tc-instruccion').offsetHeight;
-  const instrM  = 14; // margin-bottom de #tc-instruccion
-  const padB    = 16; // padding-bottom del grid
-  const H = totalH - headerH - instrH - instrM - padB;
+  // Alto disponible = ventana - todo lo que está sobre el grid
+  const headerApp = document.getElementById('app-header')?.offsetHeight || 56;
+  const tcHeader  = _el.querySelector('#tc-header').offsetHeight;
+  const tcInstr   = _el.querySelector('#tc-instruccion').offsetHeight;
+  const H = window.innerHeight - headerApp - tcHeader - tcInstr - 14 - 16 - 8;
+  //                                                     instrMargin  padB  holgura
 
   const porAncho = Math.floor((W - GAP * (cols  - 1)) / cols);
   const porAlto  = Math.floor((H - GAP * (filas - 1)) / filas);
-  const size     = Math.min(porAncho, porAlto);
+  const size     = Math.min(porAncho, porAlto, MAX);
 
   grid.querySelectorAll('.tc-opcion').forEach(o => {
     o.style.width      = size + 'px';
