@@ -409,21 +409,6 @@ function _initAreaAdultos() {
   const ajustesMod = MODULOS.find(m => m.id === 'ajustes');
   if (!ajustesMod) return;
 
-  let tc1 = 0, tt1 = null; // esquina inferior derecha — 5 toques
-  let tc2 = 0, tt2 = null; // esquina superior izquierda — 3 toques
-  document.addEventListener('pointerdown', e => {
-    if (e.clientX > window.innerWidth - 80 && e.clientY > window.innerHeight - 80) {
-      tc1++; clearTimeout(tt1);
-      tt1 = setTimeout(() => { tc1 = 0; }, 1500);
-      if (tc1 >= 5) { tc1 = 0; _abrirPin(ajustesMod); }
-    }
-    if (e.clientX < 80 && e.clientY < 80) {
-      tc2++; clearTimeout(tt2);
-      tt2 = setTimeout(() => { tc2 = 0; }, 1500);
-      if (tc2 >= 3) { tc2 = 0; _abrirPin(ajustesMod); }
-    }
-  });
-
   // Deep link por URL: ?modulo=mira-y-di
   const moduloUrl = new URLSearchParams(location.search).get('modulo');
   if (moduloUrl) {
