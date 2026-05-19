@@ -112,25 +112,17 @@ function _montarHeader() {
     </div>
   `;
 
-  // Botón volver — oculto en home
   document.getElementById('btn-volver').style.display = 'none';
 
-  // ── Pill de doble toggle ES / EN ──────────────────────────────────────────
-  // Estado global del idioma — objeto con flags independientes
   window._langConfig = { es: true, en: false };
 
-  // Resuelve qué idioma usar en una reproducción concreta:
-  // · solo ES → 'es'
-  // · solo EN → 'en'
-  // · ambos   → elige aleatoriamente en cada llamada
   window.getLang = function () {
     const { es, en } = window._langConfig;
     if (es && en) return Math.random() < 0.5 ? 'es' : 'en';
     if (en) return 'en';
-    return 'es';   // default y fallback
+    return 'es';
   };
 
-  // Guardar altura del header como variable CSS para los contenedores fixed
   requestAnimationFrame(() => {
     const h = document.getElementById('app-header')?.offsetHeight || 0;
     document.documentElement.style.setProperty('--header-h', h + 'px');
@@ -140,17 +132,14 @@ function _montarHeader() {
     if (!btn) return;
     const lang = btn.dataset.lang;
 
-    // Toggle del idioma tocado
     const next = !window._langConfig[lang];
 
-    // Regla: al menos un idioma debe estar activo
     const otroActivo = lang === 'es' ? window._langConfig.en : window._langConfig.es;
-    if (!next && !otroActivo) return; // no permitir desactivar el último
+    if (!next && !otroActivo) return;
 
     window._langConfig[lang] = next;
     btn.classList.toggle('activo', next);
 
-    // Notificar a los módulos — pasan el langConfig completo
     window.dispatchEvent(new CustomEvent('lang-change', {
       detail: { langConfig: { ...window._langConfig } }
     }));
@@ -202,8 +191,8 @@ function _getContenedor(id) {
     // position:fixed relativo al viewport — inmune al padding del padre
     // top = altura del header para no quedar debajo de él
     div.style.cssText =
-      'position:fixed;left:0;right:0;bottom:0;display:none;overflow:hidden;' +
-      'top:var(--header-h, 0px);';
+      'position:fixed;left:0;right:0;bottom:0;display:none;overflow:hidden;z-index:10;' +
+      'top:var(--header-h, 56px);';
     document.body.appendChild(div);
     _contenedores[id] = div;
   }
@@ -310,6 +299,8 @@ async function navegarA(mod) {
   // Reanudar si estaba pausado
   if (_modulosPausados[mod.id] && mod.resume) {
     _moduloActivo = mod;
+    const hh = document.getElementById('app-header')?.offsetHeight || 56;
+    document.documentElement.style.setProperty('--header-h', hh + 'px');
     contenedor.style.display = 'block';
     try { await mod.resume(contenedor); mod.onEnter?.(); } catch (e) {
       console.error('[App] Error al resumir', mod.id, e);
