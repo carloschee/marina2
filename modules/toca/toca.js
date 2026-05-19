@@ -452,7 +452,6 @@ function _acierto(btn) {
     setTimeout(() => { if (_el) _nuevaRonda(); }, 900);
   }
 }
-}
 
 function _error(btn) {
   btn.classList.add('incorrecto');
