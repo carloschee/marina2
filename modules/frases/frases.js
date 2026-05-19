@@ -216,22 +216,25 @@ function _render() {
     .fr-tira-pieza img { width: 44px; height: 44px; object-fit: contain; border-radius: 8px; }
 
     /* Botones de acción */
-    #fr-tira-acciones { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+    #fr-tira-acciones {
+      display: flex; flex-direction: row;
+      align-items: center; gap: 8px;
+      margin-left: auto; flex-shrink: 0;
+    }
     .fr-accion-btn {
       width: 44px; height: 44px; border-radius: 50%; border: none;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: transform .12s, background .2s;
+      cursor: pointer; transition: transform .12s, box-shadow .15s;
     }
     .fr-accion-btn:active { transform: scale(.88); }
     #fr-btn-leer {
-      background: #0ea5c9;
-      border: 2px solid #38bdf8;
-      box-shadow: 0 4px 16px rgba(14,165,201,0.50);
+      background: #00e5b0;
+      box-shadow: 0 4px 16px rgba(0,229,176,0.45);
     }
     #fr-btn-borrar {
-      background: rgba(255,255,255,0.18);
-      border: 1.5px solid rgba(255,255,255,0.35);
-      color: #fff; font-size: 1.5rem; font-weight: 400; font-family: inherit;
+      background: rgba(251,113,133,0.20);
+      border: 1.5px solid rgba(251,113,133,0.50);
+      color: #fb7185; font-size: 1.5rem; font-weight: 300; font-family: inherit;
     }
 
     /* ── Panel de piezas ── */
@@ -294,16 +297,9 @@ function _render() {
     }
   </style>
 
-  <!-- Selector de nivel -->
+  <!-- Selector de nivel + acciones -->
   <div id="fr-niveles">
     <span id="fr-niveles-label">Nivel</span>
-  </div>
-
-  <!-- Tira de construcción -->
-  <div id="fr-tira">
-    <div id="fr-tira-piezas">
-      <span id="fr-tira-placeholder">toca las piezas en orden…</span>
-    </div>
     <div id="fr-tira-acciones">
       <button class="fr-accion-btn" id="fr-btn-leer" title="Leer frase">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -313,6 +309,13 @@ function _render() {
         </svg>
       </button>
       <button class="fr-accion-btn" id="fr-btn-borrar" title="Borrar">×</button>
+    </div>
+  </div>
+
+  <!-- Tira de construcción -->
+  <div id="fr-tira">
+    <div id="fr-tira-piezas">
+      <span id="fr-tira-placeholder">toca las piezas en orden…</span>
     </div>
   </div>
 
