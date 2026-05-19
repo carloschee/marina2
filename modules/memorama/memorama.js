@@ -23,6 +23,12 @@ let _pares = 0;
 let _lang = 'es';
 let _audioEl = null;
 let _pictos = {};
+const DIFICULTADES = [
+  { id: 'facil', label: '⭐', pares: 6 },
+  { id: 'medio', label: '⭐⭐', pares: 12 },
+  { id: 'avanzado', label: '⭐⭐⭐', pares: 24 },
+];
+let _dificultad = DIFICULTADES[2];
 
 const _q = sel => _container?.querySelector(sel);
 
@@ -149,6 +155,23 @@ function _renderShell() {
     background:rgba(255,255,255,0.12); color:#fff;
     font-family:inherit; font-weight:800; font-size:.95rem;
     cursor:pointer; transition:background .15s; white-space:nowrap;
+  }
+  #mem-dificultad {
+    display:flex; gap:5px; align-items:center; flex-shrink:0;
+  }
+  .mem-dif-btn {
+    padding:6px 10px; border-radius:99px;
+    border:1.5px solid rgba(255,255,255,0.18);
+    background:rgba(255,255,255,0.08); color:#fff;
+    font-family:inherit; font-size:.85rem; font-weight:800;
+    cursor:pointer; transition:background .15s, border-color .15s;
+    white-space:nowrap;
+  }
+  .mem-dif-btn:active { background:rgba(255,255,255,.20); }
+  .mem-dif-btn.activo {
+    background:rgba(0,194,255,0.25);
+    border-color:#00c2ff;
+    box-shadow:0 0 0 2px rgba(0,194,255,0.20);
   }
   #mem-btn-tema:active { background:rgba(255,255,255,.20); }
   #mem-contador {
@@ -320,6 +343,14 @@ function _renderShell() {
       <span id="mem-tema-emoji">🃏</span>
       <span id="mem-tema-label">Elegir tema</span>
     </button>
+    <div id="mem-dificultad">
+      ${DIFICULTADES.map(d => `
+        <button class="mem-dif-btn${d.id === _dificultad.id ? ' activo' : ''}"
+                data-dif="${d.id}"
+                title="${d.pares} pares">
+          ${d.label}
+        </button>`).join('')}
+    </div>
     <div id="mem-contador">
       <strong id="mem-pares-count">0</strong> / ${PARES} pares
     </div>
@@ -353,6 +384,17 @@ function _bindEvents() {
   });
   _q('#mem-btn-nuevo').addEventListener('click', () => {
     haptic(10); if (_temaActivo) _iniciarJuego();
+  });
+  _q('#mem-dificultad').addEventListener('click', e => {
+    const btn = e.target.closest('.mem-dif-btn');
+    if (!btn) return;
+    haptic(8);
+    _dificultad = DIFICULTADES.find(d => d.id === btn.dataset.dif) || _dificultad;
+    _q('#mem-dificultad').querySelectorAll('.mem-dif-btn').forEach(b =>
+      b.classList.toggle('activo', b.dataset.dif === _dificultad.id)
+    );
+    _q('#mem-pares-count').textContent = '0';
+    if (_temaActivo) _iniciarJuego();
   });
   _q('#mem-modal-cerrar').addEventListener('click', () => {
     if (_cartas.length) _cerrarModal();
@@ -454,7 +496,7 @@ function _iniciarJuego() {
   };
 
   const palabras = _shuffle([..._temaActivo.palabras])
-    .slice(0, PARES)
+    .slice(0, _dificultad.pares)
     .map(_normalizarPalabra)
     .filter(Boolean);
 
@@ -467,7 +509,8 @@ function _iniciarJuego() {
 
   _renderGrid();
   _q('#mem-stack-wrap').innerHTML = '';
-  _q('#mem-pares-count').textContent = '0';
+  const totalEl = _q('#mem-pares-count');
+  if (totalEl) totalEl.textContent = `0 / ${_dificultad.pares}`;
 
   const gw = _q('#mem-grid-wrap');
   if (gw) {
@@ -527,12 +570,12 @@ function _voltear(idx) {
       _q(`[data-idx="${b}"]`).classList.add('encontrada');
       _pares++;
       const el = _q('#mem-pares-count');
-      if (el) el.textContent = _pares;
+      if (el) el.textContent = `${_pares} / ${_dificultad.pares}`;
       _volteadas = []; _bloqueado = false;
       _agregarStack(_cartas[a].palabra);
 
       Telemetry.track('memorama_par_encontrado', { _modulo: 'memorama', tema: _temaActivo.id, palabra: _cartas[a].palabra });
-      if (_pares === PARES) setTimeout(_victoria, 600);
+      if (_pares === _dificultad.pares) setTimeout(_victoria, 600);
     }, 350);
   } else {
     // No es par
