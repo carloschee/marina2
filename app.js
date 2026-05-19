@@ -19,8 +19,9 @@ import MemoramaModule from './modules/memorama/module.js';
 import AjustesModule from './modules/ajustes/module.js';
 import MiraYDiModule from './modules/mira-y-di/module.js';
 import FrasesModule from './modules/frases/module.js';
+import TocaModule from './modules/toca/module.js';
 
-const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule];
+const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule, TocaModule];
 
 // ─────────────────────────────────────────────────────────────
 // ARRANQUE

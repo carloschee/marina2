@@ -3,2982 +3,2556 @@
     "id": 1001,
     "es": "árbol",
     "en": "tree",
-    "ruta_img": "arbol.png",
-    "art": "el"
+    "ruta_img": "arbol.png"
   },
   {
     "id": 1002,
     "es": "avión",
     "en": "plane",
-    "ruta_img": "avion.png",
-    "art": "el"
+    "ruta_img": "avion.png"
   },
   {
     "id": 1003,
     "es": "agua",
     "en": "water",
-    "ruta_img": "agua.png",
-    "art": "la"
+    "ruta_img": "agua.png"
   },
   {
     "id": 1004,
     "es": "araña",
     "en": "spider",
-    "ruta_img": "arana.png",
-    "art": "la"
+    "ruta_img": "arana.png"
   },
   {
     "id": 1005,
     "es": "arco iris",
     "en": "rainbow",
-    "ruta_img": "arco-iris.png",
-    "art": "el"
+    "ruta_img": "arco-iris.png"
   },
   {
     "id": 1006,
     "es": "ardilla",
     "en": "squirrel",
-    "ruta_img": "ardilla.png",
-    "art": "la"
+    "ruta_img": "ardilla.png"
   },
   {
     "id": 1007,
     "es": "abeja",
     "en": "bee",
-    "ruta_img": "abeja.png",
-    "art": "la"
+    "ruta_img": "abeja.png"
   },
   {
     "id": 1008,
     "es": "ajo",
     "en": "garlic",
-    "ruta_img": "ajo.png",
-    "art": "el"
+    "ruta_img": "ajo.png"
   },
   {
     "id": 1009,
     "es": "barco",
     "en": "ship",
-    "ruta_img": "barco.png",
-    "art": "el"
+    "ruta_img": "barco.png"
   },
   {
     "id": 1010,
     "es": "bicicleta",
     "en": "bicycle",
-    "ruta_img": "bicicleta.png",
-    "art": "la"
+    "ruta_img": "bicicleta.png"
   },
   {
     "id": 1011,
     "es": "boca",
     "en": "mouth",
-    "ruta_img": "boca.png",
-    "art": "la"
+    "ruta_img": "boca.png"
   },
   {
     "id": 1012,
     "es": "bebé",
     "en": "baby",
-    "ruta_img": "bebe.png",
-    "art": "el"
+    "ruta_img": "bebe.png"
   },
   {
     "id": 1013,
     "es": "ballena",
     "en": "whale",
-    "ruta_img": "ballena.png",
-    "art": "la"
+    "ruta_img": "ballena.png"
   },
   {
     "id": 1014,
     "es": "brócoli",
     "en": "broccoli",
-    "ruta_img": "brocoli.png",
-    "art": "el"
+    "ruta_img": "brocoli.png"
   },
   {
     "id": 1015,
     "es": "botas",
     "en": "boots",
-    "ruta_img": "botas.png",
-    "art": "el"
+    "ruta_img": "botas.png"
   },
   {
     "id": 1016,
     "es": "botón",
     "en": "button",
-    "ruta_img": "boton.png",
-    "art": "el"
+    "ruta_img": "boton.png"
   },
   {
     "id": 1017,
     "es": "búho",
     "en": "owl",
-    "ruta_img": "buho.png",
-    "art": "el"
+    "ruta_img": "buho.png"
   },
   {
     "id": 1018,
     "es": "casa",
     "en": "home",
-    "ruta_img": "casa.png",
-    "art": "la"
+    "ruta_img": "casa.png"
   },
   {
     "id": 1019,
     "es": "coche",
     "en": "car",
-    "ruta_img": "coche.png",
-    "art": "el"
+    "ruta_img": "coche.png"
   },
   {
     "id": 1020,
     "es": "corazón",
     "en": "heart",
-    "ruta_img": "corazon.png",
-    "art": "el"
+    "ruta_img": "corazon.png"
   },
   {
     "id": 1021,
     "es": "cama",
     "en": "bed",
-    "ruta_img": "cama.png",
-    "art": "el"
+    "ruta_img": "cama.png"
   },
   {
     "id": 1022,
     "es": "caballo",
     "en": "horse",
-    "ruta_img": "caballo.png",
-    "art": "el"
+    "ruta_img": "caballo.png"
   },
   {
     "id": 1023,
     "es": "conejo",
     "en": "rabbit",
-    "ruta_img": "conejo.png",
-    "art": "el"
+    "ruta_img": "conejo.png"
   },
   {
     "id": 1024,
     "es": "cohete",
     "en": "rocket",
-    "ruta_img": "cohete.png",
-    "art": "el"
+    "ruta_img": "cohete.png"
   },
   {
     "id": 1025,
     "es": "corona",
     "en": "crown",
-    "ruta_img": "corona.png",
-    "art": "la"
+    "ruta_img": "corona.png"
   },
   {
     "id": 1026,
     "es": "cactus",
     "en": "cactus",
-    "ruta_img": "cactus.png",
-    "art": "el"
+    "ruta_img": "cactus.png"
   },
   {
     "id": 1027,
     "es": "cebra",
     "en": "zebra",
-    "ruta_img": "cebra.png",
-    "art": "la"
+    "ruta_img": "cebra.png"
   },
   {
     "id": 1028,
     "es": "camión",
     "en": "truck",
-    "ruta_img": "camion.png",
-    "art": "el"
+    "ruta_img": "camion.png"
   },
   {
     "id": 1029,
     "es": "delfín",
     "en": "dolphin",
-    "ruta_img": "delfin.png",
-    "art": "el"
+    "ruta_img": "delfin.png"
   },
   {
     "id": 1030,
     "es": "dinosaurio",
     "en": "dinosaur",
-    "ruta_img": "dinosaurio.png",
-    "art": "el"
+    "ruta_img": "dinosaurio.png"
   },
   {
     "id": 1031,
     "es": "dientes",
     "en": "teeth",
-    "ruta_img": "dientes.png",
-    "art": "el"
+    "ruta_img": "dientes.png"
   },
   {
     "id": 1032,
     "es": "dado",
     "en": "given",
-    "ruta_img": "dado.png",
-    "art": "el"
+    "ruta_img": "dado.png"
   },
   {
     "id": 1033,
     "es": "dragón",
     "en": "dragon",
-    "ruta_img": "dragon.png",
-    "art": "el"
+    "ruta_img": "dragon.png"
   },
   {
     "id": 1034,
     "es": "dulce",
     "en": "sweet",
-    "ruta_img": "dulce.png",
-    "art": "el"
+    "ruta_img": "dulce.png"
   },
   {
     "id": 1035,
     "es": "dedos",
     "en": "fingers",
-    "ruta_img": "dedos.png",
-    "art": "el"
+    "ruta_img": "dedos.png"
   },
   {
     "id": 1036,
     "es": "día",
     "en": "day",
-    "ruta_img": "dia.png",
-    "art": "el"
+    "ruta_img": "dia.png"
   },
   {
     "id": 1037,
     "es": "dinero",
     "en": "money",
-    "ruta_img": "dinero.png",
-    "art": "el"
+    "ruta_img": "dinero.png"
   },
   {
     "id": 1038,
     "es": "elefante",
     "en": "elephant",
-    "ruta_img": "elefante.png",
-    "art": "el"
+    "ruta_img": "elefante.png"
   },
   {
     "id": 1039,
     "es": "estrella",
     "en": "star",
-    "ruta_img": "estrella.png",
-    "art": "la"
+    "ruta_img": "estrella.png"
   },
   {
     "id": 1040,
     "es": "escalera",
     "en": "ladder",
-    "ruta_img": "escalera.png",
-    "art": "la"
+    "ruta_img": "escalera.png"
   },
   {
     "id": 1041,
     "es": "espejo",
     "en": "mirror",
-    "ruta_img": "espejo.png",
-    "art": "el"
+    "ruta_img": "espejo.png"
   },
   {
     "id": 1042,
     "es": "escoba",
     "en": "broom",
-    "ruta_img": "escoba.png",
-    "art": "la"
+    "ruta_img": "escoba.png"
   },
   {
     "id": 1043,
     "es": "erizo",
     "en": "sea ??urchin",
-    "ruta_img": "erizo.png",
-    "art": "el"
+    "ruta_img": "erizo.png"
   },
   {
     "id": 1044,
     "es": "esponja",
     "en": "sponge",
-    "ruta_img": "esponja.png",
-    "art": "la"
+    "ruta_img": "esponja.png"
   },
   {
     "id": 1045,
     "es": "elote",
     "en": "corn",
-    "ruta_img": "elote.png",
-    "art": "el"
+    "ruta_img": "elote.png"
   },
   {
     "id": 1046,
     "es": "escuela",
     "en": "school",
-    "ruta_img": "escuela.png",
-    "art": "la"
+    "ruta_img": "escuela.png"
   },
   {
     "id": 1047,
     "es": "espada",
     "en": "sword",
-    "ruta_img": "espada.png",
-    "art": "la"
+    "ruta_img": "espada.png"
   },
   {
     "id": 1048,
     "es": "flor",
     "en": "flower",
-    "ruta_img": "flor.png",
-    "art": "la"
+    "ruta_img": "flor.png"
   },
   {
     "id": 1049,
     "es": "fresa",
     "en": "strawberry",
-    "ruta_img": "fresa.png",
-    "art": "la"
+    "ruta_img": "fresa.png"
   },
   {
     "id": 1050,
     "es": "fuego",
     "en": "fire",
-    "ruta_img": "fuego.png",
-    "art": "el"
+    "ruta_img": "fuego.png"
   },
   {
     "id": 1051,
     "es": "foca",
     "en": "seal",
-    "ruta_img": "foca.png",
-    "art": "la"
+    "ruta_img": "foca.png"
   },
   {
     "id": 1052,
     "es": "flauta",
     "en": "flute",
-    "ruta_img": "flauta.png",
-    "art": "la"
+    "ruta_img": "flauta.png"
   },
   {
     "id": 1053,
     "es": "faro",
     "en": "lighthouse",
-    "ruta_img": "faro.png",
-    "art": "el"
+    "ruta_img": "faro.png"
   },
   {
     "id": 1054,
     "es": "fruta",
     "en": "fruit",
-    "ruta_img": "fruta.png",
-    "art": "la"
+    "ruta_img": "fruta.png"
   },
   {
     "id": 1055,
     "es": "fuente",
     "en": "fountain",
-    "ruta_img": "fuente.png",
-    "art": "el"
+    "ruta_img": "fuente.png"
   },
   {
     "id": 1056,
     "es": "gato",
     "en": "cat",
-    "ruta_img": "gato.png",
-    "art": "el"
+    "ruta_img": "gato.png"
   },
   {
     "id": 1057,
     "es": "globo aerostático",
     "en": "hot air balloon",
-    "ruta_img": "globo aerostático.png",
-    "art": "el"
+    "ruta_img": "globo aerostático.png"
   },
   {
     "id": 1058,
     "es": "guitarra",
     "en": "guitar",
-    "ruta_img": "guitarra.png",
-    "art": "la"
+    "ruta_img": "guitarra.png"
   },
   {
     "id": 1059,
     "es": "gallina",
     "en": "hen",
-    "ruta_img": "gallina.png",
-    "art": "la"
+    "ruta_img": "gallina.png"
   },
   {
     "id": 1060,
     "es": "gorila",
     "en": "gorilla",
-    "ruta_img": "gorila.png",
-    "art": "la"
+    "ruta_img": "gorila.png"
   },
   {
     "id": 1061,
     "es": "girasol",
     "en": "sunflower",
-    "ruta_img": "girasol.png",
-    "art": "el"
+    "ruta_img": "girasol.png"
   },
   {
     "id": 1062,
     "es": "gusano",
     "en": "worm",
-    "ruta_img": "gusano.png",
-    "art": "el"
+    "ruta_img": "gusano.png"
   },
   {
     "id": 1063,
     "es": "gorra",
     "en": "cap",
-    "ruta_img": "gorra.png",
-    "art": "la"
+    "ruta_img": "gorra.png"
   },
   {
     "id": 1064,
     "es": "granja",
     "en": "farm",
-    "ruta_img": "granja.png",
-    "art": "la"
+    "ruta_img": "granja.png"
   },
   {
     "id": 1065,
     "es": "grifo",
     "en": "tap",
-    "ruta_img": "grifo.png",
-    "art": "el"
+    "ruta_img": "grifo.png"
   },
   {
     "id": 1066,
     "es": "helado",
     "en": "frozen",
-    "ruta_img": "helado.png",
-    "art": "el"
+    "ruta_img": "helado.png"
   },
   {
     "id": 1067,
     "es": "hormiga",
     "en": "ant",
-    "ruta_img": "hormiga.png",
-    "art": "la"
+    "ruta_img": "hormiga.png"
   },
   {
     "id": 1068,
     "es": "huevo",
     "en": "egg",
-    "ruta_img": "huevo.png",
-    "art": "el"
+    "ruta_img": "huevo.png"
   },
   {
     "id": 1069,
     "es": "hoja",
     "en": "sheet",
-    "ruta_img": "hoja.png",
-    "art": "la"
+    "ruta_img": "hoja.png"
   },
   {
     "id": 1070,
     "es": "hada",
     "en": "fairy",
-    "ruta_img": "hada.png",
-    "art": "la"
+    "ruta_img": "hada.png"
   },
   {
     "id": 1071,
     "es": "hamaca",
     "en": "hammock",
-    "ruta_img": "hamaca.png",
-    "art": "la"
+    "ruta_img": "hamaca.png"
   },
   {
     "id": 1072,
     "es": "helicóptero",
     "en": "helicopter",
-    "ruta_img": "helicoptero.png",
-    "art": "el"
+    "ruta_img": "helicoptero.png"
   },
   {
     "id": 1073,
     "es": "hongo",
     "en": "fungus",
-    "ruta_img": "hongo.png",
-    "art": "el"
+    "ruta_img": "hongo.png"
   },
   {
     "id": 1074,
     "es": "hacha",
     "en": "axe",
-    "ruta_img": "hacha.png",
-    "art": "la"
+    "ruta_img": "hacha.png"
   },
   {
     "id": 1075,
     "es": "hueso",
     "en": "bone",
-    "ruta_img": "hueso.png",
-    "art": "el"
+    "ruta_img": "hueso.png"
   },
   {
     "id": 1076,
     "es": "iglú",
     "en": "igloo",
-    "ruta_img": "iglu.png",
-    "art": "el"
+    "ruta_img": "iglu.png"
   },
   {
     "id": 1077,
     "es": "imán",
     "en": "magnet",
-    "ruta_img": "iman.png",
-    "art": "el"
+    "ruta_img": "iman.png"
   },
   {
     "id": 1078,
     "es": "isla",
     "en": "island",
-    "ruta_img": "isla.png",
-    "art": "la"
+    "ruta_img": "isla.png"
   },
   {
     "id": 1079,
     "es": "iglesia",
     "en": "church",
-    "ruta_img": "iglesia.png",
-    "art": "la"
+    "ruta_img": "iglesia.png"
   },
   {
     "id": 1080,
     "es": "insecto",
     "en": "insect",
-    "ruta_img": "insecto.png",
-    "art": "el"
+    "ruta_img": "insecto.png"
   },
   {
     "id": 1081,
     "es": "instrumento",
     "en": "instrument",
-    "ruta_img": "instrumento.png",
-    "art": "el"
+    "ruta_img": "instrumento.png"
   },
   {
     "id": 1082,
     "es": "invierno",
     "en": "winter",
-    "ruta_img": "invierno.png",
-    "art": "el"
+    "ruta_img": "invierno.png"
   },
   {
     "id": 1083,
     "es": "jirafa",
     "en": "giraffe",
-    "ruta_img": "jirafa.png",
-    "art": "la"
+    "ruta_img": "jirafa.png"
   },
   {
     "id": 1084,
     "es": "juguete",
     "en": "toy",
-    "ruta_img": "juguete.png",
-    "art": "el"
+    "ruta_img": "juguete.png"
   },
   {
     "id": 1085,
     "es": "jardín",
     "en": "garden",
-    "ruta_img": "jardin.png",
-    "art": "el"
+    "ruta_img": "jardin.png"
   },
   {
     "id": 1086,
     "es": "jaula",
     "en": "cage",
-    "ruta_img": "jaula.png",
-    "art": "la"
+    "ruta_img": "jaula.png"
   },
   {
     "id": 1087,
     "es": "jamón",
     "en": "ham",
-    "ruta_img": "jamon.png",
-    "art": "el"
+    "ruta_img": "jamon.png"
   },
   {
     "id": 1088,
     "es": "jugo",
     "en": "juice",
-    "ruta_img": "jugo.png",
-    "art": "el"
+    "ruta_img": "jugo.png"
   },
   {
     "id": 1089,
     "es": "jabón",
     "en": "soap",
-    "ruta_img": "jabon.png",
-    "art": "el"
+    "ruta_img": "jabon.png"
   },
   {
     "id": 1090,
     "es": "jarra",
     "en": "jug",
-    "ruta_img": "jarra.png",
-    "art": "la"
+    "ruta_img": "jarra.png"
   },
   {
     "id": 1091,
     "es": "jinete",
     "en": "rider",
-    "ruta_img": "jinete.png",
-    "art": "el"
+    "ruta_img": "jinete.png"
   },
   {
     "id": 1092,
     "es": "koala",
     "en": "koala",
-    "ruta_img": "koala.png",
-    "art": "la"
+    "ruta_img": "koala.png"
   },
   {
     "id": 1093,
     "es": "kiwi",
     "en": "kiwi",
-    "ruta_img": "kiwi.png",
-    "art": "el"
+    "ruta_img": "kiwi.png"
   },
   {
     "id": 1094,
     "es": "kayak",
     "en": "kayak",
-    "ruta_img": "kayak.png",
-    "art": "el"
+    "ruta_img": "kayak.png"
   },
   {
     "id": 1095,
     "es": "libro",
     "en": "book",
-    "ruta_img": "libro.png",
-    "art": "el"
+    "ruta_img": "libro.png"
   },
   {
     "id": 1096,
     "es": "luna",
     "en": "moon",
-    "ruta_img": "luna.png",
-    "art": "la"
+    "ruta_img": "luna.png"
   },
   {
     "id": 1097,
     "es": "león",
     "en": "lion",
-    "ruta_img": "leon.png",
-    "art": "el"
+    "ruta_img": "leon.png"
   },
   {
     "id": 1098,
     "es": "llave",
     "en": "key",
-    "ruta_img": "llave.png",
-    "art": "el"
+    "ruta_img": "llave.png"
   },
   {
     "id": 1099,
     "es": "lagarto",
     "en": "lizard",
-    "ruta_img": "lagarto.png",
-    "art": "el"
+    "ruta_img": "lagarto.png"
   },
   {
     "id": 1100,
     "es": "lámpara",
     "en": "lamp",
-    "ruta_img": "lampara.png",
-    "art": "la"
+    "ruta_img": "lampara.png"
   },
   {
     "id": 1101,
     "es": "loro",
     "en": "parrot",
-    "ruta_img": "loro.png",
-    "art": "el"
+    "ruta_img": "loro.png"
   },
   {
     "id": 1102,
     "es": "lobo",
     "en": "wolf",
-    "ruta_img": "lobo.png",
-    "art": "el"
+    "ruta_img": "lobo.png"
   },
   {
     "id": 1103,
     "es": "limón",
     "en": "lemon",
-    "ruta_img": "limon.png",
-    "art": "el"
+    "ruta_img": "limon.png"
   },
   {
     "id": 1104,
     "es": "leche",
     "en": "milk",
-    "ruta_img": "leche.png",
-    "art": "la"
+    "ruta_img": "leche.png"
   },
   {
     "id": 1105,
     "es": "mariposa",
     "en": "butterfly",
-    "ruta_img": "mariposa.png",
-    "art": "la"
+    "ruta_img": "mariposa.png"
   },
   {
     "id": 1106,
     "es": "manzana",
     "en": "apple",
-    "ruta_img": "manzana.png",
-    "art": "la"
+    "ruta_img": "manzana.png"
   },
   {
     "id": 1107,
     "es": "mano",
     "en": "hand",
-    "ruta_img": "mano.png",
-    "art": "el"
+    "ruta_img": "mano.png"
   },
   {
     "id": 1108,
     "es": "mono",
     "en": "bun",
-    "ruta_img": "mono.png",
-    "art": "el"
+    "ruta_img": "mono.png"
   },
   {
     "id": 1109,
     "es": "montaña",
     "en": "mountain",
-    "ruta_img": "montana.png",
-    "art": "la"
+    "ruta_img": "montana.png"
   },
   {
     "id": 1110,
     "es": "músico",
     "en": "musician",
-    "ruta_img": "musico.png",
-    "art": "el"
+    "ruta_img": "musico.png"
   },
   {
     "id": 1111,
     "es": "mesa",
     "en": "table",
-    "ruta_img": "mesa.png",
-    "art": "la"
+    "ruta_img": "mesa.png"
   },
   {
     "id": 1112,
     "es": "mochila",
     "en": "backpack",
-    "ruta_img": "mochila.png",
-    "art": "la"
+    "ruta_img": "mochila.png"
   },
   {
     "id": 1113,
     "es": "murciélago",
     "en": "bat",
-    "ruta_img": "murcielago.png",
-    "art": "el"
+    "ruta_img": "murcielago.png"
   },
   {
     "id": 1114,
     "es": "mapa",
     "en": "map",
-    "ruta_img": "mapa.png",
-    "art": "el"
+    "ruta_img": "mapa.png"
   },
   {
     "id": 1115,
     "es": "nube",
     "en": "cloud",
-    "ruta_img": "nube.png",
-    "art": "el"
+    "ruta_img": "nube.png"
   },
   {
     "id": 1116,
     "es": "nariz",
     "en": "nose",
-    "ruta_img": "nariz.png",
-    "art": "la"
+    "ruta_img": "nariz.png"
   },
   {
     "id": 1117,
     "es": "naranja",
     "en": "orange",
-    "ruta_img": "naranja.png",
-    "art": "la"
+    "ruta_img": "naranja.png"
   },
   {
     "id": 1118,
     "es": "nieve",
     "en": "snow",
-    "ruta_img": "nieve.png",
-    "art": "el"
+    "ruta_img": "nieve.png"
   },
   {
     "id": 1119,
     "es": "nido",
     "en": "nest",
-    "ruta_img": "nido.png",
-    "art": "el"
+    "ruta_img": "nido.png"
   },
   {
     "id": 1120,
     "es": "niña",
     "en": "little girl",
-    "ruta_img": "nina.png",
-    "art": "la"
+    "ruta_img": "nina.png"
   },
   {
     "id": 1121,
     "es": "niño",
     "en": "child",
-    "ruta_img": "nino.png",
-    "art": "el"
+    "ruta_img": "nino.png"
   },
   {
     "id": 1122,
     "es": "nave",
     "en": "nave",
-    "ruta_img": "nave.png",
-    "art": "el"
+    "ruta_img": "nave.png"
   },
   {
     "id": 1123,
     "es": "nuez",
     "en": "nut",
-    "ruta_img": "nuez.png",
-    "art": "la"
+    "ruta_img": "nuez.png"
   },
   {
     "id": 1124,
     "es": "natación",
     "en": "swimming",
-    "ruta_img": "natacion.png",
-    "art": "la"
+    "ruta_img": "natacion.png"
   },
   {
     "id": 1125,
     "es": "ñu",
     "en": "wildebeest",
-    "ruta_img": "nu.png",
-    "art": "el"
+    "ruta_img": "nu.png"
   },
   {
     "id": 1126,
     "es": "ñandú",
     "en": "Rhea",
-    "ruta_img": "nandu.png",
-    "art": "el"
+    "ruta_img": "nandu.png"
   },
   {
     "id": 1127,
     "es": "ñame",
     "en": "yam",
-    "ruta_img": "name.png",
-    "art": "el"
+    "ruta_img": "name.png"
   },
   {
     "id": 1128,
     "es": "ojo",
     "en": "eye",
-    "ruta_img": "ojo.png",
-    "art": "el"
+    "ruta_img": "ojo.png"
   },
   {
     "id": 1129,
     "es": "oso",
     "en": "bear",
-    "ruta_img": "oso.png",
-    "art": "el"
+    "ruta_img": "oso.png"
   },
   {
     "id": 1130,
     "es": "oveja",
     "en": "sheep",
-    "ruta_img": "oveja.png",
-    "art": "la"
+    "ruta_img": "oveja.png"
   },
   {
     "id": 1131,
     "es": "ola",
     "en": "wave",
-    "ruta_img": "ola.png",
-    "art": "la"
+    "ruta_img": "ola.png"
   },
   {
     "id": 1132,
     "es": "oruga",
     "en": "caterpillar",
-    "ruta_img": "oruga.png",
-    "art": "la"
+    "ruta_img": "oruga.png"
   },
   {
     "id": 1133,
     "es": "oreja",
     "en": "ear",
-    "ruta_img": "oreja.png",
-    "art": "la"
+    "ruta_img": "oreja.png"
   },
   {
     "id": 1134,
     "es": "ornitorrinco",
     "en": "platypus",
-    "ruta_img": "ornitorrinco.png",
-    "art": "el"
+    "ruta_img": "ornitorrinco.png"
   },
   {
     "id": 1135,
     "es": "ocelote",
     "en": "ocelot",
-    "ruta_img": "ocelote.png",
-    "art": "el"
+    "ruta_img": "ocelote.png"
   },
   {
     "id": 1136,
     "es": "pájaro",
     "en": "bird",
-    "ruta_img": "pajaro.png",
-    "art": "el"
+    "ruta_img": "pajaro.png"
   },
   {
     "id": 1137,
     "es": "perro",
     "en": "dog",
-    "ruta_img": "perro.png",
-    "art": "el"
+    "ruta_img": "perro.png"
   },
   {
     "id": 1138,
     "es": "pelota",
     "en": "ball",
-    "ruta_img": "pelota.png",
-    "art": "la"
+    "ruta_img": "pelota.png"
   },
   {
     "id": 1139,
     "es": "pez",
     "en": "fish",
-    "ruta_img": "pez.png",
-    "art": "la"
+    "ruta_img": "pez.png"
   },
   {
     "id": 1140,
     "es": "piña",
     "en": "pineapple",
-    "ruta_img": "pina.png",
-    "art": "la"
+    "ruta_img": "pina.png"
   },
   {
     "id": 1141,
     "es": "puerta",
     "en": "door",
-    "ruta_img": "puerta.png",
-    "art": "la"
+    "ruta_img": "puerta.png"
   },
   {
     "id": 1142,
     "es": "planeta",
     "en": "planet",
-    "ruta_img": "planeta.png",
-    "art": "la"
+    "ruta_img": "planeta.png"
   },
   {
     "id": 1143,
     "es": "pato",
     "en": "duck",
-    "ruta_img": "pato.png",
-    "art": "el"
+    "ruta_img": "pato.png"
   },
   {
     "id": 1144,
     "es": "paloma",
     "en": "pigeon",
-    "ruta_img": "paloma.png",
-    "art": "el"
+    "ruta_img": "paloma.png"
   },
   {
     "id": 1145,
     "es": "pulpo",
     "en": "octopus",
-    "ruta_img": "pulpo.png",
-    "art": "el"
+    "ruta_img": "pulpo.png"
   },
   {
     "id": 1146,
     "es": "queso",
     "en": "cheese",
-    "ruta_img": "queso.png",
-    "art": "el"
+    "ruta_img": "queso.png"
   },
   {
     "id": 1147,
     "es": "quetzal",
     "en": "quetzal",
-    "ruta_img": "quetzal.png",
-    "art": "el"
+    "ruta_img": "quetzal.png"
   },
   {
     "id": 1148,
     "es": "quinqué",
     "en": "oil lamp",
-    "ruta_img": "quinqué.png",
-    "art": "el"
+    "ruta_img": "quinqué.png"
   },
   {
     "id": 1149,
     "es": "rana",
     "en": "frog",
-    "ruta_img": "rana.png",
-    "art": "la"
+    "ruta_img": "rana.png"
   },
   {
     "id": 1150,
     "es": "ratón",
     "en": "mouse",
-    "ruta_img": "raton.png",
-    "art": "el"
+    "ruta_img": "raton.png"
   },
   {
     "id": 1151,
     "es": "robot",
     "en": "robot",
-    "ruta_img": "robot.png",
-    "art": "el"
+    "ruta_img": "robot.png"
   },
   {
     "id": 1152,
     "es": "roca",
     "en": "rock",
-    "ruta_img": "roca.png",
-    "art": "la"
+    "ruta_img": "roca.png"
   },
   {
     "id": 1153,
     "es": "rosa",
     "en": "pink",
-    "ruta_img": "rosa.png",
-    "art": "la"
+    "ruta_img": "rosa.png"
   },
   {
     "id": 1154,
     "es": "rayo",
     "en": "ray",
-    "ruta_img": "rayo.png",
-    "art": "el"
+    "ruta_img": "rayo.png"
   },
   {
     "id": 1155,
     "es": "regalo",
     "en": "gift",
-    "ruta_img": "regalo.png",
-    "art": "el"
+    "ruta_img": "regalo.png"
   },
   {
     "id": 1156,
     "es": "red",
     "en": "grid",
-    "ruta_img": "red.png",
-    "art": "la"
+    "ruta_img": "red.png"
   },
   {
     "id": 1157,
     "es": "río",
     "en": "river",
-    "ruta_img": "rio.png",
-    "art": "el"
+    "ruta_img": "rio.png"
   },
   {
     "id": 1158,
     "es": "rueda",
     "en": "wheel",
-    "ruta_img": "rueda.png",
-    "art": "la"
+    "ruta_img": "rueda.png"
   },
   {
     "id": 1159,
     "es": "sandía",
     "en": "watermelon",
-    "ruta_img": "sandia.png",
-    "art": "la"
+    "ruta_img": "sandia.png"
   },
   {
     "id": 1160,
     "es": "sol",
     "en": "sun",
-    "ruta_img": "sol.png",
-    "art": "el"
+    "ruta_img": "sol.png"
   },
   {
     "id": 1161,
     "es": "silla",
     "en": "chair",
-    "ruta_img": "silla.png",
-    "art": "la"
+    "ruta_img": "silla.png"
   },
   {
     "id": 1162,
     "es": "serpiente",
     "en": "snake",
-    "ruta_img": "serpiente.png",
-    "art": "el"
+    "ruta_img": "serpiente.png"
   },
   {
     "id": 1163,
     "es": "sombrero",
     "en": "hat",
-    "ruta_img": "sombrero.png",
-    "art": "el"
+    "ruta_img": "sombrero.png"
   },
   {
     "id": 1164,
     "es": "sapo",
     "en": "toad",
-    "ruta_img": "sapo.png",
-    "art": "el"
+    "ruta_img": "sapo.png"
   },
   {
     "id": 1165,
     "es": "submarino",
     "en": "submarine",
-    "ruta_img": "submarino.png",
-    "art": "el"
+    "ruta_img": "submarino.png"
   },
   {
     "id": 1166,
     "es": "soplar",
     "en": "blow",
-    "ruta_img": "soplar.png",
-    "art": ""
+    "ruta_img": "soplar.png"
   },
   {
     "id": 1167,
     "es": "saco",
     "en": "sack",
-    "ruta_img": "saco.png",
-    "art": "el"
+    "ruta_img": "saco.png"
   },
   {
     "id": 1168,
     "es": "tigre",
     "en": "tiger",
-    "ruta_img": "tigre.png",
-    "art": "el"
+    "ruta_img": "tigre.png"
   },
   {
     "id": 1169,
     "es": "tren",
     "en": "train",
-    "ruta_img": "tren.png",
-    "art": "el"
+    "ruta_img": "tren.png"
   },
   {
     "id": 1170,
     "es": "tortuga",
     "en": "tortoise",
-    "ruta_img": "tortuga.png",
-    "art": "la"
+    "ruta_img": "tortuga.png"
   },
   {
     "id": 1171,
     "es": "taza",
     "en": "cup",
-    "ruta_img": "taza.png",
-    "art": "la"
+    "ruta_img": "taza.png"
   },
   {
     "id": 1172,
     "es": "tijeras",
     "en": "scissors",
-    "ruta_img": "tijeras.png",
-    "art": "el"
+    "ruta_img": "tijeras.png"
   },
   {
     "id": 1173,
     "es": "tomate",
     "en": "tomato",
-    "ruta_img": "tomate.png",
-    "art": "el"
+    "ruta_img": "tomate.png"
   },
   {
     "id": 1174,
     "es": "tubo",
     "en": "tube",
-    "ruta_img": "tubo.png",
-    "art": "el"
+    "ruta_img": "tubo.png"
   },
   {
     "id": 1175,
     "es": "tambor",
     "en": "drum",
-    "ruta_img": "tambor.png",
-    "art": "el"
+    "ruta_img": "tambor.png"
   },
   {
     "id": 1176,
     "es": "tiburón",
     "en": "shark",
-    "ruta_img": "tiburon.png",
-    "art": "el"
+    "ruta_img": "tiburon.png"
   },
   {
     "id": 1177,
     "es": "uva",
     "en": "grape",
-    "ruta_img": "uva.png",
-    "art": "la"
+    "ruta_img": "uva.png"
   },
   {
     "id": 1178,
     "es": "unicornio",
     "en": "unicorn",
-    "ruta_img": "unicornio.png",
-    "art": "el"
+    "ruta_img": "unicornio.png"
   },
   {
     "id": 1179,
     "es": "ukelele",
     "en": "ukulele",
-    "ruta_img": "ukelele.png",
-    "art": "el"
+    "ruta_img": "ukelele.png"
   },
   {
     "id": 1180,
     "es": "vaca",
     "en": "cow",
-    "ruta_img": "vaca.png",
-    "art": "la"
+    "ruta_img": "vaca.png"
   },
   {
     "id": 1181,
     "es": "volcán",
     "en": "volcano",
-    "ruta_img": "volcan.png",
-    "art": "el"
+    "ruta_img": "volcan.png"
   },
   {
     "id": 1182,
     "es": "violín",
     "en": "violin",
-    "ruta_img": "violin.png",
-    "art": "el"
+    "ruta_img": "violin.png"
   },
   {
     "id": 1183,
     "es": "vela",
     "en": "candle",
-    "ruta_img": "vela.png",
-    "art": "la"
+    "ruta_img": "vela.png"
   },
   {
     "id": 1184,
     "es": "ventana",
     "en": "window",
-    "ruta_img": "ventana.png",
-    "art": "la"
+    "ruta_img": "ventana.png"
   },
   {
     "id": 1185,
     "es": "vestido",
     "en": "dress",
-    "ruta_img": "vestido.png",
-    "art": "el"
+    "ruta_img": "vestido.png"
   },
   {
     "id": 1186,
     "es": "vaso",
     "en": "glass",
-    "ruta_img": "vaso.png",
-    "art": "el"
+    "ruta_img": "vaso.png"
   },
   {
     "id": 1187,
     "es": "volar",
     "en": "fly",
-    "ruta_img": "volar.png",
-    "art": ""
+    "ruta_img": "volar.png"
   },
   {
     "id": 1188,
     "es": "waffle",
     "en": "waffle",
-    "ruta_img": "waffle.png",
-    "art": "el"
+    "ruta_img": "waffle.png"
   },
   {
     "id": 1189,
     "es": "wonton",
     "en": "wonton",
-    "ruta_img": "wonton.png",
-    "art": "el"
+    "ruta_img": "wonton.png"
   },
   {
     "id": 1190,
     "es": "xilófono",
     "en": "xylophone",
-    "ruta_img": "xilofono.png",
-    "art": "el"
+    "ruta_img": "xilofono.png"
   },
   {
     "id": 1191,
     "es": "Xochimilco",
     "en": "Xochimilco",
-    "ruta_img": "Xochimilco.png",
-    "art": "el"
+    "ruta_img": "Xochimilco.png"
   },
   {
     "id": 1192,
     "es": "yoyo",
     "en": "yo-yo",
-    "ruta_img": "yoyo.png",
-    "art": "el"
+    "ruta_img": "yoyo.png"
   },
   {
     "id": 1193,
     "es": "yate",
     "en": "yacht",
-    "ruta_img": "yate.png",
-    "art": "el"
+    "ruta_img": "yate.png"
   },
   {
     "id": 1194,
     "es": "yegua",
     "en": "mare",
-    "ruta_img": "yegua.png",
-    "art": "la"
+    "ruta_img": "yegua.png"
   },
   {
     "id": 1195,
     "es": "zapato",
     "en": "shoe",
-    "ruta_img": "zapato.png",
-    "art": "el"
+    "ruta_img": "zapato.png"
   },
   {
     "id": 1196,
     "es": "zorro",
     "en": "fox",
-    "ruta_img": "zorro.png",
-    "art": "el"
+    "ruta_img": "zorro.png"
   },
   {
     "id": 1197,
     "es": "zanahoria",
     "en": "carrot",
-    "ruta_img": "zanahoria.png",
-    "art": "la"
+    "ruta_img": "zanahoria.png"
   },
   {
     "id": 1198,
     "es": "zoológico",
     "en": "zoological",
-    "ruta_img": "zoologico.png",
-    "art": "el"
+    "ruta_img": "zoologico.png"
   },
   {
     "id": 1199,
     "es": "rápido",
     "en": "fast",
-    "ruta_img": "rapido.png",
-    "art": ""
+    "ruta_img": "rapido.png"
   },
   {
     "id": 1200,
     "es": "roja",
     "en": "red",
-    "ruta_img": "roja.png",
-    "art": ""
+    "ruta_img": "roja.png"
   },
   {
     "id": 1201,
     "es": "suky",
     "en": "suky",
-    "ruta_img": "suky.png",
-    "art": ""
+    "ruta_img": "suky.png"
   },
   {
     "id": 1202,
     "es": "no",
     "en": "No",
-    "ruta_img": "no.png",
-    "art": ""
+    "ruta_img": "no.png"
   },
   {
     "id": 1203,
     "es": "tienes",
     "en": "have",
-    "ruta_img": "tienes.png",
-    "art": ""
+    "ruta_img": "tienes.png"
   },
   {
     "id": 1204,
     "es": "hambre",
     "en": "hunger",
-    "ruta_img": "hambre.png",
-    "art": "el"
+    "ruta_img": "hambre.png"
   },
   {
     "id": 1205,
     "es": "daño",
     "en": "damage",
-    "ruta_img": "dano.png",
-    "art": "el"
+    "ruta_img": "dano.png"
   },
   {
     "id": 1206,
     "es": "sueño",
     "en": "dream",
-    "ruta_img": "sueno.png",
-    "art": "el"
+    "ruta_img": "sueno.png"
   },
   {
     "id": 1207,
     "es": "cielo",
     "en": "darling",
-    "ruta_img": "cielo.png",
-    "art": "el"
+    "ruta_img": "cielo.png"
   },
   {
     "id": 1208,
     "es": "duerme",
     "en": "sleep",
-    "ruta_img": "duerme.png",
-    "art": ""
+    "ruta_img": "duerme.png"
   },
   {
     "id": 1209,
     "es": "pío",
     "en": "pious",
-    "ruta_img": "pio.png",
-    "art": ""
+    "ruta_img": "pio.png"
   },
   {
     "id": 1210,
     "es": "llorando",
     "en": "crying",
-    "ruta_img": "llorando.png",
-    "art": ""
+    "ruta_img": "llorando.png"
   },
   {
     "id": 1211,
     "es": "semillas",
     "en": "seeds",
-    "ruta_img": "semillas.png",
-    "art": "el"
+    "ruta_img": "semillas.png"
   },
   {
     "id": 1212,
     "es": "afuera",
     "en": "outside",
-    "ruta_img": "afuera.png",
-    "art": ""
+    "ruta_img": "afuera.png"
   },
   {
     "id": 1213,
     "es": "burbujas",
     "en": "bubbles",
-    "ruta_img": "burbujas.png",
-    "art": "el"
+    "ruta_img": "burbujas.png"
   },
   {
     "id": 1214,
     "es": "comer",
     "en": "eat",
-    "ruta_img": "comer.png",
-    "art": ""
+    "ruta_img": "comer.png"
   },
   {
     "id": 1215,
     "es": "dormir",
     "en": "sleep",
-    "ruta_img": "dormir.png",
-    "art": ""
+    "ruta_img": "dormir.png"
   },
   {
     "id": 1216,
     "es": "nosotros",
     "en": "us",
-    "ruta_img": "nosotros.png",
-    "art": ""
+    "ruta_img": "nosotros.png"
   },
   {
     "id": 1217,
     "es": "curamos",
     "en": "we cure",
-    "ruta_img": "curamos.png",
-    "art": ""
+    "ruta_img": "curamos.png"
   },
   {
     "id": 1218,
     "es": "negro",
     "en": "black",
-    "ruta_img": "negro.png",
-    "art": ""
+    "ruta_img": "negro.png"
   },
   {
     "id": 1219,
     "es": "águila",
     "en": "eagle",
-    "ruta_img": "aguila.png",
-    "art": "la"
+    "ruta_img": "aguila.png"
   },
   {
     "id": 1220,
     "es": "mango",
     "en": "mango",
-    "ruta_img": "mango.png",
-    "art": "el"
+    "ruta_img": "mango.png"
   },
   {
     "id": 1221,
     "es": "pera",
     "en": "pear",
-    "ruta_img": "pera.png",
-    "art": "la"
+    "ruta_img": "pera.png"
   },
   {
     "id": 1222,
     "es": "plátano",
     "en": "banana",
-    "ruta_img": "platano.png",
-    "art": "el"
+    "ruta_img": "platano.png"
   },
   {
     "id": 1223,
     "es": "melón",
     "en": "melon",
-    "ruta_img": "melon.png",
-    "art": "el"
+    "ruta_img": "melon.png"
   },
   {
     "id": 1224,
     "es": "cereza",
     "en": "cherry",
-    "ruta_img": "cereza.png",
-    "art": "la"
+    "ruta_img": "cereza.png"
   },
   {
     "id": 1225,
     "es": "durazno",
     "en": "peach",
-    "ruta_img": "durazno.png",
-    "art": "el"
+    "ruta_img": "durazno.png"
   },
   {
     "id": 1226,
     "es": "frambuesa",
     "en": "raspberry",
-    "ruta_img": "frambuesa.png",
-    "art": "la"
+    "ruta_img": "frambuesa.png"
   },
   {
     "id": 1227,
     "es": "mora",
     "en": "blackberry",
-    "ruta_img": "mora.png",
-    "art": "la"
+    "ruta_img": "mora.png"
   },
   {
     "id": 1228,
     "es": "coco",
     "en": "coconut",
-    "ruta_img": "coco.png",
-    "art": "el"
+    "ruta_img": "coco.png"
   },
   {
     "id": 1229,
     "es": "papaya",
     "en": "papaya",
-    "ruta_img": "papaya.png",
-    "art": "la"
+    "ruta_img": "papaya.png"
   },
   {
     "id": 1230,
     "es": "guayaba",
     "en": "guava",
-    "ruta_img": "guayaba.png",
-    "art": "la"
+    "ruta_img": "guayaba.png"
   },
   {
     "id": 1231,
     "es": "maracuyá",
     "en": "passion fruit",
-    "ruta_img": "maracuya.png",
-    "art": "el"
+    "ruta_img": "maracuya.png"
   },
   {
     "id": 1232,
     "es": "higo",
     "en": "fig",
-    "ruta_img": "higo.png",
-    "art": "el"
+    "ruta_img": "higo.png"
   },
   {
     "id": 1233,
     "es": "ciruela",
     "en": "plum",
-    "ruta_img": "ciruela.png",
-    "art": "la"
+    "ruta_img": "ciruela.png"
   },
   {
     "id": 1234,
     "es": "mandarina",
     "en": "tangerine",
-    "ruta_img": "mandarina.png",
-    "art": "la"
+    "ruta_img": "mandarina.png"
   },
   {
     "id": 1235,
     "es": "aguacate",
     "en": "avocado",
-    "ruta_img": "aguacate.png",
-    "art": "el"
+    "ruta_img": "aguacate.png"
   },
   {
     "id": 1236,
     "es": "autobús",
     "en": "bus",
-    "ruta_img": "autobus.png",
-    "art": "el"
+    "ruta_img": "autobus.png"
   },
   {
     "id": 1237,
     "es": "moto",
     "en": "motorbike",
-    "ruta_img": "moto.png",
-    "art": "el"
+    "ruta_img": "moto.png"
   },
   {
     "id": 1238,
     "es": "taxi",
     "en": "Taxi",
-    "ruta_img": "taxi.png",
-    "art": "el"
+    "ruta_img": "taxi.png"
   },
   {
     "id": 1239,
     "es": "ambulancia",
     "en": "ambulance",
-    "ruta_img": "ambulancia.png",
-    "art": "la"
+    "ruta_img": "ambulancia.png"
   },
   {
     "id": 1240,
     "es": "bomberos",
     "en": "firefighters",
-    "ruta_img": "bomberos.png",
-    "art": "el"
+    "ruta_img": "bomberos.png"
   },
   {
     "id": 1241,
     "es": "patrulla",
     "en": "patrol",
-    "ruta_img": "patrulla.png",
-    "art": "la"
+    "ruta_img": "patrulla.png"
   },
   {
     "id": 1242,
     "es": "tractor",
     "en": "tractor",
-    "ruta_img": "tractor.png",
-    "art": "el"
+    "ruta_img": "tractor.png"
   },
   {
     "id": 1243,
     "es": "excavadora",
     "en": "excavator",
-    "ruta_img": "excavadora.png",
-    "art": "la"
+    "ruta_img": "excavadora.png"
   },
   {
     "id": 1244,
     "es": "patineta",
     "en": "skateboard",
-    "ruta_img": "patineta.png",
-    "art": "la"
+    "ruta_img": "patineta.png"
   },
   {
     "id": 1245,
     "es": "canoa",
     "en": "canoe",
-    "ruta_img": "canoa.png",
-    "art": "la"
+    "ruta_img": "canoa.png"
   },
   {
     "id": 1246,
     "es": "velero",
     "en": "sailboat",
-    "ruta_img": "velero.png",
-    "art": "el"
+    "ruta_img": "velero.png"
   },
   {
     "id": 1247,
     "es": "tranvía",
     "en": "tram",
-    "ruta_img": "tranvia.png",
-    "art": "la"
+    "ruta_img": "tranvia.png"
   },
   {
     "id": 1248,
     "es": "metro",
     "en": "metro",
-    "ruta_img": "metro.png",
-    "art": "el"
+    "ruta_img": "metro.png"
   },
   {
     "id": 1249,
     "es": "teleférico",
     "en": "cable car",
-    "ruta_img": "teleferico.png",
-    "art": "el"
+    "ruta_img": "teleferico.png"
   },
   {
     "id": 1250,
     "es": "pan",
     "en": "bread",
-    "ruta_img": "pan.png",
-    "art": "el"
+    "ruta_img": "pan.png"
   },
   {
     "id": 1251,
     "es": "pizza",
     "en": "pizza",
-    "ruta_img": "pizza.png",
-    "art": "la"
+    "ruta_img": "pizza.png"
   },
   {
     "id": 1252,
     "es": "sopa",
     "en": "soup",
-    "ruta_img": "sopa.png",
-    "art": "la"
+    "ruta_img": "sopa.png"
   },
   {
     "id": 1253,
     "es": "arroz",
     "en": "rice",
-    "ruta_img": "arroz.png",
-    "art": "el"
+    "ruta_img": "arroz.png"
   },
   {
     "id": 1254,
     "es": "pasta",
     "en": "paste",
-    "ruta_img": "pasta.png",
-    "art": "la"
+    "ruta_img": "pasta.png"
   },
   {
     "id": 1255,
     "es": "ensalada",
     "en": "salad",
-    "ruta_img": "ensalada.png",
-    "art": "la"
+    "ruta_img": "ensalada.png"
   },
   {
     "id": 1256,
     "es": "hamburguesa",
     "en": "hamburger",
-    "ruta_img": "hamburguesa.png",
-    "art": "la"
+    "ruta_img": "hamburguesa.png"
   },
   {
     "id": 1257,
     "es": "sandwich",
     "en": "sandwich",
-    "ruta_img": "sandwich.png",
-    "art": "el"
+    "ruta_img": "sandwich.png"
   },
   {
     "id": 1258,
     "es": "yogur",
     "en": "yogurt",
-    "ruta_img": "yogur.png",
-    "art": "el"
+    "ruta_img": "yogur.png"
   },
   {
     "id": 1259,
     "es": "galleta",
     "en": "cookie",
-    "ruta_img": "galleta.png",
-    "art": "la"
+    "ruta_img": "galleta.png"
   },
   {
     "id": 1260,
     "es": "pastel",
     "en": "cake",
-    "ruta_img": "pastel.png",
-    "art": "el"
+    "ruta_img": "pastel.png"
   },
   {
     "id": 1261,
     "es": "chocolate",
     "en": "chocolate",
-    "ruta_img": "chocolate.png",
-    "art": "el"
+    "ruta_img": "chocolate.png"
   },
   {
     "id": 1262,
     "es": "maíz",
     "en": "corn",
-    "ruta_img": "maiz.png",
-    "art": "el"
+    "ruta_img": "maiz.png"
   },
   {
     "id": 1263,
     "es": "frijoles",
     "en": "beans",
-    "ruta_img": "frijoles.png",
-    "art": "el"
+    "ruta_img": "frijoles.png"
   },
   {
     "id": 1264,
     "es": "pollo",
     "en": "chicken",
-    "ruta_img": "pollo.png",
-    "art": "el"
+    "ruta_img": "pollo.png"
   },
   {
     "id": 1265,
     "es": "pescado",
     "en": "fish",
-    "ruta_img": "pescado.png",
-    "art": "el"
+    "ruta_img": "pescado.png"
   },
   {
     "id": 1266,
     "es": "camiseta",
     "en": "t-shirt",
-    "ruta_img": "camiseta.png",
-    "art": "la"
+    "ruta_img": "camiseta.png"
   },
   {
     "id": 1267,
     "es": "pantalón",
     "en": "pants",
-    "ruta_img": "pantalon.png",
-    "art": "el"
+    "ruta_img": "pantalon.png"
   },
   {
     "id": 1268,
     "es": "falda",
     "en": "skirt",
-    "ruta_img": "falda.png",
-    "art": "la"
+    "ruta_img": "falda.png"
   },
   {
     "id": 1269,
     "es": "zapatos",
     "en": "shoes",
-    "ruta_img": "zapatos.png",
-    "art": "el"
+    "ruta_img": "zapatos.png"
   },
   {
     "id": 1270,
     "es": "calcetines",
     "en": "socks",
-    "ruta_img": "calcetines.png",
-    "art": "el"
+    "ruta_img": "calcetines.png"
   },
   {
     "id": 1271,
     "es": "abrigo",
     "en": "coat",
-    "ruta_img": "abrigo.png",
-    "art": "el"
+    "ruta_img": "abrigo.png"
   },
   {
     "id": 1272,
     "es": "bufanda",
     "en": "scarf",
-    "ruta_img": "bufanda.png",
-    "art": "la"
+    "ruta_img": "bufanda.png"
   },
   {
     "id": 1273,
     "es": "guantes",
     "en": "gloves",
-    "ruta_img": "guantes.png",
-    "art": "el"
+    "ruta_img": "guantes.png"
   },
   {
     "id": 1274,
     "es": "pijama",
     "en": "pajamas",
-    "ruta_img": "pijama.png",
-    "art": "el"
+    "ruta_img": "pijama.png"
   },
   {
     "id": 1275,
     "es": "shorts",
     "en": "shorts",
-    "ruta_img": "shorts.png",
-    "art": "el"
+    "ruta_img": "shorts.png"
   },
   {
     "id": 1276,
     "es": "chaleco",
     "en": "vest",
-    "ruta_img": "chaleco.png",
-    "art": "el"
+    "ruta_img": "chaleco.png"
   },
   {
     "id": 1277,
     "es": "sudadera",
     "en": "hoodie",
-    "ruta_img": "sudadera.png",
-    "art": "la"
+    "ruta_img": "sudadera.png"
   },
   {
     "id": 1278,
     "es": "cinturón",
     "en": "belt",
-    "ruta_img": "cinturon.png",
-    "art": "el"
+    "ruta_img": "cinturon.png"
   },
   {
     "id": 1279,
     "es": "bolsa",
     "en": "bag",
-    "ruta_img": "bolsa.png",
-    "art": "la"
+    "ruta_img": "bolsa.png"
   },
   {
     "id": 1280,
     "es": "sandalias",
     "en": "sandals",
-    "ruta_img": "sandalias.png",
-    "art": "el"
+    "ruta_img": "sandalias.png"
   },
   {
     "id": 1281,
     "es": "tenis",
     "en": "tennis",
-    "ruta_img": "tenis.png",
-    "art": "el"
+    "ruta_img": "tenis.png"
   },
   {
     "id": 1282,
     "es": "corbata",
     "en": "tie",
-    "ruta_img": "corbata.png",
-    "art": "la"
+    "ruta_img": "corbata.png"
   },
   {
     "id": 1283,
     "es": "delantal",
     "en": "apron",
-    "ruta_img": "delantal.png",
-    "art": "el"
+    "ruta_img": "delantal.png"
   },
   {
     "id": 1284,
     "es": "bañador",
     "en": "swimsuit",
-    "ruta_img": "banador.png",
-    "art": "el"
+    "ruta_img": "banador.png"
   },
   {
     "id": 1285,
     "es": "rojo",
     "en": "red",
-    "ruta_img": "rojo.png",
-    "art": ""
+    "ruta_img": "rojo.png"
   },
   {
     "id": 1286,
     "es": "azul",
     "en": "blue",
-    "ruta_img": "azul.png",
-    "art": ""
+    "ruta_img": "azul.png"
   },
   {
     "id": 1287,
     "es": "amarillo",
     "en": "yellow",
-    "ruta_img": "amarillo.png",
-    "art": ""
+    "ruta_img": "amarillo.png"
   },
   {
     "id": 1288,
     "es": "verde",
     "en": "green",
-    "ruta_img": "verde.png",
-    "art": ""
+    "ruta_img": "verde.png"
   },
   {
     "id": 1289,
     "es": "morado",
     "en": "purple",
-    "ruta_img": "morado.png",
-    "art": ""
+    "ruta_img": "morado.png"
   },
   {
     "id": 1290,
     "es": "marrón",
     "en": "brown",
-    "ruta_img": "marron.png",
-    "art": ""
+    "ruta_img": "marron.png"
   },
   {
     "id": 1291,
     "es": "blanco",
     "en": "white",
-    "ruta_img": "blanco.png",
-    "art": ""
+    "ruta_img": "blanco.png"
   },
   {
     "id": 1292,
     "es": "gris",
     "en": "grey",
-    "ruta_img": "gris.png",
-    "art": ""
+    "ruta_img": "gris.png"
   },
   {
     "id": 1293,
     "es": "turquesa",
     "en": "turquoise",
-    "ruta_img": "turquesa.png",
-    "art": ""
+    "ruta_img": "turquesa.png"
   },
   {
     "id": 1294,
     "es": "dorado",
     "en": "golden",
-    "ruta_img": "dorado.png",
-    "art": ""
+    "ruta_img": "dorado.png"
   },
   {
     "id": 1295,
     "es": "plateado",
     "en": "silver",
-    "ruta_img": "plateado.png",
-    "art": ""
+    "ruta_img": "plateado.png"
   },
   {
     "id": 1296,
     "es": "beige",
     "en": "beige",
-    "ruta_img": "beige.png",
-    "art": ""
+    "ruta_img": "beige.png"
   },
   {
     "id": 1297,
     "es": "violeta",
     "en": "violet",
-    "ruta_img": "violeta.png",
-    "art": ""
+    "ruta_img": "violeta.png"
   },
   {
     "id": 1298,
     "es": "celeste",
     "en": "sky blue",
-    "ruta_img": "celeste.png",
-    "art": ""
+    "ruta_img": "celeste.png"
   },
   {
     "id": 1299,
     "es": "magenta",
     "en": "magenta",
-    "ruta_img": "magenta.png",
-    "art": ""
+    "ruta_img": "magenta.png"
   },
   {
     "id": 1300,
     "es": "oliva",
     "en": "olive",
-    "ruta_img": "oliva.png",
-    "art": ""
+    "ruta_img": "oliva.png"
   },
   {
     "id": 1301,
     "es": "coral",
     "en": "coral",
-    "ruta_img": "coral.png",
-    "art": ""
+    "ruta_img": "coral.png"
   },
   {
     "id": 1302,
     "es": "índigo",
     "en": "indigo",
-    "ruta_img": "indigo.png",
-    "art": ""
+    "ruta_img": "indigo.png"
   },
   {
     "id": 1303,
     "es": "fucsia",
     "en": "fuchsia",
-    "ruta_img": "fucsia.png",
-    "art": ""
+    "ruta_img": "fucsia.png"
   },
   {
     "id": 1304,
     "es": "lima",
     "en": "lime",
-    "ruta_img": "lima.png",
-    "art": ""
+    "ruta_img": "lima.png"
   },
   {
     "id": 1305,
     "es": "ocre",
     "en": "ocher",
-    "ruta_img": "ocre.png",
-    "art": ""
+    "ruta_img": "ocre.png"
   },
   {
     "id": 1306,
     "es": "correr",
     "en": "run",
-    "ruta_img": "correr.png",
-    "art": ""
+    "ruta_img": "correr.png"
   },
   {
     "id": 1307,
     "es": "saltar",
     "en": "hop",
-    "ruta_img": "saltar.png",
-    "art": ""
+    "ruta_img": "saltar.png"
   },
   {
     "id": 1308,
     "es": "beber",
     "en": "drink",
-    "ruta_img": "beber.png",
-    "art": ""
+    "ruta_img": "beber.png"
   },
   {
     "id": 1309,
     "es": "jugar",
     "en": "play",
-    "ruta_img": "jugar.png",
-    "art": ""
+    "ruta_img": "jugar.png"
   },
   {
     "id": 1310,
     "es": "cantar",
     "en": "sing",
-    "ruta_img": "cantar.png",
-    "art": ""
+    "ruta_img": "cantar.png"
   },
   {
     "id": 1311,
     "es": "bailar",
     "en": "dance",
-    "ruta_img": "bailar.png",
-    "art": ""
+    "ruta_img": "bailar.png"
   },
   {
     "id": 1312,
     "es": "leer",
     "en": "read",
-    "ruta_img": "leer.png",
-    "art": ""
+    "ruta_img": "leer.png"
   },
   {
     "id": 1313,
     "es": "dibujar",
     "en": "draw",
-    "ruta_img": "dibujar.png",
-    "art": ""
+    "ruta_img": "dibujar.png"
   },
   {
     "id": 1314,
     "es": "pintar",
     "en": "paint",
-    "ruta_img": "pintar.png",
-    "art": ""
+    "ruta_img": "pintar.png"
   },
   {
     "id": 1315,
     "es": "escribir",
     "en": "write",
-    "ruta_img": "escribir.png",
-    "art": ""
+    "ruta_img": "escribir.png"
   },
   {
     "id": 1316,
     "es": "llorar",
     "en": "cry",
-    "ruta_img": "llorar.png",
-    "art": ""
+    "ruta_img": "llorar.png"
   },
   {
     "id": 1317,
     "es": "reír",
     "en": "laugh",
-    "ruta_img": "reir.png",
-    "art": ""
+    "ruta_img": "reir.png"
   },
   {
     "id": 1318,
     "es": "abrazar",
     "en": "embrace",
-    "ruta_img": "abrazar.png",
-    "art": ""
+    "ruta_img": "abrazar.png"
   },
   {
     "id": 1319,
     "es": "besar",
     "en": "kiss",
-    "ruta_img": "besar.png",
-    "art": ""
+    "ruta_img": "besar.png"
   },
   {
     "id": 1320,
     "es": "caminar",
     "en": "walk",
-    "ruta_img": "caminar.png",
-    "art": ""
+    "ruta_img": "caminar.png"
   },
   {
     "id": 1321,
     "es": "nadar",
     "en": "swim",
-    "ruta_img": "nadar.png",
-    "art": ""
+    "ruta_img": "nadar.png"
   },
   {
     "id": 1322,
     "es": "trepar",
     "en": "climb",
-    "ruta_img": "trepar.png",
-    "art": ""
+    "ruta_img": "trepar.png"
   },
   {
     "id": 1323,
     "es": "empujar",
     "en": "push",
-    "ruta_img": "empujar.png",
-    "art": ""
+    "ruta_img": "empujar.png"
   },
   {
     "id": 1324,
     "es": "jalar",
     "en": "pull",
-    "ruta_img": "jalar.png",
-    "art": ""
+    "ruta_img": "jalar.png"
   },
   {
     "id": 1325,
     "es": "abrir",
     "en": "open",
-    "ruta_img": "abrir.png",
-    "art": ""
+    "ruta_img": "abrir.png"
   },
   {
     "id": 1326,
     "es": "cerrar",
     "en": "close",
-    "ruta_img": "cerrar.png",
-    "art": ""
+    "ruta_img": "cerrar.png"
   },
   {
     "id": 1327,
     "es": "feliz",
     "en": "happy",
-    "ruta_img": "feliz.png",
-    "art": ""
+    "ruta_img": "feliz.png"
   },
   {
     "id": 1328,
     "es": "triste",
     "en": "sad",
-    "ruta_img": "triste.png",
-    "art": ""
+    "ruta_img": "triste.png"
   },
   {
     "id": 1329,
     "es": "enojado",
     "en": "angry",
-    "ruta_img": "enojado.png",
-    "art": ""
+    "ruta_img": "enojado.png"
   },
   {
     "id": 1330,
     "es": "asustado",
     "en": "scared",
-    "ruta_img": "asustado.png",
-    "art": ""
+    "ruta_img": "asustado.png"
   },
   {
     "id": 1331,
     "es": "sorprendido",
     "en": "surprised",
-    "ruta_img": "sorprendido.png",
-    "art": ""
+    "ruta_img": "sorprendido.png"
   },
   {
     "id": 1332,
     "es": "aburrido",
     "en": "bored",
-    "ruta_img": "aburrido.png",
-    "art": ""
+    "ruta_img": "aburrido.png"
   },
   {
     "id": 1333,
     "es": "emocionado",
     "en": "excited",
-    "ruta_img": "emocionado.png",
-    "art": ""
+    "ruta_img": "emocionado.png"
   },
   {
     "id": 1334,
     "es": "tranquilo",
     "en": "don't worry",
-    "ruta_img": "tranquilo.png",
-    "art": ""
+    "ruta_img": "tranquilo.png"
   },
   {
     "id": 1335,
     "es": "cansado",
     "en": "tired",
-    "ruta_img": "cansado.png",
-    "art": ""
+    "ruta_img": "cansado.png"
   },
   {
     "id": 1336,
     "es": "contento",
     "en": "glad",
-    "ruta_img": "contento.png",
-    "art": ""
+    "ruta_img": "contento.png"
   },
   {
     "id": 1337,
     "es": "nervioso",
     "en": "highly strung",
-    "ruta_img": "nervioso.png",
-    "art": ""
+    "ruta_img": "nervioso.png"
   },
   {
     "id": 1338,
     "es": "orgulloso",
     "en": "proud",
-    "ruta_img": "orgulloso.png",
-    "art": ""
+    "ruta_img": "orgulloso.png"
   },
   {
     "id": 1339,
     "es": "celoso",
     "en": "jealous",
-    "ruta_img": "celoso.png",
-    "art": ""
+    "ruta_img": "celoso.png"
   },
   {
     "id": 1340,
     "es": "avergonzado",
     "en": "ashamed",
-    "ruta_img": "avergonzado.png",
-    "art": ""
+    "ruta_img": "avergonzado.png"
   },
   {
     "id": 1341,
     "es": "confundido",
     "en": "confused",
-    "ruta_img": "confundido.png",
-    "art": ""
+    "ruta_img": "confundido.png"
   },
   {
     "id": 1342,
     "es": "enamorado",
     "en": "in love",
-    "ruta_img": "enamorado.png",
-    "art": ""
+    "ruta_img": "enamorado.png"
   },
   {
     "id": 1343,
     "es": "asqueado",
     "en": "disgusted",
-    "ruta_img": "asqueado.png",
-    "art": ""
+    "ruta_img": "asqueado.png"
   },
   {
     "id": 1344,
     "es": "frustrado",
     "en": "frustrated",
-    "ruta_img": "frustrado.png",
-    "art": ""
+    "ruta_img": "frustrado.png"
   },
   {
     "id": 1345,
     "es": "esperanzado",
     "en": "hopeful",
-    "ruta_img": "esperanzado.png",
-    "art": ""
+    "ruta_img": "esperanzado.png"
   },
   {
     "id": 1346,
     "es": "solitario",
     "en": "lonely",
-    "ruta_img": "solitario.png",
-    "art": ""
+    "ruta_img": "solitario.png"
   },
   {
     "id": 1347,
     "es": "agradecido",
     "en": "grateful",
-    "ruta_img": "agradecido.png",
-    "art": ""
+    "ruta_img": "agradecido.png"
   },
   {
     "id": 1348,
     "es": "curioso",
     "en": "curious",
-    "ruta_img": "curioso.png",
-    "art": ""
+    "ruta_img": "curioso.png"
   },
   {
     "id": 1349,
     "es": "valiente",
     "en": "brave",
-    "ruta_img": "valiente.png",
-    "art": ""
+    "ruta_img": "valiente.png"
   },
   {
     "id": 1350,
     "es": "tímido",
     "en": "shy",
-    "ruta_img": "timido.png",
-    "art": ""
+    "ruta_img": "timido.png"
   },
   {
     "id": 1351,
     "es": "grande",
     "en": "big",
-    "ruta_img": "grande.png",
-    "art": ""
+    "ruta_img": "grande.png"
   },
   {
     "id": 1352,
     "es": "pequeño",
     "en": "little",
-    "ruta_img": "pequeno.png",
-    "art": ""
+    "ruta_img": "pequeno.png"
   },
   {
     "id": 1353,
     "es": "lento",
     "en": "slow",
-    "ruta_img": "lento.png",
-    "art": ""
+    "ruta_img": "lento.png"
   },
   {
     "id": 1354,
     "es": "caliente",
     "en": "hot",
-    "ruta_img": "caliente.png",
-    "art": ""
+    "ruta_img": "caliente.png"
   },
   {
     "id": 1355,
     "es": "frío",
     "en": "cold",
-    "ruta_img": "frio.png",
-    "art": ""
+    "ruta_img": "frio.png"
   },
   {
     "id": 1356,
     "es": "suave",
     "en": "gentle",
-    "ruta_img": "suave.png",
-    "art": ""
+    "ruta_img": "suave.png"
   },
   {
     "id": 1357,
     "es": "duro",
     "en": "hard",
-    "ruta_img": "duro.png",
-    "art": ""
+    "ruta_img": "duro.png"
   },
   {
     "id": 1358,
     "es": "limpio",
     "en": "clean",
-    "ruta_img": "limpio.png",
-    "art": ""
+    "ruta_img": "limpio.png"
   },
   {
     "id": 1359,
     "es": "sucio",
     "en": "dirty",
-    "ruta_img": "sucio.png",
-    "art": ""
+    "ruta_img": "sucio.png"
   },
   {
     "id": 1360,
     "es": "nuevo",
     "en": "new",
-    "ruta_img": "nuevo.png",
-    "art": ""
+    "ruta_img": "nuevo.png"
   },
   {
     "id": 1361,
     "es": "viejo",
     "en": "old",
-    "ruta_img": "viejo.png",
-    "art": ""
+    "ruta_img": "viejo.png"
   },
   {
     "id": 1362,
     "es": "bonito",
     "en": "pretty",
-    "ruta_img": "bonito.png",
-    "art": ""
+    "ruta_img": "bonito.png"
   },
   {
     "id": 1363,
     "es": "feo",
     "en": "ugly",
-    "ruta_img": "feo.png",
-    "art": ""
+    "ruta_img": "feo.png"
   },
   {
     "id": 1364,
     "es": "fuerte",
     "en": "strong",
-    "ruta_img": "fuerte.png",
-    "art": ""
+    "ruta_img": "fuerte.png"
   },
   {
     "id": 1365,
     "es": "débil",
     "en": "weak",
-    "ruta_img": "debil.png",
-    "art": ""
+    "ruta_img": "debil.png"
   },
   {
     "id": 1366,
     "es": "alto",
     "en": "high",
-    "ruta_img": "alto.png",
-    "art": ""
+    "ruta_img": "alto.png"
   },
   {
     "id": 1367,
     "es": "bajo",
     "en": "low",
-    "ruta_img": "bajo.png",
-    "art": ""
+    "ruta_img": "bajo.png"
   },
   {
     "id": 1368,
     "es": "gordo",
     "en": "fat",
-    "ruta_img": "gordo.png",
-    "art": ""
+    "ruta_img": "gordo.png"
   },
   {
     "id": 1369,
     "es": "delgado",
     "en": "slim",
-    "ruta_img": "delgado.png",
-    "art": ""
+    "ruta_img": "delgado.png"
   },
   {
     "id": 1370,
     "es": "amargo",
     "en": "bitter",
-    "ruta_img": "amargo.png",
-    "art": ""
+    "ruta_img": "amargo.png"
   },
   {
     "id": 1371,
     "es": "brillante",
     "en": "bright",
-    "ruta_img": "brillante.png",
-    "art": ""
+    "ruta_img": "brillante.png"
   },
   {
     "id": 1372,
     "es": "oscuro",
     "en": "dark",
-    "ruta_img": "oscuro.png",
-    "art": ""
+    "ruta_img": "oscuro.png"
   },
   {
     "id": 1373,
     "es": "cabeza",
     "en": "head",
-    "ruta_img": "cabeza.png",
-    "art": "la"
+    "ruta_img": "cabeza.png"
   },
   {
     "id": 1374,
     "es": "pelo",
     "en": "hair",
-    "ruta_img": "pelo.png",
-    "art": "el"
+    "ruta_img": "pelo.png"
   },
   {
     "id": 1375,
     "es": "cuello",
     "en": "neck",
-    "ruta_img": "cuello.png",
-    "art": "el"
+    "ruta_img": "cuello.png"
   },
   {
     "id": 1376,
     "es": "hombro",
     "en": "shoulder",
-    "ruta_img": "hombro.png",
-    "art": "el"
+    "ruta_img": "hombro.png"
   },
   {
     "id": 1377,
     "es": "brazo",
     "en": "arm",
-    "ruta_img": "brazo.png",
-    "art": "el"
+    "ruta_img": "brazo.png"
   },
   {
     "id": 1378,
     "es": "dedo",
     "en": "finger",
-    "ruta_img": "dedo.png",
-    "art": "el"
+    "ruta_img": "dedo.png"
   },
   {
     "id": 1379,
     "es": "pecho",
     "en": "chest",
-    "ruta_img": "pecho.png",
-    "art": "el"
+    "ruta_img": "pecho.png"
   },
   {
     "id": 1380,
     "es": "barriga",
     "en": "belly",
-    "ruta_img": "barriga.png",
-    "art": "la"
+    "ruta_img": "barriga.png"
   },
   {
     "id": 1381,
     "es": "espalda",
     "en": "back",
-    "ruta_img": "espalda.png",
-    "art": "la"
+    "ruta_img": "espalda.png"
   },
   {
     "id": 1382,
     "es": "pierna",
     "en": "leg",
-    "ruta_img": "pierna.png",
-    "art": "la"
+    "ruta_img": "pierna.png"
   },
   {
     "id": 1383,
     "es": "rodilla",
     "en": "knee",
-    "ruta_img": "rodilla.png",
-    "art": "la"
+    "ruta_img": "rodilla.png"
   },
   {
     "id": 1384,
     "es": "pie",
     "en": "foot",
-    "ruta_img": "pie.png",
-    "art": "el"
+    "ruta_img": "pie.png"
   },
   {
     "id": 1385,
     "es": "talón",
     "en": "bead",
-    "ruta_img": "talon.png",
-    "art": "el"
+    "ruta_img": "talon.png"
   },
   {
     "id": 1386,
     "es": "uña",
     "en": "a",
-    "ruta_img": "una.png",
-    "art": "la"
+    "ruta_img": "una.png"
   },
   {
     "id": 1387,
     "es": "ceja",
     "en": "eyebrow",
-    "ruta_img": "ceja.png",
-    "art": "la"
+    "ruta_img": "ceja.png"
   },
   {
     "id": 1388,
     "es": "mejilla",
     "en": "cheek",
-    "ruta_img": "mejilla.png",
-    "art": "la"
+    "ruta_img": "mejilla.png"
   },
   {
     "id": 1389,
     "es": "barbilla",
     "en": "chin",
-    "ruta_img": "barbilla.png",
-    "art": "la"
+    "ruta_img": "barbilla.png"
   },
   {
     "id": 1390,
     "es": "codo",
     "en": "elbow",
-    "ruta_img": "codo.png",
-    "art": "el"
+    "ruta_img": "codo.png"
   },
   {
     "id": 1391,
     "es": "muñeca",
     "en": "doll",
-    "ruta_img": "muneca.png",
-    "art": "la"
+    "ruta_img": "muneca.png"
   },
   {
     "id": 1392,
     "es": "lluvia",
     "en": "rain",
-    "ruta_img": "lluvia.png",
-    "art": "la"
+    "ruta_img": "lluvia.png"
   },
   {
     "id": 1393,
     "es": "mar",
     "en": "sea",
-    "ruta_img": "mar.png",
-    "art": "el"
+    "ruta_img": "mar.png"
   },
   {
     "id": 1394,
     "es": "desierto",
     "en": "desert",
-    "ruta_img": "desierto.png",
-    "art": "el"
+    "ruta_img": "desierto.png"
   },
   {
     "id": 1395,
     "es": "bosque",
     "en": "forest",
-    "ruta_img": "bosque.png",
-    "art": "el"
+    "ruta_img": "bosque.png"
   },
   {
     "id": 1396,
     "es": "piedra",
     "en": "stone",
-    "ruta_img": "piedra.png",
-    "art": "la"
+    "ruta_img": "piedra.png"
   },
   {
     "id": 1397,
     "es": "arena",
     "en": "sand",
-    "ruta_img": "arena.png",
-    "art": "la"
+    "ruta_img": "arena.png"
   },
   {
     "id": 1398,
     "es": "semilla",
     "en": "seed",
-    "ruta_img": "semilla.png",
-    "art": "la"
+    "ruta_img": "semilla.png"
   },
   {
     "id": 1399,
     "es": "raíz",
     "en": "root",
-    "ruta_img": "raiz.png",
-    "art": "el"
+    "ruta_img": "raiz.png"
   },
   {
     "id": 1400,
     "es": "rama",
     "en": "branch",
-    "ruta_img": "rama.png",
-    "art": "el"
+    "ruta_img": "rama.png"
   },
   {
     "id": 1401,
     "es": "hierba",
     "en": "grass",
-    "ruta_img": "hierba.png",
-    "art": "la"
+    "ruta_img": "hierba.png"
   },
   {
     "id": 1402,
     "es": "musgo",
     "en": "moss",
-    "ruta_img": "musgo.png",
-    "art": "el"
+    "ruta_img": "musgo.png"
   },
   {
     "id": 1403,
     "es": "cascada",
     "en": "waterfall",
-    "ruta_img": "cascada.png",
-    "art": "la"
+    "ruta_img": "cascada.png"
   },
   {
     "id": 1404,
     "es": "arriba",
     "en": "above",
-    "ruta_img": "arriba.png",
-    "art": ""
+    "ruta_img": "arriba.png"
   },
   {
     "id": 1405,
     "es": "abajo",
     "en": "below",
-    "ruta_img": "abajo.png",
-    "art": ""
+    "ruta_img": "abajo.png"
   },
   {
     "id": 1406,
     "es": "dentro",
     "en": "inside",
-    "ruta_img": "dentro.png",
-    "art": ""
+    "ruta_img": "dentro.png"
   },
   {
     "id": 1407,
     "es": "fuera",
     "en": "out",
-    "ruta_img": "fuera.png",
-    "art": ""
+    "ruta_img": "fuera.png"
   },
   {
     "id": 1408,
     "es": "antes",
     "en": "before",
-    "ruta_img": "antes.png",
-    "art": ""
+    "ruta_img": "antes.png"
   },
   {
     "id": 1409,
     "es": "después",
     "en": "after",
-    "ruta_img": "despues.png",
-    "art": ""
+    "ruta_img": "despues.png"
   },
   {
     "id": 1410,
     "es": "cerca",
     "en": "near",
-    "ruta_img": "cerca.png",
-    "art": ""
+    "ruta_img": "cerca.png"
   },
   {
     "id": 1411,
     "es": "lejos",
     "en": "far",
-    "ruta_img": "lejos.png",
-    "art": ""
+    "ruta_img": "lejos.png"
   },
   {
     "id": 1412,
     "es": "encima",
     "en": "on",
-    "ruta_img": "encima.png",
-    "art": ""
+    "ruta_img": "encima.png"
   },
   {
     "id": 1413,
     "es": "debajo",
     "en": "below",
-    "ruta_img": "debajo.png",
-    "art": ""
+    "ruta_img": "debajo.png"
   },
   {
     "id": 1414,
     "es": "delante",
     "en": "in front of",
-    "ruta_img": "delante.png",
-    "art": ""
+    "ruta_img": "delante.png"
   },
   {
     "id": 1415,
     "es": "detrás",
     "en": "behind",
-    "ruta_img": "detras.png",
-    "art": ""
+    "ruta_img": "detras.png"
   },
   {
     "id": 1416,
     "es": "izquierda",
     "en": "left",
-    "ruta_img": "izquierda.png",
-    "art": ""
+    "ruta_img": "izquierda.png"
   },
   {
     "id": 1417,
     "es": "derecha",
     "en": "right",
-    "ruta_img": "derecha.png",
-    "art": ""
+    "ruta_img": "derecha.png"
   },
   {
     "id": 1418,
     "es": "noche",
     "en": "evening",
-    "ruta_img": "noche.png",
-    "art": "la"
+    "ruta_img": "noche.png"
   },
   {
     "id": 1419,
     "es": "entrada",
     "en": "entrance",
-    "ruta_img": "entrada.png",
-    "art": "la"
+    "ruta_img": "entrada.png"
   },
   {
     "id": 1420,
     "es": "salida",
     "en": "exit",
-    "ruta_img": "salida.png",
-    "art": "la"
+    "ruta_img": "salida.png"
   },
   {
     "id": 1421,
     "es": "inicio",
     "en": "start",
-    "ruta_img": "inicio.png",
-    "art": ""
+    "ruta_img": "inicio.png"
   },
   {
     "id": 1422,
     "es": "fin",
     "en": "end",
-    "ruta_img": "fin.png",
-    "art": ""
+    "ruta_img": "fin.png"
   },
   {
     "id": 1423,
     "es": "abierto",
     "en": "open",
-    "ruta_img": "abierto.png",
-    "art": ""
+    "ruta_img": "abierto.png"
   },
   {
     "id": 1424,
     "es": "cerrado",
     "en": "closed",
-    "ruta_img": "cerrado.png",
-    "art": ""
+    "ruta_img": "cerrado.png"
   },
   {
     "id": 1425,
     "es": "lleno",
     "en": "full",
-    "ruta_img": "lleno.png",
-    "art": ""
+    "ruta_img": "lleno.png"
   },
   {
     "id": 1426,
     "es": "vacío",
     "en": "empty",
-    "ruta_img": "vacio.png",
-    "art": ""
+    "ruta_img": "vacio.png"
   }
 ]
