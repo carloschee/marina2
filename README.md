@@ -14,7 +14,6 @@ Esta sección es para ti, mamá, papá o terapeuta que acompañas a Emi durante 
 
 La primera vez que abras la app, te recomendamos agregarla a la pantalla de inicio del iPad para que funcione como una aplicación nativa: toca el botón de compartir en Safari y elige **"Agregar a pantalla de inicio"**. Así la app funciona en pantalla completa, sin la barra del navegador, y también funciona sin internet una vez descargada.
 
-!()
 ![Agregar a la pantalla de inicio](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-agregar-inicio.PNG)
 
 
@@ -24,7 +23,7 @@ La primera vez que abras la app, te recomendamos agregarla a la pantalla de inic
 
 Al abrir la app verás el menú principal con los módulos disponibles. En la parte superior hay una barra con el nombre de la app, el perfil activo y algunos controles.
 
-📸 *Captura sugerida: pantalla de inicio completa en iPad landscape, con los 4 módulos visibles y el header*
+![Agregar a la pantalla de inicio](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-ui.PNG)
 
 El indicador **En línea / Sin conexión** en la esquina superior derecha te muestra si el iPad tiene internet. Si está en verde, todo bien. Si está en rojo, la app seguirá funcionando con los contenidos que ya estén descargados.
 
@@ -38,7 +37,7 @@ En la esquina superior derecha hay dos botones: **ES** y **EN**. Puedes activar 
 - **Solo EN** → toda la sesión en inglés
 - **ES + EN activos** → la app alterna entre ambos idiomas de forma aleatoria en cada interacción, ideal para trabajar los dos idiomas en una misma sesión
 
-📸 *Captura sugerida: detalle del pill ES/EN con ambos botones activos (los dos resaltados en azul)*
+![Agregar a la pantalla de inicio](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-pill-lang.PNG)
 
 ---
 
