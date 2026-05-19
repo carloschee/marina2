@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-19T14:50:34.988Z",
-  "totalAssets": 2242,
+  "generado": "2026-05-19T14:53:39.490Z",
+  "totalAssets": 2243,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -2047,6 +2047,7 @@
     "./assets/pictogramas/mochila.png",
     "./assets/pictogramas/mono.png",
     "./assets/pictogramas/montana.png",
+    "./assets/pictogramas/montaña.png",
     "./assets/pictogramas/mora.png",
     "./assets/pictogramas/morado.png",
     "./assets/pictogramas/moto.png",
