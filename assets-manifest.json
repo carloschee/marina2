@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-19T18:23:34.859Z",
-  "totalAssets": 1401,
+  "generado": "2026-05-19T18:26:56.908Z",
+  "totalAssets": 1402,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1020,6 +1020,7 @@
     "./assets/pictogramas/cascada.png",
     "./assets/pictogramas/cebra.png",
     "./assets/pictogramas/ceja.png",
+    "./assets/pictogramas/celeste-color.png",
     "./assets/pictogramas/celoso.png",
     "./assets/pictogramas/cerca.png",
     "./assets/pictogramas/cereza.png",
