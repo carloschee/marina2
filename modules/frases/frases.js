@@ -618,7 +618,7 @@ function _bindEvents() {
       _reproducirFrase(texto, frase.id);
     } else {
       // Frase parcial — reproducir piezas construidas en cadena
-      _reproducirCadena(_built.map(i => frase.piezas[i]));
+      _reproducirCadena(_built.map(i => frase.piezas[i]), frase.lang || _lang);
     }
   });
 
@@ -654,7 +654,7 @@ function _precargarFrase(id) {
 
 // Reproduce un MP3 con fallback a TTS — garantiza que el fallback
 // solo se ejecuta una vez aunque onerror y catch() se disparen juntos.
-function _reproducirURL(url, textoFallback, onEnded = null) {
+function _reproducirURL(url, textoFallback, onEnded = null, langForzado = null) {
   const audio = _getAudio();
   TTS.stop();
   audio.pause();
@@ -664,7 +664,7 @@ function _reproducirURL(url, textoFallback, onEnded = null) {
   const _fallback = () => {
     if (_fallbackUsado) return;
     _fallbackUsado = true;
-    _hablarTTS(textoFallback);
+    _hablarTTS(textoFallback, langForzado);
   };
 
   audio.onerror = _fallback;
@@ -672,31 +672,36 @@ function _reproducirURL(url, textoFallback, onEnded = null) {
   audio.play().catch(_fallback);
 }
 
-// Reproduce el MP3 del enunciado completo con fallback a TTS.
+// _reproducirFrase — usa el lang de la frase activa
 function _reproducirFrase(texto, id) {
-  _reproducirURL(AUDIO_FRASE_URL(id, _lang), texto);
+  const frase = _frases[_activa];
+  const lang  = frase?.lang || _lang;
+  _reproducirURL(AUDIO_FRASE_URL(id, lang), texto, null, lang);
 }
 
-// Reproduce una pieza individual con fallback a TTS.
+// _reproducirPieza — usa el mismo lang
 function _reproducirPieza(pieza) {
+  const frase = _frases[_activa];
+  const lang  = frase?.lang || _lang;
   const url = pieza.tipo === 'picto'
-    ? AUDIO_URL(pieza.texto, _lang)
-    : AUDIO_FRASE_URL(pieza.texto, _lang);
-  _reproducirURL(url, pieza.texto);
+    ? AUDIO_URL(pieza.texto, lang)
+    : AUDIO_FRASE_URL(pieza.texto, lang);
+  _reproducirURL(url, pieza.texto, null, lang);
 }
 
-// Reproduce una cadena de piezas en secuencia (para frase parcial).
-function _reproducirCadena(piezas) {
+// _reproducirCadena — propaga lang a cada pieza
+function _reproducirCadena(piezas, lang = null) {
   if (!piezas.length) return;
   const [primera, ...resto] = piezas;
   const url = primera.tipo === 'picto'
-    ? AUDIO_URL(primera.texto, _lang)
-    : AUDIO_FRASE_URL(primera.texto, _lang);
-  _reproducirURL(url, primera.texto, () => _reproducirCadena(resto));
+    ? AUDIO_URL(primera.texto, lang)
+    : AUDIO_FRASE_URL(primera.texto, lang);
+  _reproducirURL(url, primera.texto, () => _reproducirCadena(resto, lang), lang);
 }
 
-function _hablarTTS(texto) {
-  const ttsLang = (window.getLang?.() === 'en') ? 'en-US' : 'es-MX';
+function _hablarTTS(texto, langForzado = null) {
+  const base = langForzado || (_lang === 'en' ? 'en' : 'es');
+  const ttsLang = base === 'en' ? 'en-US' : 'es-MX';
   TTS.speak(texto, { lang: ttsLang, rate: 0.90, pitch: 1.15 });
 }
 
