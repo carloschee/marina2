@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-19T15:01:27.160Z",
-  "totalAssets": 2243,
+  "generado": "2026-05-19T15:17:48.018Z",
+  "totalAssets": 2244,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -2217,6 +2217,7 @@
     "./assets/ui/btn-inicio.png",
     "./assets/ui/btn-memorama.png",
     "./assets/ui/btn-mira-y-di.png",
+    "./assets/ui/btn-toca.png",
     "./assets/ui/dorso-memorama.png",
     "./core/audio.js",
     "./core/config.js",
