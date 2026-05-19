@@ -301,6 +301,9 @@ async function navegarA(mod) {
     _moduloActivo = mod;
     const hh = document.getElementById('app-header')?.offsetHeight || 56;
     document.documentElement.style.setProperty('--header-h', hh + 'px');
+    const _hh = document.getElementById('app-header')?.offsetHeight || 56;
+    document.documentElement.style.setProperty('--header-h', _hh + 'px');
+    contenedor.style.setProperty?.('top', _hh + 'px');
     contenedor.style.display = 'block';
     try { await mod.resume(contenedor); mod.onEnter?.(); } catch (e) {
       console.error('[App] Error al resumir', mod.id, e);
@@ -317,6 +320,9 @@ async function navegarA(mod) {
 
   _moduloActivo = mod;
   contenedor.innerHTML = '';
+  const _hh2 = document.getElementById('app-header')?.offsetHeight || 56;
+  document.documentElement.style.setProperty('--header-h', _hh2 + 'px');
+  contenedor.style.top = _hh2 + 'px';
   contenedor.style.display = 'block';
 
   try {
