@@ -182,34 +182,61 @@ function _render() {
 
     /* ── Grid ── */
     #tc-grid {
-      flex:1; min-height:0; display:grid; gap:14px; padding:0 20px 20px;
+      flex:1; min-height:0; display:grid; gap:12px; padding:0 20px 16px;
     }
-    #tc-grid.cols-3 { grid-template-columns:repeat(3,1fr); }
-    #tc-grid.cols-4 { grid-template-columns:repeat(4,1fr); }
-    #tc-grid.cols-5 { grid-template-columns:repeat(5,1fr); }
-    #tc-grid.cols-6 { grid-template-columns:repeat(6,1fr); }
-    #tc-grid.cols-8 { grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,1fr); }
+    /* 3 opciones — 1 fila × 3 cols */
+    #tc-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+    }
+    /* 4 opciones — 1 fila × 4 cols */
+    #tc-grid.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+    }
+    /* 5 opciones — 2 filas: 3 arriba + 2 abajo centradas */
+    #tc-grid.cols-5 {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+    #tc-grid.cols-5 .tc-opcion:nth-child(1) { grid-column: 1 / 3; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(2) { grid-column: 3 / 5; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(3) { grid-column: 5 / 7; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(4) { grid-column: 2 / 4; }
+    #tc-grid.cols-5 .tc-opcion:nth-child(5) { grid-column: 4 / 6; }
+    /* 6 opciones — 2 filas × 3 cols */
+    #tc-grid.cols-6 {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+    /* 8 opciones — 2 filas × 4 cols */
+    #tc-grid.cols-8 {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
 
     .tc-opcion {
-      background:#fff; border-radius:22px;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:flex-end;
-      padding:12px 8px 14px; cursor:pointer;
-      border:3px solid transparent;
-      box-shadow:0 6px 20px rgba(0,20,60,0.20);
-      transition:transform .14s, box-shadow .14s, border-color .2s;
-      position:relative; overflow:hidden;
-      -webkit-tap-highlight-color:transparent; user-select:none;
+      background: #fff; border-radius: 20px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 10px 8px 12px; cursor: pointer;
+      border: 3px solid transparent;
+      box-shadow: 0 4px 16px rgba(0,20,60,0.18);
+      transition: transform .14s, box-shadow .14s, border-color .2s;
+      position: relative; overflow: hidden;
+      -webkit-tap-highlight-color: transparent; user-select: none;
+      min-height: 0; /* importante — deja que el grid controle la altura */
     }
-    .tc-opcion:active { transform:scale(.93); }
+    .tc-opcion:active { transform: scale(.93); }
     .tc-opcion img {
-      width:70%; aspect-ratio:1; object-fit:contain;
-      flex:1; min-height:0; pointer-events:none;
+      width: 60%; height: 60%; object-fit: contain;
+      flex-shrink: 0; pointer-events: none;
     }
     .tc-opcion-label {
-      font-size:clamp(.75rem,1.8vw,1rem); font-weight:900;
-      color:#07212e; text-align:center; margin-top:8px;
-      line-height:1.1; word-break:break-word;
+      font-size: clamp(.7rem, 1.6vw, .95rem); font-weight: 900;
+      color: #07212e; text-align: center; margin-top: 6px;
+      line-height: 1.1; word-break: break-word;
+      flex-shrink: 0;
     }
     .tc-opcion.correcto {
       border-color:#22c55e;
