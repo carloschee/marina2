@@ -115,6 +115,7 @@ export async function resume(container) {
   _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
   if (_objetivo && _opciones.length) {
+    _esperando = false;  // ← reset del flag que quedó en true desde pause()
     _renderRonda();
     setTimeout(() => _reproducirInstruccion(), 500);
   } else {
