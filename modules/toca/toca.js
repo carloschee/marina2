@@ -27,7 +27,7 @@ import { Telemetry } from '../../core/telemetry.js';
 const PICTO_URL = (ruta) => `assets/pictogramas/${ruta}`;
 const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta.replace('.png', '').toLowerCase()}.mp3`;
 
-const NIVELES     = [3, 4, 5, 6, 8];
+const NIVELES = [3, 4, 5, 6, 8];
 const ACIERTOS_UP = 3;
 
 // Tamaño fijo de mosaico calculado para el nivel máximo (8 mosaicos, layout 4+4):
@@ -37,30 +37,30 @@ const ACIERTOS_UP = 3;
 // → cuadrado limitado por el menor: 272px
 const MOSAIC_SIZE = 272; // px — igual en todos los niveles
 
-let _el         = null;
-let _catalogo   = [];
-let _temas      = [];
-let _tema       = null;
-let _pool       = [];
+let _el = null;
+let _catalogo = [];
+let _temas = [];
+let _tema = null;
+let _pool = [];
 let _langConfig = { es: true, en: false };
-let _lang       = 'es';
-let _nivel      = 0;
-let _aciertos   = 0;
-let _objetivo   = null;
-let _opciones   = [];
-let _esperando  = false;
-let _audioEl    = null;
+let _lang = 'es';
+let _nivel = 0;
+let _aciertos = 0;
+let _objetivo = null;
+let _opciones = [];
+let _esperando = false;
+let _audioEl = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 
 export async function init(container) {
-  _el         = container;
+  _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
-  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
-  _nivel      = 0;
-  _aciertos   = 0;
-  _esperando  = false;
-  _tema       = null;
+  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _nivel = 0;
+  _aciertos = 0;
+  _esperando = false;
+  _tema = null;
 
   try {
     const res = await fetch('./data/pictos.json');
@@ -91,15 +91,15 @@ export function destroy() {
   _el = null; _catalogo = []; _pool = []; _temas = [];
 }
 
-export function onEnter() {}
+export function onEnter() { }
 export function onLeave() {
   TTS.stop();
   if (_audioEl) _audioEl.pause();
   Telemetry.track('toca_sesion', {
     _modulo: 'toca',
     nivel_alcanzado: _nivel + 1,
-    opciones_nivel:  NIVELES[_nivel],
-    tema:            _tema?.id || 'todos',
+    opciones_nivel: NIVELES[_nivel],
+    tema: _tema?.id || 'todos',
   });
 }
 
@@ -110,9 +110,9 @@ export async function pause() {
 }
 
 export async function resume(container) {
-  _el         = container;
+  _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
-  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
   if (_objetivo && _opciones.length) {
     _renderRonda();
@@ -353,13 +353,13 @@ function _render() {
 // ─── Ronda ────────────────────────────────────────────────────────────────────
 
 function _nuevaRonda() {
-  if (!_el) return;                          // proteger si módulo fue destruido
+  if (!_el) return;
   const n = NIVELES[_nivel];
 
   if (_catalogo.length < n) {
-    _el.querySelector('#tc-grid').style.display        = 'none';
+    _el.querySelector('#tc-grid').style.display = 'none';
     _el.querySelector('#tc-instruccion').style.display = 'none';
-    _el.querySelector('#tc-vacio').style.display       = 'flex';
+    _el.querySelector('#tc-vacio').style.display = 'flex';
     return;
   }
 
@@ -379,7 +379,7 @@ function _nuevaRonda() {
     ? _catalogo.filter(e => _tema.palabras.includes(e.id))
     : _catalogo;
 
-  const tmpPool    = _shuffle(base.filter(e => e.id !== _objetivo.id));
+  const tmpPool = _shuffle(base.filter(e => e.id !== _objetivo.id));
   const distractores = [];
   while (distractores.length < n - 1 && tmpPool.length) {
     distractores.push(tmpPool.shift());
@@ -389,15 +389,23 @@ function _nuevaRonda() {
   _renderRonda();
 
   // Reproducir instrucción solo si no hay audio activo reproduciéndose
-  setTimeout(() => {
-    if (_el && (!_audioEl || _audioEl.paused)) _reproducirInstruccion();
-  }, 400);
+  // Reproducir instrucción cuando el audio del acierto anterior haya terminado
+  if (_audioEl && !_audioEl.paused) {
+    _audioEl.addEventListener('ended', () => {
+      if (_el) setTimeout(() => _reproducirInstruccion(), 150);
+    }, { once: true });
+    _audioEl.addEventListener('error', () => {
+      if (_el) _reproducirInstruccion();
+    }, { once: true });
+  } else {
+    setTimeout(() => { if (_el) _reproducirInstruccion(); }, 400);
+  }
 }
 
 // ─── Render ronda ─────────────────────────────────────────────────────────────
 
 function _renderRonda() {
-  const n    = NIVELES[_nivel];
+  const n = NIVELES[_nivel];
   const grid = _el.querySelector('#tc-grid');
 
   _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
@@ -410,16 +418,16 @@ function _renderRonda() {
 
   _opciones.forEach((picto, i) => {
     const btn = document.createElement('button');
-    btn.className  = 'tc-opcion';
+    btn.className = 'tc-opcion';
     btn.dataset.id = picto.id;
 
     const img = document.createElement('img');
-    img.src     = PICTO_URL(picto.ruta_img);
-    img.alt     = picto.es;
+    img.src = PICTO_URL(picto.ruta_img);
+    img.alt = picto.es;
     img.onerror = () => { img.style.opacity = '0.3'; };
 
     const label = document.createElement('span');
-    label.className   = 'tc-opcion-label';
+    label.className = 'tc-opcion-label';
     label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
 
     btn.appendChild(img);
@@ -444,16 +452,16 @@ function _renderRonda() {
 // Nivel 5 (8):  2×4                   → basis = MOSAIC_SIZE (4 por fila)
 
 function _aplicarLayout(n) {
-  const grid    = _el.querySelector('#tc-grid');
+  const grid = _el.querySelector('#tc-grid');
   const opciones = grid.querySelectorAll('.tc-opcion');
-  const S        = MOSAIC_SIZE;
+  const S = MOSAIC_SIZE;
 
   // Reset
   opciones.forEach(o => {
-    o.style.width     = S + 'px';
-    o.style.height    = S + 'px';
+    o.style.width = S + 'px';
+    o.style.height = S + 'px';
     o.style.flexBasis = S + 'px';
-    o.style.flexGrow  = '0';
+    o.style.flexGrow = '0';
     o.style.flexShrink = '0';
   });
 
@@ -495,7 +503,7 @@ function _acierto(btn) {
   btn.classList.add('correcto');
   lanzarConfeti({ count: 30, container: _el });
 
-  const texto   = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
+  const texto = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
   const archivo = _objetivo.ruta_img;
   _reproducirAudio(archivo, _lang, texto);
 
@@ -612,7 +620,7 @@ function _seleccionarTema(id) {
   } else {
     _pool = _shuffle([..._catalogo]);
   }
-  _nivel    = 0;
+  _nivel = 0;
   _aciertos = 0;
   _nuevaRonda();
 }
@@ -621,7 +629,7 @@ function _seleccionarTema(id) {
 
 function _reproducirInstruccion() {
   if (!_objetivo) return;
-  const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
+  const lang = _lang === 'en' ? 'en-US' : 'es-MX';
   const texto = _lang === 'en'
     ? `Touch the ${_objetivo.en || _objetivo.es}`
     : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
@@ -645,7 +653,7 @@ function _reproducirAudio(ruta, lang, textoFallback) {
   };
 
   _audioEl.onerror = _fallback;
-  _audioEl.src     = AUDIO_URL(ruta, lang);
+  _audioEl.src = AUDIO_URL(ruta, lang);
   _audioEl.play().catch(_fallback);
 }
 
@@ -682,7 +690,7 @@ function _onLangChange(e) {
   const cfg = e.detail?.langConfig;
   if (!cfg) return;
   _langConfig = { ...cfg };
-  _lang       = (cfg.en && !cfg.es) ? 'en' : 'es';
+  _lang = (cfg.en && !cfg.es) ? 'en' : 'es';
   if (_objetivo) {
     _actualizarPrompt();
     _el.querySelectorAll('.tc-opcion-label').forEach((lbl, i) => {
