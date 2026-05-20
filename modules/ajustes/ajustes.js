@@ -246,45 +246,19 @@ function _renderShell() {
         </div>
       </div>
 
-      <!-- Uso sin internet -->
+      <!-- Aplicación -->
       <div class="aj-seccion">
-        <p class="aj-titulo">Uso sin internet</p>
+        <p class="aj-titulo">Aplicación</p>
         <div id="aj-progreso-wrap">
           <div id="aj-progreso-bg"><div id="aj-progreso-bar"></div></div>
           <p id="aj-progreso-txt">Preparando...</p>
         </div>
         <div class="aj-fila">
           <div class="aj-fila-info">
-            <span class="aj-label">Descargar todo</span>
-            <span class="aj-desc">Guarda la app para usarla sin internet</span>
-          </div>
-          <button class="aj-btn aj-primary" id="btn-aj-descargar">Descargar</button>
-        </div>
-        <div class="aj-fila">
-          <div class="aj-fila-info">
-            <span class="aj-label">Borrar caché</span>
-            <span class="aj-desc">Libera espacio en el dispositivo</span>
-          </div>
-          <button class="aj-btn aj-danger" id="btn-aj-borrar">Borrar</button>
-        </div>
-      </div>
-
-      <!-- Aplicación -->
-      <div class="aj-seccion">
-        <p class="aj-titulo">Aplicación</p>
-        <div class="aj-fila">
-          <div class="aj-fila-info">
             <span class="aj-label">Actualizar app</span>
-            <span class="aj-desc">Aplica la última versión disponible</span>
+            <span class="aj-desc">Borra el caché e instala la última versión. Tus perfiles no se tocan.</span>
           </div>
-          <button class="aj-btn aj-neutral" id="btn-aj-refresh">Actualizar</button>
-        </div>
-        <div class="aj-fila">
-          <div class="aj-fila-info">
-            <span class="aj-label">Reinicio completo</span>
-            <span class="aj-desc">Borra caché y recarga desde el servidor</span>
-          </div>
-          <button class="aj-btn aj-danger" id="btn-aj-reset">Resetear</button>
+          <button class="aj-btn aj-primary" id="btn-aj-actualizar">Actualizar</button>
         </div>
       </div>
 
@@ -317,6 +291,21 @@ function _renderShell() {
             <span class="aj-desc">Crea un perfil para un usuario</span>
           </div>
           <button class="aj-btn aj-primary" id="btn-aj-nuevo-perfil">+ Crear</button>
+        </div>
+        <div class="aj-fila">
+          <div class="aj-fila-info">
+            <span class="aj-label">Eliminar todos los perfiles</span>
+            <span class="aj-desc">Borra todos los perfiles creados. El Invitado no se elimina.</span>
+          </div>
+          <button class="aj-btn aj-danger" id="btn-aj-eliminar-todos">🗑️ Eliminar</button>
+        </div>
+        <div style="padding:10px 12px;border-radius:12px;
+                    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);">
+          <p style="font-size:.72rem;color:rgba(255,255,255,.45);margin:0;line-height:1.5;">
+            👤 <strong style="color:rgba(255,255,255,.60);">Invitado</strong>
+            es un perfil permanente que no se puede eliminar.
+            Se activa cuando no hay ningún perfil seleccionado.
+          </p>
         </div>
       </div>
 
@@ -375,39 +364,8 @@ function _renderShell() {
 
   // ── Eventos ────────────────────────────────────────────────
   _q('#btn-aj-verificar').addEventListener('click', _actualizarEstadoConexion);
-  _q('#btn-aj-descargar').addEventListener('click', _descargarTodo);
-
-  _q('#btn-aj-borrar').addEventListener('click', async () => {
-    const btn = _q('#btn-aj-borrar');
-    btn.disabled = true;
-    btn.textContent = '⏳ Borrando…';
-    await borrarCache();
-    toast('Caché borrada', { emoji: '🗑️' });
-    btn.textContent = 'Borrar';
-    btn.disabled = false;
-  });
-
-  _q('#btn-aj-refresh').addEventListener('click', async () => {
-    const btn = _q('#btn-aj-refresh');
-    btn.disabled = true;
-    btn.textContent = '⏳ Actualizando…';
-    const reg = await navigator.serviceWorker?.getRegistration();
-    if (reg?.waiting) {
-      reg.waiting.postMessage({ tipo: 'skipWaiting' });
-      setTimeout(() => location.reload(), 400);
-    } else {
-      location.reload();
-    }
-  });
-
-  _q('#btn-aj-reset').addEventListener('click', async () => {
-    const btn = _q('#btn-aj-reset');
-    btn.disabled = true;
-    btn.textContent = '⏳ Borrando…';
-    await borrarCache();
-    btn.textContent = '⏳ Recargando…';
-    location.reload(true);
-  });
+  _q('#btn-aj-actualizar').addEventListener('click', _actualizarApp);
+  _q('#btn-aj-eliminar-todos').addEventListener('click', _eliminarTodosPerfiles);
 
   _q('#btn-aj-nuevo-perfil').addEventListener('click', () => _abrirModal());
   _q('#btn-modal-cancelar').addEventListener('click', _cerrarModal);
@@ -476,23 +434,30 @@ async function _actualizarEstadoConexion() {
   }
 }
 
-// ─── Descarga offline ─────────────────────────────────────────────────────────
-// Usa assets-manifest.json generado por scripts/generate-manifest.js
-// No hay URLs hardcodeadas de módulos específicos.
-async function _descargarTodo() {
-  const btn = _q('#btn-aj-descargar');
+// ─── Actualizar app ───────────────────────────────────────────────────────────
+// Borra el caché de recursos y descarga todo desde cero.
+// Los datos de usuario (localStorage) nunca se tocan.
+async function _actualizarApp() {
+  const btn  = _q('#btn-aj-actualizar');
   const wrap = _q('#aj-progreso-wrap');
-  const bar = _q('#aj-progreso-bar');
-  const txt = _q('#aj-progreso-txt');
+  const bar  = _q('#aj-progreso-bar');
+  const txt  = _q('#aj-progreso-txt');
   if (!btn || !wrap || !bar || !txt) return;
 
   btn.disabled = true;
-  btn.textContent = '⏳ Descargando…';
+  btn.textContent = '⏳ Actualizando…';
   wrap.classList.add('visible');
   bar.style.width = '0%';
+  txt.textContent = 'Borrando caché anterior...';
+
+  // 1. Borrar caché de recursos (nunca toca localStorage)
+  await borrarCache();
+  if (!_container) return;
+
+  bar.style.width = '15%';
   txt.textContent = 'Leyendo manifiesto...';
 
-  // 1. Cargar lista desde assets-manifest.json
+  // 2. Cargar lista desde assets-manifest.json
   let urls = new Set();
   try {
     const res = await fetchTimeout('./assets-manifest.json', 6000);
@@ -504,7 +469,7 @@ async function _descargarTodo() {
     console.warn('[Ajustes] assets-manifest.json no disponible:', e.message);
   }
 
-  // 2. Agregar URLs de caché declaradas por cada módulo activo
+  // 3. Agregar URLs de caché declaradas por cada módulo activo
   const registry = window.DotirApp?.MODULE_REGISTRY || [];
   for (const mod of registry) {
     try {
@@ -517,17 +482,18 @@ async function _descargarTodo() {
   if (!urls.size) {
     txt.textContent = 'No hay recursos para descargar.';
     btn.disabled = false;
+    btn.textContent = 'Actualizar';
     return;
   }
 
   txt.textContent = `Descargando ${urls.size} archivos...`;
-
   if (!_container) return;
 
+  // 4. Precachear todo
   const { ok, total } = await precachear([...urls], {
     onProgress: (done, tot) => {
       if (!_container) return;
-      const pct = Math.round((done / tot) * 100);
+      const pct = Math.round(15 + (done / tot) * 80);
       bar.style.width = pct + '%';
       txt.textContent = `${done} de ${tot} archivos...`;
     },
@@ -537,11 +503,37 @@ async function _descargarTodo() {
 
   bar.style.width = '100%';
   bar.style.background = ok === total ? '#22c55e' : '#f59e0b';
-  txt.textContent = ok === total ? `${ok} archivos listos` : `${ok} de ${total} descargados`;
+  txt.textContent = ok === total
+    ? `✅ ${ok} archivos actualizados`
+    : `⚠️ ${ok} de ${total} archivos`;
 
   lanzarConfeti({ count: 40, container: _container });
-  toast('Descarga completada', { emoji: '📥' });
-  btn.disabled = false;
+
+  // 5. Activar nuevo SW si hay uno esperando
+  if ('serviceWorker' in navigator) {
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (reg?.waiting) {
+      reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+      await new Promise(r => setTimeout(r, 400));
+    }
+  }
+
+  toast('App actualizada — recargando...', { emoji: '🔄' });
+  setTimeout(() => window.location.reload(), 1200);
+}
+
+// ─── Eliminar todos los perfiles ──────────────────────────────────────────────
+function _eliminarTodosPerfiles() {
+  const perfiles = Perfiles.listar().filter(p => !p.esInvitado);
+  if (!perfiles.length) {
+    toast('No hay perfiles que eliminar', { emoji: 'ℹ️' });
+    return;
+  }
+  if (!confirm(`¿Eliminar ${perfiles.length} perfil(es)? Esta acción no se puede deshacer.`)) return;
+  perfiles.forEach(p => Perfiles.eliminar(p.id));
+  Perfiles.activar(Perfiles.idInvitado);
+  _renderPerfiles();
+  toast('Perfiles eliminados', { emoji: '🗑️' });
 }
 
 // ─── Reporte ──────────────────────────────────────────────────────────────────
