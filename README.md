@@ -23,7 +23,7 @@ La primera vez que abras la app, te recomendamos agregarla a la pantalla de inic
 
 Al abrir la app verás el menú principal con los módulos disponibles. En la parte superior hay una barra con el nombre de la app, el perfil activo y algunos controles.
 
-![Agregar a la pantalla de inicio](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-ui.PNG)
+![Manú principal de Marina](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-ui.PNG)
 
 El indicador **En línea / Sin conexión** en la esquina superior derecha te muestra si el iPad tiene internet. Si está en verde, todo bien. Si está en rojo, la app seguirá funcionando con los contenidos que ya estén descargados.
 
@@ -37,7 +37,7 @@ En la esquina superior derecha hay dos botones: **ES** y **EN**. Puedes activar 
 - **Solo EN** → toda la sesión en inglés
 - **ES + EN activos** → la app alterna entre ambos idiomas de forma aleatoria en cada interacción, ideal para trabajar los dos idiomas en una misma sesión
 
-![Agregar a la pantalla de inicio](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-pill-lang.PNG)
+![Selector de idioma](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-pill-lang.jpg)
 
 ---
 
@@ -52,7 +52,9 @@ Desde Ajustes puedes:
 - **Consultar el reporte** — un resumen de las sesiones recientes, cuántas palabras practicó y cuántas frases completó
 - **Cambiar el idioma de la voz** — si prefieres una voz distinta o ajustar la velocidad
 
-📸 *Captura sugerida: pantalla de Ajustes con las secciones de Perfiles y Descarga offline visibles*
+![Menú de ajustes](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/ajustes-descarga.jpg)
+
+![Menú de ajustes](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/ajustes-usuarios.jpg)
 
 ---
 
@@ -76,7 +78,7 @@ Emi ve una retícula con todas las letras del abecedario. Toca una letra y apare
 
 La barra de colores debajo del micrófono le muestra qué tan parecido sonó a la palabra — verde significa muy bien.
 
-📸 *Captura sugerida: módulo Mira y di con la letra T activa, pictograma de "tambor" y barra del micrófono visible*
+![Mira y di](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/mira-y-di-ui.PNG)
 
 ---
 
@@ -89,7 +91,7 @@ Hay tres niveles de dificultad que puedes seleccionar tú desde arriba:
 - ★★ Intermedio — frases de 3 o 4 piezas
 - ★★★ Avanzado — frases más largas
 
-📸 *Captura sugerida: módulo Frases con la tira parcialmente armada y las piezas disponibles abajo*
+![Constructor de frases](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/frases-ui.PNG)
 
 ---
 
@@ -97,7 +99,7 @@ Hay tres niveles de dificultad que puedes seleccionar tú desde arriba:
 
 El clásico juego de memoria. Emi voltea las cartas buscando los pares de pictogramas. Al encontrar un par, escucha el nombre de la imagen.
 
-📸 *Captura sugerida: tablero de memorama con dos cartas volteadas formando un par, confeti visible*
+![Constructor de frases](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/memorama-ui.PNG)
 
 ---
 
@@ -117,8 +119,8 @@ Hay 5 niveles de dificultad que suben automáticamente:
 
 Cuando acierta 3 veces seguidas sube de nivel con una celebración. Al llegar al nivel 5 y seguir acertando, entra en **modo reto infinito** 🏆.
 
-📸 *Captura sugerida: nivel 3 con 5 mosaicos en pantalla, instrucción "Toca la rodilla" visible*
-📸 *Captura sugerida: pantalla de celebración al subir de nivel con confeti y estrellas*
+![Constructor de frases](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/toca-acierto.PNG)
+![Constructor de frases](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/toca-nivel.PNG)
 
 ---
 
