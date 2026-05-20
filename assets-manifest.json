@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-20T16:55:09.803Z",
-  "totalAssets": 1415,
+  "generado": "2026-05-20T21:29:56.673Z",
+  "totalAssets": 1416,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1216,7 +1216,8 @@
     "./assets/pictogramas/nadar.png",
     "./assets/pictogramas/name.png",
     "./assets/pictogramas/nandu.png",
-    "./assets/pictogramas/naranja.png",
+    "./assets/pictogramas/naranja-color.png",
+    "./assets/pictogramas/naranja-fruta.png",
     "./assets/pictogramas/nariz.png",
     "./assets/pictogramas/natacion.png",
     "./assets/pictogramas/nave.png",
