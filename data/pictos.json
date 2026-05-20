@@ -815,7 +815,7 @@
     "id": 1117,
     "es": "naranja",
     "en": "orange",
-    "ruta_img": "naranja.png",
+    "ruta_img": "naranja-fruta.png",
     "art": "la"
   },
   {
@@ -3008,5 +3008,12 @@
     "en": "firefighter",
     "ruta_img": "bombero.png",
     "art": "el"
+  },
+  {
+    "id": 1431,
+    "es": "naranja",
+    "en": "orange",
+    "ruta_img": "naranja-color.png",
+    "art": ""
   }
 ]
