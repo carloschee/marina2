@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-20T14:41:46.651Z",
-  "totalAssets": 1413,
+  "generado": "2026-05-20T15:17:22.345Z",
+  "totalAssets": 1415,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1387,7 +1387,9 @@
     "./assets/ui/btn-memorama.png",
     "./assets/ui/btn-mira-y-di.png",
     "./assets/ui/btn-toca.png",
-    "./assets/ui/dorso-memorama.png",
+    "./assets/ui/dorso-avanzado.png",
+    "./assets/ui/dorso-basico.png",
+    "./assets/ui/dorso-intermedio.png",
     "./core/audio.js",
     "./core/config.js",
     "./core/offline.js",
