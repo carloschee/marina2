@@ -2733,7 +2733,7 @@
     "id": 1391,
     "es": "muñeca",
     "en": "doll",
-    "ruta_img": "muneca.png",
+    "ruta_img": "muneca-juguete.png",
     "art": "la"
   },
   {
@@ -3015,5 +3015,12 @@
     "en": "orange",
     "ruta_img": "naranja-color.png",
     "art": ""
+  },
+  {
+    "id": 1432,
+    "es": "muñeca",
+    "en": "wrist",
+    "ruta_img": "muneca-cuerpo.png",
+    "art": "la"
   }
 ]
