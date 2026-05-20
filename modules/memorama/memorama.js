@@ -548,7 +548,7 @@ function _renderGrid() {
       <div class="mem-carta" data-idx="${i}">
         <div class="mem-cara mem-dorso"></div>
         <div class="mem-cara mem-frente">
-          <img src="${PICTO_BASE}${picto}.png"
+          <img src="${PICTO_BASE}${picto.toLowerCase()}.png"
                alt="${label}"
                onerror="this.style.opacity='.15'">
           <span class="mem-label">${label}</span>

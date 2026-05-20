@@ -26,7 +26,7 @@ import { TTS }                   from '../../core/tts.js';
 import { lanzarConfeti, haptic } from '../../core/ui.js';
 import { Telemetry }             from '../../core/telemetry.js';
 
-const PICTO_URL = (ruta_img) => `assets/pictogramas/${ruta_img}`;
+const PICTO_URL = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}`;
 const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
 const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
