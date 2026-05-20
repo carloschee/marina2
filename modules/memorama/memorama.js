@@ -195,6 +195,8 @@ function _renderShell() {
     padding:5px 8px 0;
     display:flex;
     opacity:1; transition:opacity 0.4s ease;
+    transform:translateZ(0); /* fuerza compositing layer propio sin romper preserve-3d */
+    isolation:isolate;
   }
   #mem-grid-wrap.oculto { opacity:0; pointer-events:none; }
   #mem-grid {
@@ -212,7 +214,6 @@ function _renderShell() {
     width:100%; height:100%; position:relative;
     cursor:pointer; transform-style:preserve-3d;
     transition:transform .45s cubic-bezier(.4,.2,.2,1);
-    will-change:transform, opacity;
   }
   .mem-carta.volteada  { transform:rotateY(180deg); }
   .mem-carta.encontrada {
@@ -336,6 +337,14 @@ function _renderShell() {
     box-shadow:0 0 0 2px rgba(0,194,255,0.25);
   }
   .mem-tema-btn-emoji { font-size:1.8rem; }
+
+  /* Fallback para navegadores sin preserve-3d */
+  @supports not (transform-style: preserve-3d) {
+    .mem-dorso { transition:opacity .22s ease; }
+    .mem-frente { opacity:0; transition:opacity .22s ease; }
+    .mem-carta.volteada .mem-dorso { opacity:0; }
+    .mem-carta.volteada .mem-frente { opacity:1; transform:none; }
+  }
 </style>
 
 <div id="mem-wrap">
