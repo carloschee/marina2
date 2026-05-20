@@ -120,7 +120,7 @@ export async function resume(container) {
     _q('#mem-modal')?.classList.add('oculto');
 
     // Si la partida estaba terminada, celebrar de nuevo
-    if (_pares === PARES) {
+    if (_pares === _dificultad.pares) {
       setTimeout(() => lanzarConfeti({ count: 80, container: _q('#mem-wrap') }), 300);
     }
   } else {
@@ -203,6 +203,7 @@ function _renderShell() {
     gap:5px;
     grid-template-columns:repeat(12, 1fr);
     grid-template-rows:repeat(4, 1fr);
+    transition:grid-template-columns .35s ease, grid-template-rows .35s ease;
   }
 
   /* Carta — igual que Dótir */
@@ -525,6 +526,18 @@ function _renderGrid() {
   const grid = _q('#mem-grid');
   if (!grid) return;
   grid.innerHTML = '';
+
+  // Layout dinámico según número de cartas totales
+  const total = _cartas.length;
+  const layout = {
+    12: { cols: 4, filas: 3 },  // fácil: 6 pares × 2
+    24: { cols: 6, filas: 4 },  // intermedio: 12 pares × 2
+    48: { cols: 12, filas: 4 },  // avanzado: 24 pares × 2
+  }[total] || { cols: 12, filas: 4 };
+
+  grid.style.gridTemplateColumns = `repeat(${layout.cols}, 1fr)`;
+  grid.style.gridTemplateRows = `repeat(${layout.filas}, 1fr)`;
+
   _cartas.forEach((carta, i) => {
     const celda = document.createElement('div');
     celda.className = 'mem-celda';
