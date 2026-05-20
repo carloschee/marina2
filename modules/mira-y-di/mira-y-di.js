@@ -9,7 +9,7 @@ import { haptic } from '../../core/ui.js';
 
 const LETRAS = 'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z'.split(' ');
 
-const pictoURL = (ruta_img) => `assets/pictogramas/${ruta_img}.png`;
+const pictoURL = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}.png`;
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
 let _el = null;
@@ -70,7 +70,8 @@ export async function pause() {
 
 export async function resume(container) {
   _el = container;
-  _lang = window._langActivo || _lang;
+  _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
+  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
   _renderLetras();
   if (_letra) {
@@ -404,7 +405,7 @@ function _bindEvents() {
 // lang    = 'es-MX' | 'en-US'
 function _hablar(texto, lang = 'es-MX', archivo = null) {
   const langCode = lang.slice(0, 2);                             // 'es' | 'en'
-  const url = `assets/audio/${langCode}/${archivo || texto}.mp3`;
+  const url = `assets/audio/${langCode}/${(archivo || texto).toLowerCase()}.mp3`;
 
   const img = _el?.querySelector('#md-picto');
   const _animar = () => {
