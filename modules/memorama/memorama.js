@@ -231,8 +231,9 @@ function _renderShell() {
     overflow:hidden; display:flex; align-items:center; justify-content:center;
   }
   .mem-dorso {
-    background-image:url('assets/ui/dorso-memorama.png');
-    background-size:cover; background-position:center;
+    background-image:var(--mem-dorso-url, url('assets/ui/dorso-avanzado.png'));
+    background-size:auto; background-repeat:repeat;
+    background-position:center;
     border:1.5px solid rgba(14,165,201,0.35);
   }
   .mem-frente {
@@ -516,6 +517,17 @@ function _iniciarJuego() {
       { id: i, palabra, volteada: false, encontrada: false },
     ])
   ).map((c, idx) => ({ ...c, idx }));
+
+  // Imagen de dorso según dificultad
+  const dorsoMap = {
+    facil: "url('assets/ui/dorso-basico.png')",
+    medio: "url('assets/ui/dorso-intermedio.png')",
+    avanzado: "url('assets/ui/dorso-avanzado.png')",
+  };
+  _container.style.setProperty(
+    '--mem-dorso-url',
+    dorsoMap[_dificultad.id] || dorsoMap.avanzado
+  );
 
   _renderGrid();
   _q('#mem-stack-wrap').innerHTML = '';
