@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-20T21:29:56.673Z",
-  "totalAssets": 1416,
+  "generado": "2026-05-20T21:45:16.234Z",
+  "totalAssets": 1417,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1209,7 +1209,8 @@
     "./assets/pictogramas/mora.png",
     "./assets/pictogramas/morado-color.png",
     "./assets/pictogramas/moto.png",
-    "./assets/pictogramas/muneca.png",
+    "./assets/pictogramas/muneca-cuerpo.png",
+    "./assets/pictogramas/muneca-juguete.png",
     "./assets/pictogramas/murcielago.png",
     "./assets/pictogramas/musgo.png",
     "./assets/pictogramas/musico.png",
