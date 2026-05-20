@@ -1,11 +1,7 @@
 scripts/archivo/*
 script/descargar-pictos-playwright.py
-script/descargar-pictos.py
-script/generar-audio.py
 script/generar-catalogo-pictos.py
-script/pictos.csv
 script/procesar-pictos.py
-script/verificar-pictos.py
 scripts/limpiar-pictos.py
 scripts/pictos-art-csv.py
 assets/pictogramas/en/*

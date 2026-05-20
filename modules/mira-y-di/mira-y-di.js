@@ -611,8 +611,8 @@ function _levenshtein(a, b) {
 // ─── Spring drag del pictograma ────────────────────────────────────────────────
 function _initSpringDrag(img) {
   let startX = 0, startY = 0, isDragging = false;
-  const MAX = 28;   // máximo desplazamiento en px
-  const K = 0.35; // resistencia (0=sin resistencia, 1=1:1)
+  const MAX = 52;   // máximo desplazamiento en px
+  const K = 0.55;  // resistencia — más alto = más movimiento
 
   const _clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
@@ -640,7 +640,7 @@ function _initSpringDrag(img) {
     isDragging = false;
     img.classList.remove('dragging');
     // Rebote elástico de vuelta al centro
-    img.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    img.style.transition = 'transform 0.65s cubic-bezier(0.34, 2.2, 0.64, 1)';
     img.style.transform = 'translate(0,0) rotate(0deg) scale(1)';
     setTimeout(() => { img.style.transition = ''; img.style.transform = ''; }, 520);
   };
