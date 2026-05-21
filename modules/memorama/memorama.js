@@ -55,6 +55,9 @@ export async function init(container) {
     _pictos = {};
   }
 
+  if (window.innerWidth <= 375 && window.innerHeight < 700) {
+    _dificultad = DIFICULTADES[0]; // fácil
+  }
   _renderShell();
   _renderListaTemas();
   _mostrarModal();
@@ -345,6 +348,31 @@ function _renderShell() {
     .mem-frente { opacity:0; transition:opacity .22s ease; }
     .mem-carta.volteada .mem-dorso { opacity:0; }
     .mem-carta.volteada .mem-frente { opacity:1; transform:none; }
+  }
+
+  /* ═══ PORTRAIT PHONE — iPhone 13 (≤600px portrait) ═══ */
+  @media (max-width:600px) and (orientation:portrait) {
+    #mem-header { padding:6px 10px; gap:7px; }
+    #mem-btn-tema { padding:5px 10px; font-size:.82rem; }
+    .mem-dif-btn { padding:5px 8px; font-size:.78rem; }
+    #mem-contador { font-size:.82rem; }
+    #mem-btn-nuevo { width:32px; height:32px; font-size:.85rem; }
+    #mem-stack-wrap { height:60px; }
+    .mem-par-tile { width:46px; height:46px; }
+    .mem-temas-grid { grid-template-columns:repeat(2,1fr); }
+  }
+
+  /* ═══ SE 3 (≤375px portrait) — solo dificultad Fácil ═══ */
+  @media (max-width:375px) and (orientation:portrait) {
+    #mem-header { padding:5px 8px; gap:5px; flex-wrap:wrap; }
+    #mem-btn-tema { padding:4px 8px; font-size:.76rem; }
+    .mem-dif-btn { padding:4px 7px; font-size:.72rem; }
+    /* Ocultar Intermedio y Avanzado en SE3 */
+    .mem-dif-btn[data-dif="medio"],
+    .mem-dif-btn[data-dif="avanzado"] { display:none !important; }
+    #mem-stack-wrap { height:52px; }
+    .mem-par-tile { width:40px; height:40px; }
+    .mem-temas-grid { grid-template-columns:repeat(2,1fr); }
   }
 </style>
 

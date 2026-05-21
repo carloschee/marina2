@@ -22,60 +22,60 @@
    · Distinto  → sin penalización, TTS lee la frase igual
 */
 
-import { TTS }                   from '../../core/tts.js';
+import { TTS } from '../../core/tts.js';
 import { lanzarConfeti, haptic } from '../../core/ui.js';
-import { Telemetry }             from '../../core/telemetry.js';
+import { Telemetry } from '../../core/telemetry.js';
 
 const PICTO_URL = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}`;
-const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
-const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
+const AUDIO_URL = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
+const AUDIO_FRASE_URL = (nombre, lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
 const NIVELES = [
   {
     id: 1, label: '⭐', titulo: 'Básico',
-    color:       '#38bdf8',   // azul cielo — fresco, tranquilo
-    colorSuave:  'rgba(56,189,248,0.15)',
-    colorBorde:  'rgba(56,189,248,0.40)',
-    colorTexto:  '#0c1a24',   // texto oscuro sobre fondo claro del nivel
-    bgTira:      'rgba(56,189,248,0.08)',
-    bgPanel:     'rgba(56,189,248,0.06)',
-    bgPiezaTxt:  'rgba(56,189,248,0.20)',
+    color: '#38bdf8',   // azul cielo — fresco, tranquilo
+    colorSuave: 'rgba(56,189,248,0.15)',
+    colorBorde: 'rgba(56,189,248,0.40)',
+    colorTexto: '#0c1a24',   // texto oscuro sobre fondo claro del nivel
+    bgTira: 'rgba(56,189,248,0.08)',
+    bgPanel: 'rgba(56,189,248,0.06)',
+    bgPiezaTxt: 'rgba(56,189,248,0.20)',
     bordePiezaTxt: 'rgba(56,189,248,0.50)',
   },
   {
     id: 2, label: '⭐⭐', titulo: 'Intermedio',
-    color:       '#c084fc',   // violeta suave
-    colorSuave:  'rgba(192,132,252,0.15)',
-    colorBorde:  'rgba(192,132,252,0.40)',
-    colorTexto:  '#1a0a2e',
-    bgTira:      'rgba(192,132,252,0.08)',
-    bgPanel:     'rgba(192,132,252,0.06)',
-    bgPiezaTxt:  'rgba(192,132,252,0.22)',
+    color: '#c084fc',   // violeta suave
+    colorSuave: 'rgba(192,132,252,0.15)',
+    colorBorde: 'rgba(192,132,252,0.40)',
+    colorTexto: '#1a0a2e',
+    bgTira: 'rgba(192,132,252,0.08)',
+    bgPanel: 'rgba(192,132,252,0.06)',
+    bgPiezaTxt: 'rgba(192,132,252,0.22)',
     bordePiezaTxt: 'rgba(192,132,252,0.50)',
   },
   {
     id: 3, label: '⭐⭐⭐', titulo: 'Avanzado',
-    color:       '#fb7185',   // coral cálido
-    colorSuave:  'rgba(251,113,133,0.15)',
-    colorBorde:  'rgba(251,113,133,0.40)',
-    colorTexto:  '#2a0a10',
-    bgTira:      'rgba(251,113,133,0.08)',
-    bgPanel:     'rgba(251,113,133,0.06)',
-    bgPiezaTxt:  'rgba(251,113,133,0.22)',
+    color: '#fb7185',   // coral cálido
+    colorSuave: 'rgba(251,113,133,0.15)',
+    colorBorde: 'rgba(251,113,133,0.40)',
+    colorTexto: '#2a0a10',
+    bgTira: 'rgba(251,113,133,0.08)',
+    bgPanel: 'rgba(251,113,133,0.06)',
+    bgPiezaTxt: 'rgba(251,113,133,0.22)',
     bordePiezaTxt: 'rgba(251,113,133,0.50)',
   },
 ];
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
-let _el          = null;
+let _el = null;
 let _todasFrases = [];   // todas las frases cargadas
-let _frases      = [];   // frases del nivel + idioma activos
-let _nivel       = 1;
-let _lang        = 'es'; // idioma activo — sincronizado con pill global
-let _activa      = 0;
-let _built       = [];
-let _audioEl    = null;
-let _pictos     = {};
+let _frases = [];   // frases del nivel + idioma activos
+let _nivel = 1;
+let _lang = 'es'; // idioma activo — sincronizado con pill global
+let _activa = 0;
+let _built = [];
+let _audioEl = null;
+let _pictos = {};
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function pause() {
@@ -109,11 +109,11 @@ function _langDesdeConfig() {
 }
 
 export async function init(container) {
-  _el     = container;
-  _built  = [];
+  _el = container;
+  _built = [];
   _activa = -1;  // sin frase preseleccionada al entrar
-  _nivel  = 1;
-  _lang   = _langDesdeConfig();
+  _nivel = 1;
+  _lang = _langDesdeConfig();
 
   try {
     const res = await fetch('./data/pictos.json');
@@ -132,7 +132,9 @@ export async function init(container) {
   }
 
   _render();
-  _cambiarNivel(1);
+  // En SE3 solo mostrar niveles 1 y 2
+  const nivelInicial = 1;
+  _cambiarNivel(nivelInicial);
   window.addEventListener('lang-change', _onLangChange);
 }
 
@@ -143,7 +145,7 @@ export function destroy() {
   _el = null; _todasFrases = []; _frases = []; _built = []; _pictos = {};
 }
 
-export function onEnter() {}
+export function onEnter() { }
 export function onLeave() {
   if (_audioEl) _audioEl.pause();
   TTS.stop();
@@ -304,6 +306,42 @@ function _render() {
       from { transform: scale(0.6); opacity: 0; }
       to   { transform: scale(1);   opacity: 1; }
     }
+
+    /* ═══ PORTRAIT PHONE — iPhone 13 (≤600px portrait) ═══ */
+  @media (max-width:600px) and (orientation:portrait) {
+    /* Selector de nivel compacto */
+    #fr-niveles { gap:6px; flex-wrap:wrap; }
+    #fr-niveles-label { font-size:.72rem; }
+    .fr-nivel-btn { height:36px; padding:0 12px; font-size:.88rem; }
+
+    /* Tira más compacta */
+    #fr-tira { padding:8px 12px; border-radius:14px; }
+
+    /* Piezas más pequeñas */
+    .fr-pieza { min-height:70px; padding:8px 12px; font-size:.92rem; }
+    .fr-pieza img { width:50px; height:50px; }
+
+    /* Selector de frases */
+    .fr-pill { padding:8px 14px; font-size:.88rem; }
+
+    /* Botones de acción */
+    .fr-accion-btn { width:36px; height:36px; font-size:.9rem; }
+  }
+
+  /* ═══ SE 3 (≤375px portrait) — sin nivel Avanzado ═══ */
+  @media (max-width:375px) and (orientation:portrait) {
+    #fr-niveles { gap:5px; }
+    .fr-nivel-btn { height:32px; padding:0 10px; font-size:.80rem; }
+
+    /* Ocultar Avanzado en SE3 */
+    .fr-nivel-btn[data-nivel="3"] { display:none !important; }
+
+    .fr-pieza { min-height:60px; padding:6px 10px; font-size:.82rem; gap:6px; }
+    .fr-pieza img { width:42px; height:42px; }
+
+    .fr-pill { padding:6px 12px; font-size:.80rem; }
+    .fr-accion-btn { width:32px; height:32px; font-size:.85rem; }
+  }
   </style>
 
   <!-- Selector de nivel + acciones -->
@@ -350,11 +388,11 @@ function _render() {
 
 // ─── Selector de nivel ────────────────────────────────────────────────────────
 function _renderNiveles() {
-  const wrap    = _el.querySelector('#fr-niveles');
-  const label   = wrap.querySelector('#fr-niveles-label');
+  const wrap = _el.querySelector('#fr-niveles');
+  const label = wrap.querySelector('#fr-niveles-label');
   const acciones = wrap.querySelector('#fr-tira-acciones');
   wrap.innerHTML = '';
-  wrap.appendChild(label);  
+  wrap.appendChild(label);
 
   // Solo mostrar niveles que tienen frases en el idioma activo
   const nivelesConFrases = NIVELES.filter(n =>
@@ -372,15 +410,16 @@ function _renderNiveles() {
 
   nivelesConFrases.forEach(n => {
     const btn = document.createElement('button');
-    btn.className   = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
+    btn.className = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
     btn.textContent = n.label + ' ' + n.titulo;
-    btn.title       = n.titulo;
+    btn.title = n.titulo;
     if (n.id === _nivel) {
-      btn.style.borderColor   = n.color;
-      btn.style.color         = n.color;
-      btn.style.background    = n.colorSuave;
-      btn.style.boxShadow     = `0 0 0 1px ${n.colorBorde}`;
+      btn.style.borderColor = n.color;
+      btn.style.color = n.color;
+      btn.style.background = n.colorSuave;
+      btn.style.boxShadow = `0 0 0 1px ${n.colorBorde}`;
     }
+    btn.dataset.nivel = n.id;
     btn.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
     wrap.appendChild(btn);
   });
@@ -388,9 +427,9 @@ function _renderNiveles() {
 }
 
 function _cambiarNivel(nivel) {
-  _nivel  = nivel;
+  _nivel = nivel;
   _activa = -1;  // sin frase preseleccionada al cambiar nivel
-  _built  = [];
+  _built = [];
   _frases = _todasFrases.filter(f => {
     if (f.nivel !== nivel) return false;
     if (_lang === 'ambos') return true;
@@ -415,8 +454,8 @@ function _aplicarTema(nivel) {
   // Tira
   const tira = _el.querySelector('#fr-tira');
   if (tira) {
-    tira.style.background   = n.bgTira;
-    tira.style.borderColor  = n.colorBorde;
+    tira.style.background = n.bgTira;
+    tira.style.borderColor = n.colorBorde;
   }
 
   // Panel de piezas
@@ -432,28 +471,28 @@ function _aplicarTema(nivel) {
   if (lvlLbl) lvlLbl.style.color = n.color;
 
   // Guardar en variable CSS para que las piezas de texto la usen
-  _el.style.setProperty('--fr-nivel-color',      n.color);
-  _el.style.setProperty('--fr-nivel-suave',      n.colorSuave);
-  _el.style.setProperty('--fr-nivel-borde',      n.colorBorde);
-  _el.style.setProperty('--fr-nivel-bg-txt',     n.bgPiezaTxt);
-  _el.style.setProperty('--fr-nivel-borde-txt',  n.bordePiezaTxt);
+  _el.style.setProperty('--fr-nivel-color', n.color);
+  _el.style.setProperty('--fr-nivel-suave', n.colorSuave);
+  _el.style.setProperty('--fr-nivel-borde', n.colorBorde);
+  _el.style.setProperty('--fr-nivel-bg-txt', n.bgPiezaTxt);
+  _el.style.setProperty('--fr-nivel-borde-txt', n.bordePiezaTxt);
 }
 
 function _actualizarVacio() {
-  const vacio  = _el.querySelector('#fr-vacio');
-  const panel  = _el.querySelector('#fr-panel-piezas');
-  const tira   = _el.querySelector('#fr-tira');
-  const sel    = _el.querySelector('#fr-selector');
+  const vacio = _el.querySelector('#fr-vacio');
+  const panel = _el.querySelector('#fr-panel-piezas');
+  const tira = _el.querySelector('#fr-tira');
+  const sel = _el.querySelector('#fr-selector');
   const sinFrases = _frases.length === 0;
-  vacio.style.display  = sinFrases ? 'flex'  : 'none';
-  panel.style.display  = sinFrases ? 'none'  : '';
-  tira.style.display   = sinFrases ? 'none'  : '';
-  sel.style.display    = sinFrases ? 'none'  : '';
+  vacio.style.display = sinFrases ? 'flex' : 'none';
+  panel.style.display = sinFrases ? 'none' : '';
+  tira.style.display = sinFrases ? 'none' : '';
+  sel.style.display = sinFrases ? 'none' : '';
 }
 
 // ─── Selector de frases ───────────────────────────────────────────────────────
 function _renderSelector() {
-  const wrap     = _el.querySelector('#fr-selector');
+  const wrap = _el.querySelector('#fr-selector');
   const nivelCfg = NIVELES.find(n => n.id === _nivel);
   wrap.innerHTML = '';
 
@@ -462,7 +501,7 @@ function _renderSelector() {
     btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
     if (i === _activa && nivelCfg) {
       btn.style.background = nivelCfg.color;
-      btn.style.color      = '#fff';
+      btn.style.color = '#fff';
       btn.style.fontWeight = '900';
     }
     btn.textContent = _lang === 'en' ? (f.en || f.es) : f.es;
@@ -480,15 +519,15 @@ function _renderSelector() {
 // ─── Seleccionar frase ────────────────────────────────────────────────────────
 function _seleccionarFrase(idx) {
   _activa = idx;
-  _built  = [];
+  _built = [];
   _el.querySelector('#fr-tira').classList.remove('correcto');
 
   const nivelCfg = NIVELES.find(n => n.id === _nivel);
   _el.querySelectorAll('.fr-pill').forEach((p, i) => {
     p.classList.toggle('activa', i === idx);
-    p.style.background  = i === idx ? (nivelCfg?.color || '#14b8a6') : '';
-    p.style.color       = i === idx ? '#fff' : '';
-    p.style.fontWeight  = i === idx ? '900' : '';
+    p.style.background = i === idx ? (nivelCfg?.color || '#14b8a6') : '';
+    p.style.color = i === idx ? '#fff' : '';
+    p.style.fontWeight = i === idx ? '900' : '';
   });
 
   _renderPiezas();
@@ -499,26 +538,26 @@ function _seleccionarFrase(idx) {
 
 // ─── Piezas disponibles ───────────────────────────────────────────────────────
 function _renderPiezas() {
-  const wrap  = _el.querySelector('#fr-piezas');
+  const wrap = _el.querySelector('#fr-piezas');
   const frase = _activa >= 0 ? _frases[_activa] : null;
   if (!frase) { wrap.innerHTML = ''; return; }
 
   wrap.innerHTML = '';
   frase.piezas.forEach((pieza, i) => {
     const btn = document.createElement('button');
-    btn.className   = `fr-pieza ${pieza.tipo}` + (_built.includes(i) ? ' usada' : '');
+    btn.className = `fr-pieza ${pieza.tipo}` + (_built.includes(i) ? ' usada' : '');
     btn.dataset.idx = i;
 
     if (pieza.tipo === 'picto') {
-      const img   = document.createElement('img');
+      const img = document.createElement('img');
       const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
       img.src = entrada ? PICTO_URL(entrada.ruta_img) : `assets/pictogramas/${pieza.texto}.png`;
-      img.alt     = pieza.texto;
+      img.alt = pieza.texto;
       img.onerror = () => img.remove();
       btn.appendChild(img);
     }
 
-    const span       = document.createElement('span');
+    const span = document.createElement('span');
     span.textContent = pieza.texto;
     btn.appendChild(span);
     btn.addEventListener('click', () => _tocarPieza(i));
@@ -584,9 +623,9 @@ function _onFraseCompleta(frase) {
 
 // ─── Render tira ──────────────────────────────────────────────────────────────
 function _renderTira() {
-  const wrap        = _el.querySelector('#fr-tira-piezas');
+  const wrap = _el.querySelector('#fr-tira-piezas');
   const placeholder = _el.querySelector('#fr-tira-placeholder');
-  const frase       = _activa >= 0 ? _frases[_activa] : null;
+  const frase = _activa >= 0 ? _frases[_activa] : null;
 
   if (_built.length === 0) {
     wrap.innerHTML = '';
@@ -598,19 +637,19 @@ function _renderTira() {
   wrap.innerHTML = '';
   _built.forEach(idx => {
     const pieza = frase.piezas[idx];
-    const div   = document.createElement('div');
+    const div = document.createElement('div');
     div.className = `fr-tira-pieza ${pieza.tipo}`;
 
     if (pieza.tipo === 'picto') {
-      const img   = document.createElement('img');
+      const img = document.createElement('img');
       const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
       img.src = entrada ? PICTO_URL(entrada.ruta_img) : `assets/pictogramas/${pieza.texto}.png`;
-      img.alt     = pieza.texto;
+      img.alt = pieza.texto;
       img.onerror = () => img.remove();
       div.appendChild(img);
     }
 
-    const span       = document.createElement('span');
+    const span = document.createElement('span');
     span.textContent = pieza.texto;
     div.appendChild(span);
     wrap.appendChild(div);
@@ -679,21 +718,21 @@ function _reproducirURL(url, textoFallback, onEnded = null, langForzado = null) 
   };
 
   audio.onerror = _fallback;
-  audio.src     = url;
+  audio.src = url;
   audio.play().catch(_fallback);
 }
 
 // _reproducirFrase — usa el lang de la frase activa
 function _reproducirFrase(texto, id) {
   const frase = _frases[_activa];
-  const lang  = frase?.lang || _lang;
+  const lang = frase?.lang || _lang;
   _reproducirURL(AUDIO_FRASE_URL(id, lang), texto, null, lang);
 }
 
 // _reproducirPieza — usa el mismo lang
 function _reproducirPieza(pieza) {
   const frase = _frases[_activa];
-  const lang  = frase?.lang || _lang;
+  const lang = frase?.lang || _lang;
   const url = pieza.tipo === 'picto'
     ? AUDIO_URL(pieza.texto, lang)
     : AUDIO_FRASE_URL(pieza.texto, lang);
