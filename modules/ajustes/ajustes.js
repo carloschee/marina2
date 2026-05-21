@@ -249,16 +249,32 @@ function _renderShell() {
       <!-- Aplicación -->
       <div class="aj-seccion">
         <p class="aj-titulo">Aplicación</p>
+
+        <!-- Barra de progreso compartida por ambas acciones -->
         <div id="aj-progreso-wrap">
           <div id="aj-progreso-bg"><div id="aj-progreso-bar"></div></div>
           <p id="aj-progreso-txt">Preparando...</p>
         </div>
+
+        <!-- Acción 1: Descargar para uso sin conexión -->
         <div class="aj-fila">
           <div class="aj-fila-info">
-            <span class="aj-label">Actualizar app</span>
+            <span class="aj-label">⬇️ Descargar para uso sin conexión</span>
+            <span class="aj-desc">Descarga pictogramas y audios. Hazlo conectado a WiFi antes de salir.</span>
+          </div>
+          <button class="aj-btn aj-primary" id="btn-aj-descargar">Descargar</button>
+        </div>
+
+        <!-- Separador -->
+        <div style="border-top: 1px solid rgba(255,255,255,0.08); margin: 2px 0;"></div>
+
+        <!-- Acción 2: Actualizar app -->
+        <div class="aj-fila">
+          <div class="aj-fila-info">
+            <span class="aj-label">🔄 Actualizar app</span>
             <span class="aj-desc">Borra el caché e instala la última versión. Tus perfiles no se tocan.</span>
           </div>
-          <button class="aj-btn aj-primary" id="btn-aj-actualizar">Actualizar</button>
+          <button class="aj-btn aj-neutral" id="btn-aj-actualizar">Actualizar</button>
         </div>
       </div>
 
@@ -364,6 +380,7 @@ function _renderShell() {
 
   // ── Eventos ────────────────────────────────────────────────
   _q('#btn-aj-verificar').addEventListener('click', _actualizarEstadoConexion);
+  _q('#btn-aj-descargar').addEventListener('click', _descargarOffline);
   _q('#btn-aj-actualizar').addEventListener('click', _actualizarApp);
   _q('#btn-aj-eliminar-todos').addEventListener('click', _eliminarTodosPerfiles);
 
@@ -433,6 +450,95 @@ async function _actualizarEstadoConexion() {
     texto.textContent = 'Sin conexión';
   }
 }
+
+// ─── Descargar para uso sin conexión ─────────────────────────────────────────
+// Descarga todos los assets al caché SIN borrar lo que ya hay.
+// No recarga la app — solo añade recursos faltantes.
+async function _descargarOffline() {
+  const btn  = _q('#btn-aj-descargar');
+  const wrap = _q('#aj-progreso-wrap');
+  const bar  = _q('#aj-progreso-bar');
+  const txt  = _q('#aj-progreso-txt');
+  if (!btn || !wrap || !bar || !txt) return;
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Descargando…';
+  wrap.classList.add('visible');
+  bar.style.width = '0%';
+  txt.textContent = 'Leyendo manifiesto...';
+
+  // 1. Leer lista de URLs
+  let urls = new Set();
+  try {
+    const res = await fetchTimeout('./assets-manifest.json', 6000);
+    if (res.ok) {
+      const manifest = await res.json();
+      (manifest.urls || []).forEach(u => urls.add(u));
+    }
+  } catch (e) {
+    console.warn('[Ajustes] assets-manifest.json no disponible:', e.message);
+  }
+
+  // 2. URLs de módulos activos
+  const registry = window.DotirApp?.MODULE_REGISTRY || [];
+  for (const mod of registry) {
+    try {
+      const extra = mod.buildCache ? await mod.buildCache() : (mod.cache || []);
+      if (!_container) return;
+      extra.forEach(u => urls.add(u));
+    } catch (_) { }
+  }
+
+  if (!urls.size) {
+    txt.textContent = 'No hay recursos para descargar.';
+    btn.disabled = false;
+    btn.textContent = '⬇️ Descargar';
+    return;
+  }
+
+  bar.style.width = '10%';
+  txt.textContent = `Descargando ${urls.size} archivos...`;
+  if (!_container) return;
+
+  // 3. Precachear SIN borrar — lo que ya está en caché se conserva
+  const { ok, total } = await precachear([...urls], {
+    onProgress: (done, tot) => {
+      if (!_container) return;
+      const pct = Math.round(10 + (done / tot) * 88);
+      bar.style.width = pct + '%';
+      txt.textContent = `${done} de ${tot} archivos...`;
+    },
+  });
+
+  if (!_container) return;
+
+  const exitoso = ok > 0 && ok >= total * 0.95;
+
+  bar.style.width = '100%';
+  bar.style.background = exitoso ? '#22c55e' : '#f59e0b';
+  txt.textContent = exitoso
+    ? `✅ ${ok} archivos listos para uso sin conexión`
+    : `⚠️ ${ok} de ${total} — intenta de nuevo con mejor señal`;
+
+  if (exitoso) {
+    lanzarConfeti({ count: 40, container: _container });
+    toast('Listo para usar sin WiFi', { emoji: '📥' });
+  }
+
+  btn.disabled = false;
+  btn.textContent = exitoso ? '✅ Descargado' : '⬇️ Reintentar';
+
+  // Restaurar botón tras 4 segundos
+  setTimeout(() => {
+    if (!_container) return;
+    const b = _q('#btn-aj-descargar');
+    if (b) { b.textContent = '⬇️ Descargar'; b.disabled = false; }
+    wrap.classList.remove('visible');
+    bar.style.width = '0%';
+    bar.style.background = '';
+  }, 4000);
+}
+
 
 // ─── Actualizar app ───────────────────────────────────────────────────────────
 // Borra el caché de recursos y descarga todo desde cero.
