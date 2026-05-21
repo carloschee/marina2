@@ -80,7 +80,7 @@ export async function init(container) {
 
   _pool = _shuffle([..._catalogo]);
   _render();
-  _nuevaRonda();
+  _abrirModalTemas();
   window.addEventListener('lang-change', _onLangChange);
 }
 
@@ -454,24 +454,51 @@ function _renderRonda() {
 function _aplicarLayout(n) {
   const grid  = _el.querySelector('#tc-grid');
   const GAP   = 12;
-  const MAX   = 280; // tamaño máximo por mosaico en px
+  const MAX   = 280;
 
-  const cols  = { 3:3, 4:2, 5:3, 6:3, 8:4 }[n] || 3;
-  const filas = { 3:1, 4:2, 5:2, 6:2, 8:2 }[n] || 2;
+  // ── Detectar portrait en iPhone ──────────────────────────────
+  const esPortrait = window.innerWidth <= 600 &&
+                     window.innerHeight > window.innerWidth;
 
-  // Ancho disponible real
+  // ── Cols y filas según orientación ───────────────────────────
+  //
+  // Landscape (original):
+  //   n=3 → 3 cols × 1 fila   n=4 → 2×2   n=5 → 3×2
+  //   n=6 → 3×2               n=8 → 4×2
+  //
+  // Portrait (nuevo — eje vertical como recurso principal):
+  //   n=3 → 1 col × 3 filas   (columna centrada, pictos grandes)
+  //   n=4 → 2 col × 2 filas   (cuadrado)
+  //   n=5 → 2 col × 3 filas   (2+2+1, el último centrado por flex)
+  //   n=6 → 2 col × 3 filas   (2×3 limpio)
+  //   n=8 → 2 col × 4 filas   (2×4 — columnas aumentan a 2)
+  //
+  let cols, filas;
+  if (esPortrait) {
+    cols  = { 3:1, 4:2, 5:2, 6:2, 8:2 }[n] || 2;
+    filas = { 3:3, 4:2, 5:3, 6:3, 8:4 }[n] || 3;
+  } else {
+    cols  = { 3:3, 4:2, 5:3, 6:3, 8:4 }[n] || 3;
+    filas = { 3:1, 4:2, 5:2, 6:2, 8:2 }[n] || 2;
+  }
+
+  // ── Espacio disponible ────────────────────────────────────────
   const W = grid.offsetWidth;
 
-  // Alto disponible = ventana - todo lo que está sobre el grid
   const headerApp = document.getElementById('app-header')?.offsetHeight || 56;
   const tcHeader  = _el.querySelector('#tc-header').offsetHeight;
   const tcInstr   = _el.querySelector('#tc-instruccion').offsetHeight;
   const H = window.innerHeight - headerApp - tcHeader - tcInstr - 14 - 16 - 8;
-  //                                                     instrMargin  padB  holgura
 
   const porAncho = Math.floor((W - GAP * (cols  - 1)) / cols);
   const porAlto  = Math.floor((H - GAP * (filas - 1)) / filas);
-  const size     = Math.min(porAncho, porAlto, MAX);
+
+  // En portrait limitamos el máximo a 160px para que los pictos no
+  // sean tan grandes que se vean fuera de lugar en pantallas pequeñas
+  const MAX_portrait = 160;
+  const size = esPortrait
+    ? Math.min(porAncho, porAlto, MAX_portrait)
+    : Math.min(porAncho, porAlto, MAX);
 
   grid.querySelectorAll('.tc-opcion').forEach(o => {
     o.style.width      = size + 'px';
