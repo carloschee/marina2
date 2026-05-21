@@ -357,9 +357,49 @@ function _initAreaAdultos() {
   document.getElementById('btn-pin-cancel')
     ?.addEventListener('click', _cerrarPin);
 
-  document.getElementById('input-pin')
+  // ── Focus trap + Escape ───────────────────────────────────────
+  const _FOCUSABLES_PIN = ['#btn-pin-cancel', '#btn-pin-ok', '#input-pin'];
+
+  document.getElementById('modal-pin')
     ?.addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('btn-pin-ok')?.click();
+      // Cerrar con Escape
+      if (e.key === 'Escape') {
+        _cerrarPin();
+        return;
+      }
+
+      // Confirmar con Enter desde el input
+      if (e.key === 'Enter' && e.target.id === 'input-pin') {
+        document.getElementById('btn-pin-ok')?.click();
+        return;
+      }
+
+      // Focus trap — Tab y Shift+Tab
+      if (e.key !== 'Tab') return;
+
+      const modal = document.getElementById('modal-pin');
+      const focusables = _FOCUSABLES_PIN
+        .map(sel => modal.querySelector(sel))
+        .filter(Boolean);
+
+      if (!focusables.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        // Shift+Tab: si estamos en el primero, ir al último
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        // Tab: si estamos en el último, ir al primero
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
   document.getElementById('modal-pin')

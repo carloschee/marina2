@@ -50,13 +50,16 @@
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       width: 100%;
       overflow: hidden;
@@ -254,14 +257,42 @@
       transition: all .3s;
     }
 
-    #indicador-offline.online  { background: rgba(0,229,176,0.18); border-color: #00e5b0; color: #00e5b0; }
-    #indicador-offline.offline { background: rgba(255,107,107,0.18); border-color: #ff6b6b; color: #ff6b6b; }
-    #indicador-offline.checking { background: rgba(255,229,102,0.18); border-color: #ffe566; color: #ffe566; }
+    #indicador-offline.online {
+      background: rgba(0, 229, 176, 0.18);
+      border-color: #00e5b0;
+      color: #00e5b0;
+    }
 
-    #dot-conexion { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .online  #dot-conexion { background: #00e5b0; }
-    .offline #dot-conexion { background: #ff6b6b; }
-    .checking #dot-conexion { background: #ffe566; }
+    #indicador-offline.offline {
+      background: rgba(255, 107, 107, 0.18);
+      border-color: #ff6b6b;
+      color: #ff6b6b;
+    }
+
+    #indicador-offline.checking {
+      background: rgba(255, 229, 102, 0.18);
+      border-color: #ffe566;
+      color: #ffe566;
+    }
+
+    #dot-conexion {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .online #dot-conexion {
+      background: #00e5b0;
+    }
+
+    .offline #dot-conexion {
+      background: #ff6b6b;
+    }
+
+    .checking #dot-conexion {
+      background: #ffe566;
+    }
 
     /* ── Body ──────────────────────────────────────────────── */
     #app-body {
@@ -325,8 +356,15 @@
     }
 
     @keyframes tile-fadein {
-      from { opacity: 0; transform: scale(.96); }
-      to   { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .module-tile:active {
@@ -337,7 +375,9 @@
     .module-tile::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 55%;
       background: linear-gradient(to top,
           rgba(2, 20, 50, 0.75) 0%,
@@ -397,7 +437,9 @@
       backdrop-filter: blur(16px);
     }
 
-    #modal-pin.visible { display: flex; }
+    #modal-pin.visible {
+      display: flex;
+    }
 
     .pin-box {
       background: rgba(255, 255, 255, 0.14);
@@ -448,7 +490,10 @@
       box-shadow: 0 0 0 3px rgba(0, 194, 255, 0.25);
     }
 
-    .pin-btns { display: flex; gap: 10px; }
+    .pin-btns {
+      display: flex;
+      gap: 10px;
+    }
 
     .pin-btns button {
       flex: 1;
@@ -461,8 +506,16 @@
       font-family: inherit;
     }
 
-    #btn-pin-ok     { background: var(--t-primary); color: #032340; }
-    #btn-pin-cancel { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.20); }
+    #btn-pin-ok {
+      background: var(--t-primary);
+      color: #032340;
+    }
+
+    #btn-pin-cancel {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+    }
 
     #pin-error {
       color: var(--m-coral);
@@ -488,13 +541,38 @@
         gap: 8px;
       }
 
-      .menu-logo h1, #saludo-nombre { font-size: 1.25rem; }
-      #perfil-chip { display: none !important; }
-      #texto-conexion { display: none; }
-      #indicador-offline { padding: 4px 8px; }
-      .lang-btn { padding: 5px 11px; font-size: 0.73rem; }
-      #btn-ajustes-header { width: 32px; height: 32px; font-size: 1rem; }
-      #btn-volver { width: 36px; height: 36px; }
+      .menu-logo h1,
+      #saludo-nombre {
+        font-size: 1.25rem;
+      }
+
+      #perfil-chip {
+        display: none !important;
+      }
+
+      #texto-conexion {
+        display: none;
+      }
+
+      #indicador-offline {
+        padding: 4px 8px;
+      }
+
+      .lang-btn {
+        padding: 5px 11px;
+        font-size: 0.73rem;
+      }
+
+      #btn-ajustes-header {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+      }
+
+      #btn-volver {
+        width: 36px;
+        height: 36px;
+      }
 
       /* Menú — 2 columnas en portrait */
       #menu-grid {
@@ -515,14 +593,34 @@
         background-position: center top;
       }
 
-      .tile-label { font-size: .9rem; }
+      .tile-label {
+        font-size: .9rem;
+      }
 
       /* PIN */
-      .pin-box { padding: 24px 18px; }
-      .pin-box h3 { font-size: 1.1rem; }
-      #pin-hint { font-size: 1rem; margin-bottom: 12px; }
-      #input-pin { font-size: 2.2rem; padding: 13px; margin-bottom: 10px; }
-      .pin-btns button { padding: 13px; font-size: 1rem; }
+      .pin-box {
+        padding: 24px 18px;
+      }
+
+      .pin-box h3 {
+        font-size: 1.1rem;
+      }
+
+      #pin-hint {
+        font-size: 1rem;
+        margin-bottom: 12px;
+      }
+
+      #input-pin {
+        font-size: 2.2rem;
+        padding: 13px;
+        margin-bottom: 10px;
+      }
+
+      .pin-btns button {
+        padding: 13px;
+        font-size: 1rem;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════
@@ -541,15 +639,48 @@
         gap: 6px;
       }
 
-      .menu-logo h1, #saludo-nombre { font-size: 1.05rem; }
-      #saludo-nombre { display: none; }
-      #texto-conexion { display: none; }
-      #indicador-offline { padding: 3px 6px; font-size: 0.65rem; }
-      #dot-conexion { width: 5px; height: 5px; }
-      .lang-btn { padding: 4px 9px; font-size: 0.68rem; }
-      #lang-pill { margin-right: 4px; }
-      #btn-ajustes-header { width: 28px; height: 28px; font-size: 0.9rem; }
-      #btn-volver { width: 32px; height: 32px; }
+      .menu-logo h1,
+      #saludo-nombre {
+        font-size: 1.05rem;
+      }
+
+      #saludo-nombre {
+        display: none;
+      }
+
+      #texto-conexion {
+        display: none;
+      }
+
+      #indicador-offline {
+        padding: 3px 6px;
+        font-size: 0.65rem;
+      }
+
+      #dot-conexion {
+        width: 5px;
+        height: 5px;
+      }
+
+      .lang-btn {
+        padding: 4px 9px;
+        font-size: 0.68rem;
+      }
+
+      #lang-pill {
+        margin-right: 4px;
+      }
+
+      #btn-ajustes-header {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+      }
+
+      #btn-volver {
+        width: 32px;
+        height: 32px;
+      }
 
       /* Menú */
       #menu-grid {
@@ -570,16 +701,36 @@
         background-position: center top;
       }
 
-      .tile-label { font-size: 0.8rem; }
+      .tile-label {
+        font-size: 0.8rem;
+      }
 
       /* PIN */
-      .pin-box { padding: 20px 14px; border-radius: var(--r-lg); }
-      .pin-box h3 { font-size: 1rem; }
-      #pin-hint { font-size: 0.9rem; margin-bottom: 10px; }
-      #input-pin { font-size: 1.9rem; padding: 11px; margin-bottom: 8px; }
-      .pin-btns button { padding: 11px; font-size: 0.9rem; }
-    }
+      .pin-box {
+        padding: 20px 14px;
+        border-radius: var(--r-lg);
+      }
 
+      .pin-box h3 {
+        font-size: 1rem;
+      }
+
+      #pin-hint {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+
+      #input-pin {
+        font-size: 1.9rem;
+        padding: 11px;
+        margin-bottom: 8px;
+      }
+
+      .pin-btns button {
+        padding: 11px;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 
@@ -593,9 +744,9 @@
     </div>
   </div>
 
-  <div id="modal-pin">
+  <div id="modal-pin" role="dialog" aria-modal="true" aria-labelledby="pin-titulo">
     <div class="pin-box">
-      <h3>Área de adultos</h3>
+      <h3 id="pin-titulo">Área de adultos</h3>
       <div id="pin-hint"></div>
       <input id="input-pin" type="number" inputmode="numeric" autocomplete="off" min="1" max="18" />
       <div class="pin-btns">
