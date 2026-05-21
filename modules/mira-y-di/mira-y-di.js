@@ -235,37 +235,78 @@ function _render() {
       #md-main {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
-        gap: 10px;
-        padding: 8px 14px 12px;
+        padding: 8px 12px 12px;
+    gap: 10px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
       }
 
       /* Card cuadrada y compacta */
       #md-card {
-        height: 210px;
         border-radius: 20px;
+        width: 100%;
+    height: 38vw;          /* ocupa ~38% del ancho — cuadrado generoso */
+    min-height: 160px;
+    max-height: 220px;
       }
+
+      #md-panel {
+    width: 100%;
+    gap: 8px;
+  }
 
       #md-picto { width:65%; height:65%; }
 
       /* Palabra grande → más pequeña */
       #md-palabra {
         font-size: clamp(1.8rem, 8vw, 2.8rem);
-        margin: 4px 0 0;
+        margin: 2px 0 0;
       }
 
       #md-meta { font-size: .65rem; margin-top: 4px; }
 
       /* Retícula — mantener 9 cols pero botones más pequeños */
       #md-letras-panel {
-        padding: 8px;
-        gap: 4px;
-      }
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
       #md-letras-panel .md-letra-btn { font-size: .9rem; }
 
+      .md-letra-btn {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    font-size: clamp(0.7rem, 3.5vw, 0.9rem);
+    min-width: 0;
+  }
+
+  #md-controles {
+    width: 100%;
+    box-sizing: border-box;
+    gap: 6px;
+  }
+
       /* Controles compactos */
-      .md-nav-btn { width:44px; height:44px; font-size:1.2rem; }
+      .md-nav-btn { width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    flex-shrink: 0; }
       #md-btn-escucha { height:44px; font-size:.95rem; }
-      #md-btn-mic { width:44px; height:44px; font-size:1.1rem; }
+      #md-btn-mic { width: 44px;
+    height: 44px;
+    flex-shrink: 0;font-size:1.1rem; }
+
+    /* Botón escucha: ocupa el espacio restante sin romperse */
+  #md-btn-escucha {
+    height: 44px;
+    font-size: 0.95rem;
+    flex: 1;
+    min-width: 0;
+  }
+}
 
       /* Ocultar medidor en portrait para ahorrar espacio */
       #md-medidor-wrap { display:none !important; }
@@ -300,6 +341,36 @@ function _render() {
       /* Ocultar micrófono — muy poco espacio */
       #md-btn-mic { display:none !important; }
     }
+
+    /* ── iPhone SE / pantallas muy angostas (≤390px) ─────────────── */
+@media (max-width: 390px) and (orientation: portrait) {
+
+  #md-card {
+    height: 35vw;
+    min-height: 140px;
+  }
+
+  #md-letras-panel {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 8px;
+  }
+
+  .md-letra-btn {
+    font-size: clamp(0.62rem, 3vw, 0.8rem);
+  }
+
+  .md-nav-btn,
+  #md-btn-mic {
+    width: 40px;
+    height: 40px;
+  }
+
+  #md-btn-escucha {
+    height: 40px;
+    font-size: 0.88rem;
+  }
+}
   </style>
 
   <div id="md-main">
