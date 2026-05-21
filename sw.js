@@ -174,16 +174,27 @@ self.addEventListener('message', event => {
   // Precache bajo demanda (llamado desde offline.js → precachear())
   if (event.data?.tipo === 'precache') {
     const urls = event.data.urls || [];
+    const src  = event.source;
     caches.open(CACHE_VERSION).then(async cache => {
       let ok = 0;
-      await Promise.allSettled(
-        urls.map(url =>
-          cache.add(new Request(url, { cache: 'reload' }))
-            .then(() => ok++)
-            .catch(() => {})
-        )
-      );
-      event.source?.postMessage({ tipo: 'precache-done', ok, total: urls.length });
+      let done = 0;
+      const total = urls.length;
+      // Descargar de a lotes de 20 para poder reportar progreso
+      const BATCH = 20;
+      for (let i = 0; i < urls.length; i += BATCH) {
+        const lote = urls.slice(i, i + BATCH);
+        await Promise.allSettled(
+          lote.map(url =>
+            cache.add(new Request(url, { cache: 'reload' }))
+              .then(() => ok++)
+              .catch(() => {})
+          )
+        );
+        done = Math.min(i + BATCH, total);
+        // Reportar progreso real al cliente
+        src?.postMessage({ tipo: 'precache-progress', done, total });
+      }
+      src?.postMessage({ tipo: 'precache-done', ok, total });
     });
   }
 

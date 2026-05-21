@@ -438,26 +438,19 @@ async function _actualizarEstadoConexion() {
 // Borra el caché de recursos y descarga todo desde cero.
 // Los datos de usuario (localStorage) nunca se tocan.
 async function _actualizarApp() {
-  const btn  = _q('#btn-aj-actualizar');
+  const btn = _q('#btn-aj-actualizar');
   const wrap = _q('#aj-progreso-wrap');
-  const bar  = _q('#aj-progreso-bar');
-  const txt  = _q('#aj-progreso-txt');
+  const bar = _q('#aj-progreso-bar');
+  const txt = _q('#aj-progreso-txt');
   if (!btn || !wrap || !bar || !txt) return;
 
   btn.disabled = true;
   btn.textContent = '⏳ Actualizando…';
   wrap.classList.add('visible');
   bar.style.width = '0%';
-  txt.textContent = 'Borrando caché anterior...';
-
-  // 1. Borrar caché de recursos (nunca toca localStorage)
-  await borrarCache();
-  if (!_container) return;
-
-  bar.style.width = '15%';
   txt.textContent = 'Leyendo manifiesto...';
 
-  // 2. Cargar lista desde assets-manifest.json
+  // 1. Cargar lista de URLs PRIMERO — sin tocar el caché todavía
   let urls = new Set();
   try {
     const res = await fetchTimeout('./assets-manifest.json', 6000);
@@ -469,7 +462,7 @@ async function _actualizarApp() {
     console.warn('[Ajustes] assets-manifest.json no disponible:', e.message);
   }
 
-  // 3. Agregar URLs de caché declaradas por cada módulo activo
+  // 2. Agregar URLs de módulos activos
   const registry = window.DotirApp?.MODULE_REGISTRY || [];
   for (const mod of registry) {
     try {
@@ -482,14 +475,22 @@ async function _actualizarApp() {
   if (!urls.size) {
     txt.textContent = 'No hay recursos para descargar.';
     btn.disabled = false;
-    btn.textContent = 'Actualizar';
+    btn.textContent = '⬇️ Actualizar app';
     return;
   }
 
-  txt.textContent = `Descargando ${urls.size} archivos...`;
+  bar.style.width = '10%';
+  txt.textContent = `Preparando ${urls.size} archivos...`;
   if (!_container) return;
 
-  // 4. Precachear todo
+  // 3. Borrar caché viejo — ahora sí, justo antes de descargar
+  await borrarCache();
+  if (!_container) return;
+
+  bar.style.width = '15%';
+  txt.textContent = `Descargando ${urls.size} archivos...`;
+
+  // 4. Precachear — el onProgress usa el avance real del SW
   const { ok, total } = await precachear([...urls], {
     onProgress: (done, tot) => {
       if (!_container) return;
@@ -501,11 +502,20 @@ async function _actualizarApp() {
 
   if (!_container) return;
 
+  const exitoso = ok > 0 && ok >= total * 0.95; // éxito si ≥95% descargó OK
+
   bar.style.width = '100%';
-  bar.style.background = ok === total ? '#22c55e' : '#f59e0b';
-  txt.textContent = ok === total
+  bar.style.background = exitoso ? '#22c55e' : '#f59e0b';
+  txt.textContent = exitoso
     ? `✅ ${ok} archivos actualizados`
-    : `⚠️ ${ok} de ${total} archivos`;
+    : `⚠️ ${ok} de ${total} archivos — intenta de nuevo`;
+
+  if (!exitoso) {
+    // Descarga parcial: NO recargar. Dejar el caché con lo que se pudo.
+    btn.disabled = false;
+    btn.textContent = '⬇️ Reintentar';
+    return;
+  }
 
   lanzarConfeti({ count: 40, container: _container });
 

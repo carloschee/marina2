@@ -23,27 +23,33 @@ export async function precachear(urls, { onProgress } = {}) {
   if (!urls?.length) return { ok: 0, total: 0 };
   return new Promise(resolve => {
     let done = false;
+
     const handler = e => {
-      if (e.data?.tipo !== 'precache-done' || done) return;
-      done = true;
-      navigator.serviceWorker.removeEventListener('message', handler);
-      resolve({ ok: e.data.ok, total: e.data.total });
+      if (done) return;
+
+      // Progreso real desde el SW
+      if (e.data?.tipo === 'precache-progress' && onProgress) {
+        onProgress(e.data.done, e.data.total);
+        return;
+      }
+
+      if (e.data?.tipo === 'precache-done') {
+        done = true;
+        navigator.serviceWorker.removeEventListener('message', handler);
+        resolve({ ok: e.data.ok, total: e.data.total });
+      }
     };
+
     navigator.serviceWorker.addEventListener('message', handler);
+
+    // Timeout de seguridad — 60s para catálogos grandes (1417 archivos)
     setTimeout(() => {
       if (done) return;
       navigator.serviceWorker.removeEventListener('message', handler);
       resolve({ ok: 0, total: urls.length });
-    }, 30000);
+    }, 60000);  // ← aumentado de 30s a 60s
+
     _swMsg({ tipo: 'precache', urls });
-    if (onProgress) {
-      let n = 0;
-      const tick = setInterval(() => {
-        if (n >= urls.length || done) { clearInterval(tick); return; }
-        n = Math.min(n + Math.ceil(urls.length / 20), urls.length);
-        onProgress(n, urls.length);
-      }, 300);
-    }
   });
 }
 
