@@ -576,25 +576,30 @@
 
       /* Menú — 2 columnas en portrait */
       #menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
-        align-content: start;
+        grid-template-columns: 1fr;
+        /* ← una columna */
+        grid-template-rows: repeat(4, 1fr);
+        /* ← 4 filas explícitas */
+        align-content: stretch;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         gap: 10px;
-        padding: 10px 12px;
+        padding: 10px 14px;
         padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
       }
 
-      .module-tile {
-        min-height: 150px;
-        max-height: 210px;
-        background-size: 100% auto;
-        background-position: center top;
+      module-tile {
+        min-height: 120px;
+        max-height: none;
+        /* ← sin límite: las filas reparten el espacio */
+        background-size: auto 85%;
+        background-position: right 16px center;
+        background-repeat: no-repeat;
       }
 
       .tile-label {
-        font-size: .9rem;
+        font-size: .95rem;
+        /* ← ligeramente más grande al tener más ancho */
       }
 
       /* PIN */
