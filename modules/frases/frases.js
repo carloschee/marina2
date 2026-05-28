@@ -285,21 +285,22 @@ function _render() {
     #fr-selector {
   flex-shrink: 0;
   display: flex;
-  gap: 10px;
-  flex-wrap: nowrap;            /* ← una fila, sin wrap */
-  overflow-x: auto;             /* ← scroll horizontal */
+  flex-direction: column;       /* ← apila verticalmente */
+  gap: 8px;
+  overflow-y: auto;             /* ← scroll vertical */
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;          /* espacio para el scrollbar en algunos dispositivos */
-  scrollbar-width: none;        /* ocultar scrollbar visual en Firefox */
+  max-height: 35vh;             /* ← límite de altura; resto es scrolleable */
+  scrollbar-width: none;
+  padding-right: 2px;           /* evita que el scroll tape el borde de las pills */
 }
 #fr-selector::-webkit-scrollbar { display: none; }
     .fr-pill {
-      padding: 10px 20px; border-radius: 99px; border: 1.5px solid rgba(255,255,255,0.18);
-      cursor: pointer; font-family: inherit; font-weight: 800; font-size: 1rem;
-      background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.80);
-      transition: background .18s, color .18s, transform .12s, border-color .18s;
-      white-space: nowrap; text-shadow: 0 1px 4px rgba(0,0,0,0.40);
-    }
+  padding: 10px 20px; border-radius: 99px; ...
+  white-space: nowrap;
+  width: 100%;                  /* ← ocupa todo el ancho */
+  text-align: left;             /* ← texto alineado a la izquierda, más natural */
+  box-sizing: border-box;
+}
     .fr-pill:active { transform: scale(.93); }
     .fr-pill.activa { color: #fff; border-color: transparent; font-weight: 900;
                       text-shadow: 0 1px 6px rgba(0,0,0,0.50); }
