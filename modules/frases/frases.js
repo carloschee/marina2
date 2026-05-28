@@ -282,7 +282,17 @@ function _render() {
     .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
     /* ── Selector de frases ── */
-    #fr-selector { flex-shrink: 0; display: flex; gap: 10px; flex-wrap: wrap; }
+    #fr-selector {
+  flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;            /* ← una fila, sin wrap */
+  overflow-x: auto;             /* ← scroll horizontal */
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;          /* espacio para el scrollbar en algunos dispositivos */
+  scrollbar-width: none;        /* ocultar scrollbar visual en Firefox */
+}
+#fr-selector::-webkit-scrollbar { display: none; }
     .fr-pill {
       padding: 10px 20px; border-radius: 99px; border: 1.5px solid rgba(255,255,255,0.18);
       cursor: pointer; font-family: inherit; font-weight: 800; font-size: 1rem;

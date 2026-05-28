@@ -530,7 +530,7 @@
        RESPONSIVE — iPhone 13 portrait (≤430px, portrait)
        Viewport: 390×844pt — objetivo principal phone
     ═══════════════════════════════════════════════════════════ */
-    @media (max-width: 600px) and (orientation: portrait) {
+    @media (max-width: 390px) and (orientation: portrait) {
 
       /* Header compacto */
       #app-header {
@@ -577,9 +577,7 @@
       /* Menú — 2 columnas en portrait */
       #menu-grid {
         grid-template-columns: 1fr;
-        /* ← una columna */
-        grid-template-rows: repeat(4, 1fr);
-        /* ← 4 filas explícitas */
+        grid-template-rows: auto;
         align-content: stretch;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -589,9 +587,8 @@
       }
 
       module-tile {
-        min-height: 120px;
-        max-height: none;
-        /* ← sin límite: las filas reparten el espacio */
+        min-height: 140px;
+        max-height: 200px;
         background-size: auto 85%;
         background-position: right 16px center;
         background-repeat: no-repeat;
@@ -599,7 +596,6 @@
 
       .tile-label {
         font-size: .95rem;
-        /* ← ligeramente más grande al tener más ancho */
       }
 
       /* PIN */
