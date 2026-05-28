@@ -153,7 +153,8 @@ export function onLeave() {
 function _render() {
   _el.style.cssText =
     'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;padding:14px 20px 12px;gap:12px;';
+    'overflow:hidden;background:transparent;' +
+    'padding:14px 20px calc(12px + env(safe-area-inset-bottom, 0px)) 20px;gap:12px;';
 
   _el.innerHTML = `
   <style>
