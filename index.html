@@ -93,14 +93,8 @@
       display: flex;
       flex-direction: column;
       background: transparent;
-    }
-
-    /* ── App fondo (tema oceano) — no debe participar en el flujo flex ── */
-    #app-fondo {
-      flex: none;
-      height: 0;
-      width: 0;
-      overflow: visible;
+      /* Sin padding-bottom global: en iPad no hay home indicator y generaba
+         un gap vacío. Cada módulo/grid gestiona su propio safe-area donde aplica. */
     }
 
     /* ── Header ──────────────────────────────────────────────── */
