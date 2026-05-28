@@ -93,7 +93,8 @@
       display: flex;
       flex-direction: column;
       background: transparent;
-      padding-bottom: env(safe-area-inset-bottom, 0px);
+      /* Sin padding-bottom global: en iPad no hay home indicator y generaba
+         un gap vacío. Cada módulo/grid gestiona su propio safe-area donde aplica. */
     }
 
     /* ── Header ──────────────────────────────────────────────── */
@@ -452,11 +453,6 @@
 
       .fr-pill.activa {
         font-size: 1.2rem !important;
-      }
-
-      /* ── Selector de frases: ligeramente menos alto en SE ── */
-      #fr-selector {
-        max-height: 30vh !important;
       }
 
       .pin-box {

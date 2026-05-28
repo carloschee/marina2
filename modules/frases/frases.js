@@ -280,20 +280,39 @@ function _render() {
     .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
     /* ── Selector de frases ──────────────────────────────────────────────────
-       CAMBIO: columna vertical scrolleable en lugar de wrap horizontal.
-       Las pills usan las variables CSS del nivel activo para color y fondo,
-       evitando el blanco genérico de alto contraste.
+       Columna vertical scrolleable. El wrapper (#fr-selector-wrap) tiene
+       position:relative para alojar el degradado ::after que indica scroll.
     ── */
+    #fr-selector-wrap {
+      flex: 1;                          /* ocupa todo el espacio libre restante */
+      min-height: 0;
+      position: relative;              /* necesario para el ::after */
+    }
+    #fr-selector-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 56px;
+      pointer-events: none;
+      background: linear-gradient(to top,
+        rgba(5, 30, 65, 0.85) 0%,
+        transparent 100%);
+      border-radius: 0 0 12px 12px;
+      transition: opacity .3s;
+    }
+    /* Ocultar el fade cuando el selector está completamente scrolleado al fondo */
+    #fr-selector-wrap.al-fondo::after { opacity: 0; }
+
     #fr-selector {
-      flex-shrink: 0;
+      height: 100%;                    /* llena el wrapper */
       display: flex;
       flex-direction: column;           /* apila verticalmente */
       gap: 8px;
-      overflow-y: auto;                 /* scroll vertical */
+      overflow-y: auto;                 /* scroll vertical cuando el contenido excede */
       -webkit-overflow-scrolling: touch;
-      max-height: 35vh;                 /* límite — el resto es scrolleable */
-      scrollbar-width: none;            /* ocultar barra en Firefox */
-      padding-right: 2px;              /* evita que scroll tape borde de pills */
+      scrollbar-width: none;
+      padding-right: 2px;
+      padding-bottom: 48px;            /* espacio para que la última pill no quede bajo el fade */
     }
     #fr-selector::-webkit-scrollbar { display: none; }
 
@@ -370,7 +389,9 @@ function _render() {
   </div>
 
   <!-- Selector de frases -->
-  <div id="fr-selector"></div>
+  <div id="fr-selector-wrap">
+    <div id="fr-selector"></div>
+  </div>
 
   <!-- Estado vacío -->
   <div id="fr-vacio">
@@ -478,7 +499,7 @@ function _actualizarVacio() {
   const vacio  = _el.querySelector('#fr-vacio');
   const panel  = _el.querySelector('#fr-panel-piezas');
   const tira   = _el.querySelector('#fr-tira');
-  const sel    = _el.querySelector('#fr-selector');
+  const sel    = _el.querySelector('#fr-selector-wrap');
   const sinFrases = _frases.length === 0;
   vacio.style.display  = sinFrases ? 'flex'  : 'none';
   panel.style.display  = sinFrases ? 'none'  : '';
@@ -682,6 +703,17 @@ function _bindEvents() {
     _renderTira();
     _renderPiezas();
   });
+
+  // Fade inferior del selector: desaparece al llegar al fondo del scroll
+  const sel  = _el.querySelector('#fr-selector');
+  const wrap = _el.querySelector('#fr-selector-wrap');
+  const _actualizarFade = () => {
+    const alFondo = sel.scrollTop + sel.clientHeight >= sel.scrollHeight - 4;
+    wrap.classList.toggle('al-fondo', alFondo);
+  };
+  sel.addEventListener('scroll', _actualizarFade, { passive: true });
+  // Evaluar al montar (por si el contenido ya cabe sin scroll)
+  requestAnimationFrame(_actualizarFade);
 }
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
