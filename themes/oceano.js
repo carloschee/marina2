@@ -54,8 +54,6 @@ export function injectStyles() {
     body { background: var(--t-bg); color: var(--t-ink); }
 
     /* ── Rayos de sol submarinos ── */
-    /* Más rápidos y luminosos que las corrientes — simulan luz filtrando desde la superficie */
-
     @keyframes rayo-a {
       0%   { transform: translateX(0)     rotate(-8deg)  scaleX(1);   opacity: .22; }
       40%  { transform: translateX(6vw)   rotate(-5deg)  scaleX(1.1); opacity: .32; }
@@ -67,14 +65,14 @@ export function injectStyles() {
       100% { transform: translateX(-4vw) rotate(8deg) scaleX(0.9); opacity: .14; }
     }
     @keyframes rayo-c {
-      0%   { transform: translateX(0)   rotate(-4deg) opacity: .14; }
+      0%   { transform: translateX(0)   rotate(-4deg); opacity: .14; }
       60%  { transform: translateX(10vw) rotate(-7deg); opacity: .24; }
       100% { transform: translateX(6vw)  rotate(-3deg); opacity: .12; }
     }
     @keyframes burbuja {
-      0%   { transform: translateY(0)   scale(1);    opacity: .70; }
-      80%  { transform: translateY(-80vh) scale(1.3); opacity: .20; }
-      100% { transform: translateY(-95vh) scale(1.4); opacity: 0;   }
+      0%   { transform: translateY(0)     scale(1);    opacity: .70; }
+      80%  { transform: translateY(-80vh) scale(1.3);  opacity: .20; }
+      100% { transform: translateY(-95vh) scale(1.4);  opacity: 0;   }
     }
     @keyframes ondular {
       0%,100% { d: path('M0,40 Q295,15 590,40 T1180,40 L1180,80 L0,80 Z'); }
@@ -163,7 +161,6 @@ export function crearFondo() {
 
     <!-- Burbujas SVG animadas -->
     <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;" aria-hidden="true">
-      <!-- 12 burbujas en posiciones y tamaños variados -->
       ${Array.from({length: 12}, (_, i) => {
         const x    = 5 + (i * 8.2) % 90;
         const size = 4 + (i * 3.7) % 14;
@@ -176,9 +173,25 @@ export function crearFondo() {
       }).join('\n      ')}
     </svg>
 
-    <!-- Ola inferior — superficie del agua -->
-    <svg style="position:absolute;bottom:0;left:0;width:100%;height:100px;pointer-events:none;"
-         viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <!-- Franja de relleno inferior — cubre la safe-area (home indicator)
+         con el color del agua profunda para que no se perciba un gap vacío
+         en modo standalone. Altura = solo el safe-area-inset-bottom. -->
+    <div style="
+      position:absolute; bottom:0; left:0; width:100%;
+      height:env(safe-area-inset-bottom, 0px);
+      background:#042040;
+      pointer-events:none;">
+    </div>
+
+    <!-- Ola inferior — superficie del agua (forma original, sin deformar).
+         Se ancla por encima de la franja de relleno usando bottom = safe-area. -->
+    <svg style="
+           position:absolute;
+           bottom:env(safe-area-inset-bottom, 0px); left:0;
+           width:100%; height:100px;
+           pointer-events:none;"
+         viewBox="0 0 1440 100"
+         preserveAspectRatio="none">
       <path d="M0,50 Q180,20 360,50 T720,50 T1080,50 T1440,50 L1440,100 L0,100 Z"
             fill="rgba(100,230,255,0.12)"/>
       <path d="M0,65 Q200,40 400,65 T800,65 T1200,65 T1440,65 L1440,100 L0,100 Z"
