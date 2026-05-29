@@ -26,77 +26,73 @@ import { TTS }                   from '../../core/tts.js';
 import { lanzarConfeti, haptic } from '../../core/ui.js';
 import { Telemetry }             from '../../core/telemetry.js';
 
-const PICTO_URL = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}`;
+const PICTO_URL       = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}`;
 const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
 const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
 const NIVELES = [
   {
-    id: 1, label: '⭐', titulo: '',
-    color:       '#38bdf8',   // azul cielo — fresco, tranquilo
-    colorSuave:  'rgba(56,189,248,0.15)',
-    colorBorde:  'rgba(56,189,248,0.40)',
-    colorTexto:  '#0c1a24',   // texto oscuro sobre fondo claro del nivel
-    bgTira:      'rgba(56,189,248,0.08)',
-    bgPanel:     'rgba(56,189,248,0.06)',
-    bgPiezaTxt:  'rgba(56,189,248,0.20)',
+    id: 1, label: '⭐', titulo: 'Básico',
+    color:         '#38bdf8',
+    colorSuave:    'rgba(56,189,248,0.15)',
+    colorBorde:    'rgba(56,189,248,0.40)',
+    colorTexto:    '#0c1a24',
+    bgTira:        'rgba(56,189,248,0.08)',
+    bgPanel:       'rgba(56,189,248,0.06)',
+    bgPiezaTxt:    'rgba(56,189,248,0.20)',
     bordePiezaTxt: 'rgba(56,189,248,0.50)',
   },
   {
-    id: 2, label: '⭐⭐', titulo: '',
-    color:       '#c084fc',   // violeta suave
-    colorSuave:  'rgba(192,132,252,0.15)',
-    colorBorde:  'rgba(192,132,252,0.40)',
-    colorTexto:  '#1a0a2e',
-    bgTira:      'rgba(192,132,252,0.08)',
-    bgPanel:     'rgba(192,132,252,0.06)',
-    bgPiezaTxt:  'rgba(192,132,252,0.22)',
+    id: 2, label: '⭐⭐', titulo: 'Intermedio',
+    color:         '#c084fc',
+    colorSuave:    'rgba(192,132,252,0.15)',
+    colorBorde:    'rgba(192,132,252,0.40)',
+    colorTexto:    '#1a0a2e',
+    bgTira:        'rgba(192,132,252,0.08)',
+    bgPanel:       'rgba(192,132,252,0.06)',
+    bgPiezaTxt:    'rgba(192,132,252,0.22)',
     bordePiezaTxt: 'rgba(192,132,252,0.50)',
   },
   {
-    id: 3, label: '⭐⭐⭐', titulo: '',
-    color:       '#fb7185',   // coral cálido
-    colorSuave:  'rgba(251,113,133,0.15)',
-    colorBorde:  'rgba(251,113,133,0.40)',
-    colorTexto:  '#2a0a10',
-    bgTira:      'rgba(251,113,133,0.08)',
-    bgPanel:     'rgba(251,113,133,0.06)',
-    bgPiezaTxt:  'rgba(251,113,133,0.22)',
+    id: 3, label: '⭐⭐⭐', titulo: 'Avanzado',
+    color:         '#fb7185',
+    colorSuave:    'rgba(251,113,133,0.15)',
+    colorBorde:    'rgba(251,113,133,0.40)',
+    colorTexto:    '#2a0a10',
+    bgTira:        'rgba(251,113,133,0.08)',
+    bgPanel:       'rgba(251,113,133,0.06)',
+    bgPiezaTxt:    'rgba(251,113,133,0.22)',
     bordePiezaTxt: 'rgba(251,113,133,0.50)',
   },
 ];
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
 let _el          = null;
-let _todasFrases = [];   // todas las frases cargadas
-let _frases      = [];   // frases del nivel + idioma activos
+let _todasFrases = [];
+let _frases      = [];
 let _nivel       = 1;
-let _lang        = 'es'; // idioma activo — sincronizado con pill global
-let _activa      = 0;
+let _lang        = 'es';
+let _activa      = -1;
 let _built       = [];
-let _audioEl    = null;
-let _pictos     = {};
+let _audioEl     = null;
+let _pictos      = {};
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function pause() {
-  // Detener audio pero mantener todo el estado en memoria
   if (_audioEl) _audioEl.pause();
   TTS.stop();
 }
 
 export async function resume(container) {
-  // El contenedor puede haber cambiado — remontar UI con el estado actual
   _el = container;
   _lang = _langDesdeConfig();
   _render();
-  // Restaurar estado visual
   _renderNiveles();
   _aplicarTema(_nivel);
   _renderSelector();
   _renderPiezas();
   _renderTira();
   _actualizarVacio();
-  // Re-registrar listener de idioma
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }
@@ -111,7 +107,7 @@ function _langDesdeConfig() {
 export async function init(container) {
   _el     = container;
   _built  = [];
-  _activa = -1;  // sin frase preseleccionada al entrar
+  _activa = -1;
   _nivel  = 1;
   _lang   = _langDesdeConfig();
 
@@ -161,15 +157,18 @@ function _render() {
     /* ── Selector de nivel ── */
     #fr-niveles {
       flex-shrink: 0;
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 8px;
+      /* Sin acciones aquí — viven en la tira */
     }
     #fr-niveles-label {
       font-size: .85rem; font-weight: 900; letter-spacing: .08em;
       text-transform: uppercase; color: #fff;
       margin-right: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.40);
+      flex-shrink: 0;
     }
     .fr-nivel-btn {
-      height: 44px; padding: 0 18px; border-radius: 99px; border: 2px solid rgba(255,255,255,0.25);
+      height: 44px; padding: 0 18px; border-radius: 99px;
+      border: 2px solid rgba(255,255,255,0.25);
       cursor: pointer; font-family: inherit; font-weight: 900; font-size: 1.05rem;
       background: rgba(255,255,255,0.10); color: #fff;
       transition: all .2s; flex-shrink: 0;
@@ -194,9 +193,7 @@ function _render() {
       display: flex; align-items: center; gap: 10px;
       transition: border-color .35s, border-style .35s;
     }
-    #fr-tira.correcto {
-      border-color: #22c55e; border-style: solid;
-    }
+    #fr-tira.correcto { border-color: #22c55e; border-style: solid; }
     #fr-tira-piezas {
       flex: 1; display: flex; align-items: center;
       gap: 8px; flex-wrap: wrap; min-height: 60px;
@@ -205,12 +202,10 @@ function _render() {
       color: rgba(255,255,255,0.50);
       font-size: 1rem; font-weight: 700; font-style: italic;
     }
-    /* Pieza en la tira — altura fija para evitar que el renglón crezca */
     .fr-tira-pieza {
       display: flex; align-items: center; gap: 8px;
       padding: 6px 12px; border-radius: 12px;
-      font-weight: 900; font-size: 1rem;
-      min-height: 60px;
+      font-weight: 900; font-size: 1rem; min-height: 60px;
       animation: fr-pop .22s cubic-bezier(.34,1.56,.64,1) both;
       transition: background .35s, box-shadow .35s, border-color .35s;
     }
@@ -225,11 +220,11 @@ function _render() {
     .fr-tira-pieza.correcto.texto { background: rgba(34,197,94,0.18); border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.18); }
     .fr-tira-pieza img { width: 44px; height: 44px; object-fit: contain; border-radius: 8px; }
 
-    /* Botones de acción */
+    /* ── Botones de acción — viven en la tira, lado derecho ── */
     #fr-tira-acciones {
-      display: flex; flex-direction: row;
+      display: flex; flex-direction: column;
       align-items: center; gap: 8px;
-      margin-left: auto; flex-shrink: 0;
+      flex-shrink: 0;
     }
     .fr-accion-btn {
       width: 44px; height: 44px; border-radius: 50%; border: none;
@@ -243,7 +238,7 @@ function _render() {
     }
     #fr-btn-borrar {
       background: rgba(251,113,133,0.20);
-      border: 1.5px solid rgba(251,113,133,0.50);
+      border: 1.5px solid rgba(251,113,133,0.50) !important;
       color: #fb7185; font-size: 1.5rem; font-weight: 300; font-family: inherit;
     }
 
@@ -280,14 +275,11 @@ function _render() {
     .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
     .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
-    /* ── Selector de frases ──────────────────────────────────────────────────
-       Columna vertical scrolleable. El wrapper (#fr-selector-wrap) tiene
-       position:relative para alojar el degradado ::after que indica scroll.
-    ── */
+    /* ── Selector de frases ── */
     #fr-selector-wrap {
-      flex: 1;                          /* ocupa todo el espacio libre restante */
+      flex: 1;
       min-height: 0;
-      position: relative;              /* necesario para el ::after */
+      position: relative;
     }
     #fr-selector-wrap::after {
       content: '';
@@ -295,55 +287,41 @@ function _render() {
       bottom: 0; left: 0; right: 0;
       height: 56px;
       pointer-events: none;
-      background: linear-gradient(to top,
-        rgba(5, 30, 65, 0.85) 0%,
-        transparent 100%);
+      background: linear-gradient(to top, rgba(5,30,65,0.85) 0%, transparent 100%);
       border-radius: 0 0 12px 12px;
       transition: opacity .3s;
     }
-    /* Ocultar el fade cuando el selector está completamente scrolleado al fondo */
     #fr-selector-wrap.al-fondo::after { opacity: 0; }
-
     #fr-selector {
-      height: 100%;                    /* llena el wrapper */
-      display: flex;
-      flex-direction: column;           /* apila verticalmente */
+      height: 100%;
+      display: flex; flex-direction: column;
       gap: 8px;
-      overflow-y: auto;                 /* scroll vertical cuando el contenido excede */
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       padding-right: 2px;
-      padding-bottom: 48px;            /* espacio para que la última pill no quede bajo el fade */
+      padding-bottom: 48px;
     }
     #fr-selector::-webkit-scrollbar { display: none; }
-
     .fr-pill {
-      /* Layout */
-      width: 100%; box-sizing: border-box;
-      text-align: left;
-      padding: 12px 20px;
-      border-radius: 16px;
+      width: 100%; box-sizing: border-box; text-align: left;
+      padding: 12px 20px; border-radius: 16px;
       border: 1.5px solid var(--fr-nivel-borde, rgba(255,255,255,0.18));
-      /* Color: tinte del nivel activo, no blanco puro */
       background: var(--fr-nivel-suave, rgba(255,255,255,0.08));
       color: var(--fr-nivel-color, rgba(255,255,255,0.85));
-      /* Tipografía — más grande para facilitar lectura */
       cursor: pointer; font-family: inherit; font-weight: 800; font-size: 1.1rem;
-      white-space: normal;              /* permite wrap si la frase es larga */
-      line-height: 1.3;
+      white-space: normal; line-height: 1.3;
       text-shadow: 0 1px 6px rgba(0,0,0,0.50);
       transition: background .18s, color .18s, transform .12s,
                   border-color .18s, box-shadow .18s;
     }
     .fr-pill:active { transform: scale(.97); }
-
-    /* Estado activo — fondo sólido del color del nivel */
     .fr-pill.activa {
       background: var(--fr-nivel-color, #38bdf8);
-      color: #07212e;                   /* texto oscuro sobre acento — ratio ≥7:1 */
+      color: #07212e;
       border-color: transparent;
       font-weight: 900; font-size: 1.15rem;
-      text-shadow: none;               /* sin sombra sobre fondo claro */
+      text-shadow: none;
       box-shadow: 0 4px 14px var(--fr-nivel-borde, rgba(56,189,248,0.35));
     }
 
@@ -361,9 +339,16 @@ function _render() {
     }
   </style>
 
-  <!-- Selector de nivel + acciones -->
+  <!-- Selector de nivel — solo botones de dificultad, sin acciones -->
   <div id="fr-niveles">
     <span id="fr-niveles-label">Nivel</span>
+  </div>
+
+  <!-- Tira de construcción — los botones 🔊 y × viven aquí -->
+  <div id="fr-tira">
+    <div id="fr-tira-piezas">
+      <span id="fr-tira-placeholder">toca las piezas en orden…</span>
+    </div>
     <div id="fr-tira-acciones">
       <button class="fr-accion-btn" id="fr-btn-leer" title="Leer frase">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -373,13 +358,6 @@ function _render() {
         </svg>
       </button>
       <button class="fr-accion-btn" id="fr-btn-borrar" title="Borrar">×</button>
-    </div>
-  </div>
-
-  <!-- Tira de construcción -->
-  <div id="fr-tira">
-    <div id="fr-tira-piezas">
-      <span id="fr-tira-placeholder">toca las piezas en orden…</span>
     </div>
   </div>
 
@@ -407,9 +385,8 @@ function _render() {
 
 // ─── Selector de nivel ────────────────────────────────────────────────────────
 function _renderNiveles() {
-  const wrap    = _el.querySelector('#fr-niveles');
-  const label   = wrap.querySelector('#fr-niveles-label');
-  const acciones = wrap.querySelector('#fr-tira-acciones');
+  const wrap  = _el.querySelector('#fr-niveles');
+  const label = wrap.querySelector('#fr-niveles-label');
   wrap.innerHTML = '';
   wrap.appendChild(label);
 
@@ -422,7 +399,6 @@ function _renderNiveles() {
     })
   );
 
-  // Si el nivel activo no tiene frases en este idioma, cambiar al primero disponible
   if (nivelesConFrases.length && !nivelesConFrases.find(n => n.id === _nivel)) {
     _nivel = nivelesConFrases[0].id;
   }
@@ -430,23 +406,23 @@ function _renderNiveles() {
   nivelesConFrases.forEach(n => {
     const btn = document.createElement('button');
     btn.className   = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
-    btn.textContent = n.label + ' ' + n.titulo;
+    btn.textContent = n.label;          // solo estrellas — sin texto del título
     btn.title       = n.titulo;
     if (n.id === _nivel) {
-      btn.style.borderColor   = n.color;
-      btn.style.color         = n.color;
-      btn.style.background    = n.colorSuave;
-      btn.style.boxShadow     = `0 0 0 1px ${n.colorBorde}`;
+      btn.style.borderColor = n.color;
+      btn.style.color       = n.color;
+      btn.style.background  = n.colorSuave;
+      btn.style.boxShadow   = `0 0 0 1px ${n.colorBorde}`;
     }
     btn.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
     wrap.appendChild(btn);
   });
-  if (acciones) wrap.appendChild(acciones);
+  // No hay acciones que mover — viven en la tira (HTML estático)
 }
 
 function _cambiarNivel(nivel) {
   _nivel  = nivel;
-  _activa = -1;  // sin frase preseleccionada al cambiar nivel
+  _activa = -1;
   _built  = [];
   _frases = _todasFrases.filter(f => {
     if (f.nivel !== nivel) return false;
@@ -456,7 +432,6 @@ function _cambiarNivel(nivel) {
 
   _renderNiveles();
   _aplicarTema(nivel);
-
   _el.querySelector('#fr-tira').classList.remove('correcto');
   _renderSelector();
   _renderPiezas();
@@ -464,48 +439,39 @@ function _cambiarNivel(nivel) {
   _actualizarVacio();
 }
 
-// Aplica el tema de color del nivel a todos los elementos de la UI
 function _aplicarTema(nivel) {
   const n = NIVELES.find(x => x.id === nivel);
   if (!n) return;
 
-  // Tira
   const tira = _el.querySelector('#fr-tira');
-  if (tira) {
-    tira.style.background   = n.bgTira;
-    tira.style.borderColor  = n.colorBorde;
-  }
+  if (tira) { tira.style.background = n.bgTira; tira.style.borderColor = n.colorBorde; }
 
-  // Panel de piezas
   const panel = _el.querySelector('#fr-panel-piezas');
   if (panel) panel.style.background = n.bgPanel;
 
-  // Label PIEZAS
   const lbl = _el.querySelector('#fr-panel-label');
   if (lbl) lbl.style.color = n.color;
 
-  // Label NIVEL
   const lvlLbl = _el.querySelector('#fr-niveles-label');
   if (lvlLbl) lvlLbl.style.color = n.color;
 
-  // Guardar en variable CSS para que las piezas de texto y las pills la usen
-  _el.style.setProperty('--fr-nivel-color',      n.color);
-  _el.style.setProperty('--fr-nivel-suave',      n.colorSuave);
-  _el.style.setProperty('--fr-nivel-borde',      n.colorBorde);
-  _el.style.setProperty('--fr-nivel-bg-txt',     n.bgPiezaTxt);
-  _el.style.setProperty('--fr-nivel-borde-txt',  n.bordePiezaTxt);
+  _el.style.setProperty('--fr-nivel-color',     n.color);
+  _el.style.setProperty('--fr-nivel-suave',     n.colorSuave);
+  _el.style.setProperty('--fr-nivel-borde',     n.colorBorde);
+  _el.style.setProperty('--fr-nivel-bg-txt',    n.bgPiezaTxt);
+  _el.style.setProperty('--fr-nivel-borde-txt', n.bordePiezaTxt);
 }
 
 function _actualizarVacio() {
-  const vacio  = _el.querySelector('#fr-vacio');
-  const panel  = _el.querySelector('#fr-panel-piezas');
-  const tira   = _el.querySelector('#fr-tira');
-  const sel    = _el.querySelector('#fr-selector-wrap');
+  const vacio = _el.querySelector('#fr-vacio');
+  const panel = _el.querySelector('#fr-panel-piezas');
+  const tira  = _el.querySelector('#fr-tira');
+  const sel   = _el.querySelector('#fr-selector-wrap');
   const sinFrases = _frases.length === 0;
-  vacio.style.display  = sinFrases ? 'flex'  : 'none';
-  panel.style.display  = sinFrases ? 'none'  : '';
-  tira.style.display   = sinFrases ? 'none'  : '';
-  sel.style.display    = sinFrases ? 'none'  : '';
+  vacio.style.display = sinFrases ? 'flex'  : 'none';
+  panel.style.display = sinFrases ? 'none'  : '';
+  tira.style.display  = sinFrases ? 'none'  : '';
+  sel.style.display   = sinFrases ? 'none'  : '';
 }
 
 // ─── Selector de frases ───────────────────────────────────────────────────────
@@ -517,8 +483,6 @@ function _renderSelector() {
   _frases.forEach((f, i) => {
     const btn = document.createElement('button');
     btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
-    // La pill activa recibe color de texto oscuro (legible sobre el acento)
-    // La inactiva hereda color del nivel desde las variables CSS — sin inline styles
     if (i === _activa && nivelCfg) {
       btn.style.background = nivelCfg.color;
       btn.style.color      = '#07212e';
@@ -528,7 +492,6 @@ function _renderSelector() {
     btn.addEventListener('click', () => {
       haptic(8);
       _seleccionarFrase(i);
-      // Reproducir el enunciado completo al seleccionarlo
       const texto = _lang === 'en' ? (f.en || f.es) : f.es;
       _reproducirFrase(texto, f.id);
     });
@@ -546,20 +509,18 @@ function _seleccionarFrase(idx) {
   _el.querySelectorAll('.fr-pill').forEach((p, i) => {
     p.classList.toggle('activa', i === idx);
     if (i === idx) {
-      p.style.background  = nivelCfg?.color || '#14b8a6';
-      p.style.color       = '#07212e';   // texto oscuro sobre acento
-      p.style.fontWeight  = '900';
+      p.style.background = nivelCfg?.color || '#14b8a6';
+      p.style.color      = '#07212e';
+      p.style.fontWeight = '900';
     } else {
-      // Quitar estilos inline — el CSS del nivel (variables) toma el control
-      p.style.background  = '';
-      p.style.color       = '';
-      p.style.fontWeight  = '';
+      p.style.background = '';
+      p.style.color      = '';
+      p.style.fontWeight = '';
     }
   });
 
   _renderPiezas();
   _renderTira();
-  // Precargar audio del enunciado para respuesta inmediata al tocar play
   if (_activa >= 0 && _frases[_activa]) _precargarFrase(_frases[_activa].id);
 }
 
@@ -576,7 +537,7 @@ function _renderPiezas() {
     btn.dataset.idx = i;
 
     if (pieza.tipo === 'picto') {
-      const img   = document.createElement('img');
+      const img     = document.createElement('img');
       const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
       img.src = entrada ? PICTO_URL(entrada.ruta_img) : `assets/pictogramas/${pieza.texto}.png`;
       img.alt     = pieza.texto;
@@ -628,8 +589,6 @@ function _onFraseCompleta(frase) {
   }
 
   const texto = _lang === 'en' ? (frase.en || frase.es) : frase.es;
-
-  // Esperar a que termine el audio de la última pieza antes de leer la frase completa.
   const delay = ordenCorrecto ? 400 : 100;
   if (_audioEl && !_audioEl.paused) {
     _audioEl.addEventListener('ended', () => _reproducirFrase(texto, frase.id), { once: true });
@@ -666,7 +625,7 @@ function _renderTira() {
     div.className = `fr-tira-pieza ${pieza.tipo}`;
 
     if (pieza.tipo === 'picto') {
-      const img   = document.createElement('img');
+      const img     = document.createElement('img');
       const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
       img.src = entrada ? PICTO_URL(entrada.ruta_img) : `assets/pictogramas/${pieza.texto}.png`;
       img.alt     = pieza.texto;
@@ -688,11 +647,9 @@ function _bindEvents() {
     const frase = _activa >= 0 ? _frases[_activa] : null;
     if (!frase || _built.length === 0) return;
     if (_built.length === frase.piezas.length) {
-      // Frase completa — usar MP3 del enunciado completo
       const texto = _lang === 'en' ? (frase.en || frase.es) : frase.es;
       _reproducirFrase(texto, frase.id);
     } else {
-      // Frase parcial — reproducir piezas construidas en cadena
       _reproducirCadena(_built.map(i => frase.piezas[i]), frase.lang || _lang);
     }
   });
@@ -705,7 +662,7 @@ function _bindEvents() {
     _renderPiezas();
   });
 
-  // Fade inferior del selector: desaparece al llegar al fondo del scroll
+  // Fade inferior del selector
   const sel  = _el.querySelector('#fr-selector');
   const wrap = _el.querySelector('#fr-selector-wrap');
   const _actualizarFade = () => {
@@ -713,25 +670,19 @@ function _bindEvents() {
     wrap.classList.toggle('al-fondo', alFondo);
   };
   sel.addEventListener('scroll', _actualizarFade, { passive: true });
-  // Evaluar al montar (por si el contenido ya cabe sin scroll)
   requestAnimationFrame(_actualizarFade);
 }
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
-
 function _getAudio() {
-  if (!_audioEl) {
-    _audioEl = document.createElement('audio');
-    _audioEl.preload = 'auto';
-  }
+  if (!_audioEl) { _audioEl = document.createElement('audio'); _audioEl.preload = 'auto'; }
   return _audioEl;
 }
 
 function _precargarFrase(id) {
-  const url = AUDIO_FRASE_URL(id, _lang);
   const tmp = new Audio();
   tmp.preload = 'auto';
-  tmp.src = url;
+  tmp.src = AUDIO_FRASE_URL(id, _lang);
 }
 
 function _reproducirURL(url, textoFallback, onEnded = null, langForzado = null) {
@@ -761,7 +712,7 @@ function _reproducirFrase(texto, id) {
 function _reproducirPieza(pieza) {
   const frase = _frases[_activa];
   const lang  = frase?.lang || _lang;
-  const url = pieza.tipo === 'picto'
+  const url   = pieza.tipo === 'picto'
     ? AUDIO_URL(pieza.texto, lang)
     : AUDIO_FRASE_URL(pieza.texto, lang);
   _reproducirURL(url, pieza.texto, null, lang);
@@ -777,14 +728,14 @@ function _reproducirCadena(piezas, lang = null) {
 }
 
 function _hablarTTS(texto, langForzado = null) {
-  const base = langForzado || (_lang === 'en' ? 'en' : 'es');
+  const base    = langForzado || (_lang === 'en' ? 'en' : 'es');
   const ttsLang = base === 'en' ? 'en-US' : 'es-MX';
   TTS.speak(texto, ttsLang);
 }
 
 // ─── Cambio de idioma ─────────────────────────────────────────────────────────
 function _onLangChange(e) {
-  const cfg = e.detail?.langConfig;
+  const cfg  = e.detail?.langConfig;
   if (!cfg) return;
   const nuevo = (cfg.es && cfg.en) ? 'ambos' : cfg.en ? 'en' : 'es';
   if (nuevo === _lang) return;
