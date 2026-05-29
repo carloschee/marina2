@@ -348,16 +348,16 @@
       transition: grid-template-columns .35s ease, gap .3s ease, padding .3s ease;
     }
 
-    /* ── Portrait en iPhone (≤600px) — filas libres, sin altura fija ── */
+    /* ── Portrait en celular (≤600px) — 1 columna unificada (iPhone SE → 13+) ── */
     @media (max-width: 600px) and (orientation: portrait) {
       #menu-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         grid-template-rows: auto;
         align-content: start;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         gap: 10px;
-        padding: 10px 12px;
+        padding: 10px 14px;
         padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
       }
 
@@ -370,15 +370,16 @@
       }
 
       .tile-label {
-        font-size: .85rem;
+        font-size: 1rem;
       }
     }
 
-    /* ── iPhone SE portrait (≤390px) ────────────────────────────────────────
-       CAMBIO: menú en 1 columna para consistencia visual y tiles más grandes.
-       Texto de pills de frases también más grande para mejor legibilidad.
+    /* ── Celular portrait angosto (≤430px) — iPhone SE, 13, 14, 15, 16 ───────
+       Ajustes compactos de header, pills y modal PIN. El grid de 1 columna
+       ya viene del bloque ≤600px; aquí solo se afina lo que cambia por el
+       ancho reducido.
     ── */
-    @media (max-width: 390px) and (orientation: portrait) {
+    @media (max-width: 430px) and (orientation: portrait) {
       #app-header {
         padding-top: calc(8px + var(--safe-top));
         padding-bottom: 8px;
@@ -425,28 +426,7 @@
         height: 34px;
       }
 
-      /* ── Menú: 1 columna en SE ── */
-      #menu-grid {
-        grid-template-columns: 1fr;   /* una sola columna */
-        grid-template-rows: auto;
-        gap: 10px;
-        padding: 10px 14px;
-        padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
-        align-content: start;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .module-tile {
-        min-height: 140px;
-        max-height: 200px;
-      }
-
-      .tile-label {
-        font-size: 1rem;   /* más grande al ser columna única */
-      }
-
-      /* ── Pills de frases: texto más grande en SE ── */
+      /* ── Pills de frases: texto más grande para legibilidad ── */
       .fr-pill {
         font-size: 1.15rem !important;
         padding: 14px 20px !important;
