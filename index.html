@@ -348,12 +348,12 @@
       transition: grid-template-columns .35s ease, gap .3s ease, padding .3s ease;
     }
 
-    /* ── Portrait en celular (≤600px) — 1 columna unificada (iPhone SE → 13+) ── */
+    /* ── Portrait en celular (≤600px) — 1 columna, 4 filas que llenan el contenedor ── */
     @media (max-width: 600px) and (orientation: portrait) {
       #menu-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        align-content: start;
+        grid-template-rows: repeat(4, 1fr);  /* 4 filas iguales = 25% c/u */
+        align-content: stretch;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         gap: 10px;
@@ -362,10 +362,10 @@
       }
 
       .module-tile {
-        min-height: 140px;
-        max-height: 200px;
-        background-size: 100% auto;
-        background-position: center top;
+        min-height: 0;          /* permite que el grid controle la altura */
+        max-height: none;       /* sin techo fijo */
+        background-size: cover;
+        background-position: center;
         background-repeat: no-repeat;
       }
 
