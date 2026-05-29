@@ -3022,5 +3022,47 @@
     "en": "wrist",
     "ruta_img": "muneca-cuerpo.png",
     "art": "la"
+  },
+  {
+    "id": 1433,
+    "es": "lavar las manos",
+    "en": "wash hands",
+    "ruta_img": "lavar-manos.png",
+    "art": ""
+  },
+  {
+    "id": 1434,
+    "es": "primero",
+    "en": "first",
+    "ruta_img": "primero.png",
+    "art": ""
+  },
+  {
+    "id": 1435,
+    "es": "descansar",
+    "en": "rest",
+    "ruta_img": "descansar.png",
+    "art": ""
+  },
+  {
+    "id": 1436,
+    "es": "hacer popo",
+    "en": "poop",
+    "ruta_img": "hacer-popo.png",
+    "art": ""
+  },
+  {
+    "id": 1437,
+    "es": "hacer pipi",
+    "en": "pee",
+    "ruta_img": "hacer-pipi.png",
+    "art": ""
+  },
+  {
+    "id": 1438,
+    "es": "quiero",
+    "en": "want",
+    "ruta_img": "quiero.png",
+    "art": ""
   }
 ]

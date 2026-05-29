@@ -542,5 +542,187 @@
         "texto": "outside"
       }
     ]
+  },
+  {
+    "id": "quiero-agua",
+    "lang": "es",
+    "es": "quiero agua",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "quiero",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "picto",
+        "texto": "agua",
+        "picto_id": 1003
+      }
+    ]
+  },
+  {
+    "id": "quiero-comer",
+    "lang": "es",
+    "es": "quiero comer",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "quiero",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "picto",
+        "texto": "comer",
+        "picto_id": 1214
+      }
+    ]
+  },
+  {
+    "id": "quiero-dormir",
+    "lang": "es",
+    "es": "quiero dormir",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "quiero",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "picto",
+        "texto": "dormir",
+        "picto_id": 1215
+      }
+    ]
+  },
+  {
+    "id": "quiero-descansar",
+    "lang": "es",
+    "es": "quiero descansar",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "quiero",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "picto",
+        "texto": "descansar",
+        "picto_id": 1435
+      }
+    ]
+  },
+  {
+    "id": "quiero-jugar",
+    "lang": "es",
+    "es": "quiero jugar",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "quiero",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "picto",
+        "texto": "jugar",
+        "picto_id": 1309
+      }
+    ]
+  },
+  {
+    "id": "quiero-hacer-popo",
+    "lang": "es",
+    "es": "quiero hacer popo",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "quiero",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "picto",
+        "texto": "hacer popo",
+        "picto_id": 1436
+      }
+    ]
+  },
+  {
+    "id": "quiero-hacer-pipi",
+    "lang": "es",
+    "es": "quiero hacer pipí",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "quiero",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "picto",
+        "texto": "hacer pipi",
+        "picto_id": 1437
+      }
+    ]
+  },
+  {
+    "id": "primero-lavar-las-manos-despues-comer",
+    "lang": "es",
+    "es": "primero lavar las manos, después comer",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "primero",
+        "picto_id": 1434
+      },
+      {
+        "tipo": "picto",
+        "texto": "lavar las manos",
+        "picto_id": 1433
+      },
+      {
+        "tipo": "picto",
+        "texto": "después",
+        "picto_id": 1409
+      },
+      {
+        "tipo": "picto",
+        "texto": "comer",
+        "picto_id": 1214
+      }
+    ]
+  },
+  {
+    "id": "primero-comer-despues-jugar",
+    "lang": "es",
+    "es": "primero comer, después jugar",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "primero",
+        "picto_id": 1434
+      },
+      {
+        "tipo": "picto",
+        "texto": "comer",
+        "picto_id": 1214
+      },
+      {
+        "tipo": "picto",
+        "texto": "después",
+        "picto_id": 1409
+      },
+      {
+        "tipo": "picto",
+        "texto": "jugar",
+        "picto_id": 1309
+      }
+    ]
   }
 ]
