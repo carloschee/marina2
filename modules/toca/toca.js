@@ -128,9 +128,11 @@ export async function resume(container) {
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
   _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
 
-  // NO llamar _render() — el contenedor conserva el HTML del pause().
-  // Solo restaurar estado visual del header y arrancar una nueva ronda.
+  // Reconstruir HTML (mismo patrón que memorama — el contenedor pudo
+  // haber sido limpiado por app.js, no se puede asumir que persiste).
+  _render();
 
+  // Restaurar estado visual del header según el estado en memoria
   const label = _el.querySelector('#tc-tema-label');
   if (label) label.textContent = _tema ? _tema.label : (_lang === 'en' ? 'All play' : 'Todos juegan');
 
@@ -138,24 +140,24 @@ export async function resume(container) {
     const nivelValor = _el.querySelector('#tc-nivel-valor');
     if (nivelValor) nivelValor.textContent = '∞';
     _el.querySelector('#tc-racha-wrap')?.classList.add('visible');
-    _el.querySelector('#tc-dots').style.display = 'none';
+    const dots = _el.querySelector('#tc-dots');
+    if (dots) dots.style.display = 'none';
     if (_mejorRacha > 0) {
       _el.querySelector('#tc-record-wrap')?.classList.add('visible');
       const rv = _el.querySelector('#tc-record-valor');
       if (rv) rv.textContent = _mejorRacha;
     }
     _actualizarRacha();
-  } else {
-    const nivelValor = _el.querySelector('#tc-nivel-valor');
-    if (nivelValor) nivelValor.textContent = _nivel + 1;
-    _renderDots();
   }
 
   _esperando = false;
 
-  // Diferir _nuevaRonda al siguiente frame para que el layout
-  // esté calculado antes de que _ajustarTamanos() lea clientWidth/clientHeight
-  requestAnimationFrame(() => { if (_el) _nuevaRonda(); });
+  // Diferir _nuevaRonda dos frames: el primero deja que el navegador aplique
+  // el layout del HTML recién insertado, el segundo garantiza que el grid
+  // ya tenga clientWidth/clientHeight reales antes de _ajustarTamanos().
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => { if (_el) _nuevaRonda(); });
+  });
 
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
@@ -577,7 +579,10 @@ function _renderRonda() {
     grid.appendChild(btn);
   });
 
-  _ajustarTamanos();
+  // Diferir al siguiente frame: garantiza que el grid tenga dimensiones
+  // reales antes de calcular el tamaño de los mosaicos (evita miniaturas
+  // cuando _renderRonda corre tras un reflow, ej. después del confeti).
+  requestAnimationFrame(() => { if (_el) _ajustarTamanos(); });
 }
 
 // ─── Interacción ──────────────────────────────────────────────────────────────
@@ -869,6 +874,15 @@ function _actualizarRacha() {
 
 function _ajustarTamanos() {
   const grid    = _el.querySelector('#tc-grid');
+  if (!grid) return;
+
+  // Si el grid aún no tiene dimensiones (layout no aplicado), reintentar
+  // en el siguiente frame en lugar de calcular tamaños diminutos.
+  if (grid.clientWidth < 50 || grid.clientHeight < 50) {
+    requestAnimationFrame(() => { if (_el) _ajustarTamanos(); });
+    return;
+  }
+
   const n       = _opciones.length;
   const cols    = n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4;
   const rows    = Math.ceil(n / cols);
@@ -881,9 +895,12 @@ function _ajustarTamanos() {
   const MAX       = MOSAIC_SIZE;
   const MAX_portrait = 200;
   const portrait  = grid.clientHeight > grid.clientWidth;
-  const size      = portrait
-    ? Math.min(porAncho, porAlto, MAX_portrait)
-    : Math.min(porAncho, porAlto, MAX);
+  const size      = Math.max(
+    80,  // piso mínimo: nunca menos de 80px aunque el cálculo falle
+    portrait
+      ? Math.min(porAncho, porAlto, MAX_portrait)
+      : Math.min(porAncho, porAlto, MAX)
+  );
 
   grid.querySelectorAll('.tc-opcion').forEach(o => {
     o.style.width      = size + 'px';
