@@ -3071,5 +3071,12 @@
     "en": "double decker bus",
     "ruta_img": "autobus-dos-pisos.png",
     "art": "el"
+  },
+  {
+    "id": 1440,
+    "es": "sóplale",
+    "en": "blow it",
+    "ruta_img": "soplar.png",
+    "art": ""
   }
 ]
