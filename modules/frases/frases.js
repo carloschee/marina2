@@ -30,10 +30,9 @@ const PICTO_URL       = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase
 const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
 const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
-// Misma lógica que sanitizar_nombre() en generar-audio.py.
-// Convierte el texto de una pieza en nombre de archivo seguro para
-// todos los sistemas — elimina caracteres inválidos en NTFS y normaliza
-// espacios a guiones. El texto original se preserva para TTS y UI.
+// Espejo de sanitizar_nombre() en generar-audio.py.
+// Convierte el texto de una pieza de tipo texto en nombre de archivo seguro.
+// El texto original se preserva para TTS y UI — solo el nombre de archivo cambia.
 // Ejemplo: '¿qué hacemos?' → 'qué-hacemos'
 function sanitizarNombre(texto) {
   return texto
@@ -206,6 +205,8 @@ function _render() {
       border: 1.5px dashed rgba(255,255,255,0.15);
       border-radius: 20px; padding: 12px 16px;
       min-height: 88px;
+      max-height: 140px;        /* evita que la tira crezca y aplaste el selector */
+      overflow: hidden;          /* las piezas que no caben quedan ocultas, no empujan */
       display: flex; align-items: center; gap: 10px;
       transition: border-color .35s, border-style .35s;
     }
@@ -296,29 +297,29 @@ function _render() {
       flex: 1;
       min-height: 0;
       position: relative;
+      overflow-y: auto;                  /* scroll en el wrapper, no en el hijo */
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    #fr-selector-wrap::-webkit-scrollbar { display: none; }
     #fr-selector-wrap::after {
       content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
+      position: sticky;                  /* sticky en lugar de absolute — se mueve con el scroll */
+      bottom: 0;
+      display: block;
       height: 56px;
+      margin-top: -56px;                 /* se superpone sobre el último elemento */
       pointer-events: none;
       background: linear-gradient(to top, rgba(5,30,65,0.85) 0%, transparent 100%);
-      border-radius: 0 0 12px 12px;
       transition: opacity .3s;
     }
     #fr-selector-wrap.al-fondo::after { opacity: 0; }
     #fr-selector {
-      height: 100%;
       display: flex; flex-direction: column;
       gap: 8px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
       padding-right: 2px;
       padding-bottom: 48px;
     }
-    #fr-selector::-webkit-scrollbar { display: none; }
     .fr-pill {
       width: 100%; box-sizing: border-box; text-align: left;
       padding: 12px 20px; border-radius: 16px;
@@ -678,14 +679,13 @@ function _bindEvents() {
     _renderPiezas();
   });
 
-  // Fade inferior del selector
-  const sel  = _el.querySelector('#fr-selector');
+  // Fade inferior: el scroll ahora vive en el wrapper
   const wrap = _el.querySelector('#fr-selector-wrap');
   const _actualizarFade = () => {
-    const alFondo = sel.scrollTop + sel.clientHeight >= sel.scrollHeight - 4;
+    const alFondo = wrap.scrollTop + wrap.clientHeight >= wrap.scrollHeight - 4;
     wrap.classList.toggle('al-fondo', alFondo);
   };
-  sel.addEventListener('scroll', _actualizarFade, { passive: true });
+  wrap.addEventListener('scroll', _actualizarFade, { passive: true });
   requestAnimationFrame(_actualizarFade);
 }
 
