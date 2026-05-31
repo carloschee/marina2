@@ -30,6 +30,22 @@ const PICTO_URL       = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase
 const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
 const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
+// Misma lógica que sanitizar_nombre() en generar-audio.py.
+// Convierte el texto de una pieza en nombre de archivo seguro para
+// todos los sistemas — elimina caracteres inválidos en NTFS y normaliza
+// espacios a guiones. El texto original se preserva para TTS y UI.
+// Ejemplo: '¿qué hacemos?' → 'qué-hacemos'
+function sanitizarNombre(texto) {
+  return texto
+    .trim().toLowerCase()
+    .replace(/[\\/:*?"<>|¿¡!,;.]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    || 'sin-nombre';
+}
+
 const NIVELES = [
   {
     id: 1, label: '⭐', titulo: 'Básico',
@@ -714,7 +730,7 @@ function _reproducirPieza(pieza) {
   const lang  = frase?.lang || _lang;
   const url   = pieza.tipo === 'picto'
     ? AUDIO_URL(pieza.texto, lang)
-    : AUDIO_FRASE_URL(pieza.texto, lang);
+    : AUDIO_FRASE_URL(sanitizarNombre(pieza.texto), lang);
   _reproducirURL(url, pieza.texto, null, lang);
 }
 
@@ -723,7 +739,7 @@ function _reproducirCadena(piezas, lang = null) {
   const [primera, ...resto] = piezas;
   const url = primera.tipo === 'picto'
     ? AUDIO_URL(primera.texto, lang)
-    : AUDIO_FRASE_URL(primera.texto, lang);
+    : AUDIO_FRASE_URL(sanitizarNombre(primera.texto), lang);
   _reproducirURL(url, primera.texto, () => _reproducirCadena(resto, lang), lang);
 }
 

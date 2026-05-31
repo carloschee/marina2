@@ -64,6 +64,32 @@ DIR_FRASES_ES = DIR_AUDIO / "frases" / "es"
 DIR_FRASES_EN = DIR_AUDIO / "frases" / "en"
 LOG_PATH      = RAIZ / "scripts" / "errores-audio.log"
 
+# ─── Sanitización de nombres de archivo ──────────────────────────────────────
+
+# Caracteres prohibidos en Windows (NTFS) y problemáticos en otros sistemas.
+# Incluye signos de puntuación españoles ¿ ¡ y signos comunes ! , ; .
+_CHARS_INVALIDOS = str.maketrans({
+    '\\': '', '/': '-', ':': '', '*': '', '?': '',
+    '"': '',  '<': '',  '>': '', '|': '', '¿': '',
+    '¡': '',  '!': '',  ',': '', ';': '', '.': '',
+})
+
+def sanitizar_nombre(texto: str) -> str:
+    """
+    Convierte texto arbitrario en nombre de archivo seguro para
+    Windows, macOS y Linux.
+      '¿qué hacemos?' → 'que-hacemos'
+      '¡sóplale!'     → 'soplale'
+      'el sol'        → 'el-sol'
+    """
+    nombre = texto.strip().lower()
+    nombre = nombre.translate(_CHARS_INVALIDOS)
+    # Espacios → guión, colapsar guiones múltiples
+    nombre = '-'.join(part for part in nombre.split() if part)
+    nombre = nombre.strip('-')
+    return nombre or "sin-nombre"
+
+
 # ─── Progreso ─────────────────────────────────────────────────────────────────
 
 class Progreso:
@@ -330,14 +356,15 @@ async def main():
                             # Legacy: texto directamente
                             pt = pieza.get("texto", "").strip()
                             if pt:
-                                ruta_mp3 = ref_dir_audio / (pt + ".mp3")
+                                nombre_safe = sanitizar_nombre(pt)
+                                ruta_mp3 = ref_dir_audio / (nombre_safe + ".mp3")
                                 if not ruta_mp3.exists() or ruta_mp3.stat().st_size == 0:
-                                    ref_piezas_picto.add((pt, pt))
+                                    ref_piezas_picto.add((nombre_safe, pt))
 
             frases_es_items       = _frases_es
             frases_en_items       = _frases_en
-            piezas_es_items       = [(p, p) for p in sorted(_piezas_txt_es)]
-            piezas_en_items       = [(p, p) for p in sorted(_piezas_txt_en)]
+            piezas_es_items       = [(sanitizar_nombre(p), p) for p in sorted(_piezas_txt_es)]
+            piezas_en_items       = [(sanitizar_nombre(p), p) for p in sorted(_piezas_txt_en)]
             piezas_picto_es_items = sorted(_piezas_picto_es, key=lambda x: x[0])
             piezas_picto_en_items = sorted(_piezas_picto_en, key=lambda x: x[0])
 
