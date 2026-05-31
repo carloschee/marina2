@@ -30,15 +30,14 @@ const PICTO_URL       = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase
 const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
 const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
-// Resuelve la URL de audio de una pieza tipo picto usando ruta_img del catálogo.
-// El script generar-audio.py usa ruta_img (sin .png) como nombre de archivo,
-// no pieza.texto — así que "autobús de dos pisos" → "autobus-dos-pisos.mp3".
-// Si el picto no está en el catálogo cargado, cae a sanitizarNombre(texto).
+// Resuelve la URL de audio de un picto usando ruta_img del catálogo,
+// igual que generar-audio.py. Evita el problema con nombres que tienen
+// tildes o espacios (ej. "autobús de dos pisos" → "autobus-dos-pisos.mp3").
 function _urlAudioPicto(pieza, lang) {
   const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
   const nombre  = entrada
     ? entrada.ruta_img.replace(/\.png$/i, '')
-    : sanitizarNombre(pieza.texto);
+    : pieza.texto;  // legacy sin picto_id: usar texto directamente
   return AUDIO_URL(nombre, lang);
 }
 
@@ -574,8 +573,8 @@ function _tocarPieza(idx) {
   const pieza = frase.piezas[idx];
 
   _built.push(idx);
-  _reproducirPieza(pieza);
-  _renderTira();
+  _renderTira();              // render primero: la UI nunca debe depender del audio
+  _reproducirPieza(pieza);    // si el audio falla, la pieza ya está en la tira
 
   const btnPieza = _el.querySelector(`.fr-pieza[data-idx="${idx}"]`);
   if (btnPieza) btnPieza.classList.add('usada');
@@ -726,7 +725,7 @@ function _reproducirPieza(pieza) {
   const lang  = frase?.lang || _lang;
   const url   = pieza.tipo === 'picto'
     ? _urlAudioPicto(pieza, lang)
-    : AUDIO_FRASE_URL(sanitizarNombre(pieza.texto), lang);
+    : AUDIO_FRASE_URL(pieza.texto, lang);  // texto sin tocar
   _reproducirURL(url, pieza.texto, null, lang);
 }
 
@@ -735,7 +734,7 @@ function _reproducirCadena(piezas, lang = null) {
   const [primera, ...resto] = piezas;
   const url = primera.tipo === 'picto'
     ? _urlAudioPicto(primera, lang)
-    : AUDIO_FRASE_URL(sanitizarNombre(primera.texto), lang);
+    : AUDIO_FRASE_URL(primera.texto, lang);  // texto sin tocar
   _reproducirURL(url, primera.texto, () => _reproducirCadena(resto, lang), lang);
 }
 
