@@ -3197,5 +3197,12 @@
     "en": "snow plow",
     "ruta_img": "quitanieve.png",
     "art": "el"
+  },
+  {
+    "id": 1458,
+    "es": "quiero",
+    "en": "want",
+    "ruta_img": "quiero.png",
+    "art": ""
   }
 ]
