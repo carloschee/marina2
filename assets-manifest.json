@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T18:31:28.494Z",
-  "totalAssets": 1476,
+  "generado": "2026-05-31T18:39:01.339Z",
+  "totalAssets": 1479,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -32,6 +32,7 @@
     "./assets/audio/en/arroz.mp3",
     "./assets/audio/en/asqueado.mp3",
     "./assets/audio/en/asustado.mp3",
+    "./assets/audio/en/autobus-dos-pisos.mp3",
     "./assets/audio/en/autobus.mp3",
     "./assets/audio/en/avergonzado.mp3",
     "./assets/audio/en/avion.mp3",
@@ -495,6 +496,7 @@
     "./assets/audio/es/arroz.mp3",
     "./assets/audio/es/asqueado.mp3",
     "./assets/audio/es/asustado.mp3",
+    "./assets/audio/es/autobus-dos-pisos.mp3",
     "./assets/audio/es/autobus.mp3",
     "./assets/audio/es/avergonzado.mp3",
     "./assets/audio/es/avion.mp3",
@@ -863,6 +865,7 @@
     "./assets/audio/es/solitario.mp3",
     "./assets/audio/es/sombrero.mp3",
     "./assets/audio/es/sopa.mp3",
+    "./assets/audio/es/soplale.mp3",
     "./assets/audio/es/soplar.mp3",
     "./assets/audio/es/sorprendido.mp3",
     "./assets/audio/es/suave.mp3",
