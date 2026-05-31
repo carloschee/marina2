@@ -30,6 +30,18 @@ const PICTO_URL       = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase
 const AUDIO_URL       = (palabra, lang = 'es') => `assets/audio/${lang}/${palabra}.mp3`;
 const AUDIO_FRASE_URL = (nombre,  lang = 'es') => `assets/audio/frases/${lang}/${nombre}.mp3`;
 
+// Resuelve la URL de audio de una pieza tipo picto usando ruta_img del catálogo.
+// El script generar-audio.py usa ruta_img (sin .png) como nombre de archivo,
+// no pieza.texto — así que "autobús de dos pisos" → "autobus-dos-pisos.mp3".
+// Si el picto no está en el catálogo cargado, cae a sanitizarNombre(texto).
+function _urlAudioPicto(pieza, lang) {
+  const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
+  const nombre  = entrada
+    ? entrada.ruta_img.replace(/\.png$/i, '')
+    : sanitizarNombre(pieza.texto);
+  return AUDIO_URL(nombre, lang);
+}
+
 const NIVELES = [
   {
     id: 1, label: '⭐', titulo: 'Básico',
@@ -275,97 +287,37 @@ function _render() {
     .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
     .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
-    /* ── Botón selector — abre la modal ── */
-    #fr-btn-selector {
-      flex-shrink: 0;
-      width: 100%; box-sizing: border-box; text-align: left;
-      padding: 14px 20px; border-radius: 16px;
-      border: 1.5px solid var(--fr-nivel-borde, rgba(255,255,255,0.18));
-      background: var(--fr-nivel-suave, rgba(255,255,255,0.08));
-      color: var(--fr-nivel-color, rgba(255,255,255,0.85));
-      cursor: pointer; font-family: inherit; font-weight: 800; font-size: 1.1rem;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.50);
-      transition: background .18s, color .18s, transform .12s, border-color .18s;
-      display: flex; align-items: center; gap: 10px;
+    /* ── Selector de frases ── */
+    #fr-selector-wrap {
+      flex: 1;
+      min-height: 0;
+      position: relative;
     }
-    #fr-btn-selector:active { transform: scale(.97); }
-    #fr-btn-selector.con-frase {
-      background: var(--fr-nivel-color, #38bdf8);
-      color: #07212e;
-      border-color: transparent;
-      font-weight: 900;
-      text-shadow: none;
-      box-shadow: 0 4px 14px var(--fr-nivel-borde, rgba(56,189,248,0.35));
+    #fr-selector-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 56px;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(5,30,65,0.85) 0%, transparent 100%);
+      border-radius: 0 0 12px 12px;
+      transition: opacity .3s;
     }
-    #fr-btn-selector-icono {
-      flex-shrink: 0; font-size: 1.1rem; opacity: .75;
-    }
-    #fr-btn-selector-texto {
-      flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
-    #fr-btn-selector-chevron {
-      flex-shrink: 0; opacity: .60; font-size: .9rem;
-      transition: transform .2s;
-    }
-
-    /* ── Modal de selección de frases ── */
-    #fr-modal-overlay {
-      display: none;
-      position: fixed; inset: 0; z-index: 9000;
-      background: rgba(2, 20, 50, 0.75);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      align-items: flex-end;              /* desliza desde abajo — natural en móvil */
-      justify-content: center;
-      padding: 0;
-    }
-    #fr-modal-overlay.visible { display: flex; }
-    #fr-modal-box {
-      width: 100%; max-width: 620px;
-      max-height: 80vh;
-      background: linear-gradient(180deg, rgba(10,40,80,0.97) 0%, rgba(5,25,55,0.99) 100%);
-      border: 1.5px solid var(--fr-nivel-borde, rgba(255,255,255,0.15));
-      border-bottom: none;
-      border-radius: 28px 28px 0 0;
+    #fr-selector-wrap.al-fondo::after { opacity: 0; }
+    #fr-selector {
+      height: 100%;
       display: flex; flex-direction: column;
-      overflow: hidden;
-      animation: fr-modal-slide-up .28s cubic-bezier(.34,1.2,.64,1) both;
-    }
-    @keyframes fr-modal-slide-up {
-      from { transform: translateY(100%); opacity: .6; }
-      to   { transform: translateY(0);    opacity: 1; }
-    }
-    #fr-modal-header {
-      flex-shrink: 0;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 20px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-    }
-    #fr-modal-titulo {
-      font-size: 1rem; font-weight: 900; letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--fr-nivel-color, rgba(255,255,255,0.80));
-      text-shadow: 0 1px 4px rgba(0,0,0,0.40);
-    }
-    #fr-modal-cerrar {
-      width: 36px; height: 36px; border-radius: 50%; border: none;
-      background: rgba(255,255,255,0.10); color: #fff;
-      font-size: 1.3rem; font-weight: 300; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background .15s, transform .12s;
-    }
-    #fr-modal-cerrar:active { transform: scale(.88); background: rgba(255,255,255,.20); }
-    #fr-modal-lista {
-      flex: 1; overflow-y: auto;
+      gap: 8px;
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 12px 16px calc(16px + env(safe-area-inset-bottom, 0px));
-      display: flex; flex-direction: column; gap: 8px;
+      padding-right: 2px;
+      padding-bottom: 48px;
     }
-    #fr-modal-lista::-webkit-scrollbar { display: none; }
+    #fr-selector::-webkit-scrollbar { display: none; }
     .fr-pill {
       width: 100%; box-sizing: border-box; text-align: left;
-      padding: 14px 20px; border-radius: 16px;
+      padding: 12px 20px; border-radius: 16px;
       border: 1.5px solid var(--fr-nivel-borde, rgba(255,255,255,0.18));
       background: var(--fr-nivel-suave, rgba(255,255,255,0.08));
       color: var(--fr-nivel-color, rgba(255,255,255,0.85));
@@ -427,22 +379,9 @@ function _render() {
     <div id="fr-piezas"></div>
   </div>
 
-  <!-- Botón que abre la modal de selección -->
-  <button id="fr-btn-selector">
-    <span id="fr-btn-selector-icono">📋</span>
-    <span id="fr-btn-selector-texto">Elegir frase…</span>
-    <span id="fr-btn-selector-chevron">▲</span>
-  </button>
-
-  <!-- Modal de selección de frases -->
-  <div id="fr-modal-overlay">
-    <div id="fr-modal-box">
-      <div id="fr-modal-header">
-        <span id="fr-modal-titulo">Elegir frase</span>
-        <button id="fr-modal-cerrar">×</button>
-      </div>
-      <div id="fr-modal-lista"></div>
-    </div>
+  <!-- Selector de frases -->
+  <div id="fr-selector-wrap">
+    <div id="fr-selector"></div>
   </div>
 
   <!-- Estado vacío -->
@@ -539,20 +478,19 @@ function _actualizarVacio() {
   const vacio = _el.querySelector('#fr-vacio');
   const panel = _el.querySelector('#fr-panel-piezas');
   const tira  = _el.querySelector('#fr-tira');
-  const btn   = _el.querySelector('#fr-btn-selector');
+  const sel   = _el.querySelector('#fr-selector-wrap');
   const sinFrases = _frases.length === 0;
   vacio.style.display = sinFrases ? 'flex'  : 'none';
   panel.style.display = sinFrases ? 'none'  : '';
   tira.style.display  = sinFrases ? 'none'  : '';
-  if (btn) btn.style.display = sinFrases ? 'none' : '';
+  sel.style.display   = sinFrases ? 'none'  : '';
 }
 
 // ─── Selector de frases ───────────────────────────────────────────────────────
 function _renderSelector() {
-  const lista    = _el.querySelector('#fr-modal-lista');
+  const wrap     = _el.querySelector('#fr-selector');
   const nivelCfg = NIVELES.find(n => n.id === _nivel);
-  lista.innerHTML = '';
-  lista.scrollTop = 0;
+  wrap.innerHTML = '';
 
   _frases.forEach((f, i) => {
     const btn = document.createElement('button');
@@ -565,50 +503,12 @@ function _renderSelector() {
     btn.textContent = _lang === 'en' ? (f.en || f.es) : f.es;
     btn.addEventListener('click', () => {
       haptic(8);
-      _cerrarModal();
       _seleccionarFrase(i);
       const texto = _lang === 'en' ? (f.en || f.es) : f.es;
       _reproducirFrase(texto, f.id);
     });
-    lista.appendChild(btn);
+    wrap.appendChild(btn);
   });
-
-  _actualizarBotonSelector();
-}
-
-function _abrirModal() {
-  const overlay  = _el.querySelector('#fr-modal-overlay');
-  const titulo   = _el.querySelector('#fr-modal-titulo');
-  const nivelCfg = NIVELES.find(n => n.id === _nivel);
-  if (titulo && nivelCfg) titulo.textContent = nivelCfg.titulo;
-  overlay.classList.add('visible');
-  haptic(8);
-  if (_activa >= 0) {
-    const lista = _el.querySelector('#fr-modal-lista');
-    const pill  = lista.querySelectorAll('.fr-pill')[_activa];
-    if (pill) setTimeout(() => pill.scrollIntoView({ block: 'center', behavior: 'smooth' }), 80);
-  }
-}
-
-function _cerrarModal() {
-  _el.querySelector('#fr-modal-overlay').classList.remove('visible');
-}
-
-function _actualizarBotonSelector() {
-  const btn      = _el.querySelector('#fr-btn-selector');
-  const txtEl    = _el.querySelector('#fr-btn-selector-texto');
-  const nivelCfg = NIVELES.find(n => n.id === _nivel);
-  if (!btn) return;
-  const frase = _activa >= 0 ? _frases[_activa] : null;
-  if (frase) {
-    txtEl.textContent = _lang === 'en' ? (frase.en || frase.es) : frase.es;
-    btn.classList.add('con-frase');
-    if (nivelCfg) { btn.style.background = nivelCfg.color; btn.style.color = '#07212e'; }
-  } else {
-    txtEl.textContent = 'Elegir frase…';
-    btn.classList.remove('con-frase');
-    btn.style.background = ''; btn.style.color = '';
-  }
 }
 
 // ─── Seleccionar frase ────────────────────────────────────────────────────────
@@ -774,16 +674,15 @@ function _bindEvents() {
     _renderPiezas();
   });
 
-  // Botón selector — abre la modal
-  _el.querySelector('#fr-btn-selector').addEventListener('click', _abrirModal);
-
-  // Cerrar modal — botón × y toque en el overlay
-  _el.querySelector('#fr-modal-cerrar').addEventListener('click', () => {
-    haptic(8); _cerrarModal();
-  });
-  _el.querySelector('#fr-modal-overlay').addEventListener('click', e => {
-    if (e.target === _el.querySelector('#fr-modal-overlay')) _cerrarModal();
-  });
+  // Fade inferior del selector
+  const sel  = _el.querySelector('#fr-selector');
+  const wrap = _el.querySelector('#fr-selector-wrap');
+  const _actualizarFade = () => {
+    const alFondo = sel.scrollTop + sel.clientHeight >= sel.scrollHeight - 4;
+    wrap.classList.toggle('al-fondo', alFondo);
+  };
+  sel.addEventListener('scroll', _actualizarFade, { passive: true });
+  requestAnimationFrame(_actualizarFade);
 }
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
@@ -826,8 +725,8 @@ function _reproducirPieza(pieza) {
   const frase = _frases[_activa];
   const lang  = frase?.lang || _lang;
   const url   = pieza.tipo === 'picto'
-    ? AUDIO_URL(pieza.texto, lang)
-    : AUDIO_FRASE_URL(pieza.texto, lang);
+    ? _urlAudioPicto(pieza, lang)
+    : AUDIO_FRASE_URL(sanitizarNombre(pieza.texto), lang);
   _reproducirURL(url, pieza.texto, null, lang);
 }
 
@@ -835,8 +734,8 @@ function _reproducirCadena(piezas, lang = null) {
   if (!piezas.length) return;
   const [primera, ...resto] = piezas;
   const url = primera.tipo === 'picto'
-    ? AUDIO_URL(primera.texto, lang)
-    : AUDIO_FRASE_URL(primera.texto, lang);
+    ? _urlAudioPicto(primera, lang)
+    : AUDIO_FRASE_URL(sanitizarNombre(primera.texto), lang);
   _reproducirURL(url, primera.texto, () => _reproducirCadena(resto, lang), lang);
 }
 
