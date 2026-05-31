@@ -732,8 +732,12 @@
     "nivel": 2,
     "piezas": [
       {
+        "tipo": "texto",
+        "texto": "el"
+      },
+      {
         "tipo": "picto",
-        "texto": "el autobús de dos pisos",
+        "texto": "autobús de dos pisos",
         "picto_id": 1439
       },
       {
