@@ -4,20 +4,15 @@
    Mecánica:
    · Voz dice "Toca la fresa" — 3/4/5/6/8 pictogramas en pantalla
    · Toca el correcto → anillo verde + pop + eco de la palabra
-   · Toca el incorrecto → wiggle + repite la instrucción
-   · 3 aciertos consecutivos → sube de nivel
+   · Toca el incorrecto → wiggle + repite la instrucción + reinicia contador
+   · Aciertos CONSECUTIVOS para subir de nivel (un fallo reinicia el contador)
    · 5 niveles: 3 → 4 → 5 → 6 → 8 opciones
+   · Aciertos requeridos por nivel: 3 → 4 → 5 → 6 → 8
 
-   Layout de mosaicos:
-   · Tamaño fijo calculado para nivel máximo (8 mosaicos, 4+4)
-   · Nivel 1 (3): fila central de 3
-   · Nivel 2 (4): 2×2
-   · Nivel 3 (5): fila de 3 + fila de 2 centrada
-   · Nivel 4 (6): 2×3
-   · Nivel 5 (8): fila de 4 + fila de 4
-
-   Idioma gobernado por el pill global (lang-change).
-   Fuente: data/pictos.json (modo aleatorio) o data/toca-temas.json (temas).
+   Modo infinito (tras completar nivel 5):
+   · Sin pantalla de "nivel completado" — rondas continuas con 8 opciones
+   · Contador de racha consecutiva visible en pantalla
+   · Al fallar: muestra puntuación y récord, guarda el mejor en localStorage
 */
 
 import { TTS } from '../../core/tts.js';
@@ -27,29 +22,40 @@ import { Telemetry } from '../../core/telemetry.js';
 const PICTO_URL = (ruta) => `assets/pictogramas/${ruta}`;
 const AUDIO_URL = (ruta, lang) => `assets/audio/${lang}/${ruta.replace('.png', '').toLowerCase()}.mp3`;
 
+// Opciones por nivel (índice 0-4)
 const NIVELES = [3, 4, 5, 6, 8];
-const ACIERTOS_UP = 3;
 
-// Tamaño fijo de mosaico calculado para el nivel máximo (8 mosaicos, layout 4+4):
-// iPad Air 4 landscape: área grid ≈ 604px alto × 1140px ancho
-// 4 cols, gap 12px: (1140 - 36) / 4 ≈ 276px ancho
-// 2 filas, gap 12px: (604 - 12) / 2 ≈ 296px alto
-// → cuadrado limitado por el menor: 272px
-const MOSAIC_SIZE = 272; // px — igual en todos los niveles
+// Aciertos CONSECUTIVOS requeridos para subir de nivel (índice 0-4)
+// Progresión basada en criterios de aprendizaje sin error (errorless learning)
+// y consolidación de respuestas para apps de comunicación aumentativa:
+//   Nivel 1 (3 opts) → 3 aciertos: entrada fluida y motivante
+//   Nivel 2 (4 opts) → 4 aciertos: introduce dificultad gradual
+//   Nivel 3 (5 opts) → 5 aciertos: consolidación media
+//   Nivel 4 (6 opts) → 6 aciertos: reto real
+//   Nivel 5 (8 opts) → 8 aciertos: máxima dificultad antes de infinito
+const ACIERTOS_POR_NIVEL = [3, 4, 5, 6, 8];
 
-let _el = null;
-let _catalogo = [];
-let _temas = [];
-let _tema = null;
-let _pool = [];
-let _langConfig = { es: true, en: false };
-let _lang = 'es';
-let _nivel = 0;
-let _aciertos = 0;
-let _objetivo = null;
-let _opciones = [];
-let _esperando = false;
-let _audioEl = null;
+const MEJOR_RACHA_KEY = 'marina2_toca_mejor_racha';
+
+// Tamaño fijo de mosaico — igual en todos los niveles
+const MOSAIC_SIZE = 272; // px
+
+let _el           = null;
+let _catalogo     = [];
+let _temas        = [];
+let _tema         = null;
+let _pool         = [];
+let _langConfig   = { es: true, en: false };
+let _lang         = 'es';
+let _nivel        = 0;
+let _aciertos     = 0;   // aciertos consecutivos en el nivel actual
+let _modoInfinito = false;
+let _racha        = 0;   // racha en modo infinito
+let _mejorRacha   = 0;   // récord guardado en localStorage
+let _objetivo     = null;
+let _opciones     = [];
+let _esperando    = false;
+let _audioEl      = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 
@@ -57,10 +63,16 @@ export async function init(container) {
   _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
   _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
-  _nivel = 0;
-  _aciertos = 0;
-  _esperando = false;
-  _tema = null;
+  _nivel        = 0;
+  _aciertos     = 0;
+  _modoInfinito = false;
+  _racha        = 0;
+  _esperando    = false;
+  _tema         = null;
+
+  // Cargar récord guardado
+  try { _mejorRacha = parseInt(localStorage.getItem(MEJOR_RACHA_KEY) || '0', 10) || 0; }
+  catch { _mejorRacha = 0; }
 
   try {
     const res = await fetch('./data/pictos.json');
@@ -91,14 +103,16 @@ export function destroy() {
   _el = null; _catalogo = []; _pool = []; _temas = [];
 }
 
-export function onEnter() { }
+export function onEnter() {}
 export function onLeave() {
   TTS.stop();
   if (_audioEl) _audioEl.pause();
   Telemetry.track('toca_sesion', {
     _modulo: 'toca',
     nivel_alcanzado: _nivel + 1,
-    opciones_nivel: NIVELES[_nivel],
+    opciones_nivel: NIVELES[Math.min(_nivel, NIVELES.length - 1)],
+    modo_infinito: _modoInfinito,
+    mejor_racha: _mejorRacha,
     tema: _tema?.id || 'todos',
   });
 }
@@ -114,167 +128,237 @@ export async function resume(container) {
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
   _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
-  if (_objetivo && _opciones.length) {
-    _esperando = false;  // ← reset del flag que quedó en true desde pause()
-    _renderRonda();
-    setTimeout(() => _reproducirInstruccion(), 500);
-  } else {
-    _nuevaRonda();
-  }
+  _nuevaRonda();
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }
 
-// ─── Shell ────────────────────────────────────────────────────────────────────
+// ─── Render principal ─────────────────────────────────────────────────────────
 
 function _render() {
   _el.style.cssText =
     'position:absolute;inset:0;display:flex;flex-direction:column;' +
-    'overflow:hidden;background:transparent;';
+    'overflow:hidden;background:transparent;padding:0;';
 
   _el.innerHTML = `
   <style>
     /* ── Header ── */
     #tc-header {
-      flex-shrink:0;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 20px 10px; gap:12px;
+      flex-shrink:0; display:flex; align-items:center; gap:10px;
+      padding:10px 16px; min-height:56px;
     }
-    #tc-nivel-wrap { display:flex; align-items:baseline; gap:4px; }
+    #tc-nivel-wrap {
+      display:flex; align-items:baseline; gap:5px;
+      background:rgba(255,255,255,0.10); border-radius:99px;
+      padding:5px 14px; flex-shrink:0;
+    }
     #tc-nivel-label {
-      font-size:.72rem; font-weight:900; letter-spacing:.12em;
-      text-transform:uppercase; color:rgba(255,255,255,0.50);
+      font-size:.70rem; font-weight:900; letter-spacing:.12em;
+      text-transform:uppercase; color:rgba(255,255,255,0.55);
     }
-    #tc-nivel-valor { font-size:.72rem; font-weight:900; color:#00e5b0; margin-left:4px; }
+    #tc-nivel-valor {
+      font-size:1.1rem; font-weight:900; color:#ffe566;
+      text-shadow:0 0 12px rgba(255,229,102,0.60);
+    }
+    /* Racha en modo infinito */
+    #tc-racha-wrap {
+      display:none; align-items:baseline; gap:5px;
+      background:rgba(0,229,176,0.15); border-radius:99px;
+      padding:5px 14px; border:1px solid rgba(0,229,176,0.35);
+      flex-shrink:0;
+    }
+    #tc-racha-wrap.visible { display:flex; }
+    #tc-racha-label {
+      font-size:.70rem; font-weight:900; letter-spacing:.12em;
+      text-transform:uppercase; color:rgba(0,229,176,0.70);
+    }
+    #tc-racha-valor {
+      font-size:1.1rem; font-weight:900; color:#00e5b0;
+      text-shadow:0 0 12px rgba(0,229,176,0.60);
+    }
+    #tc-record-wrap {
+      display:none; align-items:baseline; gap:4px;
+      flex-shrink:0;
+    }
+    #tc-record-wrap.visible { display:flex; }
+    #tc-record-label {
+      font-size:.65rem; font-weight:900; letter-spacing:.10em;
+      text-transform:uppercase; color:rgba(255,229,102,0.60);
+    }
+    #tc-record-valor {
+      font-size:.95rem; font-weight:900; color:#ffe566;
+      opacity:0.80;
+    }
     #tc-btn-tema {
-      display:flex; align-items:center; gap:6px;
-      padding:6px 14px; border-radius:99px;
-      background:rgba(255,255,255,0.10);
-      border:1.5px solid rgba(255,255,255,0.18);
-      color:#fff; font-family:inherit; font-size:.8rem; font-weight:800;
-      cursor:pointer; transition:background .15s, transform .12s; flex-shrink:0;
+      margin-left:auto; display:flex; align-items:center; gap:5px;
+      padding:5px 12px; border-radius:99px; border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.08); color:#fff; cursor:pointer;
+      font-family:inherit; font-size:.80rem; font-weight:800;
+      transition:background .15s;
     }
-    #tc-btn-tema:active { transform:scale(.93); background:rgba(255,255,255,.18); }
-    #tc-tema-label { max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    #tc-dots { display:flex; gap:6px; align-items:center; flex-shrink:0; }
+    #tc-btn-tema:active { background:rgba(255,255,255,0.18); }
+    #tc-dots {
+      display:flex; gap:6px; align-items:center; flex-shrink:0;
+    }
     .tc-dot {
       width:10px; height:10px; border-radius:50%;
-      background:rgba(255,255,255,0.18);
-      transition:background .3s, transform .3s;
+      background:rgba(255,255,255,0.20);
+      transition:background .25s, transform .2s;
     }
-    .tc-dot.lleno { background:#00e5b0; transform:scale(1.2); }
+    .tc-dot.lleno {
+      background:#00e5b0;
+      box-shadow:0 0 8px rgba(0,229,176,0.60);
+      transform:scale(1.2);
+    }
 
     /* ── Instrucción ── */
     #tc-instruccion {
-      flex-shrink:0; margin:0 20px 14px;
-      background:rgba(0,0,0,0.35);
-      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-      border:1px solid rgba(255,255,255,0.10);
-      border-radius:20px; padding:16px 20px;
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      flex-shrink:0; display:flex; align-items:center; gap:12px;
+      padding:8px 16px 10px;
     }
-    #tc-instruccion-texto { display:flex; flex-direction:column; gap:4px; }
+    #tc-instruccion-texto { flex:1; }
     #tc-label-sup {
-      font-size:.68rem; font-weight:900; letter-spacing:.12em;
-      text-transform:uppercase; color:#00e5b0;
+      display:block; font-size:.68rem; font-weight:900;
+      letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.40); margin-bottom:2px;
     }
     #tc-prompt {
-      font-size:clamp(1.6rem,4vw,2.4rem); font-weight:900;
-      color:#fff; line-height:1.1;
+      font-size:clamp(1.1rem,3.5vw,1.5rem); font-weight:900; color:#fff;
+      text-shadow:0 2px 10px rgba(0,0,0,0.40);
     }
     #tc-prompt strong { color:#ffe566; }
     #tc-btn-repetir {
-      width:52px; height:52px; border-radius:50%; border:none; cursor:pointer;
-      background:#fb7185; color:#fff; font-size:1.3rem; flex-shrink:0;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow:0 6px 20px rgba(251,113,133,0.45);
-      transition:transform .12s, box-shadow .15s;
+      width:48px; height:48px; border-radius:50%; border:none;
+      background:#00e5b0; font-size:1.3rem; cursor:pointer;
+      box-shadow:0 4px 16px rgba(0,229,176,0.45);
+      transition:transform .12s;
     }
     #tc-btn-repetir:active { transform:scale(.88); }
 
-    /* ── Grid — contenedor flex centrado ── */
+    /* ── Grid ── */
     #tc-grid {
       flex:1; min-height:0;
       display:flex; flex-wrap:wrap;
-      align-content:flex-start; justify-content:center;
-      gap:12px; padding:20px 20px 16px;
-      align-items:flex-start;
+      align-content:center; justify-content:center;
+      gap:12px; padding:8px 12px;
+      overflow:hidden;
     }
-
-    /* ── Mosaico — tamaño fijo igual en todos los niveles ── */
     .tc-opcion {
-      flex-shrink:0;
-      background:#fff; border-radius:20px;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      padding:10px 8px 12px; cursor:pointer;
-      border:3px solid transparent;
-      box-shadow:0 4px 16px rgba(0,20,60,0.18);
-      transition:transform .14s, box-shadow .14s, border-color .2s;
-      position:relative; overflow:hidden;
-      -webkit-tap-highlight-color:transparent; user-select:none;
+      border-radius:22px; border:3px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.10);
+      cursor:pointer; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:8px;
+      padding:10px; transition:transform .15s, border-color .2s, box-shadow .2s;
+      overflow:hidden; position:relative;
     }
     .tc-opcion:active { transform:scale(.93); }
     .tc-opcion img {
       width:62%; height:62%; object-fit:contain;
-      flex-shrink:0; pointer-events:none;
+      border-radius:12px; pointer-events:none;
     }
     .tc-opcion-label {
-      font-size:clamp(.75rem,1.8vw,1rem); font-weight:900;
-      color:#07212e; text-align:center; margin-top:8px;
-      line-height:1.1; word-break:break-word; flex-shrink:0;
+      font-size:clamp(.75rem,2.2vw,.95rem); font-weight:900;
+      color:#fff; text-shadow:0 1px 4px rgba(0,0,0,0.50);
+      text-align:center; padding:0 4px;
     }
     .tc-opcion.correcto {
-      border-color:#22c55e;
-      box-shadow:0 0 0 4px rgba(34,197,94,0.35), 0 6px 20px rgba(0,20,60,0.20);
-      animation:tc-pop .35s cubic-bezier(.34,1.56,.64,1) both;
+      border-color:#00e5b0;
+      box-shadow:0 0 0 4px rgba(0,229,176,0.30);
+      animation:tc-pop .3s cubic-bezier(.34,1.56,.64,1);
     }
-    @keyframes tc-pop { from { transform:scale(.9); } to { transform:scale(1); } }
-    .tc-opcion.incorrecto { animation:tc-wiggle .4s ease both; }
-    @keyframes tc-wiggle {
-      0%,100% { transform:translateX(0) rotate(0deg); }
-      20%     { transform:translateX(-8px) rotate(-2deg); }
-      40%     { transform:translateX(8px) rotate(2deg); }
-      60%     { transform:translateX(-5px) rotate(-1deg); }
-      80%     { transform:translateX(5px) rotate(1deg); }
+    .tc-opcion.incorrecto {
+      border-color:#ff6b6b;
+      animation:tc-shake .35s ease;
+    }
+    @keyframes tc-pop {
+      from { transform:scale(.85); }
+      to   { transform:scale(1); }
+    }
+    @keyframes tc-shake {
+      0%,100% { transform:translateX(0); }
+      20%     { transform:translateX(-8px); }
+      40%     { transform:translateX(8px); }
+      60%     { transform:translateX(-5px); }
+      80%     { transform:translateX(5px); }
     }
 
-    /* ── Overlay nivel ── */
+    /* ── Overlay de subida de nivel ── */
     #tc-nivel-up {
-      display:none; position:absolute; inset:0; z-index:10;
-      align-items:center; justify-content:center; flex-direction:column; gap:12px;
-      background:rgba(3,17,26,0.75);
-      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-      animation:tc-fadein .25s ease both;
+      position:absolute; inset:0;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:10px;
+      background:rgba(5,25,60,0.85);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      opacity:0; pointer-events:none;
+      transition:opacity .3s;
+      z-index:10;
     }
-    #tc-nivel-up.visible { display:flex; }
-    @keyframes tc-fadein { from { opacity:0; } to { opacity:1; } }
-    #tc-nivel-up-emoji { font-size:4rem; animation:tc-flotar 1.2s ease-in-out infinite alternate; }
-    @keyframes tc-flotar { from { transform:translateY(0); } to { transform:translateY(-12px); } }
-    #tc-nivel-up-texto { font-size:2rem; font-weight:900; color:#fff; text-shadow:0 4px 20px rgba(0,229,176,.60); }
-    #tc-nivel-up-sub   { font-size:1rem; font-weight:700; color:rgba(255,255,255,0.60); }
+    #tc-nivel-up.visible { opacity:1; pointer-events:all; }
+    #tc-nivel-up-emoji { font-size:3.5rem; animation:tc-pop .4s ease; }
+    #tc-nivel-up-texto {
+      font-size:2rem; font-weight:900; color:#fff;
+      text-shadow:0 2px 20px rgba(255,229,102,0.60);
+    }
+    #tc-nivel-up-sub {
+      font-size:1rem; font-weight:800; color:rgba(255,255,255,0.65);
+    }
+
+    /* ── Overlay de fallo en modo infinito ── */
+    #tc-fallo-infinito {
+      position:absolute; inset:0;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:14px;
+      background:rgba(5,25,60,0.90);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      opacity:0; pointer-events:none;
+      transition:opacity .3s;
+      z-index:10;
+    }
+    #tc-fallo-infinito.visible { opacity:1; pointer-events:all; }
+    #tc-fallo-emoji { font-size:3rem; }
+    #tc-fallo-racha {
+      font-size:3.5rem; font-weight:900; color:#00e5b0;
+      text-shadow:0 2px 20px rgba(0,229,176,0.50);
+      line-height:1;
+    }
+    #tc-fallo-label {
+      font-size:1rem; font-weight:800; color:rgba(255,255,255,0.60);
+      letter-spacing:.05em;
+    }
+    #tc-fallo-record {
+      font-size:1rem; font-weight:900; color:#ffe566;
+      text-shadow:0 0 12px rgba(255,229,102,0.50);
+      min-height:1.4em;
+    }
+    #tc-fallo-btn {
+      margin-top:8px; padding:14px 32px; border-radius:99px; border:none;
+      background:#00e5b0; color:#032340;
+      font-family:inherit; font-size:1.1rem; font-weight:900;
+      cursor:pointer; transition:transform .12s;
+    }
+    #tc-fallo-btn:active { transform:scale(.93); }
 
     /* ── Modal temas ── */
     #tc-modal-temas {
-      display:none; position:fixed; inset:0; z-index:20;
-      align-items:center; justify-content:center;
-      background:rgba(3,17,26,0.80);
-      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      position:absolute; inset:0; z-index:20;
+      background:rgba(5,20,50,0.80);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      display:flex; align-items:flex-end;
+      opacity:0; pointer-events:none; transition:opacity .25s;
     }
-    #tc-modal-temas.visible { display:flex; }
+    #tc-modal-temas.visible { opacity:1; pointer-events:all; }
     #tc-modal-box {
-      background:rgba(6,42,62,0.98);
-      border:1px solid rgba(14,165,201,0.20);
-      border-radius:28px; padding:24px;
-      width:88%; max-width:400px;
-      display:flex; flex-direction:column; gap:12px;
-      box-shadow:0 20px 60px rgba(0,0,0,0.5);
-      max-height:80vh; overflow-y:auto;
+      width:100%; max-height:70vh; overflow-y:auto;
+      background:rgba(12,30,70,0.95);
+      border-radius:24px 24px 0 0;
+      padding:20px 16px 32px;
+      border-top:1px solid rgba(255,255,255,0.10);
     }
     #tc-modal-titulo {
-      font-size:.72rem; font-weight:900; letter-spacing:.12em;
-      text-transform:uppercase; color:rgba(255,255,255,0.50); margin:0;
+      font-size:.78rem; font-weight:900; letter-spacing:.12em;
+      text-transform:uppercase; color:rgba(255,255,255,0.50); margin:0 0 12px;
     }
+    #tc-modal-lista { display:flex; flex-direction:column; gap:8px; }
     .tc-tema-opcion {
       display:flex; align-items:center; gap:14px;
       padding:14px 16px; border-radius:16px; cursor:pointer;
@@ -303,6 +387,14 @@ function _render() {
       <span id="tc-nivel-label">NIVEL</span>
       <span id="tc-nivel-valor">1</span>
     </div>
+    <div id="tc-racha-wrap">
+      <span id="tc-racha-label">RACHA</span>
+      <span id="tc-racha-valor">0</span>
+    </div>
+    <div id="tc-record-wrap">
+      <span id="tc-record-label">🏆</span>
+      <span id="tc-record-valor">0</span>
+    </div>
     <button id="tc-btn-tema">
       <span id="tc-tema-label">Todos juegan</span>
       <span style="font-size:.75rem;opacity:.55">▾</span>
@@ -320,10 +412,20 @@ function _render() {
 
   <div id="tc-grid"></div>
 
+  <!-- Overlay subida de nivel (niveles 1-5) -->
   <div id="tc-nivel-up">
     <div id="tc-nivel-up-emoji">⭐</div>
     <div id="tc-nivel-up-texto"></div>
     <div id="tc-nivel-up-sub"></div>
+  </div>
+
+  <!-- Overlay fallo en modo infinito -->
+  <div id="tc-fallo-infinito">
+    <div id="tc-fallo-emoji">💫</div>
+    <div id="tc-fallo-racha">0</div>
+    <div id="tc-fallo-label">aciertos consecutivos</div>
+    <div id="tc-fallo-record"></div>
+    <button id="tc-fallo-btn">Seguir jugando</button>
   </div>
 
   <div id="tc-modal-temas">
@@ -348,13 +450,20 @@ function _render() {
   _el.querySelector('#tc-modal-temas').addEventListener('click', e => {
     if (e.target === _el.querySelector('#tc-modal-temas')) _cerrarModalTemas();
   });
+  _el.querySelector('#tc-fallo-btn').addEventListener('click', () => {
+    haptic(10);
+    _el.querySelector('#tc-fallo-infinito').classList.remove('visible');
+    _racha = 0;
+    _actualizarRacha();
+    _nuevaRonda();
+  });
 }
 
 // ─── Ronda ────────────────────────────────────────────────────────────────────
 
 function _nuevaRonda() {
   if (!_el) return;
-  const n = NIVELES[_nivel];
+  const n = _modoInfinito ? NIVELES[NIVELES.length - 1] : NIVELES[_nivel];
 
   if (_catalogo.length < n) {
     _el.querySelector('#tc-grid').style.display = 'none';
@@ -365,7 +474,6 @@ function _nuevaRonda() {
 
   _esperando = false;
 
-  // Rellenar pool si hace falta
   if (_pool.length < n) {
     const base = _tema?.palabras?.length
       ? _catalogo.filter(e => _tema.palabras.includes(e.id))
@@ -388,8 +496,6 @@ function _nuevaRonda() {
   _opciones = _shuffle([_objetivo, ...distractores]);
   _renderRonda();
 
-  // Reproducir instrucción solo si no hay audio activo reproduciéndose
-  // Reproducir instrucción cuando el audio del acierto anterior haya terminado
   if (_audioEl && !_audioEl.paused) {
     _audioEl.addEventListener('ended', () => {
       if (_el) setTimeout(() => _reproducirInstruccion(), 150);
@@ -405,18 +511,17 @@ function _nuevaRonda() {
 // ─── Render ronda ─────────────────────────────────────────────────────────────
 
 function _renderRonda() {
-  const n = NIVELES[_nivel];
+  const n = _modoInfinito ? NIVELES[NIVELES.length - 1] : NIVELES[_nivel];
   const grid = _el.querySelector('#tc-grid');
 
-  _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
+  _el.querySelector('#tc-nivel-valor').textContent = _modoInfinito ? '∞' : (_nivel + 1);
   _renderDots();
   _actualizarPrompt();
 
-  // Quitar clase previa de nivel
   grid.className = '';
   grid.innerHTML = '';
 
-  _opciones.forEach((picto, i) => {
+  _opciones.forEach((picto) => {
     const btn = document.createElement('button');
     btn.className = 'tc-opcion';
     btn.dataset.id = picto.id;
@@ -436,77 +541,7 @@ function _renderRonda() {
     grid.appendChild(btn);
   });
 
-  // Aplicar layout según nivel — ajusta flex-basis para centrar filas
-  requestAnimationFrame(() => requestAnimationFrame(() => { if (_el) _aplicarLayout(n); }));
-}
-
-// ─── Layouts por nivel ────────────────────────────────────────────────────────
-// Todos los mosaicos tienen MOSAIC_SIZE × MOSAIC_SIZE px fijos.
-// flex-wrap:wrap + justify-content:center acomoda automáticamente.
-// Solo necesitamos controlar cuántos caben por fila mediante flex-basis.
-//
-// Nivel 1 (3):  1 fila de 3           → basis = MOSAIC_SIZE (3 por fila máx)
-// Nivel 2 (4):  2×2                   → basis = 45% (2 por fila)
-// Nivel 3 (5):  fila 3 + fila 2 cen. → primeros 3 full, últimos 2 centrados
-// Nivel 4 (6):  2×3                   → basis = MOSAIC_SIZE (3 por fila)
-// Nivel 5 (8):  2×4                   → basis = MOSAIC_SIZE (4 por fila)
-
-function _aplicarLayout(n) {
-  const grid  = _el.querySelector('#tc-grid');
-  const GAP   = 12;
-  const MAX   = 280;
-
-  // ── Detectar portrait en iPhone ──────────────────────────────
-  const esPortrait = window.innerWidth <= 600 &&
-                     window.innerHeight > window.innerWidth;
-
-  // ── Cols y filas según orientación ───────────────────────────
-  //
-  // Landscape (original):
-  //   n=3 → 3 cols × 1 fila   n=4 → 2×2   n=5 → 3×2
-  //   n=6 → 3×2               n=8 → 4×2
-  //
-  // Portrait (nuevo — eje vertical como recurso principal):
-  //   n=3 → 1 col × 3 filas   (columna centrada, pictos grandes)
-  //   n=4 → 2 col × 2 filas   (cuadrado)
-  //   n=5 → 2 col × 3 filas   (2+2+1, el último centrado por flex)
-  //   n=6 → 2 col × 3 filas   (2×3 limpio)
-  //   n=8 → 2 col × 4 filas   (2×4 — columnas aumentan a 2)
-  //
-  let cols, filas;
-  if (esPortrait) {
-    cols  = { 3:1, 4:2, 5:2, 6:2, 8:2 }[n] || 2;
-    filas = { 3:3, 4:2, 5:3, 6:3, 8:4 }[n] || 3;
-  } else {
-    cols  = { 3:3, 4:2, 5:3, 6:3, 8:4 }[n] || 3;
-    filas = { 3:1, 4:2, 5:2, 6:2, 8:2 }[n] || 2;
-  }
-
-  // ── Espacio disponible ────────────────────────────────────────
-  const W = grid.offsetWidth;
-
-  const headerApp = document.getElementById('app-header')?.offsetHeight || 56;
-  const tcHeader  = _el.querySelector('#tc-header').offsetHeight;
-  const tcInstr   = _el.querySelector('#tc-instruccion').offsetHeight;
-  const H = window.innerHeight - headerApp - tcHeader - tcInstr - 14 - 16 - 8;
-
-  const porAncho = Math.floor((W - GAP * (cols  - 1)) / cols);
-  const porAlto  = Math.floor((H - GAP * (filas - 1)) / filas);
-
-  // En portrait limitamos el máximo a 160px para que los pictos no
-  // sean tan grandes que se vean fuera de lugar en pantallas pequeñas
-  const MAX_portrait = 160;
-  const size = esPortrait
-    ? Math.min(porAncho, porAlto, MAX_portrait)
-    : Math.min(porAncho, porAlto, MAX);
-
-  grid.querySelectorAll('.tc-opcion').forEach(o => {
-    o.style.width      = size + 'px';
-    o.style.height     = size + 'px';
-    o.style.flexBasis  = size + 'px';
-    o.style.flexGrow   = '0';
-    o.style.flexShrink = '0';
-  });
+  _ajustarTamanos();
 }
 
 // ─── Interacción ──────────────────────────────────────────────────────────────
@@ -520,25 +555,41 @@ function _tocar(picto, btn) {
 function _acierto(btn) {
   _esperando = true;
   _aciertos++;
+
   btn.classList.add('correcto');
   lanzarConfeti({ count: 30, container: _el });
 
-  const texto = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
+  const texto   = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
   const archivo = _objetivo.ruta_img;
   _reproducirAudio(archivo, _lang, texto);
 
-  Telemetry.track('toca_acierto', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1 });
+  Telemetry.track('toca_acierto', {
+    _modulo: 'toca', picto: _objetivo.es,
+    nivel: _nivel + 1, modo_infinito: _modoInfinito,
+    racha: _modoInfinito ? _racha + 1 : undefined,
+  });
 
-  if (_aciertos >= ACIERTOS_UP) {
+  if (_modoInfinito) {
+    // ── Modo infinito: solo incrementar racha, siguiente ronda sin overlay
+    _racha++;
+    _actualizarRacha();
+    _renderDots();
+    setTimeout(() => { if (_el) _nuevaRonda(); }, 900);
+    return;
+  }
+
+  // ── Modo normal: verificar si completó el nivel
+  const aciertosNecesarios = ACIERTOS_POR_NIVEL[_nivel];
+  _renderDots();
+
+  if (_aciertos >= aciertosNecesarios) {
     _aciertos = 0;
     if (_nivel < NIVELES.length - 1) {
       setTimeout(() => _mostrarSubidaNivel(), 700);
     } else {
-      // Último nivel — celebrar modo infinito
-      setTimeout(() => _mostrarModoInfinito(), 700);
+      setTimeout(() => _activarModoInfinito(), 700);
     }
   } else {
-    _renderDots();
     setTimeout(() => { if (_el) _nuevaRonda(); }, 900);
   }
 }
@@ -546,21 +597,38 @@ function _acierto(btn) {
 function _error(btn) {
   btn.classList.add('incorrecto');
   haptic([10, 50, 10]);
-  setTimeout(() => btn.classList.remove('incorrecto'), 450);
-  setTimeout(() => _reproducirInstruccion(), 600);
-  Telemetry.track('toca_error', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1 });
+
+  Telemetry.track('toca_error', {
+    _modulo: 'toca', picto: _objetivo.es,
+    nivel: _nivel + 1, modo_infinito: _modoInfinito,
+    racha_perdida: _modoInfinito ? _racha : _aciertos,
+  });
+
+  if (_modoInfinito) {
+    // Modo infinito: mostrar overlay de fallo con puntuación
+    setTimeout(() => _mostrarFalloInfinito(), 400);
+  } else {
+    // Modo normal: reiniciar contador de aciertos consecutivos
+    _aciertos = 0;
+    _renderDots();
+    setTimeout(() => btn.classList.remove('incorrecto'), 450);
+    setTimeout(() => _reproducirInstruccion(), 600);
+  }
 }
 
-// ─── Overlays de nivel ────────────────────────────────────────────────────────
+// ─── Overlays ─────────────────────────────────────────────────────────────────
 
 function _mostrarSubidaNivel() {
   _nivel++;
+  _aciertos = 0;
   const emojis = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '🏆'];
   _el.querySelector('#tc-nivel-up-emoji').textContent = emojis[Math.min(_nivel, emojis.length - 1)];
   _el.querySelector('#tc-nivel-up-texto').textContent =
     _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
   _el.querySelector('#tc-nivel-up-sub').textContent =
-    _lang === 'en' ? `Now ${NIVELES[_nivel]} pictures` : `Ahora ${NIVELES[_nivel]} opciones`;
+    _lang === 'en'
+      ? `Now ${NIVELES[_nivel]} pictures — ${ACIERTOS_POR_NIVEL[_nivel]} in a row!`
+      : `Ahora ${NIVELES[_nivel]} opciones — ¡${ACIERTOS_POR_NIVEL[_nivel]} seguidos!`;
   _el.querySelector('#tc-nivel-up').classList.add('visible');
   lanzarConfeti({ count: 60, container: _el });
   TTS.speak(
@@ -574,12 +642,27 @@ function _mostrarSubidaNivel() {
   }, 2200);
 }
 
-function _mostrarModoInfinito() {
+function _activarModoInfinito() {
+  _modoInfinito = true;
+  _racha        = 0;
+  _aciertos     = 0;
+
+  // Mostrar UI de modo infinito
+  const rachWrap = _el.querySelector('#tc-racha-wrap');
+  const recWrap  = _el.querySelector('#tc-record-wrap');
+  rachWrap.classList.add('visible');
+  if (_mejorRacha > 0) {
+    recWrap.classList.add('visible');
+    _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
+  }
+  _el.querySelector('#tc-dots').style.display = 'none';
+
+  // Overlay de entrada al modo infinito
   _el.querySelector('#tc-nivel-up-emoji').textContent = '🏆';
   _el.querySelector('#tc-nivel-up-texto').textContent =
-    _lang === 'en' ? '¡Champion!' : '¡Campeona!';
+    _lang === 'en' ? '∞ Champion!' : '∞ ¡Campeona!';
   _el.querySelector('#tc-nivel-up-sub').textContent =
-    _lang === 'en' ? '∞ Infinite challenge!' : '∞ ¡Reto infinito!';
+    _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
   _el.querySelector('#tc-nivel-up').classList.add('visible');
   lanzarConfeti({ count: 120, container: _el });
   TTS.speak(
@@ -591,6 +674,38 @@ function _mostrarModoInfinito() {
     _el.querySelector('#tc-nivel-up').classList.remove('visible');
     _nuevaRonda();
   }, 2800);
+}
+
+function _mostrarFalloInfinito() {
+  const esRecord = _racha > _mejorRacha;
+
+  if (esRecord && _racha > 0) {
+    _mejorRacha = _racha;
+    try { localStorage.setItem(MEJOR_RACHA_KEY, String(_mejorRacha)); } catch {}
+    _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
+    _el.querySelector('#tc-record-wrap').classList.add('visible');
+  }
+
+  _el.querySelector('#tc-fallo-racha').textContent  = _racha;
+  _el.querySelector('#tc-fallo-emoji').textContent  = _racha >= 10 ? '🌟' : '💫';
+  _el.querySelector('#tc-fallo-label').textContent  =
+    _lang === 'en' ? 'consecutive hits' : 'aciertos consecutivos';
+  _el.querySelector('#tc-fallo-record').textContent = esRecord && _racha > 0
+    ? (_lang === 'en' ? `🏆 New record!` : `🏆 ¡Nuevo récord!`)
+    : (_mejorRacha > 0
+        ? (_lang === 'en' ? `Best: ${_mejorRacha}` : `Récord: ${_mejorRacha}`)
+        : '');
+  _el.querySelector('#tc-fallo-btn').textContent =
+    _lang === 'en' ? 'Keep playing' : 'Seguir jugando';
+  _el.querySelector('#tc-fallo-infinito').classList.add('visible');
+
+  if (_racha >= 5) lanzarConfeti({ count: 40, container: _el });
+  TTS.speak(
+    _lang === 'en'
+      ? `${_racha} in a row!${esRecord ? ' New record!' : ''}`
+      : `¡${_racha} seguidos!${esRecord ? ' ¡Nuevo récord!' : ''}`,
+    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.1, rate: 0.9 }
+  );
 }
 
 // ─── Modal temas ──────────────────────────────────────────────────────────────
@@ -640,8 +755,13 @@ function _seleccionarTema(id) {
   } else {
     _pool = _shuffle([..._catalogo]);
   }
-  _nivel = 0;
-  _aciertos = 0;
+  _nivel        = 0;
+  _aciertos     = 0;
+  _modoInfinito = false;
+  _racha        = 0;
+  _el.querySelector('#tc-racha-wrap').classList.remove('visible');
+  _el.querySelector('#tc-record-wrap').classList.remove('visible');
+  _el.querySelector('#tc-dots').style.display = '';
   _nuevaRonda();
 }
 
@@ -649,7 +769,7 @@ function _seleccionarTema(id) {
 
 function _reproducirInstruccion() {
   if (!_objetivo) return;
-  const lang = _lang === 'en' ? 'en-US' : 'es-MX';
+  const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
   const texto = _lang === 'en'
     ? `Touch the ${_objetivo.en || _objetivo.es}`
     : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
@@ -695,13 +815,47 @@ function _actualizarPrompt() {
 }
 
 function _renderDots() {
-  const wrap = _el.querySelector('#tc-dots');
+  if (_modoInfinito) return;  // en modo infinito los dots no aplican
+  const wrap             = _el.querySelector('#tc-dots');
+  const aciertosNecesarios = ACIERTOS_POR_NIVEL[Math.min(_nivel, ACIERTOS_POR_NIVEL.length - 1)];
   wrap.innerHTML = '';
-  for (let i = 0; i < ACIERTOS_UP; i++) {
+  for (let i = 0; i < aciertosNecesarios; i++) {
     const d = document.createElement('div');
     d.className = 'tc-dot' + (i < _aciertos ? ' lleno' : '');
     wrap.appendChild(d);
   }
+}
+
+function _actualizarRacha() {
+  if (!_el) return;
+  _el.querySelector('#tc-racha-valor').textContent = _racha;
+}
+
+function _ajustarTamanos() {
+  const grid    = _el.querySelector('#tc-grid');
+  const n       = _opciones.length;
+  const cols    = n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4;
+  const rows    = Math.ceil(n / cols);
+  const gapPx   = 12;
+  const padPx   = 24;
+  const avW     = grid.clientWidth  - padPx - gapPx * (cols - 1);
+  const avH     = grid.clientHeight - padPx - gapPx * (rows - 1);
+  const porAncho  = avW / cols;
+  const porAlto   = avH / rows;
+  const MAX       = MOSAIC_SIZE;
+  const MAX_portrait = 200;
+  const portrait  = grid.clientHeight > grid.clientWidth;
+  const size      = portrait
+    ? Math.min(porAncho, porAlto, MAX_portrait)
+    : Math.min(porAncho, porAlto, MAX);
+
+  grid.querySelectorAll('.tc-opcion').forEach(o => {
+    o.style.width      = size + 'px';
+    o.style.height     = size + 'px';
+    o.style.flexBasis  = size + 'px';
+    o.style.flexGrow   = '0';
+    o.style.flexShrink = '0';
+  });
 }
 
 // ─── Cambio de idioma ─────────────────────────────────────────────────────────

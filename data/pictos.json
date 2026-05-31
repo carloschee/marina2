@@ -3078,5 +3078,110 @@
     "en": "blow it",
     "ruta_img": "soplale.png",
     "art": ""
+  },
+  {
+    "id": 1441,
+    "es": "paracaídas",
+    "en": "parachute",
+    "ruta_img": "paracaidas.png",
+    "art": "el"
+  },
+  {
+    "id": 1442,
+    "es": "limusina",
+    "en": "lomousine",
+    "ruta_img": "limusina.png",
+    "art": "la"
+  },
+  {
+    "id": 1443,
+    "es": "astronauta",
+    "en": "astronaut",
+    "ruta_img": "astronauta.png",
+    "art": ""
+  },
+  {
+    "id": 1444,
+    "es": "yiip",
+    "en": "jeep",
+    "ruta_img": "jeep.png",
+    "art": "el"
+  },
+  {
+    "id": 1445,
+    "es": "mototaxi",
+    "en": "mototaxi",
+    "ruta_img": "mototaxi.png",
+    "art": "el"
+  },
+  {
+    "id": 1446,
+    "es": "kart",
+    "en": "kart",
+    "ruta_img": "kart.png",
+    "art": "el"
+  },
+  {
+    "id": 1447,
+    "es": "motoneta",
+    "en": "scooter",
+    "ruta_img": "motoneta.png",
+    "art": "la"
+  },
+  {
+    "id": 1448,
+    "es": "segway",
+    "en": "segway",
+    "ruta_img": "segway.png",
+    "art": "el"
+  },
+  {
+    "id": 1449,
+    "es": "dirigible",
+    "en": "blimp",
+    "ruta_img": "dirigible.png",
+    "art": "el"
+  },
+  {
+    "id": 1450,
+    "es": "papalote",
+    "en": "kite",
+    "ruta_img": "papalote.png",
+    "art": "el"
+  },
+  {
+    "id": 1451,
+    "es": "avioneta",
+    "en": "light plane",
+    "ruta_img": "avioneta.png",
+    "art": "la"
+  },
+  {
+    "id": 1452,
+    "es": "transbordador espacial",
+    "en": "space shuttle",
+    "ruta_img": "transbordador-espacial.png",
+    "art": "el"
+  },
+  {
+    "id": 1453,
+    "es": "todoterreno",
+    "en": "all-terrain vehicle",
+    "ruta_img": "todoterreno.png",
+    "art": "el"
+  },
+  {
+    "id": 1454,
+    "es": "camión escolar",
+    "en": "school bus",
+    "ruta_img": "camion-escolar.png",
+    "art": "el"
+  },
+  {
+    "id": 1455,
+    "es": "tráiler",
+    "en": "trailer",
+    "ruta_img": "trailer.png",
+    "art": "el"
   }
 ]
