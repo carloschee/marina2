@@ -296,7 +296,7 @@
   {
     "id": 1043,
     "es": "erizo",
-    "en": "sea ??urchin",
+    "en": "hedgehog",
     "ruta_img": "erizo.png",
     "art": "el"
   },
@@ -1653,10 +1653,10 @@
   },
   {
     "id": 1237,
-    "es": "moto",
+    "es": "motocicleta",
     "en": "motorbike",
     "ruta_img": "moto.png",
-    "art": "el"
+    "art": "la"
   },
   {
     "id": 1238,
@@ -1726,7 +1726,7 @@
     "es": "tranvía",
     "en": "tram",
     "ruta_img": "tranvia.png",
-    "art": "la"
+    "art": "el"
   },
   {
     "id": 1248,
@@ -2790,14 +2790,14 @@
     "es": "raíz",
     "en": "root",
     "ruta_img": "raiz.png",
-    "art": "el"
+    "art": "la"
   },
   {
     "id": 1400,
     "es": "rama",
     "en": "branch",
     "ruta_img": "rama.png",
-    "art": "el"
+    "art": "la"
   },
   {
     "id": 1401,
@@ -2909,14 +2909,14 @@
     "es": "izquierda",
     "en": "left",
     "ruta_img": "izquierda.png",
-    "art": ""
+    "art": "la"
   },
   {
     "id": 1417,
     "es": "derecha",
     "en": "right",
     "ruta_img": "derecha.png",
-    "art": ""
+    "art": "la"
   },
   {
     "id": 1418,
@@ -2951,7 +2951,7 @@
     "es": "fin",
     "en": "end",
     "ruta_img": "fin.png",
-    "art": ""
+    "art": "el"
   },
   {
     "id": 1423,
@@ -2993,7 +2993,7 @@
     "es": "mono de nieve",
     "en": "snowman",
     "ruta_img": "mono-nieve.png",
-    "art": "la"
+    "art": "el"
   },
   {
     "id": 1429,
