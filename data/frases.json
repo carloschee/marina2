@@ -724,5 +724,16 @@
         "picto_id": 1309
       }
     ]
+  },
+  {
+    "id": "autobus-de-dos-pisos-es-muy-alto",
+    "lang": "es",
+    "es": "¡autobús de dos pisos, es muy alto!",
+    "nivel": 2,
+    "piezas": [
+      { "tipo": "picto", "texto": "autobús de dos pisos", "picto_id": 1439 },
+      { "tipo": "texto", "texto": "es muy" },
+      { "tipo": "picto", "texto": "alto", "picto_id": 1366 }
+    ]
   }
 ]
