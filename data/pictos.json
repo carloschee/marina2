@@ -3064,5 +3064,12 @@
     "en": "want",
     "ruta_img": "quiero.png",
     "art": ""
+  },
+  {
+    "id": 1439,
+    "es": "autobús de dos pisos",
+    "en": "double decker bus",
+    "ruta_img": "autobus-dos-pisos.png",
+    "art": "el"
   }
 ]
