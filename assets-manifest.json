@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T21:33:44.924Z",
-  "totalAssets": 1525,
+  "generado": "2026-05-31T21:48:25.346Z",
+  "totalAssets": 1526,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -34,6 +34,7 @@
     "./assets/audio/en/astronauta.mp3",
     "./assets/audio/en/asustado.mp3",
     "./assets/audio/en/autobus-dos-pisos.mp3",
+    "./assets/audio/en/autobus-escolar.mp3",
     "./assets/audio/en/autobus.mp3",
     "./assets/audio/en/avergonzado.mp3",
     "./assets/audio/en/avion.mp3",
@@ -514,6 +515,7 @@
     "./assets/audio/es/astronauta.mp3",
     "./assets/audio/es/asustado.mp3",
     "./assets/audio/es/autobus-dos-pisos.mp3",
+    "./assets/audio/es/autobus-escolar.mp3",
     "./assets/audio/es/autobus.mp3",
     "./assets/audio/es/avergonzado.mp3",
     "./assets/audio/es/avion.mp3",
@@ -557,7 +559,6 @@
     "./assets/audio/es/cama.mp3",
     "./assets/audio/es/caminar.mp3",
     "./assets/audio/es/camion-bomberos.mp3",
-    "./assets/audio/es/camion-escolar.mp3",
     "./assets/audio/es/camion.mp3",
     "./assets/audio/es/camiseta.mp3",
     "./assets/audio/es/canoa.mp3",
