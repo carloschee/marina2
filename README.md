@@ -1,7 +1,7 @@
 # Marina 2
 
 App educativa de comunicación aumentativa y alternativa (CAA) para acompañar el desarrollo del lenguaje, basada en pictogramas ARASAAC.
-
+ 
 Diseñada para Emi 🌊
 
 ---
