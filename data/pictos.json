@@ -3183,5 +3183,19 @@
     "en": "trailer",
     "ruta_img": "trailer.png",
     "art": "el"
+  },
+  {
+    "id": 1456,
+    "es": "camión de la basura",
+    "en": "garbage truck",
+    "ruta_img": "camion-basura.png",
+    "art": "el"
+  },
+  {
+    "id": 1457,
+    "es": "quitanieve",
+    "en": "snow plow",
+    "ruta_img": "quitanieve.png",
+    "art": "el"
   }
 ]
