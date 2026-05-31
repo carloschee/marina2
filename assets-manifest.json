@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T23:16:35.523Z",
-  "totalAssets": 1526,
+  "generado": "2026-05-31T23:27:31.299Z",
+  "totalAssets": 1528,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1096,6 +1096,7 @@
     "./assets/pictogramas/calor.png",
     "./assets/pictogramas/cama.png",
     "./assets/pictogramas/caminar.png",
+    "./assets/pictogramas/camion-basura.png",
     "./assets/pictogramas/camion-bomberos.png",
     "./assets/pictogramas/camion.png",
     "./assets/pictogramas/camiseta.png",
@@ -1384,6 +1385,7 @@
     "./assets/pictogramas/queso.png",
     "./assets/pictogramas/quetzal.png",
     "./assets/pictogramas/quinqué.png",
+    "./assets/pictogramas/quitanieve.png",
     "./assets/pictogramas/raiz.png",
     "./assets/pictogramas/rama.png",
     "./assets/pictogramas/rana.png",
