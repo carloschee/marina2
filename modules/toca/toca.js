@@ -57,6 +57,13 @@ let _opciones     = [];
 let _esperando    = false;
 let _audioEl      = null;
 
+// Cache de dimensiones del grid + observer. _ajustarTamanos usa estos
+// valores cacheados (siempre el tamaño real estable) en lugar de medir
+// al vuelo, eliminando la condición de carrera que producía miniaturas.
+let _gridW    = 0;
+let _gridH    = 0;
+let _resizeObs = null;
+
 // ─── API pública ──────────────────────────────────────────────────────────────
 
 export async function init(container) {
@@ -98,6 +105,9 @@ export async function init(container) {
 
 export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
+  _resizeObs?.disconnect();
+  _resizeObs = null;
+  _gridW = 0; _gridH = 0;
   TTS.stop();
   if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
   _el = null; _catalogo = []; _pool = []; _temas = [];
@@ -487,6 +497,49 @@ function _render() {
     _actualizarRacha();
     _nuevaRonda();
   });
+
+  _observarGrid();
+}
+
+// ─── Observer de dimensiones del grid ──────────────────────────────────────────
+// El grid (#tc-grid) tiene un tamaño estable durante la sesión (flex:1 en una
+// columna de altura fija). El ResizeObserver captura ese tamaño de forma
+// confiable DESPUÉS de cada layout y lo cachea. Así _ajustarTamanos() nunca
+// depende de medir en el momento justo — usa el valor cacheado.
+function _observarGrid() {
+  const grid = _el.querySelector('#tc-grid');
+  if (!grid) return;
+
+  _resizeObs?.disconnect();
+
+  if (typeof ResizeObserver === 'undefined') {
+    // Fallback sin ResizeObserver: medir tras el layout
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!_el) return;
+        const g = _el.querySelector('#tc-grid');
+        if (g && g.clientWidth > 50 && g.clientHeight > 50) {
+          _gridW = g.clientWidth; _gridH = g.clientHeight;
+          _ajustarTamanos();
+        }
+      });
+    });
+    return;
+  }
+
+  _resizeObs = new ResizeObserver(entries => {
+    for (const e of entries) {
+      const w = e.contentRect.width;
+      const h = e.contentRect.height;
+      if (w > 50 && h > 50) {
+        const cambio = (Math.abs(w - _gridW) > 1 || Math.abs(h - _gridH) > 1);
+        _gridW = w;
+        _gridH = h;
+        if (cambio) _ajustarTamanos();  // re-dimensionar mosaicos al cambiar el grid
+      }
+    }
+  });
+  _resizeObs.observe(grid);
 }
 
 // ─── Ronda ────────────────────────────────────────────────────────────────────
@@ -598,7 +651,7 @@ function _acierto(btn) {
   _aciertos++;
 
   btn.classList.add('correcto');
-  lanzarConfeti({ count: 30, container: _el });
+  _confeti(30);
 
   const texto   = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
   const archivo = _objetivo.ruta_img;
@@ -671,7 +724,7 @@ function _mostrarSubidaNivel() {
       ? `Now ${NIVELES[_nivel]} pictures — ${ACIERTOS_POR_NIVEL[_nivel]} in a row!`
       : `Ahora ${NIVELES[_nivel]} opciones — ¡${ACIERTOS_POR_NIVEL[_nivel]} seguidos!`;
   _el.querySelector('#tc-nivel-up').classList.add('visible');
-  lanzarConfeti({ count: 60, container: _el });
+  _confeti(60);
   TTS.speak(
     _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`,
     { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
@@ -705,7 +758,7 @@ function _activarModoInfinito() {
   _el.querySelector('#tc-nivel-up-sub').textContent =
     _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
   _el.querySelector('#tc-nivel-up').classList.add('visible');
-  lanzarConfeti({ count: 120, container: _el });
+  _confeti(120);
   TTS.speak(
     _lang === 'en' ? 'Champion! Infinite challenge!' : '¡Campeona! ¡Reto infinito!',
     { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
@@ -740,7 +793,7 @@ function _mostrarFalloInfinito() {
     _lang === 'en' ? 'Keep playing' : 'Seguir jugando';
   _el.querySelector('#tc-fallo-infinito').classList.add('visible');
 
-  if (_racha >= 5) lanzarConfeti({ count: 40, container: _el });
+  if (_racha >= 5) _confeti(40);
   TTS.speak(
     _lang === 'en'
       ? `${_racha} in a row!${esRecord ? ' New record!' : ''}`
@@ -876,11 +929,20 @@ function _ajustarTamanos() {
   const grid    = _el.querySelector('#tc-grid');
   if (!grid) return;
 
-  // Si el grid aún no tiene dimensiones (layout no aplicado), reintentar
-  // en el siguiente frame en lugar de calcular tamaños diminutos.
-  if (grid.clientWidth < 50 || grid.clientHeight < 50) {
-    requestAnimationFrame(() => { if (_el) _ajustarTamanos(); });
-    return;
+  // Usar dimensiones cacheadas por el ResizeObserver (tamaño real estable).
+  // Si el cache aún está vacío (primer render antes de que dispare el observer),
+  // medir directamente; si la medición tampoco es válida, reintentar.
+  let W = _gridW;
+  let H = _gridH;
+  if (W < 50 || H < 50) {
+    W = grid.clientWidth;
+    H = grid.clientHeight;
+    if (W < 50 || H < 50) {
+      requestAnimationFrame(() => { if (_el) _ajustarTamanos(); });
+      return;
+    }
+    _gridW = W;
+    _gridH = H;
   }
 
   const n       = _opciones.length;
@@ -888,15 +950,15 @@ function _ajustarTamanos() {
   const rows    = Math.ceil(n / cols);
   const gapPx   = 12;
   const padPx   = 24;
-  const avW     = grid.clientWidth  - padPx - gapPx * (cols - 1);
-  const avH     = grid.clientHeight - padPx - gapPx * (rows - 1);
+  const avW     = W - padPx - gapPx * (cols - 1);
+  const avH     = H - padPx - gapPx * (rows - 1);
   const porAncho  = avW / cols;
   const porAlto   = avH / rows;
   const MAX       = MOSAIC_SIZE;
   const MAX_portrait = 200;
-  const portrait  = grid.clientHeight > grid.clientWidth;
+  const portrait  = H > W;
   const size      = Math.max(
-    80,  // piso mínimo: nunca menos de 80px aunque el cálculo falle
+    80,  // piso mínimo de seguridad
     portrait
       ? Math.min(porAncho, porAlto, MAX_portrait)
       : Math.min(porAncho, porAlto, MAX)
@@ -935,4 +997,14 @@ function _shuffle(arr) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+// Confeti que NO rompe el layout. lanzarConfeti() muta container.style.position
+// a 'relative', lo que colapsa la altura de _el (que debe ser position:absolute
+// con inset:0). Restauramos 'absolute' inmediatamente — el confeti sigue
+// funcionando porque sus hijos absolutos se anclan igual a _el.
+function _confeti(count) {
+  if (!_el) return;
+  lanzarConfeti({ count, container: _el });
+  _el.style.position = 'absolute';
 }
