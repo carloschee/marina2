@@ -37,8 +37,22 @@ function _urlAudioPicto(pieza, lang) {
   const entrada = pieza.picto_id ? _pictos[pieza.picto_id] : null;
   const nombre  = entrada
     ? entrada.ruta_img.replace(/\.png$/i, '')
-    : pieza.texto;  // legacy sin picto_id: usar texto directamente
+    : sanitizarNombre(pieza.texto);  // legacy sin picto_id
   return AUDIO_URL(nombre, lang);
+}
+
+// Espejo exacto de sanitizar_nombre() en generar-audio.py.
+// Convierte el texto de una pieza en el nombre de archivo que el script
+// realmente produce. Ej: "¿qué hacemos?" → "qué-hacemos" (el archivo en
+// disco, porque "¿qué hacemos?.mp3" es un nombre inválido en Windows).
+// NO afecta el texto que se envía al TTS — ese sigue siendo pieza.texto.
+function sanitizarNombre(texto) {
+  let nombre = (texto || '').trim().toLowerCase();
+  nombre = nombre.replace(/\//g, '-');              // '/' → '-'  (igual que Python)
+  nombre = nombre.replace(/[\\:*?"<>|¿¡!,;.]/g, ''); // resto de inválidos → ''
+  nombre = nombre.split(/\s+/).filter(Boolean).join('-');
+  nombre = nombre.replace(/^-+|-+$/g, '');
+  return nombre || 'sin-nombre';
 }
 
 const NIVELES = [
@@ -725,8 +739,8 @@ function _reproducirPieza(pieza) {
   const lang  = frase?.lang || _lang;
   const url   = pieza.tipo === 'picto'
     ? _urlAudioPicto(pieza, lang)
-    : AUDIO_FRASE_URL(pieza.texto, lang);  // texto sin tocar
-  _reproducirURL(url, pieza.texto, null, lang);
+    : AUDIO_FRASE_URL(sanitizarNombre(pieza.texto), lang);  // archivo sanitizado
+  _reproducirURL(url, pieza.texto, null, lang);  // TTS fallback usa texto original
 }
 
 function _reproducirCadena(piezas, lang = null) {
@@ -734,7 +748,7 @@ function _reproducirCadena(piezas, lang = null) {
   const [primera, ...resto] = piezas;
   const url = primera.tipo === 'picto'
     ? _urlAudioPicto(primera, lang)
-    : AUDIO_FRASE_URL(primera.texto, lang);  // texto sin tocar
+    : AUDIO_FRASE_URL(sanitizarNombre(primera.texto), lang);  // archivo sanitizado
   _reproducirURL(url, primera.texto, () => _reproducirCadena(resto, lang), lang);
 }
 
