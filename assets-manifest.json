@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T00:53:52.330Z",
-  "totalAssets": 1460,
+  "generado": "2026-05-31T06:17:37.419Z",
+  "totalAssets": 1461,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1005,6 +1005,7 @@
     "./assets/pictogramas/arroz.png",
     "./assets/pictogramas/asqueado.png",
     "./assets/pictogramas/asustado.png",
+    "./assets/pictogramas/autobus-dos-pisos.png",
     "./assets/pictogramas/autobus.png",
     "./assets/pictogramas/avergonzado.png",
     "./assets/pictogramas/avion.png",
