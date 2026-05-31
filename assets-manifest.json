@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T17:24:54.918Z",
-  "totalAssets": 1477,
+  "generado": "2026-05-31T17:43:39.506Z",
+  "totalAssets": 1479,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -865,6 +865,7 @@
     "./assets/audio/es/solitario.mp3",
     "./assets/audio/es/sombrero.mp3",
     "./assets/audio/es/sopa.mp3",
+    "./assets/audio/es/soplale.mp3",
     "./assets/audio/es/soplar.mp3",
     "./assets/audio/es/sorprendido.mp3",
     "./assets/audio/es/suave.mp3",
@@ -1373,6 +1374,7 @@
     "./assets/pictogramas/solitario.png",
     "./assets/pictogramas/sombrero.png",
     "./assets/pictogramas/sopa.png",
+    "./assets/pictogramas/soplale.png",
     "./assets/pictogramas/soplar.png",
     "./assets/pictogramas/sorprendido.png",
     "./assets/pictogramas/suave.png",
