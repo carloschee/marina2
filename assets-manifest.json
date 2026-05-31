@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T17:43:39.506Z",
-  "totalAssets": 1479,
+  "generado": "2026-05-31T18:03:34.358Z",
+  "totalAssets": 1478,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -496,7 +496,6 @@
     "./assets/audio/es/arroz.mp3",
     "./assets/audio/es/asqueado.mp3",
     "./assets/audio/es/asustado.mp3",
-    "./assets/audio/es/autobus-dos-pisos.mp3",
     "./assets/audio/es/autobus.mp3",
     "./assets/audio/es/avergonzado.mp3",
     "./assets/audio/es/avion.mp3",
