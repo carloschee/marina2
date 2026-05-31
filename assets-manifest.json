@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T21:06:49.574Z",
-  "totalAssets": 1525,
+  "generado": "2026-05-31T21:18:59.834Z",
+  "totalAssets": 1524,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -883,7 +883,6 @@
     "./assets/audio/es/sandia.mp3",
     "./assets/audio/es/sandwich.mp3",
     "./assets/audio/es/sapo.mp3",
-    "./assets/audio/es/segway.mp3",
     "./assets/audio/es/semilla.mp3",
     "./assets/audio/es/semillas.mp3",
     "./assets/audio/es/serpiente.mp3",
