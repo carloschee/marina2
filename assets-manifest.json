@@ -1,6 +1,6 @@
 {
-  "generado": "2026-05-31T16:55:05.727Z",
-  "totalAssets": 1476,
+  "generado": "2026-05-31T17:24:54.918Z",
+  "totalAssets": 1477,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -985,6 +985,7 @@
     "./assets/audio/frases/es/tienes-hambre.mp3",
     "./assets/audio/frases/es/tienes-sueno-pues-vamos-a-dormir.mp3",
     "./assets/audio/frases/es/tienes-sueno.mp3",
+    "./assets/audio/frases/es/tienes.mp3",
     "./assets/audio/frases/es/tren-rapido.mp3",
     "./assets/img/icon-128.png",
     "./assets/img/icon-192.png",
