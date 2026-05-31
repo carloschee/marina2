@@ -127,8 +127,31 @@ export async function resume(container) {
   _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
   _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+
+  // Re-renderizar el shell HTML (el contenedor fue limpiado por app.js)
   _render();
+
+  // Restaurar estado visual del header
+  const label = _el.querySelector('#tc-tema-label');
+  if (label) label.textContent = _tema ? _tema.label : (_lang === 'en' ? 'All play' : 'Todos juegan');
+
+  if (_modoInfinito) {
+    _el.querySelector('#tc-nivel-valor').textContent = '∞';
+    _el.querySelector('#tc-racha-wrap').classList.add('visible');
+    _el.querySelector('#tc-dots').style.display = 'none';
+    if (_mejorRacha > 0) {
+      _el.querySelector('#tc-record-wrap').classList.add('visible');
+      _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
+    }
+    _actualizarRacha();
+  } else {
+    _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
+    _renderDots();
+  }
+
+  _esperando = false;
   _nuevaRonda();
+
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }
