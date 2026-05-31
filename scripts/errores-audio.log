@@ -1,0 +1,5 @@
+
+── Ejecución 2026-05-30T23:20:56 ──
+  [frases/es piezas texto] assets\audio\frases\es\¿qué hacemos?.mp3
+       texto : ¿qué hacemos?
+       error : [Errno 22] Invalid argument: 'C:\\Users\\carlo\\OneDrive\\Documentos\\Repos\\github\\marina2\\assets\\audio\\frases\\es\\¿qué hacemos?.mp3'
