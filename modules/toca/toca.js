@@ -128,29 +128,34 @@ export async function resume(container) {
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
   _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
 
-  // Re-renderizar el shell HTML (el contenedor fue limpiado por app.js)
-  _render();
+  // NO llamar _render() — el contenedor conserva el HTML del pause().
+  // Solo restaurar estado visual del header y arrancar una nueva ronda.
 
-  // Restaurar estado visual del header
   const label = _el.querySelector('#tc-tema-label');
   if (label) label.textContent = _tema ? _tema.label : (_lang === 'en' ? 'All play' : 'Todos juegan');
 
   if (_modoInfinito) {
-    _el.querySelector('#tc-nivel-valor').textContent = '∞';
-    _el.querySelector('#tc-racha-wrap').classList.add('visible');
+    const nivelValor = _el.querySelector('#tc-nivel-valor');
+    if (nivelValor) nivelValor.textContent = '∞';
+    _el.querySelector('#tc-racha-wrap')?.classList.add('visible');
     _el.querySelector('#tc-dots').style.display = 'none';
     if (_mejorRacha > 0) {
-      _el.querySelector('#tc-record-wrap').classList.add('visible');
-      _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
+      _el.querySelector('#tc-record-wrap')?.classList.add('visible');
+      const rv = _el.querySelector('#tc-record-valor');
+      if (rv) rv.textContent = _mejorRacha;
     }
     _actualizarRacha();
   } else {
-    _el.querySelector('#tc-nivel-valor').textContent = _nivel + 1;
+    const nivelValor = _el.querySelector('#tc-nivel-valor');
+    if (nivelValor) nivelValor.textContent = _nivel + 1;
     _renderDots();
   }
 
   _esperando = false;
-  _nuevaRonda();
+
+  // Diferir _nuevaRonda al siguiente frame para que el layout
+  // esté calculado antes de que _ajustarTamanos() lea clientWidth/clientHeight
+  requestAnimationFrame(() => { if (_el) _nuevaRonda(); });
 
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
@@ -552,7 +557,15 @@ function _renderRonda() {
     const img = document.createElement('img');
     img.src = PICTO_URL(picto.ruta_img);
     img.alt = picto.es;
-    img.onerror = () => { img.style.opacity = '0.3'; };
+    img.onerror = () => {
+      // Reintentar una vez con cache-busting por si el error fue transitorio
+      if (!img.dataset.reintentado) {
+        img.dataset.reintentado = '1';
+        img.src = PICTO_URL(picto.ruta_img) + '?r=' + Date.now();
+      } else {
+        img.style.opacity = '0.3';
+      }
+    };
 
     const label = document.createElement('span');
     label.className = 'tc-opcion-label';
