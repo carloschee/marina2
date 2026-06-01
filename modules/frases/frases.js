@@ -229,8 +229,8 @@ function _render() {
     }
     .fr-tira-pieza {
       display: flex; align-items: center; gap: 8px;
-      padding: 6px 12px; border-radius: 12px;
-      font-weight: 900; font-size: 1rem; min-height: 60px;
+      padding: 4px 12px; border-radius: 12px;
+      font-weight: 900; font-size: 1rem; min-height: 54px;
       animation: fr-pop .22s cubic-bezier(.34,1.56,.64,1) both;
       transition: background .35s, box-shadow .35s, border-color .35s;
     }
@@ -267,25 +267,36 @@ function _render() {
       color: #fb7185; font-size: 1.5rem; font-weight: 300; font-family: inherit;
     }
 
-    /* ── Panel de piezas ── */
+    /* ── Panel de piezas — toma el espacio flexible con scroll propio ── */
     #fr-panel-piezas {
-      flex-shrink: 0;
+      flex: 1 1 auto;          /* ocupa el espacio disponible (≈85%) */
+      min-height: 0;           /* permite que el scroll interno funcione */
+      display: flex; flex-direction: column;
       background: rgba(0,0,0,0.30);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 20px; padding: 12px 16px;
     }
     #fr-panel-label {
+      flex-shrink: 0;
       font-size: .78rem; font-weight: 900; letter-spacing: .10em;
       text-transform: uppercase; color: rgba(255,255,255,0.70); margin-bottom: 10px;
     }
-    #fr-piezas { display: flex; gap: 10px; flex-wrap: wrap; }
+    #fr-piezas {
+      flex: 1; min-height: 0;
+      display: flex; gap: 10px; flex-wrap: wrap;
+      align-content: flex-start;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    #fr-piezas::-webkit-scrollbar { display: none; }
     .fr-pieza {
       display: flex; align-items: center; gap: 10px;
-      padding: 10px 16px; border-radius: 16px;
+      padding: 8px 16px; border-radius: 16px;
       cursor: pointer; border: none;
       font-family: inherit; font-weight: 900; font-size: 1.05rem;
-      min-height: 88px;
+      min-height: 76px;
       transition: transform .14s, opacity .2s, box-shadow .15s;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
@@ -298,18 +309,17 @@ function _render() {
       text-shadow: 0 1px 6px rgba(0,0,0,0.65);
     }
     .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
-    .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
+    .fr-pieza img    { width: 52px; height: 52px; object-fit: contain; border-radius: 10px; }
 
-    /* ── Botón "Elegir frase" (reemplaza el panel con scroll) ── */
+    /* ── Botón "Elegir frase" — fijo debajo del panel de piezas ── */
     #fr-elegir-wrap {
-      flex: 1;
-      min-height: 0;
-      display: flex; align-items: flex-start; justify-content: stretch;
+      flex-shrink: 0;
+      display: flex; align-items: stretch; justify-content: stretch;
     }
     #fr-btn-elegir {
       width: 100%;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      padding: 18px 22px; border-radius: 18px;
+      padding: 16px 22px; border-radius: 18px;
       border: 2px solid var(--fr-nivel-borde, rgba(255,255,255,0.25));
       background: var(--fr-nivel-suave, rgba(255,255,255,0.08));
       color: #fff;
