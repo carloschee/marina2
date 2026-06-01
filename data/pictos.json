@@ -1073,7 +1073,7 @@
   {
     "id": 1154,
     "es": "rayo",
-    "en": "ray",
+    "en": "light plane",
     "ruta_img": "rayo.png",
     "art": "el"
   },
@@ -1164,7 +1164,7 @@
   {
     "id": 1167,
     "es": "saco",
-    "en": "sack",
+    "en": "jacket",
     "ruta_img": "saco.png",
     "art": "el"
   },
@@ -1401,9 +1401,9 @@
   },
   {
     "id": 1201,
-    "es": "suky",
-    "en": "suky",
-    "ruta_img": "suky.png",
+    "es": "suki",
+    "en": "suki",
+    "ruta_img": "suki.png",
     "art": ""
   },
   {
@@ -3060,9 +3060,9 @@
   },
   {
     "id": 1438,
-    "es": "quiero",
-    "en": "want",
-    "ruta_img": "quiero.png",
+    "es": "yo quiero",
+    "en": "I want",
+    "ruta_img": "yo-quiero.png",
     "art": ""
   },
   {
