@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-01T01:26:42.065Z",
-  "totalAssets": 1534,
+  "generado": "2026-06-01T01:29:06.852Z",
+  "totalAssets": 1533,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -386,7 +386,6 @@
     "./assets/audio/en/rana.mp3",
     "./assets/audio/en/rapido.mp3",
     "./assets/audio/en/raton.mp3",
-    "./assets/audio/en/rayo.mp3",
     "./assets/audio/en/red.mp3",
     "./assets/audio/en/regalo.mp3",
     "./assets/audio/en/reir.mp3",
