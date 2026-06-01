@@ -1,4 +1,5 @@
 scripts/archivo/*
+scripts/legacy/*
 scripts/test-pronunciacion,py
 script/descargar-pictos-playwright.py
 script/generar-catalogo-pictos.py
