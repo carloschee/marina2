@@ -2,13 +2,13 @@
 
 App educativa de comunicación aumentativa y alternativa (CAA) para acompañar el desarrollo del lenguaje, basada en pictogramas ARASAAC.
  
-Diseñada para Emi 🌊
+Diseñada para usuarios de CAA 🌊
 
 ---
 
 ## Guía de uso — adulto supervisor
 
-Esta sección es para ti, mamá, papá o terapeuta que acompañas a Emi durante las sesiones.
+Esta sección es para el adulto supervisor — familiar, docente o terapeuta — que acompaña al usuario durante las sesiones.
 
 ### Antes de empezar
 
@@ -44,11 +44,11 @@ En la esquina superior derecha hay dos botones: **ES** y **EN**. Puedes activar 
 
 ### Ajustes — el área de adultos
 
-El botón ⚙️ en la esquina superior derecha abre el panel de ajustes. Para entrar tienes que resolver una suma matemática sencilla — esto evita que Emi acceda por accidente.
+El botón ⚙️ en la esquina superior derecha abre el panel de ajustes. Para entrar tienes que resolver una suma matemática sencilla — esto evita que el usuario acceda por accidente.
 
 Desde Ajustes puedes:
 
-- **Gestionar perfiles** — crear el perfil de Emi con su nombre y avatar, y configurar qué módulos puede ver
+- **Gestionar perfiles** — crear el perfil del usuario con su nombre y avatar, y configurar qué módulos puede ver
 - **Descargar contenido offline** — descarga todos los pictogramas y audios para que la app funcione sin internet. Recomendamos hacerlo la primera vez conectado a WiFi
 - **Consultar el reporte** — un resumen de las sesiones recientes
 - **Cambiar el idioma de la voz** — si prefieres ajustar la velocidad o el tono
@@ -62,20 +62,20 @@ Desde Ajustes puedes:
 ### Recomendaciones para la sesión
 
 - La app está diseñada para sesiones cortas y frecuentes — 10 a 15 minutos funcionan muy bien
-- En **Escucha y Toca**, el módulo sube la dificultad automáticamente cuando Emi acierta consecutivamente — no hace falta que hagas nada
+- En **Escucha y Toca**, el módulo sube la dificultad automáticamente cuando el usuario acierta consecutivamente — no hace falta hacer nada
 - Puedes volver al menú en cualquier momento tocando la flecha ‹ en la esquina superior izquierda. El módulo recuerda dónde quedó y al volver retoma desde ahí
 
 ---
 
-## Guía de uso — Emi
+## Guía de uso — usuario
 
-Esta sección describe lo que ve y hace Emi en cada módulo.
+Esta sección describe lo que ve y hace el usuario en cada módulo.
 
 ---
 
 ### 🔤 Mira y di
 
-Emi ve una retícula con todas las letras del abecedario. Toca una letra y aparece un pictograma grande con la palabra. Puede tocar el botón **escucha** para escuchar cómo se dice, y luego intentar decirla ella misma usando el micrófono 🎙️.
+Se muestra una retícula con todas las letras del abecedario. Al tocar una letra aparece un pictograma grande con la palabra. El botón **escucha** reproduce el audio, y el micrófono 🎙️ permite intentar pronunciarla.
 
 La barra de colores debajo del micrófono le muestra qué tan parecido sonó a la palabra — verde significa muy bien.
 
@@ -85,9 +85,9 @@ La barra de colores debajo del micrófono le muestra qué tan parecido sonó a l
 
 ### 💬 Frases
 
-Emi toca el botón **Elegir frase** para seleccionar qué oración quiere armar. Al elegirla, aparecen las piezas disponibles en la pantalla. Toca las piezas en el orden correcto para armarlas en la tira de arriba. Cuando termina, escucha la frase completa.
+El usuario toca el botón **Elegir frase** para seleccionar qué oración quiere armar. Al elegirla, aparecen las piezas disponibles en la pantalla. Se tocan en el orden correcto para armarlas en la tira de arriba. Al completar la frase, se escucha el audio completo.
 
-Si se equivoca, puede tocar cualquier pieza en la tira para eliminarla junto con las que vienen después y rehacer desde ese punto, sin tener que borrar todo.
+Si se equivoca, puede tocar cualquier pieza en la tira para eliminarla junto con las que vienen después y rehacer desde ese punto, sin borrar todo.
 
 Hay tres niveles de dificultad que puedes seleccionar desde la barra superior:
 - ⭐ Básico — frases cortas de 2 piezas
@@ -102,7 +102,7 @@ Hay tres niveles de dificultad que puedes seleccionar desde la barra superior:
 
 ### 🃏 Memorama
 
-El clásico juego de memoria. Emi elige un tema y voltea las cartas buscando los pares de pictogramas. Al encontrar un par, escucha el nombre de la imagen.
+El clásico juego de memoria. El usuario elige un tema y voltea las cartas buscando los pares de pictogramas. Al encontrar un par, escucha el nombre de la imagen.
 
 Hay tres niveles de dificultad:
 - ⭐ Fácil — 6 pares
@@ -115,7 +115,7 @@ Hay tres niveles de dificultad:
 
 ### 👆 Escucha y Toca
 
-Una voz dice el nombre de un pictograma — por ejemplo "Toca la fresa" — y Emi tiene que tocar la imagen correcta entre varias opciones.
+Una voz dice el nombre de un pictograma — por ejemplo "Toca la fresa" — y el usuario debe tocar la imagen correcta entre varias opciones.
 
 Hay 5 niveles de dificultad que suben automáticamente al acertar el número requerido de veces **de forma consecutiva** (un error reinicia el contador):
 
@@ -352,7 +352,7 @@ El clasificador opera en tres capas: reglas explícitas (diccionario), embedding
 python scripts/editar-vocabulario.py
 ```
 
-Abre una GUI que muestra todos los pictogramas disponibles agrupados por letra inicial. Los que ya están incluidos en `vocabulario.json` aparecen pre-marcados. Permite curar exactamente qué ve Emi en cada letra según sus intereses actuales.
+Abre una GUI que muestra todos los pictogramas disponibles agrupados por letra inicial. Los que ya están incluidos en `vocabulario.json` aparecen pre-marcados. Permite curar exactamente qué ve el usuario en cada letra según sus intereses actuales.
 
 ---
 
