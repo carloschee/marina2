@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-01T01:22:47.950Z",
-  "totalAssets": 1537,
+  "generado": "2026-06-01T01:24:17.006Z",
+  "totalAssets": 1536,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -211,7 +211,6 @@
     "./assets/audio/en/hamaca.mp3",
     "./assets/audio/en/hambre.mp3",
     "./assets/audio/en/hamburguesa.mp3",
-    "./assets/audio/en/helado.mp3",
     "./assets/audio/en/helicoptero.mp3",
     "./assets/audio/en/hierba.mp3",
     "./assets/audio/en/higo.mp3",
