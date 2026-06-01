@@ -682,10 +682,12 @@ function _renderTira() {
   if (placeholder) placeholder.style.display = 'none';
 
   wrap.innerHTML = '';
-  _built.forEach(idx => {
+  _built.forEach((idx, pos) => {
     const pieza = frase.piezas[idx];
     const div   = document.createElement('div');
     div.className = `fr-tira-pieza ${pieza.tipo}`;
+    div.style.cursor = 'pointer';
+    div.title = 'Tocar para corregir desde aquí';
 
     if (pieza.tipo === 'picto') {
       const img     = document.createElement('img');
@@ -699,8 +701,27 @@ function _renderTira() {
     const span       = document.createElement('span');
     span.textContent = pieza.texto;
     div.appendChild(span);
+
+    // Tocar una pieza de la tira la quita junto con las posteriores,
+    // devolviéndolas a las piezas disponibles (corrección puntual).
+    div.addEventListener('click', () => _quitarDesde(pos));
+
     wrap.appendChild(div);
   });
+}
+
+// ─── Quitar pieza(s) de la tira ────────────────────────────────────────────────
+// Quita la pieza en la posición `pos` de la tira y todas las que vienen
+// después, devolviéndolas a las piezas disponibles. Mantiene la secuencia
+// consistente (sin huecos) para que Emi pueda rehacer desde ese punto.
+function _quitarDesde(pos) {
+  if (pos < 0 || pos >= _built.length) return;
+  haptic(10);
+
+  _built = _built.slice(0, pos);   // conservar solo las anteriores a `pos`
+  _el.querySelector('#fr-tira').classList.remove('correcto');
+  _renderTira();
+  _renderPiezas();   // re-habilita en disponibles las que ya no están en _built
 }
 
 // ─── Eventos ──────────────────────────────────────────────────────────────────
