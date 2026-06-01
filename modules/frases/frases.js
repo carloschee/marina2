@@ -9,17 +9,16 @@
    ├─────────────────────────────────────────────────┤
    │ PIEZAS — chips tocables (picto o texto)          │
    ├─────────────────────────────────────────────────┤
-   │ Selector de frases (pills del nivel activo)      │
+   │ [ Elegir frase ▾ ]  → abre modal a pantalla      │
    └─────────────────────────────────────────────────┘
+
+   El modal muestra la lista de frases del nivel activo. Al tocar una:
+   se cierra, cargan las piezas y se reproduce la frase completa.
 
    Niveles de dificultad:
    · 1 — básico:      2 piezas, estructura simple
    · 2 — intermedio:  3 piezas, verbos o adjetivos
    · 3 — avanzado:    4+ piezas, frases compuestas
-
-   Feedback de orden:
-   · Correcto  → piezas en tira con borde verde + confeti
-   · Distinto  → sin penalización, TTS lee la frase igual
 */
 
 import { TTS }                   from '../../core/tts.js';
@@ -114,9 +113,9 @@ export async function resume(container) {
   _render();
   _renderNiveles();
   _aplicarTema(_nivel);
-  _renderSelector();
   _renderPiezas();
   _renderTira();
+  _actualizarBotonElegir();
   _actualizarVacio();
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
@@ -183,7 +182,6 @@ function _render() {
     #fr-niveles {
       flex-shrink: 0;
       display: flex; align-items: center; gap: 8px;
-      /* Sin acciones aquí — viven en la tira */
     }
     #fr-niveles-label {
       font-size: .85rem; font-weight: 900; letter-spacing: .08em;
@@ -215,6 +213,8 @@ function _render() {
       border: 1.5px dashed rgba(255,255,255,0.15);
       border-radius: 20px; padding: 12px 16px;
       min-height: 88px;
+      max-height: 140px;
+      overflow: hidden;
       display: flex; align-items: center; gap: 10px;
       transition: border-color .35s, border-style .35s;
     }
@@ -300,55 +300,78 @@ function _render() {
     .fr-pieza.usada  { opacity: 0.28; pointer-events: none; }
     .fr-pieza img    { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
 
-    /* ── Selector de frases ── */
-    #fr-selector-wrap {
+    /* ── Botón "Elegir frase" (reemplaza el panel con scroll) ── */
+    #fr-elegir-wrap {
       flex: 1;
       min-height: 0;
-      position: relative;
+      display: flex; align-items: flex-start; justify-content: stretch;
     }
-    #fr-selector-wrap::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 56px;
-      pointer-events: none;
-      background: linear-gradient(to top, rgba(5,30,65,0.85) 0%, transparent 100%);
-      border-radius: 0 0 12px 12px;
-      transition: opacity .3s;
+    #fr-btn-elegir {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 18px 22px; border-radius: 18px;
+      border: 2px solid var(--fr-nivel-borde, rgba(255,255,255,0.25));
+      background: var(--fr-nivel-suave, rgba(255,255,255,0.08));
+      color: #fff;
+      cursor: pointer; font-family: inherit; font-weight: 900;
+      font-size: 1.15rem; text-align: left;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.20);
+      transition: transform .12s, background .2s, border-color .2s;
     }
-    #fr-selector-wrap.al-fondo::after { opacity: 0; }
-    #fr-selector {
-      height: 100%;
-      display: flex; flex-direction: column;
-      gap: 8px;
-      overflow-y: auto;
+    #fr-btn-elegir:active { transform: scale(.97); }
+    #fr-btn-elegir-texto { flex: 1; }
+    #fr-btn-elegir-flecha {
+      font-size: .9rem; opacity: .6; flex-shrink: 0;
+    }
+
+    /* ── Modal de selección de frases ── */
+    #fr-modal {
+      position: absolute; inset: 0; z-index: 30;
+      background: rgba(5,20,50,0.80);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      display: flex; align-items: flex-end;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    #fr-modal.visible { opacity: 1; pointer-events: all; }
+    #fr-modal-box {
+      width: 100%; max-height: 78vh; overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding-right: 2px;
-      padding-bottom: 48px;
+      background: rgba(12,30,70,0.97);
+      border-radius: 24px 24px 0 0;
+      padding: 20px 16px calc(28px + env(safe-area-inset-bottom, 0px));
+      border-top: 2px solid var(--fr-nivel-borde, rgba(255,255,255,0.15));
+      transform: translateY(20px);
+      transition: transform .3s cubic-bezier(.34,1.1,.64,1);
     }
-    #fr-selector::-webkit-scrollbar { display: none; }
-    .fr-pill {
+    #fr-modal.visible #fr-modal-box { transform: translateY(0); }
+    #fr-modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    #fr-modal-titulo {
+      font-size: .85rem; font-weight: 900; letter-spacing: .10em;
+      text-transform: uppercase; color: var(--fr-nivel-color, rgba(255,255,255,0.70));
+    }
+    #fr-modal-cerrar {
+      width: 38px; height: 38px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.12); color: #fff; font-size: 1.3rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: transform .12s;
+    }
+    #fr-modal-cerrar:active { transform: scale(.88); }
+    #fr-modal-lista { display: flex; flex-direction: column; gap: 10px; }
+    .fr-modal-frase {
       width: 100%; box-sizing: border-box; text-align: left;
-      padding: 12px 20px; border-radius: 16px;
+      padding: 16px 20px; border-radius: 16px;
       border: 1.5px solid var(--fr-nivel-borde, rgba(255,255,255,0.18));
       background: var(--fr-nivel-suave, rgba(255,255,255,0.08));
-      color: var(--fr-nivel-color, rgba(255,255,255,0.85));
-      cursor: pointer; font-family: inherit; font-weight: 800; font-size: 1.1rem;
+      color: #fff;
+      cursor: pointer; font-family: inherit; font-weight: 800; font-size: 1.2rem;
       white-space: normal; line-height: 1.3;
       text-shadow: 0 1px 6px rgba(0,0,0,0.50);
-      transition: background .18s, color .18s, transform .12s,
-                  border-color .18s, box-shadow .18s;
+      transition: transform .12s, background .15s;
     }
-    .fr-pill:active { transform: scale(.97); }
-    .fr-pill.activa {
-      background: var(--fr-nivel-color, #38bdf8);
-      color: #07212e;
-      border-color: transparent;
-      font-weight: 900; font-size: 1.15rem;
-      text-shadow: none;
-      box-shadow: 0 4px 14px var(--fr-nivel-borde, rgba(56,189,248,0.35));
-    }
+    .fr-modal-frase:active { transform: scale(.97); }
 
     /* ── Estado vacío ── */
     #fr-vacio {
@@ -364,12 +387,12 @@ function _render() {
     }
   </style>
 
-  <!-- Selector de nivel — solo botones de dificultad, sin acciones -->
+  <!-- Selector de nivel -->
   <div id="fr-niveles">
     <span id="fr-niveles-label">Nivel</span>
   </div>
 
-  <!-- Tira de construcción — los botones 🔊 y × viven aquí -->
+  <!-- Tira de construcción -->
   <div id="fr-tira">
     <div id="fr-tira-piezas">
       <span id="fr-tira-placeholder">toca las piezas en orden…</span>
@@ -392,15 +415,29 @@ function _render() {
     <div id="fr-piezas"></div>
   </div>
 
-  <!-- Selector de frases -->
-  <div id="fr-selector-wrap">
-    <div id="fr-selector"></div>
+  <!-- Botón para abrir el modal de frases (en el lugar donde estaban las pills) -->
+  <div id="fr-elegir-wrap">
+    <button id="fr-btn-elegir">
+      <span id="fr-btn-elegir-texto">Elegir frase</span>
+      <span id="fr-btn-elegir-flecha">▾</span>
+    </button>
   </div>
 
   <!-- Estado vacío -->
   <div id="fr-vacio">
     <span style="font-size:2.5rem">🔤</span>
     No hay frases para este nivel todavía.
+  </div>
+
+  <!-- Modal de selección de frases -->
+  <div id="fr-modal">
+    <div id="fr-modal-box">
+      <div id="fr-modal-header">
+        <span id="fr-modal-titulo">Elige una frase</span>
+        <button id="fr-modal-cerrar" title="Cerrar">×</button>
+      </div>
+      <div id="fr-modal-lista"></div>
+    </div>
   </div>
   `;
 
@@ -415,7 +452,6 @@ function _renderNiveles() {
   wrap.innerHTML = '';
   wrap.appendChild(label);
 
-  // Solo mostrar niveles que tienen frases en el idioma activo
   const nivelesConFrases = NIVELES.filter(n =>
     _todasFrases.some(f => {
       if (f.nivel !== n.id) return false;
@@ -431,7 +467,7 @@ function _renderNiveles() {
   nivelesConFrases.forEach(n => {
     const btn = document.createElement('button');
     btn.className   = 'fr-nivel-btn' + (n.id === _nivel ? ' activo' : '');
-    btn.textContent = n.label;          // solo estrellas — sin texto del título
+    btn.textContent = n.label;
     btn.title       = n.titulo;
     if (n.id === _nivel) {
       btn.style.borderColor = n.color;
@@ -442,7 +478,6 @@ function _renderNiveles() {
     btn.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
     wrap.appendChild(btn);
   });
-  // No hay acciones que mover — viven en la tira (HTML estático)
 }
 
 function _cambiarNivel(nivel) {
@@ -458,10 +493,11 @@ function _cambiarNivel(nivel) {
   _renderNiveles();
   _aplicarTema(nivel);
   _el.querySelector('#fr-tira').classList.remove('correcto');
-  _renderSelector();
   _renderPiezas();
   _renderTira();
+  _actualizarBotonElegir();
   _actualizarVacio();
+  // Cambiar de nivel NO abre el modal ni carga frase — solo cambia presentación.
 }
 
 function _aplicarTema(nivel) {
@@ -491,37 +527,52 @@ function _actualizarVacio() {
   const vacio = _el.querySelector('#fr-vacio');
   const panel = _el.querySelector('#fr-panel-piezas');
   const tira  = _el.querySelector('#fr-tira');
-  const sel   = _el.querySelector('#fr-selector-wrap');
+  const elegir = _el.querySelector('#fr-elegir-wrap');
   const sinFrases = _frases.length === 0;
-  vacio.style.display = sinFrases ? 'flex'  : 'none';
-  panel.style.display = sinFrases ? 'none'  : '';
-  tira.style.display  = sinFrases ? 'none'  : '';
-  sel.style.display   = sinFrases ? 'none'  : '';
+  vacio.style.display  = sinFrases ? 'flex' : 'none';
+  panel.style.display  = sinFrases ? 'none' : '';
+  tira.style.display   = sinFrases ? 'none' : '';
+  elegir.style.display = sinFrases ? 'none' : '';
 }
 
-// ─── Selector de frases ───────────────────────────────────────────────────────
-function _renderSelector() {
-  const wrap     = _el.querySelector('#fr-selector');
-  const nivelCfg = NIVELES.find(n => n.id === _nivel);
-  wrap.innerHTML = '';
+// ─── Botón "Elegir frase" ───────────────────────────────────────────────────────
+function _actualizarBotonElegir() {
+  const txt = _el.querySelector('#fr-btn-elegir-texto');
+  if (!txt) return;
+  if (_activa >= 0 && _frases[_activa]) {
+    const f = _frases[_activa];
+    txt.textContent = _lang === 'en' ? (f.en || f.es) : f.es;
+  } else {
+    txt.textContent = _lang === 'en' ? 'Choose a phrase' : 'Elegir frase';
+  }
+}
+
+// ─── Modal de frases ────────────────────────────────────────────────────────────
+function _abrirModal() {
+  const lista = _el.querySelector('#fr-modal-lista');
+  const titulo = _el.querySelector('#fr-modal-titulo');
+  if (titulo) titulo.textContent = _lang === 'en' ? 'Choose a phrase' : 'Elige una frase';
+  lista.innerHTML = '';
 
   _frases.forEach((f, i) => {
     const btn = document.createElement('button');
-    btn.className = 'fr-pill' + (i === _activa ? ' activa' : '');
-    if (i === _activa && nivelCfg) {
-      btn.style.background = nivelCfg.color;
-      btn.style.color      = '#07212e';
-      btn.style.fontWeight = '900';
-    }
+    btn.className = 'fr-modal-frase';
     btn.textContent = _lang === 'en' ? (f.en || f.es) : f.es;
     btn.addEventListener('click', () => {
-      haptic(8);
+      haptic(10);
+      _cerrarModal();
       _seleccionarFrase(i);
       const texto = _lang === 'en' ? (f.en || f.es) : f.es;
       _reproducirFrase(texto, f.id);
     });
-    wrap.appendChild(btn);
+    lista.appendChild(btn);
   });
+
+  _el.querySelector('#fr-modal').classList.add('visible');
+}
+
+function _cerrarModal() {
+  _el.querySelector('#fr-modal')?.classList.remove('visible');
 }
 
 // ─── Seleccionar frase ────────────────────────────────────────────────────────
@@ -529,23 +580,9 @@ function _seleccionarFrase(idx) {
   _activa = idx;
   _built  = [];
   _el.querySelector('#fr-tira').classList.remove('correcto');
-
-  const nivelCfg = NIVELES.find(n => n.id === _nivel);
-  _el.querySelectorAll('.fr-pill').forEach((p, i) => {
-    p.classList.toggle('activa', i === idx);
-    if (i === idx) {
-      p.style.background = nivelCfg?.color || '#14b8a6';
-      p.style.color      = '#07212e';
-      p.style.fontWeight = '900';
-    } else {
-      p.style.background = '';
-      p.style.color      = '';
-      p.style.fontWeight = '';
-    }
-  });
-
   _renderPiezas();
   _renderTira();
+  _actualizarBotonElegir();
   if (_activa >= 0 && _frases[_activa]) _precargarFrase(_frases[_activa].id);
 }
 
@@ -587,8 +624,8 @@ function _tocarPieza(idx) {
   const pieza = frase.piezas[idx];
 
   _built.push(idx);
-  _renderTira();              // render primero: la UI nunca debe depender del audio
-  _reproducirPieza(pieza);    // si el audio falla, la pieza ya está en la tira
+  _renderTira();              // render primero: la UI nunca depende del audio
+  _reproducirPieza(pieza);
 
   const btnPieza = _el.querySelector(`.fr-pieza[data-idx="${idx}"]`);
   if (btnPieza) btnPieza.classList.add('usada');
@@ -611,6 +648,7 @@ function _onFraseCompleta(frase) {
     tira.classList.add('correcto');
     tira.querySelectorAll('.fr-tira-pieza').forEach(p => p.classList.add('correcto'));
     lanzarConfeti({ count: 60, container: _el });
+    _el.style.position = 'absolute';  // restaurar tras confeti
   }
 
   const texto = _lang === 'en' ? (frase.en || frase.es) : frase.es;
@@ -687,15 +725,19 @@ function _bindEvents() {
     _renderPiezas();
   });
 
-  // Fade inferior del selector
-  const sel  = _el.querySelector('#fr-selector');
-  const wrap = _el.querySelector('#fr-selector-wrap');
-  const _actualizarFade = () => {
-    const alFondo = sel.scrollTop + sel.clientHeight >= sel.scrollHeight - 4;
-    wrap.classList.toggle('al-fondo', alFondo);
-  };
-  sel.addEventListener('scroll', _actualizarFade, { passive: true });
-  requestAnimationFrame(_actualizarFade);
+  // Botón "Elegir frase" → abre el modal
+  _el.querySelector('#fr-btn-elegir').addEventListener('click', () => {
+    haptic(8);
+    if (_frases.length) _abrirModal();
+  });
+
+  // Cerrar modal con la × o tocando el fondo
+  _el.querySelector('#fr-modal-cerrar').addEventListener('click', () => {
+    haptic(8); _cerrarModal();
+  });
+  _el.querySelector('#fr-modal').addEventListener('click', e => {
+    if (e.target === _el.querySelector('#fr-modal')) _cerrarModal();
+  });
 }
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
@@ -739,8 +781,8 @@ function _reproducirPieza(pieza) {
   const lang  = frase?.lang || _lang;
   const url   = pieza.tipo === 'picto'
     ? _urlAudioPicto(pieza, lang)
-    : AUDIO_FRASE_URL(sanitizarNombre(pieza.texto), lang);  // archivo sanitizado
-  _reproducirURL(url, pieza.texto, null, lang);  // TTS fallback usa texto original
+    : AUDIO_FRASE_URL(sanitizarNombre(pieza.texto), lang);
+  _reproducirURL(url, pieza.texto, null, lang);
 }
 
 function _reproducirCadena(piezas, lang = null) {
@@ -748,7 +790,7 @@ function _reproducirCadena(piezas, lang = null) {
   const [primera, ...resto] = piezas;
   const url = primera.tipo === 'picto'
     ? _urlAudioPicto(primera, lang)
-    : AUDIO_FRASE_URL(sanitizarNombre(primera.texto), lang);  // archivo sanitizado
+    : AUDIO_FRASE_URL(sanitizarNombre(primera.texto), lang);
   _reproducirURL(url, primera.texto, () => _reproducirCadena(resto, lang), lang);
 }
 
