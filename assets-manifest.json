@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-01T01:20:07.429Z",
-  "totalAssets": 1536,
+  "generado": "2026-06-01T01:20:39.358Z",
+  "totalAssets": 1537,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -98,6 +98,7 @@
     "./assets/audio/en/cerrar.mp3",
     "./assets/audio/en/chaleco.mp3",
     "./assets/audio/en/chocolate.mp3",
+    "./assets/audio/en/cielo.mp3",
     "./assets/audio/en/cinturon.mp3",
     "./assets/audio/en/ciruela.mp3",
     "./assets/audio/en/coche.mp3",
