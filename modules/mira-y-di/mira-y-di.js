@@ -14,6 +14,12 @@ const LETRAS = 'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z'.split(' 
 
 const pictoURL = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}.png`;
 
+// Pantallas angostas (≤375px, ej. iPhone SE) donde el reconocimiento de voz
+// de iOS falla con service-not-allowed. En estos dispositivos el micrófono
+// se desactiva por completo: no se muestra el botón ni se solicita acceso.
+const _micDeshabilitado = () =>
+  (window.matchMedia && window.matchMedia('(max-width: 375px)').matches);
+
 // ─── Estado ───────────────────────────────────────────────────────────────────
 let _el         = null;
 let _vocab      = null;
@@ -335,7 +341,6 @@ function _render() {
 
       .md-nav-btn { width:38px; height:38px; font-size:1.1rem; }
       #md-btn-escucha { height:40px; font-size:.85rem; gap:6px; }
-
     }
 
     /* ── iPhone SE / pantallas muy angostas (≤390px) ─────────────── */
@@ -552,7 +557,18 @@ function _bindEvents() {
     const archivo = item.picto;
     _hablar(texto, lang, archivo);
   });
-  _el.querySelector('#md-btn-mic')?.addEventListener('click', _toggleMic);
+
+  // Micrófono: en pantallas angostas (≤375px, iPhone SE) se desactiva por
+  // completo — se oculta el botón y NO se enlaza el handler, de modo que
+  // nunca se llama a _iniciarMic() ni se solicita acceso al micrófono.
+  const btnMic = _el.querySelector('#md-btn-mic');
+  if (btnMic) {
+    if (_micDeshabilitado()) {
+      btnMic.style.display = 'none';
+    } else {
+      btnMic.addEventListener('click', _toggleMic);
+    }
+  }
 
   const picto = _el.querySelector('#md-picto');
   if (picto) _initSpringDrag(picto);
@@ -599,25 +615,11 @@ function _toggleMic() {
 }
 
 function _iniciarMic() {
+  if (_micDeshabilitado()) return;  // nunca solicitar mic en pantallas angostas
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { _mostrarMedidor(0, 'Micrófono no disponible en este navegador'); return; }
 
-  // DIAGNÓSTICO: mostrar siempre el medidor y reportar estado
-  _el.querySelector('#md-medidor-wrap')?.classList.add('visible');
-
-  if (!SR) {
-    _actualizarBarra(0, '❌ SpeechRecognition NO existe en este navegador');
-    return;
-  }
-
-  _actualizarBarra(0, '✓ API existe, iniciando…');
-
-  try {
-    _recog = new SR();
-  } catch (err) {
-    _actualizarBarra(0, '❌ Error al crear: ' + err.message);
-    return;
-  }
-
+  _recog = new SR();
   _recog.lang            = _lang === 'es' ? 'es-MX' : 'en-US';
   _recog.interimResults  = true;
   _recog.continuous      = true;
@@ -626,14 +628,8 @@ function _iniciarMic() {
   _mejorScore = 0;
   _micActivo  = true;
   _el.querySelector('#md-btn-mic')?.classList.add('activo');
-
-  _recog.onstart = () => {
-    _actualizarBarra(0, '🎙️ Escuchando… (onstart OK)');
-  };
-
-  _recog.onaudiostart = () => {
-    _actualizarBarra(0, '🔊 Audio capturándose…');
-  };
+  _el.querySelector('#md-medidor-wrap')?.classList.add('visible');
+  _actualizarBarra(0, '…');
 
   _recog.onresult = (e) => {
     let textoMejor = '';
@@ -646,26 +642,16 @@ function _iniciarMic() {
         if (score > _mejorScore) { _mejorScore = score; textoMejor = transcripcion; }
       }
     }
-    _actualizarBarra(_mejorScore, textoMejor || '(sin texto aún)');
+    _actualizarBarra(_mejorScore, textoMejor);
   };
 
   _recog.onerror = (e) => {
-    _actualizarBarra(_mejorScore, '⚠️ Error: ' + e.error);
-    if (e.error !== 'no-speech') { _detenerMic(); }
+    if (e.error !== 'no-speech') { _actualizarBarra(_mejorScore, `Error: ${e.error}`); _detenerMic(); }
   };
 
-  _recog.onend = () => {
-    if (_micActivo) { try { _recog.start(); } catch (err) {
-      _actualizarBarra(_mejorScore, '⚠️ onend restart falló: ' + err.message);
-    } }
-  };
+  _recog.onend = () => { if (_micActivo) { try { _recog.start(); } catch {} } };
 
-  try {
-    _recog.start();
-    _actualizarBarra(0, '▶️ start() llamado…');
-  } catch (e) {
-    _actualizarBarra(0, '❌ start() lanzó: ' + e.message);
-  }
+  try { _recog.start(); } catch (e) { console.warn('[mic]', e); }
 }
 
 function _detenerMic() {
