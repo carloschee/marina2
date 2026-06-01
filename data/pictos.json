@@ -3204,5 +3204,677 @@
     "en": "want",
     "ruta_img": "quiero.png",
     "art": ""
+  },
+  {
+    "id": 1459,
+    "es": "alce",
+    "en": "moose",
+    "ruta_img": "alce.png",
+    "art": "el"
+  },
+  {
+    "id": 1460,
+    "es": "alpaca",
+    "en": "alpaca",
+    "ruta_img": "alpaca.png",
+    "art": "la"
+  },
+  {
+    "id": 1461,
+    "es": "anguila",
+    "en": "eel",
+    "ruta_img": "anguila.png",
+    "art": "la"
+  },
+  {
+    "id": 1462,
+    "es": "animales",
+    "en": "animals",
+    "ruta_img": "animales.png",
+    "art": "los"
+  },
+  {
+    "id": 1463,
+    "es": "armadillo",
+    "en": "armadillo",
+    "ruta_img": "armadillo.png",
+    "art": "el"
+  },
+  {
+    "id": 1464,
+    "es": "avestruz",
+    "en": "ostrich",
+    "ruta_img": "avestruz.png",
+    "art": "el"
+  },
+  {
+    "id": 1465,
+    "es": "avispa",
+    "en": "wasp",
+    "ruta_img": "avispa.png",
+    "art": "la"
+  },
+  {
+    "id": 1466,
+    "es": "buitre",
+    "en": "vulture",
+    "ruta_img": "buitre.png",
+    "art": "el"
+  },
+  {
+    "id": 1467,
+    "es": "burro",
+    "en": "donkey",
+    "ruta_img": "burro.png",
+    "art": "el"
+  },
+  {
+    "id": 1468,
+    "es": "búfalo",
+    "en": "buffalo",
+    "ruta_img": "bufalo.png",
+    "art": "el"
+  },
+  {
+    "id": 1469,
+    "es": "caballito de mar",
+    "en": "seahorse",
+    "ruta_img": "caballito-de-mar.png",
+    "art": "el"
+  },
+  {
+    "id": 1470,
+    "es": "cabra",
+    "en": "goat",
+    "ruta_img": "cabra.png",
+    "art": "la"
+  },
+  {
+    "id": 1471,
+    "es": "cacatúa",
+    "en": "cockatoo",
+    "ruta_img": "cacatua.png",
+    "art": "la"
+  },
+  {
+    "id": 1472,
+    "es": "caimán",
+    "en": "caiman",
+    "ruta_img": "caiman.png",
+    "art": "el"
+  },
+  {
+    "id": 1473,
+    "es": "camaleón",
+    "en": "chameleon",
+    "ruta_img": "camaleon.png",
+    "art": "el"
+  },
+  {
+    "id": 1474,
+    "es": "camello",
+    "en": "camel",
+    "ruta_img": "camello.png",
+    "art": "el"
+  },
+  {
+    "id": 1475,
+    "es": "canario",
+    "en": "canary",
+    "ruta_img": "canario.png",
+    "art": "el"
+  },
+  {
+    "id": 1476,
+    "es": "cangrejo",
+    "en": "crab",
+    "ruta_img": "cangrejo.png",
+    "art": "el"
+  },
+  {
+    "id": 1477,
+    "es": "canguro",
+    "en": "kangaroo",
+    "ruta_img": "canguro.png",
+    "art": "el"
+  },
+  {
+    "id": 1478,
+    "es": "capibara",
+    "en": "capybara",
+    "ruta_img": "capibara.png",
+    "art": "la"
+  },
+  {
+    "id": 1479,
+    "es": "caracol",
+    "en": "snail",
+    "ruta_img": "caracol.png",
+    "art": "el"
+  },
+  {
+    "id": 1480,
+    "es": "carnero",
+    "en": "ram",
+    "ruta_img": "carnero.png",
+    "art": "el"
+  },
+  {
+    "id": 1481,
+    "es": "carpa koi",
+    "en": "koi carp",
+    "ruta_img": "carpa-koi.png",
+    "art": "la"
+  },
+  {
+    "id": 1482,
+    "es": "castor",
+    "en": "beaver",
+    "ruta_img": "castor.png",
+    "art": "el"
+  },
+  {
+    "id": 1483,
+    "es": "cerdo",
+    "en": "pig",
+    "ruta_img": "cerdo.png",
+    "art": "el"
+  },
+  {
+    "id": 1484,
+    "es": "chimpancé",
+    "en": "chimpanzee",
+    "ruta_img": "chimpance.png",
+    "art": "el"
+  },
+  {
+    "id": 1485,
+    "es": "ciempiés",
+    "en": "centipede",
+    "ruta_img": "ciempies.png",
+    "art": "el"
+  },
+  {
+    "id": 1486,
+    "es": "cigüeña",
+    "en": "stork",
+    "ruta_img": "ciguena.png",
+    "art": "la"
+  },
+  {
+    "id": 1487,
+    "es": "cisne",
+    "en": "swan",
+    "ruta_img": "cisne.png",
+    "art": "el"
+  },
+  {
+    "id": 1488,
+    "es": "cocodrilo",
+    "en": "crocodile",
+    "ruta_img": "cocodrilo.png",
+    "art": "el"
+  },
+  {
+    "id": 1489,
+    "es": "codorniz",
+    "en": "quail",
+    "ruta_img": "codorniz.png",
+    "art": "la"
+  },
+  {
+    "id": 1490,
+    "es": "colibrí",
+    "en": "hummingbird",
+    "ruta_img": "colibri.png",
+    "art": "el"
+  },
+  {
+    "id": 1491,
+    "es": "comadreja",
+    "en": "weasel",
+    "ruta_img": "comadreja.png",
+    "art": "la"
+  },
+  {
+    "id": 1492,
+    "es": "coyote",
+    "en": "coyote",
+    "ruta_img": "coyote.png",
+    "art": "el"
+  },
+  {
+    "id": 1493,
+    "es": "cuervo",
+    "en": "raven",
+    "ruta_img": "cuervo.png",
+    "art": "el"
+  },
+  {
+    "id": 1494,
+    "es": "cóndor",
+    "en": "condor",
+    "ruta_img": "condor.png",
+    "art": "el"
+  },
+  {
+    "id": 1495,
+    "es": "dromedario",
+    "en": "dromedary",
+    "ruta_img": "dromedario.png",
+    "art": "el"
+  },
+  {
+    "id": 1496,
+    "es": "escorpión",
+    "en": "scorpion",
+    "ruta_img": "escorpion.png",
+    "art": "el"
+  },
+  {
+    "id": 1497,
+    "es": "flamenco",
+    "en": "flamingo",
+    "ruta_img": "flamenco.png",
+    "art": "el"
+  },
+  {
+    "id": 1498,
+    "es": "gallo",
+    "en": "rooster",
+    "ruta_img": "gallo.png",
+    "art": "el"
+  },
+  {
+    "id": 1499,
+    "es": "ganso",
+    "en": "goose",
+    "ruta_img": "ganso.png",
+    "art": "el"
+  },
+  {
+    "id": 1500,
+    "es": "gaviota",
+    "en": "seagull",
+    "ruta_img": "gaviota.png",
+    "art": "la"
+  },
+  {
+    "id": 1501,
+    "es": "gorrión",
+    "en": "sparrow",
+    "ruta_img": "gorrion.png",
+    "art": "el"
+  },
+  {
+    "id": 1502,
+    "es": "guepardo",
+    "en": "cheetah",
+    "ruta_img": "guepardo.png",
+    "art": "el"
+  },
+  {
+    "id": 1503,
+    "es": "halcón",
+    "en": "falcon",
+    "ruta_img": "halcon.png",
+    "art": "el"
+  },
+  {
+    "id": 1504,
+    "es": "hiena",
+    "en": "hyena",
+    "ruta_img": "hiena.png",
+    "art": "la"
+  },
+  {
+    "id": 1505,
+    "es": "hipopótamo",
+    "en": "hippopotamus",
+    "ruta_img": "hipopotamo.png",
+    "art": "el"
+  },
+  {
+    "id": 1506,
+    "es": "hámster",
+    "en": "hamster",
+    "ruta_img": "hamster.png",
+    "art": "el"
+  },
+  {
+    "id": 1507,
+    "es": "iguana",
+    "en": "iguana",
+    "ruta_img": "iguana.png",
+    "art": "la"
+  },
+  {
+    "id": 1508,
+    "es": "jabalí",
+    "en": "wild boar",
+    "ruta_img": "jabali.png",
+    "art": "el"
+  },
+  {
+    "id": 1509,
+    "es": "lechuza",
+    "en": "owl",
+    "ruta_img": "lechuza.png",
+    "art": "la"
+  },
+  {
+    "id": 1510,
+    "es": "leona",
+    "en": "lioness",
+    "ruta_img": "leona.png",
+    "art": "la"
+  },
+  {
+    "id": 1511,
+    "es": "leopardo",
+    "en": "leopard",
+    "ruta_img": "leopardo.png",
+    "art": "el"
+  },
+  {
+    "id": 1512,
+    "es": "león marino",
+    "en": "sea lion",
+    "ruta_img": "leon-marino.png",
+    "art": "el"
+  },
+  {
+    "id": 1513,
+    "es": "libélula",
+    "en": "dragonfly",
+    "ruta_img": "libelula.png",
+    "art": "la"
+  },
+  {
+    "id": 1514,
+    "es": "lince",
+    "en": "lynx",
+    "ruta_img": "lince.png",
+    "art": "el"
+  },
+  {
+    "id": 1515,
+    "es": "llama",
+    "en": "llama",
+    "ruta_img": "llama.png",
+    "art": "la"
+  },
+  {
+    "id": 1516,
+    "es": "manta",
+    "en": "manta ray",
+    "ruta_img": "manta.png",
+    "art": "la"
+  },
+  {
+    "id": 1517,
+    "es": "mantis",
+    "en": "mantis",
+    "ruta_img": "mantis.png",
+    "art": "la"
+  },
+  {
+    "id": 1518,
+    "es": "mapache",
+    "en": "raccoon",
+    "ruta_img": "mapache.png",
+    "art": "el"
+  },
+  {
+    "id": 1519,
+    "es": "mariquita",
+    "en": "ladybug",
+    "ruta_img": "mariquita.png",
+    "art": "la"
+  },
+  {
+    "id": 1520,
+    "es": "marmota",
+    "en": "marmot",
+    "ruta_img": "marmota.png",
+    "art": "la"
+  },
+  {
+    "id": 1521,
+    "es": "medusa",
+    "en": "jellyfish",
+    "ruta_img": "medusa.png",
+    "art": "la"
+  },
+  {
+    "id": 1522,
+    "es": "mofeta",
+    "en": "skunk",
+    "ruta_img": "mofeta.png",
+    "art": "la"
+  },
+  {
+    "id": 1523,
+    "es": "morsa",
+    "en": "walrus",
+    "ruta_img": "morsa.png",
+    "art": "la"
+  },
+  {
+    "id": 1524,
+    "es": "mosca",
+    "en": "fly",
+    "ruta_img": "mosca.png",
+    "art": "la"
+  },
+  {
+    "id": 1525,
+    "es": "nutria",
+    "en": "otter",
+    "ruta_img": "nutria.png",
+    "art": "la"
+  },
+  {
+    "id": 1526,
+    "es": "orangután",
+    "en": "orangutan",
+    "ruta_img": "orangutan.png",
+    "art": "el"
+  },
+  {
+    "id": 1527,
+    "es": "orca",
+    "en": "orca",
+    "ruta_img": "orca.png",
+    "art": "la"
+  },
+  {
+    "id": 1528,
+    "es": "oso hormiguero",
+    "en": "anteater",
+    "ruta_img": "oso-hormiguero.png",
+    "art": "el"
+  },
+  {
+    "id": 1529,
+    "es": "pangolín",
+    "en": "pangolin",
+    "ruta_img": "pangolin.png",
+    "art": "el"
+  },
+  {
+    "id": 1530,
+    "es": "pantera",
+    "en": "panther",
+    "ruta_img": "pantera.png",
+    "art": "la"
+  },
+  {
+    "id": 1531,
+    "es": "pavo real",
+    "en": "peacock",
+    "ruta_img": "pavo-real.png",
+    "art": "el"
+  },
+  {
+    "id": 1532,
+    "es": "pavo",
+    "en": "turkey",
+    "ruta_img": "pavo.png",
+    "art": "el"
+  },
+  {
+    "id": 1533,
+    "es": "pelícano",
+    "en": "pelican",
+    "ruta_img": "pelicano.png",
+    "art": "el"
+  },
+  {
+    "id": 1534,
+    "es": "perezoso",
+    "en": "sloth",
+    "ruta_img": "perezoso.png",
+    "art": "el"
+  },
+  {
+    "id": 1535,
+    "es": "periquito",
+    "en": "parakeet",
+    "ruta_img": "periquito.png",
+    "art": "el"
+  },
+  {
+    "id": 1536,
+    "es": "pez espada",
+    "en": "swordfish",
+    "ruta_img": "pez-espada.png",
+    "art": "el"
+  },
+  {
+    "id": 1537,
+    "es": "pez martillo",
+    "en": "hammerhead shark",
+    "ruta_img": "pez-martillo.png",
+    "art": "el"
+  },
+  {
+    "id": 1538,
+    "es": "pez payaso",
+    "en": "clownfish",
+    "ruta_img": "pez-payaso.png",
+    "art": "el"
+  },
+  {
+    "id": 1539,
+    "es": "pingüino",
+    "en": "penguin",
+    "ruta_img": "pinguino.png",
+    "art": "el"
+  },
+  {
+    "id": 1540,
+    "es": "puma",
+    "en": "puma",
+    "ruta_img": "puma.png",
+    "art": "el"
+  },
+  {
+    "id": 1541,
+    "es": "rinoceronte",
+    "en": "rhinoceros",
+    "ruta_img": "rinoceronte.png",
+    "art": "el"
+  },
+  {
+    "id": 1542,
+    "es": "salamandra",
+    "en": "salamander",
+    "ruta_img": "salamandra.png",
+    "art": "la"
+  },
+  {
+    "id": 1543,
+    "es": "saltamontes",
+    "en": "grasshopper",
+    "ruta_img": "saltamontes.png",
+    "art": "el"
+  },
+  {
+    "id": 1544,
+    "es": "tarántula",
+    "en": "tarantula",
+    "ruta_img": "tarantula.png",
+    "art": "la"
+  },
+  {
+    "id": 1545,
+    "es": "tejón",
+    "en": "badger",
+    "ruta_img": "tejon.png",
+    "art": "el"
+  },
+  {
+    "id": 1546,
+    "es": "tiburón ballena",
+    "en": "whale shark",
+    "ruta_img": "tiburon-ballena.png",
+    "art": "el"
+  },
+  {
+    "id": 1547,
+    "es": "tití",
+    "en": "marmoset",
+    "ruta_img": "titi.png",
+    "art": "el"
+  },
+  {
+    "id": 1548,
+    "es": "topo",
+    "en": "mole",
+    "ruta_img": "topo.png",
+    "art": "el"
+  },
+  {
+    "id": 1549,
+    "es": "toro",
+    "en": "bull",
+    "ruta_img": "toro.png",
+    "art": "el"
+  },
+  {
+    "id": 1550,
+    "es": "tortuga marina",
+    "en": "sea turtle",
+    "ruta_img": "tortuga-marina.png",
+    "art": "la"
+  },
+  {
+    "id": 1551,
+    "es": "tucán",
+    "en": "toucan",
+    "ruta_img": "tucan.png",
+    "art": "el"
+  },
+  {
+    "id": 1552,
+    "es": "oso panda",
+    "en": "panda bear",
+    "ruta_img": "oso-panda.png",
+    "art": "el"
+  },
+  {
+    "id": 1553,
+    "es": "guacamaya",
+    "en": "guacamaya",
+    "ruta_img": "guacamaya.png",
+    "art": "la"
+  },
+  {
+    "id": 1554,
+    "es": "oso polar",
+    "en": "polar bear",
+    "ruta_img": "oso-polar.png",
+    "art": "el"
   }
 ]
