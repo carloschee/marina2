@@ -284,12 +284,13 @@ function _render() {
       overflow:hidden;
     }
     .tc-opcion {
-      border-radius:22px; border:3px solid rgba(255,255,255,0.12);
-      background:rgba(255,255,255,0.10);
+      border-radius:22px; border:3px solid rgba(255,255,255,0.30);
+      background:#fff;
       cursor:pointer; display:flex; flex-direction:column;
       align-items:center; justify-content:center; gap:8px;
       padding:10px; transition:transform .15s, border-color .2s, box-shadow .2s;
       overflow:hidden; position:relative;
+      box-shadow:0 4px 16px rgba(0,0,0,0.25);
     }
     .tc-opcion:active { transform:scale(.93); }
     .tc-opcion img {
@@ -298,7 +299,7 @@ function _render() {
     }
     .tc-opcion-label {
       font-size:clamp(.75rem,2.2vw,.95rem); font-weight:900;
-      color:#fff; text-shadow:0 1px 4px rgba(0,0,0,0.50);
+      color:#07212e;
       text-align:center; padding:0 4px;
     }
     .tc-opcion.correcto {
