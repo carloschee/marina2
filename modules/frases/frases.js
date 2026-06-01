@@ -213,16 +213,21 @@ function _render() {
       border: 1.5px dashed rgba(255,255,255,0.15);
       border-radius: 20px; padding: 12px 16px;
       min-height: 88px;
-      max-height: 140px;
+      max-height: 150px;
       overflow: hidden;
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: stretch; gap: 10px;
       transition: border-color .35s, border-style .35s;
     }
     #fr-tira.correcto { border-color: #22c55e; border-style: solid; }
     #fr-tira-piezas {
-      flex: 1; display: flex; align-items: center;
+      flex: 1;
+      display: flex; align-items: center; align-content: center;
       gap: 8px; flex-wrap: wrap; min-height: 60px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    #fr-tira-piezas::-webkit-scrollbar { display: none; }
     #fr-tira-placeholder {
       color: rgba(255,255,255,0.50);
       font-size: 1rem; font-weight: 700; font-style: italic;
@@ -248,7 +253,7 @@ function _render() {
     /* ── Botones de acción — viven en la tira, lado derecho ── */
     #fr-tira-acciones {
       display: flex; flex-direction: column;
-      align-items: center; gap: 8px;
+      align-items: center; justify-content: center; gap: 8px;
       flex-shrink: 0;
     }
     .fr-accion-btn {
@@ -718,6 +723,10 @@ function _renderTira() {
 
     wrap.appendChild(div);
   });
+
+  // Desplazar al final para que la última pieza añadida sea visible
+  // cuando la tira tiene scroll (frases largas).
+  requestAnimationFrame(() => { wrap.scrollTop = wrap.scrollHeight; });
 }
 
 // ─── Quitar pieza(s) de la tira ────────────────────────────────────────────────
