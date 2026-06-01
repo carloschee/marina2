@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-01T01:25:00.763Z",
-  "totalAssets": 1535,
+  "generado": "2026-06-01T01:26:42.065Z",
+  "totalAssets": 1534,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -259,7 +259,6 @@
     "./assets/audio/en/lima.mp3",
     "./assets/audio/en/limon.mp3",
     "./assets/audio/en/limpio.mp3",
-    "./assets/audio/en/limusina.mp3",
     "./assets/audio/en/llave.mp3",
     "./assets/audio/en/lleno.mp3",
     "./assets/audio/en/llorando.mp3",
