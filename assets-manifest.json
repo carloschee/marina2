@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-01T01:24:17.006Z",
-  "totalAssets": 1536,
+  "generado": "2026-06-01T01:25:00.763Z",
+  "totalAssets": 1535,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -216,7 +216,6 @@
     "./assets/audio/en/higo.mp3",
     "./assets/audio/en/hoja.mp3",
     "./assets/audio/en/hombro.mp3",
-    "./assets/audio/en/hongo.mp3",
     "./assets/audio/en/hormiga.mp3",
     "./assets/audio/en/hot air balloon.mp3",
     "./assets/audio/en/hot-air-balloon.mp3",
