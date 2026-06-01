@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-01T01:20:39.358Z",
-  "totalAssets": 1537,
+  "generado": "2026-06-01T01:22:28.312Z",
+  "totalAssets": 1536,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -117,7 +117,6 @@
     "./assets/audio/en/cuello.mp3",
     "./assets/audio/en/curamos.mp3",
     "./assets/audio/en/curioso.mp3",
-    "./assets/audio/en/dado.mp3",
     "./assets/audio/en/dano.mp3",
     "./assets/audio/en/debajo.mp3",
     "./assets/audio/en/debil.mp3",
