@@ -579,10 +579,10 @@ function _renderGrid() {
   // Layout dinámico según número de cartas totales
   const total = _cartas.length;
   const layout = {
-    12: { cols: 4, filas: 3 },  // fácil: 6 pares × 2
-    24: { cols: 6, filas: 4 },  // intermedio: 12 pares × 2
-    48: { cols: 8, filas: 6 },  // avanzado: 24 pares × 2  ← CAMBIA
-  }[total] || { cols: 8, filas: 6 };
+    12: { cols: 4, filas: 3 },   // fácil: 6 pares × 2
+    24: { cols: 6, filas: 4 },   // intermedio: 12 pares × 2
+    48: { cols: 12, filas: 4 },  // avanzado: 24 pares × 2
+  }[total] || { cols: 12, filas: 4 };
 
   grid.style.gridTemplateColumns = `repeat(${layout.cols}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${layout.filas}, 1fr)`;
