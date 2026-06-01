@@ -8,7 +8,7 @@ import { TTS } from '../../core/tts.js';
 import { lanzarConfeti, haptic, toast } from '../../core/ui.js';
 import { Telemetry } from '../../core/telemetry.js';
 
-const TEMAS_URL = './data/memorama.json';
+const TEMAS_URL = './data/temas.json';
 const PICTO_BASE = './assets/pictogramas/';
 const AUDIO_BASE = './assets/audio/';
 const PARES = 24;

@@ -91,7 +91,7 @@ export async function init(container) {
   }
 
   try {
-    const res2 = await fetch('./data/toca-temas.json');
+    const res2 = await fetch('./data/temas.json');
     _temas = await res2.json();
   } catch {
     _temas = [];
