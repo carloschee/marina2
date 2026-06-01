@@ -1,106 +1,147 @@
 # Marina 2
 
-PWA educativa de comunicación aumentativa y alternativa (CAA) para Emi.
-
-Módulos: **Mira y di** · **Frases** · **Memorama** · **Escucha y Toca**
-
-URL de producción: `https://carloschee.github.io/marina2/`
+App educativa de comunicación aumentativa y alternativa (CAA) para acompañar el desarrollo del lenguaje, basada en pictogramas ARASAAC.
+ 
+Diseñada para Emi 🌊
 
 ---
 
-## Novedades en v2.1.0
+## Guía de uso — adulto supervisor
 
-### ✨ Nuevas funcionalidades
+Esta sección es para ti, mamá, papá o terapeuta que acompañas a Emi durante las sesiones.
 
-**Frases**
-- Selector de frases reemplazado por modal — libera espacio en pantalla, especialmente en iPhone SE
-- Corrección puntual de piezas: tocar una pieza en la tira la elimina junto con las posteriores, permitiendo rehacer desde ese punto sin borrar todo
-- Piezas de texto ahora reproducen su audio correctamente (sanitización de nombres de archivo)
-- Audio de pictogramas resuelto desde `ruta_img` del catálogo — corrige problemas con nombres con tildes o espacios (ej. "autobús de dos pisos")
-- Scroll propio en el área de piezas disponibles y en la tira de construcción para frases largas
-- Layout compacto optimizado para iPhone SE portrait: imágenes más pequeñas, padding reducido, mejor distribución vertical
+### Antes de empezar
 
-**Escucha y Toca**
-- Aciertos progresivos por nivel: `[3, 4, 5, 6, 8]` consecutivos requeridos (antes: 3 fijo para todos)
-- Fallo reinicia el contador de aciertos consecutivos
-- Modo infinito: rondas continuas sin overlay de "nivel completado"
-- Contador de racha visible en modo infinito
-- Récord persistente en localStorage (`marina2_toca_mejor_racha`)
-- Overlay de fallo en modo infinito con puntuación y aviso de récord
-- Tiles de opciones con fondo blanco y texto negro
-- Persistencia al volver al menú: conserva nivel, tema y aciertos
+La primera vez que abras la app, te recomendamos agregarla a la pantalla de inicio del iPad para que funcione como una aplicación nativa: toca el botón de compartir en Safari y elige **"Agregar a pantalla de inicio"**. Así la app funciona en pantalla completa, sin la barra del navegador, y también funciona sin internet una vez descargada.
 
-**Mira y di**
-- Botón de micrófono ahora visible y funcional en iPhone 13 e iPad (estaba oculto por CSS)
-- Desactivado correctamente en iPhone SE donde el servicio de reconocimiento de voz no está disponible (`service-not-allowed`): no muestra el botón ni solicita permiso al cargar
-
-**Menú**
-- Layout portrait unificado: iPhone SE e iPhone 13 muestran el mismo menú 1×4
-- Tiles del menú al 25% de altura del contenedor (`grid-template-rows: repeat(4, 1fr)`)
-
-**Datos — catálogo**
-- 93 animales nuevos en `pictos.json` (IDs 1459–1551)
-- Nuevas frases: "quiero + verbo" (×7), "primero…después" (×2), "el fuego está caliente ¿qué hacemos? ¡sóplale!", "el autobús de dos pisos es muy alto"
-- Nuevos pictogramas: quiero, lavar las manos, primero, descansar, hacer popo, hacer pipi, sóplale, autobús de dos pisos, transportes adicionales (1438–1458)
-
-**Datos — temas unificados**
-- `data/temas.json` reemplaza `memorama.json` y `toca-temas.json` como fuente única de verdad para todos los módulos
-- 24 temas organizados en dos tipos: `vocabulario` (Animales, Frutas, Transportes…) y `lenguaje` (Verbos, Emociones, Opuestos…)
-- Memorama y Escucha y Toca leen del mismo archivo
-
-**Herramientas**
-- `scripts/clasificar-temas.py` — clasifica `pictos.json` en campos semánticos CAA/TEA y genera `temas.json`. Tres capas: reglas explícitas, embeddings semánticos (sentence-transformers) y revisión manual. GUI integrada con `--revisar`
-- `scripts/editar-vocabulario.py` — GUI para curar el vocabulario de Mira y di por letra. Muestra todos los pictos disponibles con la inicial seleccionada, pre-marca los ya incluidos, migra automáticamente el formato antiguo ES/EN al formato simplificado
-- `scripts/test-pronunciacion.py` — prueba pronunciación TTS al vuelo sin guardar archivos. Soporta texto plano, SSML, fonema IPA (`/f`), cambio de voz (`/v`) y velocidad (`/r`)
-- `generar-audio.py` — corregido error `[Errno 22]` en Windows con nombres de archivo que contienen caracteres inválidos (`¿`, `!`, etc.) mediante `sanitizar_nombre()`
-
-### 🐛 Bugs corregidos
-
-- **Frases — piezas de texto no aparecían** hasta tocar un picto: `_tocarPieza` ahora renderiza la tira antes de reproducir audio
-- **Frases — scroll del selector roto** tras completar una frase: `scrollTop` se resetea al reconstruir la lista; listener de scroll apunta al elemento correcto
-- **Escucha y Toca — opciones en miniatura** de forma intermitente: causa raíz era `lanzarConfeti()` mutando `container.style.position` a `relative`, colapsando el grid. Solución: helper `_confeti()` + ResizeObserver que cachea dimensiones reales del grid
-- **Escucha y Toca — reinicio al volver al menú**: `resume()` reconstruye el HTML correctamente siguiendo el patrón de Memorama
-- **Mira y di — medidor de pronunciación no visible** en iPhone 13: estaba oculto por `display:none !important` en el bloque CSS `≤600px`
-- **Audio — nombres con caracteres especiales**: `sanitizarNombre()` en JS espejo exacto de `sanitizar_nombre()` en Python garantiza que los nombres de archivo coincidan
+![Agregar a la pantalla de inicio](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-agregar-inicio.PNG)
 
 ---
 
-## Descripción
+### La pantalla de inicio
 
-Marina 2 es una app de comunicación aumentativa y alternativa (CAA) diseñada para Emi. Funciona en iPad, iPhone y cualquier navegador moderno. No requiere conexión a internet después de la primera carga.
+Al abrir la app verás el menú principal con los cuatro módulos disponibles. Cada módulo ocupa una franja horizontal que llena la pantalla — en iPhone el menú es de una columna, en iPad de dos.
 
-### Módulos
+<!-- 📸 ACTUALIZAR: captura del menú en iPhone 13 portrait (1 columna, 4 tiles) y/o iPad landscape -->
+<!-- Reemplaza: assets/readme/menu-ui.PNG -->
+![Menú principal de Marina](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-ui.PNG)
 
-| Módulo | Descripción |
-|--------|-------------|
-| **Mira y di** | Vocabulario A–Z con pictogramas, audio y evaluación de pronunciación por micrófono |
-| **Frases** | Constructor de frases por nivel de dificultad con pictogramas y piezas de texto |
-| **Memorama** | Juego de pares con pictogramas por tema y nivel de dificultad |
-| **Escucha y Toca** | Escucha una instrucción y toca el pictograma correcto — 5 niveles + modo infinito |
+El indicador **En línea / Sin conexión** en la esquina superior derecha te muestra si el iPad tiene internet. Si está en verde, todo bien. Si está en rojo, la app seguirá funcionando con los contenidos que ya estén descargados.
 
 ---
 
-## Uso
+### El pill de idioma ES / EN
 
-### Área del usuario (Emi)
+En la esquina superior derecha hay dos botones: **ES** y **EN**. Puedes activar uno, el otro, o ambos:
 
-La pantalla principal muestra los cuatro módulos. Se navega tocando el tile correspondiente. El botón `‹` vuelve al menú.
+- **Solo ES** → toda la sesión en español
+- **Solo EN** → toda la sesión en inglés
+- **ES + EN activos** → la app alterna entre ambos idiomas en cada interacción, ideal para trabajar los dos idiomas en una misma sesión
 
-### Área del supervisor (adulto)
+![Selector de idioma](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/menu-pill-lang.jpg)
 
-Se accede desde el ícono de ajustes ⚙️ con un PIN (por defecto `1234`). Permite:
-- Gestionar perfiles de usuario
-- Habilitar o deshabilitar módulos por perfil
-- Ver reportes de actividad
-- Descargar contenido offline
+---
 
-La configuración general está en `app.config.json`. No es necesario editarla en código.
+### Ajustes — el área de adultos
+
+El botón ⚙️ en la esquina superior derecha abre el panel de ajustes. Para entrar tienes que resolver una suma matemática sencilla — esto evita que Emi acceda por accidente.
+
+Desde Ajustes puedes:
+
+- **Gestionar perfiles** — crear el perfil de Emi con su nombre y avatar, y configurar qué módulos puede ver
+- **Descargar contenido offline** — descarga todos los pictogramas y audios para que la app funcione sin internet. Recomendamos hacerlo la primera vez conectado a WiFi
+- **Consultar el reporte** — un resumen de las sesiones recientes
+- **Cambiar el idioma de la voz** — si prefieres ajustar la velocidad o el tono
+
+![Ajustes — descarga offline](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/ajustes-descarga.jpg)
+
+![Ajustes — perfiles](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/ajustes-usuarios.jpg)
+
+---
+
+### Recomendaciones para la sesión
+
+- La app está diseñada para sesiones cortas y frecuentes — 10 a 15 minutos funcionan muy bien
+- En **Escucha y Toca**, el módulo sube la dificultad automáticamente cuando Emi acierta consecutivamente — no hace falta que hagas nada
+- Puedes volver al menú en cualquier momento tocando la flecha ‹ en la esquina superior izquierda. El módulo recuerda dónde quedó y al volver retoma desde ahí
+
+---
+
+## Guía de uso — Emi
+
+Esta sección describe lo que ve y hace Emi en cada módulo.
+
+---
+
+### 🔤 Mira y di
+
+Emi ve una retícula con todas las letras del abecedario. Toca una letra y aparece un pictograma grande con la palabra. Puede tocar el botón **escucha** para escuchar cómo se dice, y luego intentar decirla ella misma usando el micrófono 🎙️.
+
+La barra de colores debajo del micrófono le muestra qué tan parecido sonó a la palabra — verde significa muy bien.
+
+![Mira y di](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/mira-y-di-ui.PNG)
+
+---
+
+### 💬 Frases
+
+Emi toca el botón **Elegir frase** para seleccionar qué oración quiere armar. Al elegirla, aparecen las piezas disponibles en la pantalla. Toca las piezas en el orden correcto para armarlas en la tira de arriba. Cuando termina, escucha la frase completa.
+
+Si se equivoca, puede tocar cualquier pieza en la tira para eliminarla junto con las que vienen después y rehacer desde ese punto, sin tener que borrar todo.
+
+Hay tres niveles de dificultad que puedes seleccionar desde la barra superior:
+- ⭐ Básico — frases cortas de 2 piezas
+- ⭐⭐ Intermedio — frases de 3 o 4 piezas
+- ⭐⭐⭐ Avanzado — frases más largas con conectores
+
+<!-- 📸 ACTUALIZAR: captura del módulo Frases con el nuevo modal abierto y/o con piezas en la tira -->
+<!-- Reemplaza: assets/readme/frases-ui.PNG -->
+![Constructor de frases](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/frases-ui.PNG)
+
+---
+
+### 🃏 Memorama
+
+El clásico juego de memoria. Emi elige un tema y voltea las cartas buscando los pares de pictogramas. Al encontrar un par, escucha el nombre de la imagen.
+
+Hay tres niveles de dificultad:
+- ⭐ Fácil — 6 pares
+- ⭐⭐ Intermedio — 12 pares
+- ⭐⭐⭐ Avanzado — 24 pares
+
+![Memorama](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/memorama-ui.PNG)
+
+---
+
+### 👆 Escucha y Toca
+
+Una voz dice el nombre de un pictograma — por ejemplo "Toca la fresa" — y Emi tiene que tocar la imagen correcta entre varias opciones.
+
+Hay 5 niveles de dificultad que suben automáticamente al acertar el número requerido de veces **de forma consecutiva** (un error reinicia el contador):
+
+| Nivel | Opciones | Aciertos seguidos para subir |
+|-------|----------|------------------------------|
+| 1 | 3 imágenes | 3 |
+| 2 | 4 imágenes | 4 |
+| 3 | 5 imágenes | 5 |
+| 4 | 6 imágenes | 6 |
+| 5 | 8 imágenes | 8 |
+
+Al completar el nivel 5 entra en **modo reto infinito** 🏆 — rondas continuas con 8 opciones. En este modo se lleva un contador de racha y un récord persistente entre sesiones.
+
+<!-- 📸 ACTUALIZAR: captura de Escucha y Toca con las nuevas tiles blancas con texto negro -->
+<!-- Reemplaza: assets/readme/toca-acierto.PNG -->
+![Escucha y Toca — acierto](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/toca-acierto.PNG)
+
+<!-- 📸 ACTUALIZAR: captura de la subida de nivel o del modo infinito con el contador de racha -->
+<!-- Reemplaza: assets/readme/toca-nivel.PNG -->
+![Escucha y Toca — nivel](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/toca-nivel.PNG)
 
 ---
 
 ## Opciones de configuración
 
-Toda la configuración de la app vive en `app.config.json`:
+Toda la configuración de la app vive en el archivo `app.config.json`, en la raíz del proyecto. Puedes editarlo con cualquier editor de texto.
 
 ```json
 {
@@ -130,14 +171,17 @@ Toda la configuración de la app vive en `app.config.json`:
 }
 ```
 
-| Campo | Qué hace |
-|-------|----------|
-| `app.nombre` | Nombre en el header |
-| `ui.tema` | Tema visual (`"oceano"` es el único disponible) |
-| `ui.mostrarPill` | Muestra u oculta el pill ES/EN |
-| `tts.rate` | Velocidad de la voz (1 = normal, rango: 0.7–1.2) |
-| `tts.pitch` | Tono de la voz (1 = normal, rango: 0.8–1.4) |
-| `pin.valorDefecto` | PIN inicial de Ajustes |
+| Campo | Qué hace | Valores posibles |
+|-------|----------|--------------------|
+| `app.nombre` | Nombre que aparece en el header | Cualquier texto |
+| `ui.tema` | Tema visual de la app | `"oceano"` (único por ahora) |
+| `ui.mostrarPill` | Muestra u oculta el pill ES/EN | `true` / `false` |
+| `tts.lang` | Idioma por defecto del TTS | `"es-MX"`, `"en-US"` |
+| `tts.rate` | Velocidad de la voz (1 = normal) | `0.7` – `1.2` |
+| `tts.pitch` | Tono de la voz (1 = normal) | `0.8` – `1.4` |
+| `pin.valorDefecto` | PIN inicial de Ajustes | Número entero |
+
+Los perfiles se gestionan desde la propia app en Ajustes → Perfiles. No es necesario editarlos en código.
 
 ---
 
@@ -145,7 +189,7 @@ Toda la configuración de la app vive en `app.config.json`:
 
 ### Stack y arquitectura
 
-PWA de arquitectura modular. JavaScript vanilla con ES modules, CSS nativo y Service Worker propio. Sin frameworks, sin build step.
+Marina 2 es una PWA (Progressive Web App) de arquitectura modular. No usa frameworks — JavaScript vanilla con ES modules, CSS nativo y Service Worker propio.
 
 ```
 marina2/
@@ -156,23 +200,23 @@ marina2/
 ├── sw.js                  ← Service Worker offline-first
 ├── assets-manifest.json   ← Generado automáticamente por GitHub Action
 │
-├── core/
+├── core/                  ← Infraestructura compartida — no modificar
 │   ├── config.js          cfg() — acceso a app.config.json
 │   ├── offline.js         SW, caché, indicador de conexión
 │   ├── ui.js              toast, confeti, animarEntrada, haptic
-│   ├── perfiles.js        Perfiles con persistencia en localStorage
+│   ├── perfiles.js        Perfiles de usuario con persistencia en localStorage
 │   ├── telemetry.js       Registro local de eventos por sesión
-│   ├── tts.js             TTS.speak() / TTS.stop() con voces neurales
-│   └── audio.js           AudioManager
+│   ├── tts.js             TTS.speak() / TTS.stop() con selección de voz premium
+│   └── audio.js           AudioManager con control de reproducción
 │
 ├── themes/
-│   └── oceano.js          Fondo SVG animado, variables CSS
+│   └── oceano.js          Tema visual: fondo SVG animado, variables CSS
 │
 ├── modules/
 │   ├── _plantilla/        Plantilla para módulos nuevos
-│   ├── ajustes/           Panel de configuración del supervisor
-│   ├── mira-y-di/         Vocabulario A–Z con pictogramas y micrófono
-│   ├── frases/            Constructor de frases por nivel
+│   ├── ajustes/           Panel de configuración del adulto supervisor
+│   ├── mira-y-di/         Vocabulario A–Z con pictogramas, audio y micrófono
+│   ├── frases/            Construcción de frases por nivel
 │   ├── memorama/          Juego de pares con pictogramas
 │   └── toca/              Escucha y Toca — 5 niveles + modo infinito
 │
@@ -180,25 +224,28 @@ marina2/
 │   ├── pictos.json        Catálogo de pictogramas: {id, es, en, ruta_img, art}
 │   ├── vocabulario.json   Índice A–Z de IDs por letra: {letra: [ids]}
 │   ├── frases.json        Frases con piezas, nivel y lang
-│   └── temas.json         Temas para Memorama y Escucha y Toca: {id, label, emoji, tipo, palabras}
+│   └── temas.json         Temas para Memorama y Escucha y Toca
 │
 ├── scripts/
 │   ├── generar-audio.py        Genera MP3 con edge-tts para todo el catálogo
 │   ├── clasificar-temas.py     Clasifica pictos.json en temas CAA/TEA → temas.json
 │   ├── editar-vocabulario.py   GUI para curar vocabulario.json por letra
 │   ├── test-pronunciacion.py   Prueba TTS interactivo (SSML, IPA, sin guardar archivos)
-│   ├── pictos-csv.py           Exporta/importa pictos.json como CSV
+│   ├── pictos-csv.py           Exporta/importa pictos.json como CSV para edición
 │   ├── descargar-pictos.py     Descarga PNGs desde API ARASAAC
 │   ├── verificar-pictos.py     Auditoría del catálogo de pictogramas
 │   └── limpiar-pictogramas.py  Elimina PNGs huérfanos
 │
+├── .github/workflows/
+│   └── assets-manifest.yml     Regenera assets-manifest.json en cada push
+│
 └── assets/
-    ├── img/               Íconos PWA
+    ├── img/               Íconos PWA (192×192, 512×512)
     ├── ui/                Tiles del home: btn-{id}.png
-    ├── pictogramas/       PNGs: {ruta_img}
+    ├── pictogramas/       PNGs de ARASAAC: {ruta_img}
     └── audio/
-        ├── es/            {ruta_img sin .png}.mp3
-        ├── en/            {ruta_img sin .png}.mp3
+        ├── es/            {ruta_img sin .png}.mp3  — vocabulario ES
+        ├── en/            {ruta_img sin .png}.mp3  — vocabulario EN
         └── frases/
             ├── es/        {id}.mp3 y {pieza-texto-sanitizado}.mp3
             └── en/        {id}.mp3 y {pieza-texto-sanitizado}.mp3
@@ -208,7 +255,7 @@ marina2/
 
 ### Datos — estructura de pictos.json
 
-Fuente única de verdad para todo el vocabulario. Tiene 554 entradas.
+Fuente única de verdad para todo el vocabulario. El catálogo tiene 554 entradas.
 
 ```json
 {
@@ -220,15 +267,15 @@ Fuente única de verdad para todo el vocabulario. Tiene 554 entradas.
 }
 ```
 
-El campo `art` (el/la/los) se usa en Escucha y Toca para instrucciones naturales: "Toca **la** oveja".
+El campo `art` (el/la) se usa en Escucha y Toca para generar instrucciones naturales: "Toca **la** oveja". Para verbos, adjetivos y adverbios el campo está vacío.
 
-`vocabulario.json` indexa IDs por letra para Mira y di:
+`vocabulario.json` indexa los IDs por letra para Mira y di:
 
 ```json
 { "O": [1130, 1045, 1203] }
 ```
 
-`temas.json` define los temas para Memorama y Escucha y Toca:
+`temas.json` define los temas para Memorama y Escucha y Toca. Es la fuente única de verdad para ambos módulos:
 
 ```json
 {
@@ -240,18 +287,22 @@ El campo `art` (el/la/los) se usa en Escucha y Toca para instrucciones naturales
 }
 ```
 
-`tipo` puede ser `"vocabulario"` (Animales, Frutas, Transportes…) o `"lenguaje"` (Verbos, Emociones, Opuestos…).
+El campo `tipo` puede ser `"vocabulario"` (Animales, Frutas, Transportes…) o `"lenguaje"` (Verbos, Emociones, Opuestos…). Memorama los agrupa visualmente por tipo en el selector.
+
+Los módulos resuelven los IDs contra `pictos.json` en runtime. No hay datos duplicados.
 
 ---
 
 ### Generación de audio
 
-MP3 generados con [edge-tts](https://github.com/rany2/edge-tts). Voces: `es-MX-DaliaNeural` · `en-US-AriaNeural`.
+Los MP3 se generan con [edge-tts](https://github.com/rany2/edge-tts) usando voces neurales de Microsoft Edge — gratuito, sin API key.
+
+Voces: `es-MX-DaliaNeural` (ES) · `en-US-AriaNeural` (EN)
 
 ```powershell
 pip install edge-tts
 
-# Todo el catálogo
+# Todo el catálogo (vocabulario + frases)
 python scripts/generar-audio.py
 
 # Solo español
@@ -260,34 +311,38 @@ python scripts/generar-audio.py --solo-es
 # Solo frases (enunciados completos + piezas de texto)
 python scripts/generar-audio.py --solo-frases
 
-# Forzar regeneración
+# Forzar regeneración de archivos existentes
 python scripts/generar-audio.py --forzar
 
-# Dry run
+# Dry run — muestra qué generaría sin crear archivos
 python scripts/generar-audio.py --seco
 ```
 
-**Nota sobre nombres de archivo:** los MP3 de piezas de texto usan `sanitizar_nombre()` para eliminar caracteres inválidos en Windows (`¿`, `!`, espacios → guiones). El front en JS usa la misma lógica mediante `sanitizarNombre()`.
+**Sobre los nombres de archivo:** los MP3 de piezas de texto usan `sanitizar_nombre()` para eliminar caracteres inválidos en Windows (`¿`, `!`, espacios → guiones, etc.). El front en JS usa la misma lógica mediante `sanitizarNombre()`. Cualquier divergencia entre las dos funciones causa errores silenciosos de audio.
 
 ---
 
 ### Clasificación de temas
 
-```powershell
-pip install sentence-transformers   # solo primera vez
+El script `clasificar-temas.py` mantiene `data/temas.json` actualizado cuando se agregan pictogramas nuevos al catálogo.
 
-# Clasificar y generar temas.json
+```powershell
+pip install sentence-transformers   # solo la primera vez (~470 MB)
+
+# Clasificar todo el catálogo y generar/actualizar temas.json
 python scripts/clasificar-temas.py
 
 # Ver resumen de temas actuales
 python scripts/clasificar-temas.py --listar
 
-# Revisar pictos de baja confianza (abre GUI)
+# Revisar pictogramas de baja confianza (abre GUI)
 python scripts/clasificar-temas.py --revisar
 
 # Actualizar solo un tema
 python scripts/clasificar-temas.py --tema animales
 ```
+
+El clasificador opera en tres capas: reglas explícitas (diccionario), embeddings semánticos (modelo multilingüe) y revisión manual con GUI integrada.
 
 ---
 
@@ -297,19 +352,41 @@ python scripts/clasificar-temas.py --tema animales
 python scripts/editar-vocabulario.py
 ```
 
-Abre una GUI que muestra todos los pictos por letra. Los ya incluidos en `vocabulario.json` aparecen pre-marcados. Los cambios se guardan al presionar "Guardar vocabulario.json".
+Abre una GUI que muestra todos los pictogramas disponibles agrupados por letra inicial. Los que ya están incluidos en `vocabulario.json` aparecen pre-marcados. Permite curar exactamente qué ve Emi en cada letra según sus intereses actuales.
 
 ---
 
 ### Corrección de traducciones
 
+Para corregir traducciones incorrectas en el catálogo EN:
+
 ```powershell
-python scripts/pictos-csv.py --exportar     # JSON → CSV
-# editar scripts/pictos.csv en Excel
-python scripts/pictos-csv.py --importar --seco   # ver cambios
-python scripts/pictos-csv.py --importar          # aplicar
-python scripts/generar-audio.py --solo-en --forzar  # regenerar audios EN
+# 1. Exportar a CSV (se abre en Excel/Numbers/Sheets)
+python scripts/pictos-csv.py --exportar
+
+# 2. Editar la columna "en" en scripts/pictos.csv
+
+# 3. Ver cambios antes de aplicar
+python scripts/pictos-csv.py --importar --seco
+
+# 4. Aplicar
+python scripts/pictos-csv.py --importar
+
+# 5. Regenerar solo los audios EN afectados
+python scripts/generar-audio.py --solo-en --forzar
 ```
+
+---
+
+### Service Worker y caché offline
+
+`sw.js` implementa una estrategia offline-first con tres capas:
+
+- **Precaché en install** — descarga el shell completo (HTML, JS, CSS, fuentes) y todos los assets listados en `assets-manifest.json`
+- **Cache-first para audio y pictogramas** — los archivos pesados se sirven desde caché sin tocar la red
+- **Network-first para navegación** — intenta la red con timeout de 3s, cae a `index.html` en caché si falla
+
+`assets-manifest.json` se regenera automáticamente con GitHub Actions en cada push. No lo edites a mano.
 
 ---
 
@@ -321,74 +398,85 @@ navegarA(mod)
         └── mod.onEnter()    módulo visible al usuario
 
 [Volver al menú]
-  └── mod.onLeave()          detener TTS y audio
-        ├── mod.pause()      guardar estado (si el módulo lo implementa)
-        └── mod.destroy()    limpiar todo (si no hay pause)
+  └── mod.onLeave()          detener TTS y audio activo
+        ├── mod.pause()      guardar estado si el módulo lo soporta
+        └── mod.destroy()    limpiar todo si no hay pause()
 
 [Regresa al módulo]
-  ├── mod.resume(container)  restaurar estado — DEBE reconstruir el HTML
-  └── mod.init(container)    si no había pause
+  ├── mod.resume(container)  restaurar estado guardado
+  └── mod.init(container)    arrancar de nuevo si no había pause()
 ```
 
-`resume()` debe reconstruir el HTML porque el contenedor puede haber sido limpiado por app.js. Las variables de módulo persisten en memoria entre `pause()` y `resume()`.
+`resume()` debe reconstruir el HTML porque `app.js` puede haber limpiado el contenedor. Las variables de módulo en memoria persisten entre `pause()` y `resume()` — úsalas para restaurar el estado visual.
 
----
-
-### API del core
-
-```js
-// Configuración
-cfg('app.nombre')
-cfg('tts.rate', 0.92)            // con fallback
-
-// Voz
-TTS.speak('hola', { lang: 'es-MX', rate: 0.92, pitch: 1.2 })
-TTS.stop()
-
-// UI
-toast('¡Muy bien!', { emoji: '🎉' })
-lanzarConfeti({ count: 60, container: _el })
-// ⚠️  lanzarConfeti() muta container.style.position a 'relative'.
-//     Si el contenedor usa position:absolute;inset:0, restaurar después:
-//     lanzarConfeti({ count: 60, container: _el });
-//     _el.style.position = 'absolute';
-haptic(15)
-
-// Perfiles
-Perfiles.getActivo()
-Perfiles.getModulosHabilitados()
-Perfiles.onChange(callback)
-Perfiles.offChange(callback)     // llamar en destroy()
-
-// Telemetría
-Telemetry.track('evento', { _modulo: 'mi-modulo', dato: valor })
-
-// Idioma
-window.getLang()                 // 'es' | 'en'
-window._langConfig               // { es: true, en: false }
-window.addEventListener('lang-change', e => {
-  const { langConfig } = e.detail;
-})
-```
+Todos los módulos deben limpiar sus event listeners en `destroy()` y en `onLeave()` deben detener TTS y audio.
 
 ---
 
 ### Agregar un módulo nuevo
 
 1. Copia `modules/_plantilla/` → `modules/mi-modulo/`
-2. Edita `module.js` con `id`, `label`, `emoji`, `orden`, `requierePin`
-3. Implementa `init`, `destroy`, `onEnter`, `onLeave` y opcionalmente `pause`/`resume`
+2. Edita `module.js` con `id`, `label`, `emoji`, `orden` y `requierePin`
+3. Implementa la lógica en `mi-modulo.js` exportando `init`, `destroy`, `onEnter`, `onLeave` y opcionalmente `pause`/`resume`
 4. En `app.js` agrega el import y añade el módulo al array `MODULOS`
-5. Agrega `assets/ui/btn-mi-modulo.png` para el tile del home
-6. Push — GitHub Action actualiza `assets-manifest.json` automáticamente
+5. Agrega `assets/ui/btn-mi-modulo.png` para el tile del home (opcional — hay fallback con emoji)
+6. Push — el GitHub Action actualiza `assets-manifest.json` automáticamente
+
+---
+
+### API del core — referencia rápida
+
+```js
+// Configuración
+cfg('app.nombre')                         // lee app.config.json
+cfg('tts.rate', 0.92)                     // con fallback
+
+// Voz
+TTS.speak('hola', { lang: 'es-MX', rate: 0.92, pitch: 1.2 })
+TTS.stop()
+
+// UI
+toast('¡Muy bien!', { emoji: '🎉' })      // notificación temporal
+lanzarConfeti({ count: 60, container: _el })
+// ⚠️  lanzarConfeti() muta container.style.position a 'relative'.
+//     En módulos con position:absolute;inset:0, restaurar después:
+//     _el.style.position = 'absolute';
+haptic(15)                                // vibración táctil
+
+// Perfiles
+Perfiles.getActivo()                      // perfil activo
+Perfiles.getModulosHabilitados()          // IDs habilitados para el perfil
+Perfiles.onChange(callback)              // suscribirse a cambios
+Perfiles.offChange(callback)             // desuscribirse — llamar en destroy()
+
+// Telemetría
+Telemetry.track('evento', { _modulo: 'mi-modulo', dato: valor })
+
+// Idioma activo
+window.getLang()                          // 'es' | 'en' — respeta pill ES/EN
+window._langConfig                        // { es: true, en: false }
+// Escuchar cambios de idioma:
+window.addEventListener('lang-change', e => {
+  const { langConfig } = e.detail;        // { es, en }
+})
+```
 
 ---
 
 ### Despliegue
 
-La app se despliega automáticamente en GitHub Pages con cada push a `main`. El flujo completo tarda ~2 minutos.
+La app se despliega automáticamente en GitHub Pages con cada push a `main`.
 
-Para forzar actualización en el dispositivo: cierra la app completamente y vuelve a abrirla con conexión.
+URL de producción: `https://carloschee.github.io/marina2/`
+
+El flujo completo de un cambio:
+1. Editas código o datos localmente
+2. `git add . && git commit -m "..." && git push`
+3. GitHub Action regenera `assets-manifest.json`
+4. GitHub Pages despliega la nueva versión en ~2 minutos
+5. El Service Worker en el iPad detecta la nueva versión en la próxima carga y se actualiza automáticamente
+
+Para forzar la actualización en el iPad sin esperar: cierra la app completamente y vuelve a abrirla con conexión a internet.
 
 ---
 
@@ -400,11 +488,4 @@ Para forzar actualización en el dispositivo: cierra la app completamente y vuel
 | iPhone 13 (secundario) | Portrait | 390×844 pt |
 | iPhone SE 2/3 (terciario) | Portrait | 375×667 pt |
 
----
-
-### Notas técnicas importantes
-
-- **`lanzarConfeti()` rompe el layout**: muta `container.style.position` a `relative`. Siempre restaurar `position:absolute` después en módulos que usen `inset:0`.
-- **Medir dimensiones**: no leer `clientWidth/Height` justo después de mutar el DOM. Usar `ResizeObserver` + caché (ver `_ajustarTamanos` en toca.js).
-- **Nombres de audio**: `generar-audio.py` usa `sanitizar_nombre()` para piezas de texto y `ruta_img` para pictos. El JS usa `sanitizarNombre()` espejo exacto. Cualquier divergencia causa 404 silenciosos.
-- **CRLF en Windows**: los archivos del repo tienen `\r\n`. Al editar con scripts Python, normalizar primero con `.replace('\r\n', '\n')`.
+El CSS usa `env(safe-area-inset-top/bottom)` con `viewport-fit=cover` para respetar el notch y el home indicator en modo standalone.
