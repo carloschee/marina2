@@ -308,8 +308,6 @@ function _render() {
   }
 }
 
-      /* Ocultar medidor en portrait para ahorrar espacio */
-      #md-medidor-wrap { display:none !important; }
     }
 
     /* ════════════════════════════════════════════════════════
@@ -338,8 +336,6 @@ function _render() {
       .md-nav-btn { width:38px; height:38px; font-size:1.1rem; }
       #md-btn-escucha { height:40px; font-size:.85rem; gap:6px; }
 
-      /* Ocultar micrófono — muy poco espacio */
-      #md-btn-mic { display:none !important; }
     }
 
     /* ── iPhone SE / pantallas muy angostas (≤390px) ─────────────── */
@@ -604,9 +600,24 @@ function _toggleMic() {
 
 function _iniciarMic() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { _mostrarMedidor(0, 'Micrófono no disponible en este navegador'); return; }
 
-  _recog = new SR();
+  // DIAGNÓSTICO: mostrar siempre el medidor y reportar estado
+  _el.querySelector('#md-medidor-wrap')?.classList.add('visible');
+
+  if (!SR) {
+    _actualizarBarra(0, '❌ SpeechRecognition NO existe en este navegador');
+    return;
+  }
+
+  _actualizarBarra(0, '✓ API existe, iniciando…');
+
+  try {
+    _recog = new SR();
+  } catch (err) {
+    _actualizarBarra(0, '❌ Error al crear: ' + err.message);
+    return;
+  }
+
   _recog.lang            = _lang === 'es' ? 'es-MX' : 'en-US';
   _recog.interimResults  = true;
   _recog.continuous      = true;
@@ -615,8 +626,14 @@ function _iniciarMic() {
   _mejorScore = 0;
   _micActivo  = true;
   _el.querySelector('#md-btn-mic')?.classList.add('activo');
-  _el.querySelector('#md-medidor-wrap')?.classList.add('visible');
-  _actualizarBarra(0, '…');
+
+  _recog.onstart = () => {
+    _actualizarBarra(0, '🎙️ Escuchando… (onstart OK)');
+  };
+
+  _recog.onaudiostart = () => {
+    _actualizarBarra(0, '🔊 Audio capturándose…');
+  };
 
   _recog.onresult = (e) => {
     let textoMejor = '';
@@ -629,16 +646,26 @@ function _iniciarMic() {
         if (score > _mejorScore) { _mejorScore = score; textoMejor = transcripcion; }
       }
     }
-    _actualizarBarra(_mejorScore, textoMejor);
+    _actualizarBarra(_mejorScore, textoMejor || '(sin texto aún)');
   };
 
   _recog.onerror = (e) => {
-    if (e.error !== 'no-speech') { _actualizarBarra(_mejorScore, `Error: ${e.error}`); _detenerMic(); }
+    _actualizarBarra(_mejorScore, '⚠️ Error: ' + e.error);
+    if (e.error !== 'no-speech') { _detenerMic(); }
   };
 
-  _recog.onend = () => { if (_micActivo) { try { _recog.start(); } catch {} } };
+  _recog.onend = () => {
+    if (_micActivo) { try { _recog.start(); } catch (err) {
+      _actualizarBarra(_mejorScore, '⚠️ onend restart falló: ' + err.message);
+    } }
+  };
 
-  try { _recog.start(); } catch (e) { console.warn('[mic]', e); }
+  try {
+    _recog.start();
+    _actualizarBarra(0, '▶️ start() llamado…');
+  } catch (e) {
+    _actualizarBarra(0, '❌ start() lanzó: ' + e.message);
+  }
 }
 
 function _detenerMic() {
