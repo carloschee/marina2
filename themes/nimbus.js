@@ -1,5 +1,5 @@
-/* themes/nimbus.js — Marina 2
-   Tema "Nimbus" — cielo de tarde con nubes cúmulos empujadas por la brisa.
+/* themes/viento.js — Marina 2
+   Tema "Viento" — cielo de tarde con nubes cúmulos empujadas por la brisa.
    Azul cielo profundo, nubes blancas esponjosas en tres capas de profundidad,
    luz cálida de tarde y la sensación de aire limpio y movimiento suave.
 */
@@ -58,22 +58,34 @@ export function injectStyles() {
 
     body { background: var(--t-bg); color: var(--t-ink); }
 
-    /* ── Nubes lejanas — lentas, grises, fondo ── */
-    @keyframes nube-lenta {
-      0%   { transform: translateX(-8%); }
-      100% { transform: translateX(108%); }
+    /* ── Ráfaga — traslación continua de izquierda a derecha ── */
+    @keyframes rafaga {
+      0%   { transform: translateX(-110%); }
+      100% { transform: translateX(110vw); }
     }
 
-    /* ── Nubes medias — velocidad media ── */
-    @keyframes nube-media {
-      0%   { transform: translateX(-12%); }
-      100% { transform: translateX(112%); }
+    /* ── Ondulación vertical — la ráfaga sube y baja suavemente ── */
+    @keyframes ondula-a {
+      0%,100% { transform: translateY(0)    scaleY(1); }
+      30%      { transform: translateY(-6px) scaleY(1.08); }
+      65%      { transform: translateY(4px)  scaleY(0.94); }
+    }
+    @keyframes ondula-b {
+      0%,100% { transform: translateY(0)    scaleY(1); }
+      40%      { transform: translateY(8px)  scaleY(1.10); }
+      75%      { transform: translateY(-4px) scaleY(0.92); }
+    }
+    @keyframes ondula-c {
+      0%,100% { transform: translateY(0)    scaleY(1); }
+      25%      { transform: translateY(-10px) scaleY(1.12); }
+      60%      { transform: translateY(6px)   scaleY(0.90); }
     }
 
-    /* ── Nubes cercanas — más rápidas, más blancas ── */
-    @keyframes nube-rapida {
-      0%   { transform: translateX(-15%); }
-      100% { transform: translateX(115%); }
+    /* ── Pulso de opacidad — la ráfaga aparece y se desvanece ── */
+    @keyframes pulso-rafaga {
+      0%,100% { opacity: 0; }
+      15%      { opacity: 1; }
+      85%      { opacity: 1; }
     }
 
     /* ── Sol — pulso suave de luz ── */
@@ -86,12 +98,6 @@ export function injectStyles() {
     @keyframes atardecer {
       0%,100% { opacity: .45; }
       50%      { opacity: .62; }
-    }
-
-    /* ── Destellos de luz en nubes ── */
-    @keyframes brillo-nube {
-      0%,100% { opacity: 0; }
-      50%      { opacity: .18; }
     }
   `;
   document.head.appendChild(style);
@@ -111,6 +117,39 @@ export function crearFondo() {
       '#a8d4f5 80%,' +      /* casi blanco en horizonte */
       '#d4eaf8 90%,' +      /* neblina de horizonte */
       '#e8f4fc 100%);';     /* horizonte lejano */
+
+  // Genera una ráfaga SVG: path ondulante con degradado horizontal
+  function _rafaga({ top, grosor, dur, delay, opMin, opMax, ondula, curva }) {
+    const id = `rg-${Math.random().toString(36).slice(2,7)}`;
+    // path: línea ondulante horizontal con curvas cúbicas
+    const w = 900;
+    const y = grosor / 2;
+    const amp = grosor * curva;
+    const path = `M0,${y}
+      C${w*0.15},${y - amp} ${w*0.25},${y + amp} ${w*0.4},${y}
+      C${w*0.55},${y - amp} ${w*0.65},${y + amp*0.7} ${w*0.78},${y}
+      C${w*0.88},${y - amp*0.5} ${w*0.94},${y + amp*0.3} ${w},${y}
+      L${w},${grosor} L0,${grosor} Z`;
+
+    return `
+    <div style="
+        position:absolute; top:${top}; left:0; width:100%; height:${grosor}px;
+        animation: rafaga ${dur}s linear ${delay}s infinite, ${ondula} infinite;
+        animation-fill-mode: none;">
+      <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;" viewBox="0 0 900 ${grosor}" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+            <stop offset="12%"  stop-color="white" stop-opacity="${opMax}"/>
+            <stop offset="50%"  stop-color="white" stop-opacity="${opMax * 0.85}"/>
+            <stop offset="88%"  stop-color="white" stop-opacity="${opMin}"/>
+            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="${path}" fill="url(#${id})"/>
+      </svg>
+    </div>`;
+  }
 
   div.innerHTML = `
 
@@ -139,140 +178,38 @@ export function crearFondo() {
     </div>
 
 
-    <!-- ══ CAPA 1 — nubes lejanas, grises, muy lentas ═══════════ -->
+    <!-- ══ RÁFAGAS DE VIENTO ══════════════════════════════════════ -->
 
-    <!-- Nube lejana 1 — sale desde izquierda, tarda 55s -->
-    <svg style="
-        position:absolute; top:18%; left:0; width:28%; height:14%;
-        overflow:visible;
-        animation: nube-lenta 55s linear 0s infinite;"
-      viewBox="0 0 280 80" aria-hidden="true">
-      <ellipse cx="100" cy="60" rx="100" ry="28" fill="rgba(180,200,230,0.35)"/>
-      <ellipse cx="100" cy="45" rx="70"  ry="32" fill="rgba(190,210,235,0.30)"/>
-      <ellipse cx="75"  cy="35" rx="45"  ry="30" fill="rgba(200,215,238,0.25)"/>
-      <ellipse cx="140" cy="38" rx="50"  ry="28" fill="rgba(195,212,236,0.25)"/>
-    </svg>
+    ${/* Capa trasera — ráfagas tenues, lentas */ ''}
 
-    <!-- Nube lejana 2 — sale desfasada 22s -->
-    <svg style="
-        position:absolute; top:22%; left:0; width:22%; height:11%;
-        overflow:visible;
-        animation: nube-lenta 55s linear -22s infinite;"
-      viewBox="0 0 220 65" aria-hidden="true">
-      <ellipse cx="80"  cy="50" rx="80"  ry="22" fill="rgba(175,195,228,0.32)"/>
-      <ellipse cx="80"  cy="36" rx="55"  ry="26" fill="rgba(185,205,232,0.27)"/>
-      <ellipse cx="130" cy="38" rx="48"  ry="22" fill="rgba(188,208,233,0.22)"/>
-    </svg>
+    ${_rafaga({ top:'8%',  grosor:18, dur:28, delay:0,    opMin:.04, opMax:.18, ondula:'ondula-b 9s ease-in-out infinite',  curva:0.9 })}
+    ${_rafaga({ top:'15%', grosor:12, dur:32, delay:-8,   opMin:.03, opMax:.14, ondula:'ondula-a 11s ease-in-out infinite', curva:0.7 })}
+    ${_rafaga({ top:'24%', grosor:22, dur:26, delay:-16,  opMin:.04, opMax:.16, ondula:'ondula-c 8s ease-in-out infinite',  curva:1.1 })}
+    ${_rafaga({ top:'35%', grosor:10, dur:34, delay:-5,   opMin:.02, opMax:.12, ondula:'ondula-a 13s ease-in-out infinite', curva:0.6 })}
+    ${_rafaga({ top:'44%', grosor:16, dur:30, delay:-22,  opMin:.03, opMax:.13, ondula:'ondula-b 10s ease-in-out infinite', curva:0.8 })}
+    ${_rafaga({ top:'55%', grosor:14, dur:36, delay:-11,  opMin:.02, opMax:.10, ondula:'ondula-c 12s ease-in-out infinite', curva:0.7 })}
+    ${_rafaga({ top:'66%', grosor:20, dur:29, delay:-19,  opMin:.03, opMax:.14, ondula:'ondula-a 9s ease-in-out infinite',  curva:1.0 })}
+    ${_rafaga({ top:'76%', grosor:11, dur:38, delay:-7,   opMin:.02, opMax:.09, ondula:'ondula-b 14s ease-in-out infinite', curva:0.6 })}
 
-    <!-- Nube lejana 3 — desfasada 38s -->
-    <svg style="
-        position:absolute; top:14%; left:0; width:18%; height:9%;
-        overflow:visible;
-        animation: nube-lenta 55s linear -38s infinite;"
-      viewBox="0 0 180 55" aria-hidden="true">
-      <ellipse cx="70"  cy="42" rx="70"  ry="18" fill="rgba(178,198,228,0.28)"/>
-      <ellipse cx="70"  cy="30" rx="48"  ry="22" fill="rgba(188,208,233,0.23)"/>
-      <ellipse cx="110" cy="32" rx="42"  ry="19" fill="rgba(185,205,230,0.20)"/>
-    </svg>
+    ${/* Capa media — ráfagas principales */ ''}
 
+    ${_rafaga({ top:'5%',  grosor:28, dur:18, delay:0,    opMin:.08, opMax:.32, ondula:'ondula-a 7s ease-in-out infinite',  curva:1.2 })}
+    ${_rafaga({ top:'19%', grosor:20, dur:22, delay:-6,   opMin:.06, opMax:.26, ondula:'ondula-c 9s ease-in-out infinite',  curva:1.0 })}
+    ${_rafaga({ top:'30%', grosor:32, dur:16, delay:-10,  opMin:.07, opMax:.28, ondula:'ondula-b 8s ease-in-out infinite',  curva:1.3 })}
+    ${_rafaga({ top:'42%', grosor:18, dur:24, delay:-3,   opMin:.05, opMax:.22, ondula:'ondula-a 11s ease-in-out infinite', curva:0.9 })}
+    ${_rafaga({ top:'52%', grosor:26, dur:19, delay:-14,  opMin:.06, opMax:.24, ondula:'ondula-c 7s ease-in-out infinite',  curva:1.1 })}
+    ${_rafaga({ top:'63%', grosor:16, dur:21, delay:-9,   opMin:.05, opMax:.20, ondula:'ondula-b 10s ease-in-out infinite', curva:0.8 })}
+    ${_rafaga({ top:'73%', grosor:30, dur:17, delay:-17,  opMin:.07, opMax:.26, ondula:'ondula-a 8s ease-in-out infinite',  curva:1.2 })}
+    ${_rafaga({ top:'84%', grosor:14, dur:25, delay:-4,   opMin:.04, opMax:.18, ondula:'ondula-c 12s ease-in-out infinite', curva:0.7 })}
 
-    <!-- ══ CAPA 2 — nubes medias, blancas, velocidad media ══════ -->
+    ${/* Capa delantera — ráfagas vivas, rápidas */ ''}
 
-    <!-- Nube media 1 — sale desde izquierda, tarda 32s -->
-    <svg style="
-        position:absolute; top:10%; left:0; width:38%; height:20%;
-        overflow:visible;
-        animation: nube-media 32s linear 0s infinite;"
-      viewBox="0 0 380 110" aria-hidden="true">
-      <!-- Base -->
-      <ellipse cx="165" cy="90"  rx="160" ry="30"  fill="rgba(230,240,255,0.55)"/>
-      <!-- Cuerpo -->
-      <ellipse cx="140" cy="70"  rx="110" ry="45"  fill="rgba(240,246,255,0.58)"/>
-      <!-- Protuberancias superiores -->
-      <ellipse cx="100" cy="48"  rx="70"  ry="48"  fill="rgba(245,250,255,0.60)"/>
-      <ellipse cx="175" cy="42"  rx="80"  ry="52"  fill="rgba(248,252,255,0.62)"/>
-      <ellipse cx="245" cy="52"  rx="65"  ry="44"  fill="rgba(245,250,255,0.58)"/>
-      <!-- Cimas blancas -->
-      <ellipse cx="155" cy="22"  rx="55"  ry="38"  fill="rgba(255,255,255,0.65)"/>
-      <ellipse cx="205" cy="18"  rx="48"  ry="35"  fill="rgba(255,255,255,0.68)"/>
-      <!-- Sombra base -->
-      <ellipse cx="165" cy="94"  rx="145" ry="18"  fill="rgba(150,170,210,0.22)"/>
-    </svg>
-
-    <!-- Nube media 2 — desfasada 14s, más pequeña -->
-    <svg style="
-        position:absolute; top:6%; left:0; width:28%; height:16%;
-        overflow:visible;
-        animation: nube-media 32s linear -14s infinite;"
-      viewBox="0 0 280 90" aria-hidden="true">
-      <ellipse cx="120" cy="72"  rx="118" ry="24"  fill="rgba(228,240,255,0.52)"/>
-      <ellipse cx="110" cy="55"  rx="85"  ry="38"  fill="rgba(238,246,255,0.55)"/>
-      <ellipse cx="80"  cy="38"  rx="55"  ry="40"  fill="rgba(245,250,255,0.58)"/>
-      <ellipse cx="145" cy="34"  rx="62"  ry="42"  fill="rgba(248,252,255,0.60)"/>
-      <ellipse cx="120" cy="16"  rx="42"  ry="30"  fill="rgba(255,255,255,0.65)"/>
-      <ellipse cx="120" cy="76"  rx="105" ry="14"  fill="rgba(155,175,215,0.20)"/>
-    </svg>
-
-    <!-- Nube media 3 — desfasada 25s -->
-    <svg style="
-        position:absolute; top:28%; left:0; width:24%; height:13%;
-        overflow:visible;
-        animation: nube-media 32s linear -25s infinite;"
-      viewBox="0 0 240 78" aria-hidden="true">
-      <ellipse cx="100" cy="62"  rx="98"  ry="20"  fill="rgba(225,238,255,0.48)"/>
-      <ellipse cx="95"  cy="47"  rx="72"  ry="34"  fill="rgba(235,245,255,0.52)"/>
-      <ellipse cx="70"  cy="32"  rx="48"  ry="36"  fill="rgba(242,250,255,0.55)"/>
-      <ellipse cx="130" cy="30"  rx="55"  ry="35"  fill="rgba(245,251,255,0.57)"/>
-      <ellipse cx="105" cy="12"  rx="38"  ry="26"  fill="rgba(255,255,255,0.62)"/>
-    </svg>
-
-
-    <!-- ══ CAPA 3 — nubes cercanas, muy blancas, más rápidas ════ -->
-
-    <!-- Nube cercana 1 — tarda 20s -->
-    <svg style="
-        position:absolute; top:5%; left:0; width:42%; height:24%;
-        overflow:visible;
-        animation: nube-rapida 20s linear 0s infinite;"
-      viewBox="0 0 420 130" aria-hidden="true">
-      <ellipse cx="185" cy="108" rx="178" ry="30"  fill="rgba(235,245,255,0.60)"/>
-      <ellipse cx="165" cy="85"  rx="130" ry="50"  fill="rgba(245,250,255,0.65)"/>
-      <ellipse cx="115" cy="58"  rx="85"  ry="58"  fill="rgba(250,253,255,0.70)"/>
-      <ellipse cx="200" cy="50"  rx="95"  ry="62"  fill="rgba(252,254,255,0.72)"/>
-      <ellipse cx="280" cy="65"  rx="78"  ry="52"  fill="rgba(250,253,255,0.68)"/>
-      <ellipse cx="175" cy="22"  rx="65"  ry="46"  fill="rgba(255,255,255,0.80)"/>
-      <ellipse cx="225" cy="15"  rx="58"  ry="40"  fill="rgba(255,255,255,0.82)"/>
-      <!-- Destellos blancos en cima -->
-      <ellipse cx="195" cy="8"   rx="40"  ry="22"  fill="rgba(255,255,255,0.88)"/>
-      <!-- Sombra base azulada -->
-      <ellipse cx="190" cy="112" rx="162" ry="18"  fill="rgba(140,165,210,0.28)"/>
-    </svg>
-
-    <!-- Nube cercana 2 — desfasada 9s -->
-    <svg style="
-        position:absolute; top:8%; left:0; width:32%; height:18%;
-        overflow:visible;
-        animation: nube-rapida 20s linear -9s infinite;"
-      viewBox="0 0 320 105" aria-hidden="true">
-      <ellipse cx="140" cy="86"  rx="135" ry="24"  fill="rgba(232,244,255,0.58)"/>
-      <ellipse cx="128" cy="66"  rx="98"  ry="42"  fill="rgba(242,250,255,0.62)"/>
-      <ellipse cx="95"  cy="45"  rx="65"  ry="48"  fill="rgba(248,252,255,0.67)"/>
-      <ellipse cx="165" cy="40"  rx="72"  ry="50"  fill="rgba(250,253,255,0.70)"/>
-      <ellipse cx="135" cy="16"  rx="50"  ry="36"  fill="rgba(255,255,255,0.78)"/>
-      <ellipse cx="135" cy="90"  rx="120" ry="15"  fill="rgba(145,168,212,0.24)"/>
-    </svg>
-
-
-    <!-- ══ BRILLO DIFUSO EN NUBES — efecto de sol tocando la cima ══ -->
-    <div style="
-      position:absolute; top:0%; left:30%; width:40%; height:35%;
-      background: radial-gradient(ellipse at 50% 30%,
-        rgba(255,245,200,0.22) 0%,
-        rgba(255,230,150,0.10) 45%,
-        transparent 72%);
-      filter: blur(20px);
-      animation: brillo-nube 10s ease-in-out infinite;">
-    </div>
+    ${_rafaga({ top:'2%',  grosor:38, dur:11, delay:0,    opMin:.10, opMax:.42, ondula:'ondula-c 5s ease-in-out infinite',  curva:1.5 })}
+    ${_rafaga({ top:'22%', grosor:30, dur:13, delay:-4,   opMin:.09, opMax:.38, ondula:'ondula-a 6s ease-in-out infinite',  curva:1.4 })}
+    ${_rafaga({ top:'38%', grosor:42, dur:10, delay:-7,   opMin:.10, opMax:.40, ondula:'ondula-b 5s ease-in-out infinite',  curva:1.6 })}
+    ${_rafaga({ top:'57%', grosor:28, dur:14, delay:-2,   opMin:.08, opMax:.35, ondula:'ondula-c 7s ease-in-out infinite',  curva:1.3 })}
+    ${_rafaga({ top:'70%', grosor:36, dur:12, delay:-9,   opMin:.09, opMax:.38, ondula:'ondula-a 5s ease-in-out infinite',  curva:1.5 })}
+    ${_rafaga({ top:'88%', grosor:24, dur:15, delay:-5,   opMin:.07, opMax:.30, ondula:'ondula-b 8s ease-in-out infinite',  curva:1.2 })}
 
 
     <!-- ══ VELO DE CIELO — gradiente suave para profundidad ══════ -->
