@@ -789,10 +789,10 @@ const _TEMAS_DISPONIBLES = [
     gradiente: 'linear-gradient(135deg, #163d25 0%, #245e3a 50%, #00d4aa 100%)',
   },
   {
-    id: 'nombre',
-    nombre: 'Nombre visible',
-    desc: 'Descripción corta',
-    gradiente: 'linear-gradient(135deg, #... 0%, #... 50%, #... 100%)',
+    id: 'viento',
+    nombre: 'Viento',
+    desc: 'Ráfagas de brisa en un cielo de tarde',
+    gradiente: 'linear-gradient(135deg, #1a4a8a 0%, #2e6fb5 50%, #a8d4f5 100%)',
   },
 ];
 
