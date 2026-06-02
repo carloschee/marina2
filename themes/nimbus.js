@@ -1,36 +1,36 @@
 /* themes/nimbus.js — Marina 2
-   Tema "Nimbus" — cielo de cumulonimbus al atardecer amenazante.
-   Torres de nubes de 15km, base oscura morada, cima blanca iluminada,
-   relámpagos internos, lluvia diagonal y el azul-pizarra del cielo entre nubes.
+   Tema "Nimbus" — cielo de tarde con nubes cúmulos empujadas por la brisa.
+   Azul cielo profundo, nubes blancas esponjosas en tres capas de profundidad,
+   luz cálida de tarde y la sensación de aire limpio y movimiento suave.
 */
 
 export const tokens = {
-  /* Fondos — cielo pizarra oscuro, amenazante */
-  '--t-bg':          '#151a28',   /* cielo nocturno de tormenta */
-  '--t-bg-mid':      '#1e2a42',   /* azul-pizarra profundo */
-  '--t-surface':     'rgba(255,255,255,0.10)',
+  /* Fondos — azul cielo diurno */
+  '--t-bg':          '#1a4a8a',   /* azul cielo profundo */
+  '--t-bg-mid':      '#2e6fb5',   /* azul cielo medio */
+  '--t-surface':     'rgba(255,255,255,0.16)',
 
-  /* Texto — blanco frío, azulado */
-  '--t-ink':         '#e8f0ff',   /* blanco con tinte de cielo */
-  '--t-ink-soft':    'rgba(232,240,255,0.65)',
-  '--t-ink-dark':    '#0a0e1a',   /* noche de tormenta */
+  /* Texto — blanco cálido */
+  '--t-ink':         '#f0f8ff',   /* blanco cielo */
+  '--t-ink-soft':    'rgba(240,248,255,0.68)',
+  '--t-ink-dark':    '#0a1f3a',   /* azul noche para texto sobre claro */
 
   /* Colores principales */
-  '--t-primary':     '#4fc3f7',   /* azul cielo entre nubes */
-  '--t-primary-dk':  '#039be5',
-  '--t-accent':      '#ffe066',   /* amarillo relámpago */
-  '--t-secondary':   '#9c8fc0',   /* lavanda nube de tormenta */
-  '--t-warn':        '#ff6b6b',   /* rojo alerta */
-  '--t-gold':        '#ffd54f',   /* ámbar de relámpago lejano */
-  '--t-purple':      '#ce93d8',   /* violeta nube iluminada */
-  '--t-coral':       '#ff8a65',   /* naranja de puesta tras la tormenta */
+  '--t-primary':     '#38bdf8',   /* azul cielo brillante */
+  '--t-primary-dk':  '#0ea5c9',
+  '--t-accent':      '#fde68a',   /* amarillo sol de tarde */
+  '--t-secondary':   '#a5f3fc',   /* celeste suave */
+  '--t-warn':        '#fb7185',   /* rosa atardecer */
+  '--t-gold':        '#fcd34d',   /* dorado de sol */
+  '--t-purple':      '#c4b5fd',   /* lavanda cielo */
+  '--t-coral':       '#fdba74',   /* naranja de atardecer */
 
   /* Nav */
-  '--t-nav-bg':      'linear-gradient(180deg, rgba(10,14,26,0.95) 0%, rgba(21,26,40,0.70) 100%)',
+  '--t-nav-bg':      'linear-gradient(180deg, rgba(10,25,60,0.92) 0%, rgba(26,74,138,0.65) 100%)',
 
-  /* Sombras — frías, azuladas */
-  '--t-shadow':      '0 8px 24px rgba(10,20,60,0.45)',
-  '--t-shadow-deep': '0 16px 48px rgba(5,10,40,0.60)',
+  /* Sombras */
+  '--t-shadow':      '0 8px 24px rgba(10,30,80,0.30)',
+  '--t-shadow-deep': '0 16px 48px rgba(5,20,60,0.45)',
 
   /* Radios */
   '--t-radius-sm':   '12px',
@@ -40,17 +40,17 @@ export const tokens = {
 };
 
 export const manifest = {
-  background_color: '#151a28',
-  theme_color:      '#1e2a42',
+  background_color: '#1a4a8a',
+  theme_color:      '#2e6fb5',
 };
 
 export function injectStyles() {
-  if (document.getElementById('tema-tormenta-styles')) return;
+  if (document.getElementById('tema-viento-styles')) return;
 
   const vars = Object.entries(tokens).map(([k, v]) => `  ${k}: ${v};`).join('\n');
 
   const style = document.createElement('style');
-  style.id = 'tema-tormenta-styles';
+  style.id = 'tema-viento-styles';
   style.textContent = `
     :root {
     ${vars}
@@ -58,63 +58,40 @@ export function injectStyles() {
 
     body { background: var(--t-bg); color: var(--t-ink); }
 
-    /* ── Nubes cumulonimbus moviéndose lentamente ── */
-    @keyframes nube-izq {
-      0%,100% { transform: translateX(0)    scaleX(1); }
-      50%      { transform: translateX(3%)   scaleX(1.04); }
-    }
-    @keyframes nube-der {
-      0%,100% { transform: translateX(0)    scaleX(1); }
-      50%      { transform: translateX(-4%)  scaleX(1.06); }
-    }
-    @keyframes nube-centro {
-      0%,100% { transform: translateX(0)   translateY(0);  }
-      40%      { transform: translateX(2%)  translateY(-8px); }
-      80%      { transform: translateX(-1%) translateY(4px); }
+    /* ── Nubes lejanas — lentas, grises, fondo ── */
+    @keyframes nube-lenta {
+      0%   { transform: translateX(-8%); }
+      100% { transform: translateX(108%); }
     }
 
-    /* ── Iluminación interna de nube — glow que pulsa ── */
-    @keyframes glow-nube-a {
-      0%,100% { opacity: 0;    filter: blur(30px); }
-      8%       { opacity: .55; filter: blur(22px); }
-      14%      { opacity: .20; filter: blur(28px); }
-      18%      { opacity: .45; filter: blur(20px); }
-      24%      { opacity: 0;   filter: blur(30px); }
-    }
-    @keyframes glow-nube-b {
-      0%,100% { opacity: 0;    filter: blur(35px); }
-      5%       { opacity: .40; filter: blur(25px); }
-      10%      { opacity: 0;   filter: blur(35px); }
+    /* ── Nubes medias — velocidad media ── */
+    @keyframes nube-media {
+      0%   { transform: translateX(-12%); }
+      100% { transform: translateX(112%); }
     }
 
-    /* ── Relámpago — destello total de pantalla ── */
-    @keyframes destello-rayo {
+    /* ── Nubes cercanas — más rápidas, más blancas ── */
+    @keyframes nube-rapida {
+      0%   { transform: translateX(-15%); }
+      100% { transform: translateX(115%); }
+    }
+
+    /* ── Sol — pulso suave de luz ── */
+    @keyframes sol-pulso {
+      0%,100% { opacity: .85; transform: scale(1);    filter: blur(28px); }
+      50%      { opacity: 1;   transform: scale(1.06); filter: blur(24px); }
+    }
+
+    /* ── Resplandor de atardecer ── */
+    @keyframes atardecer {
+      0%,100% { opacity: .45; }
+      50%      { opacity: .62; }
+    }
+
+    /* ── Destellos de luz en nubes ── */
+    @keyframes brillo-nube {
       0%,100% { opacity: 0; }
-      2%       { opacity: .18; }
-      4%       { opacity: 0; }
-      6%       { opacity: .28; }
-      8%       { opacity: 0; }
-    }
-
-    /* ── Rayo ramificado SVG ── */
-    @keyframes rayo-svg {
-      0%,100% { opacity: 0; }
-      3%       { opacity: 1; }
-      7%       { opacity: 0; }
-    }
-
-    /* ── Gotas de lluvia diagonal ── */
-    @keyframes lluvia {
-      0%   { transform: translateY(-10px) translateX(0);   opacity: 0; }
-      10%  { opacity: .55; }
-      90%  { opacity: .35; }
-      100% { transform: translateY(110vh) translateX(-30px); opacity: 0; }
-    }
-
-    /* ── Velo de niebla de tormenta ── */
-    @keyframes niebla {
-      0%,100% { opacity: .08; transform: translateX(0); }
-      50%      { opacity: .14; transform: translateX(2%); }
+      50%      { opacity: .18; }
     }
   `;
   document.head.appendChild(style);
@@ -125,225 +102,188 @@ export function crearFondo() {
   div.id = 'app-fondo';
   div.style.cssText =
     'position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;' +
-    /* Gradiente: cielo-pizarra oscuro arriba → base de nube morada → oscuridad */
     'background: linear-gradient(180deg,' +
-      '#0d1220 0%,' +       /* cénit oscuro, casi negro */
-      '#1a2540 12%,' +      /* azul pizarra alto */
-      '#2a3060 28%,' +      /* azul-morado de tormenta */
-      '#3a2850 42%,' +      /* morado base de cumulonimbus */
-      '#1e1e35 58%,' +      /* transición oscura */
-      '#151525 75%,' +      /* casi negro, suelo de tormenta */
-      '#0a0a18 100%);';     /* negro noche */
-
-  // Generar gotas de lluvia
-  const gotas = Array.from({length: 35}, (_, i) => {
-    const x   = (i * 2.9) % 100;
-    const dur = 0.6 + (i * 0.18) % 0.9;
-    const del = (i * 0.31) % 2.5;
-    const op  = (0.25 + (i * 0.02) % 0.35).toFixed(2);
-    const h   = 12 + (i * 4) % 22;
-    return `<line
-      x1="${x}%" y1="0"
-      x2="${x - 1.5}%" y2="${h}px"
-      stroke="rgba(180,210,255,${op})"
-      stroke-width="${0.8 + (i * 0.05) % 0.8}"
-      style="animation: lluvia ${dur.toFixed(2)}s ${del.toFixed(2)}s linear infinite"/>`;
-  }).join('\n      ');
+      '#0a1f4a 0%,' +       /* cénit azul oscuro */
+      '#1a4a8a 18%,' +      /* azul cielo alto */
+      '#2e6fb5 38%,' +      /* azul cielo medio */
+      '#4a90d9 55%,' +      /* azul claro hacia horizonte */
+      '#6ab0e8 68%,' +      /* celeste horizonte */
+      '#a8d4f5 80%,' +      /* casi blanco en horizonte */
+      '#d4eaf8 90%,' +      /* neblina de horizonte */
+      '#e8f4fc 100%);';     /* horizonte lejano */
 
   div.innerHTML = `
 
-    <!-- ══ NUBES CUMULONIMBUS ═══════════════════════════════════ -->
-
-    <!-- Torre principal — cumulonimbus centro-izquierda -->
-    <svg style="
-        position:absolute; top:-8%; left:-5%; width:65%; height:80%;
-        transform-origin: 50% 100%;
-        animation: nube-izq 18s ease-in-out infinite;"
-      viewBox="0 0 400 500" aria-hidden="true">
-      <!-- Cuerpo principal oscuro de la nube -->
-      <ellipse cx="200" cy="420" rx="200" ry="80"
-        fill="rgba(25,20,50,0.80)"/>
-      <!-- Torre media -->
-      <ellipse cx="160" cy="320" rx="130" ry="110"
-        fill="rgba(35,28,65,0.75)"/>
-      <!-- Torre alta izquierda -->
-      <ellipse cx="110" cy="200" rx="90" ry="95"
-        fill="rgba(45,38,80,0.70)"/>
-      <!-- Cima brillante (iluminada por sol desde arriba) -->
-      <ellipse cx="130" cy="120" rx="75" ry="65"
-        fill="rgba(200,210,240,0.18)"/>
-      <ellipse cx="160" cy="80" rx="55" ry="50"
-        fill="rgba(220,225,255,0.22)"/>
-      <!-- Yunque de la cima — característico del cumulonimbus -->
-      <ellipse cx="180" cy="55" rx="80" ry="30"
-        fill="rgba(230,235,255,0.15)"/>
-      <!-- Detalle de bordes iluminados -->
-      <ellipse cx="120" cy="110" rx="40" ry="35"
-        fill="rgba(255,255,255,0.08)"/>
-    </svg>
-
-    <!-- Torre secundaria — derecha, más alta -->
-    <svg style="
-        position:absolute; top:-12%; right:-8%; width:60%; height:85%;
-        transform-origin: 50% 100%;
-        animation: nube-der 22s ease-in-out 2s infinite;"
-      viewBox="0 0 380 520" aria-hidden="true">
-      <ellipse cx="190" cy="440" rx="190" ry="75"
-        fill="rgba(20,15,45,0.82)"/>
-      <ellipse cx="220" cy="330" rx="140" ry="120"
-        fill="rgba(30,24,60,0.76)"/>
-      <ellipse cx="250" cy="200" rx="110" ry="115"
-        fill="rgba(40,32,75,0.70)"/>
-      <ellipse cx="230" cy="100" rx="85" ry="80"
-        fill="rgba(50,42,88,0.65)"/>
-      <!-- Cima iluminada -->
-      <ellipse cx="240" cy="55" rx="70" ry="55"
-        fill="rgba(210,215,245,0.20)"/>
-      <ellipse cx="255" cy="25" rx="50" ry="35"
-        fill="rgba(225,230,255,0.18)"/>
-      <!-- Yunque extendido hacia la izquierda -->
-      <ellipse cx="210" cy="15" rx="90" ry="25"
-        fill="rgba(235,238,255,0.12)"/>
-    </svg>
-
-    <!-- Masa de nubes baja — base oscura amenazante -->
-    <svg style="
-        position:absolute; top:25%; left:-2%; width:104%; height:50%;
-        animation: nube-centro 25s ease-in-out 1s infinite;"
-      viewBox="0 0 1100 300" aria-hidden="true">
-      <path d="M0,150 Q80,80 160,130 Q240,60 340,100 Q440,40 540,90
-               Q640,50 740,95 Q840,55 940,100 Q1020,75 1100,120
-               L1100,300 L0,300 Z"
-        fill="rgba(20,15,45,0.70)"/>
-      <path d="M0,180 Q100,130 200,160 Q320,110 420,150
-               Q540,120 640,155 Q760,125 860,158
-               Q980,130 1100,160 L1100,300 L0,300 Z"
-        fill="rgba(15,10,38,0.60)"/>
-    </svg>
-
-
-    <!-- ══ ILUMINACIÓN INTERNA — glow que pulsa como relámpago en nube ══ -->
-
-    <!-- Glow nube izquierda -->
+    <!-- ══ SOL — resplandor cálido en el horizonte ══════════════ -->
     <div style="
-      position:absolute; top:5%; left:2%; width:45%; height:55%;
-      background: radial-gradient(ellipse at 40% 60%,
-        rgba(180,200,255,0.60) 0%,
-        rgba(120,140,255,0.30) 35%,
-        transparent 68%);
-      filter: blur(30px);
-      animation: glow-nube-a 8s ease-in-out 1s infinite;">
-    </div>
-
-    <!-- Glow nube derecha -->
-    <div style="
-      position:absolute; top:2%; right:0%; width:50%; height:60%;
-      background: radial-gradient(ellipse at 60% 55%,
-        rgba(160,180,255,0.55) 0%,
-        rgba(200,160,255,0.25) 40%,
-        transparent 70%);
-      filter: blur(35px);
-      animation: glow-nube-b 11s ease-in-out 3.5s infinite;">
-    </div>
-
-    <!-- Glow morado — base oscura de nube iluminada -->
-    <div style="
-      position:absolute; top:30%; left:15%; width:70%; height:40%;
-      background: radial-gradient(ellipse at 50% 40%,
-        rgba(140,100,200,0.30) 0%,
-        rgba(80,60,160,0.15)  50%,
-        transparent 75%);
-      filter: blur(40px);
-      animation: glow-nube-a 13s ease-in-out 6s infinite;">
-    </div>
-
-
-    <!-- ══ DESTELLO TOTAL DE RELÁMPAGO ══════════════════════════ -->
-    <div style="
-      position:absolute; inset:0;
-      background: rgba(200,220,255,1);
-      animation: destello-rayo 9s ease-in-out 4s infinite;
-      pointer-events:none;">
-    </div>
-    <div style="
-      position:absolute; inset:0;
-      background: rgba(220,230,255,1);
-      animation: destello-rayo 14s ease-in-out 11s infinite;
-      pointer-events:none;">
-    </div>
-
-
-    <!-- ══ RAYOS RAMIFICADOS SVG ═════════════════════════════════ -->
-    <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;" aria-hidden="true">
-
-      <!-- Rayo principal izquierda -->
-      <g style="animation: rayo-svg 9s ease-in-out 4s infinite;">
-        <polyline points="28%,12% 25%,28% 27%,28% 22%,48% 24%,48% 18%,72%"
-          stroke="rgba(255,245,180,0.95)" stroke-width="2.5"
-          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <!-- Ramificación 1 -->
-        <polyline points="25%,28% 20%,40%"
-          stroke="rgba(255,245,180,0.60)" stroke-width="1.5"
-          stroke-linecap="round" fill="none"/>
-        <!-- Ramificación 2 -->
-        <polyline points="22%,48% 17%,58%"
-          stroke="rgba(255,245,180,0.50)" stroke-width="1.2"
-          stroke-linecap="round" fill="none"/>
-        <!-- Glow del rayo -->
-        <polyline points="28%,12% 25%,28% 27%,28% 22%,48% 24%,48% 18%,72%"
-          stroke="rgba(180,210,255,0.40)" stroke-width="8"
-          stroke-linecap="round" stroke-linejoin="round" fill="none"
-          style="filter:blur(4px)"/>
-      </g>
-
-      <!-- Rayo secundario derecha — timing diferente -->
-      <g style="animation: rayo-svg 14s ease-in-out 11s infinite;">
-        <polyline points="72%,8% 75%,22% 73%,22% 78%,40% 76%,40% 80%,62%"
-          stroke="rgba(255,248,190,0.90)" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <polyline points="75%,22% 80%,34%"
-          stroke="rgba(255,248,190,0.55)" stroke-width="1.3"
-          stroke-linecap="round" fill="none"/>
-        <polyline points="76%,40% 82%,52%"
-          stroke="rgba(255,248,190,0.45)" stroke-width="1.1"
-          stroke-linecap="round" fill="none"/>
-        <polyline points="72%,8% 75%,22% 73%,22% 78%,40% 76%,40% 80%,62%"
-          stroke="rgba(180,210,255,0.35)" stroke-width="7"
-          stroke-linecap="round" stroke-linejoin="round" fill="none"
-          style="filter:blur(4px)"/>
-      </g>
-    </svg>
-
-
-    <!-- ══ LLUVIA DIAGONAL ════════════════════════════════════════ -->
-    <svg style="
-        position:absolute; inset:0; width:100%; height:100%;
-        overflow:visible; opacity:0.7;"
-      aria-hidden="true">
-      ${gotas}
-    </svg>
-
-
-    <!-- ══ VELO DE NIEBLA Y HUMEDAD ══════════════════════════════ -->
-    <div style="
-      position:absolute; inset:0;
-      background: linear-gradient(160deg,
-        transparent 0%,
-        rgba(100,120,180,0.06) 40%,
-        rgba(80,100,160,0.10) 70%,
-        rgba(60,80,140,0.15) 100%);
-      animation: niebla 12s ease-in-out infinite;">
-    </div>
-
-    <!-- Resplandor azul-violeta inferior — reflexión en suelo mojado -->
-    <div style="
-      position:absolute; bottom:-5%; left:50%; transform:translateX(-50%);
-      width:120%; height:35%;
+      position:absolute; bottom:12%; left:50%; transform:translateX(-50%);
+      width:55%; height:40%;
       background: radial-gradient(ellipse at 50% 100%,
-        rgba(80,100,200,0.18) 0%,
-        rgba(60,80,180,0.08)  45%,
+        rgba(255,210,80,0.55)  0%,
+        rgba(255,180,60,0.28) 35%,
+        rgba(255,140,40,0.10) 60%,
+        transparent 78%);
+      animation: atardecer 8s ease-in-out infinite;">
+    </div>
+
+    <!-- Corona del sol -->
+    <div style="
+      position:absolute; bottom:18%; left:50%; transform:translateX(-50%);
+      width:28%; height:25%;
+      background: radial-gradient(ellipse at 50% 80%,
+        rgba(255,230,100,0.70) 0%,
+        rgba(255,200,80,0.35)  35%,
+        transparent 68%);
+      filter: blur(28px);
+      animation: sol-pulso 6s ease-in-out infinite;">
+    </div>
+
+
+    <!-- ══ CAPA 1 — nubes lejanas, grises, muy lentas ═══════════ -->
+
+    <!-- Nube lejana 1 — sale desde izquierda, tarda 55s -->
+    <svg style="
+        position:absolute; top:18%; left:0; width:28%; height:14%;
+        overflow:visible;
+        animation: nube-lenta 55s linear 0s infinite;"
+      viewBox="0 0 280 80" aria-hidden="true">
+      <ellipse cx="100" cy="60" rx="100" ry="28" fill="rgba(180,200,230,0.35)"/>
+      <ellipse cx="100" cy="45" rx="70"  ry="32" fill="rgba(190,210,235,0.30)"/>
+      <ellipse cx="75"  cy="35" rx="45"  ry="30" fill="rgba(200,215,238,0.25)"/>
+      <ellipse cx="140" cy="38" rx="50"  ry="28" fill="rgba(195,212,236,0.25)"/>
+    </svg>
+
+    <!-- Nube lejana 2 — sale desfasada 22s -->
+    <svg style="
+        position:absolute; top:22%; left:0; width:22%; height:11%;
+        overflow:visible;
+        animation: nube-lenta 55s linear -22s infinite;"
+      viewBox="0 0 220 65" aria-hidden="true">
+      <ellipse cx="80"  cy="50" rx="80"  ry="22" fill="rgba(175,195,228,0.32)"/>
+      <ellipse cx="80"  cy="36" rx="55"  ry="26" fill="rgba(185,205,232,0.27)"/>
+      <ellipse cx="130" cy="38" rx="48"  ry="22" fill="rgba(188,208,233,0.22)"/>
+    </svg>
+
+    <!-- Nube lejana 3 — desfasada 38s -->
+    <svg style="
+        position:absolute; top:14%; left:0; width:18%; height:9%;
+        overflow:visible;
+        animation: nube-lenta 55s linear -38s infinite;"
+      viewBox="0 0 180 55" aria-hidden="true">
+      <ellipse cx="70"  cy="42" rx="70"  ry="18" fill="rgba(178,198,228,0.28)"/>
+      <ellipse cx="70"  cy="30" rx="48"  ry="22" fill="rgba(188,208,233,0.23)"/>
+      <ellipse cx="110" cy="32" rx="42"  ry="19" fill="rgba(185,205,230,0.20)"/>
+    </svg>
+
+
+    <!-- ══ CAPA 2 — nubes medias, blancas, velocidad media ══════ -->
+
+    <!-- Nube media 1 — sale desde izquierda, tarda 32s -->
+    <svg style="
+        position:absolute; top:10%; left:0; width:38%; height:20%;
+        overflow:visible;
+        animation: nube-media 32s linear 0s infinite;"
+      viewBox="0 0 380 110" aria-hidden="true">
+      <!-- Base -->
+      <ellipse cx="165" cy="90"  rx="160" ry="30"  fill="rgba(230,240,255,0.55)"/>
+      <!-- Cuerpo -->
+      <ellipse cx="140" cy="70"  rx="110" ry="45"  fill="rgba(240,246,255,0.58)"/>
+      <!-- Protuberancias superiores -->
+      <ellipse cx="100" cy="48"  rx="70"  ry="48"  fill="rgba(245,250,255,0.60)"/>
+      <ellipse cx="175" cy="42"  rx="80"  ry="52"  fill="rgba(248,252,255,0.62)"/>
+      <ellipse cx="245" cy="52"  rx="65"  ry="44"  fill="rgba(245,250,255,0.58)"/>
+      <!-- Cimas blancas -->
+      <ellipse cx="155" cy="22"  rx="55"  ry="38"  fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="205" cy="18"  rx="48"  ry="35"  fill="rgba(255,255,255,0.68)"/>
+      <!-- Sombra base -->
+      <ellipse cx="165" cy="94"  rx="145" ry="18"  fill="rgba(150,170,210,0.22)"/>
+    </svg>
+
+    <!-- Nube media 2 — desfasada 14s, más pequeña -->
+    <svg style="
+        position:absolute; top:6%; left:0; width:28%; height:16%;
+        overflow:visible;
+        animation: nube-media 32s linear -14s infinite;"
+      viewBox="0 0 280 90" aria-hidden="true">
+      <ellipse cx="120" cy="72"  rx="118" ry="24"  fill="rgba(228,240,255,0.52)"/>
+      <ellipse cx="110" cy="55"  rx="85"  ry="38"  fill="rgba(238,246,255,0.55)"/>
+      <ellipse cx="80"  cy="38"  rx="55"  ry="40"  fill="rgba(245,250,255,0.58)"/>
+      <ellipse cx="145" cy="34"  rx="62"  ry="42"  fill="rgba(248,252,255,0.60)"/>
+      <ellipse cx="120" cy="16"  rx="42"  ry="30"  fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="120" cy="76"  rx="105" ry="14"  fill="rgba(155,175,215,0.20)"/>
+    </svg>
+
+    <!-- Nube media 3 — desfasada 25s -->
+    <svg style="
+        position:absolute; top:28%; left:0; width:24%; height:13%;
+        overflow:visible;
+        animation: nube-media 32s linear -25s infinite;"
+      viewBox="0 0 240 78" aria-hidden="true">
+      <ellipse cx="100" cy="62"  rx="98"  ry="20"  fill="rgba(225,238,255,0.48)"/>
+      <ellipse cx="95"  cy="47"  rx="72"  ry="34"  fill="rgba(235,245,255,0.52)"/>
+      <ellipse cx="70"  cy="32"  rx="48"  ry="36"  fill="rgba(242,250,255,0.55)"/>
+      <ellipse cx="130" cy="30"  rx="55"  ry="35"  fill="rgba(245,251,255,0.57)"/>
+      <ellipse cx="105" cy="12"  rx="38"  ry="26"  fill="rgba(255,255,255,0.62)"/>
+    </svg>
+
+
+    <!-- ══ CAPA 3 — nubes cercanas, muy blancas, más rápidas ════ -->
+
+    <!-- Nube cercana 1 — tarda 20s -->
+    <svg style="
+        position:absolute; top:5%; left:0; width:42%; height:24%;
+        overflow:visible;
+        animation: nube-rapida 20s linear 0s infinite;"
+      viewBox="0 0 420 130" aria-hidden="true">
+      <ellipse cx="185" cy="108" rx="178" ry="30"  fill="rgba(235,245,255,0.60)"/>
+      <ellipse cx="165" cy="85"  rx="130" ry="50"  fill="rgba(245,250,255,0.65)"/>
+      <ellipse cx="115" cy="58"  rx="85"  ry="58"  fill="rgba(250,253,255,0.70)"/>
+      <ellipse cx="200" cy="50"  rx="95"  ry="62"  fill="rgba(252,254,255,0.72)"/>
+      <ellipse cx="280" cy="65"  rx="78"  ry="52"  fill="rgba(250,253,255,0.68)"/>
+      <ellipse cx="175" cy="22"  rx="65"  ry="46"  fill="rgba(255,255,255,0.80)"/>
+      <ellipse cx="225" cy="15"  rx="58"  ry="40"  fill="rgba(255,255,255,0.82)"/>
+      <!-- Destellos blancos en cima -->
+      <ellipse cx="195" cy="8"   rx="40"  ry="22"  fill="rgba(255,255,255,0.88)"/>
+      <!-- Sombra base azulada -->
+      <ellipse cx="190" cy="112" rx="162" ry="18"  fill="rgba(140,165,210,0.28)"/>
+    </svg>
+
+    <!-- Nube cercana 2 — desfasada 9s -->
+    <svg style="
+        position:absolute; top:8%; left:0; width:32%; height:18%;
+        overflow:visible;
+        animation: nube-rapida 20s linear -9s infinite;"
+      viewBox="0 0 320 105" aria-hidden="true">
+      <ellipse cx="140" cy="86"  rx="135" ry="24"  fill="rgba(232,244,255,0.58)"/>
+      <ellipse cx="128" cy="66"  rx="98"  ry="42"  fill="rgba(242,250,255,0.62)"/>
+      <ellipse cx="95"  cy="45"  rx="65"  ry="48"  fill="rgba(248,252,255,0.67)"/>
+      <ellipse cx="165" cy="40"  rx="72"  ry="50"  fill="rgba(250,253,255,0.70)"/>
+      <ellipse cx="135" cy="16"  rx="50"  ry="36"  fill="rgba(255,255,255,0.78)"/>
+      <ellipse cx="135" cy="90"  rx="120" ry="15"  fill="rgba(145,168,212,0.24)"/>
+    </svg>
+
+
+    <!-- ══ BRILLO DIFUSO EN NUBES — efecto de sol tocando la cima ══ -->
+    <div style="
+      position:absolute; top:0%; left:30%; width:40%; height:35%;
+      background: radial-gradient(ellipse at 50% 30%,
+        rgba(255,245,200,0.22) 0%,
+        rgba(255,230,150,0.10) 45%,
         transparent 72%);
-      filter: blur(40px);">
+      filter: blur(20px);
+      animation: brillo-nube 10s ease-in-out infinite;">
+    </div>
+
+
+    <!-- ══ VELO DE CIELO — gradiente suave para profundidad ══════ -->
+    <div style="
+      position:absolute; inset:0;
+      background: linear-gradient(180deg,
+        rgba(10,30,80,0.12)  0%,
+        transparent          40%,
+        rgba(200,230,255,0.08) 80%,
+        rgba(220,240,255,0.15) 100%);
+      pointer-events:none;">
     </div>
 
   `;
