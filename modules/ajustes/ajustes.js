@@ -31,6 +31,11 @@ export async function init(container) {
     _renderTemas();
   };
   Perfiles.onChange(_onPerfilChange);
+
+  _renderReporte();
+  _renderPerfiles();
+  _renderModulos();
+  _renderTemas();   // ← esto faltaba
 }
 
 export function destroy() {
