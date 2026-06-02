@@ -6,7 +6,20 @@
 
 ## 🔴 En progreso / por aplicar al repo
 
-- (nada pendiente de aplicar — todo lo trabajado está en el repo)
+- [ ] **Memorama — layout avanzado corregido** — cambiar en `_renderGrid()` de `48: { cols: 8, filas: 6 }` a `48: { cols: 12, filas: 4 }` y el fallback a `|| { cols: 12, filas: 4 }`. Una línea en `modules/memorama/memorama.js`.
+- [ ] **README.md actualizado** — versión 2.1.0, sin referencias a Emi, con marcadores `<!-- 📸 ACTUALIZAR -->` para 4 capturas. Aplicar desde el último output generado.
+- [ ] **app.config.json** — actualizar `"version": "2.0.0"` → `"version": "2.1.0"`.
+- [ ] **Capturas de pantalla pendientes** para el README (guardar en `assets/readme/`):
+  - `menu-ui.PNG` — menú en iPhone 13 portrait (1 columna, 4 tiles que llenan pantalla)
+  - `frases-ui.PNG` — módulo Frases con el botón "Elegir frase" y/o modal abierto
+  - `toca-acierto.PNG` — Escucha y Toca con las tiles blancas con texto negro
+  - `toca-nivel.PNG` — subida de nivel o modo infinito con contador de racha
+- [ ] **Tag de release** — tras aplicar todo:
+  ```
+  git tag -a v2.1.0 -m "v2.1.0 — Modal frases, temas unificados, Toca infinito, fixes de layout"
+  git push origin v2.1.0
+  ```
+  Crear el release en GitHub con el contenido de `RELEASE-2.1.0.md`.
 
 ---
 
@@ -19,7 +32,7 @@
 ## 🔵 Pins (retomar cuando haya tiempo)
 
 - [ ] **Sincronización Google Drive** — diseño acordado completo (sync pasiva + activa, last-write-wins, dos archivos: perfiles y avatares). Bloqueado en: obtener Client ID en Google Cloud Console para arrancar `core/sync.js`.
-- [ ] **Accesibilidad** — funciones priorizadas para Emi:
+- [ ] **Accesibilidad** — funciones priorizadas:
   1. Velocidad de voz por perfil (slider en Ajustes → Perfiles)
   2. Reducción de movimiento (toggle que desactiva animaciones del fondo y confeti)
   3. Repetición automática de audio al cargar tarjeta (toggle por perfil)
@@ -31,42 +44,34 @@
 
 ## ✅ Resuelto recientemente
 
-### Sesión de hoy
-- [x] **VERIFICADO EN REPO: Toca y di — fix de miniaturas** — confirmado que las opciones ya no aparecen en miniatura en ningún nivel/ronda/modo infinito.
-- [x] **Toca y di — tiles fondo blanco + texto negro** — opciones con `background:#fff`, texto `#07212e`, sombra suave.
-- [x] **APLICADO AL REPO: Modal selector de frases** — el modal reemplazó el panel con scroll, funcionando.
-- [x] **APLICADO AL REPO: Audios generados en su totalidad** — regenerados todos los MP3 (piezas de texto con nombres sanitizados). Pendiente menor: limpiar duplicados con espacios si se desea, pero ya no afecta.
-- [x] **APLICADO AL REPO: Pronunciación "sóplale" (picto 1440)** — corregida, ahora suena "só-pla-le".
-- [x] **Frases — modal selector** — reemplazado el panel con scroll de pills por botón "Elegir frase" + modal a pantalla completa (mismo patrón que Toca/Memorama). No abre automáticamente al entrar; cambiar de nivel solo cambia el color de presentación. Libera espacio vertical en iPhone SE.
-- [x] **Frases — corrección puntual de piezas** — tocar una pieza en la tira la quita junto con las posteriores (rehacer desde ahí), devolviéndolas a disponibles. Mantiene la secuencia sin huecos.
-- [x] **Frases — audio de pictos por ruta_img** — `_urlAudioPicto()` resuelve el MP3 desde `ruta_img` del catálogo, no desde `pieza.texto` (arregla "autobús de dos pisos" → `autobus-dos-pisos.mp3`).
-- [x] **Frases — audio de piezas de texto** — usa `sanitizarNombre()` para el nombre de archivo (ej. "¿qué hacemos?" → `qué-hacemos.mp3`), verificado contra el manifiesto. TTS fallback usa el texto original.
-- [x] **Frases — orden render/audio** — `_tocarPieza` ahora renderiza la tira ANTES de reproducir audio (la UI nunca depende del audio).
-- [x] **Toca y di — fix de miniaturas** — causa raíz: `lanzarConfeti` mutaba `_el.style.position` a `relative`, colapsando la altura del grid. Solución: helper `_confeti()` que restaura `position:absolute`, + ResizeObserver que cachea el tamaño real del grid (`_gridW/_gridH`) para que `_ajustarTamanos` no dependa del timing de medición.
-- [x] **Toca y di — aciertos progresivos por nivel** — `ACIERTOS_POR_NIVEL = [3,4,5,6,8]` (antes constante única). Un fallo reinicia el contador de aciertos consecutivos.
-- [x] **Toca y di — modo infinito** — rondas continuas sin overlay de "nivel completado", contador de racha visible, récord en localStorage (`marina2_toca_mejor_racha`), overlay de fallo con puntuación y aviso de récord.
-- [x] **Toca y di — persistencia al volver al menú** — `resume()` reconstruye HTML (patrón memorama) y restaura el estado del header. Conserva nivel/aciertos. (Nota: el SET en curso se reconstruye — decidido como aceptable, no se restaura el objetivo exacto.)
-- [x] **generar-audio.py — sanitizar_nombre()** — elimina caracteres inválidos en Windows (`¿ ¡ ! ? , ; . : * " < > | \`), espacios → guiones. Arregla el error `[Errno 22]` al crear `¿qué hacemos?.mp3`.
-- [x] **test-pronunciacion.py** — script interactivo con pygame para probar pronunciación TTS al vuelo (sin guardar archivos). Soporta texto plano, SSML completo (`/s`), fonema IPA (`/f`), cambio de voz (`/v`) y velocidad (`/r`).
-- [x] **toca-temas.json — transportes** — expandido a 37 IDs (24 originales + 13 nuevos transportes). Excluidos astronauta (1443, persona) y papalote (1450, juguete).
-- [x] **pictos.json** — 15 transportes nuevos (1441-1455) + entradas previas. autobús de dos pisos (1439) con MP3 ya publicado en GitHub Pages.
-- [x] **frases.json** — agregadas: "el fuego está caliente ¿qué hacemos? ¡sóplale!" (nivel 3, con piezas el/está/¿qué hacemos?) y "autobús de dos pisos es muy alto" (nivel 2).
+### Esta semana
+- [x] **Memorama — migración a temas.json** — `TEMAS_URL` apunta a `data/temas.json`. Archivos `memorama.json` y `toca-temas.json` obsoletos.
+- [x] **Toca y di — migración a temas.json** — fetch de `toca-temas.json` → `data/temas.json`.
+- [x] **temas.json** — fuente única de verdad para Memorama y Escucha y Toca. 24 temas (`vocabulario` + `lenguaje`) generados por `clasificar-temas.py`.
+- [x] **pictos.json — 93 animales nuevos** — IDs 1459–1551. Clasificados y asignados a temas.
+- [x] **clasificar-temas.py** — clasificador CAA/TEA con 3 capas (reglas, embeddings, revisión manual). GUI integrada con `--revisar`. 437/437 pictos clasificados por reglas explícitas.
+- [x] **editar-vocabulario.py** — GUI para curar `vocabulario.json` por letra. Migra formato legacy ES/EN automáticamente.
+- [x] **README.md** — reescrito para v2.1.0: sin referencias a nombre propio, arquitectura actualizada (`temas.json`, scripts nuevos, 554 pictos, 3 dispositivos objetivo), advertencia de `lanzarConfeti()` en API del core.
+- [x] **RELEASE-2.1.0.md** — notas de release listas para GitHub.
+- [x] **Mira y di — micrófono** — visible y funcional en iPhone 13 e iPad. Desactivado en iPhone SE (oculta botón + no solicita permiso al cargar).
+- [x] **Frases — layout iPhone SE** — panel de piezas con scroll propio (`flex:1`), imágenes reducidas a 52px, botón "Elegir frase" fijo al fondo.
+- [x] **Frases — scroll en la tira** — `overflow-y: auto` en `#fr-tira-piezas`, auto-scroll al último elemento añadido.
 
 ### Sesiones anteriores
-- [x] Menú celular portrait unificado a 1 columna (SE e iPhone 13 iguales)
-- [x] Tiles del menú al 25% de altura del contenedor (`grid-template-rows: repeat(4, 1fr)`)
-- [x] Botones 🔊 y × movidos a la tira de frases (visibles en SE)
-- [x] `frases.json` — quiero + verbo (×7), primero…después (×2)
-- [x] `pictos.json` — quiero (1438), lavar las manos (1433), primero (1434), descansar (1435), hacer popo (1436), hacer pipi (1437)
-- [x] `toca-temas.json` — expandido de 1 tema/7 IDs a 10 temas/240 IDs
+- [x] Modal selector de frases, corrección puntual de piezas, audio de pictos por ruta_img
+- [x] Toca y di: aciertos progresivos, modo infinito, tiles blancas, fix de miniaturas (ResizeObserver), persistencia
+- [x] generar-audio.py: sanitizar_nombre(), test-pronunciacion.py
+- [x] Menú celular portrait 1×4, tiles al 25% de altura
+- [x] pictos.json: transportes nuevos (1438–1458), frases nuevas
 
 ---
 
 ## 📝 Notas técnicas (para no re-descubrir)
 
-- **Confeti rompe layout**: `lanzarConfeti({container})` muta `container.style.position` a `relative` y NO lo restaura. Cualquier módulo cuyo `_el` use `position:absolute;inset:0` debe restaurarlo después de cada confeti (ver helper `_confeti` en toca.js / línea en `_onFraseCompleta` de frases.js).
-- **Medición de layout**: no medir `clientWidth/Height` justo después de mutar el DOM (condición de carrera). Usar ResizeObserver + cache, como en `_ajustarTamanos` de toca.js.
-- **Ciclo de vida módulos**: si exporta `pause`, app.js llama `resume()` al volver (no `init()`). `resume()` debe reconstruir el HTML porque el contenedor puede haber sido limpiado. Variables de módulo persisten entre pause/resume.
-- **Nombres de archivo de audio**: el script `generar-audio.py` usa `sanitizar_nombre()` para piezas de texto y `ruta_img` para pictos. El front debe pedir esos mismos nombres (`sanitizarNombre()` en JS es espejo del Python).
-- **`--solo-frases`** genera solo enunciados completos de frases, NO pictos individuales. Para audio de un picto nuevo correr sin `--solo-frases` (o `--solo-es`).
-- **Archivos del repo tienen CRLF** (Windows). Al editar con scripts, normalizar a `\n` primero.
+- **Confeti rompe layout**: `lanzarConfeti({container})` muta `container.style.position` a `relative` y NO lo restaura. Siempre restaurar `position:absolute` después en módulos con `inset:0`.
+- **Medición de layout**: no medir `clientWidth/Height` justo después de mutar el DOM. Usar ResizeObserver + cache (ver `_ajustarTamanos` en toca.js).
+- **Ciclo de vida módulos**: si exporta `pause`, app.js llama `resume()` al volver. `resume()` debe reconstruir el HTML. Variables de módulo persisten entre pause/resume.
+- **Nombres de archivo de audio**: `sanitizar_nombre()` en Python = `sanitizarNombre()` en JS. Cualquier divergencia causa 404 silenciosos.
+- **`--solo-frases`** genera solo enunciados de frases, NO pictos individuales. Para audio de picto nuevo correr `--solo-es`.
+- **CRLF en Windows**: normalizar con `.replace('\r\n', '\n')` antes de editar con Python.
+- **`temas.json`** es la fuente única para Memorama y Toca. Para actualizar tras agregar pictos: `python scripts/clasificar-temas.py`.

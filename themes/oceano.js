@@ -6,37 +6,37 @@
 
 export const tokens = {
   /* Fondos — azul Caribe cálido, no abismo oscuro */
-  '--t-bg':          '#0a3d6b',   /* azul océano mediano */
-  '--t-bg-mid':      '#0d5a8f',   /* azul turquesa profundo */
-  '--t-surface':     '#0e6ba8',   /* superficie de cards */
+  '--t-bg': '#0a3d6b',   /* azul océano mediano */
+  '--t-bg-mid': '#0d5a8f',   /* azul turquesa profundo */
+  '--t-surface': '#0e6ba8',   /* superficie de cards */
 
   /* Texto */
-  '--t-ink':         '#ffffff',
-  '--t-ink-soft':    'rgba(255,255,255,0.70)',
-  '--t-ink-dark':    '#032340',
+  '--t-ink': '#ffffff',
+  '--t-ink-soft': 'rgba(255,255,255,0.70)',
+  '--t-ink-dark': '#032340',
 
   /* Colores principales — vibrantes y saturados */
-  '--t-primary':     '#00c2ff',   /* azul eléctrico Nemo */
-  '--t-primary-dk':  '#0090cc',
-  '--t-accent':      '#ffe566',   /* amarillo sol cálido */
-  '--t-secondary':   '#00e5b0',   /* verde agua tropical */
-  '--t-warn':        '#ff6b6b',   /* coral vivo */
-  '--t-gold':        '#ffb800',   /* naranja pez payaso */
-  '--t-purple':      '#c084fc',   /* violeta medusa */
-  '--t-coral':       '#ff7043',   /* coral Nemo */
+  '--t-primary': '#00c2ff',   /* azul eléctrico Nemo */
+  '--t-primary-dk': '#0090cc',
+  '--t-accent': '#ffe566',   /* amarillo sol cálido */
+  '--t-secondary': '#00e5b0',   /* verde agua tropical */
+  '--t-warn': '#ff6b6b',   /* coral vivo */
+  '--t-gold': '#ffb800',   /* naranja pez payaso */
+  '--t-purple': '#c084fc',   /* violeta medusa */
+  '--t-coral': '#ff7043',   /* coral Nemo */
 
   /* Nav */
-  '--t-nav-bg':      'linear-gradient(180deg, rgba(5,40,80,0.92) 0%, rgba(10,61,107,0.60) 100%)',
+  '--t-nav-bg': 'linear-gradient(180deg, rgba(5,40,80,0.92) 0%, rgba(10,61,107,0.60) 100%)',
 
   /* Sombras */
-  '--t-shadow':      '0 8px 24px rgba(0,30,80,0.35)',
+  '--t-shadow': '0 8px 24px rgba(0,30,80,0.35)',
   '--t-shadow-deep': '0 16px 48px rgba(0,20,60,0.50)',
 
   /* Radios */
-  '--t-radius-sm':   '12px',
-  '--t-radius-md':   '18px',
-  '--t-radius-lg':   '26px',
-  '--t-radius-xl':   '36px',
+  '--t-radius-sm': '12px',
+  '--t-radius-md': '18px',
+  '--t-radius-lg': '26px',
+  '--t-radius-xl': '36px',
 };
 
 export function injectStyles() {
@@ -164,16 +164,16 @@ export function crearFondo() {
     <!-- Burbujas SVG animadas -->
     <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;" aria-hidden="true">
       <!-- 12 burbujas en posiciones y tamaños variados -->
-      ${Array.from({length: 12}, (_, i) => {
-        const x    = 5 + (i * 8.2) % 90;
-        const size = 4 + (i * 3.7) % 14;
-        const dur  = 8 + (i * 2.3) % 14;
-        const del  = (i * 1.7) % 8;
-        const op   = 0.25 + (i * 0.04) % 0.35;
-        return `<circle cx="${x}%" cy="105%" r="${size}"
+      ${Array.from({ length: 12 }, (_, i) => {
+    const x = 5 + (i * 8.2) % 90;
+    const size = 4 + (i * 3.7) % 14;
+    const dur = 8 + (i * 2.3) % 14;
+    const del = (i * 1.7) % 8;
+    const op = 0.25 + (i * 0.04) % 0.35;
+    return `<circle cx="${x}%" cy="105%" r="${size}"
           fill="none" stroke="rgba(255,255,255,${op.toFixed(2)})" stroke-width="1.5"
           style="animation: burbuja ${dur.toFixed(1)}s ${del.toFixed(1)}s ease-in infinite"/>`;
-      }).join('\n      ')}
+  }).join('\n      ')}
     </svg>
 
     <!-- Ola inferior — superficie del agua -->
@@ -189,3 +189,8 @@ export function crearFondo() {
   `;
   return div;
 }
+
+export const manifest = {
+  background_color: '#0a3d6b',
+  theme_color: '#0d5a8f',
+};

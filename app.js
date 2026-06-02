@@ -23,13 +23,19 @@ import TocaModule from './modules/toca/module.js';
 
 const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule, TocaModule];
 
+
+const _LS_TEMA = `${cfg('storage.prefijo', 'app')}-tema`;
+const _LS_TEMA_KEY = () => `${cfg('storage.prefijo', 'app')}-tema`;
+
+
 // ─────────────────────────────────────────────────────────────
 // ARRANQUE
 // ─────────────────────────────────────────────────────────────
 (async function boot() {
   await cargarConfig();
 
-  await _cargarTema(cfg('ui.tema', 'oceano'));
+  const temaGuardado = localStorage.getItem(_LS_TEMA_KEY()) || cfg('ui.tema', 'oceano');
+  await _cargarTema(temaGuardado);
 
   registrarSW();
   _montarHeader();
@@ -60,16 +66,40 @@ const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule, Toc
 async function _cargarTema(nombreTema) {
   try {
     const mod = await import(`./themes/${nombreTema}.js`);
+
+    // Limpiar estilos del tema anterior
+    document.getElementById('tema-oceano-styles')?.remove();
+    document.getElementById('tema-playa-styles')?.remove();
+    document.getElementById('tema-tropical-styles')?.remove();
+
     mod.injectStyles();
+
+    // Swapear el fondo animado — eliminar el anterior si existe
+    document.getElementById('app-fondo')?.remove();
     const fondo = mod.crearFondo();
     const app = document.getElementById('app');
     if (app) app.insertBefore(fondo, app.firstChild);
+
+    // Actualizar theme-color del navegador desde el tema
+    if (mod.manifest?.theme_color) {
+      document.querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', mod.manifest.theme_color);
+    }
+
     return mod;
   } catch (e) {
     console.warn('[App] Tema no encontrado:', nombreTema, e.message);
     return null;
   }
 }
+
+// Exponer para que ajustes.js pueda cambiar el tema en runtime
+window.marina2_cambiarTema = async function (nombreTema) {
+  try {
+    localStorage.setItem(_LS_TEMA_KEY(), nombreTema);
+  } catch { }
+  await _cargarTema(nombreTema);
+};
 
 // ─────────────────────────────────────────────────────────────
 // HEADER

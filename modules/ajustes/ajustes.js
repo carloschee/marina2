@@ -28,6 +28,7 @@ export async function init(container) {
     _renderPerfiles();
     _renderModulos();
     _renderReporte();
+    _renderTemas();
   };
   Perfiles.onChange(_onPerfilChange);
 }
@@ -230,6 +231,56 @@ function _renderShell() {
       .aj-crop-zoom { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 340px; }
       .aj-crop-zoom input { flex: 1; accent-color: var(--t-primary,#0ea5c9); }
       .aj-crop-zoom span  { color: rgba(255,255,255,0.5); font-size: .8rem; }
+
+      /* Selector de temas */
+#aj-temas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.aj-tema-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 2px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: border-color .18s, background .18s, transform .12s;
+  -webkit-tap-highlight-color: transparent;
+}
+.aj-tema-card:active { transform: scale(.97); }
+.aj-tema-card.activo {
+  border-color: var(--t-primary, #0ea5c9);
+  background: rgba(255,255,255,0.12);
+}
+.aj-tema-preview {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+.aj-tema-info { flex: 1; min-width: 0; }
+.aj-tema-nombre {
+  font-size: .90rem;
+  font-weight: 800;
+  color: white;
+}
+.aj-tema-desc {
+  font-size: .70rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2px;
+}
+.aj-tema-check {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.aj-tema-card.activo .aj-tema-check { opacity: 1; }
     </style>
 
     <div id="aj-wrap">
@@ -324,6 +375,12 @@ function _renderShell() {
           </p>
         </div>
       </div>
+
+      <!-- Apariencia — selector de tema -->
+<div class="aj-seccion">
+  <span class="aj-titulo">🎨 Apariencia</span>
+  <div id="aj-temas-lista"></div>
+</div>
 
       <!-- Versión — leída desde app.config.json -->
       <p id="aj-version">${appNombre} v${appVersion}</p>
@@ -705,6 +762,77 @@ function _renderReporte() {
 // ─── Módulos visibles ─────────────────────────────────────────────────────────
 // Lee los módulos del registry global en lugar de una lista hardcodeada.
 const _MODULOS_CONFIGURABLES = [];  // se popula al primer render
+
+// ─── Apariencia — selector de tema ───────────────────────────────────────────
+const _TEMAS_DISPONIBLES = [
+  {
+    id:      'oceano',
+    nombre:  'Océano',
+    desc:    'Agua tropical luminosa, rayos submarinos',
+    gradiente: 'linear-gradient(135deg, #0a3d6b 0%, #0d5a8f 50%, #00c2ff 100%)',
+  },
+  {
+    id:      'playa',
+    nombre:  'Playa',
+    desc:    'Arena dorada al mediodía, sol resplandeciente',
+    gradiente: 'linear-gradient(135deg, #7a4a1e 0%, #a0622a 50%, #ffd60a 100%)',
+  },
+  {
+    id:      'tropical',
+    nombre:  'Tropical',
+    desc:    'Vegetación frondosa de isla mexicana',
+    gradiente: 'linear-gradient(135deg, #163d25 0%, #245e3a 50%, #00d4aa 100%)',
+  },
+];
+
+function _renderTemas() {
+  const lista = _q('#aj-temas-lista');
+  if (!lista) return;
+  lista.innerHTML = '';
+
+  const prefijo = cfg('storage.prefijo', 'app');
+  const temaActual = localStorage.getItem(`${prefijo}-tema`) || cfg('ui.tema', 'oceano');
+
+  _TEMAS_DISPONIBLES.forEach(tema => {
+    const activo = tema.id === temaActual;
+    const card = document.createElement('div');
+    card.className = 'aj-tema-card' + (activo ? ' activo' : '');
+    card.dataset.temaId = tema.id;
+
+    // Preview — gradiente representativo del tema
+    const preview = document.createElement('div');
+    preview.className = 'aj-tema-preview';
+    preview.style.background = tema.gradiente;
+
+    const info = document.createElement('div');
+    info.className = 'aj-tema-info';
+    info.innerHTML =
+      `<div class="aj-tema-nombre">${tema.nombre}</div>` +
+      `<div class="aj-tema-desc">${tema.desc}</div>`;
+
+    const check = document.createElement('span');
+    check.className = 'aj-tema-check';
+    check.textContent = '✓';
+
+    card.append(preview, info, check);
+
+    card.addEventListener('click', async () => {
+      if (card.classList.contains('activo')) return; // ya activo
+
+      // Marcar visualmente de inmediato
+      lista.querySelectorAll('.aj-tema-card').forEach(c => c.classList.remove('activo'));
+      card.classList.add('activo');
+
+      // Cambiar tema en runtime (app.js lo persiste en LS)
+      if (typeof window.marina2_cambiarTema === 'function') {
+        await window.marina2_cambiarTema(tema.id);
+        toast(`Tema "${tema.nombre}" aplicado`, { emoji: '🎨' });
+      }
+    });
+
+    lista.appendChild(card);
+  });
+}
 
 function _renderModulos() {
   const lista = _q('#aj-modulos-lista');
