@@ -517,10 +517,10 @@ async function _actualizarEstadoConexion() {
 // Descarga todos los assets al caché SIN borrar lo que ya hay.
 // No recarga la app — solo añade recursos faltantes.
 async function _descargarOffline() {
-  const btn  = _q('#btn-aj-descargar');
+  const btn = _q('#btn-aj-descargar');
   const wrap = _q('#aj-progreso-wrap');
-  const bar  = _q('#aj-progreso-bar');
-  const txt  = _q('#aj-progreso-txt');
+  const bar = _q('#aj-progreso-bar');
+  const txt = _q('#aj-progreso-txt');
   if (!btn || !wrap || !bar || !txt) return;
 
   btn.disabled = true;
@@ -771,22 +771,28 @@ const _MODULOS_CONFIGURABLES = [];  // se popula al primer render
 // ─── Apariencia — selector de tema ───────────────────────────────────────────
 const _TEMAS_DISPONIBLES = [
   {
-    id:      'oceano',
-    nombre:  'Océano',
-    desc:    'Agua tropical luminosa, rayos submarinos',
+    id: 'oceano',
+    nombre: 'Océano',
+    desc: 'Agua tropical luminosa, rayos submarinos',
     gradiente: 'linear-gradient(135deg, #0a3d6b 0%, #0d5a8f 50%, #00c2ff 100%)',
   },
   {
-    id:      'playa',
-    nombre:  'Playa',
-    desc:    'Arena dorada al mediodía, sol resplandeciente',
+    id: 'playa',
+    nombre: 'Playa',
+    desc: 'Arena dorada al mediodía, sol resplandeciente',
     gradiente: 'linear-gradient(135deg, #7a4a1e 0%, #a0622a 50%, #ffd60a 100%)',
   },
   {
-    id:      'tropical',
-    nombre:  'Tropical',
-    desc:    'Vegetación frondosa de isla mexicana',
+    id: 'tropical',
+    nombre: 'Tropical',
+    desc: 'Vegetación frondosa de isla mexicana',
     gradiente: 'linear-gradient(135deg, #163d25 0%, #245e3a 50%, #00d4aa 100%)',
+  },
+  {
+    id: 'nombre',
+    nombre: 'Nombre visible',
+    desc: 'Descripción corta',
+    gradiente: 'linear-gradient(135deg, #... 0%, #... 50%, #... 100%)',
   },
 ];
 

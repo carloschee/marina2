@@ -1637,6 +1637,7 @@
     "./themes/nimbus.js",
     "./themes/oceano.js",
     "./themes/playa.js",
-    "./themes/tropical.js"
+    "./themes/tropical.js",
+    "./themes/viento.js"
   ]
 }

@@ -71,6 +71,7 @@ async function _cargarTema(nombreTema) {
     document.getElementById('tema-oceano-styles')?.remove();
     document.getElementById('tema-playa-styles')?.remove();
     document.getElementById('tema-tropical-styles')?.remove();
+    document.getElementById('tema-viento-styles')?.remove();
 
     mod.injectStyles();
 
