@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-01T22:13:13.318Z",
-  "totalAssets": 1633,
+  "generado": "2026-06-02T18:02:08.582Z",
+  "totalAssets": 1635,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1634,6 +1634,8 @@
     "./modules/mira-y-di/module.js",
     "./modules/toca/module.js",
     "./modules/toca/toca.js",
-    "./themes/oceano.js"
+    "./themes/oceano.js",
+    "./themes/playa.js",
+    "./themes/tropical.js"
   ]
 }
