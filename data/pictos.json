@@ -3876,5 +3876,123 @@
     "en": "polar bear",
     "ruta_img": "oso-polar.png",
     "art": "el"
+  },{
+    "id": 1555,
+    "es": "avión de combate",
+    "en": "fighter jet",
+    "ruta_img": "avion-combate.png",
+    "art": "el"
+  },
+  {
+    "id": 1556,
+    "es": "buque de carga",
+    "en": "cargo ship",
+    "ruta_img": "buque-carga.png",
+    "art": "el"
+  },
+  {
+    "id": 1557,
+    "es": "camión cisterna",
+    "en": "tanker truck",
+    "ruta_img": "camion-cisterna.png",
+    "art": "el"
+  },
+  {
+    "id": 1558,
+    "es": "camión de helados",
+    "en": "ice cream truck",
+    "ruta_img": "camion-helados.png",
+    "art": "el"
+  },
+  {
+    "id": 1559,
+    "es": "tractor de orugas",
+    "en": "crawler truck",
+    "ruta_img": "tractor-orugas.png",
+    "art": "el"
+  },
+  {
+    "id": 1560,
+    "es": "camión de reparto",
+    "en": "delivery truck",
+    "ruta_img": "camion-reparto.png",
+    "art": "el"
+  },
+  {
+    "id": 1561,
+    "es": "camión de volteo",
+    "en": "dump truck",
+    "ruta_img": "camion-volteo.png",
+    "art": "el"
+  },
+  {
+    "id": 1562,
+    "es": "camión minero",
+    "en": "mining truck",
+    "ruta_img": "camion-minero.png",
+    "art": "el"
+  },
+  {
+    "id": 1563,
+    "es": "cargadora frontal",
+    "en": "front loader",
+    "ruta_img": "cargadora-frontal.png",
+    "art": "la"
+  },
+  {
+    "id": 1564,
+    "es": "carrito de golf",
+    "en": "golf cart",
+    "ruta_img": "carrito-golf.png",
+    "art": "el"
+  },
+  {
+    "id": 1565,
+    "es": "convertible",
+    "en": "convertible",
+    "ruta_img": "convertible.png",
+    "art": "el"
+  },
+  {
+    "id": 1566,
+    "es": "grúa",
+    "en": "tow truck",
+    "ruta_img": "grua.png",
+    "art": "la"
+  },
+  {
+    "id": 1567,
+    "es": "helicóptero de rescate",
+    "en": "rescue helicopter",
+    "ruta_img": "helicoptero-rescate.png",
+    "art": "el"
+  },
+  {
+    "id": 1568,
+    "es": "camión revolvedor de cemento",
+    "en": "concrete mixer",
+    "ruta_img": "camión-revolvedor-cemento.png",
+    "art": "el"
+  },
+  {
+    "id": 1569,
+    "es": "montacargas",
+    "en": "forklift",
+    "ruta_img": "montacargas.png",
+    "art": "el"
+  },
+  {
+    "id": 1570,
+    "es": "motoniveladora",
+    "en": "motor grader",
+    "ruta_img": "motoniveladora.png",
+    "art": "la"
+  },
+  {
+    "id": 1571,
+    "es": "tren bala",
+    "en": "bullet train",
+    "ruta_img": "tren-bala.png",
+    "art": "el"
   }
 ]
