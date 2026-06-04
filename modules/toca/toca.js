@@ -390,10 +390,13 @@ function _render() {
     #tc-modal-temas.visible { opacity:1; pointer-events:all; }
     #tc-modal-box {
       width:100%; max-height:70vh; overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
       background:rgba(12,30,70,0.95);
       border-radius:24px 24px 0 0;
       padding:20px 16px 32px;
       border-top:1px solid rgba(255,255,255,0.10);
+      transform:translateY(20px);
++      transition:transform .3s cubic-bezier(.34,1.1,.64,1);
     }
     #tc-modal-titulo {
       font-size:.78rem; font-weight:900; letter-spacing:.12em;
