@@ -394,6 +394,7 @@ function _render() {
       border-radius:24px 24px 0 0;
       padding:20px 16px 32px;
       border-top:1px solid rgba(255,255,255,0.10);
+      -webkit-overflow-scrolling: touch;
     }
     #tc-modal-titulo {
       font-size:.78rem; font-weight:900; letter-spacing:.12em;
@@ -407,6 +408,7 @@ function _render() {
       border:1px solid rgba(255,255,255,0.10);
       font-family:inherit; color:#fff; text-align:left;
       transition:background .15s, transform .12s; width:100%;
+      touch-action: pan-y;
     }
     .tc-tema-opcion:active { transform:scale(.97); }
     .tc-tema-opcion.activo { background:rgba(0,229,176,0.15); border-color:rgba(0,229,176,0.40); }
