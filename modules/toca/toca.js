@@ -308,40 +308,46 @@ function _render() {
       border-radius:22px; border:3px solid rgba(255,255,255,0.30);
       background:#fff;
       cursor:pointer; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:0;
-      padding:10px; transition:transform .15s, border-color .2s, box-shadow .2s;
+      align-items:center; justify-content:flex-start; gap:0;
+      padding:8px 8px 6px; transition:transform .15s, border-color .2s, box-shadow .2s;
       overflow:hidden; position:relative;
       box-shadow:0 4px 16px rgba(0,0,0,0.25);
     }
     .tc-opcion:active { transform:scale(.93); }
+
+    /* La imagen ocupa todo el espacio disponible que no consumen los labels.
+       flex:1 + min-height:0 le permiten crecer y contraerse libremente.
+       width:100% con max asegura que sea cuadrada y no desborde. */
     .tc-opcion img {
-      width:62%; height:62%; object-fit:contain;
+      flex:1 1 0; min-height:0;
+      width:80%; max-width:80%;
+      object-fit:contain;
       border-radius:12px; pointer-events:none;
-      /* En modo bilingüe la imagen cede algo de espacio a los labels */
-      flex-shrink:0;
     }
 
     /* ── Labels de opción ── */
-    /* Contenedor de los uno o dos nombres dentro de la tile */
+    /* Contenedor de los uno o dos nombres dentro de la tile.
+       flex-shrink:0 evita que los labels se compriman cuando la imagen crece. */
     .tc-opcion-labels {
       display:flex; flex-direction:column;
       align-items:center; width:100%;
+      flex-shrink:0;
       gap:0;
     }
 
-    /* Nombre en modo monolingüe (un solo span, peso máximo) */
+    /* Nombre en modo monolingüe */
     .tc-opcion-label {
-      font-size:clamp(.75rem,2.2vw,.95rem); font-weight:900;
+      font-size:clamp(.72rem,2.0vw,.90rem); font-weight:900;
       color:#07212e;
       text-align:center; padding:2px 4px 0;
-      line-height:1.2;
+      line-height:1.2; flex-shrink:0;
     }
 
     /* Separador entre los dos nombres en modo bilingüe */
     .tc-opcion-divisor {
-      width:60%; height:1px;
-      background:rgba(7,33,46,0.18);
-      margin:3px 0;
+      width:55%; height:1px;
+      background:rgba(7,33,46,0.15);
+      margin:2px 0;
       flex-shrink:0;
     }
 
@@ -350,10 +356,10 @@ function _render() {
        distinguirlos sin imponer jerarquía tipográfica. */
     .tc-opcion-label-es,
     .tc-opcion-label-en {
-      font-size:clamp(.70rem,2.0vw,.88rem); font-weight:900;
+      font-size:clamp(.68rem,1.9vw,.86rem); font-weight:900;
       color:#07212e;
       text-align:center; padding:0 4px;
-      line-height:1.2;
+      line-height:1.2; flex-shrink:0;
     }
 
     .tc-opcion.correcto {
@@ -1002,16 +1008,22 @@ function _ajustarTamanos() {
   const cols = n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4;
   const rows = Math.ceil(n / cols);
 
-  const gap     = 12;
-  const padH    = 16;
-  const padV    = 8;
-  const maxW    = Math.floor((W - padH * 2 - gap * (cols - 1)) / cols);
-  const maxH    = Math.floor((H - padV * 2 - gap * (rows - 1)) / rows);
-  const size    = Math.min(maxW, maxH, MOSAIC_SIZE);
+  const gap          = 12;
+  const padH         = 16;
+  const padV         = 8;
+  const maxW         = Math.floor((W - padH * 2 - gap * (cols - 1)) / cols);
+  const maxH         = Math.floor((H - padV * 2 - gap * (rows - 1)) / rows);
+  const portrait     = H > W;
+  const MAX_portrait = 200;   // techo más bajo en portrait para que quepan los labels
+  const techo        = portrait ? MAX_portrait : MOSAIC_SIZE;
+  const size         = Math.max(80, Math.min(maxW, maxH, techo));
 
   grid.querySelectorAll('.tc-opcion').forEach(btn => {
-    btn.style.width  = size + 'px';
-    btn.style.height = size + 'px';
+    btn.style.width    = size + 'px';
+    btn.style.height   = size + 'px';
+    btn.style.flexBasis  = size + 'px';
+    btn.style.flexGrow   = '0';
+    btn.style.flexShrink = '0';
   });
 }
 
