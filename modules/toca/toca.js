@@ -314,15 +314,11 @@ function _render() {
       box-shadow:0 4px 16px rgba(0,0,0,0.25);
     }
     .tc-opcion:active { transform:scale(.93); }
-    /* Monolingüe: imagen 62×62 igual que antes de los cambios */
     .tc-opcion img {
       width:62%; height:62%; object-fit:contain;
       border-radius:12px; pointer-events:none;
-    }
-    /* Bilingüe: imagen más compacta para que quepan los dos labels sin desbordarse.
-       La clase se aplica al botón desde JS cuando _lang === 'ambos'. */
-    .tc-opcion.bilingue img {
-      width:56%; height:50%;
+      /* En modo bilingüe la imagen cede algo de espacio a los labels */
+      flex-shrink:0;
     }
 
     /* ── Labels de opción ── */
@@ -330,7 +326,7 @@ function _render() {
     .tc-opcion-labels {
       display:flex; flex-direction:column;
       align-items:center; width:100%;
-      gap:0; flex-shrink:0;
+      gap:0;
     }
 
     /* Nombre en modo monolingüe (un solo span, peso máximo) */
@@ -346,6 +342,7 @@ function _render() {
       width:60%; height:1px;
       background:rgba(7,33,46,0.18);
       margin:3px 0;
+      flex-shrink:0;
     }
 
     /* En modo bilingüe ambos nombres usan la misma escala y peso.
@@ -446,8 +443,7 @@ function _render() {
     }
     #tc-modal-temas.visible { opacity:1; pointer-events:all; }
     #tc-modal-box {
-      width:100%; max-height:70vh; overflow-y:auto; overflow-x:hidden;
-      box-sizing:border-box;
+      width:100%; max-height:70vh; overflow-y:auto;
       background:rgba(12,30,70,0.95);
       border-radius:24px 24px 0 0;
       padding:20px 16px 32px;
@@ -457,24 +453,20 @@ function _render() {
       font-size:.78rem; font-weight:900; letter-spacing:.12em;
       text-transform:uppercase; color:rgba(255,255,255,0.50); margin:0 0 12px;
     }
-    #tc-modal-lista {
-      display:flex; flex-direction:column; gap:8px;
-      width:100%; box-sizing:border-box;
-    }
+    #tc-modal-lista { display:flex; flex-direction:column; gap:8px; }
     .tc-tema-opcion {
       display:flex; align-items:center; gap:14px;
       padding:14px 16px; border-radius:16px; cursor:pointer;
       background:rgba(255,255,255,0.06);
       border:1px solid rgba(255,255,255,0.10);
       font-family:inherit; color:#fff; text-align:left;
-      transition:background .15s, transform .12s;
-      width:100%; box-sizing:border-box; min-width:0;
+      transition:background .15s, transform .12s; width:100%;
     }
     .tc-tema-opcion:active { transform:scale(.97); }
     .tc-tema-opcion.activo { background:rgba(0,229,176,0.15); border-color:rgba(0,229,176,0.40); }
     .tc-tema-emoji  { font-size:1.5rem; flex-shrink:0; }
-    .tc-tema-info   { display:flex; flex-direction:column; gap:2px; min-width:0; }
-    .tc-tema-nombre { font-size:1rem; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .tc-tema-info   { display:flex; flex-direction:column; gap:2px; }
+    .tc-tema-nombre { font-size:1rem; font-weight:900; }
     .tc-tema-desc   { font-size:.72rem; color:rgba(255,255,255,.45); font-weight:700; }
 
     /* ── Vacío ── */
@@ -621,7 +613,7 @@ function _renderRonda() {
 
   _opciones.forEach((picto) => {
     const btn = document.createElement('button');
-    btn.className = 'tc-opcion' + (_lang === 'ambos' ? ' bilingue' : '');
+    btn.className = 'tc-opcion';
     btn.dataset.id = picto.id;
 
     const img = document.createElement('img');
