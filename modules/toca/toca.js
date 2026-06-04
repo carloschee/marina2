@@ -308,47 +308,44 @@ function _render() {
       border-radius:22px; border:3px solid rgba(255,255,255,0.30);
       background:#fff;
       cursor:pointer; display:flex; flex-direction:column;
-      align-items:center; justify-content:flex-start; gap:0;
-      padding:8px 8px 6px; transition:transform .15s, border-color .2s, box-shadow .2s;
+      align-items:center; justify-content:center; gap:0;
+      padding:10px; transition:transform .15s, border-color .2s, box-shadow .2s;
       overflow:hidden; position:relative;
       box-shadow:0 4px 16px rgba(0,0,0,0.25);
     }
     .tc-opcion:active { transform:scale(.93); }
-
-    /* La imagen ocupa todo el espacio disponible que no consumen los labels.
-       flex:1 + min-height:0 le permiten crecer y contraerse libremente.
-       width:100% con max asegura que sea cuadrada y no desborde. */
+    /* Monolingüe: imagen 62×62 igual que antes de los cambios */
     .tc-opcion img {
-      flex:1 1 0; min-height:0;
-      width:80%; max-width:80%;
-      object-fit:contain;
+      width:62%; height:62%; object-fit:contain;
       border-radius:12px; pointer-events:none;
+    }
+    /* Bilingüe: imagen más compacta para que quepan los dos labels sin desbordarse.
+       La clase se aplica al botón desde JS cuando _lang === 'ambos'. */
+    .tc-opcion.bilingue img {
+      width:56%; height:50%;
     }
 
     /* ── Labels de opción ── */
-    /* Contenedor de los uno o dos nombres dentro de la tile.
-       flex-shrink:0 evita que los labels se compriman cuando la imagen crece. */
+    /* Contenedor de los uno o dos nombres dentro de la tile */
     .tc-opcion-labels {
       display:flex; flex-direction:column;
       align-items:center; width:100%;
-      flex-shrink:0;
-      gap:0;
+      gap:0; flex-shrink:0;
     }
 
-    /* Nombre en modo monolingüe */
+    /* Nombre en modo monolingüe (un solo span, peso máximo) */
     .tc-opcion-label {
-      font-size:clamp(.72rem,2.0vw,.90rem); font-weight:900;
+      font-size:clamp(.75rem,2.2vw,.95rem); font-weight:900;
       color:#07212e;
       text-align:center; padding:2px 4px 0;
-      line-height:1.2; flex-shrink:0;
+      line-height:1.2;
     }
 
     /* Separador entre los dos nombres en modo bilingüe */
     .tc-opcion-divisor {
-      width:55%; height:1px;
-      background:rgba(7,33,46,0.15);
-      margin:2px 0;
-      flex-shrink:0;
+      width:60%; height:1px;
+      background:rgba(7,33,46,0.18);
+      margin:3px 0;
     }
 
     /* En modo bilingüe ambos nombres usan la misma escala y peso.
@@ -356,10 +353,10 @@ function _render() {
        distinguirlos sin imponer jerarquía tipográfica. */
     .tc-opcion-label-es,
     .tc-opcion-label-en {
-      font-size:clamp(.68rem,1.9vw,.86rem); font-weight:900;
+      font-size:clamp(.70rem,2.0vw,.88rem); font-weight:900;
       color:#07212e;
       text-align:center; padding:0 4px;
-      line-height:1.2; flex-shrink:0;
+      line-height:1.2;
     }
 
     .tc-opcion.correcto {
@@ -449,7 +446,8 @@ function _render() {
     }
     #tc-modal-temas.visible { opacity:1; pointer-events:all; }
     #tc-modal-box {
-      width:100%; max-height:70vh; overflow-y:auto;
+      width:100%; max-height:70vh; overflow-y:auto; overflow-x:hidden;
+      box-sizing:border-box;
       background:rgba(12,30,70,0.95);
       border-radius:24px 24px 0 0;
       padding:20px 16px 32px;
@@ -459,20 +457,24 @@ function _render() {
       font-size:.78rem; font-weight:900; letter-spacing:.12em;
       text-transform:uppercase; color:rgba(255,255,255,0.50); margin:0 0 12px;
     }
-    #tc-modal-lista { display:flex; flex-direction:column; gap:8px; }
+    #tc-modal-lista {
+      display:flex; flex-direction:column; gap:8px;
+      width:100%; box-sizing:border-box;
+    }
     .tc-tema-opcion {
       display:flex; align-items:center; gap:14px;
       padding:14px 16px; border-radius:16px; cursor:pointer;
       background:rgba(255,255,255,0.06);
       border:1px solid rgba(255,255,255,0.10);
       font-family:inherit; color:#fff; text-align:left;
-      transition:background .15s, transform .12s; width:100%;
+      transition:background .15s, transform .12s;
+      width:100%; box-sizing:border-box; min-width:0;
     }
     .tc-tema-opcion:active { transform:scale(.97); }
     .tc-tema-opcion.activo { background:rgba(0,229,176,0.15); border-color:rgba(0,229,176,0.40); }
     .tc-tema-emoji  { font-size:1.5rem; flex-shrink:0; }
-    .tc-tema-info   { display:flex; flex-direction:column; gap:2px; }
-    .tc-tema-nombre { font-size:1rem; font-weight:900; }
+    .tc-tema-info   { display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .tc-tema-nombre { font-size:1rem; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .tc-tema-desc   { font-size:.72rem; color:rgba(255,255,255,.45); font-weight:700; }
 
     /* ── Vacío ── */
@@ -619,7 +621,7 @@ function _renderRonda() {
 
   _opciones.forEach((picto) => {
     const btn = document.createElement('button');
-    btn.className = 'tc-opcion';
+    btn.className = 'tc-opcion' + (_lang === 'ambos' ? ' bilingue' : '');
     btn.dataset.id = picto.id;
 
     const img = document.createElement('img');
@@ -1008,22 +1010,16 @@ function _ajustarTamanos() {
   const cols = n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4;
   const rows = Math.ceil(n / cols);
 
-  const gap          = 12;
-  const padH         = 16;
-  const padV         = 8;
-  const maxW         = Math.floor((W - padH * 2 - gap * (cols - 1)) / cols);
-  const maxH         = Math.floor((H - padV * 2 - gap * (rows - 1)) / rows);
-  const portrait     = H > W;
-  const MAX_portrait = 200;   // techo más bajo en portrait para que quepan los labels
-  const techo        = portrait ? MAX_portrait : MOSAIC_SIZE;
-  const size         = Math.max(80, Math.min(maxW, maxH, techo));
+  const gap     = 12;
+  const padH    = 16;
+  const padV    = 8;
+  const maxW    = Math.floor((W - padH * 2 - gap * (cols - 1)) / cols);
+  const maxH    = Math.floor((H - padV * 2 - gap * (rows - 1)) / rows);
+  const size    = Math.min(maxW, maxH, MOSAIC_SIZE);
 
   grid.querySelectorAll('.tc-opcion').forEach(btn => {
-    btn.style.width    = size + 'px';
-    btn.style.height   = size + 'px';
-    btn.style.flexBasis  = size + 'px';
-    btn.style.flexGrow   = '0';
-    btn.style.flexShrink = '0';
+    btn.style.width  = size + 'px';
+    btn.style.height = size + 'px';
   });
 }
 
