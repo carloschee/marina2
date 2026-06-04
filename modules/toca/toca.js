@@ -13,11 +13,6 @@
    · Sin pantalla de "nivel completado" — rondas continuas con 8 opciones
    · Contador de racha consecutiva visible en pantalla
    · Al fallar: muestra puntuación y récord, guarda el mejor en localStorage
-
-   Bilingüe (cuando es && en activos):
-   · _lang = 'ambos' — los labels de cada opción muestran español e inglés
-     con igual peso tipográfico, separados por una línea divisoria sutil.
-   · El audio de instrucción y de acierto siempre en español (idioma primario).
 */
 
 import { TTS } from '../../core/tts.js';
@@ -51,7 +46,7 @@ let _temas        = [];
 let _tema         = null;
 let _pool         = [];
 let _langConfig   = { es: true, en: false };
-let _lang         = 'es';   // 'es' | 'en' | 'ambos'
+let _lang         = 'es';
 let _nivel        = 0;
 let _aciertos     = 0;   // aciertos consecutivos en el nivel actual
 let _modoInfinito = false;
@@ -65,25 +60,16 @@ let _audioEl      = null;
 // Cache de dimensiones del grid + observer. _ajustarTamanos usa estos
 // valores cacheados (siempre el tamaño real estable) en lugar de medir
 // al vuelo, eliminando la condición de carrera que producía miniaturas.
-let _gridW     = 0;
-let _gridH     = 0;
+let _gridW    = 0;
+let _gridH    = 0;
 let _resizeObs = null;
-
-// ─── Helper: idioma de audio ──────────────────────────────────────────────────
-// Cuando ambos idiomas están activos, el audio de instrucción y de acierto
-// se reproduce en español. La instrucción hablada en dos idiomas seguidos
-// aumentaría la carga cognitiva sin beneficio claro.
-function _langAudio() {
-  return _lang === 'ambos' ? 'es' : _lang;
-}
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 
 export async function init(container) {
   _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
-  _lang = (_langConfig.es && _langConfig.en) ? 'ambos'
-        : _langConfig.en ? 'en' : 'es';
+  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _nivel        = 0;
   _aciertos     = 0;
   _modoInfinito = false;
@@ -150,8 +136,7 @@ export async function pause() {
 export async function resume(container) {
   _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
-  _lang = (_langConfig.es && _langConfig.en) ? 'ambos'
-        : _langConfig.en ? 'en' : 'es';
+  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
 
   // Reconstruir HTML (mismo patrón que memorama — el contenedor pudo
   // haber sido limpiado por app.js, no se puede asumir que persiste).
@@ -159,11 +144,7 @@ export async function resume(container) {
 
   // Restaurar estado visual del header según el estado en memoria
   const label = _el.querySelector('#tc-tema-label');
-  if (label) {
-    label.textContent = _tema
-      ? _tema.label
-      : (_lang === 'en' ? 'All play' : 'Todos juegan');
-  }
+  if (label) label.textContent = _tema ? _tema.label : (_lang === 'en' ? 'All play' : 'Todos juegan');
 
   if (_modoInfinito) {
     const nivelValor = _el.querySelector('#tc-nivel-valor');
@@ -185,62 +166,68 @@ export async function resume(container) {
   // el layout del HTML recién insertado, el segundo garantiza que el grid
   // ya tenga clientWidth/clientHeight reales antes de _ajustarTamanos().
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      if (_el) _nuevaRonda();
-    });
+    requestAnimationFrame(() => { if (_el) _nuevaRonda(); });
   });
-}
 
-// ─── Cambio de idioma ─────────────────────────────────────────────────────────
-
-function _onLangChange(e) {
-  const cfg = e.detail?.langConfig;
-  if (!cfg) return;
-  const nuevo = (cfg.es && cfg.en) ? 'ambos' : cfg.en ? 'en' : 'es';
-  if (nuevo === _lang) return;
-  _lang = nuevo;
-  _nuevaRonda();
+  window.removeEventListener('lang-change', _onLangChange);
+  window.addEventListener('lang-change', _onLangChange);
 }
 
 // ─── Render principal ─────────────────────────────────────────────────────────
 
 function _render() {
+  _el.style.cssText =
+    'position:absolute;inset:0;display:flex;flex-direction:column;' +
+    'overflow:hidden;background:transparent;padding:0;';
+
   _el.innerHTML = `
   <style>
-    :host, #tc-root { box-sizing:border-box; }
-    * { box-sizing:inherit; }
-
-    /* ── Layout ── */
-    /* El contenedor (_el) debe ser position:absolute; inset:0 desde app.js */
-    #tc-root {
-      width:100%; height:100%;
-      display:flex; flex-direction:column;
-      background:linear-gradient(160deg,#032340 0%,#05193c 60%,#071428 100%);
-      font-family:'Nunito','Outfit',system-ui,sans-serif;
-      color:#fff; overflow:hidden; position:relative;
-      user-select:none; -webkit-user-select:none;
-    }
-
     /* ── Header ── */
     #tc-header {
-      flex-shrink:0; display:flex; align-items:center; gap:8px;
-      padding:10px 14px 6px; flex-wrap:wrap;
+      flex-shrink:0; display:flex; align-items:center; gap:10px;
+      padding:10px 16px; min-height:56px;
     }
-    #tc-nivel-wrap, #tc-racha-wrap, #tc-record-wrap {
-      display:flex; align-items:center; gap:4px;
-      background:rgba(255,255,255,0.08);
-      border:1px solid rgba(255,255,255,0.14);
-      border-radius:99px; padding:4px 10px;
-      font-size:.80rem; font-weight:900;
+    #tc-nivel-wrap {
+      display:flex; align-items:baseline; gap:5px;
+      background:rgba(255,255,255,0.10); border-radius:99px;
+      padding:5px 14px; flex-shrink:0;
     }
-    #tc-racha-wrap, #tc-record-wrap {
-      display:none;
+    #tc-nivel-label {
+      font-size:.70rem; font-weight:900; letter-spacing:.12em;
+      text-transform:uppercase; color:rgba(255,255,255,0.55);
     }
-    #tc-racha-wrap.visible  { display:flex; }
+    #tc-nivel-valor {
+      font-size:1.1rem; font-weight:900; color:#ffe566;
+      text-shadow:0 0 12px rgba(255,229,102,0.60);
+    }
+    /* Racha en modo infinito */
+    #tc-racha-wrap {
+      display:none; align-items:baseline; gap:5px;
+      background:rgba(0,229,176,0.15); border-radius:99px;
+      padding:5px 14px; border:1px solid rgba(0,229,176,0.35);
+      flex-shrink:0;
+    }
+    #tc-racha-wrap.visible { display:flex; }
+    #tc-racha-label {
+      font-size:.70rem; font-weight:900; letter-spacing:.12em;
+      text-transform:uppercase; color:rgba(0,229,176,0.70);
+    }
+    #tc-racha-valor {
+      font-size:1.1rem; font-weight:900; color:#00e5b0;
+      text-shadow:0 0 12px rgba(0,229,176,0.60);
+    }
+    #tc-record-wrap {
+      display:none; align-items:baseline; gap:4px;
+      flex-shrink:0;
+    }
     #tc-record-wrap.visible { display:flex; }
-    #tc-nivel-label, #tc-racha-label {
-      font-size:.64rem; font-weight:900; letter-spacing:.10em;
-      text-transform:uppercase; opacity:.55;
+    #tc-record-label {
+      font-size:.65rem; font-weight:900; letter-spacing:.10em;
+      text-transform:uppercase; color:rgba(255,229,102,0.60);
+    }
+    #tc-record-valor {
+      font-size:.95rem; font-weight:900; color:#ffe566;
+      opacity:0.80;
     }
     #tc-btn-tema {
       margin-left:auto; display:flex; align-items:center; gap:5px;
@@ -280,14 +267,6 @@ function _render() {
       text-shadow:0 2px 10px rgba(0,0,0,0.40);
     }
     #tc-prompt strong { color:#ffe566; }
-    /* Segunda línea del prompt en modo ambos — igual peso que la primera */
-    .tc-prompt-en {
-      display:block;
-      font-size:clamp(1.1rem,3.5vw,1.5rem); font-weight:900;
-      color:#fff;
-      opacity:0.92;
-    }
-    .tc-prompt-en strong { color:#ffe566; }
     #tc-btn-repetir {
       width:48px; height:48px; border-radius:50%; border:none;
       background:#00e5b0; font-size:1.3rem; cursor:pointer;
@@ -308,7 +287,7 @@ function _render() {
       border-radius:22px; border:3px solid rgba(255,255,255,0.30);
       background:#fff;
       cursor:pointer; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:0;
+      align-items:center; justify-content:center; gap:8px;
       padding:10px; transition:transform .15s, border-color .2s, box-shadow .2s;
       overflow:hidden; position:relative;
       box-shadow:0 4px 16px rgba(0,0,0,0.25);
@@ -317,45 +296,12 @@ function _render() {
     .tc-opcion img {
       width:62%; height:62%; object-fit:contain;
       border-radius:12px; pointer-events:none;
-      /* En modo bilingüe la imagen cede algo de espacio a los labels */
-      flex-shrink:0;
     }
-
-    /* ── Labels de opción ── */
-    /* Contenedor de los uno o dos nombres dentro de la tile */
-    .tc-opcion-labels {
-      display:flex; flex-direction:column;
-      align-items:center; width:100%;
-      gap:0;
-    }
-
-    /* Nombre en modo monolingüe (un solo span, peso máximo) */
     .tc-opcion-label {
       font-size:clamp(.75rem,2.2vw,.95rem); font-weight:900;
       color:#07212e;
-      text-align:center; padding:2px 4px 0;
-      line-height:1.2;
-    }
-
-    /* Separador entre los dos nombres en modo bilingüe */
-    .tc-opcion-divisor {
-      width:60%; height:1px;
-      background:rgba(7,33,46,0.18);
-      margin:3px 0;
-      flex-shrink:0;
-    }
-
-    /* En modo bilingüe ambos nombres usan la misma escala y peso.
-       El contraste de posición (arriba/abajo) es suficiente para
-       distinguirlos sin imponer jerarquía tipográfica. */
-    .tc-opcion-label-es,
-    .tc-opcion-label-en {
-      font-size:clamp(.70rem,2.0vw,.88rem); font-weight:900;
-      color:#07212e;
       text-align:center; padding:0 4px;
-      line-height:1.2;
     }
-
     .tc-opcion.correcto {
       border-color:#00e5b0;
       box-shadow:0 0 0 4px rgba(0,229,176,0.30);
@@ -558,50 +504,98 @@ function _render() {
 
 // ─── Observer de dimensiones del grid ──────────────────────────────────────────
 // El grid (#tc-grid) tiene un tamaño estable durante la sesión (flex:1 en una
-// columna de altura fija). Cachear las dimensiones reales evita que
-// _ajustarTamanos lea ceros justo después de un reflow.
+// columna de altura fija). El ResizeObserver captura ese tamaño de forma
+// confiable DESPUÉS de cada layout y lo cachea. Así _ajustarTamanos() nunca
+// depende de medir en el momento justo — usa el valor cacheado.
 function _observarGrid() {
-  _resizeObs?.disconnect();
-  const grid = _el?.querySelector('#tc-grid');
+  const grid = _el.querySelector('#tc-grid');
   if (!grid) return;
+
+  _resizeObs?.disconnect();
+
+  if (typeof ResizeObserver === 'undefined') {
+    // Fallback sin ResizeObserver: medir tras el layout
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!_el) return;
+        const g = _el.querySelector('#tc-grid');
+        if (g && g.clientWidth > 50 && g.clientHeight > 50) {
+          _gridW = g.clientWidth; _gridH = g.clientHeight;
+          _ajustarTamanos();
+        }
+      });
+    });
+    return;
+  }
+
   _resizeObs = new ResizeObserver(entries => {
     for (const e of entries) {
-      const { width, height } = e.contentRect;
-      if (width > 50 && height > 50) {
-        _gridW = width;
-        _gridH = height;
+      const w = e.contentRect.width;
+      const h = e.contentRect.height;
+      if (w > 50 && h > 50) {
+        const cambio = (Math.abs(w - _gridW) > 1 || Math.abs(h - _gridH) > 1);
+        _gridW = w;
+        _gridH = h;
+        if (cambio) _ajustarTamanos();  // re-dimensionar mosaicos al cambiar el grid
       }
     }
   });
   _resizeObs.observe(grid);
 }
 
-// ─── Lógica de ronda ──────────────────────────────────────────────────────────
+// ─── Ronda ────────────────────────────────────────────────────────────────────
 
 function _nuevaRonda() {
-  if (!_el || !_catalogo.length) {
-    _el?.querySelector('#tc-vacio')?.style.setProperty('display', 'flex');
+  if (!_el) return;
+  const n = _modoInfinito ? NIVELES[NIVELES.length - 1] : NIVELES[_nivel];
+
+  if (_catalogo.length < n) {
+    _el.querySelector('#tc-grid').style.display = 'none';
+    _el.querySelector('#tc-instruccion').style.display = 'none';
+    _el.querySelector('#tc-vacio').style.display = 'flex';
     return;
   }
-  const nOpciones = _modoInfinito
-    ? NIVELES[NIVELES.length - 1]
-    : NIVELES[_nivel];
 
-  if (_pool.length < nOpciones) {
-    _pool = _shuffle([..._catalogo]);
-  }
-
-  _opciones  = _pool.splice(0, nOpciones);
-  _objetivo  = _opciones[Math.floor(Math.random() * nOpciones)];
   _esperando = false;
 
+  if (_pool.length < n) {
+    const base = _tema?.palabras?.length
+      ? _catalogo.filter(e => _tema.palabras.includes(e.id))
+      : _catalogo;
+    _pool = _shuffle([...base]);
+  }
+
+  _objetivo = _pool.shift();
+
+  const base = _tema?.palabras?.length
+    ? _catalogo.filter(e => _tema.palabras.includes(e.id))
+    : _catalogo;
+
+  const tmpPool = _shuffle(base.filter(e => e.id !== _objetivo.id));
+  const distractores = [];
+  while (distractores.length < n - 1 && tmpPool.length) {
+    distractores.push(tmpPool.shift());
+  }
+
+  _opciones = _shuffle([_objetivo, ...distractores]);
   _renderRonda();
-  setTimeout(() => _reproducirInstruccion(), 350);
+
+  if (_audioEl && !_audioEl.paused) {
+    _audioEl.addEventListener('ended', () => {
+      if (_el) setTimeout(() => _reproducirInstruccion(), 150);
+    }, { once: true });
+    _audioEl.addEventListener('error', () => {
+      if (_el) _reproducirInstruccion();
+    }, { once: true });
+  } else {
+    setTimeout(() => { if (_el) _reproducirInstruccion(); }, 400);
+  }
 }
 
+// ─── Render ronda ─────────────────────────────────────────────────────────────
+
 function _renderRonda() {
-  const nOpciones = _modoInfinito
-    ? NIVELES[NIVELES.length - 1] : NIVELES[_nivel];
+  const n = _modoInfinito ? NIVELES[NIVELES.length - 1] : NIVELES[_nivel];
   const grid = _el.querySelector('#tc-grid');
 
   _el.querySelector('#tc-nivel-valor').textContent = _modoInfinito ? '∞' : (_nivel + 1);
@@ -629,41 +623,12 @@ function _renderRonda() {
       }
     };
 
+    const label = document.createElement('span');
+    label.className = 'tc-opcion-label';
+    label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
+
     btn.appendChild(img);
-
-    // ── Labels ──────────────────────────────────────────────────────────────
-    // Modo monolingüe: un solo span con peso máximo.
-    // Modo bilingüe:   dos spans de igual peso, separados por línea divisoria.
-    //   · español arriba (idioma primario de la app)
-    //   · inglés abajo
-    //   · mismo tamaño y mismo font-weight → ninguno domina al otro
-    if (_lang === 'ambos') {
-      const wrap = document.createElement('div');
-      wrap.className = 'tc-opcion-labels';
-
-      const labelEs = document.createElement('span');
-      labelEs.className = 'tc-opcion-label-es';
-      labelEs.textContent = picto.es;
-
-      const divisor = document.createElement('div');
-      divisor.className = 'tc-opcion-divisor';
-      divisor.setAttribute('aria-hidden', 'true');
-
-      const labelEn = document.createElement('span');
-      labelEn.className = 'tc-opcion-label-en';
-      labelEn.textContent = picto.en || picto.es;
-
-      wrap.appendChild(labelEs);
-      wrap.appendChild(divisor);
-      wrap.appendChild(labelEn);
-      btn.appendChild(wrap);
-    } else {
-      const label = document.createElement('span');
-      label.className = 'tc-opcion-label';
-      label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
-      btn.appendChild(label);
-    }
-
+    btn.appendChild(label);
     btn.addEventListener('click', () => _tocar(picto, btn));
     grid.appendChild(btn);
   });
@@ -689,10 +654,9 @@ function _acierto(btn) {
   btn.classList.add('correcto');
   _confeti(30);
 
-  const la      = _langAudio();
-  const texto   = la === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
+  const texto   = _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es;
   const archivo = _objetivo.ruta_img;
-  _reproducirAudio(archivo, la, texto);
+  _reproducirAudio(archivo, _lang, texto);
 
   Telemetry.track('toca_acierto', {
     _modulo: 'toca', picto: _objetivo.es,
@@ -762,16 +726,14 @@ function _mostrarSubidaNivel() {
       : `Ahora ${NIVELES[_nivel]} opciones — ¡${ACIERTOS_POR_NIVEL[_nivel]} seguidos!`;
   _el.querySelector('#tc-nivel-up').classList.add('visible');
   _confeti(60);
-
-  const la = _langAudio();
   TTS.speak(
-    la === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`,
-    { lang: la === 'en' ? 'en-US' : 'es-MX', pitch: 1.15, rate: 0.88 }
+    _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`,
+    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
   );
-
   setTimeout(() => {
-    _el?.querySelector('#tc-nivel-up')?.classList.remove('visible');
-    if (_el) _nuevaRonda();
+    if (!_el) return;
+    _el.querySelector('#tc-nivel-up').classList.remove('visible');
+    _nuevaRonda();
   }, 2200);
 }
 
@@ -779,42 +741,47 @@ function _activarModoInfinito() {
   _modoInfinito = true;
   _racha        = 0;
   _aciertos     = 0;
-  _el.querySelector('#tc-racha-wrap').classList.add('visible');
-  _el.querySelector('#tc-dots').style.display = 'none';
+
+  // Mostrar UI de modo infinito
+  const rachWrap = _el.querySelector('#tc-racha-wrap');
+  const recWrap  = _el.querySelector('#tc-record-wrap');
+  rachWrap.classList.add('visible');
   if (_mejorRacha > 0) {
-    _el.querySelector('#tc-record-wrap').classList.add('visible');
+    recWrap.classList.add('visible');
     _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
   }
+  _el.querySelector('#tc-dots').style.display = 'none';
 
-  const la = _langAudio();
+  // Overlay de entrada al modo infinito
   _el.querySelector('#tc-nivel-up-emoji').textContent = '🏆';
   _el.querySelector('#tc-nivel-up-texto').textContent =
-    la === 'en' ? 'Infinite mode!' : '¡Modo infinito!';
+    _lang === 'en' ? '∞ Champion!' : '∞ ¡Campeona!';
   _el.querySelector('#tc-nivel-up-sub').textContent =
-    la === 'en' ? 'How many can you get?' : '¿Cuántos puedes encadenar?';
+    _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
   _el.querySelector('#tc-nivel-up').classList.add('visible');
-  _confeti(80);
+  _confeti(120);
   TTS.speak(
-    la === 'en' ? 'Infinite mode!' : '¡Modo infinito!',
-    { lang: la === 'en' ? 'en-US' : 'es-MX', pitch: 1.2, rate: 0.88 }
+    _lang === 'en' ? 'Champion! Infinite challenge!' : '¡Campeona! ¡Reto infinito!',
+    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 }
   );
-
   setTimeout(() => {
-    _el?.querySelector('#tc-nivel-up')?.classList.remove('visible');
-    if (_el) _nuevaRonda();
-  }, 2400);
+    if (!_el) return;
+    _el.querySelector('#tc-nivel-up').classList.remove('visible');
+    _nuevaRonda();
+  }, 2800);
 }
 
 function _mostrarFalloInfinito() {
   const esRecord = _racha > _mejorRacha;
+
   if (esRecord && _racha > 0) {
     _mejorRacha = _racha;
     try { localStorage.setItem(MEJOR_RACHA_KEY, String(_mejorRacha)); } catch {}
     _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
-    if (_mejorRacha > 0) _el.querySelector('#tc-record-wrap').classList.add('visible');
+    _el.querySelector('#tc-record-wrap').classList.add('visible');
   }
 
-  _el.querySelector('#tc-fallo-racha').textContent = _racha;
+  _el.querySelector('#tc-fallo-racha').textContent  = _racha;
   _el.querySelector('#tc-fallo-emoji').textContent  = _racha >= 10 ? '🌟' : '💫';
   _el.querySelector('#tc-fallo-label').textContent  =
     _lang === 'en' ? 'consecutive hits' : 'aciertos consecutivos';
@@ -828,13 +795,11 @@ function _mostrarFalloInfinito() {
   _el.querySelector('#tc-fallo-infinito').classList.add('visible');
 
   if (_racha >= 5) _confeti(40);
-
-  const la = _langAudio();
   TTS.speak(
-    la === 'en'
+    _lang === 'en'
       ? `${_racha} in a row!${esRecord ? ' New record!' : ''}`
       : `¡${_racha} seguidos!${esRecord ? ' ¡Nuevo récord!' : ''}`,
-    { lang: la === 'en' ? 'en-US' : 'es-MX', pitch: 1.1, rate: 0.9 }
+    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.1, rate: 0.9 }
   );
 }
 
@@ -899,9 +864,8 @@ function _seleccionarTema(id) {
 
 function _reproducirInstruccion() {
   if (!_objetivo) return;
-  const la   = _langAudio();
-  const lang = la === 'en' ? 'en-US' : 'es-MX';
-  const texto = la === 'en'
+  const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
+  const texto = _lang === 'en'
     ? `Touch the ${_objetivo.en || _objetivo.es}`
     : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
   TTS.speak(texto, { lang, rate: 0.88, pitch: 1.1 });
@@ -933,25 +897,9 @@ function _reproducirAudio(ruta, lang, textoFallback) {
 function _actualizarPrompt() {
   if (!_objetivo) return;
   const prompt = _el.querySelector('#tc-prompt');
-
   if (_lang === 'en') {
     prompt.innerHTML = `Touch the <strong>${_objetivo.en || _objetivo.es}</strong>`;
     _el.querySelector('#tc-label-sup').textContent = 'LISTEN AND TOUCH';
-
-  } else if (_lang === 'ambos') {
-    // Ambos idiomas con igual peso: misma estructura HTML, mismas clases CSS.
-    // El orden (español arriba, inglés abajo) refleja el idioma primario
-    // de la app sin imponer jerarquía tipográfica.
-    const art   = _objetivo.art || '';
-    const texEs = art
-      ? `Toca ${art} <strong>${_objetivo.es}</strong>`
-      : `Toca <strong>${_objetivo.es}</strong>`;
-    const texEn = _objetivo.en
-      ? `Touch the <strong>${_objetivo.en}</strong>`
-      : `Touch the <strong>${_objetivo.es}</strong>`;
-    prompt.innerHTML = `${texEs}<span class="tc-prompt-en">${texEn}</span>`;
-    _el.querySelector('#tc-label-sup').textContent = 'ESCUCHA Y TOCA · LISTEN & TOUCH';
-
   } else {
     const art = _objetivo.art || '';
     prompt.innerHTML = art
@@ -963,7 +911,7 @@ function _actualizarPrompt() {
 
 function _renderDots() {
   if (_modoInfinito) return;  // en modo infinito los dots no aplican
-  const wrap = _el.querySelector('#tc-dots');
+  const wrap             = _el.querySelector('#tc-dots');
   const aciertosNecesarios = ACIERTOS_POR_NIVEL[Math.min(_nivel, ACIERTOS_POR_NIVEL.length - 1)];
   wrap.innerHTML = '';
   for (let i = 0; i < aciertosNecesarios; i++) {
@@ -979,7 +927,7 @@ function _actualizarRacha() {
 }
 
 function _ajustarTamanos() {
-  const grid = _el.querySelector('#tc-grid');
+  const grid    = _el.querySelector('#tc-grid');
   if (!grid) return;
 
   // Usar dimensiones cacheadas por el ResizeObserver (tamaño real estable).
@@ -998,24 +946,51 @@ function _ajustarTamanos() {
     _gridH = H;
   }
 
-  const n    = _opciones.length;
-  const cols = n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4;
-  const rows = Math.ceil(n / cols);
+  const n       = _opciones.length;
+  const cols    = n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4;
+  const rows    = Math.ceil(n / cols);
+  const gapPx   = 12;
+  const padPx   = 24;
+  const avW     = W - padPx - gapPx * (cols - 1);
+  const avH     = H - padPx - gapPx * (rows - 1);
+  const porAncho  = avW / cols;
+  const porAlto   = avH / rows;
+  const MAX       = MOSAIC_SIZE;
+  const MAX_portrait = 200;
+  const portrait  = H > W;
+  const size      = Math.max(
+    80,  // piso mínimo de seguridad
+    portrait
+      ? Math.min(porAncho, porAlto, MAX_portrait)
+      : Math.min(porAncho, porAlto, MAX)
+  );
 
-  const gap     = 12;
-  const padH    = 16;
-  const padV    = 8;
-  const maxW    = Math.floor((W - padH * 2 - gap * (cols - 1)) / cols);
-  const maxH    = Math.floor((H - padV * 2 - gap * (rows - 1)) / rows);
-  const size    = Math.min(maxW, maxH, MOSAIC_SIZE);
-
-  grid.querySelectorAll('.tc-opcion').forEach(btn => {
-    btn.style.width  = size + 'px';
-    btn.style.height = size + 'px';
+  grid.querySelectorAll('.tc-opcion').forEach(o => {
+    o.style.width      = size + 'px';
+    o.style.height     = size + 'px';
+    o.style.flexBasis  = size + 'px';
+    o.style.flexGrow   = '0';
+    o.style.flexShrink = '0';
   });
 }
 
-// ─── Utilidades ───────────────────────────────────────────────────────────────
+// ─── Cambio de idioma ─────────────────────────────────────────────────────────
+
+function _onLangChange(e) {
+  const cfg = e.detail?.langConfig;
+  if (!cfg) return;
+  _langConfig = { ...cfg };
+  _lang = (cfg.en && !cfg.es) ? 'en' : 'es';
+  if (_objetivo) {
+    _actualizarPrompt();
+    _el.querySelectorAll('.tc-opcion-label').forEach((lbl, i) => {
+      const p = _opciones[i];
+      if (p) lbl.textContent = _lang === 'en' ? (p.en || p.es) : p.es;
+    });
+  }
+}
+
+// ─── Util ─────────────────────────────────────────────────────────────────────
 
 function _shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -1025,12 +1000,12 @@ function _shuffle(arr) {
   return arr;
 }
 
-function _confeti(n) {
-  try {
-    lanzarConfeti({ n, container: _el });
-    // lanzarConfeti puede mutar position del contenedor; restaurar
-    requestAnimationFrame(() => {
-      if (_el) _el.style.position = 'absolute';
-    });
-  } catch {}
+// Confeti que NO rompe el layout. lanzarConfeti() muta container.style.position
+// a 'relative', lo que colapsa la altura de _el (que debe ser position:absolute
+// con inset:0). Restauramos 'absolute' inmediatamente — el confeti sigue
+// funcionando porque sus hijos absolutos se anclan igual a _el.
+function _confeti(count) {
+  if (!_el) return;
+  lanzarConfeti({ count, container: _el });
+  _el.style.position = 'absolute';
 }
