@@ -3994,5 +3994,26 @@
     "en": "bullet train",
     "ruta_img": "tren-bala.png",
     "art": "el"
+  },
+  {
+    "id": 1572,
+    "es": "furgoneta",
+    "en": "van",
+    "ruta_img": "furgoneta.png",
+    "art": "la"
+  },
+  {
+    "id": 1573,
+    "es": "camioneta",
+    "en": "pick-up",
+    "ruta_img": "camioneta.png",
+    "art": "la"
+  },
+  {
+    "id": 1574,
+    "es": "moto de agua",
+    "en": "jetski",
+    "ruta_img": "moto-agua.png",
+    "art": "la"
   }
 ]
