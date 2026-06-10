@@ -4015,5 +4015,89 @@
     "en": "jetski",
     "ruta_img": "moto-agua.png",
     "art": "la"
+  },
+  {
+    "id": 1575,
+    "es": "granizo",
+    "en": "hail",
+    "ruta_img": "granizo.png",
+    "art": "el"
+  },
+  {
+    "id": 1576,
+    "es": "tormenta",
+    "en": "storm",
+    "ruta_img": "tormenta.png",
+    "art": "la"
+  },
+  {
+    "id": 1577,
+    "es": "huracán",
+    "en": "hurricane",
+    "ruta_img": "huracan.png",
+    "art": "el"
+  },
+  {
+    "id": 1578,
+    "es": "niebla",
+    "en": "fog",
+    "ruta_img": "niebla.png",
+    "art": "la"
+  },
+  {
+    "id": 1579,
+    "es": "parcialmente nublado",
+    "en": "partly cloudy",
+    "ruta_img": "parcialmente-nublado.png",
+    "art": ""
+  },
+  {
+    "id": 1580,
+    "es": "nublado",
+    "en": "cloudy",
+    "ruta_img": "nublado.png",
+    "art": ""
+  },
+  {
+    "id": 1581,
+    "es": "ventoso",
+    "en": "windy",
+    "ruta_img": "ventoso.png",
+    "art": ""
+  },
+  {
+    "id": 1582,
+    "es": "invierno",
+    "en": "winter",
+    "ruta_img": "invierno.png",
+    "art": "el"
+  },
+  {
+    "id": 1583,
+    "es": "otoño",
+    "en": "autum",
+    "ruta_img": "otono.png",
+    "art": "el"
+  },
+  {
+    "id": 1584,
+    "es": "primavera",
+    "en": "spring",
+    "ruta_img": "primavera.png",
+    "art": "la"
+  },
+  {
+    "id": 1585,
+    "es": "verano",
+    "en": "summer",
+    "ruta_img": "verano.png",
+    "art": "el"
+  },
+  {
+    "id": 1586,
+    "es": "estaciones del año",
+    "en": "seasons",
+    "ruta_img": "estaciones-clima.png",
+    "art": "las"
   }
 ]
