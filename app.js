@@ -20,8 +20,9 @@ import AjustesModule from './modules/ajustes/module.js';
 import MiraYDiModule from './modules/mira-y-di/module.js';
 import FrasesModule from './modules/frases/module.js';
 import TocaModule from './modules/toca/module.js';
+import SilabasModule from './modules/silabas/module.js';
 
-const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule, TocaModule];
+const MODULOS = [AjustesModule, MiraYDiModule, FrasesModule, MemoramaModule, TocaModule, SilabasModule];
 
 
 const _LS_TEMA = `${cfg('storage.prefijo', 'app')}-tema`;
