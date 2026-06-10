@@ -424,8 +424,13 @@
         "picto_id": 1210
       },
       {
+        "tipo": "picto",
+        "texto": "no",
+        "picto_id": 1202
+      },
+      {
         "tipo": "texto",
-        "texto": "no sabemos qué le pasa"
+        "texto": "sabemos qué le pasa"
       }
     ]
   },
