@@ -341,9 +341,11 @@ function volverAlMenu() {
     }
     _moduloActivo = null;
   }
-  document.getElementById('vista-menu').style.display = '';
+
+  document.getElementById('vista-menu').style.display = 'flex';  // o 'block', según el valor original
+  document.getElementById('btn-ajustes-header')?.style.setProperty('display', 'flex'); // ← Bug 1
+  _montarHome();   // ← Bug 2: reconstruir el grid con los módulos actuales
   _modoMenu();
-  animarEntrada(document.getElementById('vista-menu'), 'fadeIn');
 }
 
 window.DotirApp = { volverAlMenu, navegarA, toast, MODULE_REGISTRY: MODULOS };
