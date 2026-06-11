@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-11T06:20:05.034Z",
-  "totalAssets": 1924,
+  "generado": "2026-06-11T06:36:49.614Z",
+  "totalAssets": 1925,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1889,6 +1889,7 @@
     "./assets/ui/btn-inicio.png",
     "./assets/ui/btn-memorama.png",
     "./assets/ui/btn-mira-y-di.png",
+    "./assets/ui/btn-silabas.png",
     "./assets/ui/btn-toca.png",
     "./assets/ui/dorso-avanzado.png",
     "./assets/ui/dorso-basico.png",
