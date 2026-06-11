@@ -308,16 +308,14 @@ function _render() {
 
       /* Animación de rebote al estar activa — escala + salto */
       @keyframes sl-bounce {
-        0%   { transform: scale(1)    translateY(0);   }
-        20%  { transform: scale(1.18) translateY(-8px); }
-        40%  { transform: scale(1.04) translateY(-2px); }
-        60%  { transform: scale(1.14) translateY(-6px); }
-        80%  { transform: scale(1.02) translateY(-1px); }
-        100% { transform: scale(1.10) translateY(-4px); }
+        0%   { transform: scale(1.00, 1.00); }
+        25%  { transform: scale(1.08, 0.82); }   /* aplasta */
+        55%  { transform: scale(0.94, 1.10); }   /* rebote elástico hacia arriba */
+        75%  { transform: scale(1.03, 0.97); }   /* asentamiento */
+        100% { transform: scale(1.00, 1.00); }   /* reposo */
       }
-      /* Cuando activa, se sobreescribe el rotate del data-si con la animación */
       .sl-silaba.activa {
-        animation: sl-bounce .55s ease-in-out infinite alternate;
+        animation: sl-bounce .55s cubic-bezier(.36,.07,.19,.97) 1 forwards;
         filter:brightness(1.22);
         box-shadow:0 8px 28px rgba(0,0,0,0.35);
         z-index:2; position:relative;
