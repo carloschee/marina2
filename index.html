@@ -341,48 +341,34 @@
     }
 
     /* ── Grid de módulos ─────────────────────────────────────── */
+    /* ── Grid de módulos — 3×2 en landscape, 2×3 en portrait, igual en todo dispositivo ── */
     #menu-grid {
       width: 100%;
       height: 100%;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 340px));
-      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      /* landscape: 3 columnas */
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      /* landscape: 2 filas    */
       gap: 14px;
       padding: 12px 16px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
       position: relative;
       z-index: 1;
       box-sizing: border-box;
-      justify-content: center;
-      align-content: center;
-      transition: grid-template-columns .35s ease, gap .3s ease, padding .3s ease;
+      justify-content: stretch;
+      align-content: stretch;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      transition: gap .3s ease, padding .3s ease;
     }
 
-    /* ── Portrait en celular (≤600px) — 1 columna, 4 filas que llenan el contenedor ── */
-    @media (max-width: 600px) and (orientation: portrait) {
+    @media (orientation: portrait) {
       #menu-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 1fr);
-        /* 4 filas iguales = 25% c/u */
-        align-content: stretch;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        gap: 10px;
-        padding: 10px 14px;
-        padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
-      }
-
-      .module-tile {
-        min-height: 0;
-        /* permite que el grid controle la altura */
-        max-height: none;
-        /* sin techo fijo */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-
-      .tile-label {
-        font-size: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        /* portrait: 2 columnas */
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        /* portrait: 3 filas    */
       }
     }
 
