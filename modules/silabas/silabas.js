@@ -227,85 +227,135 @@ function _render() {
         white-space:nowrap;
       }
 
-      /* ── Tarjeta de palabra — contenedor transparente, sin borde visible ── */
+      /* ── Tarjeta de palabra — landscape: fila con navs a los lados del picto ── */
       #sl-card {
         flex:1; min-height:0;
-        display:flex; flex-direction:column; align-items:center; justify-content:center;
-        gap:10px;
+        display:flex; flex-direction:row; align-items:center; justify-content:center;
+        gap:10px; padding:0 4px;
       }
-      /* Wrapper cuadrado fijo: el pictograma siempre ocupa el mismo espacio
-         independientemente de su contenido (árbol alto, pez ancho, etc.).
-         min() evita que desborde en pantallas pequeñas. */
+      /* Centro de la tarjeta: picto + nombre apilados */
+      #sl-card-centro {
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        gap:10px; flex-shrink:0;
+      }
+      /* Wrapper cuadrado fijo */
       #sl-picto-wrap {
-        width: min(42vh, 62vw);
-        height: min(42vh, 62vw);
-        flex-shrink: 0;
+        width: min(38vh, 44vw);
+        height: min(38vh, 44vw);
+        flex-shrink:0;
         background:#fff; border-radius:22px; padding:10px;
         box-shadow:0 10px 30px rgba(0,20,60,0.30);
         display:flex; align-items:center; justify-content:center;
         overflow:hidden;
       }
-      #sl-picto {
-        width:100%; height:100%;
-        object-fit:contain;
-      }
+      #sl-picto { width:100%; height:100%; object-fit:contain; }
       #sl-palabra {
         font-family:'Outfit', sans-serif;
-        font-size:clamp(2rem, 6vw, 3.4rem); font-weight:900; color:#fff;
+        font-size:clamp(1.8rem, 5vw, 3.2rem); font-weight:900; color:#fff;
         text-align:center; line-height:1; letter-spacing:-.5px;
       }
       #sl-palabra-en {
-        font-size:clamp(1rem, 3vw, 1.4rem); font-weight:800;
+        font-size:clamp(.9rem, 2.5vw, 1.3rem); font-weight:800;
         color:rgba(255,255,255,0.50); text-align:center;
       }
 
-      /* ── Fila de sílabas (la firma del módulo) ── */
-      #sl-silabas {
-        flex-shrink:0; display:flex; flex-wrap:wrap; justify-content:center;
-        gap:10px; padding:2px 0;
-      }
-      .sl-silaba {
-        min-height:56px; padding:12px 22px; border-radius:18px;
-        background:rgba(255,255,255,0.10);
-        border:2px solid rgba(167,139,250,0.40);
-        color:#fff; font-family:'Outfit', sans-serif;
-        font-weight:900; font-size:clamp(1.4rem, 4.5vw, 2.2rem);
-        cursor:pointer; transition:transform .12s, background .18s, border-color .18s;
-        display:flex; align-items:center; justify-content:center;
-      }
-      .sl-silaba:active { transform:scale(.93); }
-      .sl-silaba.activa {
-        background:rgba(167,139,250,0.85);
-        border-color:#fff;
-        transform:scale(1.06);
-        box-shadow:0 6px 22px rgba(167,139,250,0.55);
-      }
-
-      /* ── Controles ── */
-      #sl-controles {
-        flex-shrink:0; display:flex; align-items:center; gap:10px;
-      }
+      /* ── Navs: flotan a los lados del picto (dentro de #sl-card como flex-row) ── */
       .sl-nav {
-        width:60px; height:60px; flex-shrink:0; border-radius:50%;
+        width:56px; height:56px; flex-shrink:0; border-radius:50%;
         border:1.5px solid rgba(255,255,255,0.22);
-        background:rgba(255,255,255,0.10); color:#fff;
-        font-size:1.6rem; cursor:pointer;
+        background:rgba(255,255,255,0.12); color:#fff;
+        font-size:1.5rem; cursor:pointer;
         display:flex; align-items:center; justify-content:center;
         transition:transform .12s, background .18s;
       }
-      .sl-nav:active { transform:scale(.90); }
-      .sl-nav:disabled { opacity:.30; pointer-events:none; }
-      #sl-acciones { flex:1; display:flex; gap:10px; min-width:0; }
+      .sl-nav:active  { transform:scale(.88); background:rgba(255,255,255,.22); }
+      .sl-nav:disabled { opacity:.28; pointer-events:none; }
+
+      /* ── Chips de sílabas — diseño orgánico con paleta de colores ── */
+      /* Paleta: 6 colores vivos, asignados por índice mod 6 */
+      #sl-silabas {
+        flex-shrink:0; display:flex; flex-wrap:wrap; justify-content:center;
+        gap:12px; padding:4px 0;
+      }
+      .sl-silaba {
+        min-height:58px; padding:12px 26px;
+        color:#fff; font-family:'Outfit', sans-serif;
+        font-weight:900; font-size:clamp(1.4rem, 4.5vw, 2.2rem);
+        cursor:pointer;
+        display:flex; align-items:center; justify-content:center;
+        border:none;
+        /* La transición NO incluye transform para no interferir con @keyframes */
+        transition:box-shadow .18s, filter .18s;
+        /* Forma orgánica base — variada por JS con data-silaba-idx */
+        border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+      }
+      /* Variantes de forma orgánica por posición (0–5) */
+      .sl-silaba[data-si="0"] { border-radius:60% 40% 55% 45% / 45% 55% 45% 55%; transform:rotate(-2deg); }
+      .sl-silaba[data-si="1"] { border-radius:45% 55% 40% 60% / 55% 45% 60% 40%; transform:rotate(1.5deg); }
+      .sl-silaba[data-si="2"] { border-radius:55% 45% 60% 40% / 40% 60% 45% 55%; transform:rotate(-1deg); }
+      .sl-silaba[data-si="3"] { border-radius:40% 60% 45% 55% / 60% 40% 55% 45%; transform:rotate(2deg); }
+      .sl-silaba[data-si="4"] { border-radius:50% 50% 60% 40% / 40% 60% 50% 50%; transform:rotate(-1.5deg); }
+      .sl-silaba[data-si="5"] { border-radius:45% 55% 50% 50% / 55% 45% 40% 60%; transform:rotate(1deg); }
+      /* Colores por posición */
+      .sl-silaba[data-si="0"] { background:#e11d48; box-shadow:0 4px 16px rgba(225,29,72,0.40); }
+      .sl-silaba[data-si="1"] { background:#d97706; box-shadow:0 4px 16px rgba(217,119,6,0.40); }
+      .sl-silaba[data-si="2"] { background:#059669; box-shadow:0 4px 16px rgba(5,150,105,0.40); }
+      .sl-silaba[data-si="3"] { background:#2563eb; box-shadow:0 4px 16px rgba(37,99,235,0.40); }
+      .sl-silaba[data-si="4"] { background:#7c3aed; box-shadow:0 4px 16px rgba(124,58,237,0.40); }
+      .sl-silaba[data-si="5"] { background:#0891b2; box-shadow:0 4px 16px rgba(8,145,178,0.40); }
+
+      .sl-silaba:active { filter:brightness(1.18); }
+
+      /* Animación de rebote al estar activa — escala + salto */
+      @keyframes sl-bounce {
+        0%   { transform: scale(1)    translateY(0);   }
+        20%  { transform: scale(1.18) translateY(-8px); }
+        40%  { transform: scale(1.04) translateY(-2px); }
+        60%  { transform: scale(1.14) translateY(-6px); }
+        80%  { transform: scale(1.02) translateY(-1px); }
+        100% { transform: scale(1.10) translateY(-4px); }
+      }
+      /* Cuando activa, se sobreescribe el rotate del data-si con la animación */
+      .sl-silaba.activa {
+        animation: sl-bounce .55s ease-in-out infinite alternate;
+        filter:brightness(1.22);
+        box-shadow:0 8px 28px rgba(0,0,0,0.35);
+        z-index:2; position:relative;
+      }
+
+      /* ── Controles (solo los botones de acción — los navs están en #sl-card) ── */
+      #sl-controles {
+        flex-shrink:0; display:flex; align-items:stretch; gap:10px;
+        padding:0 4px;
+      }
+      #sl-acciones { display:flex; flex-direction:row; gap:10px; flex:1; min-width:0; }
       .sl-accion {
-        flex:1; min-width:0; min-height:60px; padding:0 14px;
-        border-radius:18px; border:none; cursor:pointer;
-        font-family:inherit; font-weight:900; font-size:1.05rem; color:#fff;
+        flex:1; min-width:0; min-height:64px; padding:0 18px;
+        border-radius:20px; border:none; cursor:pointer;
+        font-family:inherit; font-weight:900; font-size:1.08rem; color:#fff;
         display:flex; align-items:center; justify-content:center; gap:8px;
         transition:transform .12s, filter .18s;
       }
-      .sl-accion:active { transform:scale(.96); }
-      #sl-btn-secuencia { background:#a78bfa; box-shadow:0 4px 16px rgba(167,139,250,0.45); }
-      #sl-btn-palabra   { background:rgba(255,255,255,0.12); border:1.5px solid rgba(255,255,255,0.25); }
+      .sl-accion:active { transform:scale(.96); filter:brightness(1.1); }
+      /* Colores sólidos legibles */
+      #sl-btn-secuencia { background:#6d28d9; box-shadow:0 4px 18px rgba(109,40,217,0.50); }
+      #sl-btn-palabra   { background:#1d4ed8; box-shadow:0 4px 18px rgba(29,78,216,0.45); }
+
+      /* ── Portrait: picto en columna, botones apilados ── */
+      @media (orientation:portrait) {
+        #sl-card {
+          flex-direction:column;
+        }
+        #sl-picto-wrap {
+          width: min(46vw, 36vh);
+          height: min(46vw, 36vh);
+        }
+        #sl-acciones {
+          flex-direction:column;
+          gap:10px;
+        }
+        .sl-accion { min-height:68px; font-size:1.12rem; }
+      }
 
       /* ── Modal de categorías (patrón de frases.js: translateY propio) ── */
       #sl-modal {
@@ -363,10 +413,6 @@ function _render() {
       .sl-tema-nombre { font-size:1.05rem; font-weight:900; }
       .sl-tema-desc   { font-size:.74rem; color:rgba(255,255,255,.45); font-weight:700; }
 
-      /* ── Portrait celular ── */
-      @media (max-width:600px) and (orientation:portrait) {
-        .sl-accion { font-size:.95rem; }
-      }
     </style>
 
     <div id="sl-wrap">
@@ -379,22 +425,24 @@ function _render() {
       </div>
 
       <div id="sl-card">
-        <div id="sl-picto-wrap">
-          <img id="sl-picto" alt="">
+        <button class="sl-nav" id="sl-prev" aria-label="Anterior">◀</button>
+        <div id="sl-card-centro">
+          <div id="sl-picto-wrap">
+            <img id="sl-picto" alt="">
+          </div>
+          <div id="sl-palabra"></div>
+          <div id="sl-palabra-en"></div>
         </div>
-        <div id="sl-palabra"></div>
-        <div id="sl-palabra-en"></div>
+        <button class="sl-nav" id="sl-next" aria-label="Siguiente">▶</button>
       </div>
 
       <div id="sl-silabas"></div>
 
       <div id="sl-controles">
-        <button class="sl-nav" id="sl-prev" aria-label="Anterior">◀</button>
         <div id="sl-acciones">
           <button class="sl-accion" id="sl-btn-secuencia">▶ Sílaba a sílaba</button>
           <button class="sl-accion" id="sl-btn-palabra">🔊 Palabra</button>
         </div>
-        <button class="sl-nav" id="sl-next" aria-label="Siguiente">▶</button>
       </div>
     </div>
 
@@ -538,6 +586,7 @@ function _mostrarPalabra() {
     chip.className = 'sl-silaba';
     chip.textContent = s;
     chip.dataset.idx = i;
+    chip.dataset.si = i % 6;          // paleta y forma orgánica (0–5)
     chip.addEventListener('click', () => { haptic(8); _decirSilaba(s, i); });
     fila.appendChild(chip);
   });
