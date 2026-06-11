@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-11T14:30:55.386Z",
-  "totalAssets": 1925,
+  "generado": "2026-06-11T15:03:32.865Z",
+  "totalAssets": 1928,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1890,6 +1890,7 @@
     "./assets/ui/btn-memorama.png",
     "./assets/ui/btn-mira-y-di.png",
     "./assets/ui/btn-silabas.png",
+    "./assets/ui/btn-simon.png",
     "./assets/ui/btn-toca.png",
     "./assets/ui/dorso-avanzado.png",
     "./assets/ui/dorso-basico.png",
@@ -1921,6 +1922,8 @@
     "./modules/mira-y-di/module.js",
     "./modules/silabas/module.js",
     "./modules/silabas/silabas.js",
+    "./modules/simon/module.js",
+    "./modules/simon/simon.js",
     "./modules/toca/module.js",
     "./modules/toca/toca.js",
     "./themes/oceano.js",
