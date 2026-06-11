@@ -287,8 +287,13 @@ async function navegarA(mod) {
     _moduloActivo = null;
   }
 
+  // ← AQUÍ
+  document.getElementById('btn-ajustes-header')
+    ?.style.setProperty('display', mod.id === 'ajustes' ? 'none' : 'flex');
+
   vistaMenu.style.display = 'none';
   btnVolver.style.display = 'flex';
+  // …resto de la función
   acciones.innerHTML = '';
 
   const contenedor = _getContenedor(mod.id);
