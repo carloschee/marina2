@@ -227,20 +227,27 @@ function _render() {
         white-space:nowrap;
       }
 
-      /* ── Tarjeta de palabra ── */
+      /* ── Tarjeta de palabra — contenedor transparente, sin borde visible ── */
       #sl-card {
         flex:1; min-height:0;
         display:flex; flex-direction:column; align-items:center; justify-content:center;
         gap:10px;
-        background:rgba(255,255,255,0.06);
-        border:1px solid rgba(255,255,255,0.12);
-        border-radius:28px; padding:16px;
       }
-      #sl-picto {
-        width:auto; max-width:62%; max-height:46vh; flex:0 1 auto;
-        object-fit:contain;
+      /* Wrapper cuadrado fijo: el pictograma siempre ocupa el mismo espacio
+         independientemente de su contenido (árbol alto, pez ancho, etc.).
+         min() evita que desborde en pantallas pequeñas. */
+      #sl-picto-wrap {
+        width: min(42vh, 62vw);
+        height: min(42vh, 62vw);
+        flex-shrink: 0;
         background:#fff; border-radius:22px; padding:10px;
         box-shadow:0 10px 30px rgba(0,20,60,0.30);
+        display:flex; align-items:center; justify-content:center;
+        overflow:hidden;
+      }
+      #sl-picto {
+        width:100%; height:100%;
+        object-fit:contain;
       }
       #sl-palabra {
         font-family:'Outfit', sans-serif;
@@ -358,7 +365,6 @@ function _render() {
 
       /* ── Portrait celular ── */
       @media (max-width:600px) and (orientation:portrait) {
-        #sl-picto { max-height:34vh; max-width:72%; }
         .sl-accion { font-size:.95rem; }
       }
     </style>
@@ -373,7 +379,9 @@ function _render() {
       </div>
 
       <div id="sl-card">
-        <img id="sl-picto" alt="">
+        <div id="sl-picto-wrap">
+          <img id="sl-picto" alt="">
+        </div>
         <div id="sl-palabra"></div>
         <div id="sl-palabra-en"></div>
       </div>
