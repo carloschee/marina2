@@ -228,25 +228,27 @@ function _render() {
       }
 
       /* ── Tarjeta de palabra — landscape: fila con navs a los lados del picto ── */
+      /* ── Tarjeta: columna centrada ── */
       #sl-card {
         flex:1; min-height:0;
-        display:flex; flex-direction:row; align-items:center; justify-content:center;
-        gap:10px; padding:0 4px;
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        gap:10px;
       }
       /* Centro de la tarjeta: picto + nombre apilados */
       #sl-card-centro {
         display:flex; flex-direction:column; align-items:center; justify-content:center;
         gap:10px; flex-shrink:0;
       }
-      /* Wrapper cuadrado fijo */
+      /* Wrapper cuadrado fijo — position:relative para anclar los navs dentro */
       #sl-picto-wrap {
-        width: min(38vh, 44vw);
-        height: min(38vh, 44vw);
+        position:relative;
+        width: min(38vh, 52vw);
+        height: min(38vh, 52vw);
         flex-shrink:0;
         background:#fff; border-radius:22px; padding:10px;
         box-shadow:0 10px 30px rgba(0,20,60,0.30);
         display:flex; align-items:center; justify-content:center;
-        overflow:hidden;
+        overflow:visible;          /* visible para que los navs sobresalgan */
       }
       #sl-picto { width:100%; height:100%; object-fit:contain; }
       #sl-palabra {
@@ -259,16 +261,24 @@ function _render() {
         color:rgba(255,255,255,0.50); text-align:center;
       }
 
-      /* ── Navs: flotan a los lados del picto (dentro de #sl-card como flex-row) ── */
+      /* ── Navs: absolutos dentro de #sl-picto-wrap ──
+         top:50% + translateY(-50%) los centra exactamente en el eje Y del
+         wrapper cuadrado, en cualquier orientación y tamaño de pantalla.
+         Sobresalen del wrapper (overflow:visible) para no tapar el picto. */
       .sl-nav {
-        width:56px; height:56px; flex-shrink:0; border-radius:50%;
+        position:absolute; top:50%; transform:translateY(-50%);
+        width:52px; height:52px; border-radius:50%;
         border:1.5px solid rgba(255,255,255,0.22);
-        background:rgba(255,255,255,0.12); color:#fff;
-        font-size:1.5rem; cursor:pointer;
+        background:rgba(20,40,100,0.55);
+        backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+        color:#fff; font-size:1.4rem; cursor:pointer;
         display:flex; align-items:center; justify-content:center;
         transition:transform .12s, background .18s;
+        z-index:2;
       }
-      .sl-nav:active  { transform:scale(.88); background:rgba(255,255,255,.22); }
+      #sl-prev { left:-28px; }   /* mitad fuera del wrapper a la izquierda */
+      #sl-next { right:-28px; }  /* mitad fuera del wrapper a la derecha  */
+      .sl-nav:active  { transform:translateY(-50%) scale(.88); background:rgba(255,255,255,.22); }
       .sl-nav:disabled { opacity:.28; pointer-events:none; }
 
       /* ── Chips de sílabas — diseño orgánico con paleta de colores ── */
@@ -339,19 +349,9 @@ function _render() {
       #sl-btn-secuencia { background:#6d28d9; box-shadow:0 4px 18px rgba(109,40,217,0.50); }
       #sl-btn-palabra   { background:#1d4ed8; box-shadow:0 4px 18px rgba(29,78,216,0.45); }
 
-      /* ── Portrait: picto en columna, botones apilados ── */
+      /* ── Portrait: botones de acción apilados ── */
       @media (orientation:portrait) {
-        #sl-card {
-          flex-direction:column;
-        }
-        #sl-picto-wrap {
-          width: min(46vw, 36vh);
-          height: min(46vw, 36vh);
-        }
-        #sl-acciones {
-          flex-direction:column;
-          gap:10px;
-        }
+        #sl-acciones { flex-direction:column; gap:10px; }
         .sl-accion { min-height:68px; font-size:1.12rem; }
       }
 
@@ -423,15 +423,15 @@ function _render() {
       </div>
 
       <div id="sl-card">
-        <button class="sl-nav" id="sl-prev" aria-label="Anterior">◀</button>
         <div id="sl-card-centro">
           <div id="sl-picto-wrap">
+            <button class="sl-nav" id="sl-prev" aria-label="Anterior">◀</button>
             <img id="sl-picto" alt="">
+            <button class="sl-nav" id="sl-next" aria-label="Siguiente">▶</button>
           </div>
           <div id="sl-palabra"></div>
           <div id="sl-palabra-en"></div>
         </div>
-        <button class="sl-nav" id="sl-next" aria-label="Siguiente">▶</button>
       </div>
 
       <div id="sl-silabas"></div>
