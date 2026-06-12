@@ -1,5 +1,5 @@
 {
-  "generado": "2026-06-12T16:50:44.039Z",
+  "generado": "2026-06-12T16:56:23.652Z",
   "totalAssets": 1930,
   "urls": [
     "./app.config.json",
@@ -1380,13 +1380,13 @@
     "./assets/pictogramas/camion-bomberos.png",
     "./assets/pictogramas/camion-cisterna.png",
     "./assets/pictogramas/camion-helados.png",
+    "./assets/pictogramas/camion-mezclador-cemento.png",
     "./assets/pictogramas/camion-minero.png",
     "./assets/pictogramas/camion-reparto.png",
     "./assets/pictogramas/camion-volteo.png",
     "./assets/pictogramas/camion.png",
     "./assets/pictogramas/camioneta.png",
     "./assets/pictogramas/camiseta.png",
-    "./assets/pictogramas/camión-mezclador-cemento.png",
     "./assets/pictogramas/canario.png",
     "./assets/pictogramas/cangrejo.png",
     "./assets/pictogramas/canguro.png",
