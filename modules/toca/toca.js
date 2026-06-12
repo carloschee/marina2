@@ -1,757 +1,724 @@
-/* modules/simon/simon.js
-   Módulo "Simón" para Marina 2 — memoria de secuencias.
-
-   Niveles (por nº de piezas):
-     Nivel 1 (Fácil)   → 4 piezas  — 2×2 en ambas orientaciones
-     Nivel 2 (Medio)   → 6 piezas  — landscape 2×3 / portrait 3×2
-     Nivel 3 (Difícil) → 8 piezas  — landscape 2×4 / portrait 4×2
-
-   Flujo de entrada:
-   1. Tablero visible (blur suave) + overlay con ▶ flotando.
-   2. Al tocar ▶: overlay se cierra, aparece modal ⭐ con instrucciones TTS.
-   3. Al terminar TTS: modal se cierra, comienza la secuencia.
-   4. Cada pieza iluminada: tono musical → nombre del pictograma.
-   5. Acierto → secuencia crece. Error → misma secuencia, sin reinicio.
-
-   Principios neuroafirmativos:
-   · Sin presión de tiempo.
-   · Error amable: ámbar, misma secuencia para reintentar.
-   · Botón "Ver otra vez" disponible durante el turno.
-   · onEnter sin audio — la usuaria elige cuándo empieza.
+/* modules/toca/toca.js — Marina 2
+   Módulo "Escucha y toca".
+   Escucha una instrucción de voz y toca el pictograma correcto.
+   Selector de tema estandarizado: pill en barra superior, bottom-sheet
+   con agrupación Vocabulario / Lenguaje, igual que Sílabas y Simón.
 */
 
-import { TTS }       from '../../core/tts.js';
-import { haptic }    from '../../core/ui.js';
-import { Telemetry } from '../../core/telemetry.js';
-import { cfg }       from '../../core/config.js';
+import { TTS }           from '../../core/tts.js';
+import { haptic, lanzarConfeti } from '../../core/ui.js';
+import { Telemetry }     from '../../core/telemetry.js';
 
-// ─── Persistencia ────────────────────────────────────────────────────────────────
-const _lsNivel  = () => `${cfg('storage.prefijo', 'app')}-simon-nivel`;
-const _lsRecord = () => `${cfg('storage.prefijo', 'app')}-simon-record`;
+const PICTO_URL      = (r) => `assets/pictogramas/${r.toLowerCase()}`;
+const AUDIO_URL      = (r, lang = 'es') =>
+  `assets/audio/${lang}/${r.replace(/\.png$/i, '').toLowerCase()}.mp3`;
+const MEJOR_RACHA_KEY = 'marina2-toca-mejor-racha';
+const MOSAIC_SIZE     = 260;
+const NIVELES         = [2, 3, 4, 6];
+const ACIERTOS_POR_NIVEL = [3, 3, 4, 4];
 
-function _cargarRecord()     { try { return JSON.parse(localStorage.getItem(_lsRecord()) || '{}'); } catch { return {}; } }
-function _guardarRecord(rec) { try { localStorage.setItem(_lsRecord(), JSON.stringify(rec)); } catch {} }
-function _cargarNivelId()    { try { return parseInt(localStorage.getItem(_lsNivel()), 10) || 1; } catch { return 1; } }
-function _guardarNivelId(id) { try { localStorage.setItem(_lsNivel(), String(id)); } catch {} }
+let _el           = null;
+let _catalogo     = [];
+let _temas        = [];
+let _tema         = null;
+let _pool         = [];
+let _opciones     = [];
+let _objetivo     = null;
+let _nivel        = 0;
+let _aciertos     = 0;
+let _modoInfinito = false;
+let _racha        = 0;
+let _mejorRacha   = 0;
+let _esperando    = false;
+let _lang         = 'es';
+let _langConfig   = { es: true, en: false };
+let _audioEl      = null;
+let _gridW        = 0;
+let _gridH        = 0;
+let _resizeObs    = null;
 
-// ─── Rutas ────────────────────────────────────────────────────────────────────────
-const PICTO_URL = (r) => `assets/pictogramas/${r.toLowerCase()}`;
-const AUDIO_URL = (r, lang = 'es') => `assets/audio/${lang}/${r.replace(/\.png$/i, '').toLowerCase()}.mp3`;
-
-// ─── Configuración ────────────────────────────────────────────────────────────────
-const NIVELES = [
-  { id: 1, estrellas: '⭐',     piezas: 4, nombre: 'Fácil'   },
-  { id: 2, estrellas: '⭐⭐',   piezas: 6, nombre: 'Medio'   },
-  { id: 3, estrellas: '⭐⭐⭐', piezas: 8, nombre: 'Difícil' },
-];
-const SECUENCIA_INICIAL = 2;
-const DUR_ILUM  = 620;   // ms que una pieza queda iluminada
-const DUR_GAP   = 260;   // ms entre piezas
-const DUR_PREV  = 400;   // pausa antes de iniciar la secuencia
-
-// ─── Generador de tonos (Do mayor, sube de octava al completar) ───────────────────
-// Frecuencias base: Do4–Do5. Cada octava siguiente multiplica por 2.
-const NOTAS_BASE = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
-let _audioCtx    = null;
-let _notaIdx     = 0;     // índice dentro de NOTAS_BASE (0–7)
-let _octavaShift = 0;     // número de octavas subidas
-
-function _getAudioCtx() {
-  if (!_audioCtx || _audioCtx.state === 'closed') {
-    _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  if (_audioCtx.state === 'suspended') _audioCtx.resume();
-  return _audioCtx;
-}
-
-function _tocarNota(duracionMs = 420) {
-  try {
-    const ctx   = _getAudioCtx();
-    const freq  = NOTAS_BASE[_notaIdx] * Math.pow(2, _octavaShift);
-    const osc   = ctx.createOscillator();
-    const gain  = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.type      = 'sine';
-    osc.frequency.setValueAtTime(freq, ctx.currentTime);
-    gain.gain.setValueAtTime(0.38, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duracionMs / 1000);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + duracionMs / 1000);
-
-    // Avanzar índice; subir octava al completar la escala
-    _notaIdx++;
-    if (_notaIdx >= NOTAS_BASE.length) {
-      _notaIdx = 0;
-      _octavaShift = (_octavaShift + 1) % 3; // máx 3 octavas de desplazamiento
-    }
-  } catch {}
-}
-
-function _resetNotas() { _notaIdx = 0; _octavaShift = 0; }
-
-// ─── Estado ───────────────────────────────────────────────────────────────────────
-let _el          = null;
-let _catalogo    = [];
-let _temas       = [];
-let _tema        = null;
-let _nivel       = NIVELES[0];
-let _tablero     = [];
-let _secuencia   = [];
-let _pasoUsuario = 0;
-let _ronda       = 1;
-let _aceptaInput = false;
-let _seqToken    = 0;
-let _lang        = 'es';
-let _audioEl     = null;
-
-// ─── API pública ──────────────────────────────────────────────────────────────────
+// ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
-  _el = container;
-  const langCfg = window._langConfig || { es: true, en: false };
-  _lang  = (langCfg.es && langCfg.en) ? 'ambos' : langCfg.en ? 'en' : 'es';
-  _nivel = NIVELES.find(n => n.id === _cargarNivelId()) || NIVELES[0];
-  _tema  = null;
+  _el           = container;
+  _langConfig   = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
+  _lang         = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _nivel        = 0; _aciertos = 0; _modoInfinito = false;
+  _racha        = 0; _esperando = false; _tema = null;
+
+  try { _mejorRacha = parseInt(localStorage.getItem(MEJOR_RACHA_KEY) || '0', 10) || 0; }
+  catch { _mejorRacha = 0; }
 
   try {
-    _catalogo = (await (await fetch('./data/pictos.json')).json())
-      .filter(e => e.ruta_img && e.es);
-  } catch { _catalogo = []; }
+    const res = await fetch('./data/pictos.json');
+    const cat = await res.json();
+    _catalogo = cat.filter(e => e.ruta_img && e.es && e.art !== undefined);
+  } catch (e) { console.error('[toca] pictos.json', e); _catalogo = []; }
 
-  try { _temas = await (await fetch('./data/temas.json')).json(); }
+  try { const r = await fetch('./data/temas.json'); _temas = await r.json(); }
   catch { _temas = []; }
 
+  _pool = _shuffle([..._catalogo]);
   _render();
-  _nuevaPartida();
+  _abrirModalTemas();
   window.addEventListener('lang-change', _onLangChange);
 }
 
 export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
-  _detenerTodo();
-  _el = null; _catalogo = []; _temas = []; _tablero = []; _secuencia = [];
+  _resizeObs?.disconnect(); _resizeObs = null; _gridW = 0; _gridH = 0;
+  TTS.stop();
+  if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
+  _el = null; _catalogo = []; _pool = []; _temas = [];
 }
 
-export function onEnter() { _abrirModalCat(); }
+export function onEnter() { _abrirModalTemas(); }
 
 export function onLeave() {
-  _detenerTodo();
-  Telemetry.track('simon_sesion', { _modulo: 'simon', nivel: _nivel.id, ronda_alcanzada: _ronda });
+  TTS.stop(); if (_audioEl) _audioEl.pause();
+  Telemetry.track('toca_sesion', {
+    _modulo: 'toca', nivel_alcanzado: _nivel + 1,
+    opciones_nivel: NIVELES[Math.min(_nivel, NIVELES.length - 1)],
+    modo_infinito: _modoInfinito, mejor_racha: _mejorRacha,
+    tema: _tema?.id || 'todos',
+  });
 }
 
-export async function pause() { _detenerTodo(); }
+export async function pause() {
+  TTS.stop(); if (_audioEl) _audioEl.pause(); _esperando = true;
+}
 
 export async function resume(container) {
-  _el = container;
-  const langCfg = window._langConfig || { es: true, en: false };
-  _lang  = (langCfg.es && langCfg.en) ? 'ambos' : langCfg.en ? 'en' : 'es';
-  _nivel = NIVELES.find(n => n.id === _cargarNivelId()) || _nivel;
+  _el         = container;
+  _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
+  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
-  _nuevaPartida();
+
+  // El botón de tema solo dice 'Temas' — no hay label dinámico que restaurar
+
+  if (_modoInfinito) {
+    const nivelValor = _el.querySelector('#tc-nivel-valor');
+    if (nivelValor) nivelValor.textContent = '∞';
+    _el.querySelector('#tc-racha-wrap')?.classList.add('visible');
+    _el.querySelector('#tc-dots').style.display = 'none';
+    if (_mejorRacha > 0) {
+      _el.querySelector('#tc-record-wrap')?.classList.add('visible');
+      const rv = _el.querySelector('#tc-record-valor');
+      if (rv) rv.textContent = _mejorRacha;
+    }
+    _actualizarRacha();
+  }
+
+  _esperando = false;
+  requestAnimationFrame(() => { requestAnimationFrame(() => { if (_el) _nuevaRonda(); }); });
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }
 
-// ─── Render del shell ─────────────────────────────────────────────────────────────
+// ─── Render ───────────────────────────────────────────────────────────────────
 function _render() {
-  _el.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;';
+  _el.style.cssText =
+    'position:absolute;inset:0;display:flex;flex-direction:column;' +
+    'overflow:hidden;background:transparent;padding:0;';
+
   _el.innerHTML = `
-    <style>
-      /* ── Wrap principal ── */
-      #sm-wrap {
-        flex:1; min-height:0; display:flex; flex-direction:column;
-        padding:12px 14px calc(10px + env(safe-area-inset-bottom,0px));
-        gap:10px; overflow:hidden;
-      }
+  <style>
+    /* ── Header único: [Temas] [stats] ... en un solo renglón ── */
+    #tc-header {
+      flex-shrink:0; display:flex; align-items:center; gap:10px;
+      padding:10px 14px; min-height:56px;
+    }
+    #tc-btn-tema {
+      display:flex; align-items:center;
+      min-height:44px; padding:8px 16px; border-radius:99px;
+      background:rgba(0,229,176,0.12);
+      border:1.5px solid rgba(0,229,176,0.35);
+      color:#fff; font-family:inherit; font-weight:900; font-size:.95rem;
+      cursor:pointer; transition:transform .12s, background .2s;
+      flex-shrink:0;
+    }
+    #tc-btn-tema:active { transform:scale(.97); background:rgba(0,229,176,0.22); }
+    #tc-nivel-wrap {
+      display:flex; align-items:baseline; gap:5px;
+      background:rgba(255,255,255,0.10); border-radius:99px;
+      padding:5px 14px; flex-shrink:0;
+    }
+    #tc-nivel-label {
+      font-size:.70rem; font-weight:900; letter-spacing:.12em;
+      text-transform:uppercase; color:rgba(255,255,255,0.55);
+    }
+    #tc-nivel-valor {
+      font-size:1.1rem; font-weight:900; color:#ffe566;
+      text-shadow:0 0 12px rgba(255,229,102,0.60);
+    }
+    #tc-racha-wrap {
+      display:none; align-items:baseline; gap:5px;
+      background:rgba(0,229,176,0.15); border-radius:99px;
+      padding:5px 14px; border:1px solid rgba(0,229,176,0.35); flex-shrink:0;
+    }
+    #tc-racha-wrap.visible { display:flex; }
+    #tc-racha-label {
+      font-size:.70rem; font-weight:900; letter-spacing:.12em;
+      text-transform:uppercase; color:rgba(0,229,176,0.70);
+    }
+    #tc-racha-valor {
+      font-size:1.1rem; font-weight:900; color:#00e5b0;
+      text-shadow:0 0 12px rgba(0,229,176,0.60);
+    }
+    #tc-record-wrap { display:none; align-items:baseline; gap:4px; flex-shrink:0; }
+    #tc-record-wrap.visible { display:flex; }
+    #tc-record-label {
+      font-size:.65rem; font-weight:900; letter-spacing:.10em;
+      text-transform:uppercase; color:rgba(255,229,102,0.60);
+    }
+    #tc-record-valor { font-size:.95rem; font-weight:900; color:#ffe566; opacity:.80; }
+    #tc-dots { display:flex; gap:6px; align-items:center; flex-shrink:0; margin-left:auto; }
+    .tc-dot {
+      width:10px; height:10px; border-radius:50%;
+      background:rgba(255,255,255,0.20);
+      transition:background .25s, transform .2s;
+    }
+    .tc-dot.lleno {
+      background:#00e5b0; box-shadow:0 0 8px rgba(0,229,176,0.60); transform:scale(1.2);
+    }
 
-      /* ── Barra superior ── */
-      #sm-top { display:flex; align-items:center; gap:10px; flex-shrink:0; }
-      #sm-cat-btn {
-        display:flex; align-items:center;
-        min-height:44px; padding:8px 16px; border-radius:99px;
-        background:rgba(244,63,94,0.14); border:1.5px solid rgba(244,63,94,0.40);
-        color:#fff; font-family:inherit; font-weight:900; font-size:.95rem; cursor:pointer;
-        transition:transform .12s, background .2s; flex-shrink:0;
-      }
-      #sm-cat-btn:active { transform:scale(.97); }
-      #sm-niveles { display:flex; gap:8px; }
-      .sm-nivel {
-        min-height:44px; padding:6px 12px; border-radius:12px; cursor:pointer;
-        font-family:inherit; font-weight:900; font-size:.95rem; color:#fff;
-        background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.14);
-        transition:transform .12s, background .18s;
-      }
-      .sm-nivel:active { transform:scale(.95); }
-      .sm-nivel.activo { background:rgba(244,63,94,0.22); border-color:rgba(244,63,94,0.65); }
-      .sm-nivel:disabled { opacity:.4; pointer-events:none; }
+    /* ── Instrucción ── */
+    #tc-instruccion {
+      flex-shrink:0; display:flex; align-items:center; gap:12px;
+      padding:8px 16px 10px;
+    }
+    #tc-instruccion-texto { flex:1; }
+    #tc-label-sup {
+      display:block; font-size:.68rem; font-weight:900;
+      letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.40); margin-bottom:2px;
+    }
+    #tc-prompt {
+      font-size:clamp(1.1rem,3.5vw,1.5rem); font-weight:900; color:#fff;
+      text-shadow:0 2px 10px rgba(0,0,0,0.40);
+    }
+    #tc-prompt strong { color:#ffe566; }
+    #tc-btn-repetir {
+      width:48px; height:48px; border-radius:50%; border:none;
+      background:#00e5b0; font-size:1.3rem; cursor:pointer;
+      box-shadow:0 4px 16px rgba(0,229,176,0.45); transition:transform .12s;
+    }
+    #tc-btn-repetir:active { transform:scale(.88); }
 
-      /* ── Indicador de estado ── */
-      #sm-estado {
-        flex-shrink:0; text-align:center;
-        font-family:'Outfit',sans-serif; font-weight:900;
-        font-size:clamp(1rem,3vw,1.4rem); color:#fff; min-height:1.5em;
-      }
-      #sm-ronda {
-        margin-left:auto; flex-shrink:0; white-space:nowrap;
-        font-size:.88rem; font-weight:800; color:rgba(255,255,255,0.50);
-      }
-      #sm-info { display:flex; align-items:center; flex-shrink:0; }
+    /* ── Grid ── */
+    #tc-grid {
+      flex:1; min-height:0;
+      display:flex; flex-wrap:wrap;
+      align-content:center; justify-content:center;
+      gap:12px; padding:8px 12px; overflow:hidden;
+    }
+    .tc-opcion {
+      border-radius:22px; border:3px solid rgba(255,255,255,0.30); background:#fff;
+      cursor:pointer; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:8px;
+      padding:10px; transition:transform .15s, border-color .2s, box-shadow .2s;
+      overflow:hidden; position:relative; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+    }
+    .tc-opcion:active { transform:scale(.93); }
+    .tc-opcion img {
+      width:62%; height:62%; object-fit:contain;
+      border-radius:12px; pointer-events:none;
+    }
+    .tc-opcion-label {
+      font-size:clamp(1rem,3vw,1.3rem); font-weight:900; color:#07212e;
+      text-align:center; padding:0 4px;
+    }
+    .tc-opcion.correcto {
+      border-color:#00e5b0; box-shadow:0 0 0 4px rgba(0,229,176,0.30);
+      animation:tc-pop .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .tc-opcion.incorrecto { border-color:#ff6b6b; animation:tc-shake .35s ease; }
+    @keyframes tc-pop { from { transform:scale(.85); } to { transform:scale(1); } }
+    @keyframes tc-shake {
+      0%,100% { transform:translateX(0); }
+      20% { transform:translateX(-8px); } 40% { transform:translateX(8px); }
+      60% { transform:translateX(-5px); } 80% { transform:translateX(5px); }
+    }
 
-      /* ── Tablero ── */
-      #sm-board-wrap { flex:1; min-height:0; position:relative; }
-      #sm-board {
-        width:100%; height:100%; display:grid;
-        gap:12px; box-sizing:border-box;
-      }
-      /* Landscape */
-      #sm-board.p4 { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,1fr); }
-      #sm-board.p6 { grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); }
-      #sm-board.p8 { grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,1fr); }
-      /* Portrait */
-      @media (orientation:portrait) {
-        #sm-board.p4 { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,1fr); }
-        #sm-board.p6 { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(3,1fr); }
-        #sm-board.p8 { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(4,1fr); }
-      }
+    /* ── Overlay subida de nivel ── */
+    #tc-nivel-up {
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:10px;
+      background:rgba(5,25,60,0.85);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      opacity:0; pointer-events:none; transition:opacity .3s; z-index:10;
+    }
+    #tc-nivel-up.visible { opacity:1; pointer-events:all; }
+    #tc-nivel-up-emoji { font-size:3.5rem; animation:tc-pop .4s ease; }
+    #tc-nivel-up-texto {
+      font-size:2rem; font-weight:900; color:#fff;
+      text-shadow:0 2px 20px rgba(255,229,102,0.60);
+    }
+    #tc-nivel-up-sub { font-size:1rem; font-weight:800; color:rgba(255,255,255,0.65); }
 
-      .sm-tile {
-        position:relative; border-radius:20px; cursor:pointer; overflow:hidden;
-        display:flex; flex-direction:column; align-items:stretch;
-        gap:0; padding:10px 10px 8px;
-        background:#ffffff;
-        border:2px solid rgba(255,255,255,0.18);
-        box-shadow:0 4px 14px rgba(0,0,0,0.18);
-        transition:box-shadow .18s, background .18s, border-color .18s, filter .18s;
-        -webkit-tap-highlight-color:transparent;
-      }
-      /* Wrapper que ocupa todo el espacio disponible del tile */
-      .sm-picto-wrap {
-        flex:1; min-height:0;
-        display:flex; align-items:center; justify-content:center;
-        overflow:hidden;
-      }
-      .sm-picto-wrap img {
-        width:100%; height:100%; object-fit:contain;
-        display:block;
-      }
-      .sm-tile .sm-tile-label {
-        flex-shrink:0;
-        font-family:'Outfit',sans-serif; font-weight:900;
-        font-size:clamp(.85rem,2.4vw,1.15rem); color:#1a1a2e;
-        text-align:center; line-height:1.2; padding-top:6px;
-      }
-      #sm-board.bloqueado .sm-tile { cursor:default; }
+    /* ── Overlay fallo modo infinito ── */
+    #tc-fallo-infinito {
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:14px;
+      background:rgba(5,25,60,0.90);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      opacity:0; pointer-events:none; transition:opacity .3s; z-index:10;
+    }
+    #tc-fallo-infinito.visible { opacity:1; pointer-events:all; }
+    #tc-fallo-emoji { font-size:3rem; }
+    #tc-fallo-racha {
+      font-size:3.5rem; font-weight:900; color:#00e5b0;
+      text-shadow:0 2px 20px rgba(0,229,176,0.50); line-height:1;
+    }
+    #tc-fallo-label { font-size:1rem; font-weight:800; color:rgba(255,255,255,0.60); letter-spacing:.05em; }
+    #tc-fallo-record {
+      font-size:1rem; font-weight:900; color:#ffe566;
+      text-shadow:0 0 12px rgba(255,229,102,0.50); min-height:1.4em;
+    }
+    #tc-fallo-btn {
+      margin-top:8px; padding:14px 32px; border-radius:99px; border:none;
+      background:#00e5b0; color:#032340;
+      font-family:inherit; font-size:1.1rem; font-weight:900;
+      cursor:pointer; transition:transform .12s;
+    }
+    #tc-fallo-btn:active { transform:scale(.93); }
 
-      /* Iluminada — aqua con brillo */
-      .sm-tile.activa {
-        background:rgba(0,229,210,0.22);
-        border-color:#00e5d2;
-        box-shadow:
-          0 0 0 3px rgba(0,229,210,0.55),
-          0 0 28px 6px rgba(0,229,210,0.45),
-          0 12px 36px rgba(0,180,170,0.40);
-        filter:brightness(1.08) saturate(1.1);
-      }
-      .sm-tile.activa .sm-tile-label { color:#003d3a; }
-      .sm-tile.activa .sm-picto-wrap img { filter:brightness(1.12) saturate(1.15); }
-      /* Error suave */
-      .sm-tile.mal { background:rgba(251,191,36,.22); border-color:rgba(251,191,36,.85); }
+    /* ── Modal de temas — bottom-sheet estándar ── */
+    #tc-modal-temas {
+      position:absolute; inset:0; z-index:20;
+      background:rgba(5,20,50,0.80);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      display:flex; align-items:flex-end;
+      opacity:0; pointer-events:none; transition:opacity .25s;
+    }
+    #tc-modal-temas.visible { opacity:1; pointer-events:all; }
+    #tc-modal-box {
+      width:100%; max-height:78vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
+      background:rgba(10,20,50,0.98); border-radius:24px 24px 0 0;
+      padding:20px 16px calc(28px + env(safe-area-inset-bottom,0px));
+      border-top:2px solid rgba(0,229,176,0.30);
+      transform:translateY(20px); transition:transform .3s cubic-bezier(.34,1.1,.64,1);
+    }
+    #tc-modal-temas.visible #tc-modal-box { transform:translateY(0); }
+    #tc-modal-header {
+      display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;
+    }
+    #tc-modal-titulo {
+      font-size:.82rem; font-weight:900; letter-spacing:.10em;
+      text-transform:uppercase; color:rgba(0,229,176,0.85); margin:0;
+    }
+    #tc-modal-cerrar {
+      width:42px; height:42px; border-radius:50%; border:none;
+      background:rgba(255,255,255,0.12); color:#fff; font-size:1.3rem;
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition:transform .12s;
+    }
+    #tc-modal-cerrar:active { transform:scale(.88); }
+    #tc-modal-lista { display:flex; flex-direction:column; gap:8px; }
+    .tc-grupo-label {
+      font-size:.70rem; font-weight:900; letter-spacing:.10em;
+      text-transform:uppercase; color:rgba(255,255,255,0.40); margin:12px 0 6px;
+    }
+    .tc-tema-opcion {
+      display:flex; align-items:center; gap:14px; min-height:56px;
+      padding:12px 16px; border-radius:16px; cursor:pointer;
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);
+      font-family:inherit; color:#fff; text-align:left; width:100%;
+      transition:background .15s, transform .12s;
+    }
+    .tc-tema-opcion:active { transform:scale(.97); }
+    .tc-tema-opcion.activo { background:rgba(0,229,176,0.15); border-color:rgba(0,229,176,0.40); }
+    .tc-tema-emoji  { font-size:1.5rem; flex-shrink:0; }
+    .tc-tema-info   { display:flex; flex-direction:column; gap:2px; }
+    .tc-tema-nombre { font-size:1rem; font-weight:900; }
+    .tc-tema-desc   { font-size:.72rem; color:rgba(255,255,255,.45); font-weight:700; }
 
-      /* ── Overlay de play (sobre el tablero) — sin blur, resplandor en botón ── */
-      #sm-overlay {
-        position:absolute; inset:0; z-index:10; border-radius:20px;
-        background:rgba(5,18,48,0.42);
-        display:flex; align-items:center; justify-content:center;
-        transition:opacity .3s;
-      }
-      #sm-overlay.oculto { opacity:0; pointer-events:none; }
-      #sm-play-btn {
-        width:92px; height:92px; border-radius:50%; border:none; cursor:pointer;
-        background:rgba(244,63,94,0.95);
-        /* Resplandor grande para separar visualmente del tablero */
-        box-shadow:
-          0 0 0 10px rgba(244,63,94,0.18),
-          0 0 50px 18px rgba(244,63,94,0.50),
-          0 0 100px 40px rgba(244,63,94,0.22),
-          0 10px 36px rgba(244,63,94,0.55);
-        color:#fff; font-size:2.4rem;
-        display:flex; align-items:center; justify-content:center;
-        animation:sm-float 2.4s ease-in-out infinite;
-        transition:transform .15s;
-      }
-      #sm-play-btn:active { transform:scale(.90); }
-      @keyframes sm-float {
-        0%,100% {
-          transform:translateY(0) scale(1);
-          box-shadow:0 0 0 10px rgba(244,63,94,.18),0 0 50px 18px rgba(244,63,94,.50),0 0 100px 40px rgba(244,63,94,.22),0 10px 36px rgba(244,63,94,.55);
-        }
-        50% {
-          transform:translateY(-12px) scale(1.05);
-          box-shadow:0 0 0 14px rgba(244,63,94,.22),0 0 70px 26px rgba(244,63,94,.60),0 0 130px 55px rgba(244,63,94,.28),0 20px 50px rgba(244,63,94,.65);
-        }
-      }
+    /* ── Vacío ── */
+    #tc-vacio {
+      display:none; flex:1; flex-direction:column;
+      align-items:center; justify-content:center; gap:12px;
+      color:rgba(255,255,255,.30); font-size:1rem; font-weight:700;
+    }
+  </style>
 
-      /* ── Modal de instrucciones — sin blur, resplandor en estrella y texto ── */
-      #sm-modal-intro {
-        position:absolute; inset:0; z-index:20;
-        background:rgba(5,18,48,0.78);
-        display:flex; flex-direction:column; align-items:center; justify-content:center;
-        gap:20px; opacity:0; pointer-events:none;
-        transition:opacity .35s;
-      }
-      #sm-modal-intro.visible { opacity:1; pointer-events:all; }
-      #sm-estrella {
-        font-size:clamp(4rem,16vw,7rem); line-height:1;
-        animation:sm-star-pulse 1.1s ease-in-out infinite;
-        /* Resplandor dorado alrededor de la estrella */
-        filter:drop-shadow(0 0 18px rgba(255,220,50,0.90))
-               drop-shadow(0 0 50px rgba(255,200,0,0.60))
-               drop-shadow(0 0 90px rgba(255,180,0,0.35));
-      }
-      @keyframes sm-star-pulse {
-        0%,100% { transform:scale(1)    rotate(0deg);   }
-        25%      { transform:scale(1.12) rotate(-4deg);  }
-        75%      { transform:scale(1.08) rotate(4deg);   }
-      }
-      #sm-intro-texto {
-        font-family:'Outfit',sans-serif; font-weight:900; color:#fff; text-align:center;
-        font-size:clamp(1.1rem,4vw,1.7rem); line-height:1.3;
-        max-width:80%; padding:0 16px;
-        /* Resplandor suave en el texto para separarlo del tablero */
-        text-shadow:
-          0 0 20px rgba(255,255,255,0.70),
-          0 0 50px rgba(200,220,255,0.45),
-          0 2px 8px rgba(0,0,0,0.60);
-      }
-
-      /* ── Controles ── */
-      #sm-controles {
-        flex-shrink:0; display:flex; gap:10px; justify-content:center; min-height:56px;
-      }
-      .sm-btn {
-        min-height:56px; padding:0 22px; border-radius:16px; border:none;
-        cursor:pointer; font-family:inherit; font-weight:900; font-size:1rem;
-        color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;
-        transition:transform .12s, filter .18s;
-      }
-      .sm-btn:active { transform:scale(.96); }
-      #sm-repetir {
-        background:rgba(255,255,255,0.12);
-        border:1.5px solid rgba(255,255,255,0.25);
-      }
-      #sm-repetir.oculto { display:none; }
-      #sm-repetir img {
-        width:22px; height:22px; object-fit:contain;
-        filter:invert(1); pointer-events:none;
-        transition:transform .35s cubic-bezier(.34,1.56,.64,1);
-      }
-      #sm-repetir:active img { transform:rotate(-360deg); }
-
-      /* ── Modal de categorías (patrón frases.js) ── */
-      #sm-modal-cat {
-        position:absolute; inset:0; z-index:30;
-        background:rgba(5,20,50,0.80);
-        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-        display:flex; align-items:flex-end;
-        opacity:0; pointer-events:none; transition:opacity .25s;
-      }
-      #sm-modal-cat.visible { opacity:1; pointer-events:all; }
-      #sm-modal-cat-box {
-        width:100%; max-height:78vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
-        background:rgba(10,20,50,0.98); border-radius:24px 24px 0 0;
-        padding:20px 16px calc(28px + env(safe-area-inset-bottom,0px));
-        border-top:2px solid rgba(244,63,94,0.40);
-        transform:translateY(20px); transition:transform .3s cubic-bezier(.34,1.1,.64,1);
-      }
-      #sm-modal-cat.visible #sm-modal-cat-box { transform:translateY(0); }
-      #sm-modal-cat-header {
-        display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;
-      }
-      #sm-modal-cat-titulo {
-        font-size:.82rem; font-weight:900; letter-spacing:.10em;
-        text-transform:uppercase; color:rgba(244,63,94,0.85);
-      }
-      #sm-modal-cat-cerrar {
-        width:42px; height:42px; border-radius:50%; border:none;
-        background:rgba(255,255,255,0.12); color:#fff; font-size:1.3rem;
-        cursor:pointer; display:flex; align-items:center; justify-content:center;
-      }
-      #sm-modal-cat-lista { display:flex; flex-direction:column; gap:8px; }
-      .sm-grupo-label {
-        font-size:.70rem; font-weight:900; letter-spacing:.10em;
-        text-transform:uppercase; color:rgba(255,255,255,0.40); margin:12px 0 6px;
-      }
-      .sm-tema-opcion {
-        display:flex; align-items:center; gap:14px; min-height:56px;
-        padding:12px 16px; border-radius:16px; cursor:pointer;
-        background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);
-        font-family:inherit; color:#fff; text-align:left; width:100%;
-        transition:background .15s;
-      }
-      .sm-tema-opcion.activo { background:rgba(244,63,94,0.18); border-color:rgba(244,63,94,0.45); }
-      .sm-tema-emoji  { font-size:1.5rem; flex-shrink:0; }
-      .sm-tema-nombre { font-size:1rem; font-weight:900; }
-      .sm-tema-desc   { font-size:.74rem; color:rgba(255,255,255,.40); font-weight:700; }
-    </style>
-
-    <div id="sm-wrap">
-      <div id="sm-top">
-        <button id="sm-cat-btn">Temas</button>
-        <div id="sm-niveles"></div>
-      </div>
-
-      <div id="sm-info">
-        <div id="sm-estado"></div>
-        <span id="sm-ronda"></span>
-      </div>
-
-      <div id="sm-board-wrap">
-        <div id="sm-board" class="bloqueado"></div>
-
-        <!-- Overlay de play -->
-        <div id="sm-overlay">
-          <button id="sm-play-btn" aria-label="Jugar">▶</button>
-        </div>
-
-        <!-- Modal de instrucciones -->
-        <div id="sm-modal-intro">
-          <div id="sm-estrella">⭐</div>
-          <div id="sm-intro-texto"></div>
-        </div>
-      </div>
-
-      <div id="sm-controles">
-        <button class="sm-btn" id="sm-repetir"><img src="assets/ui/reiniciar.svg" alt="">Ver otra vez</button>
-      </div>
+  <div id="tc-header">
+    <button id="tc-btn-tema">Temas</button>
+    <div id="tc-nivel-wrap">
+      <span id="tc-nivel-label">NIVEL</span>
+      <span id="tc-nivel-valor">1</span>
     </div>
-
-    <!-- Modal de categorías -->
-    <div id="sm-modal-cat">
-      <div id="sm-modal-cat-box">
-        <div id="sm-modal-cat-header">
-          <span id="sm-modal-cat-titulo">Elige una categoría</span>
-          <button id="sm-modal-cat-cerrar" aria-label="Cerrar">✕</button>
-        </div>
-        <div id="sm-modal-cat-lista"></div>
-      </div>
+    <div id="tc-racha-wrap">
+      <span id="tc-racha-label">RACHA</span>
+      <span id="tc-racha-valor">0</span>
     </div>
+    <div id="tc-record-wrap">
+      <span id="tc-record-label">🏆</span>
+      <span id="tc-record-valor">0</span>
+    </div>
+    <div id="tc-dots"></div>
+  </div>
+
+  <div id="tc-instruccion">
+    <div id="tc-instruccion-texto">
+      <span id="tc-label-sup">ESCUCHA Y TOCA</span>
+      <div id="tc-prompt">…</div>
+    </div>
+    <button id="tc-btn-repetir" title="Repetir">🔊</button>
+  </div>
+
+  <div id="tc-grid"></div>
+
+  <div id="tc-nivel-up">
+    <div id="tc-nivel-up-emoji">⭐</div>
+    <div id="tc-nivel-up-texto"></div>
+    <div id="tc-nivel-up-sub"></div>
+  </div>
+
+  <div id="tc-fallo-infinito">
+    <div id="tc-fallo-emoji">💫</div>
+    <div id="tc-fallo-racha">0</div>
+    <div id="tc-fallo-label">aciertos consecutivos</div>
+    <div id="tc-fallo-record"></div>
+    <button id="tc-fallo-btn">Seguir jugando</button>
+  </div>
+
+  <div id="tc-modal-temas">
+    <div id="tc-modal-box">
+      <div id="tc-modal-header">
+        <span id="tc-modal-titulo">Elige una categoría</span>
+        <button id="tc-modal-cerrar" aria-label="Cerrar">✕</button>
+      </div>
+      <div id="tc-modal-lista"></div>
+    </div>
+  </div>
+
+  <div id="tc-vacio">
+    <span style="font-size:3rem">🔤</span>
+    No hay pictogramas disponibles.
+  </div>
   `;
 
-  // Selector de niveles
-  const contNiveles = _el.querySelector('#sm-niveles');
-  NIVELES.forEach(n => {
-    const b = document.createElement('button');
-    b.className = 'sm-nivel' + (n.id === _nivel.id ? ' activo' : '');
-    b.textContent = n.estrellas;
-    b.title = `${n.nombre} — ${n.piezas} piezas`;
-    b.dataset.nivel = n.id;
-    b.addEventListener('click', () => { haptic(8); _cambiarNivel(n.id); });
-    contNiveles.appendChild(b);
+  _el.querySelector('#tc-btn-repetir').addEventListener('click', () => { haptic(10); _reproducirInstruccion(); });
+  _el.querySelector('#tc-btn-tema').addEventListener('click', () => { haptic(8); _abrirModalTemas(); });
+  _el.querySelector('#tc-modal-cerrar').addEventListener('click', () => _cerrarModalTemas());
+  _el.querySelector('#tc-modal-temas').addEventListener('click', e => {
+    if (e.target.id === 'tc-modal-temas') _cerrarModalTemas();
+  });
+  _el.querySelector('#tc-fallo-btn').addEventListener('click', () => {
+    haptic(10);
+    _el.querySelector('#tc-fallo-infinito').classList.remove('visible');
+    _racha = 0; _actualizarRacha(); _nuevaRonda();
   });
 
-  _el.querySelector('#sm-play-btn').addEventListener('click', () => { haptic(10); _iniciarConIntro(); });
-  _el.querySelector('#sm-repetir').addEventListener('click', () => { haptic(8); _reproducirSecuencia(); });
-  _el.querySelector('#sm-cat-btn').addEventListener('click', () => { haptic(10); _abrirModalCat(); });
-  _el.querySelector('#sm-modal-cat-cerrar').addEventListener('click', () => _cerrarModalCat());
-  _el.querySelector('#sm-modal-cat').addEventListener('click', e => { if (e.target.id === 'sm-modal-cat') _cerrarModalCat(); });
+  _observarGrid();
 }
 
-// ─── Flujo de juego ───────────────────────────────────────────────────────────────
-function _cambiarNivel(id) {
-  if (_nivel.id === id) return;
-  _nivel = NIVELES.find(n => n.id === id) || NIVELES[0];
-  _guardarNivelId(_nivel.id);
-  _el.querySelectorAll('.sm-nivel').forEach(b =>
-    b.classList.toggle('activo', Number(b.dataset.nivel) === _nivel.id));
-  _nuevaPartida();
-}
-
-function _nuevaPartida() {
-  _detenerSecuencia();
-  _ronda = 1; _secuencia = []; _pasoUsuario = 0; _aceptaInput = false;
-  _resetNotas();
-
-  // Construir lista filtrada por tema
-  let lista = _catalogo;
-  if (_tema?.palabras?.length) {
-    const orden = new Map(_tema.palabras.map((pid, i) => [pid, i]));
-    lista = _catalogo.filter(e => orden.has(e.id)).sort((a,b) => orden.get(a.id) - orden.get(b.id));
+// ─── ResizeObserver ───────────────────────────────────────────────────────────
+function _observarGrid() {
+  const grid = _el.querySelector('#tc-grid');
+  if (!grid) return;
+  _resizeObs?.disconnect();
+  if (typeof ResizeObserver === 'undefined') {
+    requestAnimationFrame(() => { requestAnimationFrame(() => {
+      if (!_el) return;
+      const g = _el.querySelector('#tc-grid');
+      if (g && g.clientWidth > 50 && g.clientHeight > 50) {
+        _gridW = g.clientWidth; _gridH = g.clientHeight; _ajustarTamanos();
+      }
+    }); });
+    return;
   }
-  _tablero = _muestraAleatoria(lista, _nivel.piezas);
-
-  _renderTablero();
-  _actualizarRonda();
-  _setStatus('', '');
-  _mostrarOverlay(true);
-  _el.querySelector('#sm-repetir')?.classList.add('oculto');
-}
-
-function _renderTablero() {
-  const board = _el.querySelector('#sm-board');
-  board.className = `bloqueado p${_nivel.piezas}`;
-  board.innerHTML = '';
-  _tablero.forEach((entrada, idx) => {
-    const tile = document.createElement('button');
-    tile.className = 'sm-tile';
-    tile.dataset.idx = idx;
-    tile.innerHTML = `
-      <div class="sm-picto-wrap"><img src="${PICTO_URL(entrada.ruta_img)}" alt="${entrada.es}"></div>
-      <span class="sm-tile-label">${entrada.es}</span>`;
-    tile.querySelector('img').onerror = ev => { ev.target.style.visibility = 'hidden'; };
-    tile.addEventListener('click', () => _onTap(idx));
-    board.appendChild(tile);
+  _resizeObs = new ResizeObserver(entries => {
+    for (const e of entries) {
+      const w = e.contentRect.width, h = e.contentRect.height;
+      if (w > 50 && h > 50) {
+        const cambio = Math.abs(w - _gridW) > 1 || Math.abs(h - _gridH) > 1;
+        _gridW = w; _gridH = h; if (cambio) _ajustarTamanos();
+      }
+    }
   });
+  _resizeObs.observe(grid);
 }
 
-// ── Overlay de play ───────────────────────────────────────────────────────────────
-function _mostrarOverlay(mostrar) {
-  _el.querySelector('#sm-overlay')?.classList.toggle('oculto', !mostrar);
-}
-
-// ── Modal de instrucciones con TTS ────────────────────────────────────────────────
-function _iniciarConIntro() {
-  haptic(10);
-  _mostrarOverlay(false);
-
-  const modal  = _el.querySelector('#sm-modal-intro');
-  const texto  = _el.querySelector('#sm-intro-texto');
-  const nombre = window._perfilActivo?.nombre || '';
-  const saludo = nombre ? `Hola ${nombre},` : '¡Hola!';
-  const msg    = `${saludo} observa los botones y sigue la secuencia`;
-
-  texto.textContent = msg;
-  modal.classList.add('visible');
-
-  // TTS de instrucciones; al terminar, cerrar modal e iniciar
-  const synth = window.speechSynthesis;
-  const u     = new SpeechSynthesisUtterance(msg);
-  u.lang  = 'es-MX'; u.rate = 0.88; u.pitch = 1.1;
-  const voz = TTS.getVoice?.('es-MX');
-  if (voz) u.voice = voz;
-
-  const continuar = () => {
-    if (!_el) return;
-    modal.classList.remove('visible');
-    setTimeout(() => { if (_el) _jugar(); }, 350);
-  };
-  u.onend   = continuar;
-  u.onerror = continuar;
-  try { synth.cancel(); synth.speak(u); } catch { continuar(); }
-}
-
-function _jugar() {
-  if (_secuencia.length === 0)
-    for (let i = 0; i < SECUENCIA_INICIAL; i++) _secuencia.push(_pasoAleatorio());
-  _reproducirSecuencia();
-}
-
-// ─── Secuencia de iluminación ─────────────────────────────────────────────────────
-async function _reproducirSecuencia() {
-  if (!_secuencia.length) return;
-  _setStatus('Observa…', 'observa');
-  _setBloqueado(true);
-  _el.querySelector('#sm-repetir')?.classList.add('oculto');
-  const token = ++_seqToken;
-  await _sleep(DUR_PREV);
-
-  for (let i = 0; i < _secuencia.length; i++) {
-    if (token !== _seqToken || !_el) return;
-    const idx = _secuencia[i];
-    _iluminar(idx);
-    _tocarNota(DUR_ILUM - 80);
-    await _sleep(200);                        // pequeña pausa para que la nota arrange
-    if (token !== _seqToken || !_el) return;
-    await _reproducirNombreAsync(_tablero[idx]);
-    await _sleep(DUR_ILUM - 200);
-    if (token !== _seqToken || !_el) return;
-    _apagar(idx);
-    await _sleep(DUR_GAP);
+// ─── Ronda ────────────────────────────────────────────────────────────────────
+function _nuevaRonda() {
+  if (!_el) return;
+  const n = _modoInfinito ? NIVELES[NIVELES.length - 1] : NIVELES[_nivel];
+  if (_catalogo.length < n) {
+    _el.querySelector('#tc-grid').style.display      = 'none';
+    _el.querySelector('#tc-instruccion').style.display = 'none';
+    _el.querySelector('#tc-vacio').style.display     = 'flex';
+    return;
   }
-  if (token !== _seqToken || !_el) return;
-  _pasoUsuario = 0;
-  _setStatus('Tu turno', 'turno');
-  _setBloqueado(false);
-  _el.querySelector('#sm-repetir')?.classList.remove('oculto');
-}
-
-// Reproduce el nombre como promesa (resuelve al terminar el audio/TTS)
-function _reproducirNombreAsync(entrada) {
-  return new Promise(resolve => {
-    if (!entrada) { resolve(); return; }
-    const langCode = _lang === 'en' ? 'en' : 'es';
-    const texto    = (langCode === 'en' && entrada.en) ? entrada.en : entrada.es;
-    if (!_audioEl) { _audioEl = document.createElement('audio'); _audioEl.preload = 'none'; }
-    try { _audioEl.pause(); } catch {}
-    let done = false;
-    const fin = () => { if (!done) { done = true; resolve(); } };
-    _audioEl.onended = fin; _audioEl.onerror = () => {
-      const u    = new SpeechSynthesisUtterance(texto);
-      u.lang     = langCode === 'en' ? 'en-US' : 'es-MX';
-      u.rate     = 0.95; u.pitch = 1.1;
-      u.onend    = fin; u.onerror = fin;
-      try { window.speechSynthesis.speak(u); } catch { fin(); }
-    };
-    _audioEl.src = AUDIO_URL(entrada.ruta_img, langCode);
-    _audioEl.play().catch(() => _audioEl.onerror());
-    // Guardia de tiempo máximo (evita bloqueos si el audio dura mucho)
-    setTimeout(fin, 1800);
-  });
-}
-
-// ─── Interacción de la usuaria ────────────────────────────────────────────────────
-function _onTap(idx) {
-  if (!_aceptaInput) return;
-  haptic(8);
-  _flashTile(idx);
-  _tocarNota(320);
-
-  if (idx === _secuencia[_pasoUsuario]) {
-    _pasoUsuario++;
-    if (_pasoUsuario >= _secuencia.length) _rondaCompleta();
+  _esperando = false;
+  if (_pool.length < n) {
+    const base = _tema?.palabras?.length ? _catalogo.filter(e => _tema.palabras.includes(e.id)) : _catalogo;
+    _pool = _shuffle([...base]);
+  }
+  _objetivo = _pool.shift();
+  const base = _tema?.palabras?.length ? _catalogo.filter(e => _tema.palabras.includes(e.id)) : _catalogo;
+  const tmpPool = _shuffle(base.filter(e => e.id !== _objetivo.id));
+  const distractores = [];
+  while (distractores.length < n - 1 && tmpPool.length) distractores.push(tmpPool.shift());
+  _opciones = _shuffle([_objetivo, ...distractores]);
+  _renderRonda();
+  if (_audioEl && !_audioEl.paused) {
+    _audioEl.addEventListener('ended', () => { if (_el) setTimeout(() => _reproducirInstruccion(), 150); }, { once: true });
+    _audioEl.addEventListener('error', () => { if (_el) _reproducirInstruccion(); }, { once: true });
   } else {
-    _error(idx);
+    setTimeout(() => { if (_el) _reproducirInstruccion(); }, 400);
   }
 }
 
-function _rondaCompleta() {
-  _aceptaInput = false;
-  _el.querySelector('#sm-repetir')?.classList.add('oculto');
-  _ronda++;
-  _setStatus('¡Muy bien! 🎉', 'bien');
-  _actualizarRonda();
-
-  const rec  = _cargarRecord();
-  const clave = String(_nivel.id);
-  if (!rec[clave] || _ronda > rec[clave]) { rec[clave] = _ronda; _guardarRecord(rec); }
-
-  setTimeout(() => {
-    if (!_el) return;
-    _secuencia.push(_pasoAleatorio());
-    _reproducirSecuencia();
-  }, 1100);
+function _renderRonda() {
+  const grid = _el.querySelector('#tc-grid');
+  _el.querySelector('#tc-nivel-valor').textContent = _modoInfinito ? '∞' : (_nivel + 1);
+  _renderDots(); _actualizarPrompt();
+  grid.className = ''; grid.innerHTML = '';
+  _opciones.forEach(picto => {
+    const btn = document.createElement('button');
+    btn.className = 'tc-opcion'; btn.dataset.id = picto.id;
+    const img = document.createElement('img');
+    img.src = PICTO_URL(picto.ruta_img); img.alt = picto.es;
+    img.onerror = () => {
+      if (!img.dataset.reintentado) { img.dataset.reintentado = '1'; img.src = PICTO_URL(picto.ruta_img) + '?r=' + Date.now(); }
+      else img.style.opacity = '0.3';
+    };
+    const label = document.createElement('span');
+    label.className = 'tc-opcion-label';
+    label.textContent = _lang === 'en' ? (picto.en || picto.es) : picto.es;
+    btn.appendChild(img); btn.appendChild(label);
+    btn.addEventListener('click', () => _tocar(picto, btn));
+    grid.appendChild(btn);
+  });
+  requestAnimationFrame(() => { if (_el) _ajustarTamanos(); });
 }
 
-function _error(idxTocado) {
-  _aceptaInput = false;
-  _el.querySelector('#sm-repetir')?.classList.add('oculto');
-  haptic(22);
-  const tile = _tiles()[idxTocado];
-  tile?.classList.add('mal');
-  _setStatus('Uy… observa otra vez 👀', '');
-  setTimeout(() => {
-    if (!_el) return;
-    tile?.classList.remove('mal');
-    _reproducirSecuencia();
-  }, 950);
+// ─── Interacción ──────────────────────────────────────────────────────────────
+function _tocar(picto, btn) {
+  if (_esperando) return; haptic(12);
+  picto.id === _objetivo.id ? _acierto(btn) : _error(btn);
 }
 
-// ─── Estados de UI ────────────────────────────────────────────────────────────────
-function _setBloqueado(bloqueado) {
-  _aceptaInput = !bloqueado;
-  _el.querySelector('#sm-board')?.classList.toggle('bloqueado', bloqueado);
+function _acierto(btn) {
+  _esperando = true; _aciertos++;
+  btn.classList.add('correcto'); _confeti(30);
+  _reproducirAudio(_objetivo.ruta_img, _lang, _lang === 'en' ? (_objetivo.en || _objetivo.es) : _objetivo.es);
+  Telemetry.track('toca_acierto', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1, modo_infinito: _modoInfinito, racha: _modoInfinito ? _racha + 1 : undefined });
+  if (_modoInfinito) { _racha++; _actualizarRacha(); _renderDots(); setTimeout(() => { if (_el) _nuevaRonda(); }, 900); return; }
+  _renderDots();
+  if (_aciertos >= ACIERTOS_POR_NIVEL[_nivel]) {
+    _aciertos = 0;
+    if (_nivel < NIVELES.length - 1) setTimeout(() => _mostrarSubidaNivel(), 700);
+    else setTimeout(() => _activarModoInfinito(), 700);
+  } else {
+    setTimeout(() => { if (_el) _nuevaRonda(); }, 900);
+  }
 }
 
-function _setStatus(texto, clase = '') {
-  const el = _el?.querySelector('#sm-estado');
-  if (!el) return;
-  el.textContent = texto;
-  el.className   = clase;
+function _error(btn) {
+  btn.classList.add('incorrecto'); haptic([10, 50, 10]);
+  Telemetry.track('toca_error', { _modulo: 'toca', picto: _objetivo.es, nivel: _nivel + 1, modo_infinito: _modoInfinito, racha_perdida: _modoInfinito ? _racha : _aciertos });
+  if (_modoInfinito) { setTimeout(() => _mostrarFalloInfinito(), 400); }
+  else { _aciertos = 0; _renderDots(); setTimeout(() => btn.classList.remove('incorrecto'), 450); setTimeout(() => _reproducirInstruccion(), 600); }
 }
 
-function _actualizarRonda() {
-  const el  = _el?.querySelector('#sm-ronda');
-  if (!el) return;
-  const rec  = _cargarRecord();
-  const mejor = rec[String(_nivel.id)];
-  el.textContent = mejor && mejor > 1
-    ? `Ronda ${_ronda}  ·  Récord ${mejor}`
-    : `Ronda ${_ronda}`;
+// ─── Overlays ─────────────────────────────────────────────────────────────────
+function _mostrarSubidaNivel() {
+  _nivel++; _aciertos = 0;
+  const emojis = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '🏆'];
+  _el.querySelector('#tc-nivel-up-emoji').textContent = emojis[Math.min(_nivel, emojis.length - 1)];
+  _el.querySelector('#tc-nivel-up-texto').textContent = _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
+  _el.querySelector('#tc-nivel-up-sub').textContent   = _lang === 'en'
+    ? `Now ${NIVELES[_nivel]} pictures — ${ACIERTOS_POR_NIVEL[_nivel]} in a row!`
+    : `Ahora ${NIVELES[_nivel]} opciones — ¡${ACIERTOS_POR_NIVEL[_nivel]} seguidos!`;
+  _el.querySelector('#tc-nivel-up').classList.add('visible'); _confeti(60);
+  TTS.speak(_lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`, { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 });
+  setTimeout(() => { if (!_el) return; _el.querySelector('#tc-nivel-up').classList.remove('visible'); _nuevaRonda(); }, 2200);
 }
 
-// ─── Iluminación ─────────────────────────────────────────────────────────────────
-function _tiles()       { return _el ? [..._el.querySelectorAll('.sm-tile')] : []; }
-function _iluminar(idx) { _tiles()[idx]?.classList.add('activa'); }
-function _apagar(idx)   { _tiles()[idx]?.classList.remove('activa'); }
-function _flashTile(idx) {
-  const t = _tiles()[idx]; if (!t) return;
-  t.classList.add('activa');
-  setTimeout(() => t.classList.remove('activa'), 280);
+function _activarModoInfinito() {
+  _modoInfinito = true; _racha = 0; _aciertos = 0;
+  _el.querySelector('#tc-racha-wrap').classList.add('visible');
+  if (_mejorRacha > 0) { _el.querySelector('#tc-record-wrap').classList.add('visible'); _el.querySelector('#tc-record-valor').textContent = _mejorRacha; }
+  _el.querySelector('#tc-dots').style.display = 'none';
+  _el.querySelector('#tc-nivel-up-emoji').textContent = '🏆';
+  _el.querySelector('#tc-nivel-up-texto').textContent = _lang === 'en' ? '∞ Champion!' : '∞ ¡Campeona!';
+  _el.querySelector('#tc-nivel-up-sub').textContent   = _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
+  _el.querySelector('#tc-nivel-up').classList.add('visible'); _confeti(120);
+  TTS.speak(_lang === 'en' ? 'Champion! Infinite challenge!' : '¡Campeona! ¡Reto infinito!', { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 });
+  setTimeout(() => { if (!_el) return; _el.querySelector('#tc-nivel-up').classList.remove('visible'); _nuevaRonda(); }, 2800);
 }
 
-// ─── Modal de categorías ──────────────────────────────────────────────────────────
-function _abrirModalCat() {
-  const lista = _el.querySelector('#sm-modal-cat-lista');
+function _mostrarFalloInfinito() {
+  const esRecord = _racha > _mejorRacha;
+  if (esRecord && _racha > 0) {
+    _mejorRacha = _racha;
+    try { localStorage.setItem(MEJOR_RACHA_KEY, String(_mejorRacha)); } catch {}
+    _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
+    _el.querySelector('#tc-record-wrap').classList.add('visible');
+  }
+  _el.querySelector('#tc-fallo-racha').textContent  = _racha;
+  _el.querySelector('#tc-fallo-emoji').textContent  = _racha >= 10 ? '🌟' : '💫';
+  _el.querySelector('#tc-fallo-label').textContent  = _lang === 'en' ? 'consecutive hits' : 'aciertos consecutivos';
+  _el.querySelector('#tc-fallo-record').textContent = esRecord && _racha > 0
+    ? (_lang === 'en' ? `🏆 New record!` : `🏆 ¡Nuevo récord!`)
+    : (_mejorRacha > 0 ? (_lang === 'en' ? `Best: ${_mejorRacha}` : `Récord: ${_mejorRacha}`) : '');
+  _el.querySelector('#tc-fallo-btn').textContent = _lang === 'en' ? 'Keep playing' : 'Seguir jugando';
+  _el.querySelector('#tc-fallo-infinito').classList.add('visible');
+  if (_racha >= 5) _confeti(40);
+  TTS.speak(_lang === 'en' ? `${_racha} in a row!${esRecord ? ' New record!' : ''}` : `¡${_racha} seguidos!${esRecord ? ' ¡Nuevo récord!' : ''}`, { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.1, rate: 0.9 });
+}
+
+// ─── Modal de temas ───────────────────────────────────────────────────────────
+function _abrirModalTemas() {
+  const lista = _el.querySelector('#tc-modal-lista');
   lista.innerHTML = '';
-
-  lista.appendChild(_opcionTema(
-    { id: null, emoji: '🌊', label: 'Todas las palabras', desc: `${_catalogo.length} palabras` },
+  lista.appendChild(_crearOpcionTema(
+    { id: null, emoji: '🌊', label: 'Todas las palabras', desc: `${_catalogo.length} pictogramas` },
     _tema === null
   ));
-
   const grupos = { vocabulario: [], lenguaje: [], otros: [] };
   _temas.forEach(t => (grupos[t.tipo] || grupos.otros).push(t));
-
   const _seccion = (titulo, arr) => {
     if (!arr.length) return;
-    const h = document.createElement('div');
-    h.className = 'sm-grupo-label'; h.textContent = titulo;
+    const h = document.createElement('div'); h.className = 'tc-grupo-label'; h.textContent = titulo;
     lista.appendChild(h);
-    arr.forEach(t => lista.appendChild(_opcionTema(
-      { id: t.id, emoji: t.emoji || '📚', label: t.label, desc: `${t.palabras?.length || 0} palabras` },
+    arr.forEach(t => lista.appendChild(_crearOpcionTema(
+      { id: t.id, emoji: t.emoji || '📚', label: t.label, desc: `${t.palabras?.length || 0} pictogramas` },
       _tema?.id === t.id
     )));
   };
   _seccion('Vocabulario', grupos.vocabulario);
   _seccion('Lenguaje',    grupos.lenguaje);
   _seccion('Otros',       grupos.otros);
-
-  const box = _el.querySelector('#sm-modal-cat-box');
-  box.scrollTop = 0;
-  _el.querySelector('#sm-modal-cat').classList.add('visible');
+  const box = _el.querySelector('#tc-modal-box'); box.scrollTop = 0;
+  _el.querySelector('#tc-modal-temas').classList.add('visible');
 }
 
-function _opcionTema({ id, emoji, label, desc }, activo) {
+function _crearOpcionTema({ id, emoji, label, desc }, activo) {
   const btn = document.createElement('button');
-  btn.className = 'sm-tema-opcion' + (activo ? ' activo' : '');
+  btn.className = 'tc-tema-opcion' + (activo ? ' activo' : '');
   btn.innerHTML = `
-    <span class="sm-tema-emoji">${emoji}</span>
-    <span><div class="sm-tema-nombre">${label}</div><div class="sm-tema-desc">${desc}</div></span>`;
-  btn.addEventListener('click', () => { haptic(10); _aplicarTema(id); _cerrarModalCat(); });
+    <span class="tc-tema-emoji">${emoji}</span>
+    <span class="tc-tema-info">
+      <span class="tc-tema-nombre">${label}</span>
+      <span class="tc-tema-desc">${desc}</span>
+    </span>`;
+  btn.addEventListener('click', () => { haptic(10); _seleccionarTema(id); });
   return btn;
 }
 
-function _cerrarModalCat() {
-  _el.querySelector('#sm-modal-cat')?.classList.remove('visible');
+function _cerrarModalTemas() {
+  _el.querySelector('#tc-modal-temas')?.classList.remove('visible');
 }
 
-function _aplicarTema(id) {
+function _seleccionarTema(id) {
   _tema = id === null ? null : (_temas.find(t => t.id === id) || null);
+  _cerrarModalTemas();
   // El botón solo dice 'Temas' — no hay label dinámico
-  _nuevaPartida();
+  if (_tema?.palabras?.length) {
+    const ids = new Set(_tema.palabras); _pool = _shuffle(_catalogo.filter(e => ids.has(e.id)));
+  } else { _pool = _shuffle([..._catalogo]); }
+  _nivel = 0; _aciertos = 0; _modoInfinito = false; _racha = 0;
+  _el.querySelector('#tc-racha-wrap').classList.remove('visible');
+  _el.querySelector('#tc-record-wrap').classList.remove('visible');
+  _el.querySelector('#tc-dots').style.display = '';
+  _nuevaRonda();
 }
 
-// ─── Utilidades ───────────────────────────────────────────────────────────────────
-const _sleep         = ms => new Promise(r => setTimeout(r, ms));
-const _pasoAleatorio = ()  => Math.floor(Math.random() * _tablero.length);
+// ─── Audio e instrucción ──────────────────────────────────────────────────────
+function _reproducirInstruccion() {
+  if (!_objetivo) return;
+  const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
+  const texto = _lang === 'en'
+    ? `Touch the ${_objetivo.en || _objetivo.es}`
+    : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
+  TTS.speak(texto, { lang, rate: 0.88, pitch: 1.1 });
+}
 
-function _muestraAleatoria(arr, n) {
-  const c = [...arr];
-  for (let i = c.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1)); [c[i], c[j]] = [c[j], c[i]];
+function _reproducirAudio(ruta, lang, textoFallback) {
+  if (!_audioEl) { _audioEl = document.createElement('audio'); _audioEl.preload = 'none'; }
+  TTS.stop(); _audioEl.pause(); _audioEl.onerror = null;
+  let _usado = false;
+  const _fallback = () => { if (_usado) return; _usado = true; TTS.speak(textoFallback, { lang: lang === 'en' ? 'en-US' : 'es-MX', rate: 0.9, pitch: 1.2 }); };
+  _audioEl.onerror = _fallback;
+  _audioEl.src = AUDIO_URL(ruta, lang);
+  _audioEl.play().catch(_fallback);
+}
+
+// ─── UI helpers ───────────────────────────────────────────────────────────────
+function _actualizarPrompt() {
+  if (!_objetivo) return;
+  const prompt = _el.querySelector('#tc-prompt');
+  if (_lang === 'en') {
+    prompt.innerHTML = `Touch the <strong>${_objetivo.en || _objetivo.es}</strong>`;
+    _el.querySelector('#tc-label-sup').textContent = 'LISTEN AND TOUCH';
+  } else {
+    const art = _objetivo.art || '';
+    prompt.innerHTML = art ? `Toca ${art} <strong>${_objetivo.es}</strong>` : `Toca <strong>${_objetivo.es}</strong>`;
+    _el.querySelector('#tc-label-sup').textContent = 'ESCUCHA Y TOCA';
   }
-  return c.slice(0, Math.min(n, c.length));
 }
 
-function _detenerSecuencia() { _seqToken++; }
-function _detenerTodo() {
-  _detenerSecuencia(); _aceptaInput = false;
-  TTS.stop();
-  try { window.speechSynthesis?.cancel(); } catch {}
-  if (_audioEl) { try { _audioEl.pause(); } catch {} }
+function _renderDots() {
+  if (_modoInfinito) return;
+  const wrap = _el.querySelector('#tc-dots');
+  const aciertosNecesarios = ACIERTOS_POR_NIVEL[Math.min(_nivel, ACIERTOS_POR_NIVEL.length - 1)];
+  wrap.innerHTML = '';
+  for (let i = 0; i < aciertosNecesarios; i++) {
+    const d = document.createElement('div');
+    d.className = 'tc-dot' + (i < _aciertos ? ' lleno' : '');
+    wrap.appendChild(d);
+  }
 }
 
-// ─── Cambio de idioma ─────────────────────────────────────────────────────────────
+function _actualizarRacha() { if (!_el) return; _el.querySelector('#tc-racha-valor').textContent = _racha; }
+
+function _ajustarTamanos() {
+  const grid = _el.querySelector('#tc-grid'); if (!grid) return;
+  let W = _gridW, H = _gridH;
+  if (W < 50 || H < 50) {
+    W = grid.clientWidth; H = grid.clientHeight;
+    if (W < 50 || H < 50) { requestAnimationFrame(() => { if (_el) _ajustarTamanos(); }); return; }
+    _gridW = W; _gridH = H;
+  }
+  const n = _opciones.length;
+  const cols = n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4;
+  const rows = Math.ceil(n / cols);
+  const avW  = W - 24 - 12 * (cols - 1);
+  const avH  = H - 24 - 12 * (rows - 1);
+  const portrait = H > W;
+  const size = Math.max(80, portrait
+    ? Math.min(avW / cols, avH / rows, 200)
+    : Math.min(avW / cols, avH / rows, MOSAIC_SIZE));
+  grid.querySelectorAll('.tc-opcion').forEach(o => {
+    o.style.width = o.style.height = o.style.flexBasis = size + 'px';
+    o.style.flexGrow = o.style.flexShrink = '0';
+  });
+}
+
+// ─── Cambio de idioma ─────────────────────────────────────────────────────────
 function _onLangChange(e) {
-  const langCfg = e.detail?.langConfig || window._langConfig;
-  if (!langCfg) return;
-  _lang = (langCfg.es && langCfg.en) ? 'ambos' : langCfg.en ? 'en' : 'es';
+  const c = e.detail?.langConfig; if (!c) return;
+  _langConfig = { ...c }; _lang = (c.en && !c.es) ? 'en' : 'es';
+  if (_objetivo) {
+    _actualizarPrompt();
+    _el.querySelectorAll('.tc-opcion-label').forEach((lbl, i) => {
+      const p = _opciones[i]; if (p) lbl.textContent = _lang === 'en' ? (p.en || p.es) : p.es;
+    });
+  }
+}
+
+// ─── Util ─────────────────────────────────────────────────────────────────────
+function _shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function _confeti(count) {
+  if (!_el) return;
+  lanzarConfeti({ count, container: _el });
+  _el.style.position = 'absolute';
 }

@@ -51,11 +51,10 @@ export async function init(container) {
   if (window.innerWidth <= 375 && window.innerHeight < 700) _dificultad = DIFICULTADES[0];
 
   _renderShell();
+  // Preseleccionar "Animales" como tema activo sin iniciar el juego todavía:
+  // el modal se abrirá en onEnter() con Animales ya marcado como activo.
+  _temaActivo = _temas.find(t => t.id === 'animales') || null;
   _renderListaTemas();
-  // Seleccionar "Animales" por defecto al entrar por primera vez
-  const temaAnimales = _temas.find(t => t.id === 'animales');
-  if (temaAnimales) _activarTema(temaAnimales);
-  else _mostrarModal();   // fallback si no existe el tema
   window.addEventListener('lang-change', _onLangChange);
 }
 
