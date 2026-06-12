@@ -175,7 +175,7 @@ export function destroy() {
   _el = null; _catalogo = []; _temas = []; _lista = [];
 }
 
-export function onEnter() { /* sin audio al entrar — principio neuroafirmativo */ }
+export function onEnter() { _abrirModal(); /* sin audio, pero sí muestra el selector */ }
 
 export function onLeave() {
   _detenerTodo();
@@ -209,18 +209,17 @@ function _render() {
         gap:12px; overflow:hidden;
       }
 
-      /* ── Barra superior: categoría + contador ── */
-      #sl-top { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+      /* ── Header: [Temas] [contador] en un solo renglón ── */
+      #sl-top { display:flex; align-items:center; gap:12px; flex-shrink:0; min-height:56px; }
       #sl-cat-btn {
-        display:flex; align-items:center; gap:10px;
-        min-height:56px; padding:10px 18px; border-radius:99px;
+        display:flex; align-items:center;
+        min-height:44px; padding:8px 16px; border-radius:99px;
         background:rgba(167,139,250,0.16);
         border:1.5px solid rgba(167,139,250,0.45);
-        color:#fff; font-family:inherit; font-weight:900; font-size:1.05rem;
-        cursor:pointer; transition:transform .12s, background .2s;
+        color:#fff; font-family:inherit; font-weight:900; font-size:.95rem;
+        cursor:pointer; transition:transform .12s, background .2s; flex-shrink:0;
       }
       #sl-cat-btn:active { transform:scale(.97); }
-      #sl-cat-emoji { font-size:1.3rem; }
       #sl-contador {
         margin-left:auto; flex-shrink:0;
         font-size:.95rem; font-weight:800; color:rgba(255,255,255,0.55);
@@ -415,10 +414,7 @@ function _render() {
 
     <div id="sl-wrap">
       <div id="sl-top">
-        <button id="sl-cat-btn">
-          <span id="sl-cat-emoji">🌊</span>
-          <span id="sl-cat-nombre">Todas las palabras</span>
-        </button>
+        <button id="sl-cat-btn">Temas</button>
         <span id="sl-contador"></span>
       </div>
 
@@ -532,10 +528,7 @@ function _aplicarTema(id) {
   }
 
   _idx = 0;
-  const nombre = _el.querySelector('#sl-cat-nombre');
-  const emoji  = _el.querySelector('#sl-cat-emoji');
-  if (nombre) nombre.textContent = _tema ? _tema.label : 'Todas las palabras';
-  if (emoji)  emoji.textContent  = _tema ? (_tema.emoji || '📚') : '🌊';
+  // El botón solo dice 'Temas' — no hay label dinámico
   _mostrarPalabra();
 }
 

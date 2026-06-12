@@ -52,7 +52,10 @@ export async function init(container) {
 
   _renderShell();
   _renderListaTemas();
-  _mostrarModal();
+  // Seleccionar "Animales" por defecto al entrar por primera vez
+  const temaAnimales = _temas.find(t => t.id === 'animales');
+  if (temaAnimales) _activarTema(temaAnimales);
+  else _mostrarModal();   // fallback si no existe el tema
   window.addEventListener('lang-change', _onLangChange);
 }
 
@@ -63,7 +66,7 @@ export function destroy() {
   _cartas = []; _temaActivo = null; _container = null; _pictos = {};
 }
 
-export function onEnter() {}
+export function onEnter() { _mostrarModal(); }
 export function onLeave() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 export async function pause() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 
@@ -116,27 +119,20 @@ function _renderShell() {
     background:transparent; position:relative;
   }
 
-  /* ── Barra superior: selector de tema ── */
-  #mem-top {
+  /* ── Header único: [Temas] [dificultad] ... [reiniciar] ── */
+  #mem-header {
     flex-shrink:0; display:flex; align-items:center;
-    padding:10px 14px 0; gap:10px;
+    gap:10px; padding:10px 14px; min-height:56px;
   }
   #mem-btn-tema-top {
-    display:flex; align-items:center; gap:8px;
-    min-height:48px; padding:8px 16px; border-radius:99px;
+    display:flex; align-items:center;
+    min-height:44px; padding:8px 16px; border-radius:99px;
     background:rgba(0,194,255,0.12);
     border:1.5px solid rgba(0,194,255,0.35);
     color:#fff; font-family:inherit; font-weight:900; font-size:.95rem;
-    cursor:pointer; transition:transform .12s, background .2s;
+    cursor:pointer; transition:transform .12s, background .2s; flex-shrink:0;
   }
   #mem-btn-tema-top:active { transform:scale(.97); background:rgba(0,194,255,0.22); }
-  #mem-tema-emoji-top { font-size:1.2rem; }
-
-  /* ── Header interno: dificultad + contador + nueva partida ── */
-  #mem-header {
-    flex-shrink:0; display:flex; align-items:center;
-    gap:10px; padding:6px 14px;
-  }
   #mem-dificultad { display:flex; gap:5px; align-items:center; flex-shrink:0; }
   .mem-dif-btn {
     padding:6px 10px; border-radius:99px;
@@ -152,17 +148,16 @@ function _renderShell() {
     box-shadow:0 0 0 2px rgba(0,194,255,0.20);
   }
   #mem-contador {
-    flex:1; text-align:center;
-    font-size:.95rem; font-weight:900; color:rgba(255,255,255,0.70);
+    font-size:.95rem; font-weight:900; color:rgba(255,255,255,0.70); white-space:nowrap;
   }
   #mem-contador strong { color:#fff; font-size:1.1rem; }
   #mem-btn-nuevo {
-    width:38px; height:38px; border-radius:50%;
+    width:44px; height:44px; border-radius:50%;
     border:1.5px solid rgba(255,255,255,0.25);
-    background:rgba(255,255,255,0.12); color:#fff;
+    background:#fff; color:#1a1a2e;
     font-size:1rem; cursor:pointer;
     display:flex; align-items:center; justify-content:center;
-    transition:transform .15s; flex-shrink:0;
+    transition:transform .15s; flex-shrink:0; margin-left:auto;
   }
   #mem-btn-nuevo:active { transform:scale(.88); }
   #mem-btn-nuevo img {
@@ -315,14 +310,8 @@ function _renderShell() {
 </style>
 
 <div id="mem-wrap">
-  <div id="mem-top">
-    <button id="mem-btn-tema-top">
-      <span id="mem-tema-emoji-top">🌊</span>
-      <span id="mem-tema-label-top">Todas las palabras</span>
-    </button>
-  </div>
-
   <div id="mem-header">
+    <button id="mem-btn-tema-top">Temas</button>
     <div id="mem-dificultad">
       ${DIFICULTADES.map(d => `
         <button class="mem-dif-btn${d.id === _dificultad.id ? ' activo' : ''}"
@@ -422,10 +411,7 @@ function _renderListaTemas() {
 
 function _activarTema(tema) {
   _temaActivo = tema;
-  const emojiTop = _q('#mem-tema-emoji-top');
-  const labelTop = _q('#mem-tema-label-top');
-  if (emojiTop) emojiTop.textContent = tema.emoji || '📚';
-  if (labelTop) labelTop.textContent = tema.label;
+  // El botón solo dice 'Temas' — no hay label dinámico
   _cerrarModal();
   setTimeout(() => _iniciarJuego(), 360);
 }

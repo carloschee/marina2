@@ -131,7 +131,7 @@ export function destroy() {
   _el = null; _catalogo = []; _temas = []; _tablero = []; _secuencia = [];
 }
 
-export function onEnter() {}   // sin audio al entrar
+export function onEnter() { _abrirModalCat(); }
 
 export function onLeave() {
   _detenerTodo();
@@ -166,14 +166,14 @@ function _render() {
       /* ── Barra superior ── */
       #sm-top { display:flex; align-items:center; gap:10px; flex-shrink:0; }
       #sm-cat-btn {
-        display:flex; align-items:center; gap:8px;
-        min-height:48px; padding:8px 16px; border-radius:99px;
+        display:flex; align-items:center;
+        min-height:44px; padding:8px 16px; border-radius:99px;
         background:rgba(244,63,94,0.14); border:1.5px solid rgba(244,63,94,0.40);
         color:#fff; font-family:inherit; font-weight:900; font-size:.95rem; cursor:pointer;
-        transition:transform .12s, background .2s;
+        transition:transform .12s, background .2s; flex-shrink:0;
       }
       #sm-cat-btn:active { transform:scale(.97); }
-      #sm-niveles { display:flex; gap:8px; margin-left:auto; }
+      #sm-niveles { display:flex; gap:8px; }
       .sm-nivel {
         min-height:44px; padding:6px 12px; border-radius:12px; cursor:pointer;
         font-family:inherit; font-weight:900; font-size:.95rem; color:#fff;
@@ -395,10 +395,7 @@ function _render() {
 
     <div id="sm-wrap">
       <div id="sm-top">
-        <button id="sm-cat-btn">
-          <span id="sm-cat-emoji">🌊</span>
-          <span id="sm-cat-nombre">Todas las palabras</span>
-        </button>
+        <button id="sm-cat-btn">Temas</button>
         <div id="sm-niveles"></div>
       </div>
 
@@ -728,10 +725,7 @@ function _cerrarModalCat() {
 
 function _aplicarTema(id) {
   _tema = id === null ? null : (_temas.find(t => t.id === id) || null);
-  const nombre = _el.querySelector('#sm-cat-nombre');
-  const emoji  = _el.querySelector('#sm-cat-emoji');
-  if (nombre) nombre.textContent = _tema ? _tema.label : 'Todas las palabras';
-  if (emoji)  emoji.textContent  = _tema ? (_tema.emoji || '📚') : '🌊';
+  // El botón solo dice 'Temas' — no hay label dinámico
   _nuevaPartida();
 }
 
