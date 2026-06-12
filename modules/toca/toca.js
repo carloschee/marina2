@@ -14,8 +14,10 @@ const AUDIO_URL      = (r, lang = 'es') =>
   `assets/audio/${lang}/${r.replace(/\.png$/i, '').toLowerCase()}.mp3`;
 const MEJOR_RACHA_KEY = 'marina2-toca-mejor-racha';
 const MOSAIC_SIZE     = 260;
-const NIVELES         = [2, 3, 4, 6];
-const ACIERTOS_POR_NIVEL = [3, 3, 4, 4];
+// Opciones por nivel (índice 0-4)
+const NIVELES         = [3, 4, 5, 6, 8];
+// Aciertos CONSECUTIVOS requeridos para subir de nivel
+const ACIERTOS_POR_NIVEL = [3, 4, 5, 6, 8];
 
 let _el           = null;
 let _catalogo     = [];
