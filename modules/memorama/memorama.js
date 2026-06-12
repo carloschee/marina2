@@ -190,7 +190,13 @@ function _renderShell() {
     display:flex; align-items:center; justify-content:center;
     transition:transform .15s; flex-shrink:0;
   }
-  #mem-btn-nuevo:active { transform:scale(.88) rotate(180deg); }
+    #mem-btn-nuevo img {
+  width:22px; height:22px; object-fit:contain;
+  filter:invert(1);           /* el SVG es gris claro — invertir da blanco */
+  transition:transform .15s;
+  pointer-events:none;
+}
+#mem-btn-nuevo:active img { transform:rotate(180deg); }
 
   /* Grid — igual que Dótir */
   #mem-grid-wrap {
@@ -393,7 +399,9 @@ function _renderShell() {
     <div id="mem-contador">
       <strong id="mem-pares-count">0</strong> / ${PARES} pares
     </div>
-    <button id="mem-btn-nuevo" title="Nueva partida">🔄</button>
+    <button id="mem-btn-nuevo" title="Nueva partida">
+  <img src="assets/ui/reiniciar.svg" alt="Nueva partida" aria-hidden="true">
+</button>
   </div>
 
   <div id="mem-grid-wrap" class="oculto">

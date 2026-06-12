@@ -339,6 +339,12 @@ function _render() {
         border:1.5px solid rgba(255,255,255,0.25);
       }
       #sm-repetir.oculto { display:none; }
+      #sm-repetir img {
+        width:22px; height:22px; object-fit:contain;
+        filter:invert(1); pointer-events:none;
+        transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+      }
+      #sm-repetir:active img { transform:rotate(-360deg); }
 
       /* ── Modal de categorías (patrón frases.js) ── */
       #sm-modal-cat {
@@ -417,7 +423,7 @@ function _render() {
       </div>
 
       <div id="sm-controles">
-        <button class="sm-btn" id="sm-repetir">👀 Ver otra vez</button>
+        <button class="sm-btn" id="sm-repetir"><img src="assets/ui/reiniciar.svg" alt="">Ver otra vez</button>
       </div>
     </div>
 
