@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-12T20:50:01.800Z",
-  "totalAssets": 1928,
+  "generado": "2026-06-12T21:05:12.578Z",
+  "totalAssets": 1929,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1895,6 +1895,7 @@
     "./assets/ui/dorso-avanzado.png",
     "./assets/ui/dorso-basico.png",
     "./assets/ui/dorso-intermedio.png",
+    "./assets/ui/reiniciar.svg",
     "./core/audio.js",
     "./core/config.js",
     "./core/offline.js",
