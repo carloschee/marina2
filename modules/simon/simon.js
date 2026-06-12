@@ -241,47 +241,59 @@ function _render() {
       }
       #sm-board.bloqueado .sm-tile { cursor:default; }
 
-      /* Iluminada — fondo rosa, texto blanco */
+      /* Iluminada — aqua con brillo */
       .sm-tile.activa {
-        background:rgba(244,63,94,0.92);
-        border-color:rgba(255,255,255,0.80);
-        box-shadow:0 0 0 4px rgba(244,63,94,.40), 0 10px 30px rgba(244,63,94,.55);
-        filter:brightness(1.06);
+        background:rgba(0,229,210,0.22);
+        border-color:#00e5d2;
+        box-shadow:
+          0 0 0 3px rgba(0,229,210,0.55),
+          0 0 28px 6px rgba(0,229,210,0.45),
+          0 12px 36px rgba(0,180,170,0.40);
+        filter:brightness(1.08) saturate(1.1);
       }
-      .sm-tile.activa .sm-tile-label { color:#fff; }
-      .sm-tile.activa .sm-picto-wrap img { filter:brightness(1.10) saturate(1.1); }
+      .sm-tile.activa .sm-tile-label { color:#003d3a; }
+      .sm-tile.activa .sm-picto-wrap img { filter:brightness(1.12) saturate(1.15); }
       /* Error suave */
       .sm-tile.mal { background:rgba(251,191,36,.22); border-color:rgba(251,191,36,.85); }
 
-      /* ── Overlay de play (sobre el tablero) ── */
+      /* ── Overlay de play (sobre el tablero) — sin blur, resplandor en botón ── */
       #sm-overlay {
         position:absolute; inset:0; z-index:10; border-radius:20px;
-        background:rgba(5,18,48,0.55);
-        backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+        background:rgba(5,18,48,0.42);
         display:flex; align-items:center; justify-content:center;
         transition:opacity .3s;
       }
       #sm-overlay.oculto { opacity:0; pointer-events:none; }
       #sm-play-btn {
-        width:88px; height:88px; border-radius:50%; border:none; cursor:pointer;
-        background:rgba(244,63,94,0.90);
-        box-shadow:0 8px 32px rgba(244,63,94,0.55);
-        color:#fff; font-size:2.2rem;
+        width:92px; height:92px; border-radius:50%; border:none; cursor:pointer;
+        background:rgba(244,63,94,0.95);
+        /* Resplandor grande para separar visualmente del tablero */
+        box-shadow:
+          0 0 0 10px rgba(244,63,94,0.18),
+          0 0 50px 18px rgba(244,63,94,0.50),
+          0 0 100px 40px rgba(244,63,94,0.22),
+          0 10px 36px rgba(244,63,94,0.55);
+        color:#fff; font-size:2.4rem;
         display:flex; align-items:center; justify-content:center;
         animation:sm-float 2.4s ease-in-out infinite;
         transition:transform .15s;
       }
       #sm-play-btn:active { transform:scale(.90); }
       @keyframes sm-float {
-        0%,100% { transform:translateY(0)   scale(1);    box-shadow:0 8px 32px rgba(244,63,94,.55); }
-        50%      { transform:translateY(-10px) scale(1.04); box-shadow:0 18px 40px rgba(244,63,94,.70); }
+        0%,100% {
+          transform:translateY(0) scale(1);
+          box-shadow:0 0 0 10px rgba(244,63,94,.18),0 0 50px 18px rgba(244,63,94,.50),0 0 100px 40px rgba(244,63,94,.22),0 10px 36px rgba(244,63,94,.55);
+        }
+        50% {
+          transform:translateY(-12px) scale(1.05);
+          box-shadow:0 0 0 14px rgba(244,63,94,.22),0 0 70px 26px rgba(244,63,94,.60),0 0 130px 55px rgba(244,63,94,.28),0 20px 50px rgba(244,63,94,.65);
+        }
       }
 
-      /* ── Modal de instrucciones ── */
+      /* ── Modal de instrucciones — sin blur, resplandor en estrella y texto ── */
       #sm-modal-intro {
         position:absolute; inset:0; z-index:20;
-        background:rgba(5,18,48,0.82);
-        backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+        background:rgba(5,18,48,0.78);
         display:flex; flex-direction:column; align-items:center; justify-content:center;
         gap:20px; opacity:0; pointer-events:none;
         transition:opacity .35s;
@@ -290,6 +302,10 @@ function _render() {
       #sm-estrella {
         font-size:clamp(4rem,16vw,7rem); line-height:1;
         animation:sm-star-pulse 1.1s ease-in-out infinite;
+        /* Resplandor dorado alrededor de la estrella */
+        filter:drop-shadow(0 0 18px rgba(255,220,50,0.90))
+               drop-shadow(0 0 50px rgba(255,200,0,0.60))
+               drop-shadow(0 0 90px rgba(255,180,0,0.35));
       }
       @keyframes sm-star-pulse {
         0%,100% { transform:scale(1)    rotate(0deg);   }
@@ -300,6 +316,11 @@ function _render() {
         font-family:'Outfit',sans-serif; font-weight:900; color:#fff; text-align:center;
         font-size:clamp(1.1rem,4vw,1.7rem); line-height:1.3;
         max-width:80%; padding:0 16px;
+        /* Resplandor suave en el texto para separarlo del tablero */
+        text-shadow:
+          0 0 20px rgba(255,255,255,0.70),
+          0 0 50px rgba(200,220,255,0.45),
+          0 2px 8px rgba(0,0,0,0.60);
       }
 
       /* ── Controles ── */

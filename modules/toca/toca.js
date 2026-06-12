@@ -298,7 +298,7 @@ function _render() {
       border-radius:12px; pointer-events:none;
     }
     .tc-opcion-label {
-      font-size:clamp(.75rem,2.2vw,.95rem); font-weight:900;
+      font-size: clamp(1rem, 3vw, 1.3rem); font-weight:900;
       color:#07212e;
       text-align:center; padding:0 4px;
     }
