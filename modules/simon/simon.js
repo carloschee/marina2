@@ -215,33 +215,43 @@ function _render() {
 
       .sm-tile {
         position:relative; border-radius:20px; cursor:pointer; overflow:hidden;
-        display:flex; flex-direction:column; align-items:center; justify-content:center;
-        gap:6px; padding:8px;
-        background:rgba(255,255,255,0.07);
-        border:2px solid rgba(255,255,255,0.12);
-        transition:box-shadow .18s, background .18s, border-color .18s;
+        display:flex; flex-direction:column; align-items:stretch;
+        gap:0; padding:10px 10px 8px;
+        background:#ffffff;
+        border:2px solid rgba(255,255,255,0.18);
+        box-shadow:0 4px 14px rgba(0,0,0,0.18);
+        transition:box-shadow .18s, background .18s, border-color .18s, filter .18s;
         -webkit-tap-highlight-color:transparent;
       }
-      .sm-tile img {
-        width:auto; max-width:80%; max-height:58%; flex:0 1 auto; object-fit:contain;
-        background:#fff; border-radius:14px; padding:6px;
+      /* Wrapper que ocupa todo el espacio disponible del tile */
+      .sm-picto-wrap {
+        flex:1; min-height:0;
+        display:flex; align-items:center; justify-content:center;
+        overflow:hidden;
+      }
+      .sm-picto-wrap img {
+        width:100%; height:100%; object-fit:contain;
+        display:block;
       }
       .sm-tile .sm-tile-label {
-        font-family:'Outfit',sans-serif; font-weight:800;
-        font-size:clamp(.75rem,2.2vw,1.05rem); color:rgba(255,255,255,.85);
-        text-align:center; line-height:1;
+        flex-shrink:0;
+        font-family:'Outfit',sans-serif; font-weight:900;
+        font-size:clamp(.85rem,2.4vw,1.15rem); color:#1a1a2e;
+        text-align:center; line-height:1.2; padding-top:6px;
       }
       #sm-board.bloqueado .sm-tile { cursor:default; }
 
-      /* Iluminada */
+      /* Iluminada — fondo rosa, texto blanco */
       .sm-tile.activa {
-        background:rgba(244,63,94,0.82);
-        border-color:#fff;
-        box-shadow:0 0 0 4px rgba(244,63,94,.35), 0 10px 30px rgba(244,63,94,.5);
+        background:rgba(244,63,94,0.92);
+        border-color:rgba(255,255,255,0.80);
+        box-shadow:0 0 0 4px rgba(244,63,94,.40), 0 10px 30px rgba(244,63,94,.55);
+        filter:brightness(1.06);
       }
-      .sm-tile.activa img { filter:brightness(1.08); }
+      .sm-tile.activa .sm-tile-label { color:#fff; }
+      .sm-tile.activa .sm-picto-wrap img { filter:brightness(1.10) saturate(1.1); }
       /* Error suave */
-      .sm-tile.mal { background:rgba(251,191,36,.28); border-color:rgba(251,191,36,.85); }
+      .sm-tile.mal { background:rgba(251,191,36,.22); border-color:rgba(251,191,36,.85); }
 
       /* ── Overlay de play (sobre el tablero) ── */
       #sm-overlay {
@@ -460,7 +470,7 @@ function _renderTablero() {
     tile.className = 'sm-tile';
     tile.dataset.idx = idx;
     tile.innerHTML = `
-      <img src="${PICTO_URL(entrada.ruta_img)}" alt="${entrada.es}">
+      <div class="sm-picto-wrap"><img src="${PICTO_URL(entrada.ruta_img)}" alt="${entrada.es}"></div>
       <span class="sm-tile-label">${entrada.es}</span>`;
     tile.querySelector('img').onerror = ev => { ev.target.style.visibility = 'hidden'; };
     tile.addEventListener('click', () => _onTap(idx));
