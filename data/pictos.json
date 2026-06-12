@@ -3279,7 +3279,7 @@
     "id": 1469,
     "es": "caballito de mar",
     "en": "seahorse",
-    "ruta_img": "caballito-de-mar.png",
+    "ruta_img": "caballito-mar.png",
     "art": "el"
   },
   {
@@ -3711,9 +3711,9 @@
   },
   {
     "id": 1531,
-    "es": "pavo real",
+    "es": "pavorreal",
     "en": "peacock",
-    "ruta_img": "pavo-real.png",
+    "ruta_img": "pavorreal.png",
     "art": "el"
   },
   {
