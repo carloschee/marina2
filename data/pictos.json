@@ -1032,7 +1032,7 @@
     "id": 1148,
     "es": "quinqué",
     "en": "oil lamp",
-    "ruta_img": "quinqué.png",
+    "ruta_img": "quinque.png",
     "art": "el"
   },
   {
@@ -2115,10 +2115,10 @@
   },
   {
     "id": 1303,
-    "es": "fucsia",
-    "en": "fuchsia",
-    "ruta_img": "fucsia.png",
-    "art": ""
+    "es": "carambola",
+    "en": "starfruit",
+    "ruta_img": "carambola.png",
+    "art": "la"
   },
   {
     "id": 1304,
