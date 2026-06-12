@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-12T16:28:25.049Z",
-  "totalAssets": 1928,
+  "generado": "2026-06-12T16:35:14.853Z",
+  "totalAssets": 1930,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -1669,7 +1669,7 @@
     "./assets/pictogramas/naranja-fruta.png",
     "./assets/pictogramas/nariz.png",
     "./assets/pictogramas/natacion.png",
-    "./assets/pictogramas/nave.png",
+    "./assets/pictogramas/nave-espacial.png",
     "./assets/pictogramas/negro-color.png",
     "./assets/pictogramas/nervioso.png",
     "./assets/pictogramas/nido.png",
@@ -1814,6 +1814,7 @@
     "./assets/pictogramas/taza.png",
     "./assets/pictogramas/tejon.png",
     "./assets/pictogramas/teleferico.png",
+    "./assets/pictogramas/tener-frío.png",
     "./assets/pictogramas/tenis.png",
     "./assets/pictogramas/tiburon-ballena.png",
     "./assets/pictogramas/tiburon.png",
@@ -1841,6 +1842,7 @@
     "./assets/pictogramas/triste.png",
     "./assets/pictogramas/tubo.png",
     "./assets/pictogramas/tucan.png",
+    "./assets/pictogramas/turquesa.png",
     "./assets/pictogramas/ukelele.png",
     "./assets/pictogramas/una.png",
     "./assets/pictogramas/unicornio.png",
