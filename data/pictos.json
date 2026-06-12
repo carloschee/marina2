@@ -850,7 +850,7 @@
     "id": 1122,
     "es": "nave espacial",
     "en": "spaceship",
-    "ruta_img": "nave.png",
+    "ruta_img": "nave-espacial.png",
     "art": "la"
   },
   {
@@ -2108,9 +2108,9 @@
   },
   {
     "id": 1302,
-    "es": "índigo",
-    "en": "indigo",
-    "ruta_img": "indigo.png",
+    "es": "tener frío",
+    "en": "to be cold",
+    "ruta_img": "tener-frio.png",
     "art": ""
   },
   {
