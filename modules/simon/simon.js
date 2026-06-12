@@ -357,7 +357,7 @@ function _render() {
       #sm-modal-cat.visible { opacity:1; pointer-events:all; }
       #sm-modal-cat-box {
         width:100%; max-height:78vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
-        background:rgba(20,16,46,0.97); border-radius:24px 24px 0 0;
+        background:rgba(10,20,50,0.98); border-radius:24px 24px 0 0;
         padding:20px 16px calc(28px + env(safe-area-inset-bottom,0px));
         border-top:2px solid rgba(244,63,94,0.40);
         transform:translateY(20px); transition:transform .3s cubic-bezier(.34,1.1,.64,1);
@@ -397,7 +397,7 @@ function _render() {
       <div id="sm-top">
         <button id="sm-cat-btn">
           <span id="sm-cat-emoji">🌊</span>
-          <span id="sm-cat-nombre">Todas</span>
+          <span id="sm-cat-nombre">Todas las palabras</span>
         </button>
         <div id="sm-niveles"></div>
       </div>
@@ -730,7 +730,7 @@ function _aplicarTema(id) {
   _tema = id === null ? null : (_temas.find(t => t.id === id) || null);
   const nombre = _el.querySelector('#sm-cat-nombre');
   const emoji  = _el.querySelector('#sm-cat-emoji');
-  if (nombre) nombre.textContent = _tema ? _tema.label : 'Todas';
+  if (nombre) nombre.textContent = _tema ? _tema.label : 'Todas las palabras';
   if (emoji)  emoji.textContent  = _tema ? (_tema.emoji || '📚') : '🌊';
   _nuevaPartida();
 }

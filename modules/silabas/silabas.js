@@ -416,7 +416,7 @@ function _render() {
     <div id="sl-wrap">
       <div id="sl-top">
         <button id="sl-cat-btn">
-          <span id="sl-cat-emoji">📚</span>
+          <span id="sl-cat-emoji">🌊</span>
           <span id="sl-cat-nombre">Todas las palabras</span>
         </button>
         <span id="sl-contador"></span>
