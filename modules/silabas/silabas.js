@@ -163,7 +163,29 @@ const RE_R_SUAVE = /^r[^r]/i;
 // Regex: sílaba formada por UNA sola vocal, con o sin tilde
 const RE_VOCAL_SOLA = /^[aeiouáéíóúAEIOUÁÉÍÓÚ]$/;
 
-function _normalizarParaTTS(silaba, idx, entrada) {
+// ── Estrategia para la "r" suave en sílabas intermedias ──
+// Cambiar este valor para probar enfoques distintos sin tocar el resto:
+//   'h'     → antepone "h" muda: "ro" → "hro" (hipótesis a probar)
+//   'vocal' → antepone la última vocal de la sílaba anterior: "ro" → "ero"/"oro"/etc.
+//   'ninguna' → no aplica corrección (deja "ro" tal cual; sonará como "rro")
+const R_SUAVE_ESTRATEGIA = 'h';
+
+// Extrae la última vocal (sin tilde) de una sílaba — usada por la
+// estrategia 'vocal' de continuidad fonética para la "r" suave.
+const VOCALES = 'aeiouáéíóúAEIOUÁÉÍÓÚ';
+function _ultimaVocal(silaba) {
+  for (let i = silaba.length - 1; i >= 0; i--) {
+    if (VOCALES.includes(silaba[i])) {
+      return silaba[i].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+  }
+  return null;
+}
+
+// silabas: array completo de la palabra. idx: índice de la sílaba actual.
+function _normalizarParaTTS(silabas, idx, entrada) {
+  const silaba = silabas[idx];
+
   // (a) Override manual por palabra — máxima prioridad, sin más procesamiento
   if (entrada?.silabas_tts && entrada.silabas_tts[idx]) {
     return entrada.silabas_tts[idx];
@@ -184,10 +206,20 @@ function _normalizarParaTTS(silaba, idx, entrada) {
     return t;
   }
 
-  // (c2) r simple al inicio de sílaba intermedia → prefijo vocal "a" para
-  //      forzar la pronunciación suave (evita que suene como "rr").
-  if (RE_R_SUAVE.test(t)) {
-    t = 'a' + t;
+  // (c2) r simple al inicio de sílaba intermedia → forzar pronunciación suave.
+  //      "h" es muda en español: "ro" → "hro" no debería sonar como "rro"
+  //      ni formar una palabra reconocible distinta (a diferencia de "aro").
+  //      Si esta hipótesis no se confirma al probar en dispositivo, cambiar
+  //      R_SUAVE_ESTRATEGIA arriba a 'vocal' (continuidad con la sílaba previa)
+  //      o 'ninguna' (sin corrección, usar silabas_tts caso por caso).
+  if (RE_R_SUAVE.test(t) && idx > 0) {
+    if (R_SUAVE_ESTRATEGIA === 'h') {
+      t = 'h' + t;
+    } else if (R_SUAVE_ESTRATEGIA === 'vocal') {
+      const vocalPrevia = _ultimaVocal(silabas[idx - 1]);
+      if (vocalPrevia) t = vocalPrevia + t;
+    }
+    // 'ninguna' → no se modifica t
   }
 
   return t;
@@ -643,7 +675,7 @@ function _mostrarPalabra() {
     chip.textContent = s;
     chip.dataset.idx = i;
     chip.dataset.si = i % 6;          // paleta y forma orgánica (0–5)
-    chip.addEventListener('click', () => { haptic(8); _decirSilaba(s, i); });
+    chip.addEventListener('click', () => { haptic(8); _decirSilaba(silabas, i); });
     fila.appendChild(chip);
   });
 
@@ -664,11 +696,11 @@ function _limpiarResaltado() {
 }
 
 // Pronuncia una sola sílaba (al tocar la ficha)
-function _decirSilaba(silaba, idx) {
+function _decirSilaba(silabas, idx) {
   _detenerSecuencia();
   _resaltar(idx);
   const entrada = _lista[_idx];
-  const textoTTS = _normalizarParaTTS(silaba, idx, entrada);
+  const textoTTS = _normalizarParaTTS(silabas, idx, entrada);
   TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
   // El resaltado se limpia al iniciar otra acción; aquí lo dejamos breve.
   setTimeout(() => { _el?.querySelector(`.sl-silaba[data-idx="${idx}"]`)?.classList.remove('activa'); }, 650);
@@ -721,7 +753,7 @@ function _reproducirSecuencia() {
       return;
     }
     _resaltar(i);
-    const textoTTS = _normalizarParaTTS(silabas[i], i, entrada);
+    const textoTTS = _normalizarParaTTS(silabas, i, entrada);
     const u  = new SpeechSynthesisUtterance(textoTTS);
     u.lang   = 'es-MX';
     u.rate   = 0.7;
