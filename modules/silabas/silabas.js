@@ -128,6 +128,71 @@ function silabificar(palabraOriginal) {
   return silabas;
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+//  Normalización para TTS — reglas estrictas de pronunciación
+//
+//  Problemas detectados con el motor TTS en español:
+//   1) Sílabas de 2 letras coinciden con abreviaturas de puntos cardinales
+//      ("no" → lee "noroeste", "se" → "sudeste", etc.)
+//   2) Una vocal acentuada SOLA ("í", "é"...) se lee como nombre de letra
+//      ("i acentuada") en lugar de sonar la vocal.
+//   3) Una "r" simple al INICIO de una sílaba intermedia se pronuncia como
+//      "rr" fuerte (vibrante múltiple) en lugar de "r" suave.
+//
+//  Orden de prioridad (de mayor a menor):
+//   a) entrada.silabas_tts[i]  — override manual por palabra en pictos.json
+//   b) SILABAS_TTS_OVERRIDES   — diccionario de sílabas problemáticas conocidas
+//   c) Reglas genéricas (vocal sola / r suave)
+// ════════════════════════════════════════════════════════════════════════════
+
+// Diccionario de sílabas con pronunciación forzada — case-insensitive.
+// Se añade tilde a monosílabos que el motor confunde con abreviaturas de
+// puntos cardinales (N, S, E, O, NE, NO, SE, SO...) o con otras siglas.
+// La tilde fuerza una lectura fonética normal sin cambiar audiblemente
+// la vocal en la mayoría de motores es-MX.
+const SILABAS_TTS_OVERRIDES = {
+  'no': 'nó',
+  'se': 'sé',
+  'su': 'sú',
+  'es': 'és',
+  'os': 'ós',
+};
+
+// Regex: r simple (no rr) al inicio de sílaba — debe sonar suave
+const RE_R_SUAVE = /^r[^r]/i;
+// Regex: sílaba formada por UNA sola vocal, con o sin tilde
+const RE_VOCAL_SOLA = /^[aeiouáéíóúAEIOUÁÉÍÓÚ]$/;
+
+function _normalizarParaTTS(silaba, idx, entrada) {
+  // (a) Override manual por palabra — máxima prioridad, sin más procesamiento
+  if (entrada?.silabas_tts && entrada.silabas_tts[idx]) {
+    return entrada.silabas_tts[idx];
+  }
+
+  let t = silaba;
+  const clave = t.toLowerCase();
+
+  // (b) Diccionario de sílabas problemáticas conocidas (match exacto)
+  if (SILABAS_TTS_OVERRIDES[clave]) {
+    return SILABAS_TTS_OVERRIDES[clave];
+  }
+
+  // (c1) Vocal acentuada sola → quitar tilde para que no se lea como
+  //      "vocal acentuada" (nombre de letra) y suene la vocal simple.
+  if (RE_VOCAL_SOLA.test(t)) {
+    t = t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    return t;
+  }
+
+  // (c2) r simple al inicio de sílaba intermedia → prefijo vocal "a" para
+  //      forzar la pronunciación suave (evita que suene como "rr").
+  if (RE_R_SUAVE.test(t)) {
+    t = 'a' + t;
+  }
+
+  return t;
+}
+
 // ─── Estado ───────────────────────────────────────────────────────────────────
 let _el         = null;
 let _catalogo   = [];     // entradas de pictos.json filtradas
@@ -602,7 +667,9 @@ function _limpiarResaltado() {
 function _decirSilaba(silaba, idx) {
   _detenerSecuencia();
   _resaltar(idx);
-  TTS.speak(silaba, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
+  const entrada = _lista[_idx];
+  const textoTTS = _normalizarParaTTS(silaba, idx, entrada);
+  TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
   // El resaltado se limpia al iniciar otra acción; aquí lo dejamos breve.
   setTimeout(() => { _el?.querySelector(`.sl-silaba[data-idx="${idx}"]`)?.classList.remove('activa'); }, 650);
 }
@@ -654,7 +721,8 @@ function _reproducirSecuencia() {
       return;
     }
     _resaltar(i);
-    const u  = new SpeechSynthesisUtterance(silabas[i]);
+    const textoTTS = _normalizarParaTTS(silabas[i], i, entrada);
+    const u  = new SpeechSynthesisUtterance(textoTTS);
     u.lang   = 'es-MX';
     u.rate   = 0.7;
     u.pitch  = 1.1;
