@@ -39,9 +39,10 @@ Uso:
 
 Opciones:
   --forzar          Regenera archivos aunque ya existan
-  --solo-r-suave    Solo genera sílabas con la corrección "r" suave
-                     (más rápido para una primera prueba; el resto
-                     seguirá usando el TTS en vivo como hasta ahora)
+  --solo-corregidas Solo genera/regenera sílabas con alguna corrección
+                     (override de palabra inglesa o "r" suave). Útil
+                     para aplicar una regla nueva sin rehacer todo el
+                     catálogo.
   --seco            Dry run — muestra qué haría sin generar nada
   --concurrencia N  Peticiones simultáneas (default: 5)
 """
@@ -184,16 +185,34 @@ def silabificar(palabra_original: str) -> list[str]:
 
     return silabas
 
-# ─── Regla de "r" suave ─────────────────────────────────────────────────────
+# ─── Reglas de corrección por sílaba ─────────────────────────────────────────
+
+# Sílabas que coinciden con palabras en inglés y que es-US-News-F lee con
+# fonética inglesa en vez de española (ej. "go" -> diptongo /oʊ/, suena "wo").
+# Coincidencia EXACTA (case-insensitive), en CUALQUIER posición (idx) — a
+# diferencia de la regla "r" suave, que solo aplica a sílabas intermedias.
+# IPA forzado = lectura española estándar letra-por-letra del español.
+# Agregar aquí cualquier otra sílaba que se descubra con el mismo problema
+# (candidatas: no, so, to, do, yo, me — palabras inglesas comunes de 2 letras).
+SILABAS_OVERRIDE_FONEMA = {
+    'go': 'go',
+}
 
 def _ipa_para_silaba(silaba: str, idx: int) -> str | None:
     """
     Devuelve la transcripción IPA si la sílaba necesita corrección, o None
     si se debe sintetizar con texto plano.
 
-    "r" simple (no "rr") al inicio de una sílaba intermedia (idx>0) →
-    sustituir solo esa "r" por "ɾ" (tap), resto de la sílaba igual.
+    Prioridad:
+      1) SILABAS_OVERRIDE_FONEMA — coincidencia exacta, cualquier posición
+         (colisiones con palabras inglesas, ej. "go").
+      2) "r" simple (no "rr") al inicio de una sílaba intermedia (idx>0) →
+         sustituir solo esa "r" por "ɾ" (tap), resto de la sílaba igual.
     """
+    clave = silaba.lower()
+    if clave in SILABAS_OVERRIDE_FONEMA:
+        return SILABAS_OVERRIDE_FONEMA[clave]
+
     if idx == 0:
         return None
     if len(silaba) >= 2 and silaba[0] == 'r' and silaba[1] != 'r':
@@ -301,7 +320,7 @@ async def generar_mp3(texto, ipa, ruta: Path):
 async def main():
     parser = argparse.ArgumentParser(description="Generador de audio por sílaba para Marina 2")
     parser.add_argument("--forzar",       action="store_true")
-    parser.add_argument("--solo-r-suave", action="store_true")
+    parser.add_argument("--solo-corregidas", action="store_true")
     parser.add_argument("--seco",         action="store_true")
     parser.add_argument("--concurrencia", type=int, default=5, metavar="N")
     args = parser.parse_args()
@@ -345,7 +364,7 @@ async def main():
                 n_con_fix += 1
             else:
                 n_sin_fix += 1
-                if args.solo_r_suave:
+                if args.solo_corregidas:
                     continue  # omitir sílabas sin corrección en este modo
 
             nombre = f"{base}-{idx}"
@@ -358,8 +377,8 @@ async def main():
     print(f"   Palabras           : {len(catalogo)}")
     print(f"   Sílabas con fix 'ɾ': {n_con_fix}")
     print(f"   Sílabas sin fix    : {n_sin_fix}")
-    if args.solo_r_suave:
-        print(f"   ⚙️  --solo-r-suave: generando solo {n_con_fix} sílabas con corrección")
+    if args.solo_corregidas:
+        print(f"   ⚙️  --solo-corregidas: generando solo {n_con_fix} sílabas con corrección")
     else:
         print(f"   Total a generar    : {len(items)}")
     if args.seco:
