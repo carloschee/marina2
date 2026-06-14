@@ -168,7 +168,7 @@ const RE_VOCAL_SOLA = /^[aeiouáéíóúAEIOUÁÉÍÓÚ]$/;
 //   'h'     → antepone "h" muda: "ro" → "hro" (hipótesis a probar)
 //   'vocal' → antepone la última vocal de la sílaba anterior: "ro" → "ero"/"oro"/etc.
 //   'ninguna' → no aplica corrección (deja "ro" tal cual; sonará como "rro")
-const R_SUAVE_ESTRATEGIA = 'h';
+const R_SUAVE_ESTRATEGIA = 'vocal';
 
 // Extrae la última vocal (sin tilde) de una sílaba — usada por la
 // estrategia 'vocal' de continuidad fonética para la "r" suave.
