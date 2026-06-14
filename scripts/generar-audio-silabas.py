@@ -195,7 +195,11 @@ def silabificar(palabra_original: str) -> list[str]:
 # Agregar aquí cualquier otra sílaba que se descubra con el mismo problema
 # (candidatas: no, so, to, do, yo, me — palabras inglesas comunes de 2 letras).
 SILABAS_OVERRIDE_FONEMA = {
-    'go': 'go',
+    # Nota: el valor usa 'ɡ' (U+0261, IPA script-g), NO 'g' ASCII (U+0067).
+    # Visualmente casi idénticas, pero distintas para el parser de fonemas
+    # — mismo tipo de problema que 'ˈ' (U+02C8) vs apóstrofo ASCII con
+    # "sóplale". La clave (sílaba a buscar) sigue siendo ASCII normal.
+    'go': 'ɡo',
 }
 
 def _ipa_para_silaba(silaba: str, idx: int) -> str | None:
