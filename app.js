@@ -58,7 +58,6 @@ const _LS_TEMA_KEY = () => `${cfg('storage.prefijo', 'app')}-tema`;
   _montarHome();
   _initAreaAdultos();
   _initWakeLock();
-  _solicitarMicrofono();
 
 })();
 
@@ -523,14 +522,4 @@ function _initWakeLock() {
       navigator.serviceWorker?.controller?.postMessage({ tipo: 'heartbeat' });
     }
   }, 4 * 60 * 1000);
-}
-
-// ─────────────────────────────────────────────────────────────
-// MICRÓFONO
-// ─────────────────────────────────────────────────────────────
-function _solicitarMicrofono() {
-  if (!navigator.mediaDevices?.getUserMedia) return;
-  navigator.mediaDevices.getUserMedia({ audio: true })
-    .then(stream => stream.getTracks().forEach(t => t.stop()))
-    .catch(e => console.warn('[Mic] permiso no concedido:', e.message));
 }

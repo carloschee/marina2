@@ -14,12 +14,6 @@ const LETRAS = 'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z'.split(' 
 
 const pictoURL = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}.png`;
 
-// Pantallas angostas (≤375px, ej. iPhone SE) donde el reconocimiento de voz
-// de iOS falla con service-not-allowed. En estos dispositivos el micrófono
-// se desactiva por completo: no se muestra el botón ni se solicita acceso.
-const _micDeshabilitado = () =>
-  (window.matchMedia && window.matchMedia('(max-width: 375px)').matches);
-
 // ─── Estado ───────────────────────────────────────────────────────────────────
 let _el         = null;
 let _vocab      = null;
@@ -64,17 +58,16 @@ export async function init(container) {
 
 export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
-  _detenerMic();
   TTS.stop();
   if (_audioEl) { _audioEl.pause(); _audioEl.src = ''; _audioEl = null; }
   _el = null; _vocab = null; _pictos = {}; _letra = null;
 }
 
 export function onEnter() {}
-export function onLeave() { _detenerMic(); TTS.stop(); if (_audioEl) _audioEl.pause(); }
+export function onLeave() { TTS.stop(); if (_audioEl) _audioEl.pause(); }
 
 export async function pause() {
-  _detenerMic(); TTS.stop(); if (_audioEl) _audioEl.pause();
+  TTS.stop(); if (_audioEl) _audioEl.pause();
 }
 
 export async function resume(container) {
@@ -192,35 +185,6 @@ function _render() {
     }
     #md-btn-escucha:active { transform:scale(.96); box-shadow:0 4px 12px rgba(251,113,133,.30); }
 
-    #md-btn-mic {
-      width:52px; height:52px; border-radius:50%; border:none; cursor:pointer;
-      background:rgba(255,255,255,.10); color:#fff; font-size:1.3rem;
-      display:flex; align-items:center; justify-content:center;
-      transition:background .15s, transform .12s, box-shadow .15s; flex-shrink:0;
-    }
-    #md-btn-mic:active { transform:scale(.88); }
-    #md-btn-mic.activo {
-      background:rgba(251,113,133,.25); box-shadow:0 0 0 3px rgba(251,113,133,.50);
-      animation:mic-pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes mic-pulse {
-      0%,100% { box-shadow:0 0 0 3px rgba(251,113,133,.50); }
-      50%      { box-shadow:0 0 0 7px rgba(251,113,133,.15); }
-    }
-
-    /* ── Medidor pronunciación ── */
-    #md-medidor-wrap { margin-top:10px; display:none; flex-direction:column; gap:5px; }
-    #md-medidor-wrap.visible { display:flex; }
-    #md-medidor-label {
-      display:flex; justify-content:space-between; align-items:center;
-      font-size:.68rem; font-weight:700; letter-spacing:.08em;
-      text-transform:uppercase; color:rgba(255,255,255,.45);
-    }
-    #md-medidor-pct   { font-size:.8rem; font-weight:900; transition:color .3s; }
-    #md-medidor-track { height:8px; border-radius:99px; background:rgba(255,255,255,.10); overflow:hidden; }
-    #md-medidor-bar   { height:100%; border-radius:99px; width:0%; transition:width .25s ease, background .35s ease; }
-    #md-medidor-texto { font-size:.72rem; color:rgba(255,255,255,.35); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-height:1em; }
-
     /* ── Dots ── */
     #md-dots { display:flex; gap:5px; justify-content:center; margin-top:8px; }
     .md-dot  { height:5px; border-radius:99px; background:rgba(255,255,255,.18); transition:all .3s; }
@@ -242,24 +206,24 @@ function _render() {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
         padding: 8px 12px 12px;
-    gap: 10px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+        gap: 10px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       /* Card cuadrada y compacta */
       #md-card {
         border-radius: 20px;
         width: 100%;
-    height: 38vw;          /* ocupa ~38% del ancho — cuadrado generoso */
-    min-height: 160px;
-    max-height: 220px;
+        height: 38vw;          /* ocupa ~38% del ancho — cuadrado generoso */
+        min-height: 160px;
+        max-height: 220px;
       }
 
       #md-panel {
-    width: 100%;
-    gap: 8px;
-  }
+        width: 100%;
+        gap: 8px;
+      }
 
       #md-picto { width:65%; height:65%; }
 
@@ -273,52 +237,48 @@ function _render() {
 
       /* Retícula — mantener 9 cols pero botones más pequeños */
       #md-letras-panel {
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-  }
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
       #md-letras-panel .md-letra-btn { font-size: .9rem; }
 
       .md-letra-btn {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1;
-    font-size: clamp(0.7rem, 3.5vw, 0.9rem);
-    min-width: 0;
-  }
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+        font-size: clamp(0.7rem, 3.5vw, 0.9rem);
+        min-width: 0;
+      }
 
-  #md-controles {
-    width: 100%;
-    box-sizing: border-box;
-    gap: 6px;
-  }
+      #md-controles {
+        width: 100%;
+        box-sizing: border-box;
+        gap: 6px;
+      }
 
       /* Controles compactos */
-      .md-nav-btn { width: 44px;
-    height: 44px;
-    font-size: 1.2rem;
-    flex-shrink: 0; }
-      #md-btn-escucha { height:44px; font-size:.95rem; }
-      #md-btn-mic { width: 44px;
-    height: 44px;
-    flex-shrink: 0;font-size:1.1rem; }
+      .md-nav-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
 
-    /* Botón escucha: ocupa el espacio restante sin romperse */
-  #md-btn-escucha {
-    height: 44px;
-    font-size: 0.95rem;
-    flex: 1;
-    min-width: 0;
-  }
-}
-
+      /* Botón escucha: ocupa el espacio restante sin romperse */
+      #md-btn-escucha {
+        height: 44px;
+        font-size: 0.95rem;
+        flex: 1;
+        min-width: 0;
+      }
     }
 
     /* ════════════════════════════════════════════════════════
        SE 3 — (≤375px portrait)
-       Card más chica · Retícula 7 columnas · Sin mic
+       Card más chica · Retícula 7 columnas
     ════════════════════════════════════════════════════════ */
     @media (max-width:375px) and (orientation:portrait) {
       #md-main {
@@ -344,34 +304,33 @@ function _render() {
     }
 
     /* ── iPhone SE / pantallas muy angostas (≤390px) ─────────────── */
-@media (max-width: 390px) and (orientation: portrait) {
+    @media (max-width: 390px) and (orientation: portrait) {
 
-  #md-card {
-    height: 35vw;
-    min-height: 140px;
-  }
+      #md-card {
+        height: 35vw;
+        min-height: 140px;
+      }
 
-  #md-letras-panel {
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    padding: 8px;
-  }
+      #md-letras-panel {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+        padding: 8px;
+      }
 
-  .md-letra-btn {
-    font-size: clamp(0.62rem, 3vw, 0.8rem);
-  }
+      .md-letra-btn {
+        font-size: clamp(0.62rem, 3vw, 0.8rem);
+      }
 
-  .md-nav-btn,
-  #md-btn-mic {
-    width: 40px;
-    height: 40px;
-  }
+      .md-nav-btn {
+        width: 40px;
+        height: 40px;
+      }
 
-  #md-btn-escucha {
-    height: 40px;
-    font-size: 0.88rem;
-  }
-}
+      #md-btn-escucha {
+        height: 40px;
+        font-size: 0.88rem;
+      }
+    }
   </style>
 
   <div id="md-main">
@@ -390,16 +349,7 @@ function _render() {
         <div id="md-controles">
           <button class="md-nav-btn" id="md-prev">‹</button>
           <button id="md-btn-escucha"><span style="font-size:1.3rem">🔊</span> escucha</button>
-          <button id="md-btn-mic" title="Pronunciar">🎙️</button>
           <button class="md-nav-btn" id="md-next">›</button>
-        </div>
-        <div id="md-medidor-wrap">
-          <div id="md-medidor-label">
-            <span>Pronunciación</span>
-            <span id="md-medidor-pct">0%</span>
-          </div>
-          <div id="md-medidor-track"><div id="md-medidor-bar"></div></div>
-          <div id="md-medidor-texto">…</div>
         </div>
         <div id="md-dots"></div>
       </div>
@@ -483,9 +433,6 @@ function _actualizarVista() {
   const main  = _el.querySelector('#md-main');
   const vacio = _el.querySelector('#md-vacio');
 
-  _mejorScore = 0;
-  _actualizarBarra(0, '…');
-
   if (!_lista.length) {
     main.style.display  = 'none';
     vacio.style.display = 'flex';
@@ -558,18 +505,6 @@ function _bindEvents() {
     _hablar(texto, lang, archivo);
   });
 
-  // Micrófono: en pantallas angostas (≤375px, iPhone SE) se desactiva por
-  // completo — se oculta el botón y NO se enlaza el handler, de modo que
-  // nunca se llama a _iniciarMic() ni se solicita acceso al micrófono.
-  const btnMic = _el.querySelector('#md-btn-mic');
-  if (btnMic) {
-    if (_micDeshabilitado()) {
-      btnMic.style.display = 'none';
-    } else {
-      btnMic.addEventListener('click', _toggleMic);
-    }
-  }
-
   const picto = _el.querySelector('#md-picto');
   if (picto) _initSpringDrag(picto);
 }
@@ -602,79 +537,6 @@ function _hablar(texto, lang = 'es-MX', archivo = null) {
   _audioEl.onerror = _fallback;
   _audioEl.src     = url;
   _audioEl.play().then(() => _animar()).catch(_fallback);
-}
-
-// ─── Micrófono ────────────────────────────────────────────────────────────────
-let _recog     = null;
-let _micActivo = false;
-let _mejorScore = 0;
-
-function _toggleMic() {
-  if (_micActivo) { _detenerMic(); return; }
-  _iniciarMic();
-}
-
-function _iniciarMic() {
-  if (_micDeshabilitado()) return;  // nunca solicitar mic en pantallas angostas
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { _mostrarMedidor(0, 'Micrófono no disponible en este navegador'); return; }
-
-  _recog = new SR();
-  _recog.lang            = _lang === 'es' ? 'es-MX' : 'en-US';
-  _recog.interimResults  = true;
-  _recog.continuous      = true;
-  _recog.maxAlternatives = 3;
-
-  _mejorScore = 0;
-  _micActivo  = true;
-  _el.querySelector('#md-btn-mic')?.classList.add('activo');
-  _el.querySelector('#md-medidor-wrap')?.classList.add('visible');
-  _actualizarBarra(0, '…');
-
-  _recog.onresult = (e) => {
-    let textoMejor = '';
-    for (let i = e.resultIndex; i < e.results.length; i++) {
-      const res = e.results[i];
-      for (let a = 0; a < res.length; a++) {
-        const transcripcion = res[a].transcript.trim().toLowerCase();
-        const objetivo      = (_lista[_idx]?.texto || '').toLowerCase();
-        const score         = _similitud(transcripcion, objetivo);
-        if (score > _mejorScore) { _mejorScore = score; textoMejor = transcripcion; }
-      }
-    }
-    _actualizarBarra(_mejorScore, textoMejor);
-  };
-
-  _recog.onerror = (e) => {
-    if (e.error !== 'no-speech') { _actualizarBarra(_mejorScore, `Error: ${e.error}`); _detenerMic(); }
-  };
-
-  _recog.onend = () => { if (_micActivo) { try { _recog.start(); } catch {} } };
-
-  try { _recog.start(); } catch (e) { console.warn('[mic]', e); }
-}
-
-function _detenerMic() {
-  _micActivo = false;
-  try { _recog?.stop(); } catch {}
-  _recog = null;
-  _el?.querySelector('#md-btn-mic')?.classList.remove('activo');
-}
-
-function _actualizarBarra(score, texto) {
-  const pct   = Math.round(score * 100);
-  const color = score < 0.40 ? '#f87171' : score < 0.70 ? '#fbbf24' : '#34d399';
-  const bar   = _el.querySelector('#md-medidor-bar');
-  const pctEl = _el.querySelector('#md-medidor-pct');
-  const txtEl = _el.querySelector('#md-medidor-texto');
-  if (bar)   { bar.style.width = pct + '%'; bar.style.background = color; }
-  if (pctEl) { pctEl.textContent = pct + '%'; pctEl.style.color = color; }
-  if (txtEl)   txtEl.textContent = texto || '…';
-}
-
-function _mostrarMedidor(score, texto) {
-  _el.querySelector('#md-medidor-wrap')?.classList.add('visible');
-  _actualizarBarra(score, texto);
 }
 
 // ─── Spring drag ──────────────────────────────────────────────────────────────
@@ -770,28 +632,6 @@ function _oscurecer(hex, t) {
   const g = Math.round(((n>>8)&255)*(1-t));
   const b = Math.round((n&255)*(1-t));
   return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
-}
-
-// ─── Similitud fonética ───────────────────────────────────────────────────────
-function _similitud(a, b) {
-  const norm = s => s.toLowerCase().normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').trim();
-  const na = norm(a), nb = norm(b);
-  if (!na || !nb) return 0;
-  if (na === nb) return 1;
-  if (na.split(' ').includes(nb)) return 0.95;
-  return Math.max(0, 1 - _levenshtein(na, nb) / Math.max(na.length, nb.length));
-}
-
-function _levenshtein(a, b) {
-  const m = a.length, n = b.length;
-  const dp = Array.from({length: m+1}, (_,i) =>
-    Array.from({length: n+1}, (_,j) => i===0 ? j : j===0 ? i : 0)
-  );
-  for (let i = 1; i <= m; i++)
-    for (let j = 1; j <= n; j++)
-      dp[i][j] = a[i-1]===b[j-1] ? dp[i-1][j-1] : 1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
-  return dp[m][n];
 }
 
 function _shuffle(arr) {

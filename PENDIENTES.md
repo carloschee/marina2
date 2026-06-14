@@ -53,7 +53,6 @@
 - [x] **editar-vocabulario.py** — GUI para curar `vocabulario.json` por letra. Migra formato legacy ES/EN automáticamente.
 - [x] **README.md** — reescrito para v2.1.0: sin referencias a nombre propio, arquitectura actualizada (`temas.json`, scripts nuevos, 554 pictos, 3 dispositivos objetivo), advertencia de `lanzarConfeti()` en API del core.
 - [x] **RELEASE-2.1.0.md** — notas de release listas para GitHub.
-- [x] **Mira y di — micrófono** — visible y funcional en iPhone 13 e iPad. Desactivado en iPhone SE (oculta botón + no solicita permiso al cargar).
 - [x] **Frases — layout iPhone SE** — panel de piezas con scroll propio (`flex:1`), imágenes reducidas a 52px, botón "Elegir frase" fijo al fondo.
 - [x] **Frases — scroll en la tira** — `overflow-y: auto` en `#fr-tira-piezas`, auto-scroll al último elemento añadido.
 

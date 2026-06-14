@@ -75,9 +75,7 @@ Esta sección describe lo que ve y hace el usuario en cada módulo.
 
 ### 🔤 Mira y di
 
-Se muestra una retícula con todas las letras del abecedario. Al tocar una letra aparece un pictograma grande con la palabra. El botón **escucha** reproduce el audio, y el micrófono 🎙️ permite intentar pronunciarla.
-
-La barra de colores debajo del micrófono le muestra qué tan parecido sonó a la palabra — verde significa muy bien.
+Se muestra una retícula con todas las letras del abecedario. Al tocar una letra aparece un pictograma grande con la palabra. El botón **escucha** reproduce el audio.
 
 ![Mira y di](https://raw.githubusercontent.com/carloschee/marina2/refs/heads/main/assets/readme/mira-y-di-ui.PNG)
 
