@@ -36,6 +36,10 @@ import { Telemetry } from '../../core/telemetry.js';
 const PICTO_URL = (ruta_img) => `assets/pictogramas/${ruta_img.toLowerCase()}`;        // ruta_img ya incluye .png
 const AUDIO_URL = (ruta_img, lang = 'es') =>
   `assets/audio/${lang}/${ruta_img.replace(/\.png$/i, '').toLowerCase()}.mp3`;
+// Audio pregenerado por sílaba (generar-audio-silabas.py). idx es el índice
+// dentro del array que devuelve silabificar(). Solo existe para 'es'.
+const SILABA_AUDIO_URL = (ruta_img, idx) =>
+  `assets/audio/es/silabas/${ruta_img.replace(/\.png$/i, '').toLowerCase()}-${idx}.mp3`;
 
 // ════════════════════════════════════════════════════════════════════════════
 //  Silabificador de español (reglas estándar RAE/uso común)
@@ -695,13 +699,28 @@ function _limpiarResaltado() {
   _el?.querySelectorAll('.sl-silaba.activa').forEach(c => c.classList.remove('activa'));
 }
 
-// Pronuncia una sola sílaba (al tocar la ficha)
+// Pronuncia una sola sílaba (al tocar la ficha).
+// Prioridad: MP3 pregenerado (generar-audio-silabas.py) → TTS normalizado.
 function _decirSilaba(silabas, idx) {
   _detenerSecuencia();
   _resaltar(idx);
   const entrada = _lista[_idx];
-  const textoTTS = _normalizarParaTTS(silabas, idx, entrada);
-  TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
+
+  if (!_audioEl) { _audioEl = document.createElement('audio'); _audioEl.preload = 'none'; }
+  TTS.stop();
+  try { _audioEl.pause(); } catch {}
+  _audioEl.onended = null;
+
+  let usado = false;
+  const fallback = () => {
+    if (usado) return; usado = true;
+    const textoTTS = _normalizarParaTTS(silabas, idx, entrada);
+    TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
+  };
+  _audioEl.onerror = fallback;
+  _audioEl.src = SILABA_AUDIO_URL(entrada.ruta_img, idx);
+  _audioEl.play().catch(fallback);
+
   // El resaltado se limpia al iniciar otra acción; aquí lo dejamos breve.
   setTimeout(() => { _el?.querySelector(`.sl-silaba[data-idx="${idx}"]`)?.classList.remove('activa'); }, 650);
 }
@@ -717,6 +736,7 @@ function _reproducirPalabra() {
   TTS.stop();
   _audioEl.pause();
   _audioEl.onerror = null;
+  _audioEl.onended = null;
 
   let usado = false;
   const fallback = () => {
@@ -729,20 +749,21 @@ function _reproducirPalabra() {
 }
 
 // Lee sílaba por sílaba, resaltando cada una, y cierra con la palabra completa.
-// Encadena con onend (la API de TTS hace synth.cancel() en cada speak, así que
-// no podemos usarla en serie; usamos speechSynthesis directo con la voz premium
-// que selecciona TTS.getVoice()).
+// Cada sílaba reproduce su MP3 pregenerado (generar-audio-silabas.py); si falta
+// el archivo, cae a TTS normalizado solo para esa sílaba. Se encadena con
+// onended/onerror del <audio> compartido — no usa speechSynthesis en serie.
 function _reproducirSecuencia() {
   const entrada = _lista[_idx];
   if (!entrada) return;
 
-  const synth = window.speechSynthesis;
-  if (!synth) { _reproducirPalabra(); return; }
-
   _detenerSecuencia();
   const token = ++_seqToken;
   const silabas = silabificar(entrada.es);
-  const voz = TTS.getVoice('es-MX');
+
+  if (!_audioEl) { _audioEl = document.createElement('audio'); _audioEl.preload = 'none'; }
+  TTS.stop();
+  try { _audioEl.pause(); } catch {}
+  try { window.speechSynthesis?.cancel(); } catch {}
 
   let i = 0;
   const siguiente = () => {
@@ -753,18 +774,36 @@ function _reproducirSecuencia() {
       return;
     }
     _resaltar(i);
-    const textoTTS = _normalizarParaTTS(silabas, i, entrada);
-    const u  = new SpeechSynthesisUtterance(textoTTS);
-    u.lang   = 'es-MX';
-    u.rate   = 0.7;
-    u.pitch  = 1.1;
-    if (voz) u.voice = voz;
-    u.onend   = () => { if (token === _seqToken) { i++; setTimeout(siguiente, 220); } };
-    u.onerror = () => { if (token === _seqToken) { i++; setTimeout(siguiente, 220); } };
-    synth.speak(u);
+
+    const idxActual = i;
+    let avanzado = false;
+    const avanzar = () => {
+      if (avanzado || token !== _seqToken) return;
+      avanzado = true;
+      i++;
+      setTimeout(siguiente, 220);
+    };
+
+    // Fallback TTS solo para esta sílaba si su MP3 no existe.
+    const fallbackTTS = () => {
+      const synth = window.speechSynthesis;
+      if (!synth) { avanzar(); return; }
+      const textoTTS = _normalizarParaTTS(silabas, idxActual, entrada);
+      const voz = TTS.getVoice('es-MX');
+      const u = new SpeechSynthesisUtterance(textoTTS);
+      u.lang = 'es-MX'; u.rate = 0.7; u.pitch = 1.1;
+      if (voz) u.voice = voz;
+      u.onend = avanzar;
+      u.onerror = avanzar;
+      try { synth.speak(u); } catch { avanzar(); }
+    };
+
+    _audioEl.onended = avanzar;
+    _audioEl.onerror = fallbackTTS;
+    _audioEl.src = SILABA_AUDIO_URL(entrada.ruta_img, idxActual);
+    _audioEl.play().catch(fallbackTTS);
   };
 
-  try { synth.cancel(); } catch {}
   siguiente();
 }
 
