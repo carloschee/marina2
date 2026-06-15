@@ -253,11 +253,44 @@ SILABAS_AUDIO_FIJO = {
 #
 # Todas las entradas validadas empíricamente, voz es-US-News-F:
 SILABAS_OVERRIDE = {
+    # ── Lote 1 ──
     'gre': ('xgre', 'gɾe'),   # tigre — deletreaba; gibberish+phoneme funciona
     'hue': ('hue',  'we'),    # huevo — sonaba "jue"; phoneme con texto original funciona
     'ho':  ('o',    None),    # hoja  — sonaba "jo"; quitar "h" (sin phoneme) funciona
     'rra': ('rrá',  None),    # gorra — deletreaba; respelling con tilde (sin phoneme) funciona
     'to':  ('xto',  'to'),    # instrumento — sonaba "tu"; gibberish+phoneme funciona
+
+    # ── Lote 2: A) deletrea -> respelling (con o sin tilde) ──
+    'lla':  ('llá', None),    # ardilla/estrella/silla/llave — deletreaba
+    'ba':   ('bá',  None),    # ballena/escoba/guayaba — deletreaba
+    'bró':  ('bro', None),    # brócoli — deletreaba "be-ere-o-con-acento..."
+    'lli':  ('llí', None),    # gallina — deletreaba
+    'rrin': ('rrín', None),   # ornitorrinco — deletreaba
+    'ló':   ('lo',  None),    # xilófono/zoológico — deletreaba "ele-o-con-acento"
+    'cu':   ('cú',  None),    # curamos/maracuyá — deletreaba
+
+    # ── Lote 2: B) lectura en inglés -> gibberish + phoneme ──
+    'be':  ('xbe',  'be'),    # abeja/nube/bomberos — sonaba "bi" (inglés)
+    'jo':  ('xjo',  'xo'),    # ajo/ojo — sonaba "yo" (inglés)
+    'cue': ('xcue', 'kwe'),   # escuela — sonaba "kiu" (inglés)
+    'ju':  ('xju',  'xu'),    # juguete/jugo — sonaba "yu" (inglés)
+    'jar': ('xjar', 'xar'),   # jardín — sonaba "jar" (inglés)
+    'gar': ('xgar', 'gar'),   # lagarto — lectura inglesa
+    'je':  ('xje',  'xe'),    # tijeras — sonaba "ye" (inglés)
+    'tie': ('xtie', 'tje'),   # tienes — lectura inglesa
+    'sue': ('xsue', 'swe'),   # sueño — lectura inglesa
+
+    # ── Lote 2: C) "h" muda -> quitar la h ──
+    'ham': ('am', None),      # hambre — h muda leída en inglés
+    'hi':  ('i',  None),      # higo — h muda leída en inglés
+
+    # ── Lote 2: D) casos especiales ──
+    'vol': ('xvol', 'bol'),   # volcán — sonaba "volume" (v=b en español)
+    'xo':  ('so',   None),    # xochimilco — deletreaba, "x" náhuatl = /s/
+    'rue': ('xrue', 'rwe'),   # rueda — perdía el diptongo, sonaba "ru"
+
+    # NOTA: 'bé' (bebé), 'yak' (kayak) y 'dra' (dragón) siguen pendientes —
+    # los candidatos probados no funcionaron, en iteración (ver test-silabas-lote2b.py)
 }
 
 def _resolucion_silaba(silaba: str, idx: int):
