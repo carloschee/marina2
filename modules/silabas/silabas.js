@@ -786,22 +786,24 @@ function _reproducirSecuencia() {
 
     // Fallback TTS solo para esta sílaba si su MP3 no existe.
     // Guardia: onerror y play().catch() pueden disparar ambos para el mismo
-    // archivo faltante — sin esto, synth.speak() se llamaba dos veces y la
-    // sílaba se escuchaba repetida.
+    // archivo faltante — sin esto, el fallback se ejecutaba dos veces.
+    //
+    // Usa TTS.speak() (el mismo wrapper que ya funciona en _decirSilaba),
+    // en vez de un SpeechSynthesisUtterance crudo — ese enfoque no producía
+    // audio ni disparaba onend/onerror en este contexto (la secuencia se
+    // quedaba trabada). TTS.speak() es "fire-and-forget" (no avisa cuándo
+    // termina), así que el avance al siguiente sílaba se hace por
+    // temporizador, estimado según la longitud del texto.
     let fallbackUsado = false;
     const fallbackTTS = () => {
       if (fallbackUsado) return;
       fallbackUsado = true;
-      const synth = window.speechSynthesis;
-      if (!synth) { avanzar(); return; }
       const textoTTS = _normalizarParaTTS(silabas, idxActual, entrada);
-      const voz = TTS.getVoice('es-MX');
-      const u = new SpeechSynthesisUtterance(textoTTS);
-      u.lang = 'es-MX'; u.rate = 0.7; u.pitch = 1.1;
-      if (voz) u.voice = voz;
-      u.onend = avanzar;
-      u.onerror = avanzar;
-      try { synth.speak(u); } catch { avanzar(); }
+      try {
+        TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
+      } catch {}
+      const duracion = Math.max(700, textoTTS.length * 150);
+      setTimeout(avanzar, duracion);
     };
 
     _audioEl.onended = avanzar;
@@ -826,6 +828,19 @@ function _detenerTodo() {
 
 // ─── Cambio de idioma (pill ES/EN) ──────────────────────────────────────────────
 function _onLangChange(e) {
+  const cfg = e.detail?.langConfig || window._langConfig;
+  if (!cfg) return;
+  const nuevo = (cfg.es && cfg.en) ? 'ambos' : cfg.en ? 'en' : 'es';
+  if (nuevo === _lang) return;
+  _lang = nuevo;
+  // El silabeo se mantiene en español; solo cambia la traducción de apoyo.
+  const entrada = _lista[_idx];
+  const en = _el?.querySelector('#sl-palabra-en');
+  if (en && entrada) {
+    en.textContent = (_lang !== 'es' && entrada.en) ? entrada.en : '';
+    en.style.display = en.textContent ? 'block' : 'none';
+  }
+}
   const cfg = e.detail?.langConfig || window._langConfig;
   if (!cfg) return;
   const nuevo = (cfg.es && cfg.en) ? 'ambos' : cfg.en ? 'en' : 'es';
