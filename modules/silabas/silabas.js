@@ -841,16 +841,3 @@ function _onLangChange(e) {
     en.style.display = en.textContent ? 'block' : 'none';
   }
 }
-  const cfg = e.detail?.langConfig || window._langConfig;
-  if (!cfg) return;
-  const nuevo = (cfg.es && cfg.en) ? 'ambos' : cfg.en ? 'en' : 'es';
-  if (nuevo === _lang) return;
-  _lang = nuevo;
-  // El silabeo se mantiene en español; solo cambia la traducción de apoyo.
-  const entrada = _lista[_idx];
-  const en = _el?.querySelector('#sl-palabra-en');
-  if (en && entrada) {
-    en.textContent = (_lang !== 'es' && entrada.en) ? entrada.en : '';
-    en.style.display = en.textContent ? 'block' : 'none';
-  }
-}
