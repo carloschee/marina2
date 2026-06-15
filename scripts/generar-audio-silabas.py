@@ -289,8 +289,10 @@ SILABAS_OVERRIDE = {
     'xo':  ('so',   None),    # xochimilco — deletreaba, "x" náhuatl = /s/
     'rue': ('xrue', 'rwe'),   # rueda — perdía el diptongo, sonaba "ru"
 
-    # NOTA: 'bé' (bebé), 'yak' (kayak) y 'dra' (dragón) siguen pendientes —
-    # los candidatos probados no funcionaron, en iteración (ver test-silabas-lote2b.py)
+    # ── Lote 2b: casos que requirieron una segunda iteración ──
+    'bé':  ('xbe',  'be'),    # bebé — mismo patrón que 'be' (es la misma sílaba con tilde)
+    'yak': ('xyak', 'jak'),   # kayak — gibberish+phoneme /jak/ (no /ʝak/, y sin 'xiak')
+    'dra': ('drá',  None),    # dragón — respelling con tilde (sin phoneme); evita colisión con "Dra."
 }
 
 def _resolucion_silaba(silaba: str, idx: int):
