@@ -22,11 +22,31 @@ Regla de corrección aplicada (validada empíricamente):
   sintetizan con texto plano — Google ya las pronuncia correctamente
   (confirmado también para vocales acentuadas solas, ej. "í").
 
-Overrides manuales (casos excepcionales):
-  data/silabas-ipa-overrides.json (opcional), formato:
-    { "<ruta_img_sin_.png>-<idx>": "<ipa>" }
-  ej.: { "arbol-0": "ar" }  ← si alguna sílaba específica necesita ajuste
-  manual que la regla general no cubre. Tiene prioridad sobre la regla.
+Overrides manuales (casos excepcionales, por palabra+posición específica):
+  data/silabas-ipa-overrides.json (opcional), formato por entrada:
+    "<ruta_img_sin_.png>-<idx>": "<ipa>"              ← legacy: solo ipa,
+                                                          texto = la sílaba misma
+    "<ruta_img_sin_.png>-<idx>": ["<texto>", "<ipa_o_null>"]  ← formato completo:
+                                                          controla texto E ipa
+  ej.: { "arbol-0": "ar" }
+       { "tigre-1": ["xgre", "gɾe"] }
+  Para cuando una sílaba específica necesita un ajuste que la regla general
+  (SILABAS_OVERRIDE) no cubre. Tiene prioridad sobre SILABAS_OVERRIDE.
+
+Reglas generales por sílaba (SILABAS_OVERRIDE, aplican en cualquier palabra):
+  Validado empíricamente con es-US-News-F — varias sílabas colisionan con
+  palabras inglesas (lectura con fonética inglesa) o con cómo el motor
+  procesa "h" muda / clústers consonánticos al inicio:
+    'gre' (tigre) → <phoneme ph="gɾe">xgre</phoneme>  (gibberish+fonema)
+    'hue' (huevo) → <phoneme ph="we">hue</phoneme>    (fonema, texto original)
+    'ho'  (hoja)  → "o" plano                          (quitar "h" muda)
+    'rra' (gorra) → "rrá" plano                        (respelling con tilde)
+    'to'  (instrumento) → <phoneme ph="to">xto</phoneme>  (gibberish+fonema)
+    'go'  (lago)  → ver SILABAS_AUDIO_FIJO (ningún <phoneme> funcionó)
+  Patrón "gibberish+fonema": cuando el texto original de la sílaba coincide
+  con el lexicón del motor (palabra inglesa o entrada especial), <phoneme>
+  con ese texto es ignorado — pero <phoneme> SÍ se aplica si el texto
+  interno no coincide con nada del lexicón (se usa un texto sin sentido).
 
 Audio fijo (sílabas que ningún <phoneme> corrige con esta voz):
   scripts/audio-fijo/<archivo>.mp3 — audio grabado/aislado por separado,
@@ -218,33 +238,50 @@ SILABAS_AUDIO_FIJO = {
     'go': 'silaba-GO.mp3',
 }
 
-SILABAS_OVERRIDE_FONEMA = {
-    # (sin entradas activas por ahora)
+# Overrides combinados: sílaba (lowercase) -> (texto_a_enviar, ipa_o_None)
+#
+#   - ipa is None  → sintetizar texto_a_enviar como texto plano
+#   - ipa is str   → <phoneme alphabet="ipa" ph="{ipa}">{texto_a_enviar}</phoneme>
+#
+# texto_a_enviar puede ser:
+#   - la sílaba misma (cuando solo se necesita el fonema)
+#   - una respelling en texto plano (cuando NO se necesita fonema, ej. "rrá")
+#   - texto gibberish (cuando el fonema funciona pero el texto original
+#     dispara colisión de lexicón — mismo patrón que "go", validado para
+#     "gre" y "to": <phoneme ph="..."> con texto interno gibberish SÍ
+#     funciona; con el texto original ("gre"/"to") no)
+#
+# Todas las entradas validadas empíricamente, voz es-US-News-F:
+SILABAS_OVERRIDE = {
+    'gre': ('xgre', 'gɾe'),   # tigre — deletreaba; gibberish+phoneme funciona
+    'hue': ('hue',  'we'),    # huevo — sonaba "jue"; phoneme con texto original funciona
+    'ho':  ('o',    None),    # hoja  — sonaba "jo"; quitar "h" (sin phoneme) funciona
+    'rra': ('rrá',  None),    # gorra — deletreaba; respelling con tilde (sin phoneme) funciona
+    'to':  ('xto',  'to'),    # instrumento — sonaba "tu"; gibberish+phoneme funciona
 }
 
-def _ipa_para_silaba(silaba: str, idx: int):
+def _resolucion_silaba(silaba: str, idx: int):
     """
-    Devuelve:
-      - str   → transcripción IPA para <phoneme>
-      - None  → sintetizar con texto plano, sin corrección
+    Devuelve (texto_a_enviar, ipa_o_None) para sintetizar esta sílaba.
 
     (Las sílabas en SILABAS_AUDIO_FIJO se manejan aparte, por copia de
     archivo — no llegan a esta función.)
 
     Prioridad:
-      1) SILABAS_OVERRIDE_FONEMA — coincidencia exacta, cualquier posición.
+      1) SILABAS_OVERRIDE — coincidencia exacta, cualquier posición.
       2) "r" simple (no "rr") al inicio de una sílaba intermedia (idx>0) →
-         sustituir solo esa "r" por "ɾ" (tap), resto de la sílaba igual.
+         <phoneme ph="ɾ..."> sustituyendo solo la "r" inicial, texto =
+         la sílaba misma.
+      3) Sin corrección: (silaba, None).
     """
     clave = silaba.lower()
-    if clave in SILABAS_OVERRIDE_FONEMA:
-        return SILABAS_OVERRIDE_FONEMA[clave]
+    if clave in SILABAS_OVERRIDE:
+        return SILABAS_OVERRIDE[clave]
 
-    if idx == 0:
-        return None
-    if len(silaba) >= 2 and silaba[0] == 'r' and silaba[1] != 'r':
-        return 'ɾ' + silaba[1:]
-    return None
+    if idx > 0 and len(silaba) >= 2 and silaba[0] == 'r' and silaba[1] != 'r':
+        return (silaba, 'ɾ' + silaba[1:])
+
+    return (silaba, None)
 
 # ─── Overrides manuales ──────────────────────────────────────────────────────
 
@@ -395,18 +432,25 @@ async def main():
 
             clave_override = f"{base}-{idx}"
             if clave_override in overrides:
-                ipa = overrides[clave_override]
+                val = overrides[clave_override]
+                if isinstance(val, str):
+                    # Formato legacy: solo ipa, texto = la sílaba misma.
+                    texto_envio, ipa = silaba, val
+                else:
+                    # Formato [texto, ipa_o_null]
+                    texto_envio, ipa = val[0], val[1]
             else:
-                ipa = _ipa_para_silaba(silaba, idx)
+                texto_envio, ipa = _resolucion_silaba(silaba, idx)
 
-            if ipa:
+            corregida = (ipa is not None) or (texto_envio != silaba)
+            if corregida:
                 n_con_fix += 1
             else:
                 n_sin_fix += 1
                 if args.solo_corregidas:
                     continue  # omitir sílabas sin corrección en este modo
 
-            items.append((nombre, silaba, ipa))
+            items.append((nombre, texto_envio, ipa))
 
     # ── Calcular pendientes (lo que realmente falta generar con TTS) ─────────
     pendientes = []
