@@ -765,6 +765,23 @@ function _reproducirSecuencia() {
   try { _audioEl.pause(); } catch {}
   try { window.speechSynthesis?.cancel(); } catch {}
 
+  // "Desbloquear" speechSynthesis DENTRO del gesto del usuario (este click).
+  // El fallback TTS de sílabas omitidas (ej. "go") se dispara después, de
+  // forma asíncrona, vía onerror del <audio> — fuera del gesto original.
+  // En iOS/Safari, speechSynthesis.speak() llamado fuera de un gesto de
+  // usuario no produce sonido (sin error visible: queda en silencio).
+  // Hablar y cancelar inmediatamente un utterance casi silencioso aquí
+  // habilita la sesión de TTS para el resto de la secuencia.
+  try {
+    const synth = window.speechSynthesis;
+    if (synth) {
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0;
+      synth.speak(u);
+      synth.cancel();
+    }
+  } catch {}
+
   let i = 0;
   const siguiente = () => {
     if (!_el || token !== _seqToken) return;            // secuencia obsoleta → abortar
@@ -799,11 +816,21 @@ function _reproducirSecuencia() {
       if (fallbackUsado) return;
       fallbackUsado = true;
       const textoTTS = _normalizarParaTTS(silabas, idxActual, entrada);
-      try {
-        TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
-      } catch {}
       const duracion = Math.max(700, textoTTS.length * 150);
-      setTimeout(avanzar, duracion);
+
+      // Chrome: speechSynthesis.speak() llamado en el mismo ciclo que un
+      // evento de error/cancel de <audio> a menudo no produce audio (sin
+      // error, sin sonido). Limpiar el <audio> que quedó en estado de error
+      // y dar un pequeño respiro antes de hablar evita el silencio.
+      try { _audioEl.removeAttribute('src'); _audioEl.load(); } catch {}
+      setTimeout(() => {
+        try {
+          window.speechSynthesis?.resume();
+          TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
+        } catch {}
+      }, 80);
+
+      setTimeout(avanzar, duracion + 80);
     };
 
     _audioEl.onended = avanzar;
