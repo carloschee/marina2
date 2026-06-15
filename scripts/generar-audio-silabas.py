@@ -192,28 +192,40 @@ def silabificar(palabra_original: str) -> list[str]:
 # Coincidencia EXACTA (case-insensitive), en CUALQUIER posición (idx) — a
 # diferencia de la regla "r" suave, que solo aplica a sílabas intermedias.
 # IPA forzado = lectura española estándar letra-por-letra del español.
-# Agregar aquí cualquier otra sílaba que se descubra con el mismo problema
-# (candidatas: no, so, to, do, yo, me — palabras inglesas comunes de 2 letras).
-SILABAS_OVERRIDE_FONEMA = {
-    # Nota: el valor usa 'ɡ' (U+0261, IPA script-g), NO 'g' ASCII (U+0067).
-    # Visualmente casi idénticas, pero distintas para el parser de fonemas
-    # — mismo tipo de problema que 'ˈ' (U+02C8) vs apóstrofo ASCII con
-    # "sóplale". La clave (sílaba a buscar) sigue siendo ASCII normal.
-    'go': 'ɡo',
+# Sílabas que NINGUNA combinación de <phoneme> renderiza correctamente con
+# esta voz (validado empíricamente: <phoneme ph="ɡo"> con CUALQUIER texto
+# interno —incluso gibberish sin relación con "go"— produce un sonido
+# percibido como "wo"). Es una limitación de la voz para esa combinación
+# fonética en aislamiento, no un problema de sintaxis SSML.
+#
+# Para estas sílabas NO se genera MP3 (y se borra si existía de una corrida
+# previa) — silabas.js cae a su respaldo de TTS del navegador
+# (_normalizarParaTTS), que usa un motor/voz distinto donde la colisión con
+# la palabra inglesa "go" no aplica.
+SILABAS_OMITIR = {
+    'go',
 }
 
-def _ipa_para_silaba(silaba: str, idx: int) -> str | None:
+SILABAS_OVERRIDE_FONEMA = {
+    # (sin entradas activas por ahora — "go" se maneja vía SILABAS_OMITIR)
+}
+
+def _ipa_para_silaba(silaba: str, idx: int):
     """
-    Devuelve la transcripción IPA si la sílaba necesita corrección, o None
-    si se debe sintetizar con texto plano.
+    Devuelve:
+      - 'OMITIR'  → no generar MP3 para esta sílaba (ver SILABAS_OMITIR)
+      - str       → transcripción IPA para <phoneme>
+      - None      → sintetizar con texto plano, sin corrección
 
     Prioridad:
-      1) SILABAS_OVERRIDE_FONEMA — coincidencia exacta, cualquier posición
-         (colisiones con palabras inglesas, ej. "go").
-      2) "r" simple (no "rr") al inicio de una sílaba intermedia (idx>0) →
+      1) SILABAS_OMITIR — coincidencia exacta, cualquier posición.
+      2) SILABAS_OVERRIDE_FONEMA — coincidencia exacta, cualquier posición.
+      3) "r" simple (no "rr") al inicio de una sílaba intermedia (idx>0) →
          sustituir solo esa "r" por "ɾ" (tap), resto de la sílaba igual.
     """
     clave = silaba.lower()
+    if clave in SILABAS_OMITIR:
+        return 'OMITIR'
     if clave in SILABAS_OVERRIDE_FONEMA:
         return SILABAS_OVERRIDE_FONEMA[clave]
 
@@ -348,7 +360,7 @@ async def main():
 
     # ── Construir la lista de items: (nombre_archivo, texto, ipa) ────────────
     items = []
-    n_con_fix = n_sin_fix = 0
+    n_con_fix = n_sin_fix = n_omitidas = 0
     for e in catalogo:
         ruta_img = e.get("ruta_img")
         es       = e.get("es")
@@ -364,6 +376,18 @@ async def main():
             else:
                 ipa = _ipa_para_silaba(silaba, idx)
 
+            nombre = f"{base}-{idx}"
+
+            if ipa == 'OMITIR':
+                n_omitidas += 1
+                ruta_existente = DIR_SILABAS / (nombre + ".mp3")
+                if ruta_existente.exists():
+                    if args.seco:
+                        print(f"  🗑  (dry run) borraría {ruta_existente.relative_to(RAIZ)}")
+                    else:
+                        ruta_existente.unlink()
+                continue  # no se genera — silabas.js usa su respaldo TTS
+
             if ipa:
                 n_con_fix += 1
             else:
@@ -371,7 +395,6 @@ async def main():
                 if args.solo_corregidas:
                     continue  # omitir sílabas sin corrección en este modo
 
-            nombre = f"{base}-{idx}"
             items.append((nombre, silaba, ipa))
 
     # ── Resumen inicial ───────────────────────────────────────────────────────
@@ -381,6 +404,8 @@ async def main():
     print(f"   Palabras           : {len(catalogo)}")
     print(f"   Sílabas con fix 'ɾ': {n_con_fix}")
     print(f"   Sílabas sin fix    : {n_sin_fix}")
+    if n_omitidas:
+        print(f"   Sílabas omitidas   : {n_omitidas}  (usan respaldo TTS del navegador — ver SILABAS_OMITIR)")
     if args.solo_corregidas:
         print(f"   ⚙️  --solo-corregidas: generando solo {n_con_fix} sílabas con corrección")
     else:
