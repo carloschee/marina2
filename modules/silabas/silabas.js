@@ -785,7 +785,13 @@ function _reproducirSecuencia() {
     };
 
     // Fallback TTS solo para esta sílaba si su MP3 no existe.
+    // Guardia: onerror y play().catch() pueden disparar ambos para el mismo
+    // archivo faltante — sin esto, synth.speak() se llamaba dos veces y la
+    // sílaba se escuchaba repetida.
+    let fallbackUsado = false;
     const fallbackTTS = () => {
+      if (fallbackUsado) return;
+      fallbackUsado = true;
       const synth = window.speechSynthesis;
       if (!synth) { avanzar(); return; }
       const textoTTS = _normalizarParaTTS(silabas, idxActual, entrada);
