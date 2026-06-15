@@ -28,12 +28,23 @@ Overrides manuales (casos excepcionales):
   ej.: { "arbol-0": "ar" }  ← si alguna sílaba específica necesita ajuste
   manual que la regla general no cubre. Tiene prioridad sobre la regla.
 
+Audio fijo (sílabas que ningún <phoneme> corrige con esta voz):
+  scripts/audio-fijo/<archivo>.mp3 — audio grabado/aislado por separado,
+  que se COPIA (sin TTS) a cada {base}-{idx}.mp3 donde aparezca esa sílaba.
+  Mapeo en SILABAS_AUDIO_FIJO, ej.: {"go": "silaba-GO.mp3"}.
+  Validado para "go": <phoneme ph="ɡo"> con CUALQUIER texto interno (incluso
+  gibberish) sigue sonando "wo" con es-US-News-F — limitación de la voz
+  para esa combinación fonética en aislamiento, no corregible por SSML.
+  Si falta el archivo de origen, esas sílabas se omiten (con aviso) sin
+  afectar el resto de la corrida.
+
 Salida:
   assets/audio/es/silabas/{ruta_img sin .png}-{idx}.mp3
 
 Uso:
   pip install requests
-  export GOOGLE_TTS_API_KEY="tu-api-key"
+  export GOOGLE_TTS_API_KEY="tu-api-key"     # solo necesaria si hay sílabas
+                                              # nuevas que requieran TTS
   python scripts/generar-audio-silabas.py --seco     # vista previa
   python scripts/generar-audio-silabas.py            # generar
 
@@ -51,6 +62,7 @@ import asyncio
 import base64
 import json
 import os
+import shutil
 import sys
 import argparse
 import time
@@ -192,40 +204,39 @@ def silabificar(palabra_original: str) -> list[str]:
 # Coincidencia EXACTA (case-insensitive), en CUALQUIER posición (idx) — a
 # diferencia de la regla "r" suave, que solo aplica a sílabas intermedias.
 # IPA forzado = lectura española estándar letra-por-letra del español.
-# Sílabas que NINGUNA combinación de <phoneme> renderiza correctamente con
-# esta voz (validado empíricamente: <phoneme ph="ɡo"> con CUALQUIER texto
-# interno —incluso gibberish sin relación con "go"— produce un sonido
-# percibido como "wo"). Es una limitación de la voz para esa combinación
-# fonética en aislamiento, no un problema de sintaxis SSML.
+# Sílabas para las que ninguna combinación de <phoneme> renderiza el sonido
+# correcto con esta voz (validado empíricamente para "go": <phoneme ph="ɡo">
+# con CUALQUIER texto interno —incluso gibberish— suena "wo"). En vez de
+# sintetizar con Google, se COPIA un archivo de audio fijo (aislado/grabado
+# por separado) a cada posición {base}-{idx}.mp3 donde aparezca la sílaba.
 #
-# Para estas sílabas NO se genera MP3 (y se borra si existía de una corrida
-# previa) — silabas.js cae a su respaldo de TTS del navegador
-# (_normalizarParaTTS), que usa un motor/voz distinto donde la colisión con
-# la palabra inglesa "go" no aplica.
-SILABAS_OMITIR = {
-    'go',
+# Los archivos de origen viven en scripts/audio-fijo/. Si el archivo no
+# existe ahí, el script avisa y omite esas sílabas (no rompe el resto).
+DIR_AUDIO_FIJO = Path(__file__).parent / "audio-fijo"
+
+SILABAS_AUDIO_FIJO = {
+    'go': 'silaba-GO.mp3',
 }
 
 SILABAS_OVERRIDE_FONEMA = {
-    # (sin entradas activas por ahora — "go" se maneja vía SILABAS_OMITIR)
+    # (sin entradas activas por ahora)
 }
 
 def _ipa_para_silaba(silaba: str, idx: int):
     """
     Devuelve:
-      - 'OMITIR'  → no generar MP3 para esta sílaba (ver SILABAS_OMITIR)
-      - str       → transcripción IPA para <phoneme>
-      - None      → sintetizar con texto plano, sin corrección
+      - str   → transcripción IPA para <phoneme>
+      - None  → sintetizar con texto plano, sin corrección
+
+    (Las sílabas en SILABAS_AUDIO_FIJO se manejan aparte, por copia de
+    archivo — no llegan a esta función.)
 
     Prioridad:
-      1) SILABAS_OMITIR — coincidencia exacta, cualquier posición.
-      2) SILABAS_OVERRIDE_FONEMA — coincidencia exacta, cualquier posición.
-      3) "r" simple (no "rr") al inicio de una sílaba intermedia (idx>0) →
+      1) SILABAS_OVERRIDE_FONEMA — coincidencia exacta, cualquier posición.
+      2) "r" simple (no "rr") al inicio de una sílaba intermedia (idx>0) →
          sustituir solo esa "r" por "ɾ" (tap), resto de la sílaba igual.
     """
     clave = silaba.lower()
-    if clave in SILABAS_OMITIR:
-        return 'OMITIR'
     if clave in SILABAS_OVERRIDE_FONEMA:
         return SILABAS_OVERRIDE_FONEMA[clave]
 
@@ -342,11 +353,6 @@ async def main():
     args = parser.parse_args()
     conc = max(1, min(args.concurrencia, 20))
 
-    if not args.seco and not GOOGLE_API_KEY:
-        print("❌  Falta la variable de entorno GOOGLE_TTS_API_KEY.")
-        print("   Ver scripts/GUIA-GOOGLE-TTS.md.")
-        sys.exit(1)
-
     if not PICTOS_JSON.exists():
         print(f"❌  No existe {PICTOS_JSON}")
         sys.exit(1)
@@ -359,8 +365,11 @@ async def main():
         print(f"📖  {len(overrides)} override(s) de sílaba cargados desde {OVERRIDES_JSON.name}")
 
     # ── Construir la lista de items: (nombre_archivo, texto, ipa) ────────────
+    # copias: lista de (origen, destino) para sílabas con SILABAS_AUDIO_FIJO
     items = []
-    n_con_fix = n_sin_fix = n_omitidas = 0
+    copias = []
+    n_con_fix = n_sin_fix = n_fijas = 0
+    n_fijas_sin_origen = 0
     for e in catalogo:
         ruta_img = e.get("ruta_img")
         es       = e.get("es")
@@ -370,23 +379,25 @@ async def main():
         silabas = silabificar(es)
 
         for idx, silaba in enumerate(silabas):
+            clave_silaba = silaba.lower()
+            nombre = f"{base}-{idx}"
+            ruta_destino = DIR_SILABAS / (nombre + ".mp3")
+
+            # ── Audio fijo (copia, no TTS) ──────────────────────────────────
+            if clave_silaba in SILABAS_AUDIO_FIJO:
+                n_fijas += 1
+                origen = DIR_AUDIO_FIJO / SILABAS_AUDIO_FIJO[clave_silaba]
+                if not origen.exists():
+                    n_fijas_sin_origen += 1
+                    continue
+                copias.append((origen, ruta_destino))
+                continue
+
             clave_override = f"{base}-{idx}"
             if clave_override in overrides:
                 ipa = overrides[clave_override]
             else:
                 ipa = _ipa_para_silaba(silaba, idx)
-
-            nombre = f"{base}-{idx}"
-
-            if ipa == 'OMITIR':
-                n_omitidas += 1
-                ruta_existente = DIR_SILABAS / (nombre + ".mp3")
-                if ruta_existente.exists():
-                    if args.seco:
-                        print(f"  🗑  (dry run) borraría {ruta_existente.relative_to(RAIZ)}")
-                    else:
-                        ruta_existente.unlink()
-                continue  # no se genera — silabas.js usa su respaldo TTS
 
             if ipa:
                 n_con_fix += 1
@@ -397,27 +408,7 @@ async def main():
 
             items.append((nombre, silaba, ipa))
 
-    # ── Resumen inicial ───────────────────────────────────────────────────────
-    print(f"\n🌊  Marina 2 — Generador de audio por sílaba")
-    print(f"   Concurrencia       : {conc} peticiones simultáneas")
-    print(f"   Voz                : {VOZ}  (Google Cloud TTS)")
-    print(f"   Palabras           : {len(catalogo)}")
-    print(f"   Sílabas con fix 'ɾ': {n_con_fix}")
-    print(f"   Sílabas sin fix    : {n_sin_fix}")
-    if n_omitidas:
-        print(f"   Sílabas omitidas   : {n_omitidas}  (usan respaldo TTS del navegador — ver SILABAS_OMITIR)")
-    if args.solo_corregidas:
-        print(f"   ⚙️  --solo-corregidas: generando solo {n_con_fix} sílabas con corrección")
-    else:
-        print(f"   Total a generar    : {len(items)}")
-    if args.seco:
-        print(f"   ⚡ DRY RUN — no se generará ningún archivo")
-    print()
-
-    if not args.seco:
-        DIR_SILABAS.mkdir(parents=True, exist_ok=True)
-
-    # ── Generar ───────────────────────────────────────────────────────────────
+    # ── Calcular pendientes (lo que realmente falta generar con TTS) ─────────
     pendientes = []
     omitidos = 0
     for nombre, texto, ipa in items:
@@ -426,6 +417,56 @@ async def main():
             omitidos += 1
         else:
             pendientes.append((nombre, texto, ipa, ruta))
+
+    # ── Verificar API key de Google solo si hay sílabas PENDIENTES de TTS ────
+    if pendientes and not args.seco and not GOOGLE_API_KEY:
+        print("❌  Falta la variable de entorno GOOGLE_TTS_API_KEY.")
+        print("   Ver scripts/GUIA-GOOGLE-TTS.md.")
+        print(f"   ({len(pendientes)} sílaba(s) pendientes requieren síntesis con Google TTS)")
+        sys.exit(1)
+
+    # ── Resumen inicial ───────────────────────────────────────────────────────
+    print(f"\n🌊  Marina 2 — Generador de audio por sílaba")
+    print(f"   Concurrencia       : {conc} peticiones simultáneas")
+    print(f"   Voz                : {VOZ}  (Google Cloud TTS)")
+    print(f"   Palabras           : {len(catalogo)}")
+    print(f"   Sílabas con fix 'ɾ': {n_con_fix}")
+    print(f"   Sílabas sin fix    : {n_sin_fix}")
+    if n_fijas:
+        print(f"   Sílabas audio fijo : {n_fijas}  (copiadas desde scripts/audio-fijo/)")
+        if n_fijas_sin_origen:
+            for clave, archivo in SILABAS_AUDIO_FIJO.items():
+                ruta = DIR_AUDIO_FIJO / archivo
+                if not ruta.exists():
+                    print(f"   ⚠️  Falta {ruta.relative_to(RAIZ)} — "
+                          f"{n_fijas_sin_origen} sílaba(s) '{clave}' sin copiar")
+    if args.solo_corregidas:
+        print(f"   ⚙️  --solo-corregidas: generando solo {n_con_fix} sílabas con corrección")
+    else:
+        print(f"   Total a generar    : {len(items)}  ({len(pendientes)} pendientes, {omitidos} ya existían)")
+        print(f"   Total a copiar     : {len(copias)}")
+    if args.seco:
+        print(f"   ⚡ DRY RUN — no se generará ni copiará ningún archivo")
+    print()
+
+    if not args.seco:
+        DIR_SILABAS.mkdir(parents=True, exist_ok=True)
+
+    # ── Copiar audio fijo ──────────────────────────────────────────────────────
+    copiados = copias_omitidas = 0
+    for origen, destino in copias:
+        if destino.exists() and not args.forzar:
+            copias_omitidas += 1
+            continue
+        if args.seco:
+            copiados += 1
+            continue
+        shutil.copyfile(origen, destino)
+        copiados += 1
+
+    if copias or n_fijas:
+        print(f"📋  silabas/es audio fijo: {copiados} copiados · {copias_omitidas} ya existían")
+        print()
 
     print(f"📢  silabas/es ({len(pendientes)} pendientes, {omitidos} ya existían)")
 

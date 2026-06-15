@@ -78,7 +78,7 @@ CASOS = [
     ("06-respell-ipa.mp3", '<phoneme alphabet="ipa" ph="ɡo">gó</phoneme>',
      "re-deletreo + phoneme"),
 
-    ("07-furgoneta.mp3", "furgoneta",
+    ("07-furgoneta.mp3", "Tango... Gónadas... Rogó... Logotipo",
      "control — cómo suena el '-go-' real dentro de la palabra"),
 ]
 
