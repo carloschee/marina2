@@ -103,7 +103,7 @@ let _aceptaInput = false;
 let _seqToken    = 0;
 let _lang        = 'es';
 let _audioEl     = null;
-let _introAudio  = null;  // referencia al audio de instrucciones en curso
+let _introAudio  = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────────
 export async function init(container) {
@@ -130,7 +130,6 @@ export async function init(container) {
 export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
   _detenerTodo();
-  if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
   _el = null; _catalogo = []; _temas = []; _tablero = []; _secuencia = [];
 }
 
@@ -488,7 +487,7 @@ function _iniciarConIntro() {
   const modal   = _el.querySelector('#sm-modal-intro');
   const texto   = _el.querySelector('#sm-intro-texto');
 
-  // Cerrar y reabrir el modal para limpiar cualquier estado visual anterior
+  // Cerrar y reabrir para limpiar cualquier estado visual anterior
   modal.classList.remove('visible');
 
   const lang    = (window._langConfig?.en && !window._langConfig?.es) ? 'en' : 'es';
@@ -496,23 +495,34 @@ function _iniciarConIntro() {
   const ttsLang = lang === 'en' ? 'en-US' : 'es-MX';
   const audioSrc = `assets/audio/simon/${lang}/simon-inicio.mp3`;
 
-  // Token para ignorar callbacks de una instrucción anterior que aún no terminó
+  // Token para ignorar callbacks de instrucciones obsoletas
   const token = ++_seqToken;
 
   texto.textContent = msg;
   modal.classList.add('visible');
 
   const continuar = () => {
-    if (!_el || token !== _seqToken) return;  // instrucción obsoleta → ignorar
+    if (!_el || token !== _seqToken) return;
+    _introAudio = null;
     modal.classList.remove('visible');
     setTimeout(() => { if (_el && token === _seqToken) _jugar(); }, 350);
   };
 
-  // Intentar MP3 pregenerado; fallback a TTS si no existe o falla
-  _introAudio = new Audio(audioSrc);
-  _introAudio.onended = continuar;
-  _introAudio.onerror = () => {
+  // Timeout de seguridad: si el audio no dispara onended/onerror en 5s, continuar
+  const safetyTimer = setTimeout(() => {
     if (token !== _seqToken) return;
+    if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
+    continuar();
+  }, 5000);
+
+  const limpiarTimer = () => clearTimeout(safetyTimer);
+
+  _introAudio = new Audio(audioSrc);
+  _introAudio.onended = () => { limpiarTimer(); continuar(); };
+  _introAudio.onerror = () => {
+    limpiarTimer();
+    if (token !== _seqToken) return;
+    _introAudio = null;
     const synth = window.speechSynthesis;
     if (!synth) { continuar(); return; }
     const u = new SpeechSynthesisUtterance(msg);
@@ -522,7 +532,7 @@ function _iniciarConIntro() {
     u.onend = continuar; u.onerror = continuar;
     try { synth.cancel(); synth.speak(u); } catch { continuar(); }
   };
-  audio.play().catch(() => audio.onerror());
+  _introAudio.play().catch(() => { limpiarTimer(); if (token === _seqToken) _introAudio?.onerror?.(); });
 }
 
 function _renderTablero() {
@@ -714,7 +724,11 @@ function _sm_crearTile(id, emoji, label, activo) {
   const tile = document.createElement('button');
   tile.className = 'sm-mosaico-tile' + (activo ? ' activo' : '');
   tile.innerHTML = `<span class="sm-mosaico-emoji">${emoji}</span><span class="sm-mosaico-label">${label}</span>`;
-  tile.addEventListener('click', () => { haptic(10); _aplicarTema(id); _cerrarModalCat(); });
+  tile.addEventListener('click', () => {
+    haptic(10);
+    _cerrarModalCat();          // cerrar modal PRIMERO
+    setTimeout(() => _aplicarTema(id), 280);  // aplicar después de la transición de cierre
+  });
   return tile;
 }
 

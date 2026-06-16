@@ -65,7 +65,7 @@ export function destroy() {
   _cartas = []; _temaActivo = null; _container = null; _pictos = {};
 }
 
-export function onEnter() { if (!(_temaActivo && _cartas.length)) _mostrarModal(); }
+export function onEnter() { _mostrarModal(); }
 export function onLeave() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 export async function pause() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 
@@ -492,13 +492,14 @@ function _renderGrid() {
 
 function _voltear(carta) {
   if (_bloqueado || carta.volteada || carta.encontrada) return;
+  if (_volteadas.length >= 2) return;   // guardia extra: nunca acumular más de 2
   haptic(8);
   carta.volteada = true;
   _q(`[data-idx="${carta.idx}"]`)?.classList.add('volteada');
   _volteadas.push(carta);
 
   if (_volteadas.length < 2) return;
-  _bloqueado = true;
+  _bloqueado = true;                     // bloquear ANTES del setTimeout
   const [a, b] = _volteadas;
   _volteadas = [];
 
