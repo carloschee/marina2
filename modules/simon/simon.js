@@ -121,7 +121,8 @@ export async function init(container) {
   catch { _temas = []; }
 
   _render();
-  _nuevaPartida();
+  // _nuevaPartida() NO se llama aquí — el juego arranca solo después
+  // de que la usuaria elige tema en onEnter() → modal → _aplicarTema()
   window.addEventListener('lang-change', _onLangChange);
 }
 
@@ -146,7 +147,7 @@ export async function resume(container) {
   _lang  = (langCfg.es && langCfg.en) ? 'ambos' : langCfg.en ? 'en' : 'es';
   _nivel = NIVELES.find(n => n.id === _cargarNivelId()) || _nivel;
   _render();
-  _nuevaPartida();
+  _abrirModalCat();  // volver al flujo normal: modal → tema → instrucciones
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 }
