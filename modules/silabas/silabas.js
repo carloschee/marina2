@@ -456,58 +456,51 @@ function _render() {
       }
 
       /* ── Modal de categorías (patrón de frases.js: translateY propio) ── */
+      /* ── Modal de temas — mosaico ── */
       #sl-modal {
-        position:absolute; inset:0; z-index:30;
-        background:rgba(5,20,50,0.80);
-        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-        display:flex; align-items:flex-end;
-        opacity:0; pointer-events:none; transition:opacity .25s;
+        position:fixed; inset:0; z-index:200;
+        background:rgba(5,18,48,0.72); backdrop-filter:blur(6px);
+        display:flex; align-items:flex-end; justify-content:center;
+        opacity:0; pointer-events:none; transition:opacity .22s;
       }
       #sl-modal.visible { opacity:1; pointer-events:all; }
       #sl-modal-box {
-        width:100%; max-height:78vh; overflow-y:auto;
-        -webkit-overflow-scrolling:touch;
-        background:rgba(20,16,46,0.97);
-        border-radius:24px 24px 0 0;
-        padding:20px 16px calc(28px + env(safe-area-inset-bottom, 0px));
-        border-top:2px solid rgba(167,139,250,0.40);
-        transform:translateY(20px);
-        transition:transform .3s cubic-bezier(.34,1.1,.64,1);
+        width:100%; max-width:620px; max-height:88vh;
+        background:#0d2249; border-radius:24px 24px 0 0;
+        display:flex; flex-direction:column;
+        transform:translateY(32px); transition:transform .28s cubic-bezier(.4,0,.2,1);
+        overflow:hidden;
       }
       #sl-modal.visible #sl-modal-box { transform:translateY(0); }
-      #sl-modal-header {
-        display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;
-      }
-      #sl-modal-titulo {
-        font-size:.82rem; font-weight:900; letter-spacing:.10em;
-        text-transform:uppercase; color:rgba(167,139,250,0.85);
-      }
+      #sl-modal-header { display:flex; align-items:center; justify-content:space-between; padding:18px 20px 14px; flex-shrink:0; }
+      #sl-modal-titulo { font-size:1rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#a78bfa; }
       #sl-modal-cerrar {
-        width:42px; height:42px; border-radius:50%; border:none;
-        background:rgba(255,255,255,0.12); color:#fff; font-size:1.3rem;
-        cursor:pointer; display:flex; align-items:center; justify-content:center;
-        transition:transform .12s;
+        width:36px; height:36px; border-radius:50%; border:none; cursor:pointer;
+        background:rgba(255,255,255,0.10); color:#fff; font-size:1rem;
+        display:flex; align-items:center; justify-content:center; transition:background .15s;
       }
-      #sl-modal-cerrar:active { transform:scale(.88); }
-      .sl-grupo-label {
-        font-size:.70rem; font-weight:900; letter-spacing:.10em;
-        text-transform:uppercase; color:rgba(255,255,255,0.45); margin:14px 0 8px;
+      #sl-modal-cerrar:active { background:rgba(255,255,255,0.20); }
+      #sl-modal-lista { flex:1; overflow-y:auto; padding:0 16px 24px; -webkit-overflow-scrolling:touch; }
+      .sl-mosaico { display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:10px; padding:4px 0; }
+      .sl-mosaico-tile {
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        gap:4px; padding:10px 6px 8px; border-radius:16px;
+        border:2px solid rgba(255,255,255,0.10); background:rgba(255,255,255,0.06);
+        cursor:pointer; transition:transform .12s, background .15s, border-color .15s; min-height:84px;
       }
-      .sl-grupo-label:first-of-type { margin-top:0; }
-      #sl-modal-lista { display:flex; flex-direction:column; gap:8px; }
-      .sl-tema-opcion {
-        display:flex; align-items:center; gap:14px;
-        min-height:56px; padding:12px 16px; border-radius:16px; cursor:pointer;
-        background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);
-        font-family:inherit; color:#fff; text-align:left; width:100%;
-        transition:background .15s, transform .12s;
+      .sl-mosaico-tile:active { transform:scale(.93); }
+      .sl-mosaico-tile.activo { background:rgba(255,255,255,0.12); border-color:#a78bfa; box-shadow:0 0 0 1px #a78bfa44; }
+      .sl-mosaico-emoji { font-size:2rem; line-height:1; pointer-events:none; }
+      .sl-mosaico-label {
+        font-size:.62rem; font-weight:800; text-align:center; color:rgba(255,255,255,0.75);
+        line-height:1.2; pointer-events:none; max-width:80px;
+        overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
       }
-      .sl-tema-opcion:active { transform:scale(.98); }
-      .sl-tema-opcion.activo {
-        background:rgba(167,139,250,0.18); border-color:rgba(167,139,250,0.45);
-      }
-      .sl-tema-emoji  { font-size:1.5rem; flex-shrink:0; }
-      .sl-tema-info   { display:flex; flex-direction:column; gap:2px; }
+      .sl-mosaico-tile.activo .sl-mosaico-label { color:#fff; }
+      .sl-tile-todas { grid-column:1/-1; flex-direction:row; justify-content:flex-start; gap:14px; padding:12px 18px; min-height:auto; }
+      .sl-tile-todas .sl-mosaico-emoji { font-size:1.8rem; }
+      .sl-tile-todas .sl-mosaico-label { font-size:.85rem; font-weight:900; max-width:none; -webkit-line-clamp:1; }
+      .sl-mosaico-divisor { grid-column:1/-1; height:1px; background:rgba(255,255,255,0.12); margin:6px 0; }
       .sl-tema-nombre { font-size:1.05rem; font-weight:900; }
       .sl-tema-desc   { font-size:.74rem; color:rgba(255,255,255,.45); font-weight:700; }
 
@@ -565,51 +558,48 @@ function _render() {
   _el.querySelector('#sl-btn-palabra').addEventListener('click', () => { haptic(10); _reproducirPalabra(); });
 }
 
-// ─── Categorías ────────────────────────────────────────────────────────────────
+// ─── Categorías — mosaico ──────────────────────────────────────────────────────
+const SL_TEMAS_PRIO = ['transportes','frutas','verduras','alimentos','animales'];
+
 function _abrirModal() {
   const lista = _el.querySelector('#sl-modal-lista');
   lista.innerHTML = '';
 
-  lista.appendChild(_opcionTema(
-    { id: null, emoji: '🌊', label: 'Todas las palabras', desc: `${_catalogo.length} palabras` },
-    _tema === null
-  ));
+  const activoId = _tema?.id ?? null;
+  const prio = [], resto = [];
+  _temas.forEach(t => (SL_TEMAS_PRIO.includes(t.id) ? prio : resto).push(t));
+  prio.sort((a,b) => SL_TEMAS_PRIO.indexOf(a.id) - SL_TEMAS_PRIO.indexOf(b.id));
 
-  // Agrupar por tipo (vocabulario / lenguaje), igual que el selector de Memorama
-  const grupos = { vocabulario: [], lenguaje: [], otros: [] };
-  _temas.forEach(t => (grupos[t.tipo] || grupos.otros).push(t));
+  const grid = document.createElement('div');
+  grid.className = 'sl-mosaico';
 
-  const _seccion = (titulo, arr) => {
-    if (!arr.length) return;
-    const h = document.createElement('div');
-    h.className = 'sl-grupo-label';
-    h.textContent = titulo;
-    lista.appendChild(h);
-    arr.forEach(t => lista.appendChild(_opcionTema(
-      { id: t.id, emoji: t.emoji || '📚', label: t.label, desc: `${t.palabras?.length || 0} palabras` },
-      _tema?.id === t.id
-    )));
-  };
-  _seccion('Vocabulario', grupos.vocabulario);
-  _seccion('Lenguaje',    grupos.lenguaje);
-  _seccion('Otros',       grupos.otros);
+  const tileTodas = _sl_crearTile(null, '🌊', 'Todas las palabras', activoId === null);
+  tileTodas.classList.add('sl-tile-todas');
+  grid.appendChild(tileTodas);
 
+  const sep1 = document.createElement('div'); sep1.className = 'sl-mosaico-divisor';
+  grid.appendChild(sep1);
+
+  prio.forEach(t => grid.appendChild(_sl_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
+
+  if (resto.length) {
+    const sep2 = document.createElement('div'); sep2.className = 'sl-mosaico-divisor';
+    grid.appendChild(sep2);
+    resto.forEach(t => grid.appendChild(_sl_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
+  }
+
+  lista.appendChild(grid);
   const box = _el.querySelector('#sl-modal-box');
-  box.scrollTop = 0;                                   // reset de scroll (patrón frases.js)
+  if (box) box.scrollTop = 0;
   _el.querySelector('#sl-modal').classList.add('visible');
 }
 
-function _opcionTema({ id, emoji, label, desc }, activo) {
-  const btn = document.createElement('button');
-  btn.className = 'sl-tema-opcion' + (activo ? ' activo' : '');
-  btn.innerHTML = `
-    <span class="sl-tema-emoji">${emoji}</span>
-    <span class="sl-tema-info">
-      <span class="sl-tema-nombre">${label}</span>
-      <span class="sl-tema-desc">${desc}</span>
-    </span>`;
-  btn.addEventListener('click', () => { haptic(10); _aplicarTema(id); _cerrarModal(); });
-  return btn;
+function _sl_crearTile(id, emoji, label, activo) {
+  const tile = document.createElement('button');
+  tile.className = 'sl-mosaico-tile' + (activo ? ' activo' : '');
+  tile.innerHTML = `<span class="sl-mosaico-emoji">${emoji}</span><span class="sl-mosaico-label">${label}</span>`;
+  tile.addEventListener('click', () => { haptic(10); _aplicarTema(id); _cerrarModal(); });
+  return tile;
 }
 
 function _cerrarModal() {

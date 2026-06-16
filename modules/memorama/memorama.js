@@ -240,55 +240,58 @@ function _renderShell() {
   .mem-par-tile img { width:100%; height:100%; object-fit:contain; padding:4px; pointer-events:none; }
 
   /* ── Modal de temas — bottom-sheet estándar ── */
+  /* ── Modal de temas — mosaico de emojis ── */
   #mem-modal {
-    position:absolute; inset:0; z-index:40;
-    background:rgba(5,20,50,0.80);
-    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-    display:flex; align-items:flex-end;
-    opacity:1; transition:opacity .35s ease; pointer-events:auto;
+    position:fixed; inset:0; z-index:200;
+    background:rgba(5,18,48,0.72); backdrop-filter:blur(6px);
+    display:flex; align-items:flex-end; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .22s;
   }
-  #mem-modal.oculto { opacity:0; pointer-events:none; }
+  #mem-modal.visible { opacity:1; pointer-events:all; }
+  #mem-modal.oculto  { opacity:0; pointer-events:none; }
   .mem-modal-box {
-    width:100%; max-height:78vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
-    background:rgba(10,20,50,0.98); border-radius:24px 24px 0 0;
-    padding:20px 16px calc(28px + env(safe-area-inset-bottom,0px));
-    border-top:2px solid rgba(0,194,255,0.30);
-    transform:translateY(20px);
-    transition:transform .35s cubic-bezier(.34,1.1,.64,1), opacity .35s;
+    width:100%; max-width:620px; max-height:88vh;
+    background:#0d2249; border-radius:24px 24px 0 0;
+    display:flex; flex-direction:column;
+    transform:translateY(32px); transition:transform .28s cubic-bezier(.4,0,.2,1);
+    overflow:hidden;
   }
-  #mem-modal.oculto .mem-modal-box { transform:translateY(20px); opacity:0; }
+  #mem-modal.visible .mem-modal-box { transform:translateY(0); }
   .mem-modal-header {
-    display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 20px 14px; flex-shrink:0;
   }
   .mem-modal-titulo {
-    font-size:.82rem; font-weight:900; letter-spacing:.10em;
-    text-transform:uppercase; color:rgba(0,194,255,0.85);
+    font-size:1rem; font-weight:900; letter-spacing:.08em;
+    text-transform:uppercase; color:#00c2ff;
   }
   .mem-modal-cerrar {
-    width:42px; height:42px; border-radius:50%; border:none;
-    background:rgba(255,255,255,0.12); color:#fff; font-size:1.3rem;
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:transform .12s;
+    width:36px; height:36px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(255,255,255,0.10); color:#fff; font-size:1rem;
+    display:flex; align-items:center; justify-content:center; transition:background .15s;
   }
-  .mem-modal-cerrar:active { transform:scale(.88); }
-  #mem-lista-temas { display:flex; flex-direction:column; gap:8px; }
-  .mem-grupo-label {
-    font-size:.70rem; font-weight:900; letter-spacing:.10em;
-    text-transform:uppercase; color:rgba(255,255,255,0.40); margin:12px 0 6px;
+  .mem-modal-cerrar:active { background:rgba(255,255,255,0.20); }
+  #mem-lista-temas { flex:1; overflow-y:auto; padding:0 16px 24px; -webkit-overflow-scrolling:touch; }
+  .mem-mosaico { display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:10px; padding:4px 0; }
+  .mem-mosaico-tile {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:4px; padding:10px 6px 8px; border-radius:16px;
+    border:2px solid rgba(255,255,255,0.10); background:rgba(255,255,255,0.06);
+    cursor:pointer; transition:transform .12s, background .15s, border-color .15s; min-height:84px;
   }
-  .mem-grupo-label:first-child { margin-top:0; }
-  .mem-tema-btn {
-    display:flex; align-items:center; gap:14px; min-height:56px;
-    padding:12px 16px; border-radius:16px; cursor:pointer;
-    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);
-    font-family:inherit; color:#fff; text-align:left; width:100%;
-    transition:background .15s, transform .12s;
+  .mem-mosaico-tile:active { transform:scale(.93); }
+  .mem-mosaico-tile.activo { background:rgba(255,255,255,0.12); border-color:#00c2ff; box-shadow:0 0 0 1px #00c2ff44; }
+  .mem-mosaico-emoji { font-size:2rem; line-height:1; pointer-events:none; }
+  .mem-mosaico-label {
+    font-size:.62rem; font-weight:800; text-align:center; color:rgba(255,255,255,0.75);
+    line-height:1.2; pointer-events:none; max-width:80px;
+    overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
   }
-  .mem-tema-btn:active { transform:scale(.97); }
-  .mem-tema-btn.activo { background:rgba(0,194,255,0.18); border-color:rgba(0,194,255,0.40); }
-  .mem-tema-emoji-ico { font-size:1.5rem; flex-shrink:0; }
-  .mem-tema-nombre { display:block; font-size:1rem; font-weight:900; }
-  .mem-tema-desc   { font-size:.74rem; color:rgba(255,255,255,.40); font-weight:700; }
+  .mem-mosaico-tile.activo .mem-mosaico-label { color:#fff; }
+  .mem-tile-todas { grid-column:1/-1; flex-direction:row; justify-content:flex-start; gap:14px; padding:12px 18px; min-height:auto; }
+  .mem-tile-todas .mem-mosaico-emoji { font-size:1.8rem; }
+  .mem-tile-todas .mem-mosaico-label { font-size:.85rem; font-weight:900; max-width:none; -webkit-line-clamp:1; }
+  .mem-mosaico-divisor { grid-column:1/-1; height:1px; background:rgba(255,255,255,0.12); margin:6px 0; }
 
   /* Portrait / small screen */
   @media (max-width:600px) and (orientation:portrait) {
@@ -379,33 +382,45 @@ function _cerrarModal() {
 }
 
 // ─── Lista de temas ───────────────────────────────────────────────────────────
+// ─── Modal de temas — mosaico ────────────────────────────────────────────────
+const MEM_TEMAS_PRIO = ['transportes','frutas','verduras','alimentos','animales'];
+
 function _renderListaTemas() {
   const lista = _q('#mem-lista-temas'); if (!lista) return;
   lista.innerHTML = '';
 
-  const grupos = { vocabulario: [], lenguaje: [], otros: [] };
-  _temas.forEach(t => (grupos[t.tipo] || grupos.otros).push(t));
+  const activoId = _temaActivo?.id ?? null;
+  const prio = [], resto = [];
+  _temas.forEach(t => (MEM_TEMAS_PRIO.includes(t.id) ? prio : resto).push(t));
+  prio.sort((a,b) => MEM_TEMAS_PRIO.indexOf(a.id) - MEM_TEMAS_PRIO.indexOf(b.id));
 
-  const _seccion = (titulo, arr) => {
-    if (!arr.length) return;
-    const h = document.createElement('div'); h.className = 'mem-grupo-label'; h.textContent = titulo;
-    lista.appendChild(h);
-    arr.forEach(t => {
-      const btn = document.createElement('button');
-      btn.className = 'mem-tema-btn' + (t.id === _temaActivo?.id ? ' activo' : '');
-      btn.innerHTML = `
-        <span class="mem-tema-emoji-ico">${t.emoji || '📚'}</span>
-        <span>
-          <span class="mem-tema-nombre">${t.label}</span>
-          <span class="mem-tema-desc">${t.palabras?.length || 0} palabras</span>
-        </span>`;
-      btn.addEventListener('click', () => { haptic(8); _activarTema(t); });
-      lista.appendChild(btn);
-    });
-  };
-  _seccion('Vocabulario', grupos.vocabulario);
-  _seccion('Lenguaje',    grupos.lenguaje);
-  _seccion('Otros',       grupos.otros);
+  const grid = document.createElement('div');
+  grid.className = 'mem-mosaico';
+
+  const tileTodas = _mem_crearTile(null, '🌊', 'Todas las palabras', activoId === null);
+  tileTodas.classList.add('mem-tile-todas');
+  grid.appendChild(tileTodas);
+
+  const sep1 = document.createElement('div'); sep1.className = 'mem-mosaico-divisor';
+  grid.appendChild(sep1);
+
+  prio.forEach(t => grid.appendChild(_mem_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
+
+  if (resto.length) {
+    const sep2 = document.createElement('div'); sep2.className = 'mem-mosaico-divisor';
+    grid.appendChild(sep2);
+    resto.forEach(t => grid.appendChild(_mem_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
+  }
+  lista.appendChild(grid);
+}
+
+function _mem_crearTile(id, emoji, label, activo) {
+  const t = _temas.find(x => x.id === id) || null;
+  const tile = document.createElement('button');
+  tile.className = 'mem-mosaico-tile' + (activo ? ' activo' : '');
+  tile.innerHTML = `<span class="mem-mosaico-emoji">${emoji}</span><span class="mem-mosaico-label">${label}</span>`;
+  tile.addEventListener('click', () => { haptic(8); _activarTema(t); });
+  return tile;
 }
 
 function _activarTema(tema) {
