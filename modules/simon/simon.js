@@ -132,7 +132,7 @@ export function destroy() {
   _el = null; _catalogo = []; _temas = []; _tablero = []; _secuencia = [];
 }
 
-export function onEnter() { _abrirModalCat(); }
+export function onEnter() { if (!(_secuencia.length > 0 || _ronda > 1)) _abrirModalCat(); }
 
 export function onLeave() {
   _detenerTodo();

@@ -65,7 +65,7 @@ export function destroy() {
   _cartas = []; _temaActivo = null; _container = null; _pictos = {};
 }
 
-export function onEnter() { _mostrarModal(); }
+export function onEnter() { if (!(_temaActivo && _cartas.length)) _mostrarModal(); }
 export function onLeave() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 export async function pause() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 

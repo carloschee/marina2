@@ -276,7 +276,7 @@ export function destroy() {
   _el = null; _catalogo = []; _temas = []; _lista = [];
 }
 
-export function onEnter() { _abrirModal(); /* sin audio, pero sí muestra el selector */ }
+export function onEnter() { if (!_lista.length) _abrirModal(); }
 
 export function onLeave() {
   _detenerTodo();

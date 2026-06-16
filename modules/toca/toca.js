@@ -73,7 +73,7 @@ export function destroy() {
   _el = null; _catalogo = []; _pool = []; _temas = [];
 }
 
-export function onEnter() { _abrirModalTemas(); }
+export function onEnter() { if (!_objetivo) _abrirModalTemas(); }
 
 export function onLeave() {
   TTS.stop(); if (_audioEl) _audioEl.pause();
