@@ -1,6 +1,6 @@
 {
-  "generado": "2026-06-16T19:40:32.338Z",
-  "totalAssets": 3621,
+  "generado": "2026-06-16T20:14:45.289Z",
+  "totalAssets": 3623,
   "urls": [
     "./app.config.json",
     "./app.js",
@@ -2974,6 +2974,8 @@
     "./assets/audio/frases/es/tienes-sueno.mp3",
     "./assets/audio/frases/es/tienes.mp3",
     "./assets/audio/frases/es/tren-rapido.mp3",
+    "./assets/audio/simon/en/simon-inicio.mp3",
+    "./assets/audio/simon/es/simon-inicio.mp3",
     "./assets/img/icon-128.png",
     "./assets/img/icon-192.png",
     "./assets/img/icon-512.png",
