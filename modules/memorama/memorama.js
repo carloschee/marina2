@@ -242,21 +242,23 @@ function _renderShell() {
   /* ── Modal de temas — bottom-sheet estándar ── */
   /* ── Modal de temas — mosaico de emojis ── */
   #mem-modal {
-    position:fixed; inset:0; z-index:200;
-    background:rgba(5,18,48,0.72); backdrop-filter:blur(6px);
+    position:absolute; inset:0; z-index:40;
+    background:rgba(5,20,50,0.80);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
     display:flex; align-items:flex-end; justify-content:center;
-    opacity:0; pointer-events:none; transition:opacity .22s;
+    opacity:1; transition:opacity .35s ease; pointer-events:auto;
   }
-  #mem-modal.visible { opacity:1; pointer-events:all; }
-  #mem-modal.oculto  { opacity:0; pointer-events:none; }
+  #mem-modal.oculto { opacity:0; pointer-events:none; }
   .mem-modal-box {
     width:100%; max-width:620px; max-height:88vh;
-    background:#0d2249; border-radius:24px 24px 0 0;
+    background:rgba(10,20,50,0.98); border-radius:24px 24px 0 0;
     display:flex; flex-direction:column;
-    transform:translateY(32px); transition:transform .28s cubic-bezier(.4,0,.2,1);
+    border-top:2px solid rgba(0,194,255,0.30);
+    transform:translateY(20px);
+    transition:transform .35s cubic-bezier(.34,1.1,.64,1), opacity .35s;
     overflow:hidden;
   }
-  #mem-modal.visible .mem-modal-box { transform:translateY(0); }
+  #mem-modal.oculto .mem-modal-box { transform:translateY(20px); opacity:0; }
   .mem-modal-header {
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 20px 14px; flex-shrink:0;
@@ -415,11 +417,11 @@ function _renderListaTemas() {
 }
 
 function _mem_crearTile(id, emoji, label, activo) {
-  const t = _temas.find(x => x.id === id) || null;
+  const tema = id === null ? null : (_temas.find(t => t.id === id) || null);
   const tile = document.createElement('button');
   tile.className = 'mem-mosaico-tile' + (activo ? ' activo' : '');
   tile.innerHTML = `<span class="mem-mosaico-emoji">${emoji}</span><span class="mem-mosaico-label">${label}</span>`;
-  tile.addEventListener('click', () => { haptic(8); _activarTema(t); });
+  tile.addEventListener('click', () => { haptic(8); _activarTema(tema); });
   return tile;
 }
 
