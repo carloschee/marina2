@@ -465,7 +465,7 @@ function _cambiarNivel(id) {
   _nuevaPartida();
 }
 
-function _nuevaPartida() {
+function _nuevaPartida(saltarOverlay = false) {
   _detenerSecuencia();
   _ronda = 1; _secuencia = []; _pasoUsuario = 0; _aceptaInput = false;
   _resetNotas();
@@ -481,8 +481,16 @@ function _nuevaPartida() {
   _renderTablero();
   _actualizarRonda();
   _setStatus('', '');
-  _mostrarOverlay(true);
   _el.querySelector('#sm-repetir')?.classList.add('oculto');
+
+  if (saltarOverlay) {
+    // La usuaria ya eligió un tema — ir directo a las instrucciones de inicio,
+    // sin mostrar el overlay ▶ intermedio.
+    _mostrarOverlay(false);
+    _iniciarConIntro();
+  } else {
+    _mostrarOverlay(true);
+  }
 }
 
 function _renderTablero() {
@@ -726,7 +734,7 @@ function _cerrarModalCat() {
 function _aplicarTema(id) {
   _tema = id === null ? null : (_temas.find(t => t.id === id) || null);
   // El botón solo dice 'Temas' — no hay label dinámico
-  _nuevaPartida();
+  _nuevaPartida(true);   // saltar overlay ▶ — la usuaria ya eligió el tema
 }
 
 // ─── Utilidades ───────────────────────────────────────────────────────────────────
