@@ -256,29 +256,7 @@ function _render() {
       /* Error suave */
       .sm-tile.mal { background:rgba(251,191,36,.22); border-color:rgba(251,191,36,.85); }
 
-      /* ── Overlay de play (sobre el tablero) — sin blur, resplandor en botón ── */
-      #sm-overlay {
-        position:absolute; inset:0; z-index:10; border-radius:20px;
-        background:rgba(5,18,48,0.42);
-        display:flex; align-items:center; justify-content:center;
-        transition:opacity .3s;
-      }
-      #sm-overlay.oculto { opacity:0; pointer-events:none; }
-      #sm-play-btn {
-        width:92px; height:92px; border-radius:50%; border:none; cursor:pointer;
-        background:rgba(244,63,94,0.95);
-        /* Resplandor grande para separar visualmente del tablero */
-        box-shadow:
-          0 0 0 10px rgba(244,63,94,0.18),
-          0 0 50px 18px rgba(244,63,94,0.50),
-          0 0 100px 40px rgba(244,63,94,0.22),
-          0 10px 36px rgba(244,63,94,0.55);
-        color:#fff; font-size:2.4rem;
-        display:flex; align-items:center; justify-content:center;
-        animation:sm-float 2.4s ease-in-out infinite;
-        transition:transform .15s;
-      }
-      #sm-play-btn:active { transform:scale(.90); }
+      /* overlay de play eliminado — se inicia directo con las instrucciones */
       @keyframes sm-float {
         0%,100% {
           transform:translateY(0) scale(1);
@@ -407,11 +385,6 @@ function _render() {
       <div id="sm-board-wrap">
         <div id="sm-board" class="bloqueado"></div>
 
-        <!-- Overlay de play -->
-        <div id="sm-overlay">
-          <button id="sm-play-btn" aria-label="Jugar">▶</button>
-        </div>
-
         <!-- Modal de instrucciones -->
         <div id="sm-modal-intro">
           <div id="sm-estrella">⭐</div>
@@ -448,7 +421,6 @@ function _render() {
     contNiveles.appendChild(b);
   });
 
-  _el.querySelector('#sm-play-btn').addEventListener('click', () => { haptic(10); _iniciarConIntro(); });
   _el.querySelector('#sm-repetir').addEventListener('click', () => { haptic(8); _reproducirSecuencia(); });
   _el.querySelector('#sm-cat-btn').addEventListener('click', () => { haptic(10); _abrirModalCat(); });
   _el.querySelector('#sm-modal-cat-cerrar').addEventListener('click', () => _cerrarModalCat());
@@ -465,12 +437,11 @@ function _cambiarNivel(id) {
   _nuevaPartida();
 }
 
-function _nuevaPartida(saltarOverlay = false) {
+function _nuevaPartida() {
   _detenerSecuencia();
   _ronda = 1; _secuencia = []; _pasoUsuario = 0; _aceptaInput = false;
   _resetNotas();
 
-  // Construir lista filtrada por tema
   let lista = _catalogo;
   if (_tema?.palabras?.length) {
     const orden = new Map(_tema.palabras.map((pid, i) => [pid, i]));
@@ -482,15 +453,49 @@ function _nuevaPartida(saltarOverlay = false) {
   _actualizarRonda();
   _setStatus('', '');
   _el.querySelector('#sm-repetir')?.classList.add('oculto');
+  _iniciarConIntro();
+}
 
-  if (saltarOverlay) {
-    // La usuaria ya eligió un tema — ir directo a las instrucciones de inicio,
-    // sin mostrar el overlay ▶ intermedio.
-    _mostrarOverlay(false);
-    _iniciarConIntro();
-  } else {
-    _mostrarOverlay(true);
-  }
+// ── Modal de instrucciones ────────────────────────────────────────────────────────
+// Textos fijos en español e inglés — sin nombre de perfil (simplicidad).
+// Intenta reproducir assets/audio/simon/{lang}/simon-inicio.mp3;
+// si falla, cae a TTS.
+const INTRO_ES = '¡Hola! Observa los botones y sigue la secuencia';
+const INTRO_EN = 'Hello! Look at the buttons and follow the sequence';
+
+function _iniciarConIntro() {
+  haptic(10);
+
+  const modal   = _el.querySelector('#sm-modal-intro');
+  const texto   = _el.querySelector('#sm-intro-texto');
+  const lang    = (window._langConfig?.en && !window._langConfig?.es) ? 'en' : 'es';
+  const msg     = lang === 'en' ? INTRO_EN : INTRO_ES;
+  const ttsLang = lang === 'en' ? 'en-US' : 'es-MX';
+  const audioSrc = `assets/audio/simon/${lang}/simon-inicio.mp3`;
+
+  texto.textContent = msg;
+  modal.classList.add('visible');
+
+  const continuar = () => {
+    if (!_el) return;
+    modal.classList.remove('visible');
+    setTimeout(() => { if (_el) _jugar(); }, 350);
+  };
+
+  // Intentar MP3 pregenerado; fallback a TTS si no existe o falla
+  const audio = new Audio(audioSrc);
+  audio.onended = continuar;
+  audio.onerror = () => {
+    const synth = window.speechSynthesis;
+    if (!synth) { continuar(); return; }
+    const u = new SpeechSynthesisUtterance(msg);
+    u.lang = ttsLang; u.rate = 0.88; u.pitch = 1.1;
+    const voz = TTS.getVoice?.(ttsLang);
+    if (voz) u.voice = voz;
+    u.onend = continuar; u.onerror = continuar;
+    try { synth.cancel(); synth.speak(u); } catch { continuar(); }
+  };
+  audio.play().catch(() => audio.onerror());
 }
 
 function _renderTablero() {
@@ -508,42 +513,6 @@ function _renderTablero() {
     tile.addEventListener('click', () => _onTap(idx));
     board.appendChild(tile);
   });
-}
-
-// ── Overlay de play ───────────────────────────────────────────────────────────────
-function _mostrarOverlay(mostrar) {
-  _el.querySelector('#sm-overlay')?.classList.toggle('oculto', !mostrar);
-}
-
-// ── Modal de instrucciones con TTS ────────────────────────────────────────────────
-function _iniciarConIntro() {
-  haptic(10);
-  _mostrarOverlay(false);
-
-  const modal  = _el.querySelector('#sm-modal-intro');
-  const texto  = _el.querySelector('#sm-intro-texto');
-  const nombre = window._perfilActivo?.nombre || '';
-  const saludo = nombre ? `Hola ${nombre},` : '¡Hola!';
-  const msg    = `${saludo} observa los botones y sigue la secuencia`;
-
-  texto.textContent = msg;
-  modal.classList.add('visible');
-
-  // TTS de instrucciones; al terminar, cerrar modal e iniciar
-  const synth = window.speechSynthesis;
-  const u     = new SpeechSynthesisUtterance(msg);
-  u.lang  = 'es-MX'; u.rate = 0.88; u.pitch = 1.1;
-  const voz = TTS.getVoice?.('es-MX');
-  if (voz) u.voice = voz;
-
-  const continuar = () => {
-    if (!_el) return;
-    modal.classList.remove('visible');
-    setTimeout(() => { if (_el) _jugar(); }, 350);
-  };
-  u.onend   = continuar;
-  u.onerror = continuar;
-  try { synth.cancel(); synth.speak(u); } catch { continuar(); }
 }
 
 function _jugar() {
@@ -734,7 +703,7 @@ function _cerrarModalCat() {
 function _aplicarTema(id) {
   _tema = id === null ? null : (_temas.find(t => t.id === id) || null);
   // El botón solo dice 'Temas' — no hay label dinámico
-  _nuevaPartida(true);   // saltar overlay ▶ — la usuaria ya eligió el tema
+  _nuevaPartida();
 }
 
 // ─── Utilidades ───────────────────────────────────────────────────────────────────
