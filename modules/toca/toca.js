@@ -114,11 +114,13 @@ export async function resume(container) {
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
 
-  // Al regresar al módulo, siempre mostrar el modal de temas —
-  // igual que al entrar por primera vez. La usuaria elige tema y
-  // _seleccionarTema() arranca el juego. No llamar _nuevaRonda() aquí
-  // porque dispara las instrucciones por debajo del modal abierto.
-  _abrirModalTemas();
+  // Si no hay actividad en curso (nunca se eligió tema), mostrar el modal.
+  // Si ya hay una actividad activa (_objetivo existe), reanudarla tal como estaba.
+  if (!_objetivo) {
+    _abrirModalTemas();
+  } else {
+    requestAnimationFrame(() => { requestAnimationFrame(() => { if (_el) _nuevaRonda(); }); });
+  }
 }
 
 // ─── Render ───────────────────────────────────────────────────────────────────

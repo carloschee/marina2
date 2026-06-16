@@ -293,10 +293,16 @@ export async function resume(container) {
   _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
   _lang = (_langConfig.es && _langConfig.en) ? 'ambos' : _langConfig.en ? 'en' : 'es';
-  _render();                 // app.js pudo limpiar el contenedor; reconstruir
-  _mostrarPalabra();
+  _render();
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
+  // Si hay una lista cargada (ya se eligió tema), restaurar la palabra actual.
+  // Si no, mostrar el modal de temas igual que al entrar por primera vez.
+  if (_lista.length > 0) {
+    _mostrarPalabra();
+  } else {
+    _abrirModal();
+  }
 }
 
 // ─── Render del shell ──────────────────────────────────────────────────────────
@@ -458,17 +464,19 @@ function _render() {
       /* ── Modal de categorías (patrón de frases.js: translateY propio) ── */
       /* ── Modal de temas — mosaico ── */
       #sl-modal {
-        position:fixed; inset:0; z-index:200;
-        background:rgba(5,18,48,0.72); backdrop-filter:blur(6px);
+        position:absolute; inset:0; z-index:30;
+        background:rgba(5,20,50,0.80);
+        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
         display:flex; align-items:flex-end; justify-content:center;
-        opacity:0; pointer-events:none; transition:opacity .22s;
+        opacity:0; pointer-events:none; transition:opacity .25s;
       }
       #sl-modal.visible { opacity:1; pointer-events:all; }
       #sl-modal-box {
         width:100%; max-width:620px; max-height:88vh;
-        background:#0d2249; border-radius:24px 24px 0 0;
+        background:rgba(20,16,46,0.97); border-radius:24px 24px 0 0;
         display:flex; flex-direction:column;
-        transform:translateY(32px); transition:transform .28s cubic-bezier(.4,0,.2,1);
+        border-top:2px solid rgba(167,139,250,0.40);
+        transform:translateY(20px); transition:transform .3s cubic-bezier(.34,1.1,.64,1);
         overflow:hidden;
       }
       #sl-modal.visible #sl-modal-box { transform:translateY(0); }
@@ -564,30 +572,23 @@ const SL_TEMAS_PRIO = ['transportes','frutas','verduras','alimentos','animales']
 function _abrirModal() {
   const lista = _el.querySelector('#sl-modal-lista');
   lista.innerHTML = '';
-
   const activoId = _tema?.id ?? null;
   const prio = [], resto = [];
   _temas.forEach(t => (SL_TEMAS_PRIO.includes(t.id) ? prio : resto).push(t));
   prio.sort((a,b) => SL_TEMAS_PRIO.indexOf(a.id) - SL_TEMAS_PRIO.indexOf(b.id));
-
   const grid = document.createElement('div');
   grid.className = 'sl-mosaico';
-
   const tileTodas = _sl_crearTile(null, '🌊', 'Todas las palabras', activoId === null);
   tileTodas.classList.add('sl-tile-todas');
   grid.appendChild(tileTodas);
-
   const sep1 = document.createElement('div'); sep1.className = 'sl-mosaico-divisor';
   grid.appendChild(sep1);
-
   prio.forEach(t => grid.appendChild(_sl_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
-
   if (resto.length) {
     const sep2 = document.createElement('div'); sep2.className = 'sl-mosaico-divisor';
     grid.appendChild(sep2);
     resto.forEach(t => grid.appendChild(_sl_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
   }
-
   lista.appendChild(grid);
   const box = _el.querySelector('#sl-modal-box');
   if (box) box.scrollTop = 0;

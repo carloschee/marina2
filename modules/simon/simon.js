@@ -147,9 +147,18 @@ export async function resume(container) {
   _lang  = (langCfg.es && langCfg.en) ? 'ambos' : langCfg.en ? 'en' : 'es';
   _nivel = NIVELES.find(n => n.id === _cargarNivelId()) || _nivel;
   _render();
-  _abrirModalCat();  // volver al flujo normal: modal → tema → instrucciones
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
+  // Si hay una partida en curso, restaurarla; si no, mostrar el modal de temas.
+  if (_secuencia.length > 0 || _ronda > 1) {
+    _renderTablero();
+    _actualizarRonda();
+    _setStatus('', '');
+    _el.querySelector('#sm-repetir')?.classList.add('oculto');
+    _iniciarConIntro();
+  } else {
+    _abrirModalCat();
+  }
 }
 
 // ─── Render del shell ─────────────────────────────────────────────────────────────
@@ -328,17 +337,19 @@ function _render() {
       /* ── Modal de categorías (patrón frases.js) ── */
       /* ── Modal de temas — mosaico ── */
       #sm-modal-cat {
-        position:fixed; inset:0; z-index:200;
-        background:rgba(5,18,48,0.72); backdrop-filter:blur(6px);
+        position:absolute; inset:0; z-index:30;
+        background:rgba(5,20,50,0.80);
+        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
         display:flex; align-items:flex-end; justify-content:center;
-        opacity:0; pointer-events:none; transition:opacity .22s;
+        opacity:0; pointer-events:none; transition:opacity .25s;
       }
       #sm-modal-cat.visible { opacity:1; pointer-events:all; }
       #sm-modal-cat-box {
         width:100%; max-width:620px; max-height:88vh;
-        background:#0d2249; border-radius:24px 24px 0 0;
+        background:rgba(10,20,50,0.98); border-radius:24px 24px 0 0;
         display:flex; flex-direction:column;
-        transform:translateY(32px); transition:transform .28s cubic-bezier(.4,0,.2,1);
+        border-top:2px solid rgba(244,63,94,0.40);
+        transform:translateY(20px); transition:transform .3s cubic-bezier(.34,1.1,.64,1);
         overflow:hidden;
       }
       #sm-modal-cat.visible #sm-modal-cat-box { transform:translateY(0); }
@@ -662,30 +673,23 @@ const SM_TEMAS_PRIO = ['transportes','frutas','verduras','alimentos','animales']
 function _abrirModalCat() {
   const lista = _el.querySelector('#sm-modal-cat-lista');
   lista.innerHTML = '';
-
   const activoId = _tema?.id ?? null;
   const prio = [], resto = [];
   _temas.forEach(t => (SM_TEMAS_PRIO.includes(t.id) ? prio : resto).push(t));
   prio.sort((a,b) => SM_TEMAS_PRIO.indexOf(a.id) - SM_TEMAS_PRIO.indexOf(b.id));
-
   const grid = document.createElement('div');
   grid.className = 'sm-mosaico';
-
   const tileTodas = _sm_crearTile(null, '🌊', 'Todas las palabras', activoId === null);
   tileTodas.classList.add('sm-tile-todas');
   grid.appendChild(tileTodas);
-
   const sep1 = document.createElement('div'); sep1.className = 'sm-mosaico-divisor';
   grid.appendChild(sep1);
-
   prio.forEach(t => grid.appendChild(_sm_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
-
   if (resto.length) {
     const sep2 = document.createElement('div'); sep2.className = 'sm-mosaico-divisor';
     grid.appendChild(sep2);
     resto.forEach(t => grid.appendChild(_sm_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
   }
-
   lista.appendChild(grid);
   const box = _el.querySelector('#sm-modal-cat-box');
   if (box) box.scrollTop = 0;

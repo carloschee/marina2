@@ -191,12 +191,19 @@ class Progreso:
 
 # ─── Síntesis: Google Cloud TTS (español) ──────────────────────────────────────
 
-def _google_synthesize_sync(texto: str, ipa, voz: str, lang: str,
+def _es_ipa(valor: str) -> bool:
+    # IPA real contiene ˈ (U+02C8) o tiene puntos de separación silábica
+    return 'ˈ' in valor or (len(valor) > 2 and '.' in valor)
+
+
+def _google_synthesize_sync(texto: str, override, voz: str, lang: str,
                              speaking_rate: float, pitch: float) -> bytes:
-    """Llamada síncrona a Google TTS REST. Se ejecuta en un hilo aparte
-    desde el código async (asyncio.to_thread) para no bloquear el loop."""
-    if ipa:
-        contenido = f'<phoneme alphabet="ipa" ph="{ipa}">{texto}</phoneme>'
+    # override puede ser:
+    #   None          -> texto plano sin corrección
+    #   IPA (con ˈ o puntos) -> <phoneme alphabet='ipa' ph='...'>
+    #   texto plano   -> respelling directo (ej. 'combertible')
+    if override and _es_ipa(override):
+        contenido = f'<phoneme alphabet="ipa" ph="{override}">{texto}</phoneme>'
         body_input = {
             "ssml": (
                 '<speak version="1.0" '
@@ -204,6 +211,9 @@ def _google_synthesize_sync(texto: str, ipa, voz: str, lang: str,
                 f'xml:lang="{lang}">{contenido}</speak>'
             )
         }
+    elif override:
+        # Respelling: enviar el texto alternativo directamente como texto plano
+        body_input = {"text": override}
     else:
         body_input = {"text": texto}
 

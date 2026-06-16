@@ -240,7 +240,7 @@ function _renderShell() {
   .mem-par-tile img { width:100%; height:100%; object-fit:contain; padding:4px; pointer-events:none; }
 
   /* ── Modal de temas — bottom-sheet estándar ── */
-  /* ── Modal de temas — mosaico de emojis ── */
+  /* ── Modal de temas — mosaico ── */
   #mem-modal {
     position:absolute; inset:0; z-index:40;
     background:rgba(5,20,50,0.80);
@@ -263,10 +263,7 @@ function _renderShell() {
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 20px 14px; flex-shrink:0;
   }
-  .mem-modal-titulo {
-    font-size:1rem; font-weight:900; letter-spacing:.08em;
-    text-transform:uppercase; color:#00c2ff;
-  }
+  .mem-modal-titulo { font-size:1rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#00c2ff; }
   .mem-modal-cerrar {
     width:36px; height:36px; border-radius:50%; border:none; cursor:pointer;
     background:rgba(255,255,255,0.10); color:#fff; font-size:1rem;
@@ -390,24 +387,18 @@ const MEM_TEMAS_PRIO = ['transportes','frutas','verduras','alimentos','animales'
 function _renderListaTemas() {
   const lista = _q('#mem-lista-temas'); if (!lista) return;
   lista.innerHTML = '';
-
   const activoId = _temaActivo?.id ?? null;
   const prio = [], resto = [];
   _temas.forEach(t => (MEM_TEMAS_PRIO.includes(t.id) ? prio : resto).push(t));
   prio.sort((a,b) => MEM_TEMAS_PRIO.indexOf(a.id) - MEM_TEMAS_PRIO.indexOf(b.id));
-
   const grid = document.createElement('div');
   grid.className = 'mem-mosaico';
-
   const tileTodas = _mem_crearTile(null, '🌊', 'Todas las palabras', activoId === null);
   tileTodas.classList.add('mem-tile-todas');
   grid.appendChild(tileTodas);
-
   const sep1 = document.createElement('div'); sep1.className = 'mem-mosaico-divisor';
   grid.appendChild(sep1);
-
   prio.forEach(t => grid.appendChild(_mem_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
-
   if (resto.length) {
     const sep2 = document.createElement('div'); sep2.className = 'mem-mosaico-divisor';
     grid.appendChild(sep2);
