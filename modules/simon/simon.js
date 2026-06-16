@@ -103,6 +103,7 @@ let _aceptaInput = false;
 let _seqToken    = 0;
 let _lang        = 'es';
 let _audioEl     = null;
+let _introAudio  = null;  // referencia al audio de instrucciones en curso
 
 // ─── API pública ──────────────────────────────────────────────────────────────────
 export async function init(container) {
@@ -129,10 +130,11 @@ export async function init(container) {
 export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
   _detenerTodo();
+  if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
   _el = null; _catalogo = []; _temas = []; _tablero = []; _secuencia = [];
 }
 
-export function onEnter() { if (!(_secuencia.length > 0 || _ronda > 1)) _abrirModalCat(); }
+export function onEnter() { _abrirModalCat(); }
 
 export function onLeave() {
   _detenerTodo();
@@ -479,26 +481,38 @@ const INTRO_EN = 'Hello! Look at the buttons and follow the sequence';
 function _iniciarConIntro() {
   haptic(10);
 
+  // Cancelar instrucciones previas si las hay (ej. cambio de nivel rápido)
+  if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
+  try { window.speechSynthesis?.cancel(); } catch {}
+
   const modal   = _el.querySelector('#sm-modal-intro');
   const texto   = _el.querySelector('#sm-intro-texto');
+
+  // Cerrar y reabrir el modal para limpiar cualquier estado visual anterior
+  modal.classList.remove('visible');
+
   const lang    = (window._langConfig?.en && !window._langConfig?.es) ? 'en' : 'es';
   const msg     = lang === 'en' ? INTRO_EN : INTRO_ES;
   const ttsLang = lang === 'en' ? 'en-US' : 'es-MX';
   const audioSrc = `assets/audio/simon/${lang}/simon-inicio.mp3`;
 
+  // Token para ignorar callbacks de una instrucción anterior que aún no terminó
+  const token = ++_seqToken;
+
   texto.textContent = msg;
   modal.classList.add('visible');
 
   const continuar = () => {
-    if (!_el) return;
+    if (!_el || token !== _seqToken) return;  // instrucción obsoleta → ignorar
     modal.classList.remove('visible');
-    setTimeout(() => { if (_el) _jugar(); }, 350);
+    setTimeout(() => { if (_el && token === _seqToken) _jugar(); }, 350);
   };
 
   // Intentar MP3 pregenerado; fallback a TTS si no existe o falla
-  const audio = new Audio(audioSrc);
-  audio.onended = continuar;
-  audio.onerror = () => {
+  _introAudio = new Audio(audioSrc);
+  _introAudio.onended = continuar;
+  _introAudio.onerror = () => {
+    if (token !== _seqToken) return;
     const synth = window.speechSynthesis;
     if (!synth) { continuar(); return; }
     const u = new SpeechSynthesisUtterance(msg);
@@ -732,6 +746,7 @@ function _detenerTodo() {
   TTS.stop();
   try { window.speechSynthesis?.cancel(); } catch {}
   if (_audioEl) { try { _audioEl.pause(); } catch {} }
+  if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
 }
 
 // ─── Cambio de idioma ─────────────────────────────────────────────────────────────

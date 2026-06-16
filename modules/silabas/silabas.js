@@ -234,6 +234,7 @@ let _el         = null;
 let _catalogo   = [];     // entradas de pictos.json filtradas
 let _temas      = [];     // temas.json
 let _tema       = null;   // null = "Todas las palabras"
+let _temaElegido = false; // true cuando la usuaria elige explícitamente un tema
 let _lista      = [];     // entradas de la categoría activa
 let _idx        = 0;
 let _lang       = 'es';   // 'es' | 'en' | 'ambos'
@@ -246,7 +247,7 @@ export async function init(container) {
   _el = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
   _lang = (_langConfig.es && _langConfig.en) ? 'ambos' : _langConfig.en ? 'en' : 'es';
-  _tema = null;
+  _tema = null; _temaElegido = false;
   _idx  = 0;
 
   try {
@@ -273,10 +274,10 @@ export async function init(container) {
 export function destroy() {
   window.removeEventListener('lang-change', _onLangChange);
   _detenerTodo();
-  _el = null; _catalogo = []; _temas = []; _lista = [];
+  _el = null; _catalogo = []; _temas = []; _lista = []; _temaElegido = false;
 }
 
-export function onEnter() { if (!_lista.length) _abrirModal(); }
+export function onEnter() { if (!_temaElegido) _abrirModal(); }
 
 export function onLeave() {
   _detenerTodo();
@@ -298,7 +299,7 @@ export async function resume(container) {
   window.addEventListener('lang-change', _onLangChange);
   // Si hay una lista cargada (ya se eligió tema), restaurar la palabra actual.
   // Si no, mostrar el modal de temas igual que al entrar por primera vez.
-  if (_lista.length > 0) {
+  if (_temaElegido) {
     _mostrarPalabra();
   } else {
     _abrirModal();
@@ -599,7 +600,7 @@ function _sl_crearTile(id, emoji, label, activo) {
   const tile = document.createElement('button');
   tile.className = 'sl-mosaico-tile' + (activo ? ' activo' : '');
   tile.innerHTML = `<span class="sl-mosaico-emoji">${emoji}</span><span class="sl-mosaico-label">${label}</span>`;
-  tile.addEventListener('click', () => { haptic(10); _aplicarTema(id); _cerrarModal(); });
+  tile.addEventListener('click', () => { haptic(10); _temaElegido = true; _aplicarTema(id); _cerrarModal(); });
   return tile;
 }
 
