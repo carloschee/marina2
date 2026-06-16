@@ -293,6 +293,39 @@ SILABAS_OVERRIDE = {
     'bé':  ('xbe',  'be'),    # bebé — mismo patrón que 'be' (es la misma sílaba con tilde)
     'yak': ('xyak', 'jak'),   # kayak — gibberish+phoneme /jak/ (no /ʝak/, y sin 'xiak')
     'dra': ('drá',  None),    # dragón — respelling con tilde (sin phoneme); evita colisión con "Dra."
+
+    # ── Lote 3: A) deletrea → respelling ──
+    'cin':  ('cín',  None),   # cinturón
+    'ír':   ('ir',   None),   # reír — quitar tilde
+    'brir': ('brír', None),   # abrir
+    'rrar': ('rrár', None),   # cerrar
+    'llu':  ('llú',  None),   # lluvia
+    'iz':   ('íz',   None),   # izquierda
+    'cío':  ('cio',  None),   # vacío — quitar tilde
+    'bke':  ('blé',  None),   # dirigible
+    'fla':  ('flá',  None),   # flamenco
+    'piés': ('pies', None),   # ciempiés — quitar tilde
+
+    # ── Lote 3: B) inglés → gibberish + phoneme ──
+    'fun':  ('xfun',  'fun'),  # confundido
+    'lien': ('xlien', 'ljen'), # valiente/caliente
+    'vie':  ('xvie',  'bje'),  # viejo — v=b en español
+    'so':   ('xso',   'so'),   # ganso/sóplale
+
+    # ── Lote 3: C) diptongo falso → phoneme con texto original ──
+    'pio':  ('pio',  'pjo'),   # limpio — acentuaba la 'i'
+    'cio':  ('cio',  'sjo'),   # sucio/inicio — acentuaba la 'i'
+    'nue':  ('nue',  'nwe'),   # nuevo — acentuaba la 'u'
+    'nie':  ('nie',  'nje'),   # nieve/quitanieves — acentuaba la 'i'
+
+    # ── Lote 3: D) casos especiales ──
+    'hom':  ('om',   None),    # hombro — h muda leída como /x/
+    # 'jeep': sin corrección — el plano ya suena aceptable
+
+    # ── Lote 3b ──
+    'cer':  ('xcer', 'ser'),   # cerca/cerdo/hacer — deletreaba
+    'des':  ('xdes', 'des'),   # descansar — pronunciaba 'de.' sin s
+    'er':   ('xer',  'er'),    # leer — deletreaba
 }
 
 def _resolucion_silaba(silaba: str, idx: int):
