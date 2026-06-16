@@ -718,6 +718,7 @@ function _decirSilaba(silabas, idx) {
     TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
   };
   _audioEl.onerror = fallback;
+  _audioEl.volume = 1;
   _audioEl.src = SILABA_AUDIO_URL(entrada.ruta_img, idx);
   _audioEl.play().catch(fallback);
 
@@ -744,6 +745,7 @@ function _reproducirPalabra() {
     TTS.speak(entrada.es, { lang: 'es-MX', rate: 0.9, pitch: 1.15 });
   };
   _audioEl.onerror = fallback;
+  _audioEl.volume = 1;
   _audioEl.src = AUDIO_URL(entrada.ruta_img, 'es');
   _audioEl.play().catch(fallback);
 }
@@ -835,6 +837,7 @@ function _reproducirSecuencia() {
 
     _audioEl.onended = avanzar;
     _audioEl.onerror = fallbackTTS;
+    _audioEl.volume = 1;
     _audioEl.src = SILABA_AUDIO_URL(entrada.ruta_img, idxActual);
     _audioEl.play().catch(fallbackTTS);
   };
