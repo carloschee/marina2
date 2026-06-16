@@ -326,6 +326,20 @@ SILABAS_OVERRIDE = {
     'cer':  ('xcer', 'ser'),   # cerca/cerdo/hacer — deletreaba
     'des':  ('xdes', 'des'),   # descansar — pronunciaba 'de.' sin s
     'er':   ('xer',  'er'),    # leer — deletreaba
+
+    # ── Lote 4: h muda leída como /x/ → quitar h ──
+    'hal': ('al',  None),      # halcón
+    'hie': ('ie',  None),      # hiena
+    'hu':  ('u',   None),      # huracán
+
+    # ── Lote 4: inglés → gibberish + phoneme ──
+    'car': ('xcar', 'kar'),    # buque de carga / montacargas
+
+    # ── Lote 4: deletrea → respelling con tilde ──
+    'ble': ('blé',  None),     # convertible
+
+    # ── Lote 4: diptongo falso → phoneme con texto original ──
+    'mio': ('mio',  'mjo'),    # camioneta — acentuaba la i
 }
 
 def _resolucion_silaba(silaba: str, idx: int):
@@ -342,14 +356,17 @@ def _resolucion_silaba(silaba: str, idx: int):
          la sílaba misma.
       3) Sin corrección: (silaba, None).
     """
-    clave = silaba.lower()
+    clave = silaba.strip().lower()   # strip() para palabras compuestas como "caballito de mar"
+                                     # donde el silabificador deja espacios: 'to ' en vez de 'to'
+    silaba_limpia = silaba.strip()   # texto base a enviar si no hay override de texto
+
     if clave in SILABAS_OVERRIDE:
         return SILABAS_OVERRIDE[clave]
 
-    if idx > 0 and len(silaba) >= 2 and silaba[0] == 'r' and silaba[1] != 'r':
-        return (silaba, 'ɾ' + silaba[1:])
+    if idx > 0 and len(clave) >= 2 and clave[0] == 'r' and clave[1] != 'r':
+        return (silaba_limpia, 'ɾ' + clave[1:])
 
-    return (silaba, None)
+    return (silaba_limpia, None)
 
 # ─── Overrides manuales ──────────────────────────────────────────────────────
 

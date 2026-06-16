@@ -820,19 +820,18 @@ function _reproducirSecuencia() {
       const textoTTS = _normalizarParaTTS(silabas, idxActual, entrada);
       const duracion = Math.max(700, textoTTS.length * 150);
 
-      // Chrome: speechSynthesis.speak() llamado en el mismo ciclo que un
-      // evento de error/cancel de <audio> a menudo no produce audio (sin
-      // error, sin sonido). Limpiar el <audio> que quedó en estado de error
-      // y dar un pequeño respiro antes de hablar evita el silencio.
       try { _audioEl.removeAttribute('src'); _audioEl.load(); } catch {}
       setTimeout(() => {
+        // Si el usuario navegó a otro pictograma mientras esperábamos,
+        // el token ya cambió — no hablar con el texto del picto anterior.
+        if (token !== _seqToken) return;
         try {
           window.speechSynthesis?.resume();
           TTS.speak(textoTTS, { lang: 'es-MX', rate: 0.7, pitch: 1.1 });
         } catch {}
       }, 80);
 
-      setTimeout(avanzar, duracion + 80);
+      setTimeout(() => { if (token === _seqToken) avanzar(); }, duracion + 80);
     };
 
     _audioEl.onended = avanzar;
