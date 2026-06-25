@@ -467,7 +467,10 @@ function _renderGrid() {
   const grid = _q('#mem-grid'); if (!grid) return;
   grid.innerHTML = '';
   const total  = _cartas.length;
-  const layout = { 12: { cols: 4, filas: 3 }, 24: { cols: 6, filas: 4 }, 48: { cols: 12, filas: 4 } }[total] || { cols: 12, filas: 4 };
+  const portrait = window.innerHeight > window.innerWidth;
+  const layout = portrait
+    ? ({ 12: { cols: 4, filas: 3 }, 24: { cols: 4, filas: 6 }, 48: { cols: 4, filas: 12 } }[total] || { cols: 4, filas: 12 })
+    : ({ 12: { cols: 4, filas: 3 }, 24: { cols: 6, filas: 4 }, 48: { cols: 12, filas: 4 } }[total] || { cols: 12, filas: 4 });
   grid.style.gridTemplateColumns = `repeat(${layout.cols}, 1fr)`;
   grid.style.gridTemplateRows    = `repeat(${layout.filas}, 1fr)`;
 
