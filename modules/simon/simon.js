@@ -133,7 +133,14 @@ export function destroy() {
   _el = null; _catalogo = []; _temas = []; _tablero = []; _secuencia = [];
 }
 
-export function onEnter() { _abrirModalCat(); }
+export function onEnter() {
+  if (!_tablero.length) {
+    _abrirModalCat();
+  } else {
+    // Reanudar partida existente tras resume() o regreso al módulo
+    _iniciarConIntro();
+  }
+}
 
 export function onLeave() {
   _detenerTodo();
@@ -150,15 +157,13 @@ export async function resume(container) {
   _render();
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
-  // Si hay una partida en curso, restaurarla; si no, mostrar el modal de temas.
-  if (_secuencia.length > 0 || _ronda > 1) {
+  // onEnter() (llamado por app.js justo después) decide si abrir modal o reanudar.
+  // resume() solo reconstruye el DOM; no inicia audio ni abre modales.
+  if (_tablero.length) {
     _renderTablero();
     _actualizarRonda();
     _setStatus('', '');
     _el.querySelector('#sm-repetir')?.classList.add('oculto');
-    _iniciarConIntro();
-  } else {
-    _abrirModalCat();
   }
 }
 
@@ -478,7 +483,7 @@ const INTRO_ES = '¡Hola! Observa los botones y sigue la secuencia';
 const INTRO_EN = 'Hello! Look at the buttons and follow the sequence';
 
 function _iniciarConIntro() {
-  haptic(10);
+  // haptic omitido — puede llamarse fuera de gesto de usuario en iOS
 
   // Cancelar instrucciones previas si las hay (ej. cambio de nivel rápido)
   if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
@@ -532,7 +537,11 @@ function _iniciarConIntro() {
     u.onend = continuar; u.onerror = continuar;
     try { synth.cancel(); synth.speak(u); } catch { continuar(); }
   };
-  _introAudio.play().catch(() => { limpiarTimer(); if (token === _seqToken) _introAudio?.onerror?.(); });
+  _introAudio.play().catch(() => {
+    limpiarTimer();
+    // No llamar onerror() directamente — en iOS speechSynthesis fuera de gesto causa errores.
+    // El safetyTimer de 5s garantiza que continuar() se llama de todas formas.
+  });
 }
 
 function _renderTablero() {
@@ -605,7 +614,10 @@ function _reproducirNombreAsync(entrada) {
       try { window.speechSynthesis.speak(u); } catch { fin(); }
     };
     _audioEl.src = AUDIO_URL(entrada.ruta_img, langCode);
-    _audioEl.play().catch(() => _audioEl.onerror());
+    _audioEl.play().catch(() => {
+      // play() rechazado (ej. iOS sin gesto): disparar fallback TTS de forma segura
+      try { if (_audioEl.onerror) _audioEl.onerror(); } catch { fin(); }
+    });
     // Guardia de tiempo máximo (evita bloqueos si el audio dura mucho)
     setTimeout(fin, 1800);
   });
