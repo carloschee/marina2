@@ -137,12 +137,7 @@ export function onEnter() {
   if (!_tablero.length) {
     _abrirModalCat();
   } else {
-    // Tablero ya renderizado por resume() — solo mostrar botón "Ver otra vez".
-    // NO llamar _iniciarConIntro() aqui: en iOS PWA, play() fuera de gesto
-    // de usuario es rechazado y speechSynthesis tambien falla silenciosamente,
-    // lo que deja el modulo colgado. El usuario arranca con el boton.
-    _setStatus('Toca "Ver otra vez" para empezar', 'observa');
-    _el.querySelector('#sm-repetir')?.classList.remove('oculto');
+    _iniciarConIntro();
   }
 }
 
@@ -161,8 +156,8 @@ export async function resume(container) {
   _render();
   window.removeEventListener('lang-change', _onLangChange);
   window.addEventListener('lang-change', _onLangChange);
-  // onEnter() (llamado por app.js justo después) decide si abrir modal o reanudar.
-  // resume() solo reconstruye el DOM; no inicia audio ni abre modales.
+  // onEnter() (llamado por app.js tras resume) decide si abrir modal o reanudar.
+  // resume() solo reconstruye el DOM visual.
   if (_tablero.length) {
     _renderTablero();
     _actualizarRonda();
@@ -487,7 +482,7 @@ const INTRO_ES = '¡Hola! Observa los botones y sigue la secuencia';
 const INTRO_EN = 'Hello! Look at the buttons and follow the sequence';
 
 function _iniciarConIntro() {
-  // haptic omitido — puede llamarse fuera de gesto de usuario en iOS
+  // haptic omitido — puede ejecutarse fuera de gesto en iOS
 
   // Cancelar instrucciones previas si las hay (ej. cambio de nivel rápido)
   if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
@@ -522,7 +517,7 @@ function _iniciarConIntro() {
     if (token !== _seqToken) return;
     if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
     continuar();
-  }, 3500);
+  }, 5000);
 
   const limpiarTimer = () => clearTimeout(safetyTimer);
 
@@ -543,10 +538,8 @@ function _iniciarConIntro() {
   };
   _introAudio.play().catch(() => {
     limpiarTimer();
-    // En iOS PWA, play() fuera de gesto es rechazado y onerror no siempre dispara.
-    // Llamar continuar() directamente es la salida mas robusta;
-    // evita speechSynthesis fuera de gesto (que tambien falla en iOS).
-    continuar();
+    // No invocar onerror() — en iOS puede encadenar speechSynthesis fuera de gesto.
+    // El safetyTimer de 5s garantiza que continuar() se llama de todas formas.
   });
 }
 
@@ -607,25 +600,31 @@ function _reproducirNombreAsync(entrada) {
   return new Promise(resolve => {
     if (!entrada) { resolve(); return; }
     const langCode = _lang === 'en' ? 'en' : 'es';
-    const texto    = (langCode === 'en' && entrada.en) ? entrada.en : entrada.es;
-    if (!_audioEl) { _audioEl = document.createElement('audio'); _audioEl.preload = 'none'; }
-    try { _audioEl.pause(); } catch {}
+
+    // Crear un elemento nuevo por cada llamada evita estado sucio entre rondas.
+    // En iOS, reutilizar el mismo <audio> con .pause() + nuevo .src puede
+    // dejar el elemento en un estado donde onerror/onended nunca disparan.
+    const audio = new Audio();
+    audio.preload = 'none';
+
     let done = false;
     const fin = () => { if (!done) { done = true; resolve(); } };
-    _audioEl.onended = fin; _audioEl.onerror = () => {
-      const u    = new SpeechSynthesisUtterance(texto);
-      u.lang     = langCode === 'en' ? 'en-US' : 'es-MX';
-      u.rate     = 0.95; u.pitch = 1.1;
-      u.onend    = fin; u.onerror = fin;
-      try { window.speechSynthesis.speak(u); } catch { fin(); }
-    };
-    _audioEl.src = AUDIO_URL(entrada.ruta_img, langCode);
-    _audioEl.play().catch(() => {
-      // play() rechazado (ej. iOS sin gesto): disparar fallback TTS de forma segura
-      try { if (_audioEl.onerror) _audioEl.onerror(); } catch { fin(); }
-    });
-    // Guardia de tiempo máximo (evita bloqueos si el audio dura mucho)
-    setTimeout(fin, 1800);
+
+    // Guardia de tiempo máximo — garantiza que la promesa siempre resuelve
+    const timer = setTimeout(fin, 1600);
+    const finConTimer = () => { clearTimeout(timer); fin(); };
+
+    audio.onended = finConTimer;
+
+    // En onerror: avanzar directamente sin depender de speechSynthesis.
+    // En iOS, speak() fuera de gesto activo puede quedar en cola sin disparar
+    // onend, bloqueando la secuencia indefinidamente.
+    audio.onerror = finConTimer;
+
+    audio.src = AUDIO_URL(entrada.ruta_img, langCode);
+
+    // play() puede rechazar en iOS si no hay gesto activo — fin() como fallback
+    audio.play().catch(finConTimer);
   });
 }
 
@@ -777,7 +776,7 @@ function _detenerTodo() {
   _detenerSecuencia(); _aceptaInput = false;
   TTS.stop();
   try { window.speechSynthesis?.cancel(); } catch {}
-  if (_audioEl) { try { _audioEl.pause(); } catch {} }
+  if (_audioEl) { try { _audioEl.pause(); } catch {} _audioEl = null; }
   if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
 }
 
