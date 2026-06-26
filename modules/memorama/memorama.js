@@ -65,7 +65,16 @@ export function destroy() {
   _cartas = []; _temaActivo = null; _container = null; _pictos = {};
 }
 
-export function onEnter() { _mostrarModal(); }
+export function onEnter() {
+  // Abrir modal solo si no hay partida en curso;
+  // si ya hay cartas en juego (persistencia via pause/resume) mostrar el tablero.
+  if (_temaActivo && _cartas.length) {
+    _q('#mem-grid-wrap')?.classList.remove('oculto');
+    _q('#mem-modal')?.classList.add('oculto');
+  } else {
+    _mostrarModal();
+  }
+}
 export function onLeave() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 export async function pause() { if (_audioEl) _audioEl.pause(); TTS.stop(); }
 

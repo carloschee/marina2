@@ -137,8 +137,12 @@ export function onEnter() {
   if (!_tablero.length) {
     _abrirModalCat();
   } else {
-    // Reanudar partida existente tras resume() o regreso al módulo
-    _iniciarConIntro();
+    // Tablero ya renderizado por resume() — solo mostrar botón "Ver otra vez".
+    // NO llamar _iniciarConIntro() aqui: en iOS PWA, play() fuera de gesto
+    // de usuario es rechazado y speechSynthesis tambien falla silenciosamente,
+    // lo que deja el modulo colgado. El usuario arranca con el boton.
+    _setStatus('Toca "Ver otra vez" para empezar', 'observa');
+    _el.querySelector('#sm-repetir')?.classList.remove('oculto');
   }
 }
 
@@ -518,7 +522,7 @@ function _iniciarConIntro() {
     if (token !== _seqToken) return;
     if (_introAudio) { try { _introAudio.pause(); } catch {} _introAudio = null; }
     continuar();
-  }, 5000);
+  }, 3500);
 
   const limpiarTimer = () => clearTimeout(safetyTimer);
 
@@ -539,8 +543,10 @@ function _iniciarConIntro() {
   };
   _introAudio.play().catch(() => {
     limpiarTimer();
-    // No llamar onerror() directamente — en iOS speechSynthesis fuera de gesto causa errores.
-    // El safetyTimer de 5s garantiza que continuar() se llama de todas formas.
+    // En iOS PWA, play() fuera de gesto es rechazado y onerror no siempre dispara.
+    // Llamar continuar() directamente es la salida mas robusta;
+    // evita speechSynthesis fuera de gesto (que tambien falla en iOS).
+    continuar();
   });
 }
 
