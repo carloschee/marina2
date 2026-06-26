@@ -5,47 +5,47 @@
    con agrupación Vocabulario / Lenguaje, igual que Sílabas y Simón.
 */
 
-import { TTS } from '../../core/tts.js';
+import { TTS }           from '../../core/tts.js';
 import { haptic, lanzarConfeti } from '../../core/ui.js';
-import { Telemetry } from '../../core/telemetry.js';
+import { Telemetry }     from '../../core/telemetry.js';
 
-const PICTO_URL = (r) => `assets/pictogramas/${r.toLowerCase()}`;
-const AUDIO_URL = (r, lang = 'es') =>
+const PICTO_URL      = (r) => `assets/pictogramas/${r.toLowerCase()}`;
+const AUDIO_URL      = (r, lang = 'es') =>
   `assets/audio/${lang}/${r.replace(/\.png$/i, '').toLowerCase()}.mp3`;
 const MEJOR_RACHA_KEY = 'marina2-toca-mejor-racha';
-const MOSAIC_SIZE = 260;
+const MOSAIC_SIZE     = 260;
 // Opciones por nivel (índice 0-4)
-const NIVELES = [3, 4, 5, 6, 8];
+const NIVELES         = [3, 4, 5, 6, 8];
 // Aciertos CONSECUTIVOS requeridos para subir de nivel
 const ACIERTOS_POR_NIVEL = [3, 4, 5, 6, 8];
 
-let _el = null;
-let _catalogo = [];
-let _temas = [];
-let _tema = null;
-let _pool = [];
-let _opciones = [];
-let _objetivo = null;
-let _nivel = 0;
-let _aciertos = 0;
+let _el           = null;
+let _catalogo     = [];
+let _temas        = [];
+let _tema         = null;
+let _pool         = [];
+let _opciones     = [];
+let _objetivo     = null;
+let _nivel        = 0;
+let _aciertos     = 0;
 let _modoInfinito = false;
-let _racha = 0;
-let _mejorRacha = 0;
-let _esperando = false;
-let _lang = 'es';
-let _langConfig = { es: true, en: false };
-let _audioEl = null;
-let _gridW = 0;
-let _gridH = 0;
-let _resizeObs = null;
+let _racha        = 0;
+let _mejorRacha   = 0;
+let _esperando    = false;
+let _lang         = 'es';
+let _langConfig   = { es: true, en: false };
+let _audioEl      = null;
+let _gridW        = 0;
+let _gridH        = 0;
+let _resizeObs    = null;
 
 // ─── API pública ──────────────────────────────────────────────────────────────
 export async function init(container) {
-  _el = container;
-  _langConfig = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
-  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
-  _nivel = 0; _aciertos = 0; _modoInfinito = false;
-  _racha = 0; _esperando = false; _tema = null;
+  _el           = container;
+  _langConfig   = window._langConfig ? { ...window._langConfig } : { es: true, en: false };
+  _lang         = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _nivel        = 0; _aciertos = 0; _modoInfinito = false;
+  _racha        = 0; _esperando = false; _tema = null;
 
   try { _mejorRacha = parseInt(localStorage.getItem(MEJOR_RACHA_KEY) || '0', 10) || 0; }
   catch { _mejorRacha = 0; }
@@ -90,9 +90,9 @@ export async function pause() {
 }
 
 export async function resume(container) {
-  _el = container;
+  _el         = container;
   _langConfig = window._langConfig ? { ...window._langConfig } : _langConfig;
-  _lang = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
+  _lang       = (_langConfig.en && !_langConfig.es) ? 'en' : 'es';
   _render();
 
   // El botón de tema solo dice 'Temas' — no hay label dinámico que restaurar
@@ -291,7 +291,6 @@ function _render() {
     }
     #tc-fallo-btn:active { transform:scale(.93); }
 
-    /* ── Modal de temas — bottom-sheet estándar ── */
     /* ── Modal de temas — mosaico ── */
     #tc-modal-temas {
       position:fixed; inset:0; z-index:200;
@@ -308,8 +307,14 @@ function _render() {
       overflow:hidden;
     }
     #tc-modal-temas.visible #tc-modal-box { transform:translateY(0); }
-    #tc-modal-header { display:flex; align-items:center; justify-content:space-between; padding:18px 20px 14px; flex-shrink:0; }
-    #tc-modal-titulo { font-size:1rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#00e5b0; }
+    #tc-modal-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 20px 14px; flex-shrink:0;
+    }
+    #tc-modal-titulo {
+      font-size:1rem; font-weight:900; letter-spacing:.08em;
+      text-transform:uppercase; color:#00e5b0;
+    }
     #tc-modal-cerrar {
       width:36px; height:36px; border-radius:50%; border:none; cursor:pointer;
       background:rgba(255,255,255,0.10); color:#fff; font-size:1rem;
@@ -424,15 +429,13 @@ function _observarGrid() {
   if (!grid) return;
   _resizeObs?.disconnect();
   if (typeof ResizeObserver === 'undefined') {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (!_el) return;
-        const g = _el.querySelector('#tc-grid');
-        if (g && g.clientWidth > 50 && g.clientHeight > 50) {
-          _gridW = g.clientWidth; _gridH = g.clientHeight; _ajustarTamanos();
-        }
-      });
-    });
+    requestAnimationFrame(() => { requestAnimationFrame(() => {
+      if (!_el) return;
+      const g = _el.querySelector('#tc-grid');
+      if (g && g.clientWidth > 50 && g.clientHeight > 50) {
+        _gridW = g.clientWidth; _gridH = g.clientHeight; _ajustarTamanos();
+      }
+    }); });
     return;
   }
   _resizeObs = new ResizeObserver(entries => {
@@ -452,9 +455,9 @@ function _nuevaRonda() {
   if (!_el) return;
   const n = _modoInfinito ? NIVELES[NIVELES.length - 1] : NIVELES[_nivel];
   if (_catalogo.length < n) {
-    _el.querySelector('#tc-grid').style.display = 'none';
+    _el.querySelector('#tc-grid').style.display      = 'none';
     _el.querySelector('#tc-instruccion').style.display = 'none';
-    _el.querySelector('#tc-vacio').style.display = 'flex';
+    _el.querySelector('#tc-vacio').style.display     = 'flex';
     return;
   }
   _esperando = false;
@@ -536,7 +539,7 @@ function _mostrarSubidaNivel() {
   const emojis = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '🏆'];
   _el.querySelector('#tc-nivel-up-emoji').textContent = emojis[Math.min(_nivel, emojis.length - 1)];
   _el.querySelector('#tc-nivel-up-texto').textContent = _lang === 'en' ? `Level ${_nivel + 1}!` : `¡Nivel ${_nivel + 1}!`;
-  _el.querySelector('#tc-nivel-up-sub').textContent = _lang === 'en'
+  _el.querySelector('#tc-nivel-up-sub').textContent   = _lang === 'en'
     ? `Now ${NIVELES[_nivel]} pictures — ${ACIERTOS_POR_NIVEL[_nivel]} in a row!`
     : `Ahora ${NIVELES[_nivel]} opciones — ¡${ACIERTOS_POR_NIVEL[_nivel]} seguidos!`;
   _el.querySelector('#tc-nivel-up').classList.add('visible'); _confeti(60);
@@ -551,7 +554,7 @@ function _activarModoInfinito() {
   _el.querySelector('#tc-dots').style.display = 'none';
   _el.querySelector('#tc-nivel-up-emoji').textContent = '🏆';
   _el.querySelector('#tc-nivel-up-texto').textContent = _lang === 'en' ? '∞ Champion!' : '∞ ¡Campeona!';
-  _el.querySelector('#tc-nivel-up-sub').textContent = _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
+  _el.querySelector('#tc-nivel-up-sub').textContent   = _lang === 'en' ? 'Infinite challenge!' : '¡Reto infinito!';
   _el.querySelector('#tc-nivel-up').classList.add('visible'); _confeti(120);
   TTS.speak(_lang === 'en' ? 'Champion! Infinite challenge!' : '¡Campeona! ¡Reto infinito!', { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.3, rate: 0.9 });
   setTimeout(() => { if (!_el) return; _el.querySelector('#tc-nivel-up').classList.remove('visible'); _nuevaRonda(); }, 2800);
@@ -561,25 +564,27 @@ function _mostrarFalloInfinito() {
   const esRecord = _racha > _mejorRacha;
   if (esRecord && _racha > 0) {
     _mejorRacha = _racha;
-    try { localStorage.setItem(MEJOR_RACHA_KEY, String(_mejorRacha)); } catch { }
+    try { localStorage.setItem(MEJOR_RACHA_KEY, String(_mejorRacha)); } catch {}
     _el.querySelector('#tc-record-valor').textContent = _mejorRacha;
     _el.querySelector('#tc-record-wrap').classList.add('visible');
   }
-  _el.querySelector('#tc-fallo-racha').textContent = _racha;
-  _el.querySelector('#tc-fallo-emoji').textContent = _racha >= 10 ? '🌟' : '💫';
-  _el.querySelector('#tc-fallo-label').textContent = _lang === 'en' ? 'consecutive hits' : 'aciertos consecutivos';
+  _el.querySelector('#tc-fallo-racha').textContent  = _racha;
+  _el.querySelector('#tc-fallo-emoji').textContent  = _racha >= 10 ? '🌟' : '💫';
+  _el.querySelector('#tc-fallo-label').textContent  = _lang === 'en' ? 'consecutive hits' : 'aciertos consecutivos';
   _el.querySelector('#tc-fallo-record').textContent = esRecord && _racha > 0
     ? (_lang === 'en' ? `🏆 New record!` : `🏆 ¡Nuevo récord!`)
     : (_mejorRacha > 0 ? (_lang === 'en' ? `Best: ${_mejorRacha}` : `Récord: ${_mejorRacha}`) : '');
   _el.querySelector('#tc-fallo-btn').textContent = _lang === 'en' ? 'Keep playing' : 'Seguir jugando';
   _el.querySelector('#tc-fallo-infinito').classList.add('visible');
   if (_racha >= 5) _confeti(40);
-  TTS.speak(_lang === 'en' ? `${_racha} in a row!${esRecord ? ' New record!' : ''}` : `¡${_racha} seguidos!${esRecord ? ' ¡Nuevo récord!' : ''}`, { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.1, rate: 0.9 });
+  TTS.speak(_lang === 'en'
+    ? `${_racha} in a row!${esRecord ? ' New record!' : ''}`
+    : `¡${_racha} seguidos!${esRecord ? ' ¡Nuevo récord!' : ''}`,
+    { lang: _lang === 'en' ? 'en-US' : 'es-MX', pitch: 1.1, rate: 0.9 });
 }
 
-// ─── Modal de temas ───────────────────────────────────────────────────────────
-// ─── Modal de temas — mosaico ────────────────────────────────────────────────
-const TC_TEMAS_PRIO = ['transportes', 'frutas', 'verduras', 'alimentos', 'animales'];
+// ─── Modal de temas — mosaico ─────────────────────────────────────────────────
+const TC_TEMAS_PRIO = ['transportes','frutas','verduras','alimentos','animales'];
 
 function _abrirModalTemas() {
   const lista = _el.querySelector('#tc-modal-lista');
@@ -588,7 +593,7 @@ function _abrirModalTemas() {
   const activoId = _tema?.id ?? null;
   const prio = [], resto = [];
   _temas.forEach(t => (TC_TEMAS_PRIO.includes(t.id) ? prio : resto).push(t));
-  prio.sort((a, b) => TC_TEMAS_PRIO.indexOf(a.id) - TC_TEMAS_PRIO.indexOf(b.id));
+  prio.sort((a,b) => TC_TEMAS_PRIO.indexOf(a.id) - TC_TEMAS_PRIO.indexOf(b.id));
 
   const grid = document.createElement('div');
   grid.className = 'tc-mosaico';
@@ -600,12 +605,12 @@ function _abrirModalTemas() {
   const sep1 = document.createElement('div'); sep1.className = 'tc-mosaico-divisor';
   grid.appendChild(sep1);
 
-  prio.forEach(t => grid.appendChild(_tc_crearTile(t.id, t.emoji || '📚', t.label, t.id === activoId)));
+  prio.forEach(t => grid.appendChild(_tc_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
 
   if (resto.length) {
     const sep2 = document.createElement('div'); sep2.className = 'tc-mosaico-divisor';
     grid.appendChild(sep2);
-    resto.forEach(t => grid.appendChild(_tc_crearTile(t.id, t.emoji || '📚', t.label, t.id === activoId)));
+    resto.forEach(t => grid.appendChild(_tc_crearTile(t.id, t.emoji||'📚', t.label, t.id===activoId)));
   }
 
   lista.appendChild(grid);
@@ -642,7 +647,7 @@ function _seleccionarTema(id) {
 // ─── Audio e instrucción ──────────────────────────────────────────────────────
 function _reproducirInstruccion() {
   if (!_objetivo) return;
-  const lang = _lang === 'en' ? 'en-US' : 'es-MX';
+  const lang  = _lang === 'en' ? 'en-US' : 'es-MX';
   const texto = _lang === 'en'
     ? `Touch the ${_objetivo.en || _objetivo.es}`
     : `Toca ${_objetivo.art ? _objetivo.art + ' ' : ''}${_objetivo.es}`;
@@ -687,6 +692,7 @@ function _renderDots() {
 
 function _actualizarRacha() { if (!_el) return; _el.querySelector('#tc-racha-valor').textContent = _racha; }
 
+// ─── Layout de tiles ─────────────────────────────────────────────────────────
 function _ajustarTamanos() {
   const grid = _el.querySelector('#tc-grid'); if (!grid) return;
   let W = _gridW, H = _gridH;
@@ -695,18 +701,22 @@ function _ajustarTamanos() {
     if (W < 50 || H < 50) { requestAnimationFrame(() => { if (_el) _ajustarTamanos(); }); return; }
     _gridW = W; _gridH = H;
   }
-  const n = _opciones.length;
+  const n       = _opciones.length;
   const portrait = H > W;
+
+  // En portrait: máx 2 columnas para que los tiles sean suficientemente grandes
+  // En landscape: la lógica original (hasta 4 columnas)
   const cols = portrait
-    ? (n <= 2 ? n : 2)   // portrait: máx 2 columnas siempre
+    ? (n <= 2 ? n : 2)
     : (n <= 3 ? n : n <= 4 ? 2 : n <= 6 ? 3 : 4);
+
   const rows = Math.ceil(n / cols);
-  const avW = W - 24 - 12 * (cols - 1);
-  const avH = H - 24 - 12 * (rows - 1);
-  const portrait = H > W;
+  const avW  = W - 24 - 12 * (cols - 1);
+  const avH  = H - 24 - 12 * (rows - 1);
   const size = Math.max(80, portrait
     ? Math.min(avW / cols, avH / rows, 200)
     : Math.min(avW / cols, avH / rows, MOSAIC_SIZE));
+
   grid.querySelectorAll('.tc-opcion').forEach(o => {
     o.style.width = o.style.height = o.style.flexBasis = size + 'px';
     o.style.flexGrow = o.style.flexShrink = '0';
@@ -728,7 +738,7 @@ function _onLangChange(e) {
 // ─── Util ─────────────────────────────────────────────────────────────────────
 function _shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));[arr[i], arr[j]] = [arr[j], arr[i]];
+    const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
 }
