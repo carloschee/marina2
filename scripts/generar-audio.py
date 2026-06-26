@@ -34,6 +34,10 @@ Opciones:
   --solo-frases     Solo frases y piezas (ambos idiomas)
   --seco            Dry run — muestra qué haría sin generar nada
   --concurrencia N  Peticiones simultáneas (default: 5)
+  --optimizar       Recomprime todos los MP3 en assets/audio/ a 32 kbps mono
+                    con ffmpeg (requiere ffmpeg en PATH). Sobreescribe los
+                    archivos originales. Compatible con --seco para previsualizar.
+                    No requiere API key — es independiente de la generación TTS.
 
 ── data/ipa-overrides.json ───────────────────────────────────────────────────
 Archivo opcional (puede no existir o estar vacío: {}). Mapea texto exacto
@@ -53,6 +57,9 @@ plano. El resto del catálogo no se ve afectado.
 
 import asyncio
 import base64
+import shutil
+import subprocess
+import tempfile
 import json
 import os
 import sys
@@ -327,6 +334,112 @@ def escribir_log(errores_log: list):
             )
     print(f"\n📋  Log de errores: scripts/errores-audio.log")
 
+# ─── Optimización de MP3 con ffmpeg ──────────────────────────────────────────
+
+BITRATE_OPTIMIZADO = "32k"   # Suficiente para voz; reduce ~50% vs 128 kbps
+
+def _verificar_ffmpeg() -> bool:
+    """Devuelve True si ffmpeg está disponible en PATH."""
+    return shutil.which("ffmpeg") is not None
+
+
+def optimizar_mp3(seco: bool = False) -> None:
+    """
+    Escanea assets/audio/ recursivamente, recomprime cada .mp3 a
+    BITRATE_OPTIMIZADO kbps mono con ffmpeg y sobreescribe el original.
+
+    Estrategia segura:
+      1. ffmpeg escribe a un .tmp en el mismo directorio.
+      2. Solo si el .tmp es mayor que 0 bytes se sobreescribe el original.
+      3. Si ffmpeg falla, el original queda intacto y se anota el error.
+
+    Con --seco muestra cuántos archivos se procesarían y el ahorro estimado
+    sin tocar nada.
+    """
+    if not _verificar_ffmpeg():
+        print("❌  ffmpeg no está disponible en PATH.")
+        print("   Instálalo con: brew install ffmpeg  (macOS)")
+        print("                  sudo apt install ffmpeg  (Linux)")
+        print("                  https://ffmpeg.org/download.html  (Windows)")
+        return
+
+    archivos = sorted(DIR_AUDIO.rglob("*.mp3"))
+    if not archivos:
+        print("   No se encontraron archivos .mp3 en assets/audio/")
+        return
+
+    print(f"\n🗜️   Optimizando MP3 — {len(archivos)} archivos encontrados")
+    print(f"   Bitrate objetivo : {BITRATE_OPTIMIZADO} mono")
+    if seco:
+        print(f"   ⚡ DRY RUN — no se modificará ningún archivo")
+
+    # En dry-run: estimar tamaño actual y proyectado
+    if seco:
+        total_bytes = sum(f.stat().st_size for f in archivos)
+        # Estimación conservadora: 40% de reducción promedio para voz a 32 kbps
+        estimado_bytes = int(total_bytes * 0.60)
+        ahorro_mb = (total_bytes - estimado_bytes) / 1_048_576
+        print(f"   Tamaño actual    : {total_bytes / 1_048_576:.1f} MB")
+        print(f"   Ahorro estimado  : ~{ahorro_mb:.1f} MB (≈40%)")
+        print(f"   (Ejecuta sin --seco para aplicar)")
+        return
+
+    optimizados = errores = omitidos = 0
+    bytes_antes = bytes_despues = 0
+    progreso = Progreso(len(archivos), "mp3")
+
+    for ruta in archivos:
+        tam_original = ruta.stat().st_size
+        if tam_original == 0:
+            omitidos += 1
+            progreso.avanzar()
+            continue
+
+        tmp = ruta.with_suffix(".tmp.mp3")
+        try:
+            resultado = subprocess.run(
+                [
+                    "ffmpeg", "-y",           # sobreescribir tmp si existe
+                    "-i", str(ruta),           # entrada
+                    "-b:a", BITRATE_OPTIMIZADO, # bitrate audio
+                    "-ac", "1",               # mono
+                    "-vn",                     # sin video
+                    "-loglevel", "error",     # silencioso salvo errores
+                    str(tmp),
+                ],
+                capture_output=True,
+                timeout=30,
+            )
+            if resultado.returncode != 0 or not tmp.exists() or tmp.stat().st_size == 0:
+                raise RuntimeError(
+                    resultado.stderr.decode("utf-8", errors="replace").strip()
+                    or "ffmpeg terminó sin output"
+                )
+            tam_nuevo = tmp.stat().st_size
+            tmp.replace(ruta)   # sobreescritura atómica
+            bytes_antes    += tam_original
+            bytes_despues  += tam_nuevo
+            optimizados    += 1
+        except Exception as exc:
+            if tmp.exists():
+                tmp.unlink(missing_ok=True)
+            errores += 1
+            print(f"\n   ⚠️  {ruta.relative_to(RAIZ)}: {exc}")
+        finally:
+            progreso.avanzar()
+
+    progreso.cerrar()
+
+    ahorro_mb   = (bytes_antes - bytes_despues) / 1_048_576
+    reduccion   = (1 - bytes_despues / bytes_antes) * 100 if bytes_antes else 0
+    print(f"   ✅ {optimizados} optimizados · {omitidos} vacíos omitidos · {errores} errores")
+    print(f"   Tamaño antes  : {bytes_antes  / 1_048_576:.1f} MB")
+    print(f"   Tamaño después: {bytes_despues / 1_048_576:.1f} MB")
+    print(f"   Ahorro real   : {ahorro_mb:.1f} MB  ({reduccion:.0f}% de reducción)")
+    if errores:
+        print(f"   ⚠️  {errores} archivo(s) no pudieron optimizarse — originales intactos")
+
+
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 async def main():
@@ -337,10 +450,17 @@ async def main():
     parser.add_argument("--solo-frases",  action="store_true")
     parser.add_argument("--seco",         action="store_true")
     parser.add_argument("--concurrencia", type=int, default=5, metavar="N")
+    parser.add_argument("--optimizar",    action="store_true",
+                        help="Recomprime todos los MP3 a 32 kbps mono con ffmpeg")
     args = parser.parse_args()
 
     modo_solo_frases = args.solo_frases and not (args.solo_es or args.solo_en)
     conc             = max(1, min(args.concurrencia, 20))
+
+    # ── --optimizar: recomprimir MP3 y salir (no requiere API key) ────────────
+    if args.optimizar:
+        optimizar_mp3(seco=args.seco)
+        return
 
     # ── Verificar API key de Google si se va a generar algo en español ────────
     necesita_es = not args.solo_en
