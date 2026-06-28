@@ -513,6 +513,7 @@
       {
         "tipo": "picto",
         "texto": "hot air balloon"
+        "picto_id": 1057
       },
       {
         "tipo": "texto",
@@ -521,6 +522,7 @@
       {
         "tipo": "picto",
         "texto": "sky"
+        "picto_id": 1207
       }
     ]
   },
@@ -537,6 +539,7 @@
       {
         "tipo": "picto",
         "texto": "sun"
+        "picto_id": 1160
       },
       {
         "tipo": "texto",
@@ -545,6 +548,7 @@
       {
         "tipo": "picto",
         "texto": "outside"
+        "picto_id": 1212
       }
     ]
   },
