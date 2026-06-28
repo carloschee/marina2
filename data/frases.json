@@ -512,7 +512,7 @@
     "piezas": [
       {
         "tipo": "picto",
-        "texto": "hot air balloon"
+        "texto": "hot air balloon",
         "picto_id": 1057
       },
       {
@@ -521,7 +521,7 @@
       },
       {
         "tipo": "picto",
-        "texto": "sky"
+        "texto": "sky",
         "picto_id": 1207
       }
     ]
@@ -538,7 +538,7 @@
       },
       {
         "tipo": "picto",
-        "texto": "sun"
+        "texto": "sun",
         "picto_id": 1160
       },
       {
@@ -547,7 +547,7 @@
       },
       {
         "tipo": "picto",
-        "texto": "outside"
+        "texto": "outside",
         "picto_id": 1212
       }
     ]
