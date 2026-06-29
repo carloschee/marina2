@@ -9,3 +9,4 @@ scripts/pictos-art-csv.py
 assets/pictogramas/en/*
 assets/pictogramas/es/*
 PENDIENTES.md
+scripts/errores-audio.log
