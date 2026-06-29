@@ -10,3 +10,13 @@ assets/pictogramas/en/*
 assets/pictogramas/es/*
 PENDIENTES.md
 scripts/errores-audio.log
+scripts/errores-audio-silabas.log
+scripts/pictos-art.csv
+scripts/pictos.csv
+scripts/clasificar-temas.py
+scripts/descargar-pictos-playwright.py
+scripts/descargar-pictos.py
+scripts/editar-vocabulario.py
+scripts/generar-catalogo-pictos.py
+scripts/procesar-pictos.py
+scripts/verificar-pictos.py
