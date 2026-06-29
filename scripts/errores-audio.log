@@ -3,3 +3,2135 @@
   [frases/es piezas texto] assets\audio\frases\es\¿qué hacemos?.mp3
        texto : ¿qué hacemos?
        error : [Errno 22] Invalid argument: 'C:\\Users\\carlo\\OneDrive\\Documentos\\Repos\\github\\marina2\\assets\\audio\\frases\\es\\¿qué hacemos?.mp3'
+
+── Ejecución 2026-06-29T09:09:09 ──
+  [vocab/es] assets\audio\es\arana.mp3
+       texto : araña
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\arco-iris.mp3
+       texto : arco iris
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\agua.mp3
+       texto : agua
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\arbol.mp3
+       texto : árbol
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\avion.mp3
+       texto : avión
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\barco.mp3
+       texto : barco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\abeja.mp3
+       texto : abeja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bicicleta.mp3
+       texto : bicicleta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ajo.mp3
+       texto : ajo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ardilla.mp3
+       texto : ardilla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bebe.mp3
+       texto : bebé
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ballena.mp3
+       texto : ballena
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\brocoli.mp3
+       texto : brócoli
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\boca.mp3
+       texto : boca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\botas.mp3
+       texto : botas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\boton.mp3
+       texto : botón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\buho.mp3
+       texto : búho
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\coche.mp3
+       texto : coche
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\casa.mp3
+       texto : casa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\corazon.mp3
+       texto : corazón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\caballo.mp3
+       texto : caballo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cama.mp3
+       texto : cama
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\corona.mp3
+       texto : corona
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\conejo.mp3
+       texto : conejo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cohete.mp3
+       texto : cohete
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cactus.mp3
+       texto : cactus
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dinosaurio.mp3
+       texto : dinosaurio
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\delfin.mp3
+       texto : delfín
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cebra.mp3
+       texto : cebra
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion.mp3
+       texto : camión
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dientes.mp3
+       texto : dientes
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dragon.mp3
+       texto : dragón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dado.mp3
+       texto : dado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dulce.mp3
+       texto : dulce
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dedos.mp3
+       texto : dedos
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dia.mp3
+       texto : día
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\estrella.mp3
+       texto : estrella
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\elefante.mp3
+       texto : elefante
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\escalera.mp3
+       texto : escalera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dinero.mp3
+       texto : dinero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\espejo.mp3
+       texto : espejo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\esponja.mp3
+       texto : esponja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\escoba.mp3
+       texto : escoba
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\erizo.mp3
+       texto : erizo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\elote.mp3
+       texto : elote
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\escuela.mp3
+       texto : escuela
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\espada.mp3
+       texto : espada
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\fuego.mp3
+       texto : fuego
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\flor.mp3
+       texto : flor
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\fresa.mp3
+       texto : fresa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\foca.mp3
+       texto : foca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\faro.mp3
+       texto : faro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\flauta.mp3
+       texto : flauta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\fuente.mp3
+       texto : fuente
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\fruta.mp3
+       texto : fruta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gato.mp3
+       texto : gato
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\globo-aerostatico.mp3
+       texto : globo aerostático
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\guitarra.mp3
+       texto : guitarra
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gorila.mp3
+       texto : gorila
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gallina.mp3
+       texto : gallina
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\girasol.mp3
+       texto : girasol
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\granja.mp3
+       texto : granja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\grifo.mp3
+       texto : grifo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gorra.mp3
+       texto : gorra
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\helado.mp3
+       texto : helado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gusano.mp3
+       texto : gusano
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\huevo.mp3
+       texto : huevo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hamaca.mp3
+       texto : hamaca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hoja.mp3
+       texto : hoja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hada.mp3
+       texto : hada
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hormiga.mp3
+       texto : hormiga
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\helicoptero.mp3
+       texto : helicóptero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\iglu.mp3
+       texto : iglú
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hongo.mp3
+       texto : hongo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hueso.mp3
+       texto : hueso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hacha.mp3
+       texto : hacha
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\iman.mp3
+       texto : imán
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\isla.mp3
+       texto : isla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\iglesia.mp3
+       texto : iglesia
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\insecto.mp3
+       texto : insecto
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\instrumento.mp3
+       texto : instrumento
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\invierno.mp3
+       texto : invierno
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\juguete.mp3
+       texto : juguete
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jardin.mp3
+       texto : jardín
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jirafa.mp3
+       texto : jirafa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jaula.mp3
+       texto : jaula
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jugo.mp3
+       texto : jugo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jamon.mp3
+       texto : jamón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jinete.mp3
+       texto : jinete
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jarra.mp3
+       texto : jarra
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jabon.mp3
+       texto : jabón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\libro.mp3
+       texto : libro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\kayak.mp3
+       texto : kayak
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\luna.mp3
+       texto : luna
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\kiwi.mp3
+       texto : kiwi
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\koala.mp3
+       texto : koala
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lagarto.mp3
+       texto : lagarto
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\leon.mp3
+       texto : león
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\llave.mp3
+       texto : llave
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lampara.mp3
+       texto : lámpara
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\loro.mp3
+       texto : loro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\limon.mp3
+       texto : limón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lobo.mp3
+       texto : lobo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\leche.mp3
+       texto : leche
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\manzana.mp3
+       texto : manzana
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mariposa.mp3
+       texto : mariposa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mano.mp3
+       texto : mano
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\montana.mp3
+       texto : montaña
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mono.mp3
+       texto : mono
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\musico.mp3
+       texto : músico
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mesa.mp3
+       texto : mesa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mochila.mp3
+       texto : mochila
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\murcielago.mp3
+       texto : murciélago
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mapa.mp3
+       texto : mapa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nariz.mp3
+       texto : nariz
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nube.mp3
+       texto : nube
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\naranja-fruta.mp3
+       texto : naranja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nieve.mp3
+       texto : nieve
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nina.mp3
+       texto : niña
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nino.mp3
+       texto : niño
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nido.mp3
+       texto : nido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nave-espacial.mp3
+       texto : nave espacial
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nuez.mp3
+       texto : nuez
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nandu.mp3
+       texto : ñandú
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\natacion.mp3
+       texto : natación
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nu.mp3
+       texto : ñu
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\name.mp3
+       texto : ñame
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ojo.mp3
+       texto : ojo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oso.mp3
+       texto : oso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oveja.mp3
+       texto : oveja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ola.mp3
+       texto : ola
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oruga.mp3
+       texto : oruga
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oreja.mp3
+       texto : oreja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ornitorrinco.mp3
+       texto : ornitorrinco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pajaro.mp3
+       texto : pájaro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ocelote.mp3
+       texto : ocelote
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\perro.mp3
+       texto : perro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pelota.mp3
+       texto : pelota
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pez.mp3
+       texto : pez
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pina.mp3
+       texto : piña
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\puerta.mp3
+       texto : puerta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\planeta.mp3
+       texto : planeta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pato.mp3
+       texto : pato
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\paloma.mp3
+       texto : paloma
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pulpo.mp3
+       texto : pulpo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\queso.mp3
+       texto : queso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\quetzal.mp3
+       texto : quetzal
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\quinque.mp3
+       texto : quinqué
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rana.mp3
+       texto : rana
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\raton.mp3
+       texto : ratón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\robot.mp3
+       texto : robot
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\roca.mp3
+       texto : roca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rosa.mp3
+       texto : rosa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rayo.mp3
+       texto : rayo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\regalo.mp3
+       texto : regalo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\red.mp3
+       texto : red
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rio.mp3
+       texto : río
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rueda.mp3
+       texto : rueda
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sandia.mp3
+       texto : sandía
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sol.mp3
+       texto : sol
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\silla.mp3
+       texto : silla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\serpiente.mp3
+       texto : serpiente
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sombrero.mp3
+       texto : sombrero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sapo.mp3
+       texto : sapo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\submarino.mp3
+       texto : submarino
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\soplar.mp3
+       texto : soplar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\saco.mp3
+       texto : saco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tigre.mp3
+       texto : tigre
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tren.mp3
+       texto : tren
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tortuga.mp3
+       texto : tortuga
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\taza.mp3
+       texto : taza
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tijeras.mp3
+       texto : tijeras
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tomate.mp3
+       texto : tomate
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tubo.mp3
+       texto : tubo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tambor.mp3
+       texto : tambor
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\uva.mp3
+       texto : uva
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tiburon.mp3
+       texto : tiburón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\unicornio.mp3
+       texto : unicornio
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ukelele.mp3
+       texto : ukelele
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\vaca.mp3
+       texto : vaca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\volcan.mp3
+       texto : volcán
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\violin.mp3
+       texto : violín
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\vela.mp3
+       texto : vela
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ventana.mp3
+       texto : ventana
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\vestido.mp3
+       texto : vestido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\vaso.mp3
+       texto : vaso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\waffle.mp3
+       texto : waffle
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\volar.mp3
+       texto : volar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\wonton.mp3
+       texto : wonton
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\xilofono.mp3
+       texto : xilófono
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\xochimilco.mp3
+       texto : Xochimilco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\yoyo.mp3
+       texto : yoyo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\yate.mp3
+       texto : yate
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\yegua.mp3
+       texto : yegua
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\zapato.mp3
+       texto : zapato
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\zorro.mp3
+       texto : zorro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\zoologico.mp3
+       texto : zoológico
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rapido.mp3
+       texto : rápido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\zanahoria.mp3
+       texto : zanahoria
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rojo-color.mp3
+       texto : roja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\suki.mp3
+       texto : suki
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tienes.mp3
+       texto : tienes
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hambre.mp3
+       texto : hambre
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\no.mp3
+       texto : no
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dano.mp3
+       texto : daño
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sueno.mp3
+       texto : sueño
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cielo.mp3
+       texto : cielo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\duerme.mp3
+       texto : duerme
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pio.mp3
+       texto : pío
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\llorando.mp3
+       texto : llorando
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\semillas.mp3
+       texto : semillas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\afuera.mp3
+       texto : afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\burbujas.mp3
+       texto : burbujas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\comer.mp3
+       texto : comer
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dormir.mp3
+       texto : dormir
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nosotros.mp3
+       texto : nosotros
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\curamos.mp3
+       texto : curamos
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\aguila.mp3
+       texto : águila
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mango-fruta.mp3
+       texto : mango
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\negro-color.mp3
+       texto : negro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pera.mp3
+       texto : pera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\platano.mp3
+       texto : plátano
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cereza.mp3
+       texto : cereza
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\durazno.mp3
+       texto : durazno
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\melon.mp3
+       texto : melón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\frambuesa.mp3
+       texto : frambuesa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mora.mp3
+       texto : mora
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\guayaba.mp3
+       texto : guayaba
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\papaya.mp3
+       texto : papaya
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\coco.mp3
+       texto : coco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\maracuya.mp3
+       texto : maracuyá
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\higo.mp3
+       texto : higo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ciruela.mp3
+       texto : ciruela
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mandarina.mp3
+       texto : mandarina
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\aguacate.mp3
+       texto : aguacate
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\autobus.mp3
+       texto : autobús
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\moto.mp3
+       texto : motocicleta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-bomberos.mp3
+       texto : camión de bomberos
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ambulancia.mp3
+       texto : ambulancia
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\patrulla.mp3
+       texto : patrulla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\taxi.mp3
+       texto : taxi
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tractor.mp3
+       texto : tractor
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\patineta.mp3
+       texto : patineta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\excavadora.mp3
+       texto : excavadora
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\velero.mp3
+       texto : velero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\canoa.mp3
+       texto : canoa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tranvia.mp3
+       texto : tranvía
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\metro.mp3
+       texto : metro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\teleferico.mp3
+       texto : teleférico
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pizza.mp3
+       texto : pizza
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pan.mp3
+       texto : pan
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sopa.mp3
+       texto : sopa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\arroz.mp3
+       texto : arroz
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pasta.mp3
+       texto : pasta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ensalada.mp3
+       texto : ensalada
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hamburguesa.mp3
+       texto : hamburguesa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sandwich.mp3
+       texto : sandwich
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\yogur.mp3
+       texto : yogur
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\galleta.mp3
+       texto : galleta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pastel.mp3
+       texto : pastel
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\chocolate.mp3
+       texto : chocolate
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\maiz.mp3
+       texto : maíz
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\frijoles.mp3
+       texto : frijoles
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pollo.mp3
+       texto : pollo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camiseta.mp3
+       texto : camiseta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pescado.mp3
+       texto : pescado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pantalon.mp3
+       texto : pantalón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\falda.mp3
+       texto : falda
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\zapatos.mp3
+       texto : zapatos
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\calcetines.mp3
+       texto : calcetines
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bufanda.mp3
+       texto : bufanda
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\abrigo.mp3
+       texto : abrigo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\guantes.mp3
+       texto : guantes
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pijama.mp3
+       texto : pijama
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\shorts.mp3
+       texto : shorts
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sudadera.mp3
+       texto : sudadera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\chaleco.mp3
+       texto : chaleco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cinturon.mp3
+       texto : cinturón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bolsa.mp3
+       texto : bolsa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sandalias.mp3
+       texto : sandalias
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tenis.mp3
+       texto : tenis
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\corbata.mp3
+       texto : corbata
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\delantal.mp3
+       texto : delantal
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\banador.mp3
+       texto : bañador
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rojo-color.mp3
+       texto : rojo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\amarillo-color.mp3
+       texto : amarillo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\azul.mp3
+       texto : azul
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\morado-color.mp3
+       texto : morado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\verde-color.mp3
+       texto : verde
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\marron-color.mp3
+       texto : marrón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gris-color.mp3
+       texto : gris
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\blanco-color.mp3
+       texto : blanco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dorado-color.mp3
+       texto : dorado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\turquesa.mp3
+       texto : turquesa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\plateado-color.mp3
+       texto : plateado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\violeta-flor.mp3
+       texto : violeta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\beige-color.mp3
+       texto : beige
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\celeste-color.mp3
+       texto : celeste
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\magenta-color.mp3
+       texto : magenta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oliva.mp3
+       texto : oliva
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\coral.mp3
+       texto : coral
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tener-frio.mp3
+       texto : tener frío
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\carambola.mp3
+       texto : carambola
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lima.mp3
+       texto : lima
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ocre-color.mp3
+       texto : ocre
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\correr.mp3
+       texto : correr
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\saltar.mp3
+       texto : saltar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jugar.mp3
+       texto : jugar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\beber.mp3
+       texto : beber
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cantar.mp3
+       texto : cantar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bailar.mp3
+       texto : bailar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\leer.mp3
+       texto : leer
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pintar.mp3
+       texto : pintar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dibujar.mp3
+       texto : dibujar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\escribir.mp3
+       texto : escribir
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\llorar.mp3
+       texto : llorar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\reir.mp3
+       texto : reír
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\besar.mp3
+       texto : besar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\abrazar.mp3
+       texto : abrazar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\caminar.mp3
+       texto : caminar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nadar.mp3
+       texto : nadar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\trepar.mp3
+       texto : trepar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\empujar.mp3
+       texto : empujar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jalar.mp3
+       texto : jalar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\abrir.mp3
+       texto : abrir
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cerrar.mp3
+       texto : cerrar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\feliz.mp3
+       texto : feliz
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\triste.mp3
+       texto : triste
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\asustado.mp3
+       texto : asustado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\enojado.mp3
+       texto : enojado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sorprendido.mp3
+       texto : sorprendido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\aburrido.mp3
+       texto : aburrido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tranquilo.mp3
+       texto : tranquilo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\emocionado.mp3
+       texto : emocionado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cansado.mp3
+       texto : cansado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\contento.mp3
+       texto : contento
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nervioso.mp3
+       texto : nervioso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\avergonzado.mp3
+       texto : avergonzado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\orgulloso.mp3
+       texto : orgulloso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\celoso.mp3
+       texto : celoso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\confundido.mp3
+       texto : confundido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\enamorado.mp3
+       texto : enamorado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\esperanzado.mp3
+       texto : esperanzado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\frustrado.mp3
+       texto : frustrado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\asqueado.mp3
+       texto : asqueado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\solitario.mp3
+       texto : solitario
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\agradecido.mp3
+       texto : agradecido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\curioso.mp3
+       texto : curioso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\valiente.mp3
+       texto : valiente
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\timido.mp3
+       texto : tímido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\grande.mp3
+       texto : grande
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pequeno.mp3
+       texto : pequeño
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lento.mp3
+       texto : lento
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\caliente.mp3
+       texto : caliente
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\frio.mp3
+       texto : frío
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\suave.mp3
+       texto : suave
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\duro.mp3
+       texto : duro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\limpio.mp3
+       texto : limpio
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\sucio.mp3
+       texto : sucio
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nuevo.mp3
+       texto : nuevo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\viejo.mp3
+       texto : viejo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bonito.mp3
+       texto : bonito
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\feo.mp3
+       texto : feo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\fuerte.mp3
+       texto : fuerte
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\debil.mp3
+       texto : débil
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\alto.mp3
+       texto : alto
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bajo.mp3
+       texto : bajo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gordo.mp3
+       texto : gordo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\delgado.mp3
+       texto : delgado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\amargo.mp3
+       texto : amargo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\brillante.mp3
+       texto : brillante
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oscuro.mp3
+       texto : oscuro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cabeza.mp3
+       texto : cabeza
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pelo.mp3
+       texto : pelo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cuello.mp3
+       texto : cuello
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hombro.mp3
+       texto : hombro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\brazo.mp3
+       texto : brazo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dedo.mp3
+       texto : dedo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pecho.mp3
+       texto : pecho
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\espalda.mp3
+       texto : espalda
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pierna.mp3
+       texto : pierna
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\barriga.mp3
+       texto : barriga
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rodilla.mp3
+       texto : rodilla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pie.mp3
+       texto : pie
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\talon.mp3
+       texto : talón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\una.mp3
+       texto : uña
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ceja.mp3
+       texto : ceja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mejilla.mp3
+       texto : mejilla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\barbilla.mp3
+       texto : barbilla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lluvia.mp3
+       texto : lluvia
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\codo.mp3
+       texto : codo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\muneca-juguete.mp3
+       texto : muñeca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mar.mp3
+       texto : mar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\desierto.mp3
+       texto : desierto
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bosque.mp3
+       texto : bosque
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\arena.mp3
+       texto : arena
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\semilla.mp3
+       texto : semilla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\piedra.mp3
+       texto : piedra
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\raiz.mp3
+       texto : raíz
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hierba.mp3
+       texto : hierba
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rama.mp3
+       texto : rama
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cascada.mp3
+       texto : cascada
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\musgo.mp3
+       texto : musgo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\arriba.mp3
+       texto : arriba
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\abajo.mp3
+       texto : abajo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\antes.mp3
+       texto : antes
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\fuera.mp3
+       texto : fuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dentro.mp3
+       texto : dentro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\despues.mp3
+       texto : después
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cerca.mp3
+       texto : cerca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lejos.mp3
+       texto : lejos
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\encima.mp3
+       texto : encima
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\debajo.mp3
+       texto : debajo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\delante.mp3
+       texto : delante
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\detras.mp3
+       texto : detrás
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\izquierda.mp3
+       texto : izquierda
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\derecha.mp3
+       texto : derecha
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\entrada.mp3
+       texto : entrada
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\noche.mp3
+       texto : noche
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\salida.mp3
+       texto : salida
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\inicio.mp3
+       texto : inicio
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\fin.mp3
+       texto : fin
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\abierto.mp3
+       texto : abierto
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cerrado.mp3
+       texto : cerrado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lleno.mp3
+       texto : lleno
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\vacio.mp3
+       texto : vacío
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pastelito.mp3
+       texto : pastelito
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\calor.mp3
+       texto : calor
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mono-nieve.mp3
+       texto : mono de nieve
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bombero.mp3
+       texto : bombero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\naranja-color.mp3
+       texto : naranja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lavar-manos.mp3
+       texto : lavar las manos
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\primero.mp3
+       texto : primero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\muneca-cuerpo.mp3
+       texto : muñeca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\descansar.mp3
+       texto : descansar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hacer-popo.mp3
+       texto : hacer popo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\yo-quiero.mp3
+       texto : yo quiero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hacer-pipi.mp3
+       texto : hacer pipi
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\autobus-dos-pisos.mp3
+       texto : autobús de dos pisos
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\soplale.mp3
+       texto : sóplale
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\paracaidas.mp3
+       texto : paracaídas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\astronauta.mp3
+       texto : astronauta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jeep.mp3
+       texto : jeep
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\limusina.mp3
+       texto : limusina
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mototaxi.mp3
+       texto : mototaxi
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\kart.mp3
+       texto : kart
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\segway.mp3
+       texto : segway
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\motoneta.mp3
+       texto : motoneta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dirigible.mp3
+       texto : dirigible
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\papalote.mp3
+       texto : papalote
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\avioneta.mp3
+       texto : avioneta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\transbordador-espacial.mp3
+       texto : transbordador espacial
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\todoterreno.mp3
+       texto : todoterreno
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\trailer.mp3
+       texto : tráiler
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\autobus-escolar.mp3
+       texto : autobús escolar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-basura.mp3
+       texto : camión de la basura
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\quitanieve.mp3
+       texto : quitanieve
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\alce.mp3
+       texto : alce
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\alpaca.mp3
+       texto : alpaca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\quiero.mp3
+       texto : quiero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\anguila.mp3
+       texto : anguila
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\animales.mp3
+       texto : animales
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\avestruz.mp3
+       texto : avestruz
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\armadillo.mp3
+       texto : armadillo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\avispa.mp3
+       texto : avispa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\buitre.mp3
+       texto : buitre
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cabra.mp3
+       texto : cabra
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\burro.mp3
+       texto : burro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cacatua.mp3
+       texto : cacatúa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\bufalo.mp3
+       texto : búfalo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\caballito-mar.mp3
+       texto : caballito de mar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camaleon.mp3
+       texto : camaleón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\caiman.mp3
+       texto : caimán
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cangrejo.mp3
+       texto : cangrejo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\canario.mp3
+       texto : canario
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camello.mp3
+       texto : camello
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\carnero.mp3
+       texto : carnero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\capibara.mp3
+       texto : capibara
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\canguro.mp3
+       texto : canguro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\caracol.mp3
+       texto : caracol
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\carpa-koi.mp3
+       texto : carpa koi
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cerdo.mp3
+       texto : cerdo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\chimpance.mp3
+       texto : chimpancé
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\castor.mp3
+       texto : castor
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ciguena.mp3
+       texto : cigüeña
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ciempies.mp3
+       texto : ciempiés
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cisne.mp3
+       texto : cisne
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\colibri.mp3
+       texto : colibrí
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cocodrilo.mp3
+       texto : cocodrilo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\codorniz.mp3
+       texto : codorniz
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\comadreja.mp3
+       texto : comadreja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\coyote.mp3
+       texto : coyote
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cuervo.mp3
+       texto : cuervo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\escorpion.mp3
+       texto : escorpión
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\dromedario.mp3
+       texto : dromedario
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\condor.mp3
+       texto : cóndor
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\flamenco.mp3
+       texto : flamenco
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gallo.mp3
+       texto : gallo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gorrion.mp3
+       texto : gorrión
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\gaviota.mp3
+       texto : gaviota
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ganso.mp3
+       texto : ganso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\guepardo.mp3
+       texto : guepardo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hiena.mp3
+       texto : hiena
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\halcon.mp3
+       texto : halcón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hamster.mp3
+       texto : hámster
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\hipopotamo.mp3
+       texto : hipopótamo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\iguana.mp3
+       texto : iguana
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\jabali.mp3
+       texto : jabalí
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lechuza.mp3
+       texto : lechuza
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\leona.mp3
+       texto : leona
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\leopardo.mp3
+       texto : leopardo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\leon-marino.mp3
+       texto : león marino
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\lince.mp3
+       texto : lince
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\libelula.mp3
+       texto : libélula
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\llama.mp3
+       texto : llama
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mantis.mp3
+       texto : mantis
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\manta.mp3
+       texto : manta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mapache.mp3
+       texto : mapache
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\marmota.mp3
+       texto : marmota
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\catarina.mp3
+       texto : catarina
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\zorrillo.mp3
+       texto : zorrillo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\medusa.mp3
+       texto : medusa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\morsa.mp3
+       texto : morsa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\mosca.mp3
+       texto : mosca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nutria.mp3
+       texto : nutria
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\orca.mp3
+       texto : orca
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\orangutan.mp3
+       texto : orangután
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oso-hormiguero.mp3
+       texto : oso hormiguero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pangolin.mp3
+       texto : pangolín
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pavorreal.mp3
+       texto : pavorreal
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pavo.mp3
+       texto : pavo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pantera.mp3
+       texto : pantera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pelicano.mp3
+       texto : pelícano
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\perezoso.mp3
+       texto : perezoso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pez-martillo.mp3
+       texto : pez martillo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\periquito.mp3
+       texto : periquito
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pez-espada.mp3
+       texto : pez espada
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pez-payaso.mp3
+       texto : pez payaso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\pinguino.mp3
+       texto : pingüino
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\puma.mp3
+       texto : puma
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\rinoceronte.mp3
+       texto : rinoceronte
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\salamandra.mp3
+       texto : salamandra
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\saltamontes.mp3
+       texto : saltamontes
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tarantula.mp3
+       texto : tarántula
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tiburon-ballena.mp3
+       texto : tiburón ballena
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tejon.mp3
+       texto : tejón
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\titi.mp3
+       texto : tití
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\topo.mp3
+       texto : topo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\toro.mp3
+       texto : toro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oso-panda.mp3
+       texto : oso panda
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tucan.mp3
+       texto : tucán
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tortuga-marina.mp3
+       texto : tortuga marina
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\guacamaya.mp3
+       texto : guacamaya
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\oso-polar.mp3
+       texto : oso polar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\avion-combate.mp3
+       texto : avión de combate
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\buque-carga.mp3
+       texto : buque de carga
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-cisterna.mp3
+       texto : camión cisterna
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-helados.mp3
+       texto : camión de helados
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tractor-orugas.mp3
+       texto : tractor de orugas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-volteo.mp3
+       texto : camión de volteo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-reparto.mp3
+       texto : camión de reparto
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-minero.mp3
+       texto : camión minero
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\cargadora-frontal.mp3
+       texto : cargadora frontal
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\carrito-golf.mp3
+       texto : carrito de golf
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\convertible.mp3
+       texto : convertible
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\grua.mp3
+       texto : grúa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\helicoptero-rescate.mp3
+       texto : helicóptero de rescate
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\montacargas.mp3
+       texto : montacargas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camion-mezclador-cemento.mp3
+       texto : camión mezclador de cemento
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\motoniveladora.mp3
+       texto : motoniveladora
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tren-bala.mp3
+       texto : tren bala
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\furgoneta.mp3
+       texto : furgoneta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\camioneta.mp3
+       texto : camioneta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\moto-agua.mp3
+       texto : moto de agua
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\tormenta.mp3
+       texto : tormenta
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\granizo.mp3
+       texto : granizo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\niebla.mp3
+       texto : niebla
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\parcialmente-nublado.mp3
+       texto : parcialmente nublado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\huracan.mp3
+       texto : huracán
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\ventoso.mp3
+       texto : ventoso
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\nublado.mp3
+       texto : nublado
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\primavera.mp3
+       texto : primavera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\otono.mp3
+       texto : otoño
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\invierno.mp3
+       texto : invierno
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\verano.mp3
+       texto : verano
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [vocab/es] assets\audio\es\estaciones-clima.mp3
+       texto : estaciones del año
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suky-no.mp3
+       texto : Suky no
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\tienes-hambre.mp3
+       texto : ¿tienes hambre?
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\tren-rapido.mp3
+       texto : tren rápido
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\la-luna.mp3
+       texto : la luna
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\manzana-roja.mp3
+       texto : manzana roja
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\tienes-sueno.mp3
+       texto : ¿tienes sueño?
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\te-has-hecho-dano.mp3
+       texto : ¿te has hecho daño?
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\el-gato-duerme.mp3
+       texto : el gato duerme
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\pio-esta-llorando.mp3
+       texto : pío está llorando...
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\globo-aerostatico-en-el-cielo.mp3
+       texto : globo aerostático en el cielo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\la-sandia-tiene-semillas.mp3
+       texto : la sandía tiene semillas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\el-sol-esta-afuera.mp3
+       texto : el sol está afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\el-submarino-en-el-agua.mp3
+       texto : el submarino en el agua
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\la-mariposa-en-la-flor.mp3
+       texto : la mariposa en la flor
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\el-submarino-hace-burbujas.mp3
+       texto : el submarino hace burbujas
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\tienes-sueno-pues-vamos-a-dormir.mp3
+       texto : ¿tienes sueño? pues vamos a dormir
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\tienes-hambre-pues-vamos-a-comer.mp3
+       texto : ¿tienes hambre? ¡pues vamos a comer!
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\pio-esta-llorando-no-sabemos-que-le-pasa.mp3
+       texto : pío está llorando, no sabemos qué le pasa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\te-has-hecho-dano-nosotros-te-curamos.mp3
+       texto : ¿te has hecho daño? ¡nosotros te curamos!
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\la-sandia-tiene-semillas-de-color-negro.mp3
+       texto : la sandía tiene semillas de color negro
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\el-submarino-hace-burbujas-en-el-agua.mp3
+       texto : el submarino hace burbujas en el agua
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\quiero-agua.mp3
+       texto : quiero agua
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\quiero-comer.mp3
+       texto : quiero comer
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\quiero-dormir.mp3
+       texto : quiero dormir
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\quiero-descansar.mp3
+       texto : quiero descansar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\quiero-jugar.mp3
+       texto : quiero jugar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\quiero-hacer-popo.mp3
+       texto : quiero hacer popo
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\quiero-hacer-pipi.mp3
+       texto : quiero hacer pipí
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-comer-despues-jugar.mp3
+       texto : primero comer, después jugar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer.mp3
+       texto : primero lavar las manos, después comer
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\el-autobus-de-dos-pisos-es-muy-alto.mp3
+       texto : ¡el autobús de dos pisos, es muy alto!
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\el-fuego-esta-caliente-que-hacemos-soplale.mp3
+       texto : el fuego está caliente, ¿qué hacemos? ¡sóplale!
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\es-muy.mp3
+       texto : es muy
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\el.mp3
+       texto : el
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\en-el.mp3
+       texto : en el
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\en-la.mp3
+       texto : en la
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\de-color.mp3
+       texto : de color
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\la.mp3
+       texto : la
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\pues-vamos-a.mp3
+       texto : pues vamos a
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\sabemos-qué-le-pasa.mp3
+       texto : sabemos qué le pasa
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\hace.mp3
+       texto : hace
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\está.mp3
+       texto : está
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\te.mp3
+       texto : te
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\te-has-hecho.mp3
+       texto : te has hecho
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\tiene.mp3
+       texto : tiene
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\qué-hacemos.mp3
+       texto : ¿qué hacemos?
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T10:15:11 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T10:19:26 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T10:33:16 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 403 Client Error: Forbidden for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T10:39:09 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T10:40:21 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T10:44:35 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T11:31:38 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T11:34:34 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+
+── Ejecución 2026-06-29T11:39:26 ──
+  [vocab/es] assets\audio\es\submarino-adjetivo.mp3
+       texto : submarino
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki.mp3
+       texto : ¿dónde está Suki?
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\primero-lavar-las-manos-despues-comer-y-luego-jugar.mp3
+       texto : primero lavar las manos, después comer, y luego jugar
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\suki-esta-afuera.mp3
+       texto : Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es enunciados] assets\audio\frases\es\donde-esta-suki-suki-esta-afuera.mp3
+       texto : ¿dónde está Suki? Suki está afuera
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\dónde-está.mp3
+       texto : ¿dónde está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\y-luego.mp3
+       texto : y luego
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM
+  [frases/es piezas texto] assets\audio\frases\es\suki-está.mp3
+       texto : ? Suki está
+       error : 400 Client Error: Bad Request for url: https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyAL1mg758L1cHG-yiGo-ztfDhRXJu2jmqM

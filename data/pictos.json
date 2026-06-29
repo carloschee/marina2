@@ -1458,7 +1458,7 @@
   {
     "id": 1209,
     "es": "pío",
-    "en": "pious",
+    "en": "pee-oh",
     "ruta_img": "pio.png",
     "art": ""
   },
@@ -4099,5 +4099,12 @@
     "en": "seasons",
     "ruta_img": "estaciones-clima.png",
     "art": "las"
+  },
+  {
+    "id": 1587,
+    "es": "submarino",
+    "en": "underwater",
+    "ruta_img": "submarino-adjetivo.png",
+    "art": "el"
   }
 ]

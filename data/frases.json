@@ -794,5 +794,473 @@
         "picto_id": 1440
       }
     ]
+  },
+  {
+    "id": "im-hungry",
+    "lang": "en",
+    "es": "I'm hungry",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "I'm"
+      },
+      {
+        "tipo": "picto",
+        "texto": "hungry",
+        "picto_id": 1204
+      }
+    ]
+  },
+  {
+    "id": "im-happy",
+    "lang": "en",
+    "es": "I'm happy",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "I'm"
+      },
+      {
+        "tipo": "picto",
+        "texto": "happy",
+        "picto_id": 1327
+      }
+    ]
+  },
+  {
+    "id": "im-sad",
+    "lang": "en",
+    "es": "I'm sad",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "I'm"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sad",
+        "picto_id": 1328
+      }
+    ]
+  },
+  {
+    "id": "i-want-to-poop",
+    "lang": "en",
+    "es": "I want to poop",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "I want",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "texto",
+        "texto": "to"
+      },
+      {
+        "tipo": "picto",
+        "texto": "poop",
+        "picto_id": 1436
+      }
+    ]
+  },
+  {
+    "id": "i-want-to-pee",
+    "lang": "en",
+    "es": "I want to pee",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "I want",
+        "picto_id": 1438
+      },
+      {
+        "tipo": "texto",
+        "texto": "to"
+      },
+      {
+        "tipo": "picto",
+        "texto": "pee",
+        "picto_id": 1437
+      }
+    ]
+  },
+  {
+    "id": "its-sunny-outside",
+    "lang": "en",
+    "es": "It's sunny outside",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "It's"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sunny",
+        "picto_id": 1160
+      },
+      {
+        "tipo": "picto",
+        "texto": "outside",
+        "picto_id": 1212
+      }
+    ]
+  },
+  {
+    "id": "its-partly-cloudy-outside",
+    "lang": "en",
+    "es": "It's partly cloudy outside",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "It's"
+      },
+      {
+        "tipo": "picto",
+        "texto": "partly cloudy",
+        "picto_id": 1579
+      },
+      {
+        "tipo": "picto",
+        "texto": "outside",
+        "picto_id": 1212
+      }
+    ]
+  },
+  {
+    "id": "its-cloudy-outside",
+    "lang": "en",
+    "es": "It's cloudy outside",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "It's"
+      },
+      {
+        "tipo": "picto",
+        "texto": "cloudy",
+        "picto_id": 1580
+      },
+      {
+        "tipo": "picto",
+        "texto": "outside",
+        "picto_id": 1212
+      }
+    ]
+  },
+  {
+    "id": "its-windy-outside",
+    "lang": "en",
+    "es": "It's windy outside",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "It's"
+      },
+      {
+        "tipo": "picto",
+        "texto": "windy",
+        "picto_id": 1581
+      },
+      {
+        "tipo": "picto",
+        "texto": "outside",
+        "picto_id": 1212
+      }
+    ]
+  },
+  {
+    "id": "its-raining-outside",
+    "lang": "en",
+    "es": "It's raining outside",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "It's"
+      },
+      {
+        "tipo": "picto",
+        "texto": "raining",
+        "picto_id": 1392
+      },
+      {
+        "tipo": "picto",
+        "texto": "outside",
+        "picto_id": 1212
+      }
+    ]
+  },
+  {
+    "id": "i-see-a-rainbow-in-the-sky",
+    "lang": "en",
+    "es": "I see a rainbow in the sky",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "I see a"
+      },
+      {
+        "tipo": "picto",
+        "texto": "rainbow",
+        "picto_id": 1005
+      },
+      {
+        "tipo": "texto",
+        "texto": "in the"
+      },
+      {
+        "tipo": "picto",
+        "texto": "sky",
+        "picto_id": 1207
+      }
+    ]
+  },
+  {
+    "id": "its-hot-in-summer",
+    "lang": "en",
+    "es": "It's hot in summer",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "It's"
+      },
+      {
+        "tipo": "picto",
+        "texto": "hot",
+        "picto_id": 1354
+      },
+      {
+        "tipo": "texto",
+        "texto": "in"
+      },
+      {
+        "tipo": "picto",
+        "texto": "summer",
+        "picto_id": 1585
+      }
+    ]
+  },
+  {
+    "id": "its-cold-in-winter",
+    "lang": "en",
+    "es": "It's cold in winter",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "It's"
+      },
+      {
+        "tipo": "picto",
+        "texto": "cold",
+        "picto_id": 1355
+      },
+      {
+        "tipo": "texto",
+        "texto": "in"
+      },
+      {
+        "tipo": "picto",
+        "texto": "winter",
+        "picto_id": 1582
+      }
+    ]
+  },
+  {
+    "id": "the-submarine-makes-bubbles",
+    "lang": "en",
+    "es": "The submarine makes bubbles",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "The"
+      },
+      {
+        "tipo": "picto",
+        "texto": "submarine",
+        "picto_id": 1165
+      },
+      {
+        "tipo": "texto",
+        "texto": "makes"
+      },
+      {
+        "tipo": "picto",
+        "texto": "bubbles",
+        "picto_id": 1213
+      }
+    ]
+  },
+  {
+    "id": "the-submarine-is-underwater",
+    "lang": "en",
+    "es": "The submarine is underwater",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "The"
+      },
+      {
+        "tipo": "picto",
+        "texto": "submarine",
+        "picto_id": 1165
+      },
+      {
+        "tipo": "texto",
+        "texto": "is"
+      },
+      {
+        "tipo": "picto",
+        "texto": "underwater",
+        "picto_id": 1587
+      }
+    ]
+  },
+  {
+    "id": "the-submarine-makes-bubbles-underwater",
+    "lang": "en",
+    "es": "The submarine makes bubbles underwater",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "The"
+      },
+      {
+        "tipo": "picto",
+        "texto": "submarine",
+        "picto_id": 1165
+      },
+      {
+        "tipo": "texto",
+        "texto": "makes"
+      },
+      {
+        "tipo": "picto",
+        "texto": "bubbles",
+        "picto_id": 1213
+      },
+      {
+        "tipo": "picto",
+        "texto": "underwater",
+        "picto_id": 1587
+      }
+    ]
+  },
+  {
+    "id": "primero-lavar-las-manos-despues-comer-y-luego-jugar",
+    "lang": "es",
+    "es": "primero lavar las manos, después comer, y luego jugar",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "primero",
+        "picto_id": 1434
+      },
+      {
+        "tipo": "picto",
+        "texto": "lavar las manos",
+        "picto_id": 1433
+      },
+      {
+        "tipo": "picto",
+        "texto": "después",
+        "picto_id": 1409
+      },
+      {
+        "tipo": "picto",
+        "texto": "comer",
+        "picto_id": 1214
+      },
+      {
+        "tipo": "texto",
+        "texto": "y luego"
+      },
+      {
+        "tipo": "picto",
+        "texto": "jugar",
+        "picto_id": 1309
+      }
+    ]
+  },
+  {
+    "id": "suki-esta-afuera",
+    "lang": "es",
+    "es": "Suki está afuera",
+    "nivel": 1,
+    "piezas": [
+      {
+        "tipo": "picto",
+        "texto": "Suki",
+        "picto_id": 1201
+      },
+      {
+        "tipo": "texto",
+        "texto": "está"
+      },
+      {
+        "tipo": "picto",
+        "texto": "afuera",
+        "picto_id": 1212
+      }
+    ]
+  },
+  {
+    "id": "donde-esta-suki",
+    "lang": "es",
+    "es": "¿dónde está Suki?",
+    "nivel": 2,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "¿dónde está"
+      },
+      {
+        "tipo": "picto",
+        "texto": "Suki",
+        "picto_id": 1201
+      }
+    ]
+  },
+  {
+    "id": "donde-esta-suki-suki-esta-afuera",
+    "lang": "es",
+    "es": "¿dónde está Suki? Suki está afuera",
+    "nivel": 3,
+    "piezas": [
+      {
+        "tipo": "texto",
+        "texto": "¿dónde está"
+      },
+      {
+        "tipo": "picto",
+        "texto": "Suki",
+        "picto_id": 1201
+      },
+      {
+        "tipo": "texto",
+        "texto": "? Suki está"
+      },
+      {
+        "tipo": "picto",
+        "texto": "afuera",
+        "picto_id": 1212
+      }
+    ]
   }
 ]
